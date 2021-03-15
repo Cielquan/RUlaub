@@ -1,0 +1,11 @@
+[package]
+name = "rulaub-backend"
+version = "1.0.0"
+license = "Apache-2.0/MIT"
+authors = ["Christian Riedel <cielquan@protonmail.com>"]
+edition = "2018"
+
+[lib]
+name = "rulaub_backend"
+
+[dependencies]
