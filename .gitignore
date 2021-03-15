@@ -41,3 +41,6 @@ _backupfiles
 .backupfiles
 
 .spellignore
+
+# Database files
+*.db

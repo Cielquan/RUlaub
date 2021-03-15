@@ -9,3 +9,7 @@ edition = "2018"
 name = "rulaub_backend"
 
 [dependencies]
+diesel = { version = "1.4.6", features = ["sqlite", "chrono"] }
+libsqlite3-sys = { version = "0.20.1", features = ["bundled"]}
+chrono = "0.4"
+dotenv = "0.15.0"
