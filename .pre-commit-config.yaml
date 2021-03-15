@@ -49,6 +49,36 @@ repos:
 
 
 #: -------------------------------------------------------------------------------------
+#: Rust hooks
+#: -------------------------------------------------------------------------------------
+  # Run rust toolchain
+  - repo: local
+    hooks:
+      - id: cargo-fmt
+        name: rustfmt
+        description: Format rust source with rustfmt.
+        entry: cargo fmt
+        args: ["--"]
+        language: system
+        types: [rust]
+      - id: cargo-clippy
+        name: clippy
+        description: Lint rust source with clippy.
+        entry: cargo clippy
+        args: ["--", "-D", "warnings"]
+        language: system
+        types: [rust]
+        pass_filenames: false
+      - id: cargo-check
+        name: cargo check
+        description: Check rust package for errors.
+        entry: cargo check
+        language: system
+        types: [rust]
+        pass_filenames: false
+
+
+#: -------------------------------------------------------------------------------------
 #: YAML hooks
 #: -------------------------------------------------------------------------------------
   #: yamllint - yaml linter
