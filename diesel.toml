@@ -2,4 +2,4 @@
 # see diesel.rs/guides/configuring-diesel-cli
 
 [print_schema]
-file = "rust_bakend/src/db/schema.rs"
+file = "rust_backend/src/db/schema.rs"
