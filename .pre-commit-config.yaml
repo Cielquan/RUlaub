@@ -49,6 +49,19 @@ repos:
 
 
 #: -------------------------------------------------------------------------------------
+#: YAML hooks
+#: -------------------------------------------------------------------------------------
+  #: yamllint - yaml linter
+  #: Inline skip: `# yamllint disable-line[ rule:<RULE>]`
+  #: Block skip: `# yamllint disable[ rule:<RULE>]`
+  #: Block skip end: `# yamllint enable`
+  - repo: https://github.com/adrienverge/yamllint
+    rev: 0fff4e29e42d170cd0d1ad17736acdc53df97fc9  # frozen: v1.26.0
+    hooks:
+      - id: yamllint
+
+
+#: -------------------------------------------------------------------------------------
 #: Meta hooks
 #: -------------------------------------------------------------------------------------
   #: Meta hooks provided by pre-commit
