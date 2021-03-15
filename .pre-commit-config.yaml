@@ -1,0 +1,53 @@
+---
+minimum_pre_commit_version: "1.15"
+default_stages: [commit]
+
+
+ci:
+  skip: []
+
+
+repos:
+#: -------------------------------------------------------------------------------------
+#: General hooks
+#: -------------------------------------------------------------------------------------
+  #: Find TODO:|FIXME:|BUG: comments in all files
+  #: Inline skip: `#i#` directly after the colon after the tag-word
+  - repo: local
+    hooks:
+      - id: find-todos
+        name: 'Find TODO:|FIXME:|BUG: comments'
+        description: 'Check for TODO:|FIXME:|BUG: comments in all files'
+        language: pygrep
+        entry: '(^|//|#|<!--|;|/\*|\.\.)\s*(TODO:|FIXME:|BUG:)(?!#i#)'
+        exclude: 'TODO'
+
+  #: code unspecific out-of-the-box hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 6e2418c5521b7d606e72914dced3253f9ace1205  # frozen: v3.4.0
+    hooks:
+      - id: check-case-conflict
+      - id: check-json
+      - id: pretty-format-json
+        args: ["--indent=4", "--autofix"]
+      - id: check-toml
+      - id: check-yaml
+      - id: detect-private-key
+      - id: trailing-whitespace
+        stages: [commit]
+      - id: end-of-file-fixer
+        stages: [commit]
+
+
+#: -------------------------------------------------------------------------------------
+#: Meta hooks
+#: -------------------------------------------------------------------------------------
+  #: Meta hooks provided by pre-commit
+  - repo: meta
+    hooks:
+      - id: identity
+        stages: [commit, manual]
+      - id: check-hooks-apply
+        stages: [manual]
+      - id: check-useless-excludes
+        stages: [manual]
