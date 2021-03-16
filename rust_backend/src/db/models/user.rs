@@ -1,3 +1,8 @@
+use std::fmt::{self, Display, Formatter};
+
+use diesel::prelude::*;
+use diesel::result::Error;
+
 use super::super::schema::users;
 
 #[derive(Queryable, Debug)]
@@ -8,7 +13,7 @@ pub struct User {
     pub hex_color: i32,
     pub group_manager_id: Option<i32>,
 }
-#[derive(Insertable)]
+#[derive(Insertable, Debug)]
 #[table_name = "users"]
 pub struct NewUser<'a> {
     pub name: &'a str,
@@ -29,6 +34,47 @@ impl User {
             vacation_days,
             hex_color,
             group_manager_id,
+        }
+    }
+}
+
+impl Display for User {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        if f.alternate() {
+            write!(f, "<User {}>", self.name)
+        } else {
+            write!(
+                f,
+                "<User {} (ID: {} | color: {:x} | Vacation days: {} | Boss: {:?})>",
+                self.name,
+                self.id,
+                self.hex_color,
+                self.vacation_days,
+                self.group_manager_id
+            )
+        }
+    }
+}
+
+impl NewUser<'_> {
+    pub fn save_to_db(self, conn: &SqliteConnection) -> Result<i32, Error> {
+        diesel::insert_into(users::table)
+            .values(&self)
+            .execute(conn)?;
+        diesel::select(super::super::last_insert_rowid).get_result::<i32>(conn)
+    }
+}
+
+impl Display for NewUser<'_> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        if f.alternate() {
+            write!(f, "<NewUser {}>", self.name)
+        } else {
+            write!(
+                f,
+                "<NewUser {} (ID: None | color: {:x} | Vacation days: {} | Boss: {:?})>",
+                self.name, self.hex_color, self.vacation_days, self.group_manager_id
+            )
         }
     }
 }
