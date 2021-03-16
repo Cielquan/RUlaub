@@ -12,7 +12,7 @@ pub struct NewSchoolHolidayType<'a> {
 }
 
 impl SchoolHolidayType {
-    pub fn new<'a>(name: &'a str) -> NewSchoolHolidayType<'a> {
+    pub fn new(name: &str) -> NewSchoolHolidayType {
         NewSchoolHolidayType { name }
     }
 }
