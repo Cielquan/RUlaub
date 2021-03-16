@@ -2,6 +2,7 @@ use std::fmt::{self, Display, Formatter};
 
 use diesel::prelude::*;
 use diesel::result::Error;
+use log::{debug, trace};
 
 use super::super::schema::users;
 
@@ -58,10 +59,14 @@ impl Display for User {
 
 impl NewUser<'_> {
     pub fn save_to_db(self, conn: &SqliteConnection) -> Result<i32, Error> {
+        debug!(target: "new_db_entry", "Adding to db: {:?}", &self);
         diesel::insert_into(users::table)
             .values(&self)
             .execute(conn)?;
-        diesel::select(super::super::last_insert_rowid).get_result::<i32>(conn)
+        trace!(target: "new_db_entry", "Get `last_insert_rowid` for id of: {:#}", &self);
+        let id = diesel::select(super::super::last_insert_rowid).get_result::<i32>(conn);
+        debug!(target: "new_db_entry", "Got ID: <{:?}> for {:#}", id, &self);
+        id
     }
 }
 
