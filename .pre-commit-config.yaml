@@ -65,7 +65,6 @@ repos:
         name: clippy
         description: Lint rust source with clippy.
         entry: cargo clippy
-        args: ["--", "-D", "warnings"]
         language: system
         types: [rust]
         pass_filenames: false
