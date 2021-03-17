@@ -1,6 +1,6 @@
 #[macro_use]
 extern crate diesel;
 extern crate dotenv;
-extern crate log;
+extern crate tracing;
 
 pub mod db;

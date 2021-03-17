@@ -2,7 +2,7 @@ use std::fmt::{self, Display, Formatter};
 
 use diesel::prelude::*;
 use diesel::result::Error;
-use log::{debug, trace};
+use tracing::{instrument, debug, trace};
 
 use super::super::schema::users;
 
@@ -24,12 +24,14 @@ pub struct NewUser<'a> {
 }
 
 impl User {
+    #[instrument]
     pub fn new<'a>(
         name: &'a str,
         vacation_days: &'a i32,
         hex_color: &'a i32,
         group_manager_id: Option<&'a i32>,
     ) -> NewUser<'a> {
+        trace!("Create NewUser instance");
         NewUser {
             name,
             vacation_days,
@@ -58,6 +60,7 @@ impl Display for User {
 }
 
 impl NewUser<'_> {
+    #[instrument(skip(self, conn))]
     pub fn save_to_db(self, conn: &SqliteConnection) -> Result<i32, Error> {
         debug!(target: "new_db_entry", "Adding to db: {:?}", &self);
         diesel::insert_into(users::table)
