@@ -22,12 +22,12 @@ impl Display for User {
         } else {
             write!(
                 f,
-                "<User {} (ID: {} | color: {:x} | Vacation days: {} | Boss: {:?})>",
+                "<User {} (Color: {:x} | Vacation days: {} | Boss: {:?} | ID: {})>",
                 self.name,
-                self.id,
                 self.hex_color,
                 self.vacation_days,
-                self.group_manager_id
+                self.group_manager_id,
+                self.id
             )
         }
     }
@@ -67,7 +67,7 @@ impl Display for NewUser<'_> {
         } else {
             write!(
                 f,
-                "<NewUser {} (ID: None | color: {:x} | Vacation days: {} | Boss: {:?})>",
+                "<NewUser {} (Color: {:x} | Vacation days: {} | Boss: {:?})>",
                 self.name, self.hex_color, self.vacation_days, self.group_manager_id
             )
         }
