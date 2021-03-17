@@ -1,8 +1,13 @@
+use std::fmt::{self, Display, Formatter};
+
 use chrono::NaiveDate;
+use diesel::prelude::*;
+use diesel::result::Error;
+use tracing::{debug, instrument, trace};
 
-use super::super::schema::vacations;
+use super::super::{schema::vacations, util::last_insert_rowid};
 
-#[derive(Queryable)]
+#[derive(Queryable, Debug)]
 pub struct Vacation {
     pub id: i32,
     pub user_id: i32,
@@ -11,14 +16,24 @@ pub struct Vacation {
     pub type_id: i32,
     pub setup_id: i32,
 }
-#[derive(Insertable)]
-#[table_name = "vacations"]
-pub struct NewVacation<'a> {
-    pub user_id: &'a i32,
-    pub start_date: &'a NaiveDate,
-    pub end_date: &'a NaiveDate,
-    pub type_id: &'a i32,
-    pub setup_id: &'a i32,
+
+impl Display for Vacation {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        if f.alternate() {
+            write!(f, "<Vacation {} for {}>", self.type_id, self.user_id)
+        } else {
+            write!(
+                f,
+                "<Vacation {} for {} (Start Date: {} | End Date: {} | Setup-ID: {} | ID: {})>",
+                self.type_id,
+                self.user_id,
+                self.start_date,
+                self.end_date,
+                self.setup_id,
+                self.id
+            )
+        }
+    }
 }
 
 impl Vacation {
@@ -36,5 +51,48 @@ impl Vacation {
             type_id,
             setup_id,
         }
+    }
+}
+
+#[derive(Insertable, Debug)]
+#[table_name = "vacations"]
+pub struct NewVacation<'a> {
+    pub user_id: &'a i32,
+    pub start_date: &'a NaiveDate,
+    pub end_date: &'a NaiveDate,
+    pub type_id: &'a i32,
+    pub setup_id: &'a i32,
+}
+
+impl Display for NewVacation<'_> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        if f.alternate() {
+            write!(f, "<NewVacation {} for {}>", self.type_id, self.user_id)
+        } else {
+            write!(
+                f,
+                "<NewVacation {} for {} (Start Date: {} | End Date: {} | Setup-ID: {})>",
+                self.type_id,
+                self.user_id,
+                self.start_date,
+                self.end_date,
+                self.setup_id
+            )
+        }
+    }
+}
+
+impl NewVacation<'_> {
+    #[instrument(skip(self, conn))]
+    pub fn save_to_db(self, conn: &SqliteConnection) -> Result<i32, Error> {
+        debug!(target: "new_db_entry", "Adding to db: {:?}", &self);
+        diesel::insert_into(vacations::table)
+            .values(&self)
+            .execute(conn)?;
+
+        trace!(target: "new_db_entry", "Get `last_insert_rowid` for id of: {:#}", &self);
+        let id = diesel::select(last_insert_rowid).get_result::<i32>(conn);
+        debug!(target: "new_db_entry", "Got ID: <{:?}> for {:#}", id, &self);
+        id
     }
 }
