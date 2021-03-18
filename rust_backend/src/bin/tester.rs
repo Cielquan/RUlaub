@@ -43,5 +43,5 @@ fn main() {
 }
 
 fn create_new_user<'a>() -> NewUser<'a> {
-    User::new("Name11", &32, &123, None)
+    User::new("Name11", "na1", &32, &123, None)
 }

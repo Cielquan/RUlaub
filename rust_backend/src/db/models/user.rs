@@ -11,6 +11,7 @@ use crate::db::util::last_insert_rowid;
 pub struct User {
     pub id: i32,
     pub name: String,
+    pub abbr: String,
     pub vacation_days: i32,
     pub hex_color: i32,
     pub group_manager_id: Option<i32>,
@@ -23,8 +24,9 @@ impl Display for User {
         } else {
             write!(
                 f,
-                "<User {} (Color: {:x} | Vacation days: {} | Boss: {:?} | ID: {})>",
+                "<User {} (Abbr: {} | Color: {:x} | Vacation days: {} | Boss: {:?} | ID: {})>",
                 self.name,
+                self.abbr,
                 self.hex_color,
                 self.vacation_days,
                 self.group_manager_id,
@@ -38,6 +40,7 @@ impl User {
     #[instrument]
     pub fn new<'a>(
         name: &'a str,
+        abbr: &'a str,
         vacation_days: &'a i32,
         hex_color: &'a i32,
         group_manager_id: Option<&'a i32>,
@@ -45,6 +48,7 @@ impl User {
         trace!("Create NewUser instance");
         NewUser {
             name,
+            abbr,
             vacation_days,
             hex_color,
             group_manager_id,
@@ -56,6 +60,7 @@ impl User {
 #[table_name = "users"]
 pub struct NewUser<'a> {
     pub name: &'a str,
+    pub abbr: &'a str,
     pub vacation_days: &'a i32,
     pub hex_color: &'a i32,
     pub group_manager_id: Option<&'a i32>,
@@ -68,8 +73,8 @@ impl Display for NewUser<'_> {
         } else {
             write!(
                 f,
-                "<NewUser {} (Color: {:x} | Vacation days: {} | Boss: {:?})>",
-                self.name, self.hex_color, self.vacation_days, self.group_manager_id
+                "<NewUser {} (Abbr: {} | Color: {:x} | Vacation days: {} | Boss: {:?})>",
+                self.name, self.abbr, self.hex_color, self.vacation_days, self.group_manager_id
             )
         }
     }

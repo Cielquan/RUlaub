@@ -1,6 +1,7 @@
 CREATE TABLE users (
     id INTEGER NOT NULL PRIMARY KEY,
     name VARCHAR(128) NOT NULL UNIQUE,
+    abbr VARCHAR(10) NOT NULL UNIQUE,
     vacation_days INTEGER(3) NOT NULL,
     hex_color INTEGER NOT NULL UNIQUE,
     group_manager_id INTEGER,

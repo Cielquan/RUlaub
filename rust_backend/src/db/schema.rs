@@ -45,6 +45,7 @@ table! {
     users (id) {
         id -> Integer,
         name -> Text,
+        abbr -> Text,
         vacation_days -> Integer,
         hex_color -> Integer,
         group_manager_id -> Nullable<Integer>,
