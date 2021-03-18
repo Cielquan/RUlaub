@@ -43,5 +43,8 @@ fn main() {
 }
 
 fn create_new_user<'a>() -> NewUser<'a> {
-    User::new("Name11", "na1", &32, &123, None)
+    let add = 0; // CHANGE ME
+
+    let num = 1 + add;
+    User::new(format!("Name{}", num), format!("na{}", num), &32, &num, None)
 }
