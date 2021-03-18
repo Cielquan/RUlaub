@@ -12,8 +12,14 @@ name = "rulaub_backend"
 diesel = { version = "1.4.6", features = ["sqlite", "chrono"] }
 libsqlite3-sys = { version = "0.20.1", features = ["bundled"]}
 chrono = "0.4"
-dotenv = "0.15.0"
 tracing = "0.1.25"
 
+dotenv = "0.15.0"
 tracing-subscriber = "0.2.17"
 tracing-appender = "0.1"
+
+# take a look at
+anyhow = "1.0"
+directories = "3.0"
+config = "0.11"
+    lazy_static = "1.4.0"
