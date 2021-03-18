@@ -1,11 +1,13 @@
-#[macro_use]
+// #[macro_use]
 extern crate diesel;
 extern crate dotenv;
 extern crate tracing;
 extern crate tracing_appender;
 extern crate tracing_subscriber;
 
-mod db;
+extern crate rulaub_backend;
+
+use rulaub_backend::db;
 use db::models::*;
 
 use tracing::Level;
