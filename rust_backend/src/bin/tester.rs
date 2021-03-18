@@ -1,3 +1,4 @@
+extern crate anyhow;
 // #[macro_use]
 extern crate diesel;
 extern crate dotenv;
@@ -33,18 +34,18 @@ fn main() {
 
     tracing::trace!("App start");
 
-    let conn = db::establish_connection();
-
-    let u = create_new_user();
-
-    let id = u.save_to_db(&conn);
+    let id = create_new_user();
 
     println!("{}", id.unwrap());
 }
 
-fn create_new_user<'a>() -> NewUser<'a> {
+fn create_new_user<'a>() -> anyhow::Result<i32> {
     let add = 0; // CHANGE ME
 
+    let conn = db::establish_connection();
+
     let num = 1 + add;
-    User::new(format!("Name{}", num), format!("na{}", num), &32, &num, None)
+    let name = format!("Name{}", &num);
+    let abbr = format!("na{}", &num);
+    User::new(&name, &abbr, &32, &num, None).save_to_db(&conn)
 }
