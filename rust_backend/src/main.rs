@@ -22,7 +22,7 @@ fn main() {
         .with_thread_names(true)
         .with_thread_ids(true)
         .with_max_level(Level::INFO);
-        // .with_filter_reloading()
+    // .with_filter_reloading()
     // let handle = tracer.reload_handle();
     tracer.init();
     tracing::debug!("Test tracing1");

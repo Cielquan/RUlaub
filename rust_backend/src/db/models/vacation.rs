@@ -5,7 +5,8 @@ use diesel::prelude::*;
 use diesel::result::Error;
 use tracing::{debug, instrument, trace};
 
-use super::super::{schema::vacations, util::last_insert_rowid};
+use crate::db::schema::vacations;
+use crate::db::util::last_insert_rowid;
 
 #[derive(Queryable, Debug)]
 pub struct Vacation {

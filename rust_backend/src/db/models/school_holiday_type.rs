@@ -4,7 +4,8 @@ use diesel::prelude::*;
 use diesel::result::Error;
 use tracing::{debug, instrument, trace};
 
-use super::super::{schema::school_holiday_types, util::last_insert_rowid};
+use crate::db::schema::school_holiday_types;
+use crate::db::util::last_insert_rowid;
 
 #[derive(Queryable, Debug)]
 pub struct SchoolHolidayType {

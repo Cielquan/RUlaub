@@ -4,7 +4,8 @@ use diesel::prelude::*;
 use diesel::result::Error;
 use tracing::{debug, instrument, trace};
 
-use super::super::{schema::states, util::last_insert_rowid};
+use crate::db::schema::states;
+use crate::db::util::last_insert_rowid;
 
 #[derive(Queryable, Debug)]
 pub struct State {
