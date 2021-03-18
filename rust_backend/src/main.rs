@@ -8,10 +8,12 @@ extern crate tracing_subscriber;
 mod db;
 use db::models::*;
 
+use tracing::Level;
+
 fn main() {
     let file_appender = tracing_appender::rolling::daily("logs", "log");
     let (non_blocking, _guard) = tracing_appender::non_blocking(file_appender);
-    tracing_subscriber::fmt()
+    let tracer = tracing_subscriber::fmt()
         .with_writer(non_blocking)
         .pretty()
         .with_ansi(false)
@@ -19,10 +21,13 @@ fn main() {
         .with_target(true)
         .with_thread_names(true)
         .with_thread_ids(true)
-        .with_max_level(tracing::Level::TRACE)
-        // .reload_handle(true);
-        .init();
-    tracing::error!("Test tracing");
+        .with_max_level(Level::INFO);
+        // .with_filter_reloading()
+    // let handle = tracer.reload_handle();
+    tracer.init();
+    tracing::debug!("Test tracing1");
+    // handle.reload(Level::DEBUG).expect("the collector should still exist");
+    tracing::debug!("Test tracing2");
 
     tracing::trace!("App start");
 

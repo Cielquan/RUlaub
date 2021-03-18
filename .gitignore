@@ -45,3 +45,6 @@ _backupfiles
 
 # Database files
 *.db
+
+# Logs
+logs/
