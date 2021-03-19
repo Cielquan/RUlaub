@@ -20,11 +20,13 @@ fn main() {
         .with_writer(non_blocking)
         .pretty()
         .with_ansi(false)
+        // https://github.com/tokio-rs/tracing/issues/1310
+        .fmt_fields(tracing_subscriber::fmt::format::DefaultFields::new())
         .with_level(true)
+        .with_max_level(Level::INFO)
         .with_target(true)
         .with_thread_names(true)
-        .with_thread_ids(true)
-        .with_max_level(Level::INFO);
+        .with_thread_ids(true);
     // .with_filter_reloading()
     // let handle = tracer.reload_handle();
     tracer.init();
