@@ -12,8 +12,8 @@ use dotenv::dotenv;
 use std::env;
 use tracing::Level;
 
-use rulaub_backend::db;
 use db::models::*;
+use rulaub_backend::db;
 
 fn main() {
     let file_appender = tracing_appender::rolling::daily("logs", "log");
@@ -38,9 +38,12 @@ fn main() {
 
     tracing::trace!("App start");
 
-    let id = create_new_user();
+    println!("File path: {}", rulaub_backend::config::get_conf_file_path_str());
 
-    println!("{}", id.unwrap());
+    rulaub_backend::config::watch_settings();
+
+    // let id = create_new_user();
+    // println!("{}", id.unwrap());
 }
 
 fn get_db_url() -> String {

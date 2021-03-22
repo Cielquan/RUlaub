@@ -4,13 +4,13 @@ extern crate config as configlib;
 extern crate diesel;
 extern crate directories;
 extern crate dotenv;
-// #[macro_use]
+#[macro_use]
 extern crate lazy_static;
 extern crate notify;
 extern crate thiserror;
 extern crate tracing;
 
-mod config;
+pub mod config;
 
 pub mod db;
 
