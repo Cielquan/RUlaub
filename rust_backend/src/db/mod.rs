@@ -3,4 +3,4 @@ mod util;
 
 pub mod models;
 
-pub use util::establish_connection;
+pub use util::establish_connection_to;
