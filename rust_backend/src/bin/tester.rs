@@ -8,10 +8,12 @@ extern crate tracing_subscriber;
 
 extern crate rulaub_backend;
 
+use dotenv::dotenv;
+use std::env;
+use tracing::Level;
+
 use rulaub_backend::db;
 use db::models::*;
-
-use tracing::Level;
 
 fn main() {
     let file_appender = tracing_appender::rolling::daily("logs", "log");
@@ -41,10 +43,18 @@ fn main() {
     println!("{}", id.unwrap());
 }
 
+fn get_db_url() -> String {
+    dotenv().ok();
+
+    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+    database_url
+}
+
 fn create_new_user<'a>() -> anyhow::Result<i32> {
     let add = 0; // CHANGE ME
 
-    let conn = db::establish_connection();
+    let db_url = get_db_url();
+    let conn = db::establish_connection_to(&db_url[..]);
 
     let num = 1 + add;
     let name = format!("Name{}", &num);
