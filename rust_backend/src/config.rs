@@ -16,20 +16,26 @@ fn get_conf_file_path() -> Option<String> {
     Some(String::from(conf_file.to_str()?))
 }
 
-pub fn get_conf_file_path_str() -> String {
-    match get_conf_file_path() {
-        Some(s) => s,
-        None => panic!("No conf file string"),
-    }
+fn check_conf_file_path() -> Result<String> {
+    
 }
 
 lazy_static! {
+    static ref SETTINGS_FILE_FOUND: bool = {
+        match get_conf_file_path() {
+            Some(_) => true,
+            None => false,
+        }
+    };
     static ref SETTINGS: RwLock<Config> = RwLock::new({
         let mut settings = Config::default();
-        settings
-            .merge(File::with_name(&get_conf_file_path_str()[..]))
-            .unwrap();
-
+        if *SETTINGS_FILE_FOUND {
+            if let Some(path) = get_conf_file_path() {
+                settings
+                    .merge(File::with_name(&path[..]))
+                    .unwrap();
+            }
+        }
         settings
     });
 }
@@ -81,10 +87,6 @@ fn watch() {
 }
 
 pub fn watch_settings() {
-    // This is just an example of what could be done, today
-    // We do want this to be built-in to config-rs at some point
-    // Feel free to take a crack at a PR
-
     show();
     watch();
 }
