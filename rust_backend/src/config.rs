@@ -3,6 +3,7 @@ use directories::ProjectDirs;
 use notify::{DebouncedEvent, RecommendedWatcher, RecursiveMode, Watcher};
 
 use std::collections::HashMap;
+use std::io::{Error, ErrorKind};
 use std::path::{Path, PathBuf};
 use std::sync::mpsc::channel;
 use std::sync::RwLock;
@@ -16,24 +17,34 @@ fn get_conf_file_path() -> Option<String> {
     Some(String::from(conf_file.to_str()?))
 }
 
-fn check_conf_file_path() -> Result<String> {
-    
+fn check_conf_file_path() -> Result<String, Error> {
+    if let Some(path) = get_conf_file_path() {
+        if Path::new(&path).is_file() {
+            return Ok(path);
+        } else {
+            return Err(Error::new(
+                ErrorKind::NotFound,
+                format!("Settings file <{}> is not a file!", path),
+            ));
+        }
+    }
+    Err(Error::new(ErrorKind::NotFound, "No settings file found!"))
 }
 
 lazy_static! {
     static ref SETTINGS_FILE_FOUND: bool = {
-        match get_conf_file_path() {
-            Some(_) => true,
-            None => false,
+        if let Some(path) = get_conf_file_path() {
+            if Path::new(&path).is_file() {
+                return true
+            }
         }
+        false
     };
     static ref SETTINGS: RwLock<Config> = RwLock::new({
         let mut settings = Config::default();
         if *SETTINGS_FILE_FOUND {
             if let Some(path) = get_conf_file_path() {
-                settings
-                    .merge(File::with_name(&path[..]))
-                    .unwrap();
+                settings.merge(File::with_name(&path[..])).unwrap();
             }
         }
         settings
