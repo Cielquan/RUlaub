@@ -11,7 +11,6 @@ extern crate thiserror;
 extern crate tracing;
 
 pub mod config;
-
 pub mod db;
 
 pub const NAME: &'static str = "RUlaub";
