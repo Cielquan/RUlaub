@@ -11,9 +11,8 @@ use std::time::Duration;
 
 fn get_conf_file_path() -> Option<String> {
     let proj_dirs = ProjectDirs::from("", crate::AUTHOR, crate::NAME)?;
-    let conf_dir_path = PathBuf::from(proj_dirs.config_dir());
-    let conf_dir_path_str = conf_dir_path.to_str()?;
-    let conf_file = Path::new(conf_dir_path_str).join("settings.toml");
+    let conf_dir = proj_dirs.config_dir();
+    let conf_file = conf_dir.join("settings.toml");
     Some(String::from(conf_file.to_str()?))
 }
 
