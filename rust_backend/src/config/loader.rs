@@ -3,38 +3,42 @@ use directories::ProjectDirs;
 use notify::{DebouncedEvent, RecommendedWatcher, RecursiveMode, Watcher};
 
 use std::collections::HashMap;
-use std::io::{Error, ErrorKind};
+use std::io::{Error as IOError, ErrorKind};
 use std::path::{Path, PathBuf};
 use std::sync::mpsc::channel;
 use std::sync::RwLock;
 use std::time::Duration;
 
-fn get_conf_file_path() -> Option<String> {
-    let proj_dirs = ProjectDirs::from("", crate::AUTHOR, crate::NAME)?;
-    let conf_dir = proj_dirs.config_dir();
-    let conf_file = conf_dir.join("settings.toml");
-    Some(String::from(conf_file.to_str()?))
+fn build_conf_file_path() -> Option<PathBuf> {
+    Some(
+        ProjectDirs::from("", crate::AUTHOR, crate::NAME)?
+            .config_dir()
+            .join("settings.toml"),
+    )
 }
 
-fn check_conf_file_path() -> Result<String, Error> {
-    if let Some(path) = get_conf_file_path() {
-        if Path::new(&path).is_file() {
-            return Ok(path);
-        } else {
-            return Err(Error::new(
-                ErrorKind::NotFound,
-                format!("Settings file <{}> is not a file!", path),
-            ));
-        }
+fn get_conf_file_path() -> Result<PathBuf, IOError> {
+    match build_conf_file_path() {
+        Some(path) => Ok(path),
+        None => Err(IOError::new(
+            ErrorKind::NotFound,
+            "Could not build config file path.",
+        )),
     }
-    Err(Error::new(ErrorKind::NotFound, "No settings file found!"))
 }
 
 lazy_static! {
+    #[derive(Debug)]
+    pub static ref SETTINGS_FILE_PATH: PathBuf = {
+        get_conf_file_path().expect(concat!(
+            "Potential issue with the filesystem.",
+            "Could not extract project direcotries for this OS."
+        ))
+    };
     static ref SETTINGS_FILE_FOUND: bool = {
-        if let Some(path) = get_conf_file_path() {
+        if let Ok(path) = get_conf_file_path() {
             if Path::new(&path).is_file() {
-                return true
+                return true;
             }
         }
         false
@@ -42,8 +46,8 @@ lazy_static! {
     static ref SETTINGS: RwLock<Config> = RwLock::new({
         let mut settings = Config::default();
         if *SETTINGS_FILE_FOUND {
-            if let Some(path) = get_conf_file_path() {
-                settings.merge(File::with_name(&path[..])).unwrap();
+            if let Ok(path) = get_conf_file_path() {
+                settings.merge(File::with_name(path)).unwrap();
             }
         }
         settings
@@ -74,7 +78,7 @@ fn watch() {
     // Add a path to be watched. All files and directories at that path and
     // below will be monitored for changes.
     watcher
-        .watch(get_conf_file_path_str(), RecursiveMode::NonRecursive)
+        .watch(get_conf_file_path(), RecursiveMode::NonRecursive)
         .unwrap();
 
     // This is a simple loop, but you may want to use more complex logic here,
