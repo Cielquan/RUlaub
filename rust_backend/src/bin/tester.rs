@@ -38,9 +38,12 @@ fn main() {
 
     tracing::trace!("App start");
 
-    println!("File path: {}", rulaub_backend::config::get_conf_file_path_str());
+    println!(
+        "File path: {:?}",
+        *rulaub_backend::config::loader::SETTINGS_FILE_PATH // rulaub_backend::config::get_conf_file_path_str()
+    );
 
-    rulaub_backend::config::watch_settings();
+    // rulaub_backend::config::watch_settings();
 
     // let id = create_new_user();
     // println!("{}", id.unwrap());
