@@ -1,13 +1,13 @@
-use configlib::*;
-use directories::ProjectDirs;
-use notify::{DebouncedEvent, RecommendedWatcher, RecursiveMode, Watcher};
-
 use std::collections::HashMap;
-use std::io::{Error as IOError, ErrorKind};
+use std::io::{Error as IOError, ErrorKind as IOErrorKind};
 use std::path::{Path, PathBuf};
 use std::sync::mpsc::channel;
 use std::sync::RwLock;
 use std::time::Duration;
+
+use configlib::*;
+use directories::ProjectDirs;
+use notify::{DebouncedEvent, RecommendedWatcher, RecursiveMode, Watcher};
 
 fn build_conf_file_path() -> Option<PathBuf> {
     Some(
@@ -21,29 +21,30 @@ fn get_conf_file_path() -> Result<PathBuf, IOError> {
     match build_conf_file_path() {
         Some(path) => Ok(path),
         None => Err(IOError::new(
-            ErrorKind::NotFound,
+            IOErrorKind::NotFound,
             "Could not build config file path.",
         )),
     }
 }
 
+fn check_conf_file_path() -> PathBuf {
+    get_conf_file_path().expect(concat!(
+        "Potential issue with the filesystem.",
+        "Could not find project direcotries for this OS."
+    ))
+}
+
 lazy_static! {
-    #[derive(Debug)]
-    pub static ref SETTINGS_FILE_PATH: PathBuf = {
-        get_conf_file_path().expect(concat!(
-            "Potential issue with the filesystem.",
-            "Could not extract project direcotries for this OS."
-        ))
+    static ref SETTINGS_FILE_PATH: PathBuf = {
+        check_conf_file_path()
     };
     static ref SETTINGS_FILE_FOUND: bool = {
         if let Ok(path) = get_conf_file_path() {
-            if Path::new(&path).is_file() {
-                return true;
-            }
+            return Path::new(&path).is_file()
         }
         false
     };
-    static ref SETTINGS: RwLock<Config> = RwLock::new({
+    pub static ref SETTINGS: RwLock<Config> = RwLock::new({
         let mut settings = Config::default();
         if *SETTINGS_FILE_FOUND {
             if let Ok(path) = get_conf_file_path() {
