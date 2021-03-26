@@ -8,6 +8,7 @@ use std::time::Duration;
 use configlib::*;
 use directories::ProjectDirs;
 use notify::{DebouncedEvent, RecommendedWatcher, RecursiveMode, Watcher};
+use tracing::debug;
 
 fn build_conf_file_path() -> Option<PathBuf> {
     Some(
@@ -35,10 +36,17 @@ fn check_conf_file_path() -> PathBuf {
 }
 
 lazy_static! {
-    static ref SETTINGS_FILE_PATH: PathBuf = {
+    #[derive(Debug)]
+    pub static ref SETTINGS_FILE_PATH: PathBuf = {
         check_conf_file_path()
     };
-    static ref SETTINGS_FILE_FOUND: bool = {
+    pub static ref SETTINGS_FILE_PATH_STR: String = {
+        if let Some(path) = SETTINGS_FILE_PATH.to_str() {
+            return String::from(path)
+        }
+        String::new()
+    };
+    pub static ref SETTINGS_FILE_FOUND: bool = {
         if let Ok(path) = get_conf_file_path() {
             return Path::new(&path).is_file()
         }
@@ -46,18 +54,14 @@ lazy_static! {
     };
     pub static ref SETTINGS: RwLock<Config> = RwLock::new({
         let mut settings = Config::default();
-        if *SETTINGS_FILE_FOUND {
-            if let Ok(path) = get_conf_file_path() {
-                settings.merge(File::with_name(path)).unwrap();
-            }
-        }
+        settings.merge(File::with_name(&SETTINGS_FILE_PATH_STR[..])).unwrap();
         settings
     });
 }
 
 fn show() {
-    println!(
-        " * Settings :: \n\x1b[31m{:?}\x1b[0m",
+    debug!(
+        "Loaded Settings:\n{:?}",
         SETTINGS
             .read()
             .unwrap()
@@ -79,7 +83,7 @@ fn watch() {
     // Add a path to be watched. All files and directories at that path and
     // below will be monitored for changes.
     watcher
-        .watch(get_conf_file_path(), RecursiveMode::NonRecursive)
+        .watch(&SETTINGS_FILE_PATH_STR[..], RecursiveMode::NonRecursive)
         .unwrap();
 
     // This is a simple loop, but you may want to use more complex logic here,
