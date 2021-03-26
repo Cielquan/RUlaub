@@ -25,7 +25,7 @@ fn main() {
         // https://github.com/tokio-rs/tracing/issues/1310
         .fmt_fields(tracing_subscriber::fmt::format::DefaultFields::new())
         .with_level(true)
-        .with_max_level(Level::INFO)
+        .with_max_level(Level::TRACE)
         .with_target(true)
         .with_thread_names(true)
         .with_thread_ids(true);
@@ -37,16 +37,21 @@ fn main() {
     tracing::debug!("Test tracing2");
 
     tracing::trace!("App start");
+    println!("App start");
 
     println!(
         "File path: {:?}",
-        *rulaub_backend::config::loader::SETTINGS_FILE_PATH // rulaub_backend::config::get_conf_file_path_str()
+        *rulaub_backend::config::loader::SETTINGS_FILE_PATH
+        // rulaub_backend::config::get_conf_file_path_str()
     );
 
-    // rulaub_backend::config::watch_settings();
+    rulaub_backend::config::loader::watch_settings();
 
     // let id = create_new_user();
     // println!("{}", id.unwrap());
+
+    println!("App end");
+    tracing::trace!("App end");
 }
 
 fn get_db_url() -> String {
