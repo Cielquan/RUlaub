@@ -8,7 +8,25 @@ use std::time::Duration;
 use configlib::*;
 use directories::ProjectDirs;
 use notify::{DebouncedEvent, RecommendedWatcher, RecursiveMode, Watcher};
-use tracing::{debug, error, info};
+use tracing::{debug, error, info, trace};
+
+/*
+1. Build path
+2. Check path
+3. Check if file
+4. Get as String
+
+*/
+
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+pub enum ConfigError {
+    #[error("Could not build config file path.")]
+    PathNotFound,
+    #[error("Could not stringify config file path.")]
+    PathStringify,
+}
 
 fn build_conf_file_path() -> Option<PathBuf> {
     Some(
@@ -18,27 +36,49 @@ fn build_conf_file_path() -> Option<PathBuf> {
     )
 }
 
-fn get_conf_file_path() -> Result<PathBuf, IOError> {
+fn get_conf_file_path() -> Result<PathBuf, ConfigError> {
     match build_conf_file_path() {
-        Some(path) => Ok(path),
-        None => Err(IOError::new(
-            IOErrorKind::NotFound,
-            "Could not build config file path.",
-        )),
-    }
-}
-
-fn check_conf_file_path() -> PathBuf {
-    match get_conf_file_path() {
-        Ok(path) => path,
-        Err(_) => {
+        Some(path) => {
+            trace!("Built conf file path: <{:?}>", path);
+            Ok(path)
+        }
+        None => {
             error!(concat!(
+                "Failed to build conf file path. ",
                 "Potential issue with the filesystem. ",
                 "Could not find project direcotries for this OS."
             ));
-            PathBuf::new()
+            Err(ConfigError::PathNotFound)
         }
     }
+}
+
+fn check_conf_file_path_is_file() -> bool {
+    match get_conf_file_path() {
+        Some(path) => {
+            debug!("Config file <{:?}> does exist.", path);
+            return Path::new(&path).is_file();
+        }
+        None => false,
+    }
+}
+
+fn get_conf_file_path_as_string() -> Result<String, ConfigError> {
+    if let Some(path) = get_conf_file_path()?.to_str() {
+        return Ok(String::from(path));
+    }
+    Err(ConfigError::PathStringify)
+}
+
+fn check_conf_file_path() -> PathBuf {
+    get_conf_file_path().expect({
+        let err = concat!(
+            "Potential issue with the filesystem. ",
+            "Could not find project direcotries for this OS."
+        );
+        error!(err);
+        err
+    })
 }
 
 lazy_static! {
@@ -69,7 +109,7 @@ lazy_static! {
     });
 }
 
-fn show() {
+fn log_settings() {
     debug!(
         "Loaded Settings:\n{:?}",
         SETTINGS
@@ -81,41 +121,30 @@ fn show() {
     );
 }
 
-fn watch() {
-    // Create a channel to receive the events.
+fn watch_file() {
     let (tx, rx) = channel();
 
-    // Automatically select the best implementation for your platform.
-    // You can also access each implementation directly e.g. INotifyWatcher.
     let mut watcher: RecommendedWatcher =
         Watcher::new(tx, Duration::from_secs(2)).unwrap();
 
-    // Add a path to be watched. All files and directories at that path and
-    // below will be monitored for changes.
     watcher
         .watch(&SETTINGS_FILE_PATH_STR[..], RecursiveMode::NonRecursive)
         .unwrap();
 
-    // This is a simple loop, but you may want to use more complex logic here,
-    // for example to handle I/O.
     loop {
         match rx.recv() {
             Ok(DebouncedEvent::Write(_)) => {
                 info!("Settings.toml updated. Refreshing configuration.");
                 SETTINGS.write().unwrap().refresh().unwrap();
-                show();
+                log_settings();
             }
-
-            Err(e) => error!("watch error: {:?}", e),
-
-            _ => {
-                // Ignore event
-            }
+            Err(e) => error!("Error while watching settings file: {:?}", e),
+            _ => { /* Ignore other event */ }
         }
     }
 }
 
-pub fn watch_settings() {
-    show();
-    watch();
+pub fn watch_settings_file() {
+    log_settings();
+    watch_file();
 }
