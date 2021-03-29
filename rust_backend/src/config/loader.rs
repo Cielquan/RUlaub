@@ -8,7 +8,7 @@ use std::time::Duration;
 use configlib::*;
 use directories::ProjectDirs;
 use notify::{DebouncedEvent, RecommendedWatcher, RecursiveMode, Watcher};
-use tracing::debug;
+use tracing::{debug, error, info};
 
 fn build_conf_file_path() -> Option<PathBuf> {
     Some(
@@ -29,10 +29,16 @@ fn get_conf_file_path() -> Result<PathBuf, IOError> {
 }
 
 fn check_conf_file_path() -> PathBuf {
-    get_conf_file_path().expect(concat!(
-        "Potential issue with the filesystem.",
-        "Could not find project direcotries for this OS."
-    ))
+    match get_conf_file_path() {
+        Ok(path) => path,
+        Err(_) => {
+            error!(concat!(
+                "Potential issue with the filesystem. ",
+                "Could not find project direcotries for this OS."
+            ));
+            PathBuf::new()
+        }
+    }
 }
 
 lazy_static! {
@@ -54,7 +60,11 @@ lazy_static! {
     };
     pub static ref SETTINGS: RwLock<Config> = RwLock::new({
         let mut settings = Config::default();
-        settings.merge(File::with_name(&SETTINGS_FILE_PATH_STR[..])).unwrap();
+        settings.merge(File::with_name(&SETTINGS_FILE_PATH_STR[..])).expect({
+            let err = "Failed to merge config file into config struct.";
+            error!(err);
+            err
+        });
         settings
     });
 }
@@ -91,12 +101,12 @@ fn watch() {
     loop {
         match rx.recv() {
             Ok(DebouncedEvent::Write(_)) => {
-                println!(" * Settings.toml written; refreshing configuration ...");
+                info!("Settings.toml updated. Refreshing configuration.");
                 SETTINGS.write().unwrap().refresh().unwrap();
                 show();
             }
 
-            Err(e) => println!("watch error: {:?}", e),
+            Err(e) => error!("watch error: {:?}", e),
 
             _ => {
                 // Ignore event
