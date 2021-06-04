@@ -12,7 +12,7 @@ repos:
 #: Valiadte this config file
 #: -------------------------------------------------------------------------------------
   - repo: https://github.com/pre-commit/pre-commit
-    rev: 8aec369df752dc6bfc498a96eb922f656244070b  # frozen: v2.11.1
+    rev: '229a4e03e3ed531961ca850df6462f19c2a9376d'  # frozen: v2.13.0
     hooks:
       - id: validate_manifest
 
@@ -33,19 +33,15 @@ repos:
 
   #: code unspecific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 6e2418c5521b7d606e72914dced3253f9ace1205  # frozen: v3.4.0
+    rev: '38b88246ccc552bffaaf54259d064beeee434539'  # frozen: v4.0.1
     hooks:
       - id: check-case-conflict
-      - id: check-json
-      - id: pretty-format-json
-        args: ["--indent=4", "--autofix"]
-      - id: check-toml
-      - id: check-yaml
       - id: detect-private-key
       - id: trailing-whitespace
         stages: [commit]
       - id: end-of-file-fixer
         stages: [commit]
+      - id: check-shebang-scripts-are-executable
 
 
 #: -------------------------------------------------------------------------------------
@@ -54,6 +50,7 @@ repos:
   # Run rust toolchain
   - repo: local
     hooks:
+        #: Config file: rustfmt.toml
       - id: cargo-fmt
         name: rustfmt
         description: Format rust source with rustfmt.
@@ -72,9 +69,81 @@ repos:
         name: cargo check
         description: Check rust package for errors.
         entry: cargo check
+        args: ["--", "-D", "warnings"]
         language: system
         types: [rust]
         pass_filenames: false
+
+
+#: -------------------------------------------------------------------------------------
+#: JavaScript
+#: -------------------------------------------------------------------------------------
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    #: https://github.com/prettier/prettier
+    #: Config file: .prettierrc (JSON, YAML)
+    #: Ignore file: .prettierignore (file ignore pattern)
+    rev: 'a99a3fbe79a9d346cabd02a5e167ad0edafe616b'  # frozen: v2.3.0
+    hooks:
+      - id: prettier
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    #: https://github.com/eslint/eslint
+    #: Config file: .eslintrc.json
+    #: Ignore file: .eslintignore (file ignore pattern)
+    rev: '35fae9e419403ae42821f7ff00f360dd109bdd18'  # frozen: v7.27.0
+    hooks:
+      - id: eslint
+        files: \.[jt]sx?$  # *.js, *.jsx, *.ts and *.tsx
+        types: [file]
+
+
+#: -------------------------------------------------------------------------------------
+#: HTML
+#: -------------------------------------------------------------------------------------
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
+    rev: 'b234899b5db911d0e5482deffcf4e6364ad349d0'  # frozen: v1.1.1
+    hooks:
+      #: https://htmlhint.com/
+      #: Config file: .htmlhintrc (JSON, YAML, JS file containing config obj) [--config/-c]
+      #: Ignore file: .htmlhintignore (file ignore pattern) [--ignore/-i]
+      #: Inline config e.g.: `<!-- htmlhint tag-pair,id-class-value:underline -->`
+      - id: htmlhint
+      #: https://github.com/htmllint/htmllint
+      #: https://github.com/htmllint/htmllint/wiki/Options
+      #: Config file: .htmllintrc (json) [--rc]
+      #: Inline config: `<!-- htmllint [key]="[value]" -->`
+      - id: htmllint
+
+
+#: -------------------------------------------------------------------------------------
+#: CSS
+#: -------------------------------------------------------------------------------------
+  - repo: https://github.com/pre-commit/mirrors-csslint
+    #: https://github.com/CSSLint/csslint
+    #: Config file: .csslintrc [--config]
+    rev: '818b64c6bf19ca1e089b4dabc8dc74059b405814'  # frozen: v1.0.5
+    hooks:
+      - id: csslint
+
+
+#: -------------------------------------------------------------------------------------
+#: JSON hooks
+#: -------------------------------------------------------------------------------------
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: '38b88246ccc552bffaaf54259d064beeee434539'  # frozen: v4.0.1
+    hooks:
+      - id: check-json
+      - id: pretty-format-json
+        args: ["--indent=4", "--autofix"]
+
+
+#: -------------------------------------------------------------------------------------
+#: TOML hooks
+#: -------------------------------------------------------------------------------------
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: '38b88246ccc552bffaaf54259d064beeee434539'  # frozen: v4.0.1
+    hooks:
+      - id: check-toml
 
 
 #: -------------------------------------------------------------------------------------
