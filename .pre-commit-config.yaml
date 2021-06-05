@@ -2,38 +2,35 @@
 minimum_pre_commit_version: "1.15"
 default_stages: [commit]
 
-
 ci:
   skip: []
 
-
 repos:
-#: -------------------------------------------------------------------------------------
-#: Valiadte this config file
-#: -------------------------------------------------------------------------------------
+  #: -----------------------------------------------------------------------------------
+  #: Valiadte this config file
+  #: -----------------------------------------------------------------------------------
   - repo: https://github.com/pre-commit/pre-commit
-    rev: '229a4e03e3ed531961ca850df6462f19c2a9376d'  # frozen: v2.13.0
+    rev: 229a4e03e3ed531961ca850df6462f19c2a9376d # frozen: v2.13.0
     hooks:
       - id: validate_manifest
 
-
-#: -------------------------------------------------------------------------------------
-#: General hooks
-#: -------------------------------------------------------------------------------------
+  #: -----------------------------------------------------------------------------------
+  #: General hooks
+  #: -----------------------------------------------------------------------------------
   #: Find TODO:|FIXME:|BUG: comments in all files
   #: Inline skip: `#i#` directly after the colon after the tag-word
   - repo: local
     hooks:
       - id: find-todos
-        name: 'Find TODO:|FIXME:|BUG: comments'
-        description: 'Check for TODO:|FIXME:|BUG: comments in all files'
+        name: "Find TODO:|FIXME:|BUG: comments"
+        description: "Check for TODO:|FIXME:|BUG: comments in all files"
         language: pygrep
-        entry: '(^|//|#|<!--|;|/\*|\.\.)\s*(TODO:|FIXME:|BUG:)(?!#i#)'
-        exclude: 'TODO'
+        entry: '(^|//!?|#|<!--|;|/\*(\*|!)?|\.\.)\s*(TODO:|FIXME:|BUG:)(?!#i#)'
+        exclude: TODO
 
   #: code unspecific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: '38b88246ccc552bffaaf54259d064beeee434539'  # frozen: v4.0.1
+    rev: 38b88246ccc552bffaaf54259d064beeee434539 # frozen: v4.0.1
     hooks:
       - id: check-case-conflict
       - id: detect-private-key
@@ -43,14 +40,13 @@ repos:
         stages: [commit]
       - id: check-shebang-scripts-are-executable
 
-
-#: -------------------------------------------------------------------------------------
-#: Rust hooks
-#: -------------------------------------------------------------------------------------
+  #: -----------------------------------------------------------------------------------
+  #: Rust hooks
+  #: -----------------------------------------------------------------------------------
   # Run rust toolchain
   - repo: local
     hooks:
-        #: Config file: rustfmt.toml
+      #: Config file: rustfmt.toml
       - id: cargo-fmt
         name: rustfmt
         description: Format rust source with rustfmt.
@@ -74,15 +70,14 @@ repos:
         types: [rust]
         pass_filenames: false
 
-
-#: -------------------------------------------------------------------------------------
-#: JavaScript
-#: -------------------------------------------------------------------------------------
+  #: -----------------------------------------------------------------------------------
+  #: JavaScript
+  #: -----------------------------------------------------------------------------------
   - repo: https://github.com/pre-commit/mirrors-prettier
     #: https://github.com/prettier/prettier
     #: Config file: .prettierrc (JSON, YAML)
     #: Ignore file: .prettierignore (file ignore pattern)
-    rev: 'a99a3fbe79a9d346cabd02a5e167ad0edafe616b'  # frozen: v2.3.0
+    rev: a99a3fbe79a9d346cabd02a5e167ad0edafe616b # frozen: v2.3.0
     hooks:
       - id: prettier
 
@@ -90,18 +85,17 @@ repos:
     #: https://github.com/eslint/eslint
     #: Config file: .eslintrc.json
     #: Ignore file: .eslintignore (file ignore pattern)
-    rev: '35fae9e419403ae42821f7ff00f360dd109bdd18'  # frozen: v7.27.0
+    rev: 35fae9e419403ae42821f7ff00f360dd109bdd18 # frozen: v7.27.0
     hooks:
       - id: eslint
-        files: \.[jt]sx?$  # *.js, *.jsx, *.ts and *.tsx
+        files: \.[jt]sx?$ # *.js, *.jsx, *.ts and *.tsx
         types: [file]
 
-
-#: -------------------------------------------------------------------------------------
-#: HTML
-#: -------------------------------------------------------------------------------------
+  #: -----------------------------------------------------------------------------------
+  #: HTML
+  #: -----------------------------------------------------------------------------------
   - repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
-    rev: 'b234899b5db911d0e5482deffcf4e6364ad349d0'  # frozen: v1.1.1
+    rev: b234899b5db911d0e5482deffcf4e6364ad349d0 # frozen: v1.1.1
     hooks:
       #: https://htmlhint.com/
       #: Config file: .htmlhintrc (JSON, YAML, JS file containing config obj) [--config/-c]
@@ -114,41 +108,37 @@ repos:
       #: Inline config: `<!-- htmllint [key]="[value]" -->`
       - id: htmllint
 
-
-#: -------------------------------------------------------------------------------------
-#: CSS
-#: -------------------------------------------------------------------------------------
+  #: -----------------------------------------------------------------------------------
+  #: CSS
+  #: -----------------------------------------------------------------------------------
   - repo: https://github.com/pre-commit/mirrors-csslint
     #: https://github.com/CSSLint/csslint
     #: Config file: .csslintrc [--config]
-    rev: '818b64c6bf19ca1e089b4dabc8dc74059b405814'  # frozen: v1.0.5
+    rev: 818b64c6bf19ca1e089b4dabc8dc74059b405814 # frozen: v1.0.5
     hooks:
       - id: csslint
 
-
-#: -------------------------------------------------------------------------------------
-#: JSON hooks
-#: -------------------------------------------------------------------------------------
+  #: -----------------------------------------------------------------------------------
+  #: JSON hooks
+  #: -----------------------------------------------------------------------------------
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: '38b88246ccc552bffaaf54259d064beeee434539'  # frozen: v4.0.1
+    rev: 38b88246ccc552bffaaf54259d064beeee434539 # frozen: v4.0.1
     hooks:
       - id: check-json
       - id: pretty-format-json
         args: ["--indent=4", "--autofix"]
 
-
-#: -------------------------------------------------------------------------------------
-#: TOML hooks
-#: -------------------------------------------------------------------------------------
+  #: -----------------------------------------------------------------------------------
+  #: TOML hooks
+  #: -----------------------------------------------------------------------------------
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: '38b88246ccc552bffaaf54259d064beeee434539'  # frozen: v4.0.1
+    rev: 38b88246ccc552bffaaf54259d064beeee434539 # frozen: v4.0.1
     hooks:
       - id: check-toml
 
-
-#: -------------------------------------------------------------------------------------
-#: Meta hooks
-#: -------------------------------------------------------------------------------------
+  #: -----------------------------------------------------------------------------------
+  #: Meta hooks
+  #: -----------------------------------------------------------------------------------
   #: Meta hooks provided by pre-commit
   - repo: meta
     hooks:
