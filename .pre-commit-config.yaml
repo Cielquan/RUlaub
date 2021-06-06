@@ -6,28 +6,77 @@ ci:
   skip: []
 
 repos:
-  # ------------------------------------------------------------------------------------
-  # (Meta) hooks provided by pre-commit for the config file
-  # ------------------------------------------------------------------------------------
-
-  - repo: https://github.com/pre-commit/pre-commit
-    rev: 229a4e03e3ed531961ca850df6462f19c2a9376d # frozen: v2.13.0
-    hooks:
-      # Valiadte this config file
-      - id: validate_manifest
+  # ----------------------------------------------
+  # Meta hooks
+  # ----------------------------------------------
 
   - repo: meta
     hooks:
       - id: identity
-        stages: [commit, manual]
+        stages: [manual]
       - id: check-hooks-apply
         stages: [manual]
       - id: check-useless-excludes
         stages: [manual]
 
-  # ------------------------------------------------------------------------------------
-  # General (code unspecific) hooks
-  # ------------------------------------------------------------------------------------
+  # ####################################################################################
+  #
+  #       FORMATTING
+  #
+  # ####################################################################################
+
+  # ----------------------------------------------
+  # General (code unspecific)
+  # ----------------------------------------------
+
+  # code unspecific out-of-the-box hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 38b88246ccc552bffaaf54259d064beeee434539 # frozen: v4.0.1
+    hooks:
+      - id: end-of-file-fixer
+        stages: [commit]
+      - id: trailing-whitespace
+        stages: [commit]
+
+  # ----------------------------------------------
+  # Rust
+  # ----------------------------------------------
+
+  # Run rust toolchain
+  - repo: local
+    hooks:
+      # rustfmt - rust formater
+      # Config file: rustfmt.toml
+      - id: cargo-fmt
+        name: rustfmt
+        description: Format rust source with rustfmt.
+        entry: cargo fmt
+        args: ["--"]
+        language: system
+        types: [rust]
+
+  # ----------------------------------------------
+  # JS / TS / HTML / CSS / MD / YAML
+  # ----------------------------------------------
+
+  # prettier - JS formater
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    # https://github.com/prettier/prettier
+    # Config file: .prettierrc (JSON, YAML)
+    # Ignore file: .prettierignore (file ignore pattern)
+    rev: a99a3fbe79a9d346cabd02a5e167ad0edafe616b # frozen: v2.3.0
+    hooks:
+      - id: prettier
+
+  # ####################################################################################
+  #
+  #       LINTING
+  #
+  # ####################################################################################
+
+  # ----------------------------------------------
+  # General (code unspecific)
+  # ----------------------------------------------
 
   - repo: local
     hooks:
@@ -47,27 +96,14 @@ repos:
       - id: check-case-conflict
       - id: check-shebang-scripts-are-executable
       - id: detect-private-key
-      - id: end-of-file-fixer
-        stages: [commit]
-      - id: trailing-whitespace
-        stages: [commit]
 
-  # ------------------------------------------------------------------------------------
-  # Rust hooks
-  # ------------------------------------------------------------------------------------
+  # ----------------------------------------------
+  # Rust
+  # ----------------------------------------------
 
   # Run rust toolchain
   - repo: local
     hooks:
-      # rustfmt - rust formater
-      # Config file: rustfmt.toml
-      - id: cargo-fmt
-        name: rustfmt
-        description: Format rust source with rustfmt.
-        entry: cargo fmt
-        args: ["--"]
-        language: system
-        types: [rust]
       # clippy - rust linter
       - id: cargo-clippy
         name: clippy
@@ -86,49 +122,24 @@ repos:
         types: [rust]
         pass_filenames: false
 
-  # ------------------------------------------------------------------------------------
-  # JSON hooks
-  # ------------------------------------------------------------------------------------
+  # ----------------------------------------------
+  # JavaScript
+  # ----------------------------------------------
 
-  # JSON specific out-of-the-box hooks
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 38b88246ccc552bffaaf54259d064beeee434539 # frozen: v4.0.1
+  # eslint - JS linter
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    # https://github.com/eslint/eslint
+    # Config file: .eslintrc.json
+    # Ignore file: .eslintignore (file ignore pattern)
+    rev: 35fae9e419403ae42821f7ff00f360dd109bdd18 # frozen: v7.27.0
     hooks:
-      - id: check-json
+      - id: eslint
+        files: \.[jt]sx?$ # *.js, *.jsx, *.ts, *.tsx
+        types: [file]
 
-  # ------------------------------------------------------------------------------------
-  # TOML hooks
-  # ------------------------------------------------------------------------------------
-
-  # TOML specific out-of-the-box hooks
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 38b88246ccc552bffaaf54259d064beeee434539 # frozen: v4.0.1
-    hooks:
-      - id: check-toml
-
-  # ------------------------------------------------------------------------------------
-  # YAML hooks
-  # ------------------------------------------------------------------------------------
-
-  # YAML specific out-of-the-box hooks
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 38b88246ccc552bffaaf54259d064beeee434539 # frozen: v4.0.1
-    hooks:
-      - id: check-yaml
-
-  # yamllint - yaml linter
-  - repo: https://github.com/adrienverge/yamllint
-    rev: 85ccd625a382423edd988fcb796c4dd5897886fb # frozen: v1.26.1
-    hooks:
-      # Config file: .yamllint (yaml) [--config-file]
-      # Inline skip: `# yamllint disable-line[ rule:<RULE>]`
-      # Block skip: `# yamllint disable[ rule:<RULE>]`
-      # Block skip end: `# yamllint enable`
-      - id: yamllint
-
-  # ------------------------------------------------------------------------------------
+  # ----------------------------------------------
   # HTML
-  # ------------------------------------------------------------------------------------
+  # ----------------------------------------------
 
   # htmlhint - HTML linter
   - repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
@@ -149,9 +160,9 @@ repos:
       # Inline config: `<!-- htmllint [key]="[value]" -->`
       - id: htmllint
 
-  # ------------------------------------------------------------------------------------
+  # ----------------------------------------------
   # CSS
-  # ------------------------------------------------------------------------------------
+  # ----------------------------------------------
 
   # csslint - CSS linter
   - repo: https://github.com/pre-commit/mirrors-csslint
@@ -168,26 +179,24 @@ repos:
     hooks:
       - id: scss-lint
 
-  # ------------------------------------------------------------------------------------
-  # JavaScript
-  # ------------------------------------------------------------------------------------
+  # ----------------------------------------------
+  # JSON / TOML / YAML
+  # ----------------------------------------------
 
-  # prettier - JS formater
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    # https://github.com/prettier/prettier
-    # Config file: .prettierrc (JSON, YAML)
-    # Ignore file: .prettierignore (file ignore pattern)
-    rev: a99a3fbe79a9d346cabd02a5e167ad0edafe616b # frozen: v2.3.0
+  # JSON specific out-of-the-box hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 38b88246ccc552bffaaf54259d064beeee434539 # frozen: v4.0.1
     hooks:
-      - id: prettier
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
 
-  # eslint - JS linter
-  - repo: https://github.com/pre-commit/mirrors-eslint
-    # https://github.com/eslint/eslint
-    # Config file: .eslintrc.json
-    # Ignore file: .eslintignore (file ignore pattern)
-    rev: 35fae9e419403ae42821f7ff00f360dd109bdd18 # frozen: v7.27.0
+  # yamllint - yaml linter
+  - repo: https://github.com/adrienverge/yamllint
+    rev: 85ccd625a382423edd988fcb796c4dd5897886fb # frozen: v1.26.1
     hooks:
-      - id: eslint
-        files: \.[jt]sx?$ # *.js, *.jsx, *.ts, *.tsx
-        types: [file]
+      # Config file: .yamllint (yaml) [--config-file]
+      # Inline skip: `# yamllint disable-line[ rule:<RULE>]`
+      # Block skip: `# yamllint disable[ rule:<RULE>]`
+      # Block skip end: `# yamllint enable`
+      - id: yamllint
