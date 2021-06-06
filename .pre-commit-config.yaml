@@ -95,8 +95,6 @@ repos:
     rev: 38b88246ccc552bffaaf54259d064beeee434539 # frozen: v4.0.1
     hooks:
       - id: check-json
-      - id: pretty-format-json
-        args: ["--indent=4", "--autofix"]
 
   # ------------------------------------------------------------------------------------
   # TOML hooks
