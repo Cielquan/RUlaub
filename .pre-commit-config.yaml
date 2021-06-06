@@ -95,6 +95,7 @@ repos:
     hooks:
       - id: check-case-conflict
       - id: check-shebang-scripts-are-executable
+        exclude: '^.*\.rs$'
       - id: detect-private-key
 
   # ----------------------------------------------
@@ -117,7 +118,6 @@ repos:
         name: cargo check
         description: Check rust package for errors.
         entry: cargo check
-        args: ["--", "-D", "warnings"]
         language: system
         types: [rust]
         pass_filenames: false

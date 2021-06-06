@@ -1,3 +1,4 @@
 {
-  "printWidth": 88
+  "printWidth": 88,
+  "endOfLine": "auto"
 }
