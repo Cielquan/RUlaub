@@ -1,7 +1,10 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+
 import useStyles from "../styles";
+
+import DarkThemeSwitch from "./DarkThemeSwitch";
 
 const Navbar = ({ title }: { title: string }): React.ReactElement => {
   const classes = useStyles();
@@ -15,6 +18,7 @@ const Navbar = ({ title }: { title: string }): React.ReactElement => {
         <Typography className={classes.navbarTitle} variant="h6" align="center">
           {title}
         </Typography>
+        <DarkThemeSwitch />
       </Toolbar>
     </AppBar>
   );
