@@ -4,20 +4,28 @@ import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
 
 import { State } from "./state";
+import useStyles from "./styles";
 import createDarkTheme from "./theme";
-import Navbar from "./components/Navbar";
+import { Navbar, SideMenu } from "./components";
 
 function App(): React.ReactElement {
   const darkState = useSelector((state: State) => state.darkTheme);
 
+  const classes = useStyles();
   const theme = createDarkTheme(darkState);
 
   return (
     <>
       <CssBaseline />
       <ThemeProvider theme={theme}>
-        <Navbar title="RUlaub" />
-        <div> {darkState ? "dark" : "light"} </div>
+        <div className={classes.root}>
+          <Navbar title="RUlaub" />
+          <SideMenu />
+          <main className={classes.content}>
+            <div className={classes.toolbar} /> {/* Spacer */}
+            <div> {darkState ? "dark" : "light"} </div>
+          </main>
+        </div>
       </ThemeProvider>
     </>
   );
