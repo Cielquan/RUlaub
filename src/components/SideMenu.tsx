@@ -12,7 +12,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
-import { ChevronLeft, ChevronRight, Settings } from "@material-ui/icons";
+import { ChevronLeft, ChevronRight, Help, Settings } from "@material-ui/icons";
 
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
@@ -55,6 +55,17 @@ const SideMenu = (): React.ReactElement => {
           </ListItem>
         ))}
       </List>
+      <div className={classes.bottom}>
+        <Divider />
+        <List>
+          <ListItem button key="Help">
+            <ListItemIcon>
+              <Help />
+            </ListItemIcon>
+            <ListItemText primary="Help" />
+          </ListItem>
+        </List>
+      </div>
     </Drawer>
   );
 };
