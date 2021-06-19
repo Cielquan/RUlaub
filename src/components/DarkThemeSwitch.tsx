@@ -14,7 +14,7 @@ const DarkThemeSwitch = (): React.ReactElement => {
   return (
     <>
       <IconButton onClick={darkState ? useLightTheme : useDarkTheme}>
-        {darkState ? <BrightnessLow /> : <BrightnessHigh />}
+        {darkState ? <BrightnessHigh /> : <BrightnessLow />}
       </IconButton>
     </>
   );
