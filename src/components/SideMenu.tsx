@@ -4,18 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import { useTheme } from "@material-ui/core/styles";
 import {
-  Drawer,
-  List,
   Divider,
+  Drawer,
   IconButton,
+  List,
   ListItem,
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+import SettingsIcon from "@material-ui/icons/Settings";
 
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
@@ -27,6 +26,8 @@ const SideMenu = (): React.ReactElement => {
 
   const classes = useStyles();
   const theme = useTheme();
+
+  const itemList: Array<[string, JSX.Element]> = [["Settings", <SettingsIcon />]];
 
   return (
     <Drawer
@@ -49,23 +50,10 @@ const SideMenu = (): React.ReactElement => {
       </div>
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
+        {itemList.map((item) => (
+          <ListItem button key={item[0]}>
+            <ListItemIcon>{item[1]}</ListItemIcon>
+            <ListItemText primary={item[0]} />
           </ListItem>
         ))}
       </List>
