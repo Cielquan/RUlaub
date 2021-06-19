@@ -12,9 +12,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import SettingsIcon from "@material-ui/icons/Settings";
+import { ChevronLeft, ChevronRight, Settings } from "@material-ui/icons";
 
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
@@ -27,7 +25,7 @@ const SideMenu = (): React.ReactElement => {
   const classes = useStyles();
   const theme = useTheme();
 
-  const itemList: Array<[string, JSX.Element]> = [["Settings", <SettingsIcon />]];
+  const itemList: Array<[string, JSX.Element]> = [["Settings", <Settings />]];
 
   return (
     <Drawer
@@ -45,7 +43,7 @@ const SideMenu = (): React.ReactElement => {
     >
       <div className={classes.toolbar}>
         <IconButton onClick={closeSideMenu}>
-          {theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          {theme.direction === "rtl" ? <ChevronRight /> : <ChevronLeft />}
         </IconButton>
       </div>
       <Divider />

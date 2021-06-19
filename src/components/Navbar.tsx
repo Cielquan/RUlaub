@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import { Menu } from "@material-ui/icons";
 
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
@@ -34,7 +34,7 @@ const Navbar = ({ title }: { title: string }): React.ReactElement => {
             [classes.hide]: sideMenuState,
           })}
         >
-          <MenuIcon />
+          <Menu />
         </IconButton>
         <Typography className={classes.navbarTitle} variant="h6" align="center" noWrap>
           {title}
