@@ -8,7 +8,7 @@ import createDarkTheme from "./theme";
 import Navbar from "./components/Navbar";
 
 function App(): React.ReactElement {
-  const darkState = useSelector((state: State) => state.theme);
+  const darkState = useSelector((state: State) => state.darkTheme);
 
   const theme = createDarkTheme(darkState);
 

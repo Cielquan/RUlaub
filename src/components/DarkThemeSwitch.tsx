@@ -9,7 +9,7 @@ import { actionCreators, State } from "../state";
 const DarkThemeSwitch = (): React.ReactElement => {
   const dispatch = useDispatch();
   const { useDarkTheme, useLightTheme } = bindActionCreators(actionCreators, dispatch);
-  const darkState = useSelector((state: State) => state.theme);
+  const darkState = useSelector((state: State) => state.darkTheme);
 
   return (
     <>
