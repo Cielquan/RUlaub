@@ -1,7 +1,7 @@
 import { createMuiTheme, Theme } from "@material-ui/core/styles";
 import { orange, lightBlue, deepOrange, deepPurple } from "@material-ui/core/colors";
 
-const createDarkTheme = (darkState: boolean): Theme => {
+const createTheme = (darkState: boolean): Theme => {
   const palletType = darkState ? "dark" : "light";
 
   return createMuiTheme({
@@ -17,4 +17,4 @@ const createDarkTheme = (darkState: boolean): Theme => {
   });
 };
 
-export default createDarkTheme;
+export default createTheme;
