@@ -20,7 +20,7 @@ import useStyles from "../styles";
 const SideMenu = (): React.ReactElement => {
   const dispatch = useDispatch();
   const { closeSideMenu } = bindActionCreators(actionCreators, dispatch);
-  const sideMenuState = useSelector((state: State) => state.sideMenuOpen);
+  const sideMenuState = useSelector((state: State) => state.sideMenu);
 
   const classes = useStyles();
 

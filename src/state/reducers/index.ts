@@ -4,7 +4,7 @@ import themeReducer from "./themeReducer";
 
 const rootReducer = combineReducers({
   darkTheme: themeReducer,
-  sideMenuOpen: sideMenuReducer,
+  sideMenu: sideMenuReducer,
 });
 
 export default rootReducer;
