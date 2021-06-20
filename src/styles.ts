@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
     // necessary to match toolbar height
     ...theme.mixins.toolbar,
   },
+  sideMenuNestedButton: {
+    paddingLeft: theme.spacing(4),
+  },
 }));
 
 export default useStyles;

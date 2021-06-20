@@ -17,6 +17,7 @@ import { actionCreators, State } from "../state";
 import useStyles from "../styles";
 
 import SideMenuInfoButton from "./SideMenuInfoButton";
+import SideMenuDatabaseButton from "./SideMenuDatabaseButton";
 
 const SideMenu = (): React.ReactElement => {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const SideMenu = (): React.ReactElement => {
             <ListItemText primary={item[0]} />
           </ListItem>
         ))}
+        <SideMenuDatabaseButton />
       </List>
       <div className={classes.infoButton}>
         <Divider />
