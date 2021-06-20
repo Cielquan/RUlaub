@@ -2,7 +2,7 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { IconButton } from "@material-ui/core";
-import { BrightnessLow, BrightnessHigh } from "@material-ui/icons";
+import { BrightnessHigh, BrightnessLow } from "@material-ui/icons";
 
 import { actionCreators, State } from "../state";
 
