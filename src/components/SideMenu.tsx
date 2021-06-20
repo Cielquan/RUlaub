@@ -16,7 +16,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
 
-import SideMenuHelpButton from "./SideMenuInfoButton";
+import SideMenuInfoButton from "./SideMenuInfoButton";
 
 const SideMenu = (): React.ReactElement => {
   const dispatch = useDispatch();
@@ -43,10 +43,10 @@ const SideMenu = (): React.ReactElement => {
           </ListItem>
         ))}
       </List>
-      <div className={classes.bottom}>
+      <div className={classes.infoButton}>
         <Divider />
         <List>
-          <SideMenuHelpButton />
+          <SideMenuInfoButton />
         </List>
       </div>
     </Drawer>

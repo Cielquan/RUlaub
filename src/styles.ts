@@ -8,8 +8,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
-  bottom: {
+  infoButton: {
     marginTop: "auto",
+    marginBottom: theme.spacing(2),
   },
   navbarSpacer: {
     // necessary for content to be below app bar
