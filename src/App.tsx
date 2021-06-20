@@ -22,7 +22,7 @@ function App(): React.ReactElement {
           <Navbar title="RUlaub" />
           <SideMenu />
           <main className={classes.content}>
-            <div className={classes.toolbar} /> {/* Spacer */}
+            <div className={classes.navbarSpacer} />
             <div> {darkState ? "dark" : "light"} </div>
           </main>
         </div>

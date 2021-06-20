@@ -1,40 +1,29 @@
 import React from "react";
-import clsx from "clsx";
 import { bindActionCreators } from "redux";
-import { useDispatch, useSelector } from "react-redux";
-import { AppBar, Toolbar, Typography, IconButton } from "@material-ui/core";
-import { Menu } from "@material-ui/icons";
+import { useDispatch } from "react-redux";
+import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
 
-import { actionCreators, State } from "../state";
+import { actionCreators } from "../state";
 import useStyles from "../styles";
 
 import DarkThemeSwitch from "./DarkThemeSwitch";
 
 const Navbar = ({ title }: { title: string }): React.ReactElement => {
   const dispatch = useDispatch();
-  const { openSideMenu, closeSideMenu } = bindActionCreators(actionCreators, dispatch);
-  const sideMenuState = useSelector((state: State) => state.sideMenuOpen);
+  const { openSideMenu } = bindActionCreators(actionCreators, dispatch);
 
   const classes = useStyles();
 
   return (
-    <AppBar
-      position="fixed"
-      className={clsx(classes.appBar, {
-        [classes.appBarShift]: sideMenuState,
-      })}
-    >
+    <AppBar position="fixed">
       <Toolbar>
         <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          onClick={sideMenuState ? closeSideMenu : openSideMenu}
+          className={classes.sideMenuButton}
           edge="start"
-          className={clsx(classes.menuButton, {
-            [classes.hide]: sideMenuState,
-          })}
+          onClick={openSideMenu}
         >
-          <Menu />
+          <MenuIcon />
         </IconButton>
         <Typography className={classes.navbarTitle} variant="h6" align="center" noWrap>
           {title}

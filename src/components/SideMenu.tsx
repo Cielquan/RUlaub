@@ -1,8 +1,6 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
-import clsx from "clsx";
-import { useTheme } from "@material-ui/core/styles";
 import {
   Divider,
   Drawer,
@@ -12,7 +10,9 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@material-ui/core";
-import { ChevronLeft, ChevronRight, Help, Settings } from "@material-ui/icons";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import HelpIcon from "@material-ui/icons/Help";
+import SettingsIcon from "@material-ui/icons/Settings";
 
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
@@ -23,27 +23,14 @@ const SideMenu = (): React.ReactElement => {
   const sideMenuState = useSelector((state: State) => state.sideMenuOpen);
 
   const classes = useStyles();
-  const theme = useTheme();
 
-  const itemList: Array<[string, JSX.Element]> = [["Settings", <Settings />]];
+  const itemList: Array<[string, JSX.Element]> = [["Settings", <SettingsIcon />]];
 
   return (
-    <Drawer
-      variant="permanent"
-      className={clsx(classes.sideMenu, {
-        [classes.sideMenuOpen]: sideMenuState,
-        [classes.sideMenuClose]: !sideMenuState,
-      })}
-      classes={{
-        paper: clsx({
-          [classes.sideMenuOpen]: sideMenuState,
-          [classes.sideMenuClose]: !sideMenuState,
-        }),
-      }}
-    >
-      <div className={classes.toolbar}>
+    <Drawer anchor="left" open={sideMenuState} onClose={closeSideMenu}>
+      <div className={classes.sideMenuHeader}>
         <IconButton onClick={closeSideMenu}>
-          {theme.direction === "rtl" ? <ChevronRight /> : <ChevronLeft />}
+          <ChevronLeftIcon />
         </IconButton>
       </div>
       <Divider />
@@ -60,7 +47,7 @@ const SideMenu = (): React.ReactElement => {
         <List>
           <ListItem button key="Help">
             <ListItemIcon>
-              <Help />
+              <HelpIcon />
             </ListItemIcon>
             <ListItemText primary="Help" />
           </ListItem>
