@@ -8,6 +8,11 @@ export enum SideMenuType {
   CLOSE = "close SideMenu",
 }
 
+export enum SideMenuDatabaseType {
+  OPEN = "open SideMenuDatabase",
+  CLOSE = "close SideMenuDatabase",
+}
+
 export enum ThemeType {
   DARK = "activate darkTheme",
   LIGHT = "activate lightTheme",
