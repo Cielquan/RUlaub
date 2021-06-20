@@ -1,8 +1,9 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
-import { IconButton } from "@material-ui/core";
-import { BrightnessHigh, BrightnessLow } from "@material-ui/icons";
+import { IconButton, Tooltip } from "@material-ui/core";
+import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
+import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 
 import { actionCreators, State } from "../state";
 
@@ -12,11 +13,11 @@ const DarkThemeSwitch = (): React.ReactElement => {
   const darkState = useSelector((state: State) => state.darkTheme);
 
   return (
-    <>
+    <Tooltip arrow title={darkState ? "Activate Light Theme" : "Activate Dark Theme"}>
       <IconButton onClick={darkState ? useLightTheme : useDarkTheme}>
-        {darkState ? <BrightnessHigh /> : <BrightnessLow />}
+        {darkState ? <BrightnessHighIcon /> : <BrightnessLowIcon />}
       </IconButton>
-    </>
+    </Tooltip>
   );
 };
 
