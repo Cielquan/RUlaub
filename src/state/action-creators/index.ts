@@ -1,3 +1,3 @@
-export * from "./helpPageActionCreators";
+export * from "./infoPageActionCreators";
 export * from "./sideMenuActionCreators";
 export * from "./themeActionCreators";

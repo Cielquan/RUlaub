@@ -26,24 +26,24 @@ const Transition = React.forwardRef(
   ) => <Slide direction="up" ref={ref} {...props} />
 );
 
-const HelpPage = (): React.ReactElement => {
+const InfoPage = (): React.ReactElement => {
   const dispatch = useDispatch();
-  const { closeHelpPage } = bindActionCreators(actionCreators, dispatch);
-  const helpPageState = useSelector((state: State) => state.helpPage);
+  const { closeInfoPage } = bindActionCreators(actionCreators, dispatch);
+  const infoPageState = useSelector((state: State) => state.infoPage);
 
   return (
     <Dialog
-      open={helpPageState}
+      open={infoPageState}
       TransitionComponent={Transition}
       keepMounted
-      onClose={closeHelpPage}
+      onClose={closeInfoPage}
     >
       <DialogTitle>RUlaub</DialogTitle>
       <DialogContent>
         <DialogContentText>Some Info abound RUlaub.</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={closeHelpPage} color="primary" autoFocus>
+        <Button onClick={closeInfoPage} color="primary" autoFocus>
           Close
         </Button>
       </DialogActions>
@@ -51,4 +51,4 @@ const HelpPage = (): React.ReactElement => {
   );
 };
 
-export default HelpPage;
+export default InfoPage;

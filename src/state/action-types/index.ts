@@ -1,6 +1,6 @@
-export enum HelpPageType {
-  OPEN = "open HelpPage",
-  CLOSE = "close HelpPage",
+export enum InfoPageType {
+  OPEN = "open InfoPage",
+  CLOSE = "close InfoPage",
 }
 
 export enum SideMenuType {

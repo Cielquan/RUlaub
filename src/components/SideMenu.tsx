@@ -16,7 +16,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
 
-import SideMenuHelpButton from "./SideMenuHelpButton";
+import SideMenuHelpButton from "./SideMenuInfoButton";
 
 const SideMenu = (): React.ReactElement => {
   const dispatch = useDispatch();

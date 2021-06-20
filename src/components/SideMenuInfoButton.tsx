@@ -2,29 +2,29 @@ import React from "react";
 import { bindActionCreators } from "redux";
 import { useDispatch } from "react-redux";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
-import HelpIcon from "@material-ui/icons/Help";
+import InfoIcon from "@material-ui/icons/Info";
 
 import { actionCreators } from "../state";
 
-const SideMenuHelpButton = (): React.ReactElement => {
+const SideMenuInfoButton = (): React.ReactElement => {
   const dispatch = useDispatch();
-  const { closeSideMenu, openHelpPage } = bindActionCreators(actionCreators, dispatch);
+  const { closeSideMenu, openInfoPage } = bindActionCreators(actionCreators, dispatch);
 
   return (
     <ListItem
-      key="Help"
+      key="Info"
       button
       onClick={() => {
         closeSideMenu();
-        openHelpPage();
+        openInfoPage();
       }}
     >
       <ListItemIcon>
-        <HelpIcon />
+        <InfoIcon />
       </ListItemIcon>
-      <ListItemText primary="Help" />
+      <ListItemText primary="Info" />
     </ListItem>
   );
 };
 
-export default SideMenuHelpButton;
+export default SideMenuInfoButton;
