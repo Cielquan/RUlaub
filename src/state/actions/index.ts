@@ -1,3 +1,11 @@
-export * from "./helpPageAction";
-export * from "./sideMenuAction";
-export * from "./themeAction";
+export type HelpPageAction = {
+  type: string;
+};
+
+export type SideMenuAction = {
+  type: string;
+};
+
+export type ThemeAction = {
+  type: string;
+};
