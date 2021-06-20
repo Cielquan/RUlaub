@@ -6,7 +6,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import { State } from "./state";
 import useStyles from "./styles";
 import createDarkTheme from "./theme";
-import { Navbar, SideMenu } from "./components";
+import { HelpPage, Navbar, SideMenu } from "./components";
 
 function App(): React.ReactElement {
   const darkState = useSelector((state: State) => state.darkTheme);
@@ -26,6 +26,7 @@ function App(): React.ReactElement {
             <div> {darkState ? "dark" : "light"} </div>
           </main>
         </div>
+        <HelpPage />
       </ThemeProvider>
     </>
   );

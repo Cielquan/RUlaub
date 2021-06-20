@@ -8,10 +8,17 @@ import { actionCreators } from "../state";
 
 const SideMenuHelpButton = (): React.ReactElement => {
   const dispatch = useDispatch();
-  const { closeSideMenu } = bindActionCreators(actionCreators, dispatch);
+  const { closeSideMenu, openHelpPage } = bindActionCreators(actionCreators, dispatch);
 
   return (
-    <ListItem key="Help" button onClick={() => closeSideMenu()}>
+    <ListItem
+      key="Help"
+      button
+      onClick={() => {
+        closeSideMenu();
+        openHelpPage();
+      }}
+    >
       <ListItemIcon>
         <HelpIcon />
       </ListItemIcon>
