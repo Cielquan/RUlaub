@@ -11,11 +11,12 @@ import {
   ListItemText,
 } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import HelpIcon from "@material-ui/icons/Help";
 import SettingsIcon from "@material-ui/icons/Settings";
 
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
+
+import SideMenuHelpButton from "./SideMenuHelpButton";
 
 const SideMenu = (): React.ReactElement => {
   const dispatch = useDispatch();
@@ -45,12 +46,7 @@ const SideMenu = (): React.ReactElement => {
       <div className={classes.bottom}>
         <Divider />
         <List>
-          <ListItem button key="Help">
-            <ListItemIcon>
-              <HelpIcon />
-            </ListItemIcon>
-            <ListItemText primary="Help" />
-          </ListItem>
+          <SideMenuHelpButton />
         </List>
       </div>
     </Drawer>
