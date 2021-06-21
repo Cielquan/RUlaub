@@ -7,6 +7,10 @@ export type InfoPageAction = {
   type: string;
 };
 
+export type LanguageAction = {
+  type: string;
+};
+
 export type SideMenuAction = {
   type: string;
 };
