@@ -21,7 +21,7 @@ function App(): React.ReactElement {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className={classes.root}>
-        <Navbar title="RUlaub" />
+        <Navbar />
         <SideMenu />
         <main className={classes.content}>
           <div className={classes.navbarSpacer} />

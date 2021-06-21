@@ -13,6 +13,7 @@ import {
 import { TransitionProps } from "@material-ui/core/transitions";
 
 import { actionCreators, State } from "../state";
+import useStyles from "../styles";
 
 // TODO:#i# How to fix eslint errors?
 // https://material-ui.com/components/dialogs/#transitions
@@ -30,6 +31,9 @@ const InfoPage = (): React.ReactElement => {
   const dispatch = useDispatch();
   const { closeInfoPage } = bindActionCreators(actionCreators, dispatch);
   const infoPageState = useSelector((state: State) => state.infoPage);
+  const appInfoState = useSelector((state: State) => state.appInfo);
+
+  const classes = useStyles();
 
   return (
     <Dialog
@@ -38,9 +42,11 @@ const InfoPage = (): React.ReactElement => {
       keepMounted
       onClose={closeInfoPage}
     >
-      <DialogTitle>RUlaub</DialogTitle>
+      <DialogTitle>{appInfoState.name}</DialogTitle>
       <DialogContent>
-        <DialogContentText>Some Info abound RUlaub.</DialogContentText>
+        <DialogContentText className={classes.helpPageText}>
+          {appInfoState.infoText}
+        </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={closeInfoPage} color="primary" autoFocus>

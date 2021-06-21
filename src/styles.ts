@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
   sideMenuNestedButton: {
     paddingLeft: theme.spacing(4),
   },
+  helpPageText: {
+    whiteSpace: "pre-wrap",
+  },
 }));
 
 export default useStyles;
