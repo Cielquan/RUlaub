@@ -1,3 +1,9 @@
+export enum AppInfoType {
+  NAME = "change name",
+  VERSION = "change version",
+  INFO_TEXT = "change infoText",
+}
+
 export enum InfoPageType {
   OPEN = "open InfoPage",
   CLOSE = "close InfoPage",
