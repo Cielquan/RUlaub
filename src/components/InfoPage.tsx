@@ -14,6 +14,7 @@ import { TransitionProps } from "@material-ui/core/transitions";
 
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
+import * as pjson from "../../package.json";
 
 // TODO:#i# How to fix eslint errors?
 // https://material-ui.com/components/dialogs/#transitions
@@ -31,7 +32,6 @@ const InfoPage = (): React.ReactElement => {
   const dispatch = useDispatch();
   const { closeInfoPage } = bindActionCreators(actionCreators, dispatch);
   const infoPageState = useSelector((state: State) => state.infoPage);
-  const appInfoState = useSelector((state: State) => state.appInfo);
 
   const classes = useStyles();
 
@@ -42,10 +42,13 @@ const InfoPage = (): React.ReactElement => {
       keepMounted
       onClose={closeInfoPage}
     >
-      <DialogTitle>{appInfoState.name}</DialogTitle>
+      <DialogTitle>{`RUlaub v${pjson.version}`}</DialogTitle>
       <DialogContent>
         <DialogContentText className={classes.helpPageText}>
-          {appInfoState.infoText}
+          {"RUlaub is licensed under either 'Apache License 2.0' " +
+            "or 'MIT License' at your option.\n\n" +
+            "Source Code and Documentation are available at: " +
+            "https://github.com/Cielquan/RUlaub"}
         </DialogContentText>
       </DialogContent>
       <DialogActions>

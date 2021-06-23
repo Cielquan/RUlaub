@@ -1,8 +1,3 @@
-export type AppInfoAction = {
-  type: string;
-  payload: string;
-};
-
 export type InfoPageAction = {
   type: string;
 };
