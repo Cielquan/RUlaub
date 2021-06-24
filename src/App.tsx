@@ -28,6 +28,7 @@ function App(): React.ReactElement {
         <main className={classes.content}>
           <div className={classes.navbarSpacer} />
           <div> {darkState ? "dark" : "light"} </div>
+          <div> {langState.locale} </div>
         </main>
       </div>
       <InfoPage />
