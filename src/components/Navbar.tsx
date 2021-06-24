@@ -8,7 +8,7 @@ import { actionCreators } from "../state";
 import useStyles from "../styles";
 
 import DarkThemeSwitch from "./DarkThemeSwitch";
-import LanguageButton from "./LanguageButton";
+import LanguageMenu from "./LanguageMenu";
 
 const Navbar = (): React.ReactElement => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const Navbar = (): React.ReactElement => {
         <Typography className={classes.navbarTitle} variant="h6" align="center" noWrap>
           RUlaub
         </Typography>
-        <LanguageButton />
+        <LanguageMenu />
         <DarkThemeSwitch />
       </Toolbar>
     </AppBar>
