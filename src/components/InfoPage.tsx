@@ -8,6 +8,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Link,
   Slide,
 } from "@material-ui/core";
 import { TransitionProps } from "@material-ui/core/transitions";
@@ -47,8 +48,15 @@ const InfoPage = (): React.ReactElement => {
         <DialogContentText className={classes.helpPageText}>
           {"RUlaub is licensed under either 'Apache License 2.0' " +
             "or 'MIT License' at your option.\n\n" +
-            "Source Code and Documentation are available at: " +
-            "https://github.com/Cielquan/RUlaub"}
+            "Source Code and Documentation are available at "}
+          <Link
+            href="https://github.com/Cielquan/RUlaub"
+            target="_blank"
+            rel="noreferrer"
+          >
+            github
+          </Link>
+          .
         </DialogContentText>
       </DialogContent>
       <DialogActions>
