@@ -26,7 +26,7 @@ const Navbar = (): React.ReactElement => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography className={classes.navbarTitle} variant="h6" align="center" noWrap>
+        <Typography className={classes.navbarTitle} variant="h6" align="left" noWrap>
           RUlaub
         </Typography>
         <LanguageMenu />
