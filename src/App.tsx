@@ -10,6 +10,7 @@ import createTheme from "./theme";
 
 import InfoPage from "./components/InfoPage";
 import Navbar from "./components/Navbar";
+import NewHolidayButton from "./components/NewHolidayButton";
 import SideMenu from "./components/SideMenu";
 
 function App(): React.ReactElement {
@@ -29,6 +30,7 @@ function App(): React.ReactElement {
           <div className={classes.navbarSpacer} />
           <div> {darkState ? "dark" : "light"} </div>
           <div> {langState.locale} </div>
+          <NewHolidayButton />
         </main>
       </div>
       <InfoPage />

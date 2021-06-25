@@ -37,6 +37,11 @@ const useStyles = makeStyles((theme) => ({
   helpPageText: {
     whiteSpace: "pre-wrap",
   },
+  newHolidayButton: {
+    position: "absolute",
+    bottom: theme.spacing(2),
+    right: theme.spacing(2),
+  },
 }));
 
 export default useStyles;
