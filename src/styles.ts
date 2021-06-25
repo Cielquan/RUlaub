@@ -3,10 +3,22 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    position: "absolute",
+    top: "0",
+    bottom: "0",
+    left: "0",
+    right: "0",
   },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    marginTop: `${theme.mixins.toolbar.minHeight}px`,
+    "@media (min-width:0px) and (orientation: landscape)": {
+      marginTop: `calc(${theme.mixins.toolbar.minHeight}px - 6px)`,
+    },
+    "@media (min-width:600px)": {
+      marginTop: `calc(${theme.mixins.toolbar.minHeight}px + 8px)`,
+    },
   },
   infoButton: {
     marginTop: "auto",
@@ -39,8 +51,8 @@ const useStyles = makeStyles((theme) => ({
   },
   newHolidayButton: {
     position: "absolute",
-    bottom: theme.spacing(2),
-    right: theme.spacing(2),
+    bottom: theme.spacing(3),
+    right: theme.spacing(3),
   },
 }));
 

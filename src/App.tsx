@@ -27,7 +27,6 @@ function App(): React.ReactElement {
         <Navbar />
         <SideMenu />
         <main className={classes.content}>
-          <div className={classes.navbarSpacer} />
           <div> {darkState ? "dark" : "light"} </div>
           <div> {langState.locale} </div>
           <NewHolidayButton />
