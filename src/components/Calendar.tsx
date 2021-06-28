@@ -1,7 +1,3 @@
-// // Grid gutters: https://codesandbox.io/s/2w8wmlm89p?file=/index.js
-// // Grid sync scroll:
-// // eslint-disable-next-line max-len
-// // https://codesandbox.io/s/scroll-synced-multigrids-h2g26?from-embed=&file=/src/index.js
 import React, {
   CSSProperties,
   forwardRef,
@@ -12,7 +8,6 @@ import React, {
 } from "react";
 import { FixedSizeList as List, FixedSizeGrid as Grid } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
-// import { Button } from "@material-ui/core";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
@@ -62,36 +57,19 @@ const Calendar = (): React.ReactElement => {
   const columnLabelRef: React.RefObject<List> = React.createRef();
   const gridRef: React.RefObject<Grid> = React.createRef();
 
-  // NOTE: they are wrapped in `useCallback` for performance reasons
   const handleGridScroll = useCallback((e) => {
-    // from the official docs:
-    // > scrollUpdateWasRequested is a boolean.
-    // > This value is true if the scroll was caused by scrollTo() or scrollToItem(),
-    // > And false if it was the result of a user interaction in the browser.
-    //
-    // so we want to ignore events that were from `scrollTo`
-    if (e.scrollUpdateWasRequested) return;
-
     setScrollX(e.scrollLeft);
     setScrollY(e.scrollTop);
   }, []);
 
   const handleRowLabelScroll = useCallback((e) => {
-    // see comment above
-    if (e.scrollUpdateWasRequested) return;
-
     setScrollY(e.scrollOffset);
   }, []);
 
   const handleColumnLabelScroll = useCallback((e) => {
-    // see comment above
-    if (e.scrollUpdateWasRequested) return;
-
     setScrollX(e.scrollOffset);
   }, []);
 
-  // last, but not least, add an effect to watch for changes in `scrollX` or `scrollY`.
-  // if there is a change, then call `scrollTo`
   useEffect(() => {
     rowLabelRef.current?.scrollTo(scrollY);
     columnLabelRef.current?.scrollTo(scrollX);
@@ -105,7 +83,7 @@ const Calendar = (): React.ReactElement => {
   const ROWS = 100;
 
   // const scroll = (): void => {
-  //   gridRef.current?.scrollToItem({ columnIndex: 0, rowIndex: 0 });
+  //   gridRef.current?.scrollToItem({ columnIndex: 50, rowIndex: 50, align: "start" });
   // };
 
   return (
