@@ -13,6 +13,8 @@ import Navbar from "./components/Navbar";
 import NewHolidayButton from "./components/NewHolidayButton";
 import SideMenu from "./components/SideMenu";
 
+import Calendar from "./components/Calendar";
+
 function App(): React.ReactElement {
   const darkState = useSelector((state: State) => state.darkTheme);
   const langState = useSelector((state: State) => state.language);
@@ -27,6 +29,7 @@ function App(): React.ReactElement {
         <Navbar />
         <SideMenu />
         <main className={classes.content}>
+          <Calendar />
           <NewHolidayButton />
         </main>
       </div>
