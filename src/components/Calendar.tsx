@@ -1,11 +1,4 @@
-import React, {
-  CSSProperties,
-  forwardRef,
-  LegacyRef,
-  useState,
-  useEffect,
-  useCallback,
-} from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { FixedSizeList as List, FixedSizeGrid as Grid } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 
@@ -14,38 +7,7 @@ import useStyles, { STYLE_CONST } from "../styles";
 import MultigridCell from "./MultigridCell";
 import MultigridColumnLabel from "./MultigridColumnLabel";
 import MultigridRowLabel from "./MultigridRowLabel";
-
-interface innerElementTypeProps {
-  style: CSSProperties;
-  children?: React.ReactNode;
-}
-
-const innerElementType = forwardRef(
-  (
-    { style, ...rest }: innerElementTypeProps,
-    ref: LegacyRef<HTMLDivElement> | undefined
-  ): React.ReactElement => {
-    const classes = useStyles();
-
-    return (
-      <div
-        ref={ref}
-        className={classes.multigridBackground}
-        style={{
-          ...style,
-          paddingLeft: STYLE_CONST.CALENDAR_GUTTER_SIZE,
-          paddingTop: STYLE_CONST.CALENDAR_GUTTER_SIZE,
-        }}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...rest}
-      />
-    );
-  }
-);
-
-innerElementType.defaultProps = {
-  children: <></>,
-};
+import innerElementType from "./multigridInnerElementType";
 
 const Calendar = (): React.ReactElement => {
   const classes = useStyles();
