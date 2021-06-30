@@ -7,7 +7,7 @@ import { actionCreators } from "../state";
 
 import SideMenuButton from "./SideMenuButton";
 
-const SideMenuInfoButton = (): React.ReactElement => {
+const SideMenuInfoButton = (): JSX.Element => {
   const dispatch = useDispatch();
   const { closeSideMenu, openInfoPage } = bindActionCreators(actionCreators, dispatch);
 

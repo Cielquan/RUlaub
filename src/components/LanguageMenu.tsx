@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { Button, Menu, Typography } from "@material-ui/core";
 import TranslateIcon from "@material-ui/icons/Translate";
@@ -9,11 +9,11 @@ import { State } from "../state";
 import LanguageMenuDEButton from "./LanguageMenuDEButton";
 import LanguageMenuENButton from "./LanguageMenuENButton";
 
-const LanguageMenu = (): React.ReactElement => {
+const LanguageMenu = (): JSX.Element => {
   const langState = useSelector((state: State) => state.language);
 
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = (): void => {

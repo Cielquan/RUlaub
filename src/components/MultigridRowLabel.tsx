@@ -10,7 +10,7 @@ interface MultigridRowLabelProps {
 const MultigridRowLabel = ({
   index: rowIndex,
   style,
-}: MultigridRowLabelProps): React.ReactElement => {
+}: MultigridRowLabelProps): JSX.Element => {
   const classes = useStyles();
 
   return (

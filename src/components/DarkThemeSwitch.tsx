@@ -7,7 +7,7 @@ import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 
 import { actionCreators, State } from "../state";
 
-const DarkThemeSwitch = (): React.ReactElement => {
+const DarkThemeSwitch = (): JSX.Element => {
   const dispatch = useDispatch();
   const { useDarkTheme, useLightTheme } = bindActionCreators(actionCreators, dispatch);
   const darkState = useSelector((state: State) => state.darkTheme);

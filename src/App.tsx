@@ -15,7 +15,7 @@ import SideMenu from "./components/SideMenu";
 
 import Calendar from "./components/Calendar";
 
-function App(): React.ReactElement {
+function App(): JSX.Element {
   const darkState = useSelector((state: State) => state.darkTheme);
   const langState = useSelector((state: State) => state.language);
 

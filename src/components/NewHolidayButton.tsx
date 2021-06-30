@@ -4,7 +4,7 @@ import AddIcon from "@material-ui/icons/Add";
 
 import useStyles from "../styles";
 
-const NewHolidayButton = (): React.ReactElement => {
+const NewHolidayButton = (): JSX.Element => {
   const classes = useStyles();
 
   return (

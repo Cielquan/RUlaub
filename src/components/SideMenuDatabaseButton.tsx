@@ -12,7 +12,7 @@ import SideMenuButton from "./SideMenuButton";
 import SideMenuDatabaseCreateButton from "./SideMenuDatabaseCreateButton";
 import SideMenuDatabaseModifyButton from "./SideMenuDatabaseModifyButton";
 
-const SideMenuDatabaseButton = (): React.ReactElement => {
+const SideMenuDatabaseButton = (): JSX.Element => {
   const dispatch = useDispatch();
   const { closeSideMenuDatabase, openSideMenuDatabase } = bindActionCreators(
     actionCreators,

@@ -11,9 +11,7 @@ interface LanguageMenuDEButton {
   closeFn: () => void;
 }
 
-const LanguageMenuDEButton = ({
-  closeFn,
-}: LanguageMenuDEButton): React.ReactElement => {
+const LanguageMenuDEButton = ({ closeFn }: LanguageMenuDEButton): JSX.Element => {
   const langState = useSelector((state: State) => state.language);
   const dispatch = useDispatch();
   const { useDE } = bindActionCreators(actionCreators, dispatch);

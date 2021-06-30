@@ -12,7 +12,7 @@ const MultigridCell = ({
   columnIndex,
   rowIndex,
   style,
-}: MultigridCellProps): React.ReactElement => {
+}: MultigridCellProps): JSX.Element => {
   const classes = useStyles();
 
   return (

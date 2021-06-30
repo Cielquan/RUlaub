@@ -8,7 +8,7 @@ import useStyles from "../styles";
 
 import SideMenuButton from "./SideMenuButton";
 
-const SideMenuDatabaseCreateButton = (): React.ReactElement => {
+const SideMenuDatabaseCreateButton = (): JSX.Element => {
   const dispatch = useDispatch();
   const { closeSideMenu } = bindActionCreators(actionCreators, dispatch);
 

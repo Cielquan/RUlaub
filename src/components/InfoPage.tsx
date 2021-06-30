@@ -18,6 +18,7 @@ import useStyles from "../styles";
 import * as pjson from "../../package.json";
 
 // TODO:#i# How to fix eslint errors?
+// TODO: look at types
 // https://material-ui.com/components/dialogs/#transitions
 const Transition = React.forwardRef(
   (
@@ -29,7 +30,7 @@ const Transition = React.forwardRef(
   ) => <Slide direction="up" ref={ref} {...props} />
 );
 
-const InfoPage = (): React.ReactElement => {
+const InfoPage = (): JSX.Element => {
   const dispatch = useDispatch();
   const { closeInfoPage } = bindActionCreators(actionCreators, dispatch);
   const infoPageState = useSelector((state: State) => state.infoPage);

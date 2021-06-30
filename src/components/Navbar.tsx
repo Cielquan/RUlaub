@@ -10,7 +10,7 @@ import useStyles from "../styles";
 import DarkThemeSwitch from "./DarkThemeSwitch";
 import LanguageMenu from "./LanguageMenu";
 
-const Navbar = (): React.ReactElement => {
+const Navbar = (): JSX.Element => {
   const dispatch = useDispatch();
   const { openSideMenu } = bindActionCreators(actionCreators, dispatch);
 

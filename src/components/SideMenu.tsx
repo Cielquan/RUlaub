@@ -19,7 +19,7 @@ import useStyles from "../styles";
 import SideMenuInfoButton from "./SideMenuInfoButton";
 import SideMenuDatabaseButton from "./SideMenuDatabaseButton";
 
-const SideMenu = (): React.ReactElement => {
+const SideMenu = (): JSX.Element => {
   const dispatch = useDispatch();
   const { closeSideMenu } = bindActionCreators(actionCreators, dispatch);
   const sideMenuState = useSelector((state: State) => state.sideMenu);

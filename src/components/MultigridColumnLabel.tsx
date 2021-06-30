@@ -10,7 +10,7 @@ interface MultigridColumnLabelProps {
 const MultigridColumnLabel = ({
   index: columnIndex,
   style,
-}: MultigridColumnLabelProps): React.ReactElement => {
+}: MultigridColumnLabelProps): JSX.Element => {
   const classes = useStyles();
 
   return (

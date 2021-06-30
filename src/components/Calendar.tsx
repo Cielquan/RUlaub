@@ -1,21 +1,19 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { createRef, useState, useEffect, useCallback } from "react";
 import { FixedSizeList as List, FixedSizeGrid as Grid } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 
-import useStyles, { STYLE_CONST } from "../styles";
+import useStyles from "../styles";
 
-import MultigridCell from "./MultigridCell";
 import CalendarColumnLabels from "./CalendarColumnLabels";
 import CalendarGrid from "./CalendarGrid";
 import CalendarRowLabels from "./CalendarRowLabels";
-import innerElementType from "./multigridInnerElementType";
 
-const Calendar = (): React.ReactElement => {
+const Calendar = (): JSX.Element => {
   const classes = useStyles();
 
-  const rowLabelRef: React.RefObject<List> = React.createRef();
-  const columnLabelRef: React.RefObject<List> = React.createRef();
-  const gridRef: React.RefObject<Grid> = React.createRef();
+  const rowLabelRef = createRef<List>();
+  const columnLabelRef = createRef<List>();
+  const gridRef = createRef<Grid>();
 
   const [scrollX, setScrollX] = useState(0);
   const [scrollY, setScrollY] = useState(0);

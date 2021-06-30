@@ -1,4 +1,4 @@
-import React from "react";
+import React, { RefObject } from "react";
 import { FixedSizeList as List } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
@@ -9,14 +9,14 @@ import innerElementType from "./multigridInnerElementType";
 interface CalendarRowLabelsProps {
   height: number;
   scrollHandle: (e: any) => void;
-  ref: React.RefObject<List>;
+  ref: RefObject<List>;
 }
 
 const CalendarRowLabels = ({
   height,
   scrollHandle,
   ref,
-}: CalendarRowLabelsProps): React.ReactElement => {
+}: CalendarRowLabelsProps): JSX.Element => {
   const classes = useStyles();
 
   const ROWS = 100;

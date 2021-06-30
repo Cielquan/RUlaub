@@ -11,7 +11,7 @@ const LanguageMenuButton = ({
   text,
   selected,
   onClick,
-}: LanguageMenuButtonProps): React.ReactElement => (
+}: LanguageMenuButtonProps): JSX.Element => (
   <MenuItem selected={selected} onClick={onClick}>
     {text}
   </MenuItem>
