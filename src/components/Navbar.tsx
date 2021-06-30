@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { bindActionCreators } from "redux";
 import { useDispatch } from "react-redux";
 import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
@@ -10,7 +10,7 @@ import useStyles from "../styles";
 import DarkThemeSwitch from "./DarkThemeSwitch";
 import LanguageMenu from "./LanguageMenu";
 
-const Navbar = (): JSX.Element => {
+const Navbar = (): ReactElement => {
   const dispatch = useDispatch();
   const { openSideMenu } = bindActionCreators(actionCreators, dispatch);
 

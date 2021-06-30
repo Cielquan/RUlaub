@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,14 +19,14 @@ import useStyles from "../styles";
 import SideMenuInfoButton from "./SideMenuInfoButton";
 import SideMenuDatabaseButton from "./SideMenuDatabaseButton";
 
-const SideMenu = (): JSX.Element => {
+const SideMenu = (): ReactElement => {
   const dispatch = useDispatch();
   const { closeSideMenu } = bindActionCreators(actionCreators, dispatch);
   const sideMenuState = useSelector((state: State) => state.sideMenu);
 
   const classes = useStyles();
 
-  const itemList: Array<[string, JSX.Element]> = [["Settings", <SettingsIcon />]];
+  const itemList: Array<[string, ReactElement]> = [["Settings", <SettingsIcon />]];
 
   return (
     <Drawer anchor="left" open={sideMenuState} onClose={closeSideMenu}>

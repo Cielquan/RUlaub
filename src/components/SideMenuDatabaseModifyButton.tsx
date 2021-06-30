@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { bindActionCreators } from "redux";
 import { useDispatch } from "react-redux";
 import CreateIcon from "@material-ui/icons/Create";
@@ -8,7 +8,7 @@ import useStyles from "../styles";
 
 import SideMenuButton from "./SideMenuButton";
 
-const SideMenuDatabaseModifyButton = (): JSX.Element => {
+const SideMenuDatabaseModifyButton = (): ReactElement => {
   const dispatch = useDispatch();
   const { closeSideMenu } = bindActionCreators(actionCreators, dispatch);
 

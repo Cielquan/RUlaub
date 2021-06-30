@@ -1,4 +1,10 @@
-import React, { createRef, useState, useEffect, useCallback } from "react";
+import React, {
+  createRef,
+  ReactElement,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { FixedSizeList as List, FixedSizeGrid as Grid } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 
@@ -8,7 +14,7 @@ import CalendarColumnLabels from "./CalendarColumnLabels";
 import CalendarGrid from "./CalendarGrid";
 import CalendarRowLabels from "./CalendarRowLabels";
 
-const Calendar = (): JSX.Element => {
+const Calendar = (): ReactElement => {
   const classes = useStyles();
 
   const rowLabelRef = createRef<List>();

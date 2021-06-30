@@ -1,4 +1,4 @@
-import React, { RefObject } from "react";
+import React, { ReactElement, RefObject } from "react";
 import { FixedSizeList as List } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
@@ -16,7 +16,7 @@ const CalendarRowLabels = ({
   height,
   scrollHandle,
   ref,
-}: CalendarRowLabelsProps): JSX.Element => {
+}: CalendarRowLabelsProps): ReactElement => {
   const classes = useStyles();
 
   const ROWS = 100;

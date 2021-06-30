@@ -1,10 +1,10 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { Fab, Tooltip } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 
 import useStyles from "../styles";
 
-const NewHolidayButton = (): JSX.Element => {
+const NewHolidayButton = (): ReactElement => {
   const classes = useStyles();
 
   return (

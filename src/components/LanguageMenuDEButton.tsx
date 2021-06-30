@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,7 +11,7 @@ interface LanguageMenuDEButton {
   closeFn: () => void;
 }
 
-const LanguageMenuDEButton = ({ closeFn }: LanguageMenuDEButton): JSX.Element => {
+const LanguageMenuDEButton = ({ closeFn }: LanguageMenuDEButton): ReactElement => {
   const langState = useSelector((state: State) => state.language);
   const dispatch = useDispatch();
   const { useDE } = bindActionCreators(actionCreators, dispatch);

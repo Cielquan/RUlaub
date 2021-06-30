@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, ReactElement } from "react";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
@@ -10,7 +10,7 @@ interface MultigridColumnLabelProps {
 const MultigridColumnLabel = ({
   index: columnIndex,
   style,
-}: MultigridColumnLabelProps): JSX.Element => {
+}: MultigridColumnLabelProps): ReactElement => {
   const classes = useStyles();
 
   return (

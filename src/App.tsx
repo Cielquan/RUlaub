@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { useSelector } from "react-redux";
 import { CssBaseline } from "@material-ui/core";
 import { ThemeProvider } from "@material-ui/core/styles";
@@ -15,7 +15,7 @@ import SideMenu from "./components/SideMenu";
 
 import Calendar from "./components/Calendar";
 
-function App(): JSX.Element {
+function App(): ReactElement {
   const darkState = useSelector((state: State) => state.darkTheme);
   const langState = useSelector((state: State) => state.language);
 

@@ -1,4 +1,4 @@
-import React, { RefObject } from "react";
+import React, { ReactElement, RefObject } from "react";
 import { FixedSizeGrid as Grid } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
@@ -18,7 +18,7 @@ const CalendarGrid = ({
   height,
   scrollHandle,
   ref,
-}: CalendarGridProps): JSX.Element => {
+}: CalendarGridProps): ReactElement => {
   const classes = useStyles();
 
   const COLUMNS = 100;

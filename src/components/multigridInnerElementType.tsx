@@ -1,4 +1,4 @@
-import React, { CSSProperties, forwardRef, LegacyRef } from "react";
+import React, { CSSProperties, forwardRef, LegacyRef, ReactElement } from "react";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
@@ -12,7 +12,7 @@ const innerElementType = forwardRef(
   (
     { style, ...rest }: innerElementTypeProps,
     ref: LegacyRef<HTMLDivElement> | undefined
-  ): JSX.Element => {
+  ): ReactElement => {
     const classes = useStyles();
 
     return (

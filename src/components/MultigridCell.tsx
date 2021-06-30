@@ -1,4 +1,4 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, ReactElement } from "react";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
@@ -12,7 +12,7 @@ const MultigridCell = ({
   columnIndex,
   rowIndex,
   style,
-}: MultigridCellProps): JSX.Element => {
+}: MultigridCellProps): ReactElement => {
   const classes = useStyles();
 
   return (

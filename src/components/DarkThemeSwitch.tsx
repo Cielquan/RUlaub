@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import { IconButton, Tooltip } from "@material-ui/core";
@@ -7,7 +7,7 @@ import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
 
 import { actionCreators, State } from "../state";
 
-const DarkThemeSwitch = (): JSX.Element => {
+const DarkThemeSwitch = (): ReactElement => {
   const dispatch = useDispatch();
   const { useDarkTheme, useLightTheme } = bindActionCreators(actionCreators, dispatch);
   const darkState = useSelector((state: State) => state.darkTheme);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -23,14 +23,14 @@ import * as pjson from "../../package.json";
 const Transition = React.forwardRef(
   (
     /* eslint-disable react/require-default-props, @typescript-eslint/no-explicit-any */
-    props: TransitionProps & { children?: React.ReactElement<any, any> },
+    props: TransitionProps & { children?: ReactElement<any, any> },
     /* eslint-enable */
     ref: React.Ref<unknown>
     // eslint-disable-next-line react/jsx-props-no-spreading
   ) => <Slide direction="up" ref={ref} {...props} />
 );
 
-const InfoPage = (): JSX.Element => {
+const InfoPage = (): ReactElement => {
   const dispatch = useDispatch();
   const { closeInfoPage } = bindActionCreators(actionCreators, dispatch);
   const infoPageState = useSelector((state: State) => state.infoPage);
