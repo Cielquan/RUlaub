@@ -39,7 +39,7 @@ const CalendarGrid = ({
     <Grid
       className={classes.multigridMainGrid}
       height={height - STYLE_CONST.CALENDAR_ROW_HEIGHT}
-      width={width - STYLE_CONST.CALENDAR_COLUMN_WIDTH}
+      width={width - STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
       innerElementType={innerElementType}
       columnCount={COLUMNS}
       columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH + STYLE_CONST.CALENDAR_GUTTER_SIZE}

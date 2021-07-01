@@ -34,7 +34,7 @@ const CalendarColumnLabels = ({
       height={STYLE_CONST.CALENDAR_ROW_HEIGHT}
       width={
         width -
-        STYLE_CONST.CALENDAR_COLUMN_WIDTH -
+        STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH -
         STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS
       }
       innerElementType={innerElementType}

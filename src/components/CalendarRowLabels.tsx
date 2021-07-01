@@ -35,7 +35,7 @@ const CalendarRowLabels = ({
         STYLE_CONST.CALENDAR_ROW_HEIGHT -
         STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS
       }
-      width={STYLE_CONST.CALENDAR_COLUMN_WIDTH}
+      width={STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
       innerElementType={innerElementType}
       itemCount={ROWS}
       itemSize={STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_GUTTER_SIZE}

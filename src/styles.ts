@@ -4,6 +4,7 @@ export const STYLE_CONST = {
   CALENDAR_COLUMN_WIDTH: 70,
   CALENDAR_ROW_HEIGHT: 35,
   CALENDAR_GUTTER_SIZE: 2,
+  CALENDAR_ROW_LABEL_WIDTH: 250,
   CALENDAR_SCROLLBAR_THINCKNESS: 6,
 };
 
@@ -76,14 +77,14 @@ const useStyles = makeStyles((theme) => ({
   multigridColumnLabels: {
     // absolutely position the label and move it right by a col
     position: "absolute !important" as "absolute",
-    left: STYLE_CONST.CALENDAR_COLUMN_WIDTH,
+    left: STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH,
     borderLeft: `1px solid ${theme.palette.text.primary}`,
   },
   multigridMainGrid: {
     // absolutely position the label and move it down by a row and right by a col
     position: "absolute !important" as "absolute",
     top: STYLE_CONST.CALENDAR_ROW_HEIGHT,
-    left: STYLE_CONST.CALENDAR_COLUMN_WIDTH,
+    left: STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH,
     borderTop: `1px solid ${theme.palette.text.primary}`,
     borderLeft: `1px solid ${theme.palette.text.primary}`,
     // borderLeft: "1px solid black",
