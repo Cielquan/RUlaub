@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject } from "react";
+import React, { ReactElement, useEffect, useRef } from "react";
 import { FixedSizeList as List } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
@@ -8,16 +8,22 @@ import innerElementType from "./multigridInnerElementType";
 
 interface CalendarColumnLabelsProps {
   width: number;
+  positionX: number;
   scrollHandle: (e: any) => void;
-  ref: RefObject<List>;
 }
 
 const CalendarColumnLabels = ({
   width,
+  positionX,
   scrollHandle,
-  ref,
 }: CalendarColumnLabelsProps): ReactElement => {
   const classes = useStyles();
+
+  const columnLabelRef = useRef<List>(null);
+
+  useEffect(() => {
+    columnLabelRef.current?.scrollTo(positionX);
+  }, [positionX, columnLabelRef]);
 
   const COLUMNS = 100;
 
@@ -34,7 +40,7 @@ const CalendarColumnLabels = ({
       innerElementType={innerElementType}
       itemCount={COLUMNS}
       itemSize={STYLE_CONST.CALENDAR_COLUMN_WIDTH + STYLE_CONST.CALENDAR_GUTTER_SIZE}
-      ref={ref}
+      ref={columnLabelRef}
       onScroll={scrollHandle}
       style={{ overflow: "hidden" }} // need this manual overwrite to work
     >

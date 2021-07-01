@@ -1,4 +1,4 @@
-import React, { ReactElement, RefObject } from "react";
+import React, { ReactElement, useEffect, useRef } from "react";
 import { FixedSizeGrid as Grid } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
@@ -9,17 +9,28 @@ import innerElementType from "./multigridInnerElementType";
 interface CalendarGridProps {
   width: number;
   height: number;
+  positionX: number;
+  positionY: number;
   scrollHandle: (e: any) => void;
-  ref: RefObject<Grid>;
 }
 
 const CalendarGrid = ({
   width,
   height,
+  positionX,
+  positionY,
   scrollHandle,
-  ref,
 }: CalendarGridProps): ReactElement => {
   const classes = useStyles();
+
+  const gridRef = useRef<Grid>(null);
+
+  useEffect(() => {
+    gridRef.current?.scrollTo({
+      scrollLeft: positionX,
+      scrollTop: positionY,
+    });
+  }, [positionY, positionX, gridRef]);
 
   const COLUMNS = 100;
   const ROWS = 100;
@@ -34,7 +45,7 @@ const CalendarGrid = ({
       columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH + STYLE_CONST.CALENDAR_GUTTER_SIZE}
       rowCount={ROWS}
       rowHeight={STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_GUTTER_SIZE}
-      ref={ref}
+      ref={gridRef}
       onScroll={scrollHandle}
     >
       {MultigridCell}
