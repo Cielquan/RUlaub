@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export const STYLE_CONST = {
   CALENDAR_COLUMN_WIDTH: 70,
   CALENDAR_ROW_HEIGHT: 35,
-  CALENDAR_GUTTER_SIZE: 5,
+  CALENDAR_GUTTER_SIZE: 2,
   CALENDAR_SCROLLBAR_THINCKNESS: 6,
 };
 
