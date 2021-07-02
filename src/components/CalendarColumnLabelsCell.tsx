@@ -26,7 +26,12 @@ const CalendarColumnLabelsCell = ({
         width: Number(style.width) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
       }}
     >
-      <Typography variant="body1" align="center" noWrap>
+      <Typography
+        className={classes.typographyGrow}
+        variant="body1"
+        align="center"
+        noWrap
+      >
         {datePlusDays(data, columnIndex).getDate()}
       </Typography>
     </div>
