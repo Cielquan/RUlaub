@@ -27,13 +27,28 @@ const CalendarMonthColumnLabelsCell = ({
         width: Number(style.width) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
       }}
     >
-      <Typography className={classes.typographyGrow} variant="h5" align="left" noWrap>
+      <Typography
+        className={classes.typographyGrow}
+        variant="h5"
+        component="div"
+        align="left"
+      >
         {monthDate.toLocaleString("default", { month: "long" })}
       </Typography>
-      <Typography className={classes.typographyGrow} variant="h5" align="center" noWrap>
+      <Typography
+        className={classes.typographyGrow}
+        variant="h5"
+        component="div"
+        align="center"
+      >
         {monthDate.toLocaleString("default", { month: "long" })}
       </Typography>
-      <Typography className={classes.typographyGrow} variant="h5" align="right" noWrap>
+      <Typography
+        className={classes.typographyGrow}
+        variant="h5"
+        component="div"
+        align="right"
+      >
         {monthDate.toLocaleString("default", { month: "long" })}
       </Typography>
     </div>

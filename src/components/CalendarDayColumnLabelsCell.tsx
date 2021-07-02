@@ -36,12 +36,7 @@ const CalendarDayColumnLabelsCell = ({
         height: Number(style.height) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
       }}
     >
-      <Typography
-        className={classes.typographyGrow}
-        variant="body1"
-        align="center"
-        noWrap
-      >
+      <Typography className={classes.typographyGrow} variant="body1" align="center">
         {date.getDate()}
       </Typography>
     </div>

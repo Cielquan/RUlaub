@@ -28,7 +28,6 @@ const CalendarTableHeadCell = ({
         variant="h3"
         component="div"
         align="center"
-        noWrap
       >
         {data}
       </Typography>
