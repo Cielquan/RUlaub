@@ -6,7 +6,7 @@ RUlaub is a wordplay on the german word for vacation (Urlaub) and Rust.
 ## Development
 
 Currently it's planned to be a Rust backend with an
-[Electron](https://www.electronjs.org/) frontend.
+[Tauri](https://tauri.studio/) frontend.
 
 Furthmore the tool should be native in english with an added german translation.
 
