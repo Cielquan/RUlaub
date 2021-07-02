@@ -17,18 +17,16 @@ import { actionCreators, State } from "../state";
 import useStyles from "../styles";
 import * as pjson from "../../package.json";
 
-// TODO:#i# How to fix eslint errors?
-// TODO: look at types
-// https://material-ui.com/components/dialogs/#transitions
 const Transition = React.forwardRef(
   (
-    /* eslint-disable react/require-default-props, @typescript-eslint/no-explicit-any */
-    props: TransitionProps & { children?: ReactElement<any, any> },
-    /* eslint-enable */
+    props: TransitionProps & { children?: ReactElement },
     ref: React.Ref<unknown>
     // eslint-disable-next-line react/jsx-props-no-spreading
   ) => <Slide direction="up" ref={ref} {...props} />
 );
+Transition.defaultProps = {
+  children: <></>,
+};
 
 const InfoPage = (): ReactElement => {
   const dispatch = useDispatch();
