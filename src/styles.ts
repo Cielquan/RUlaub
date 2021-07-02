@@ -115,6 +115,10 @@ const useStyles = makeStyles((theme) => ({
     padding: "0 0.5em",
     backgroundColor: theme.palette.background.default,
   },
+  currentDate: {
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.getContrastText(theme.palette.secondary.main),
+  },
 }));
 
 export default useStyles;

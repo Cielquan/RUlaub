@@ -35,3 +35,8 @@ export const getDaysInMonth = (month: number, year: number): number => {
   }
   return days;
 };
+
+export const sameDay = (date1: Date, date2: Date): boolean =>
+  date1.getDate() === date2.getDate() &&
+  date1.getMonth() === date2.getMonth() &&
+  date1.getFullYear() === date2.getFullYear();

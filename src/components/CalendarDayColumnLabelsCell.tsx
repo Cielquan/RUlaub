@@ -1,8 +1,11 @@
 import React, { CSSProperties, ReactElement } from "react";
+import clsx from "clsx";
 import { Typography } from "@material-ui/core";
 
 import useStyles, { STYLE_CONST } from "../styles";
-import { datePlusDays } from "../utils/dateutils";
+import { datePlusDays, sameDay } from "../utils/dateutils";
+
+const today = new Date();
 
 interface CalendarDayColumnLabelsCellProps {
   index: number;
@@ -17,9 +20,14 @@ const CalendarDayColumnLabelsCell = ({
 }: CalendarDayColumnLabelsCellProps): ReactElement => {
   const classes = useStyles();
 
+  const date = datePlusDays(data, columnIndex);
+
   return (
     <div
-      className={classes.multigridCell}
+      className={clsx(
+        classes.multigridCell,
+        sameDay(date, today) ? classes.currentDate : {}
+      )}
       style={{
         ...style,
         left: Number(style.left) + STYLE_CONST.CALENDAR_GUTTER_SIZE,
@@ -34,7 +42,7 @@ const CalendarDayColumnLabelsCell = ({
         align="center"
         noWrap
       >
-        {datePlusDays(data, columnIndex).getDate()}
+        {date.getDate()}
       </Typography>
     </div>
   );
