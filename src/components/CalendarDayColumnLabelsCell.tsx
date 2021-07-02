@@ -4,17 +4,17 @@ import { Typography } from "@material-ui/core";
 import useStyles, { STYLE_CONST } from "../styles";
 import { datePlusDays } from "../utils/dateutils";
 
-interface CalendarColumnLabelsCellProps {
+interface CalendarDayColumnLabelsCellProps {
   index: number;
   data: Date;
   style: CSSProperties;
 }
 
-const CalendarColumnLabelsCell = ({
+const CalendarDayColumnLabelsCell = ({
   index: columnIndex,
   data,
   style,
-}: CalendarColumnLabelsCellProps): ReactElement => {
+}: CalendarDayColumnLabelsCellProps): ReactElement => {
   const classes = useStyles();
 
   return (
@@ -38,4 +38,4 @@ const CalendarColumnLabelsCell = ({
   );
 };
 
-export default CalendarColumnLabelsCell;
+export default CalendarDayColumnLabelsCell;

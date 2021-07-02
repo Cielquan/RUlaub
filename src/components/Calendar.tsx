@@ -4,7 +4,7 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import useStyles from "../styles";
 import { isLeapYear } from "../utils/dateutils";
 
-import CalendarColumnLabels from "./CalendarColumnLabels";
+import CalendarDayColumnLabels from "./CalendarDayColumnLabels";
 import CalendarGrid from "./CalendarGrid";
 import CalendarRowLabels from "./CalendarRowLabels";
 import CalendarTableHead from "./CalendarTableHead";
@@ -44,7 +44,7 @@ const Calendar = (): ReactElement => {
             scrollHandle={handleRowLabelScroll}
           />
 
-          <CalendarColumnLabels
+          <CalendarDayColumnLabels
             width={width}
             positionX={scrollX}
             scrollHandle={handleColumnLabelScroll}
