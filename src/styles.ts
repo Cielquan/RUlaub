@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
   },
-  navbarTitle: {
+  typographyGrow: {
     flexGrow: 1,
   },
   sideMenuButton: {
@@ -67,6 +67,15 @@ const useStyles = makeStyles((theme) => ({
   },
   multigridBackground: {
     backgroundColor: theme.palette.background.paper,
+  },
+  multigridTableHead: {
+    // absolutely position the label and move it right by a col
+    position: "absolute !important" as "absolute",
+    top: 0,
+    left: 0,
+  },
+  multigridTableHeadCell: {
+    width: "100%",
   },
   multigridRowLabels: {
     // absolutely position the label and move it down by a row
@@ -104,7 +113,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
   },
   multigridCenterContent: {
-    justifyContent: "center",
+    // justifyContent: "center",
   },
 }));
 
