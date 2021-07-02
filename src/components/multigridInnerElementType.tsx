@@ -2,10 +2,9 @@ import React, { CSSProperties, forwardRef, LegacyRef, ReactElement } from "react
 
 import useStyles, { STYLE_CONST } from "../styles";
 
-// TODO: look at types
 interface innerElementTypeProps {
   style: CSSProperties;
-  children?: React.ReactNode;
+  children?: ReactElement;
 }
 
 const innerElementType = forwardRef(
