@@ -103,7 +103,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "0 0.5em",
     backgroundColor: theme.palette.background.default,
   },
-  multigridColumnLabelsCell: {
+  multigridCenterContent: {
     justifyContent: "center",
   },
 }));

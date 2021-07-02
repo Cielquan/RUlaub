@@ -19,7 +19,7 @@ const CalendarColumnLabelsCell = ({
 
   return (
     <div
-      className={clsx(classes.multigridCell, classes.multigridColumnLabelsCell)}
+      className={clsx(classes.multigridCell, classes.multigridCenterContent)}
       style={{
         ...style,
         left: Number(style.left) + STYLE_CONST.CALENDAR_GUTTER_SIZE,
