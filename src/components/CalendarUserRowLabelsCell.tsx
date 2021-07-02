@@ -3,10 +3,10 @@ import { Typography } from "@material-ui/core";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
-interface CalendarUserRowLabelsCellProps {
+type CalendarUserRowLabelsCellProps = {
   index: number;
   style: CSSProperties;
-}
+};
 
 const CalendarUserRowLabelsCell = ({
   index: rowIndex,

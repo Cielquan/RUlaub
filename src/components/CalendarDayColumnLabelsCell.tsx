@@ -7,11 +7,11 @@ import { datePlusDays, sameDay } from "../utils/dateutils";
 
 const today = new Date();
 
-interface CalendarDayColumnLabelsCellProps {
+type CalendarDayColumnLabelsCellProps = {
   index: number;
   data: Date;
   style: CSSProperties;
-}
+};
 
 const CalendarDayColumnLabelsCell = ({
   index: columnIndex,

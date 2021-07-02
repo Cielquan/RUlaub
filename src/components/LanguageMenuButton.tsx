@@ -1,11 +1,15 @@
 import React, { ReactElement } from "react";
 import { MenuItem } from "@material-ui/core";
 
-interface LanguageMenuButtonProps {
+export type CloseFunction = {
+  closeFn: () => void;
+};
+
+type LanguageMenuButtonProps = {
   text: string;
   selected: boolean;
   onClick: () => void;
-}
+};
 
 const LanguageMenuButton = ({
   text,

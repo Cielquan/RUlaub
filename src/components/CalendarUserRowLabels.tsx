@@ -6,11 +6,11 @@ import useStyles, { STYLE_CONST } from "../styles";
 import CalendarUserRowLabelsCell from "./CalendarUserRowLabelsCell";
 import innerElementType from "./multigridInnerElementType";
 
-interface CalendarUserRowLabelsProps {
+type CalendarUserRowLabelsProps = {
   height: number;
   positionY: number;
   scrollHandle: (e: ListOnScrollProps) => void;
-}
+};
 
 const CalendarUserRowLabels = ({
   height,

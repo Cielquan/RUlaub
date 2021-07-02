@@ -7,12 +7,12 @@ import { getDaysInMonth } from "../utils/dateutils";
 import CalendarMonthColumnLabelsCell from "./CalendarMonthColumnLabelsCell";
 import innerElementType from "./multigridInnerElementType";
 
-interface CalendarMonthColumnLabelsProps {
+type CalendarMonthColumnLabelsProps = {
   width: number;
   positionX: number;
   scrollHandle: (e: ListOnScrollProps) => void;
   year: number;
-}
+};
 
 const CalendarMonthColumnLabels = ({
   width,

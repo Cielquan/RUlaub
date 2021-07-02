@@ -6,14 +6,14 @@ import useStyles, { STYLE_CONST } from "../styles";
 import CalendarGridCell from "./CalendarGridCell";
 import innerElementType from "./multigridInnerElementType";
 
-interface CalendarGridProps {
+type CalendarGridProps = {
   width: number;
   height: number;
   positionX: number;
   positionY: number;
   scrollHandle: (e: GridOnScrollProps) => void;
   daysInYear: number;
-}
+};
 
 const CalendarGrid = ({
   width,

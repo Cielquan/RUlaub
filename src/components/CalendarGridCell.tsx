@@ -2,9 +2,9 @@ import React, { CSSProperties, ReactElement } from "react";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
-interface CalendarGridCellProps {
+type CalendarGridCellProps = {
   style: CSSProperties;
-}
+};
 
 const CalendarGridCell = ({ style }: CalendarGridCellProps): ReactElement => {
   const classes = useStyles();

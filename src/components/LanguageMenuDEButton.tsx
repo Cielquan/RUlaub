@@ -5,13 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Languages from "../languages";
 import { actionCreators, State } from "../state";
 
-import LanguageMenuButton from "./LanguageMenuButton";
+import LanguageMenuButton, { CloseFunction } from "./LanguageMenuButton";
 
-interface LanguageMenuDEButton {
-  closeFn: () => void;
-}
-
-const LanguageMenuDEButton = ({ closeFn }: LanguageMenuDEButton): ReactElement => {
+const LanguageMenuDEButton = ({ closeFn }: CloseFunction): ReactElement => {
   const langState = useSelector((state: State) => state.language);
   const dispatch = useDispatch();
   const { useDE } = bindActionCreators(actionCreators, dispatch);

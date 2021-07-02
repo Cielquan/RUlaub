@@ -1,14 +1,14 @@
 import React, { ReactElement } from "react";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 
-interface SideMenuButtonProps {
+type SideMenuButtonProps = {
   key: string;
   text: string;
   icon: ReactElement;
   onClick: () => void;
   foldIcon?: ReactElement;
   className?: string;
-}
+};
 
 const SideMenuButton = ({
   key,

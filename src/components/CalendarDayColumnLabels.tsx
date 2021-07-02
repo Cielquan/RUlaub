@@ -7,13 +7,13 @@ import useStyles, { STYLE_CONST } from "../styles";
 import CalendarDayColumnLabelsCell from "./CalendarDayColumnLabelsCell";
 import innerElementType from "./multigridInnerElementType";
 
-interface CalendarDayColumnLabelsProps {
+type CalendarDayColumnLabelsProps = {
   width: number;
   positionX: number;
   scrollHandle: (e: ListOnScrollProps) => void;
   year: number;
   daysInYear: number;
-}
+};
 
 const CalendarDayColumnLabels = ({
   width,

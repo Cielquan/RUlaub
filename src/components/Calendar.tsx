@@ -13,9 +13,9 @@ import CalendarTableHead from "./CalendarTableHead";
 
 const YEAR = 2021;
 
-interface CalendarProps {
+type CalendarProps = {
   theme: Theme;
-}
+};
 
 const Calendar = ({ theme }: CalendarProps): ReactElement => {
   const classes = useStyles();
