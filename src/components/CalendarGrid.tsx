@@ -39,7 +39,7 @@ const CalendarGrid = ({
   return (
     <Grid
       className={classes.multigridMainGrid}
-      height={height - STYLE_CONST.CALENDAR_ROW_HEIGHT}
+      height={height - STYLE_CONST.CALENDAR_ROW_HEIGHT * 2}
       width={width - STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
       innerElementType={innerElementType}
       columnCount={daysInYear}

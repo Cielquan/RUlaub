@@ -32,7 +32,7 @@ const CalendarUserRowLabels = ({
       className={classes.multigridRowLabels}
       height={
         height -
-        STYLE_CONST.CALENDAR_ROW_HEIGHT -
+        STYLE_CONST.CALENDAR_ROW_HEIGHT * 2 -
         STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS
       }
       width={STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}

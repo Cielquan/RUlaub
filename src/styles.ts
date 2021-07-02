@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   multigridRowLabels: {
     // absolutely position the label and move it down by a row
     position: "absolute !important" as "absolute",
-    top: STYLE_CONST.CALENDAR_ROW_HEIGHT,
+    top: STYLE_CONST.CALENDAR_ROW_HEIGHT * 2,
     borderTop: `1px solid ${theme.palette.text.primary}`,
   },
   multigridColumnLabels: {
@@ -89,10 +89,13 @@ const useStyles = makeStyles((theme) => ({
     left: STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH,
     borderLeft: `1px solid ${theme.palette.text.primary}`,
   },
+  multigridColumnSubLabels: {
+    top: STYLE_CONST.CALENDAR_ROW_HEIGHT,
+  },
   multigridMainGrid: {
     // absolutely position the label and move it down by a row and right by a col
     position: "absolute !important" as "absolute",
-    top: STYLE_CONST.CALENDAR_ROW_HEIGHT,
+    top: STYLE_CONST.CALENDAR_ROW_HEIGHT * 2,
     left: STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH,
     borderTop: `1px solid ${theme.palette.text.primary}`,
     borderLeft: `1px solid ${theme.palette.text.primary}`,

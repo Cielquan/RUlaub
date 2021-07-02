@@ -6,6 +6,7 @@ import { isLeapYear } from "../utils/dateutils";
 
 import CalendarDayColumnLabels from "./CalendarDayColumnLabels";
 import CalendarGrid from "./CalendarGrid";
+import CalendarMonthColumnLabels from "./CalendarMonthColumnLabels";
 import CalendarUserRowLabels from "./CalendarUserRowLabels";
 import CalendarTableHead from "./CalendarTableHead";
 
@@ -38,10 +39,11 @@ const Calendar = (): ReactElement => {
         <div className={classes.multigrid}>
           <CalendarTableHead year={YEAR} />
 
-          <CalendarUserRowLabels
-            height={height}
-            positionY={scrollY}
-            scrollHandle={handleRowLabelScroll}
+          <CalendarMonthColumnLabels
+            width={width}
+            positionX={scrollX}
+            scrollHandle={handleColumnLabelScroll}
+            year={YEAR}
           />
 
           <CalendarDayColumnLabels
@@ -50,6 +52,12 @@ const Calendar = (): ReactElement => {
             scrollHandle={handleColumnLabelScroll}
             year={YEAR}
             daysInYear={daysInYear}
+          />
+
+          <CalendarUserRowLabels
+            height={height}
+            positionY={scrollY}
+            scrollHandle={handleRowLabelScroll}
           />
 
           <CalendarGrid

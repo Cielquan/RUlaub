@@ -25,7 +25,7 @@ const CalendarTableHeadCell = ({
     >
       <Typography
         className={classes.typographyGrow}
-        variant="h4"
+        variant="h3"
         component="div"
         align="center"
         noWrap

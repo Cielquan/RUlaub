@@ -23,7 +23,9 @@ const CalendarDayColumnLabelsCell = ({
       style={{
         ...style,
         left: Number(style.left) + STYLE_CONST.CALENDAR_GUTTER_SIZE,
+        top: Number(style.top) + STYLE_CONST.CALENDAR_GUTTER_SIZE,
         width: Number(style.width) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
+        height: Number(style.height) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
       }}
     >
       <Typography
