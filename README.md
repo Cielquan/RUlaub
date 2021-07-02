@@ -10,6 +10,10 @@ Currently it's planned to be a Rust backend with an
 
 Furthmore the tool should be native in english with an added german translation.
 
+## Credits
+
+Crab image by <a href="https://pixabay.com/users/davidrockdesign-2595351/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3424714">DavidRockDesign</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3424714">Pixabay</a>
+
 ## License
 
 Licensed under either of
