@@ -1,4 +1,5 @@
 import React, { CSSProperties, ReactElement } from "react";
+import { Typography } from "@material-ui/core";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
@@ -22,7 +23,9 @@ const CalendarRowLabelsCell = ({
         height: Number(style.height) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
       }}
     >
-      r {rowIndex}
+      <Typography variant="body1" noWrap>
+        some long row with index {rowIndex}
+      </Typography>
     </div>
   );
 };

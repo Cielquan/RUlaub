@@ -1,5 +1,5 @@
 import React, { CSSProperties, ReactElement } from "react";
-import clsx from "clsx";
+import { Typography } from "@material-ui/core";
 
 import useStyles, { STYLE_CONST } from "../styles";
 import { datePlusDays } from "../utils/dateutils";
@@ -19,14 +19,16 @@ const CalendarColumnLabelsCell = ({
 
   return (
     <div
-      className={clsx(classes.multigridCell, classes.multigridCenterContent)}
+      className={classes.multigridCell}
       style={{
         ...style,
         left: Number(style.left) + STYLE_CONST.CALENDAR_GUTTER_SIZE,
         width: Number(style.width) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
       }}
     >
-      {datePlusDays(data, columnIndex).getDate()}
+      <Typography variant="body1" align="center" noWrap>
+        {datePlusDays(data, columnIndex).getDate()}
+      </Typography>
     </div>
   );
 };

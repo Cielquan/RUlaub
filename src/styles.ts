@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const STYLE_CONST = {
-  CALENDAR_COLUMN_WIDTH: 30,
+  CALENDAR_COLUMN_WIDTH: 32,
   CALENDAR_ROW_HEIGHT: 35,
   CALENDAR_GUTTER_SIZE: 2,
   CALENDAR_ROW_LABEL_WIDTH: 250,
@@ -111,9 +111,6 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     padding: "0 0.5em",
     backgroundColor: theme.palette.background.default,
-  },
-  multigridCenterContent: {
-    // justifyContent: "center",
   },
 }));
 
