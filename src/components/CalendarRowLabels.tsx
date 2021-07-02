@@ -3,7 +3,7 @@ import { FixedSizeList as List } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
-import CalendarRowLabel from "./CalendarRowLabel";
+import CalendarRowLabelsCell from "./CalendarRowLabelsCell";
 import innerElementType from "./multigridInnerElementType";
 
 interface CalendarRowLabelsProps {
@@ -43,7 +43,7 @@ const CalendarRowLabels = ({
       onScroll={scrollHandle}
       style={{ overflow: "hidden" }} // need this manual overwrite to work
     >
-      {CalendarRowLabel}
+      {CalendarRowLabelsCell}
     </List>
   );
 };

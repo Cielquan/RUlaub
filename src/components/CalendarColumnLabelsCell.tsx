@@ -2,15 +2,15 @@ import React, { CSSProperties, ReactElement } from "react";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
-interface CalendarColumnLabelProps {
+interface CalendarColumnLabelsCellProps {
   index: number;
   style: CSSProperties;
 }
 
-const CalendarColumnLabel = ({
+const CalendarColumnLabelsCell = ({
   index: columnIndex,
   style,
-}: CalendarColumnLabelProps): ReactElement => {
+}: CalendarColumnLabelsCellProps): ReactElement => {
   const classes = useStyles();
 
   return (
@@ -27,4 +27,4 @@ const CalendarColumnLabel = ({
   );
 };
 
-export default CalendarColumnLabel;
+export default CalendarColumnLabelsCell;
