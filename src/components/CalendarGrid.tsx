@@ -3,7 +3,7 @@ import { FixedSizeGrid as Grid } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
-import MultigridCell from "./MultigridCell";
+import CalendarGridCell from "./CalendarGridCell";
 import innerElementType from "./multigridInnerElementType";
 
 interface CalendarGridProps {
@@ -48,7 +48,7 @@ const CalendarGrid = ({
       ref={gridRef}
       onScroll={scrollHandle}
     >
-      {MultigridCell}
+      {CalendarGridCell}
     </Grid>
   );
 };

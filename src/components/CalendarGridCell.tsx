@@ -2,17 +2,17 @@ import React, { CSSProperties, ReactElement } from "react";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
-interface MultigridCellProps {
+interface CalendarGridCellProps {
   columnIndex: number;
   rowIndex: number;
   style: CSSProperties;
 }
 
-const MultigridCell = ({
+const CalendarGridCell = ({
   columnIndex,
   rowIndex,
   style,
-}: MultigridCellProps): ReactElement => {
+}: CalendarGridCellProps): ReactElement => {
   const classes = useStyles();
 
   return (
@@ -31,4 +31,4 @@ const MultigridCell = ({
   );
 };
 
-export default MultigridCell;
+export default CalendarGridCell;

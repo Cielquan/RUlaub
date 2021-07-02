@@ -2,15 +2,15 @@ import React, { CSSProperties, ReactElement } from "react";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
-interface MultigridRowLabelProps {
+interface CalendarRowLabelProps {
   index: number;
   style: CSSProperties;
 }
 
-const MultigridRowLabel = ({
+const CalendarRowLabel = ({
   index: rowIndex,
   style,
-}: MultigridRowLabelProps): ReactElement => {
+}: CalendarRowLabelProps): ReactElement => {
   const classes = useStyles();
 
   return (
@@ -27,4 +27,4 @@ const MultigridRowLabel = ({
   );
 };
 
-export default MultigridRowLabel;
+export default CalendarRowLabel;
