@@ -6,7 +6,7 @@ import { isLeapYear } from "../utils/dateutils";
 
 import CalendarDayColumnLabels from "./CalendarDayColumnLabels";
 import CalendarGrid from "./CalendarGrid";
-import CalendarRowLabels from "./CalendarRowLabels";
+import CalendarUserRowLabels from "./CalendarUserRowLabels";
 import CalendarTableHead from "./CalendarTableHead";
 
 const YEAR = 2021;
@@ -38,7 +38,7 @@ const Calendar = (): ReactElement => {
         <div className={classes.multigrid}>
           <CalendarTableHead year={YEAR} />
 
-          <CalendarRowLabels
+          <CalendarUserRowLabels
             height={height}
             positionY={scrollY}
             scrollHandle={handleRowLabelScroll}

@@ -3,15 +3,15 @@ import { Typography } from "@material-ui/core";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
-interface CalendarRowLabelsCellProps {
+interface CalendarUserRowLabelsCellProps {
   index: number;
   style: CSSProperties;
 }
 
-const CalendarRowLabelsCell = ({
+const CalendarUserRowLabelsCell = ({
   index: rowIndex,
   style,
-}: CalendarRowLabelsCellProps): ReactElement => {
+}: CalendarUserRowLabelsCellProps): ReactElement => {
   const classes = useStyles();
 
   return (
@@ -30,4 +30,4 @@ const CalendarRowLabelsCell = ({
   );
 };
 
-export default CalendarRowLabelsCell;
+export default CalendarUserRowLabelsCell;
