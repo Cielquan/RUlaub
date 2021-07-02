@@ -41,7 +41,8 @@ const CalendarRowLabels = ({
       itemSize={STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_GUTTER_SIZE}
       ref={rowLabelRef}
       onScroll={scrollHandle}
-      style={{ overflow: "hidden" }} // need this manual overwrite to work
+      // needs this local manual overwrite to work, css class gets overwritten
+      style={{ overflow: "hidden" }}
     >
       {CalendarRowLabelsCell}
     </List>
