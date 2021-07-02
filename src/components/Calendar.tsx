@@ -1,4 +1,5 @@
 import React, { ReactElement, useCallback, useState } from "react";
+import { Theme } from "@material-ui/core";
 import AutoSizer from "react-virtualized-auto-sizer";
 
 import useStyles from "../styles";
@@ -12,7 +13,11 @@ import CalendarTableHead from "./CalendarTableHead";
 
 const YEAR = 2021;
 
-const Calendar = (): ReactElement => {
+interface CalendarProps {
+  theme: Theme;
+}
+
+const Calendar = ({ theme }: CalendarProps): ReactElement => {
   const classes = useStyles();
 
   const [scrollX, setScrollX] = useState(0);
@@ -35,41 +40,45 @@ const Calendar = (): ReactElement => {
 
   return (
     <AutoSizer>
-      {({ height, width }) => (
-        <div className={classes.multigrid}>
-          <CalendarTableHead year={YEAR} />
+      {({ height, width }) => {
+        // FAB is 7 spacing in diameter
+        const trueHeight = height - theme.spacing(7 + 1);
+        return (
+          <div className={classes.multigrid}>
+            <CalendarTableHead year={YEAR} />
 
-          <CalendarMonthColumnLabels
-            width={width}
-            positionX={scrollX}
-            scrollHandle={handleColumnLabelScroll}
-            year={YEAR}
-          />
+            <CalendarMonthColumnLabels
+              width={width}
+              positionX={scrollX}
+              scrollHandle={handleColumnLabelScroll}
+              year={YEAR}
+            />
 
-          <CalendarDayColumnLabels
-            width={width}
-            positionX={scrollX}
-            scrollHandle={handleColumnLabelScroll}
-            year={YEAR}
-            daysInYear={daysInYear}
-          />
+            <CalendarDayColumnLabels
+              width={width}
+              positionX={scrollX}
+              scrollHandle={handleColumnLabelScroll}
+              year={YEAR}
+              daysInYear={daysInYear}
+            />
 
-          <CalendarUserRowLabels
-            height={height}
-            positionY={scrollY}
-            scrollHandle={handleRowLabelScroll}
-          />
+            <CalendarUserRowLabels
+              height={trueHeight}
+              positionY={scrollY}
+              scrollHandle={handleRowLabelScroll}
+            />
 
-          <CalendarGrid
-            width={width}
-            height={height}
-            positionX={scrollX}
-            positionY={scrollY}
-            scrollHandle={handleGridScroll}
-            daysInYear={daysInYear}
-          />
-        </div>
-      )}
+            <CalendarGrid
+              width={width}
+              height={trueHeight}
+              positionX={scrollX}
+              positionY={scrollY}
+              scrollHandle={handleGridScroll}
+              daysInYear={daysInYear}
+            />
+          </div>
+        );
+      }}
     </AutoSizer>
   );
 };

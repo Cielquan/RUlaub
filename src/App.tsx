@@ -29,7 +29,7 @@ function App(): ReactElement {
         <Navbar />
         <SideMenu />
         <main className={classes.content}>
-          <Calendar />
+          <Calendar theme={theme} />
           <NewHolidayButton />
         </main>
       </div>
