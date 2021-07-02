@@ -3,16 +3,10 @@ import React, { CSSProperties, ReactElement } from "react";
 import useStyles, { STYLE_CONST } from "../styles";
 
 interface CalendarGridCellProps {
-  columnIndex: number;
-  rowIndex: number;
   style: CSSProperties;
 }
 
-const CalendarGridCell = ({
-  columnIndex,
-  rowIndex,
-  style,
-}: CalendarGridCellProps): ReactElement => {
+const CalendarGridCell = ({ style }: CalendarGridCellProps): ReactElement => {
   const classes = useStyles();
 
   return (
@@ -25,9 +19,7 @@ const CalendarGridCell = ({
         width: Number(style.width) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
         height: Number(style.height) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
       }}
-    >
-      {`r${rowIndex}, c${columnIndex}`}
-    </div>
+    />
   );
 };
 

@@ -10,12 +10,16 @@ interface CalendarColumnLabelsProps {
   width: number;
   positionX: number;
   scrollHandle: (e: any) => void;
+  year: number;
+  daysInYear: number;
 }
 
 const CalendarColumnLabels = ({
   width,
   positionX,
   scrollHandle,
+  year,
+  daysInYear,
 }: CalendarColumnLabelsProps): ReactElement => {
   const classes = useStyles();
 
@@ -25,7 +29,7 @@ const CalendarColumnLabels = ({
     columnLabelRef.current?.scrollTo(positionX);
   }, [positionX, columnLabelRef]);
 
-  const COLUMNS = 100;
+  const firstDayOfYear = new Date(`${year}-01-01`);
 
   return (
     <List
@@ -38,7 +42,8 @@ const CalendarColumnLabels = ({
         STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS
       }
       innerElementType={innerElementType}
-      itemCount={COLUMNS}
+      itemCount={daysInYear}
+      itemData={firstDayOfYear}
       itemSize={STYLE_CONST.CALENDAR_COLUMN_WIDTH + STYLE_CONST.CALENDAR_GUTTER_SIZE}
       ref={columnLabelRef}
       onScroll={scrollHandle}

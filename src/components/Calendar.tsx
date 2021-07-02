@@ -2,10 +2,13 @@ import React, { ReactElement, useCallback, useState } from "react";
 import AutoSizer from "react-virtualized-auto-sizer";
 
 import useStyles from "../styles";
+import { isLeapYear } from "../utils/dateutils";
 
 import CalendarColumnLabels from "./CalendarColumnLabels";
 import CalendarGrid from "./CalendarGrid";
 import CalendarRowLabels from "./CalendarRowLabels";
+
+const YEAR = 2021;
 
 const Calendar = (): ReactElement => {
   const classes = useStyles();
@@ -26,6 +29,8 @@ const Calendar = (): ReactElement => {
     setScrollX(e.scrollOffset);
   }, []);
 
+  const daysInYear = 365 + (isLeapYear(YEAR) ? 1 : 0);
+
   return (
     <AutoSizer>
       {({ height, width }) => (
@@ -40,6 +45,8 @@ const Calendar = (): ReactElement => {
             width={width}
             positionX={scrollX}
             scrollHandle={handleColumnLabelScroll}
+            year={YEAR}
+            daysInYear={daysInYear}
           />
 
           <CalendarGrid
@@ -48,6 +55,7 @@ const Calendar = (): ReactElement => {
             positionX={scrollX}
             positionY={scrollY}
             scrollHandle={handleGridScroll}
+            daysInYear={daysInYear}
           />
         </div>
       )}

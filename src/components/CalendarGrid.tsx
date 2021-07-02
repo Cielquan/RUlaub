@@ -12,6 +12,7 @@ interface CalendarGridProps {
   positionX: number;
   positionY: number;
   scrollHandle: (e: any) => void;
+  daysInYear: number;
 }
 
 const CalendarGrid = ({
@@ -20,6 +21,7 @@ const CalendarGrid = ({
   positionX,
   positionY,
   scrollHandle,
+  daysInYear,
 }: CalendarGridProps): ReactElement => {
   const classes = useStyles();
 
@@ -32,7 +34,6 @@ const CalendarGrid = ({
     });
   }, [positionY, positionX, gridRef]);
 
-  const COLUMNS = 100;
   const ROWS = 100;
 
   return (
@@ -41,7 +42,7 @@ const CalendarGrid = ({
       height={height - STYLE_CONST.CALENDAR_ROW_HEIGHT}
       width={width - STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
       innerElementType={innerElementType}
-      columnCount={COLUMNS}
+      columnCount={daysInYear}
       columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH + STYLE_CONST.CALENDAR_GUTTER_SIZE}
       rowCount={ROWS}
       rowHeight={STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_GUTTER_SIZE}
