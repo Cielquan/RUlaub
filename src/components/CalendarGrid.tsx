@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useRef } from "react";
-import { FixedSizeGrid as Grid } from "react-window";
+import { FixedSizeGrid as Grid, GridOnScrollProps } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
@@ -11,7 +11,7 @@ interface CalendarGridProps {
   height: number;
   positionX: number;
   positionY: number;
-  scrollHandle: (e: any) => void;
+  scrollHandle: (e: GridOnScrollProps) => void;
   daysInYear: number;
 }
 

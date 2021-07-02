@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useRef } from "react";
-import { FixedSizeList as List } from "react-window";
+import { FixedSizeList as List, ListOnScrollProps } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
@@ -9,7 +9,7 @@ import innerElementType from "./multigridInnerElementType";
 interface CalendarRowLabelsProps {
   height: number;
   positionY: number;
-  scrollHandle: (e: any) => void;
+  scrollHandle: (e: ListOnScrollProps) => void;
 }
 
 const CalendarRowLabels = ({
