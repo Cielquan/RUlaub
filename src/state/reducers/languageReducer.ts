@@ -1,6 +1,6 @@
 import { LanguageType } from "../action-types";
 import { LanguageAction } from "../actions";
-import * as languages from "../../languages";
+import * as languages from "../../i18n";
 
 const initialState = languages.Languages.english;
 

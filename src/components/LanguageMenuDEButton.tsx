@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { bindActionCreators } from "redux";
 import { useDispatch, useSelector } from "react-redux";
 
-import Languages from "../languages";
+import Languages from "../i18n";
 import { actionCreators, State } from "../state";
 
 import LanguageMenuButton, { CloseFunction } from "./LanguageMenuButton";
