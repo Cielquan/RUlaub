@@ -1,8 +1,8 @@
 {
-  "locales": ["en", "de"],
-  "sourceLocale": "en",
+  "locales": ["en-US", "de-DE"],
+  "sourceLocale": "en-US",
   "fallbackLocales": {
-      "default": "en"
+      "default": "en-US"
   },
   "catalogs": [
     {

@@ -12,14 +12,13 @@ import InfoPage from "./components/InfoPage";
 import Navbar from "./components/Navbar";
 import NewHolidayButton from "./components/NewHolidayButton";
 import SideMenu from "./components/SideMenu";
-
 import Calendar from "./components/Calendar";
 
 function App(): ReactElement {
   const darkState = useSelector((state: State) => state.darkTheme);
   const langState = useSelector((state: State) => state.language);
 
-  const theme = createTheme(darkState, locales[langState.locale]);
+  const theme = createTheme(darkState, locales[langState.importName]);
   const classes = useStyles();
 
   return (
