@@ -1,10 +1,5 @@
 ### Before Beta
 
-- impl l10n/i18n
-
-  - english (default)
-  - german
-
 - add state for db data (json file for testing)
 
 - add state for local config (json file for testing)
