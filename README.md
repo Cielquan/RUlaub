@@ -1,14 +1,17 @@
 # RUlaub
 
-RUlaub will be a vacation calandar for teams.
+RUlaub is a vacation calandar for teams.
 RUlaub is a wordplay on the german word for vacation (Urlaub) and Rust.
 
 ## Development
 
-Currently it's planned to be a Rust backend with an
-[Tauri](https://tauri.studio/) frontend.
+The programm uses [tauri](https://tauri.studio/) as its foundation.
+The backend is - like tauri - written in [Rust](https://www.rust-lang.org/).
+The frontend is written in [TypeScript](https://www.typescriptlang.org/) and uses
+[React](https://reactjs.org/) with mainly [Material-UI](https://material-ui.com/)
+components.
 
-Furthmore the tool should be native in english with an added german translation.
+See the [Roadmap](ROADMAP.md) for the next planned steps.
 
 ## Credits
 
