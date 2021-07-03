@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "HP First",
+      "abbr": "HPF",
+      "vacation_days": 30,
+      "hex_color": 123,
+      "group_manager_id": 1,
+      "vacations": [
+        {
+          "id": 1,
+          "start_date": "2021-01-01",
+          "end_date": "2021-01-15",
+          "type_id": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "HP Second",
+      "abbr": "HPS",
+      "vacation_days": 30,
+      "hex_color": 12345,
+      "group_manager_id": 1,
+      "vacations": [
+        {
+          "id": 2,
+          "start_date": "2021-01-03",
+          "end_date": "2021-02-15",
+          "type_id": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "user": {
+    "name": "HP First",
+    "abbr": "HPF",
+    "vacation_days": 30,
+    "hex_color": 123
+  },
+  "settings": {
+    "databaseURI": "here is the database",
+    "year_to_show": 2021,
+    "theme": "dark"
+  }
+}
