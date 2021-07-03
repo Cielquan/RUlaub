@@ -12,6 +12,7 @@ import {
 } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import SettingsIcon from "@material-ui/icons/Settings";
+import { t } from "@lingui/macro";
 
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
@@ -25,8 +26,7 @@ const SideMenu = (): ReactElement => {
   const sideMenuState = useSelector((state: State) => state.sideMenu);
 
   const classes = useStyles();
-
-  const itemList: Array<[string, ReactElement]> = [["Settings", <SettingsIcon />]];
+  const itemList: Array<[string, ReactElement]> = [[t`Settings`, <SettingsIcon />]];
 
   return (
     <Drawer anchor="left" open={sideMenuState} onClose={closeSideMenu}>

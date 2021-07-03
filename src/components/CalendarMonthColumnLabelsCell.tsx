@@ -1,7 +1,9 @@
 import React, { CSSProperties, ReactElement } from "react";
 import { Typography } from "@material-ui/core";
+import { useLingui } from "@lingui/react";
 
 import useStyles, { STYLE_CONST } from "../styles";
+import { getMonthNameList } from "../utils/dateutils";
 
 type CalendarMonthColumnLabelsCellProps = {
   index: number;
@@ -14,9 +16,9 @@ const CalendarMonthColumnLabelsCell = ({
 }: CalendarMonthColumnLabelsCellProps): ReactElement => {
   const classes = useStyles();
 
-  const zeroPad = (num: number, places: number): string =>
-    String(num).padStart(places, "0");
-  const monthDate = new Date(`2000-${zeroPad(columnIndex + 1, 2)}-01`);
+  const { i18n } = useLingui();
+
+  const monthNameList = getMonthNameList(i18n);
 
   return (
     <div
@@ -33,7 +35,7 @@ const CalendarMonthColumnLabelsCell = ({
         component="div"
         align="left"
       >
-        {monthDate.toLocaleString("default", { month: "long" })}
+        {monthNameList[columnIndex]}
       </Typography>
       <Typography
         className={classes.typographyGrow}
@@ -41,7 +43,7 @@ const CalendarMonthColumnLabelsCell = ({
         component="div"
         align="center"
       >
-        {monthDate.toLocaleString("default", { month: "long" })}
+        {monthNameList[columnIndex]}
       </Typography>
       <Typography
         className={classes.typographyGrow}
@@ -49,7 +51,7 @@ const CalendarMonthColumnLabelsCell = ({
         component="div"
         align="right"
       >
-        {monthDate.toLocaleString("default", { month: "long" })}
+        {monthNameList[columnIndex]}
       </Typography>
     </div>
   );

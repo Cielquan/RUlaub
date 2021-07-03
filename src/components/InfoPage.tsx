@@ -10,8 +10,10 @@ import {
   DialogTitle,
   Link,
   Slide,
+  Typography,
 } from "@material-ui/core";
 import { TransitionProps } from "@material-ui/core/transitions";
+import { Trans } from "@lingui/macro";
 
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
@@ -35,6 +37,12 @@ const InfoPage = (): ReactElement => {
 
   const classes = useStyles();
 
+  const ghLink = (
+    <Link href="https://github.com/Cielquan/RUlaub" target="_blank" rel="noreferrer">
+      github
+    </Link>
+  );
+
   return (
     <Dialog
       open={infoPageState}
@@ -45,22 +53,23 @@ const InfoPage = (): ReactElement => {
       <DialogTitle>{`RUlaub v${pjson.version}`}</DialogTitle>
       <DialogContent>
         <DialogContentText className={classes.helpPageText}>
-          {"RUlaub is licensed under either 'Apache License 2.0' " +
-            "or 'MIT License' at your option.\n\n" +
-            "Source Code and Documentation are available at "}
-          <Link
-            href="https://github.com/Cielquan/RUlaub"
-            target="_blank"
-            rel="noreferrer"
-          >
-            github
-          </Link>
-          .
+          <Typography>
+            <Trans>
+              RUlaub is licensed under either &apos;Apache License 2.0&apos; or
+              &apos;MIT License&apos; at your option.
+            </Trans>
+          </Typography>
+          <Typography>
+            <Trans>
+              For the Source Code, Documentation and copies of the License files please
+              see the github repository at: {ghLink}.
+            </Trans>
+          </Typography>
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={closeInfoPage} color="primary" autoFocus>
-          Close
+          <Trans>Close</Trans>
         </Button>
       </DialogActions>
     </Dialog>

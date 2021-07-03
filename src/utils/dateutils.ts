@@ -1,3 +1,5 @@
+import { i18n as i18nObj } from "@lingui/core";
+
 export const isLeapYear = (year: number): boolean => {
   const leapDayDate = new Date(year, 1, 29);
   const dayAfter = new Date(year, 2, 1);
@@ -12,6 +14,21 @@ export const datePlusDays = (currentDate: Date, daysToAdd: number): Date => {
   newDate.setDate(currentDate.getDate() + daysToAdd);
   return newDate;
 };
+
+export const getMonthNameList = (i18n: typeof i18nObj): string[] => [
+  i18n._("January"),
+  i18n._("February"),
+  i18n._("March"),
+  i18n._("April"),
+  i18n._("May"),
+  i18n._("June"),
+  i18n._("July"),
+  i18n._("August"),
+  i18n._("September"),
+  i18n._("October"),
+  i18n._("November"),
+  i18n._("December"),
+];
 
 const DaysInMonth: { [key: number]: number } = {
   1: 31,

@@ -2,6 +2,7 @@ import React, { ReactElement } from "react";
 import { bindActionCreators } from "redux";
 import { useDispatch } from "react-redux";
 import CreateIcon from "@material-ui/icons/Create";
+import { t } from "@lingui/macro";
 
 import { actionCreators } from "../state";
 import useStyles from "../styles";
@@ -16,8 +17,8 @@ const SideMenuDatabaseModifyButton = (): ReactElement => {
 
   return (
     <SideMenuButton
-      key="Modify existing"
-      text="Modify existing"
+      key={t`Modify existing`}
+      text={t`Modify existing`}
       icon={<CreateIcon />}
       onClick={closeSideMenu}
       className={classes.sideMenuNestedButton}

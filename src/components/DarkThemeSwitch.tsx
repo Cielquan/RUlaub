@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IconButton, Tooltip } from "@material-ui/core";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
+import { t } from "@lingui/macro";
 
 import { actionCreators, State } from "../state";
 
@@ -13,7 +14,7 @@ const DarkThemeSwitch = (): ReactElement => {
   const darkState = useSelector((state: State) => state.darkTheme);
 
   return (
-    <Tooltip arrow title={darkState ? "Activate Light Theme" : "Activate Dark Theme"}>
+    <Tooltip arrow title={darkState ? t`Activate Light Theme` : t`Activate Dark Theme`}>
       <IconButton onClick={darkState ? useLightTheme : useDarkTheme}>
         {darkState ? <BrightnessHighIcon /> : <BrightnessLowIcon />}
       </IconButton>

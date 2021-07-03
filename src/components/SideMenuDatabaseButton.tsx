@@ -5,6 +5,7 @@ import { Collapse, List } from "@material-ui/core";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StorageIcon from "@material-ui/icons/Storage";
+import { t } from "@lingui/macro";
 
 import { actionCreators, State } from "../state";
 
@@ -23,8 +24,8 @@ const SideMenuDatabaseButton = (): ReactElement => {
   return (
     <>
       <SideMenuButton
-        key="Database"
-        text="Database"
+        key={t`Database`}
+        text={t`Database`}
         icon={<StorageIcon />}
         onClick={sideMenuDatabaseState ? closeSideMenuDatabase : openSideMenuDatabase}
         foldIcon={sideMenuDatabaseState ? <ExpandLess /> : <ExpandMore />}

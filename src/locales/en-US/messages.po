@@ -12,3 +12,51 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 "Plural-Forms: \n"
+
+#: src/components/DarkThemeSwitch.tsx:17
+msgid "Activate Light Theme"
+msgstr "Activate Light Theme"
+
+#: src/components/DarkThemeSwitch.tsx:17
+msgid "Activate Dark Theme"
+msgstr "Activate Dark Theme"
+
+#: src/components/InfoPage.tsx:57
+msgid "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
+msgstr "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
+
+#: src/components/InfoPage.tsx:63
+msgid "For the Source Code, Documentation and copies of the License files please see the github repository at: {ghLink}."
+msgstr "For the Source Code, Documentation and copies of the License files please see the github repository at: {ghLink}."
+
+#: src/components/InfoPage.tsx:72
+msgid "Close"
+msgstr "Close"
+
+#: src/components/NewHolidayButton.tsx:13
+msgid "Add new Holiday"
+msgstr "Add new Holiday"
+
+#: src/components/SideMenu.tsx:29
+msgid "Settings"
+msgstr "Settings"
+
+#: src/components/SideMenuDatabaseButton.tsx:27
+#: src/components/SideMenuDatabaseButton.tsx:28
+msgid "Database"
+msgstr "Database"
+
+#: src/components/SideMenuDatabaseCreateButton.tsx:20
+#: src/components/SideMenuDatabaseCreateButton.tsx:21
+msgid "Create new"
+msgstr "Create new"
+
+#: src/components/SideMenuDatabaseModifyButton.tsx:20
+#: src/components/SideMenuDatabaseModifyButton.tsx:21
+msgid "Modify existing"
+msgstr "Modify existing"
+
+#: src/components/SideMenuInfoButton.tsx:17
+#: src/components/SideMenuInfoButton.tsx:18
+msgid "Info"
+msgstr "Info"
