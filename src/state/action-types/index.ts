@@ -8,6 +8,10 @@ export enum LanguageType {
   EN = "use english",
 }
 
+export enum LocalConfigType {
+  UPDATE = "update local config",
+}
+
 export enum SideMenuType {
   OPEN = "open SideMenu",
   CLOSE = "close SideMenu",

@@ -1,9 +1,16 @@
+import { LocalConfigPayload } from "../utils/localConfig";
+
 export type InfoPageAction = {
   type: string;
 };
 
 export type LanguageAction = {
   type: string;
+};
+
+export type LocalConfigAction = {
+  type: string;
+  payload: LocalConfigPayload;
 };
 
 export type SideMenuAction = {
