@@ -33,7 +33,7 @@ msgstr "For the Source Code, Documentation and copies of the License files pleas
 msgid "Close"
 msgstr "Close"
 
-#: src/components/NewHolidayButton.tsx:13
+#: src/components/NewHolidayButton.tsx:12
 msgid "Add new Holiday"
 msgstr "Add new Holiday"
 
@@ -60,3 +60,51 @@ msgstr "Modify existing"
 #: src/components/SideMenuInfoButton.tsx:18
 msgid "Info"
 msgstr "Info"
+
+#: src/utils/dateutils.ts:20
+msgid "January"
+msgstr "January"
+
+#: src/utils/dateutils.ts:21
+msgid "February"
+msgstr "February"
+
+#: src/utils/dateutils.ts:22
+msgid "March"
+msgstr "March"
+
+#: src/utils/dateutils.ts:23
+msgid "April"
+msgstr "April"
+
+#: src/utils/dateutils.ts:24
+msgid "May"
+msgstr "May"
+
+#: src/utils/dateutils.ts:25
+msgid "June"
+msgstr "June"
+
+#: src/utils/dateutils.ts:26
+msgid "July"
+msgstr "July"
+
+#: src/utils/dateutils.ts:27
+msgid "August"
+msgstr "August"
+
+#: src/utils/dateutils.ts:28
+msgid "September"
+msgstr "September"
+
+#: src/utils/dateutils.ts:29
+msgid "October"
+msgstr "October"
+
+#: src/utils/dateutils.ts:30
+msgid "November"
+msgstr "November"
+
+#: src/utils/dateutils.ts:31
+msgid "December"
+msgstr "December"

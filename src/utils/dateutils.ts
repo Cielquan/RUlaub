@@ -1,4 +1,5 @@
 import { i18n as i18nObj } from "@lingui/core";
+import { t } from "@lingui/macro";
 
 export const isLeapYear = (year: number): boolean => {
   const leapDayDate = new Date(year, 1, 29);
@@ -15,19 +16,20 @@ export const datePlusDays = (currentDate: Date, daysToAdd: number): Date => {
   return newDate;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getMonthNameList = (i18n: typeof i18nObj): string[] => [
-  i18n._("January"),
-  i18n._("February"),
-  i18n._("March"),
-  i18n._("April"),
-  i18n._("May"),
-  i18n._("June"),
-  i18n._("July"),
-  i18n._("August"),
-  i18n._("September"),
-  i18n._("October"),
-  i18n._("November"),
-  i18n._("December"),
+  t`January`,
+  t`February`,
+  t`March`,
+  t`April`,
+  t`May`,
+  t`June`,
+  t`July`,
+  t`August`,
+  t`September`,
+  t`October`,
+  t`November`,
+  t`December`,
 ];
 
 const DaysInMonth: { [key: number]: number } = {
