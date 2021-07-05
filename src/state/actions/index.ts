@@ -1,4 +1,10 @@
+import { DBDataPayload } from "../utils/dbData";
 import { LocalConfigPayload } from "../utils/localConfig";
+
+export type DBDataAction = {
+  type: string;
+  payload: DBDataPayload;
+};
 
 export type InfoPageAction = {
   type: string;

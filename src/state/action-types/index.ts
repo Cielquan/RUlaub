@@ -1,3 +1,7 @@
+export enum DBDataType {
+  UPDATE = "update db data",
+}
+
 export enum InfoPageType {
   OPEN = "open InfoPage",
   CLOSE = "close InfoPage",

@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import dbDataReducer from "./dbDataReducer";
 import infoPageReducer from "./infoPageReducer";
 import languageReducer from "./languageReducer";
 import localConfigReducer from "./localConfigReducer";
@@ -7,6 +8,7 @@ import sideMenuDatabaseReducer from "./sideMenuDatabaseReducer";
 import themeReducer from "./themeReducer";
 
 const rootReducer = combineReducers({
+  dbData: dbDataReducer,
   theme: themeReducer,
   infoPage: infoPageReducer,
   language: languageReducer,

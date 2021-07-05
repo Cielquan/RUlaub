@@ -1,7 +1,5 @@
 ### Before Beta
 
-- add state for db data (json file for testing)
-
 - impl bridge to backend which serves above json files
 
 - impl bridge to backend to alter the json files
