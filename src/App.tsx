@@ -26,7 +26,7 @@ export async function dynamicActivate(locale: string): Promise<void> {
 
 function App(): ReactElement {
   const dispatch = useDispatch();
-  const { useDarkTheme, useDE, useEN, useLightTheme } = bindActionCreators(
+  const { changeLanguage, useDarkTheme, useLightTheme } = bindActionCreators(
     actionCreators,
     dispatch
   );
@@ -46,18 +46,7 @@ function App(): ReactElement {
       (localConfigState.settings.theme === "dark" ? useDarkTheme : useLightTheme)();
     }
     if (localConfigState.settings.language !== langState.locale) {
-      let langSwitch: () => void;
-      switch (localConfigState.settings.language) {
-        case "de-DE":
-          langSwitch = useDE;
-          break;
-        case "en-US":
-          langSwitch = useEN;
-          break;
-        default:
-          langSwitch = useEN;
-      }
-      langSwitch();
+      changeLanguage(localConfigState.settings.language);
     }
   });
 

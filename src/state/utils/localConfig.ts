@@ -1,3 +1,5 @@
+import { SupportedLocales } from "../../i18n";
+
 type UserConfig = {
   name: string;
   abbr: string;
@@ -16,14 +18,14 @@ type SettingsConfig = {
   databaseURI: string;
   yearToShow: number;
   theme: string;
-  language: string;
+  language: SupportedLocales;
 };
 
 type SettingsConfigPayload = {
   databaseURI?: string;
   yearToShow?: number;
   theme?: string;
-  language?: string;
+  language?: SupportedLocales;
 };
 
 export type LocalConfig = {
