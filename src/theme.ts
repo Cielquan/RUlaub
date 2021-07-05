@@ -8,8 +8,10 @@ import {
 } from "@material-ui/core/colors";
 import { Localization } from "@material-ui/core/locale";
 
-const createTheme = (themeState: string, language: Localization): Theme => {
-  const palletType = themeState === "dark" ? "dark" : "light";
+export type SupportedThemes = "dark" | "light";
+
+const createTheme = (themeState: SupportedThemes, language: Localization): Theme => {
+  const palletType = themeState;
 
   return createMuiTheme(
     {

@@ -1,4 +1,5 @@
 import { SupportedLocales } from "../../i18n";
+import { SupportedThemes } from "../../theme";
 
 type UserConfig = {
   name: string;
@@ -17,14 +18,14 @@ type UserConfigPayload = {
 type SettingsConfig = {
   databaseURI: string;
   yearToShow: number;
-  theme: string;
+  theme: SupportedThemes;
   language: SupportedLocales;
 };
 
 type SettingsConfigPayload = {
   databaseURI?: string;
   yearToShow?: number;
-  theme?: string;
+  theme?: SupportedThemes;
   language?: SupportedLocales;
 };
 
