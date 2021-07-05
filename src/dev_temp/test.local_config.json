@@ -8,6 +8,7 @@
   "settings": {
     "databaseURI": "here is the database",
     "yearToShow": 2021,
-    "theme": "dark"
+    "theme": "dark",
+    "language": "de-DE"
   }
 }

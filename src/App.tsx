@@ -26,7 +26,10 @@ export async function dynamicActivate(locale: string): Promise<void> {
 
 function App(): ReactElement {
   const dispatch = useDispatch();
-  const { useDarkTheme, useLightTheme } = bindActionCreators(actionCreators, dispatch);
+  const { useDarkTheme, useDE, useEN, useLightTheme } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   const themeState = useSelector((state: State) => state.theme);
   const langState = useSelector((state: State) => state.language);
   const localConfigState = useSelector((state: State) => state.localConfig);
@@ -41,6 +44,20 @@ function App(): ReactElement {
   useMountEffect(() => {
     if (localConfigState.settings.theme !== themeState) {
       (localConfigState.settings.theme === "dark" ? useDarkTheme : useLightTheme)();
+    }
+    if (localConfigState.settings.language !== langState.locale) {
+      let langSwitch: () => void;
+      switch (localConfigState.settings.language) {
+        case "de-DE":
+          langSwitch = useDE;
+          break;
+        case "en-US":
+          langSwitch = useEN;
+          break;
+        default:
+          langSwitch = useEN;
+      }
+      langSwitch();
     }
   });
 

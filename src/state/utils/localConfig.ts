@@ -16,12 +16,14 @@ type SettingsConfig = {
   databaseURI: string;
   yearToShow: number;
   theme: string;
+  language: string;
 };
 
 type SettingsConfigPayload = {
   databaseURI?: string;
   yearToShow?: number;
   theme?: string;
+  language?: string;
 };
 
 export type LocalConfig = {
