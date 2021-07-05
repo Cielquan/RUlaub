@@ -1,18 +1,15 @@
 import { LanguageType } from "../action-types";
 import { LanguageAction } from "../actions";
-import * as languages from "../../i18n";
+import { Language, Languages } from "../../i18n";
 
-const initialState = languages.Languages.english;
+const initialState = Languages.english;
 
-const reducer = (
-  state: languages.Language = initialState,
-  action: LanguageAction
-): languages.Language => {
+const reducer = (state: Language = initialState, action: LanguageAction): Language => {
   switch (action.type) {
     case LanguageType.DE:
-      return languages.Languages.german;
+      return Languages.german;
     case LanguageType.EN:
-      return languages.Languages.english;
+      return Languages.english;
     default:
       return state;
   }
