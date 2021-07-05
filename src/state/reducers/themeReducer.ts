@@ -1,14 +1,14 @@
 import { ThemeType } from "../action-types";
 import { ThemeAction } from "../actions";
 
-const initialState = true;
+const initialState = "dark";
 
-const reducer = (state: boolean = initialState, action: ThemeAction): boolean => {
+const reducer = (state: string = initialState, action: ThemeAction): string => {
   switch (action.type) {
     case ThemeType.DARK:
-      return true;
+      return "dark";
     case ThemeType.LIGHT:
-      return false;
+      return "light";
     default:
       return state;
   }

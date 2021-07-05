@@ -11,12 +11,15 @@ import { actionCreators, State } from "../state";
 const DarkThemeSwitch = (): ReactElement => {
   const dispatch = useDispatch();
   const { useDarkTheme, useLightTheme } = bindActionCreators(actionCreators, dispatch);
-  const darkState = useSelector((state: State) => state.darkTheme);
+  const themeState = useSelector((state: State) => state.theme);
 
   return (
-    <Tooltip arrow title={darkState ? t`Activate Light Theme` : t`Activate Dark Theme`}>
-      <IconButton onClick={darkState ? useLightTheme : useDarkTheme}>
-        {darkState ? <BrightnessHighIcon /> : <BrightnessLowIcon />}
+    <Tooltip
+      arrow
+      title={themeState === "dark" ? t`Activate Light Theme` : t`Activate Dark Theme`}
+    >
+      <IconButton onClick={themeState === "dark" ? useLightTheme : useDarkTheme}>
+        {themeState === "dark" ? <BrightnessHighIcon /> : <BrightnessLowIcon />}
       </IconButton>
     </Tooltip>
   );

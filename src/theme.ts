@@ -8,21 +8,21 @@ import {
 } from "@material-ui/core/colors";
 import { Localization } from "@material-ui/core/locale";
 
-const createTheme = (darkState: boolean, language: Localization): Theme => {
-  const palletType = darkState ? "dark" : "light";
+const createTheme = (themeState: string, language: Localization): Theme => {
+  const palletType = themeState === "dark" ? "dark" : "light";
 
   return createMuiTheme(
     {
       palette: {
         type: palletType,
         primary: {
-          main: darkState ? orange[500] : lightBlue[500],
+          main: themeState === "dark" ? orange[500] : lightBlue[500],
         },
         secondary: {
-          main: darkState ? deepOrange[900] : deepPurple[500],
+          main: themeState === "dark" ? deepOrange[900] : deepPurple[500],
         },
         background: {
-          paper: darkState ? grey[700] : grey[300],
+          paper: themeState === "dark" ? grey[700] : grey[300],
         },
       },
     },

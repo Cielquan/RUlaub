@@ -7,7 +7,7 @@ import sideMenuDatabaseReducer from "./sideMenuDatabaseReducer";
 import themeReducer from "./themeReducer";
 
 const rootReducer = combineReducers({
-  darkTheme: themeReducer,
+  theme: themeReducer,
   infoPage: infoPageReducer,
   language: languageReducer,
   localConfig: localConfigReducer,

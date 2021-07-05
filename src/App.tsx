@@ -23,10 +23,10 @@ export async function dynamicActivate(locale: string): Promise<void> {
 }
 
 function App(): ReactElement {
-  const darkState = useSelector((state: State) => state.darkTheme);
+  const themeState = useSelector((state: State) => state.theme);
   const langState = useSelector((state: State) => state.language);
 
-  const theme = createTheme(darkState, locales[langState.importName]);
+  const theme = createTheme(themeState, locales[langState.importName]);
   const classes = useStyles();
 
   useEffect(() => {
