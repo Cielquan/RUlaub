@@ -10,6 +10,7 @@ import { I18nProvider } from "@lingui/react";
 import { actionCreators, State } from "./state";
 import useStyles from "./styles";
 import createTheme from "./theme";
+import { useMountEffect } from "./utils/reactutils";
 
 import InfoPage from "./components/InfoPage";
 import Navbar from "./components/Navbar";
@@ -37,13 +38,11 @@ function App(): ReactElement {
     dynamicActivate(langState.locale);
   }, [langState.locale]);
 
-  useEffect(() => {
+  useMountEffect(() => {
     if (localConfigState.settings.theme !== themeState) {
       (localConfigState.settings.theme === "dark" ? useDarkTheme : useLightTheme)();
     }
-    // Empty array is need to run hook only on first
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   return (
     <I18nProvider i18n={i18n}>
