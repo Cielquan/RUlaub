@@ -44,7 +44,7 @@ export const updateLocalConfig = (
     rv.user = { ...rv.user, ...updatePayload.user };
   }
   if ("settings" in updatePayload) {
-    rv.user = { ...rv.user, ...updatePayload.user };
+    rv.settings = { ...rv.settings, ...updatePayload.settings };
   }
 
   return rv;
