@@ -27,7 +27,7 @@ msgstr "RUlaub ist frei wählbar unter der 'Apache License 2.0' oder 'MIT Licens
 
 #: src/components/InfoPage.tsx:63
 msgid "For the Source Code, Documentation and copies of the License files please see the github repository at: {ghLink}."
-msgstr "Quellcode, Dokumentation und Kopien der Licensen sind im Github Repository zu finden: {ghLink}."
+msgstr "Quellcode, Dokumentation und Kopien der Lizenzen sind im Github Repository zu finden: {ghLink}."
 
 #: src/components/InfoPage.tsx:72
 msgid "Close"
