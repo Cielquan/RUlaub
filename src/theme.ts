@@ -1,5 +1,11 @@
 import { createMuiTheme, Theme } from "@material-ui/core/styles";
-import { orange, lightBlue, deepOrange, deepPurple } from "@material-ui/core/colors";
+import {
+  deepOrange,
+  deepPurple,
+  grey,
+  lightBlue,
+  orange,
+} from "@material-ui/core/colors";
 import { Localization } from "@material-ui/core/locale";
 
 const createTheme = (darkState: boolean, language: Localization): Theme => {
@@ -14,6 +20,9 @@ const createTheme = (darkState: boolean, language: Localization): Theme => {
         },
         secondary: {
           main: darkState ? deepOrange[900] : deepPurple[500],
+        },
+        background: {
+          paper: darkState ? grey[700] : grey[300],
         },
       },
     },
