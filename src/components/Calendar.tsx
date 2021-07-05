@@ -1,7 +1,9 @@
 import React, { ReactElement, useCallback, useState } from "react";
+import { useSelector } from "react-redux";
 import { Theme } from "@material-ui/core";
 import AutoSizer from "react-virtualized-auto-sizer";
 
+import { State } from "../state";
 import useStyles from "../styles";
 import { isLeapYear } from "../utils/dateutils";
 
@@ -11,14 +13,15 @@ import CalendarMonthColumnLabels from "./CalendarMonthColumnLabels";
 import CalendarUserRowLabels from "./CalendarUserRowLabels";
 import CalendarTableHead from "./CalendarTableHead";
 
-const YEAR = 2021;
-
 type CalendarProps = {
   theme: Theme;
 };
 
 const Calendar = ({ theme }: CalendarProps): ReactElement => {
   const classes = useStyles();
+
+  const localConfigState = useSelector((state: State) => state.localConfig);
+  const year = localConfigState.settings.yearToShow;
 
   const [scrollX, setScrollX] = useState(0);
   const [scrollY, setScrollY] = useState(0);
@@ -36,7 +39,7 @@ const Calendar = ({ theme }: CalendarProps): ReactElement => {
     setScrollX(e.scrollOffset);
   }, []);
 
-  const daysInYear = 365 + (isLeapYear(YEAR) ? 1 : 0);
+  const daysInYear = 365 + (isLeapYear(year) ? 1 : 0);
 
   return (
     <AutoSizer>
@@ -45,20 +48,20 @@ const Calendar = ({ theme }: CalendarProps): ReactElement => {
         const trueHeight = height - theme.spacing(7 + 1);
         return (
           <div className={classes.multigrid}>
-            <CalendarTableHead year={YEAR} />
+            <CalendarTableHead year={year} />
 
             <CalendarMonthColumnLabels
               width={width}
               positionX={scrollX}
               scrollHandle={handleColumnLabelScroll}
-              year={YEAR}
+              year={year}
             />
 
             <CalendarDayColumnLabels
               width={width}
               positionX={scrollX}
               scrollHandle={handleColumnLabelScroll}
-              year={YEAR}
+              year={year}
               daysInYear={daysInYear}
             />
 
