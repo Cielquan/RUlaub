@@ -1,6 +1,8 @@
 import { Typography } from "@material-ui/core";
 import React, { CSSProperties, ReactElement } from "react";
+import { useSelector } from "react-redux";
 
+import { State } from "../state";
 import useStyles, { STYLE_CONST } from "../styles";
 
 type CalendarUserRowLabelsCellProps = {
@@ -14,6 +16,8 @@ const CalendarUserRowLabelsCell = ({
 }: CalendarUserRowLabelsCellProps): ReactElement => {
   const classes = useStyles();
 
+  const dbDataState = useSelector((state: State) => state.dbData);
+
   return (
     <div
       className={classes.multigridCell}
@@ -24,7 +28,7 @@ const CalendarUserRowLabelsCell = ({
       }}
     >
       <Typography variant="body1" noWrap>
-        some long row with index {rowIndex}
+        {dbDataState.users[rowIndex].name}
       </Typography>
     </div>
   );

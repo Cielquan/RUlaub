@@ -1,6 +1,8 @@
 import React, { ReactElement, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import { FixedSizeList as List, ListOnScrollProps } from "react-window";
 
+import { State } from "../state";
 import useStyles, { STYLE_CONST } from "../styles";
 
 import CalendarUserRowLabelsCell from "./CalendarUserRowLabelsCell";
@@ -19,13 +21,13 @@ const CalendarUserRowLabels = ({
 }: CalendarUserRowLabelsProps): ReactElement => {
   const classes = useStyles();
 
+  const dbDataState = useSelector((state: State) => state.dbData);
+
   const rowLabelRef = useRef<List>(null);
 
   useEffect(() => {
     rowLabelRef.current?.scrollTo(positionY);
   }, [positionY, rowLabelRef]);
-
-  const ROWS = 100;
 
   return (
     <List
@@ -37,7 +39,7 @@ const CalendarUserRowLabels = ({
       }
       width={STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
       innerElementType={innerElementType}
-      itemCount={ROWS}
+      itemCount={dbDataState.users.length}
       itemSize={STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_GUTTER_SIZE}
       ref={rowLabelRef}
       onScroll={scrollHandle}

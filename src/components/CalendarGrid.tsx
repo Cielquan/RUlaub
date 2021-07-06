@@ -1,6 +1,8 @@
 import React, { ReactElement, useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import { FixedSizeGrid as Grid, GridOnScrollProps } from "react-window";
 
+import { State } from "../state";
 import useStyles, { STYLE_CONST } from "../styles";
 
 import CalendarGridCell from "./CalendarGridCell";
@@ -25,6 +27,8 @@ const CalendarGrid = ({
 }: CalendarGridProps): ReactElement => {
   const classes = useStyles();
 
+  const dbDataState = useSelector((state: State) => state.dbData);
+
   const gridRef = useRef<Grid>(null);
 
   useEffect(() => {
@@ -34,8 +38,6 @@ const CalendarGrid = ({
     });
   }, [positionY, positionX, gridRef]);
 
-  const ROWS = 100;
-
   return (
     <Grid
       className={classes.multigridMainGrid}
@@ -44,7 +46,7 @@ const CalendarGrid = ({
       innerElementType={innerElementType}
       columnCount={daysInYear}
       columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH + STYLE_CONST.CALENDAR_GUTTER_SIZE}
-      rowCount={ROWS}
+      rowCount={dbDataState.users.length}
       rowHeight={STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_GUTTER_SIZE}
       ref={gridRef}
       onScroll={scrollHandle}
