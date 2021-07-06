@@ -85,6 +85,9 @@ const useStyles = makeStyles((theme) => ({
     top: STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL * 2,
     borderTop: `1px solid ${theme.palette.text.primary}`,
   },
+  multigridRowLabelsUser: {
+    padding: "0 0.3em",
+  },
   multigridColumnLabels: {
     // absolutely position the label and move it right by a col
     position: "absolute !important" as "absolute",
@@ -93,6 +96,9 @@ const useStyles = makeStyles((theme) => ({
   },
   multigridColumnLabelsDay: {
     top: STYLE_CONST.CALENDAR_ROW_HEIGHT,
+  },
+  multigridColumnLabelsMonth: {
+    padding: "0 0.7em",
   },
   multigridMainGrid: {
     // absolutely position the label and move it down by a row and right by a col

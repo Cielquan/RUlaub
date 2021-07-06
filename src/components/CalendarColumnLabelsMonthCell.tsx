@@ -1,5 +1,6 @@
 import { useLingui } from "@lingui/react";
 import { Typography } from "@material-ui/core";
+import clsx from "clsx";
 import React, { CSSProperties, ReactElement } from "react";
 
 import useStyles, { STYLE_CONST } from "../styles";
@@ -22,7 +23,7 @@ const CalendarColumnLabelsMonthCell = ({
 
   return (
     <div
-      className={classes.multigridCell}
+      className={clsx(classes.multigridCell)}
       style={{
         ...style,
         left: Number(style.left) + STYLE_CONST.CALENDAR_GUTTER_SIZE,
@@ -30,7 +31,7 @@ const CalendarColumnLabelsMonthCell = ({
       }}
     >
       <Typography
-        className={classes.typographyGrow}
+        className={clsx(classes.multigridColumnLabelsMonth, classes.typographyGrow)}
         variant="h5"
         component="div"
         align="left"
@@ -38,7 +39,7 @@ const CalendarColumnLabelsMonthCell = ({
         {monthNameList[columnIndex]}
       </Typography>
       <Typography
-        className={classes.typographyGrow}
+        className={clsx(classes.multigridColumnLabelsMonth, classes.typographyGrow)}
         variant="h5"
         component="div"
         align="center"
@@ -46,7 +47,7 @@ const CalendarColumnLabelsMonthCell = ({
         {monthNameList[columnIndex]}
       </Typography>
       <Typography
-        className={classes.typographyGrow}
+        className={clsx(classes.multigridColumnLabelsMonth, classes.typographyGrow)}
         variant="h5"
         component="div"
         align="right"

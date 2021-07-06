@@ -27,7 +27,7 @@ const CalendarRowLabelsUserCell = ({
         height: Number(style.height) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
       }}
     >
-      <Typography variant="body1" noWrap>
+      <Typography className={classes.multigridRowLabelsUser} variant="body1" noWrap>
         {dbDataState.users[rowIndex].name}
       </Typography>
     </div>
