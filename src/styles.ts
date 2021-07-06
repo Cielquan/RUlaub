@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export const STYLE_CONST = {
-  CALENDAR_COLUMN_WIDTH: 32,
+  CALENDAR_COLUMN_WIDTH: 35,
   CALENDAR_ROW_HEIGHT: 35,
   CALENDAR_COLUMN_WIDTH_FULL: 32 + 2, // incl. gutter size
   CALENDAR_ROW_HEIGHT_FULL: 35 + 2, // incl. gutter size
@@ -82,7 +82,7 @@ const useStyles = makeStyles((theme) => ({
   multigridRowLabels: {
     // absolutely position the label and move it down by a row
     position: "absolute !important" as "absolute",
-    top: STYLE_CONST.CALENDAR_ROW_HEIGHT * 2,
+    top: STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL * 2,
     borderTop: `1px solid ${theme.palette.text.primary}`,
   },
   multigridColumnLabels: {
@@ -97,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
   multigridMainGrid: {
     // absolutely position the label and move it down by a row and right by a col
     position: "absolute !important" as "absolute",
-    top: STYLE_CONST.CALENDAR_ROW_HEIGHT * 2,
+    top: STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL * 2,
     left: STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH,
     borderTop: `1px solid ${theme.palette.text.primary}`,
     borderLeft: `1px solid ${theme.palette.text.primary}`,
@@ -114,7 +114,7 @@ const useStyles = makeStyles((theme) => ({
     height: STYLE_CONST.CALENDAR_ROW_HEIGHT,
     display: "flex",
     alignItems: "center",
-    padding: "0 0.5em",
+    padding: "0 0.2em",
     backgroundColor: theme.palette.background.default,
   },
   currentDate: {

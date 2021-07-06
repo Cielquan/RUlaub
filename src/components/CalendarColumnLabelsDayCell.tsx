@@ -1,6 +1,8 @@
 import { Typography } from "@material-ui/core";
 import clsx from "clsx";
 import React, { CSSProperties, ReactElement } from "react";
+import { useSelector } from "react-redux";
+import { State } from "../state";
 
 import useStyles, { STYLE_CONST } from "../styles";
 import { datePlusDays, sameDay } from "../utils/dateutils";
@@ -8,17 +10,21 @@ import { datePlusDays, sameDay } from "../utils/dateutils";
 const today = new Date();
 
 type CalendarColumnLabelsDayCellProps = {
-  index: number;
+  columnIndex: number;
+  rowIndex: number;
   data: Date;
   style: CSSProperties;
 };
 
 const CalendarColumnLabelsDayCell = ({
-  index: columnIndex,
+  columnIndex,
+  rowIndex,
   data,
   style,
 }: CalendarColumnLabelsDayCellProps): ReactElement => {
   const classes = useStyles();
+
+  const { locale } = useSelector((state: State) => state.language);
 
   const date = datePlusDays(data, columnIndex);
 
@@ -36,8 +42,14 @@ const CalendarColumnLabelsDayCell = ({
         height: Number(style.height) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
       }}
     >
-      <Typography className={classes.typographyGrow} variant="body1" align="center">
-        {date.getDate()}
+      <Typography
+        className={classes.typographyGrow}
+        variant={rowIndex % 2 ? "body2" : "body1"}
+        align="center"
+      >
+        {rowIndex % 2
+          ? date.toLocaleString(locale, { weekday: "short" }).slice(0, 2)
+          : date.getDate()}
       </Typography>
     </div>
   );

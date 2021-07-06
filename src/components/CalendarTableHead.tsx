@@ -18,7 +18,9 @@ const CalendarTableHead = ({ year }: CalendarTableHeadProps): ReactElement => {
     <List
       className={clsx(classes.multigridTableHead)}
       layout="horizontal"
-      height={STYLE_CONST.CALENDAR_ROW_HEIGHT * 2}
+      height={
+        STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL * 2
+      }
       width={STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
       innerElementType={innerElementType}
       itemCount={1}
