@@ -7,17 +7,17 @@ import { datePlusDays, sameDay } from "../utils/dateutils";
 
 const today = new Date();
 
-type CalendarDayColumnLabelsCellProps = {
+type CalendarColumnLabelsDayNumberCellProps = {
   index: number;
   data: Date;
   style: CSSProperties;
 };
 
-const CalendarDayColumnLabelsCell = ({
+const CalendarColumnLabelsDayNumberCell = ({
   index: columnIndex,
   data,
   style,
-}: CalendarDayColumnLabelsCellProps): ReactElement => {
+}: CalendarColumnLabelsDayNumberCellProps): ReactElement => {
   const classes = useStyles();
 
   const date = datePlusDays(data, columnIndex);
@@ -43,4 +43,4 @@ const CalendarDayColumnLabelsCell = ({
   );
 };
 
-export default CalendarDayColumnLabelsCell;
+export default CalendarColumnLabelsDayNumberCell;

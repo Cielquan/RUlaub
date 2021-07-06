@@ -2,11 +2,11 @@ import React, { CSSProperties, ReactElement } from "react";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
-type CalendarGridCellProps = {
+type CalendarBodyCellProps = {
   style: CSSProperties;
 };
 
-const CalendarGridCell = ({ style }: CalendarGridCellProps): ReactElement => {
+const CalendarBodyCell = ({ style }: CalendarBodyCellProps): ReactElement => {
   const classes = useStyles();
 
   return (
@@ -23,4 +23,4 @@ const CalendarGridCell = ({ style }: CalendarGridCellProps): ReactElement => {
   );
 };
 
-export default CalendarGridCell;
+export default CalendarBodyCell;

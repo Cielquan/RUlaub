@@ -1,27 +1,25 @@
-import clsx from "clsx";
 import React, { ReactElement, useEffect, useRef } from "react";
-import { FixedSizeList as List, ListOnScrollProps } from "react-window";
+import { VariableSizeList as List, ListOnScrollProps } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
+import { getDaysInMonth } from "../utils/dateutils";
 
-import CalendarDayColumnLabelsCell from "./CalendarDayColumnLabelsCell";
+import CalendarColumnLabelsMonthCell from "./CalendarColumnLabelsMonthCell";
 import innerElementType from "./multigridInnerElementType";
 
-type CalendarDayColumnLabelsProps = {
+type CalendarColumnLabelsMonthProps = {
   width: number;
   positionX: number;
   scrollHandle: (e: ListOnScrollProps) => void;
   year: number;
-  daysInYear: number;
 };
 
-const CalendarDayColumnLabels = ({
+const CalendarColumnLabelsMonth = ({
   width,
   positionX,
   scrollHandle,
   year,
-  daysInYear,
-}: CalendarDayColumnLabelsProps): ReactElement => {
+}: CalendarColumnLabelsMonthProps): ReactElement => {
   const classes = useStyles();
 
   const columnLabelRef = useRef<List>(null);
@@ -30,11 +28,13 @@ const CalendarDayColumnLabels = ({
     columnLabelRef.current?.scrollTo(positionX);
   }, [positionX, columnLabelRef]);
 
-  const firstDayOfYear = new Date(`${year}-01-01`);
+  const getMonthWidth = (index: number): number =>
+    getDaysInMonth(index + 1, year) *
+    (STYLE_CONST.CALENDAR_COLUMN_WIDTH + STYLE_CONST.CALENDAR_GUTTER_SIZE);
 
   return (
     <List
-      className={clsx(classes.multigridColumnLabels, classes.multigridColumnSubLabels)}
+      className={classes.multigridColumnLabels}
       layout="horizontal"
       height={STYLE_CONST.CALENDAR_ROW_HEIGHT}
       width={
@@ -43,17 +43,16 @@ const CalendarDayColumnLabels = ({
         STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS
       }
       innerElementType={innerElementType}
-      itemCount={daysInYear}
-      itemData={firstDayOfYear}
-      itemSize={STYLE_CONST.CALENDAR_COLUMN_WIDTH + STYLE_CONST.CALENDAR_GUTTER_SIZE}
+      itemCount={12}
+      itemSize={getMonthWidth}
       ref={columnLabelRef}
       onScroll={scrollHandle}
       // needs this local manual overwrite to work, css class gets overwritten
       style={{ overflow: "hidden" }}
     >
-      {CalendarDayColumnLabelsCell}
+      {CalendarColumnLabelsMonthCell}
     </List>
   );
 };
 
-export default CalendarDayColumnLabels;
+export default CalendarColumnLabelsMonth;

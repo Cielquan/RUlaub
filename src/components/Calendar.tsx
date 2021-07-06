@@ -7,11 +7,11 @@ import { State } from "../state";
 import useStyles from "../styles";
 import { isLeapYear } from "../utils/dateutils";
 
-import CalendarDayColumnLabels from "./CalendarDayColumnLabels";
-import CalendarGrid from "./CalendarGrid";
-import CalendarMonthColumnLabels from "./CalendarMonthColumnLabels";
+import CalendarColumnLabelsDayNumber from "./CalendarColumnLabelsDayNumber";
+import CalendarBody from "./CalendarBody";
+import CalendarColumnLabelsMonth from "./CalendarColumnLabelsMonth";
 import CalendarTableHead from "./CalendarTableHead";
-import CalendarUserRowLabels from "./CalendarUserRowLabels";
+import CalendarRowLabelsUser from "./CalendarRowLabelsUser";
 
 type CalendarProps = {
   theme: Theme;
@@ -50,14 +50,14 @@ const Calendar = ({ theme }: CalendarProps): ReactElement => {
           <div className={classes.multigrid}>
             <CalendarTableHead year={year} />
 
-            <CalendarMonthColumnLabels
+            <CalendarColumnLabelsMonth
               width={width}
               positionX={scrollX}
               scrollHandle={handleColumnLabelScroll}
               year={year}
             />
 
-            <CalendarDayColumnLabels
+            <CalendarColumnLabelsDayNumber
               width={width}
               positionX={scrollX}
               scrollHandle={handleColumnLabelScroll}
@@ -65,13 +65,13 @@ const Calendar = ({ theme }: CalendarProps): ReactElement => {
               daysInYear={daysInYear}
             />
 
-            <CalendarUserRowLabels
+            <CalendarRowLabelsUser
               height={trueHeight}
               positionY={scrollY}
               scrollHandle={handleRowLabelScroll}
             />
 
-            <CalendarGrid
+            <CalendarBody
               width={width}
               height={trueHeight}
               positionX={scrollX}

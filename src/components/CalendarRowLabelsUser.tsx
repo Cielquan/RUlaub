@@ -5,20 +5,20 @@ import { FixedSizeList as List, ListOnScrollProps } from "react-window";
 import { State } from "../state";
 import useStyles, { STYLE_CONST } from "../styles";
 
-import CalendarUserRowLabelsCell from "./CalendarUserRowLabelsCell";
+import CalendarRowLabelsUserCell from "./CalendarRowLabelsUserCell";
 import innerElementType from "./multigridInnerElementType";
 
-type CalendarUserRowLabelsProps = {
+type CalendarRowLabelsUserProps = {
   height: number;
   positionY: number;
   scrollHandle: (e: ListOnScrollProps) => void;
 };
 
-const CalendarUserRowLabels = ({
+const CalendarRowLabelsUser = ({
   height,
   positionY,
   scrollHandle,
-}: CalendarUserRowLabelsProps): ReactElement => {
+}: CalendarRowLabelsUserProps): ReactElement => {
   const classes = useStyles();
 
   const dbDataState = useSelector((state: State) => state.dbData);
@@ -46,9 +46,9 @@ const CalendarUserRowLabels = ({
       // needs this local manual overwrite to work, css class gets overwritten
       style={{ overflow: "hidden" }}
     >
-      {CalendarUserRowLabelsCell}
+      {CalendarRowLabelsUserCell}
     </List>
   );
 };
 
-export default CalendarUserRowLabels;
+export default CalendarRowLabelsUser;

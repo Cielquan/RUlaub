@@ -5,10 +5,10 @@ import { FixedSizeGrid as Grid, GridOnScrollProps } from "react-window";
 import { State } from "../state";
 import useStyles, { STYLE_CONST } from "../styles";
 
-import CalendarGridCell from "./CalendarGridCell";
+import CalendarBodyCell from "./CalendarBodyCell";
 import innerElementType from "./multigridInnerElementType";
 
-type CalendarGridProps = {
+type CalendarBodyProps = {
   width: number;
   height: number;
   positionX: number;
@@ -17,14 +17,14 @@ type CalendarGridProps = {
   daysInYear: number;
 };
 
-const CalendarGrid = ({
+const CalendarBody = ({
   width,
   height,
   positionX,
   positionY,
   scrollHandle,
   daysInYear,
-}: CalendarGridProps): ReactElement => {
+}: CalendarBodyProps): ReactElement => {
   const classes = useStyles();
 
   const dbDataState = useSelector((state: State) => state.dbData);
@@ -51,9 +51,9 @@ const CalendarGrid = ({
       ref={gridRef}
       onScroll={scrollHandle}
     >
-      {CalendarGridCell}
+      {CalendarBodyCell}
     </Grid>
   );
 };
 
-export default CalendarGrid;
+export default CalendarBody;

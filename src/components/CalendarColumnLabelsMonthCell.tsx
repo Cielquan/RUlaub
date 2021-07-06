@@ -5,15 +5,15 @@ import React, { CSSProperties, ReactElement } from "react";
 import useStyles, { STYLE_CONST } from "../styles";
 import { getMonthNameList } from "../utils/dateutils";
 
-type CalendarMonthColumnLabelsCellProps = {
+type CalendarColumnLabelsMonthCellProps = {
   index: number;
   style: CSSProperties;
 };
 
-const CalendarMonthColumnLabelsCell = ({
+const CalendarColumnLabelsMonthCell = ({
   index: columnIndex,
   style,
-}: CalendarMonthColumnLabelsCellProps): ReactElement => {
+}: CalendarColumnLabelsMonthCellProps): ReactElement => {
   const classes = useStyles();
 
   const { i18n } = useLingui();
@@ -57,4 +57,4 @@ const CalendarMonthColumnLabelsCell = ({
   );
 };
 
-export default CalendarMonthColumnLabelsCell;
+export default CalendarColumnLabelsMonthCell;
