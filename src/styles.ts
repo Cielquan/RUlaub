@@ -101,7 +101,6 @@ const useStyles = makeStyles((theme) => ({
     left: STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH,
     borderTop: `1px solid ${theme.palette.text.primary}`,
     borderLeft: `1px solid ${theme.palette.text.primary}`,
-    // borderLeft: "1px solid black",
     "&::-webkit-scrollbar": {
       width: STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS,
       height: STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS,
