@@ -1,5 +1,5 @@
-import React, { CSSProperties, ReactElement } from "react";
 import { Typography } from "@material-ui/core";
+import React, { CSSProperties, ReactElement } from "react";
 
 import useStyles from "../styles";
 

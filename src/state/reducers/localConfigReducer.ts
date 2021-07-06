@@ -1,6 +1,7 @@
 import { LocalConfigType } from "../action-types";
 import { LocalConfigAction } from "../actions";
 import { LocalConfig, updateLocalConfig } from "../utils/localConfig";
+
 import localConfig from "../../dev_temp/test.local_config.json";
 
 const initialState = localConfig as LocalConfig;

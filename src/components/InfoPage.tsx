@@ -1,6 +1,4 @@
-import React, { ReactElement } from "react";
-import { bindActionCreators } from "redux";
-import { useDispatch, useSelector } from "react-redux";
+import { Trans } from "@lingui/macro";
 import {
   Button,
   Dialog,
@@ -13,10 +11,13 @@ import {
   Typography,
 } from "@material-ui/core";
 import { TransitionProps } from "@material-ui/core/transitions";
-import { Trans } from "@lingui/macro";
+import React, { ReactElement } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
+
 import * as pjson from "../../package.json";
 
 const Transition = React.forwardRef(

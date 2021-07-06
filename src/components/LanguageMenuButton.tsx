@@ -1,5 +1,5 @@
-import React, { ReactElement } from "react";
 import { MenuItem } from "@material-ui/core";
+import React, { ReactElement } from "react";
 
 export type CloseFunction = {
   closeFn: () => void;

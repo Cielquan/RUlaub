@@ -1,6 +1,6 @@
-import React, { CSSProperties, ReactElement } from "react";
-import { Typography } from "@material-ui/core";
 import { useLingui } from "@lingui/react";
+import { Typography } from "@material-ui/core";
+import React, { CSSProperties, ReactElement } from "react";
 
 import useStyles, { STYLE_CONST } from "../styles";
 import { getMonthNameList } from "../utils/dateutils";

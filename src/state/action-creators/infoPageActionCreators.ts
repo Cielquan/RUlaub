@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+
 import { InfoPageType } from "../action-types";
 import { InfoPageAction } from "../actions";
 

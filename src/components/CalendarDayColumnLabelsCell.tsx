@@ -1,6 +1,6 @@
-import React, { CSSProperties, ReactElement } from "react";
-import clsx from "clsx";
 import { Typography } from "@material-ui/core";
+import clsx from "clsx";
+import React, { CSSProperties, ReactElement } from "react";
 
 import useStyles, { STYLE_CONST } from "../styles";
 import { datePlusDays, sameDay } from "../utils/dateutils";

@@ -1,8 +1,8 @@
-import React, { ReactElement } from "react";
-import { bindActionCreators } from "redux";
-import { useDispatch } from "react-redux";
 import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import React, { ReactElement } from "react";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { actionCreators } from "../state";
 import useStyles from "../styles";

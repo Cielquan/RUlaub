@@ -1,10 +1,10 @@
-import React, { ReactElement } from "react";
-import { bindActionCreators } from "redux";
-import { useDispatch, useSelector } from "react-redux";
+import { t } from "@lingui/macro";
 import { IconButton, Tooltip } from "@material-ui/core";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
 import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
-import { t } from "@lingui/macro";
+import React, { ReactElement } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { actionCreators, State } from "../state";
 

@@ -1,8 +1,8 @@
-import React, { ReactElement } from "react";
-import { bindActionCreators } from "redux";
-import { useDispatch } from "react-redux";
-import AddIcon from "@material-ui/icons/Add";
 import { t } from "@lingui/macro";
+import AddIcon from "@material-ui/icons/Add";
+import React, { ReactElement } from "react";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { actionCreators } from "../state";
 import useStyles from "../styles";

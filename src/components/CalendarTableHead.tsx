@@ -1,10 +1,10 @@
-import React, { ReactElement } from "react";
 import clsx from "clsx";
+import React, { ReactElement } from "react";
 import { FixedSizeList as List } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
-import CalendarTableHeadCell from "./CalendarTableHeadCell";
 
+import CalendarTableHeadCell from "./CalendarTableHeadCell";
 import innerElementType from "./multigridInnerElementType";
 
 type CalendarTableHeadProps = {

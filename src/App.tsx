@@ -1,22 +1,22 @@
-import React, { ReactElement, useEffect } from "react";
-import { bindActionCreators } from "redux";
-import { useDispatch, useSelector } from "react-redux";
-import { CssBaseline } from "@material-ui/core";
-import { ThemeProvider } from "@material-ui/core/styles";
-import * as locales from "@material-ui/core/locale";
 import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
+import { CssBaseline } from "@material-ui/core";
+import * as locales from "@material-ui/core/locale";
+import { ThemeProvider } from "@material-ui/core/styles";
+import React, { ReactElement, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { actionCreators, State } from "./state";
 import useStyles from "./styles";
 import createTheme from "./theme";
 import { useMountEffect } from "./utils/reactutils";
 
+import Calendar from "./components/Calendar";
 import InfoPage from "./components/InfoPage";
 import Navbar from "./components/Navbar";
 import NewHolidayButton from "./components/NewHolidayButton";
 import SideMenu from "./components/SideMenu";
-import Calendar from "./components/Calendar";
 
 export async function dynamicActivate(locale: string): Promise<void> {
   const { messages } = await import(`./locales/${locale}/messages`);

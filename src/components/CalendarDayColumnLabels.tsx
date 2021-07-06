@@ -1,5 +1,5 @@
-import React, { ReactElement, useEffect, useRef } from "react";
 import clsx from "clsx";
+import React, { ReactElement, useEffect, useRef } from "react";
 import { FixedSizeList as List, ListOnScrollProps } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";

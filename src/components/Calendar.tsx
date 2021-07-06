@@ -1,6 +1,6 @@
+import { Theme } from "@material-ui/core";
 import React, { ReactElement, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
-import { Theme } from "@material-ui/core";
 import AutoSizer from "react-virtualized-auto-sizer";
 
 import { State } from "../state";
@@ -10,8 +10,8 @@ import { isLeapYear } from "../utils/dateutils";
 import CalendarDayColumnLabels from "./CalendarDayColumnLabels";
 import CalendarGrid from "./CalendarGrid";
 import CalendarMonthColumnLabels from "./CalendarMonthColumnLabels";
-import CalendarUserRowLabels from "./CalendarUserRowLabels";
 import CalendarTableHead from "./CalendarTableHead";
+import CalendarUserRowLabels from "./CalendarUserRowLabels";
 
 type CalendarProps = {
   theme: Theme;

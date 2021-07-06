@@ -1,7 +1,7 @@
-import React, { ReactElement } from "react";
+import { t } from "@lingui/macro";
 import { Fab, Tooltip } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import { t } from "@lingui/macro";
+import React, { ReactElement } from "react";
 
 import useStyles from "../styles";
 

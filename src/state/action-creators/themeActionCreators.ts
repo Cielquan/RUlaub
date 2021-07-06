@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+
 import { ThemeType } from "../action-types";
 import { ThemeAction } from "../actions";
 

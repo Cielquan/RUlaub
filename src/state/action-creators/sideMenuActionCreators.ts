@@ -1,4 +1,5 @@
 import { Dispatch } from "redux";
+
 import { SideMenuType } from "../action-types";
 import { SideMenuAction } from "../actions";
 

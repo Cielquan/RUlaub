@@ -1,11 +1,11 @@
-import React, { ReactElement } from "react";
-import { bindActionCreators } from "redux";
-import { useDispatch, useSelector } from "react-redux";
+import { t } from "@lingui/macro";
 import { Collapse, List } from "@material-ui/core";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StorageIcon from "@material-ui/icons/Storage";
-import { t } from "@lingui/macro";
+import React, { ReactElement } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { actionCreators, State } from "../state";
 

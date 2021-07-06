@@ -1,5 +1,5 @@
-import React, { ReactElement } from "react";
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
+import React, { ReactElement } from "react";
 
 type SideMenuButtonProps = {
   key: string;

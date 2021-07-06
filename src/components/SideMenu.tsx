@@ -1,6 +1,4 @@
-import React, { ReactElement } from "react";
-import { bindActionCreators } from "redux";
-import { useDispatch, useSelector } from "react-redux";
+import { t } from "@lingui/macro";
 import {
   Divider,
   Drawer,
@@ -12,13 +10,15 @@ import {
 } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import SettingsIcon from "@material-ui/icons/Settings";
-import { t } from "@lingui/macro";
+import React, { ReactElement } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
 
-import SideMenuInfoButton from "./SideMenuInfoButton";
 import SideMenuDatabaseButton from "./SideMenuDatabaseButton";
+import SideMenuInfoButton from "./SideMenuInfoButton";
 
 const SideMenu = (): ReactElement => {
   const dispatch = useDispatch();
