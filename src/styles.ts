@@ -126,6 +126,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
     color: theme.palette.getContrastText(theme.palette.secondary.main),
   },
+  holiday: {
+    backgroundColor: theme.palette.secondary.light,
+  },
 }));
 
 export default useStyles;
