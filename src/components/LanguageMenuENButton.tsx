@@ -8,9 +8,9 @@ import { actionCreators, State } from "../state";
 import LanguageMenuButton, { CloseFunction } from "./LanguageMenuButton";
 
 const LanguageMenuENButton = ({ closeFn }: CloseFunction): ReactElement => {
-  const langState = useSelector((state: State) => state.language);
   const dispatch = useDispatch();
   const { useEN } = bindActionCreators(actionCreators, dispatch);
+  const langState = useSelector((state: State) => state.language);
 
   return (
     <LanguageMenuButton

@@ -10,10 +10,10 @@ import useStyles from "../styles";
 import SideMenuButton from "./SideMenuButton";
 
 const SideMenuDatabaseCreateButton = (): ReactElement => {
+  const classes = useStyles();
+
   const dispatch = useDispatch();
   const { closeSideMenu } = bindActionCreators(actionCreators, dispatch);
-
-  const classes = useStyles();
 
   return (
     <SideMenuButton

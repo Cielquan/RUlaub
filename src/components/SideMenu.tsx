@@ -21,11 +21,12 @@ import SideMenuDatabaseButton from "./SideMenuDatabaseButton";
 import SideMenuInfoButton from "./SideMenuInfoButton";
 
 const SideMenu = (): ReactElement => {
+  const classes = useStyles();
+
   const dispatch = useDispatch();
   const { closeSideMenu } = bindActionCreators(actionCreators, dispatch);
   const sideMenuState = useSelector((state: State) => state.sideMenu);
 
-  const classes = useStyles();
   const itemList: Array<[string, ReactElement]> = [[t`Settings`, <SettingsIcon />]];
 
   return (

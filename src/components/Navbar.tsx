@@ -11,10 +11,10 @@ import DarkThemeSwitch from "./DarkThemeSwitch";
 import LanguageMenu from "./LanguageMenu";
 
 const Navbar = (): ReactElement => {
+  const classes = useStyles();
+
   const dispatch = useDispatch();
   const { openSideMenu } = bindActionCreators(actionCreators, dispatch);
-
-  const classes = useStyles();
 
   return (
     <AppBar position="fixed">

@@ -32,11 +32,11 @@ Transition.defaultProps = {
 };
 
 const InfoPage = (): ReactElement => {
+  const classes = useStyles();
+
   const dispatch = useDispatch();
   const { closeInfoPage } = bindActionCreators(actionCreators, dispatch);
   const infoPageState = useSelector((state: State) => state.infoPage);
-
-  const classes = useStyles();
 
   const ghLink = (
     <Link href="https://github.com/Cielquan/RUlaub" target="_blank" rel="noreferrer">

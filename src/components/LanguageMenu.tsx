@@ -13,9 +13,11 @@ const LanguageMenu = (): ReactElement => {
   const langState = useSelector((state: State) => state.language);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
   const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = (): void => {
     setAnchorEl(null);
   };
