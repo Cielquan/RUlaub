@@ -43,7 +43,7 @@ const CalendarColumnLabelsDay = ({
       innerElementType={innerElementType}
       itemCount={daysInYear}
       itemData={firstDayOfYear}
-      itemSize={STYLE_CONST.CALENDAR_COLUMN_WIDTH + STYLE_CONST.CALENDAR_GUTTER_SIZE}
+      itemSize={STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL}
       ref={columnLabelRef}
       // needs this local manual overwrite to work, css class gets overwritten
       style={{ overflow: "hidden" }}

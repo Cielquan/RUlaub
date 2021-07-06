@@ -45,9 +45,9 @@ const CalendarBody = ({
       width={width - STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
       innerElementType={innerElementType}
       columnCount={daysInYear}
-      columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH + STYLE_CONST.CALENDAR_GUTTER_SIZE}
+      columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL}
       rowCount={dbDataState.users.length}
-      rowHeight={STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_GUTTER_SIZE}
+      rowHeight={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL}
       ref={gridRef}
       onScroll={scrollHandle}
     >

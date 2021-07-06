@@ -27,8 +27,7 @@ const CalendarColumnLabelsMonth = ({
   }, [positionX, columnLabelRef]);
 
   const getMonthWidth = (index: number): number =>
-    getDaysInMonth(index + 1, year) *
-    (STYLE_CONST.CALENDAR_COLUMN_WIDTH + STYLE_CONST.CALENDAR_GUTTER_SIZE);
+    getDaysInMonth(index + 1, year) * STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL;
 
   return (
     <List

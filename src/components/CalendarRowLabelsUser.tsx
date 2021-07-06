@@ -38,7 +38,7 @@ const CalendarRowLabelsUser = ({
       width={STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
       innerElementType={innerElementType}
       itemCount={dbDataState.users.length}
-      itemSize={STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_GUTTER_SIZE}
+      itemSize={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL}
       ref={rowLabelRef}
       // needs this local manual overwrite to work, css class gets overwritten
       style={{ overflow: "hidden" }}

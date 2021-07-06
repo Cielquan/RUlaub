@@ -23,7 +23,7 @@ const CalendarTableHead = ({ year }: CalendarTableHeadProps): ReactElement => {
       innerElementType={innerElementType}
       itemCount={1}
       itemData={year}
-      itemSize={STYLE_CONST.CALENDAR_COLUMN_WIDTH + STYLE_CONST.CALENDAR_GUTTER_SIZE}
+      itemSize={STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL}
       // needs this local manual overwrite to work, css class gets overwritten
       style={{ overflow: "hidden" }}
     >
