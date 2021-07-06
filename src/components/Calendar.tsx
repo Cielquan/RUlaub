@@ -7,7 +7,7 @@ import { State } from "../state";
 import useStyles from "../styles";
 import { isLeapYear } from "../utils/dateutils";
 
-import CalendarColumnLabelsDayNumber from "./CalendarColumnLabelsDayNumber";
+import CalendarColumnLabelsDay from "./CalendarColumnLabelsDay";
 import CalendarBody from "./CalendarBody";
 import CalendarColumnLabelsMonth from "./CalendarColumnLabelsMonth";
 import CalendarTableHead from "./CalendarTableHead";
@@ -57,7 +57,7 @@ const Calendar = ({ theme }: CalendarProps): ReactElement => {
               year={year}
             />
 
-            <CalendarColumnLabelsDayNumber
+            <CalendarColumnLabelsDay
               width={width}
               positionX={scrollX}
               scrollHandle={handleColumnLabelScroll}

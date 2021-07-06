@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
     left: STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH,
     borderLeft: `1px solid ${theme.palette.text.primary}`,
   },
-  multigridColumnSubLabels: {
+  multigridColumnLabelsDay: {
     top: STYLE_CONST.CALENDAR_ROW_HEIGHT,
   },
   multigridMainGrid: {

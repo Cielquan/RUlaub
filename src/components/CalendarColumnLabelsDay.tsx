@@ -4,10 +4,10 @@ import { FixedSizeList as List, ListOnScrollProps } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
-import CalendarColumnLabelsDayNumberCell from "./CalendarColumnLabelsDayNumberCell";
+import CalendarColumnLabelsDayCell from "./CalendarColumnLabelsDayCell";
 import innerElementType from "./multigridInnerElementType";
 
-type CalendarColumnLabelsDayNumberProps = {
+type CalendarColumnLabelsDayProps = {
   width: number;
   positionX: number;
   scrollHandle: (e: ListOnScrollProps) => void;
@@ -15,13 +15,13 @@ type CalendarColumnLabelsDayNumberProps = {
   daysInYear: number;
 };
 
-const CalendarColumnLabelsDayNumber = ({
+const CalendarColumnLabelsDay = ({
   width,
   positionX,
   scrollHandle,
   year,
   daysInYear,
-}: CalendarColumnLabelsDayNumberProps): ReactElement => {
+}: CalendarColumnLabelsDayProps): ReactElement => {
   const classes = useStyles();
 
   const columnLabelRef = useRef<List>(null);
@@ -34,7 +34,7 @@ const CalendarColumnLabelsDayNumber = ({
 
   return (
     <List
-      className={clsx(classes.multigridColumnLabels, classes.multigridColumnSubLabels)}
+      className={clsx(classes.multigridColumnLabels, classes.multigridColumnLabelsDay)}
       layout="horizontal"
       height={STYLE_CONST.CALENDAR_ROW_HEIGHT}
       width={
@@ -51,9 +51,9 @@ const CalendarColumnLabelsDayNumber = ({
       // needs this local manual overwrite to work, css class gets overwritten
       style={{ overflow: "hidden" }}
     >
-      {CalendarColumnLabelsDayNumberCell}
+      {CalendarColumnLabelsDayCell}
     </List>
   );
 };
 
-export default CalendarColumnLabelsDayNumber;
+export default CalendarColumnLabelsDay;
