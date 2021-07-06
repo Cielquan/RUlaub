@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useRef } from "react";
-import { VariableSizeList as List, ListOnScrollProps } from "react-window";
+import { VariableSizeList as List } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
 import { getDaysInMonth } from "../utils/dateutils";
@@ -10,14 +10,12 @@ import innerElementType from "./multigridInnerElementType";
 type CalendarColumnLabelsMonthProps = {
   width: number;
   positionX: number;
-  scrollHandle: (e: ListOnScrollProps) => void;
   year: number;
 };
 
 const CalendarColumnLabelsMonth = ({
   width,
   positionX,
-  scrollHandle,
   year,
 }: CalendarColumnLabelsMonthProps): ReactElement => {
   const classes = useStyles();
@@ -46,7 +44,6 @@ const CalendarColumnLabelsMonth = ({
       itemCount={12}
       itemSize={getMonthWidth}
       ref={columnLabelRef}
-      onScroll={scrollHandle}
       // needs this local manual overwrite to work, css class gets overwritten
       style={{ overflow: "hidden" }}
     >

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React, { ReactElement, useEffect, useRef } from "react";
-import { FixedSizeList as List, ListOnScrollProps } from "react-window";
+import { FixedSizeList as List } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
 
@@ -10,7 +10,6 @@ import innerElementType from "./multigridInnerElementType";
 type CalendarColumnLabelsDayProps = {
   width: number;
   positionX: number;
-  scrollHandle: (e: ListOnScrollProps) => void;
   year: number;
   daysInYear: number;
 };
@@ -18,7 +17,6 @@ type CalendarColumnLabelsDayProps = {
 const CalendarColumnLabelsDay = ({
   width,
   positionX,
-  scrollHandle,
   year,
   daysInYear,
 }: CalendarColumnLabelsDayProps): ReactElement => {
@@ -47,7 +45,6 @@ const CalendarColumnLabelsDay = ({
       itemData={firstDayOfYear}
       itemSize={STYLE_CONST.CALENDAR_COLUMN_WIDTH + STYLE_CONST.CALENDAR_GUTTER_SIZE}
       ref={columnLabelRef}
-      onScroll={scrollHandle}
       // needs this local manual overwrite to work, css class gets overwritten
       style={{ overflow: "hidden" }}
     >

@@ -31,14 +31,6 @@ const Calendar = ({ theme }: CalendarProps): ReactElement => {
     setScrollY(e.scrollTop);
   }, []);
 
-  const handleRowLabelScroll = useCallback((e) => {
-    setScrollY(e.scrollOffset);
-  }, []);
-
-  const handleColumnLabelScroll = useCallback((e) => {
-    setScrollX(e.scrollOffset);
-  }, []);
-
   const daysInYear = 365 + (isLeapYear(year) ? 1 : 0);
 
   return (
@@ -50,26 +42,16 @@ const Calendar = ({ theme }: CalendarProps): ReactElement => {
           <div className={classes.multigrid}>
             <CalendarTableHead year={year} />
 
-            <CalendarColumnLabelsMonth
-              width={width}
-              positionX={scrollX}
-              scrollHandle={handleColumnLabelScroll}
-              year={year}
-            />
+            <CalendarColumnLabelsMonth width={width} positionX={scrollX} year={year} />
 
             <CalendarColumnLabelsDay
               width={width}
               positionX={scrollX}
-              scrollHandle={handleColumnLabelScroll}
               year={year}
               daysInYear={daysInYear}
             />
 
-            <CalendarRowLabelsUser
-              height={trueHeight}
-              positionY={scrollY}
-              scrollHandle={handleRowLabelScroll}
-            />
+            <CalendarRowLabelsUser height={trueHeight} positionY={scrollY} />
 
             <CalendarBody
               width={width}

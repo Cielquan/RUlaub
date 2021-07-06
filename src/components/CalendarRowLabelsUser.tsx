@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
-import { FixedSizeList as List, ListOnScrollProps } from "react-window";
+import { FixedSizeList as List } from "react-window";
 
 import { State } from "../state";
 import useStyles, { STYLE_CONST } from "../styles";
@@ -11,13 +11,11 @@ import innerElementType from "./multigridInnerElementType";
 type CalendarRowLabelsUserProps = {
   height: number;
   positionY: number;
-  scrollHandle: (e: ListOnScrollProps) => void;
 };
 
 const CalendarRowLabelsUser = ({
   height,
   positionY,
-  scrollHandle,
 }: CalendarRowLabelsUserProps): ReactElement => {
   const classes = useStyles();
 
@@ -42,7 +40,6 @@ const CalendarRowLabelsUser = ({
       itemCount={dbDataState.users.length}
       itemSize={STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_GUTTER_SIZE}
       ref={rowLabelRef}
-      onScroll={scrollHandle}
       // needs this local manual overwrite to work, css class gets overwritten
       style={{ overflow: "hidden" }}
     >
