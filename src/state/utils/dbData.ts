@@ -1,7 +1,9 @@
 type Vacation = {
   id: number;
   startDate: string;
+  startDay: number;
   endDate: string;
+  endDay: number;
   typeId: number;
 };
 
