@@ -21,9 +21,11 @@ const CalendarBodyCell = ({
   const dbDataState = useSelector((state: State) => state.dbData);
 
   const isHoliday = (): boolean => {
-    // TODO: Add logic
-    if (dbDataState) {
-      return true;
+    const { vacations } = dbDataState.users[rowIndex];
+    for (const vacation of vacations) {
+      if (vacation.startDay <= columnIndex + 1 && vacation.endDay >= columnIndex) {
+        return true;
+      }
     }
     return false;
   };
