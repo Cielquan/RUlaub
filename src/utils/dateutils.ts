@@ -55,6 +55,34 @@ export const getDaysInMonth = (month: number, year: number): number => {
   return days;
 };
 
+const DaysTillMonth: { [key: number]: number } = {
+  1: 0,
+  2: 31,
+  3: 59,
+  4: 90,
+  5: 120,
+  6: 151,
+  7: 181,
+  8: 212,
+  9: 243,
+  10: 273,
+  11: 304,
+  12: 334,
+};
+
+export const getDaysForDate = (date: Date): number => {
+  const day = date.getDate();
+  const month = date.getMonth();
+  const year = date.getFullYear();
+
+  let days = DaysTillMonth[month] + day;
+
+  if (month === 2 && isLeapYear(year)) {
+    days += 1;
+  }
+  return days;
+};
+
 export const sameDay = (date1: Date, date2: Date): boolean =>
   date1.getDate() === date2.getDate() &&
   date1.getMonth() === date2.getMonth() &&
