@@ -21,11 +21,13 @@ const CalendarBodyCell = ({
   const dbDataState = useSelector((state: State) => state.dbData);
 
   const isHoliday = (): boolean => {
-    const { vacations } = dbDataState.users[rowIndex];
-    for (const vacation of vacations) {
-      if (vacation.startDay <= columnIndex + 1 && vacation.endDay >= columnIndex) {
-        return true;
-      }
+    if (
+      dbDataState.users[rowIndex].vacations.filter(
+        (vacation) =>
+          vacation.startDay <= columnIndex + 1 && vacation.endDay >= columnIndex
+      ).length > 0
+    ) {
+      return true;
     }
     return false;
   };
