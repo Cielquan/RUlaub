@@ -24,7 +24,7 @@ export async function dynamicActivate(locale: string): Promise<void> {
   i18n.activate(locale);
 }
 
-function App(): ReactElement {
+const App = (): ReactElement => {
   const dispatch = useDispatch();
   const { useDarkTheme, useDE, useEN, useLightTheme } = bindActionCreators(
     actionCreators,
@@ -66,6 +66,6 @@ function App(): ReactElement {
       </ThemeProvider>
     </I18nProvider>
   );
-}
+};
 
 export default App;
