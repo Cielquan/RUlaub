@@ -70,12 +70,12 @@ const DaysTillMonth: { [key: number]: number } = {
 
 export const getDaysForDate = (date: Date): number => {
   const day = date.getDate();
-  const month = date.getMonth();
+  const month = date.getMonth() + 1;
   const year = date.getFullYear();
 
   let days = DaysTillMonth[month] + day;
 
-  if (month === 2 && isLeapYear(year)) {
+  if (month >= 2 && isLeapYear(year)) {
     days += 1;
   }
   return days;
