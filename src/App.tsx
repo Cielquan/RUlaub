@@ -54,10 +54,10 @@ function App(): ReactElement {
     <I18nProvider i18n={i18n}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className={classes.root}>
+        <div data-testid="rulaub-root" className={classes.root}>
           <Navbar />
           <SideMenu />
-          <main className={classes.content}>
+          <main data-testid="rulaub-main" className={classes.content}>
             <Calendar theme={theme} />
             <NewHolidayButton />
           </main>
