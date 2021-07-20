@@ -6,7 +6,7 @@ import {
   orange,
 } from "@material-ui/core/colors";
 import { Localization } from "@material-ui/core/locale";
-import { createMuiTheme, Theme } from "@material-ui/core/styles";
+import { createTheme as createMuiTheme, Theme } from "@material-ui/core/styles";
 
 export type SupportedThemes = "dark" | "light";
 
