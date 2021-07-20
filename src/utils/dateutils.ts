@@ -2,12 +2,10 @@ import { i18n as i18nObj } from "@lingui/core";
 import { t } from "@lingui/macro";
 
 export const isLeapYear = (year: number): boolean => {
-  const leapDayDate = new Date(year, 1, 29);
-  const dayAfter = new Date(year, 2, 1);
-  if (leapDayDate.toISOString() === dayAfter.toISOString()) {
-    return false;
+  if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+    return true;
   }
-  return true;
+  return false;
 };
 
 export const datePlusDays = (currentDate: Date, daysToAdd: number): Date => {
