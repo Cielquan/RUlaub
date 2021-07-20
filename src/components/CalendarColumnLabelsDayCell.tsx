@@ -9,7 +9,7 @@ import { datePlusDays, sameDay } from "../utils/dateutils";
 
 const today = new Date();
 
-type CalendarColumnLabelsDayCellProps = {
+type Props = {
   columnIndex: number;
   rowIndex: number;
   data: Date;
@@ -21,7 +21,7 @@ const CalendarColumnLabelsDayCell = ({
   rowIndex,
   data,
   style,
-}: CalendarColumnLabelsDayCellProps): ReactElement => {
+}: Props): ReactElement => {
   const classes = useStyles();
 
   const { locale } = useSelector((state: State) => state.language);

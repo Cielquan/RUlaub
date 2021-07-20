@@ -5,15 +5,12 @@ import { useSelector } from "react-redux";
 import { State } from "../state";
 import useStyles, { STYLE_CONST } from "../styles";
 
-type CalendarRowLabelsUserCellProps = {
+type Props = {
   index: number;
   style: CSSProperties;
 };
 
-const CalendarRowLabelsUserCell = ({
-  index: rowIndex,
-  style,
-}: CalendarRowLabelsUserCellProps): ReactElement => {
+const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElement => {
   const classes = useStyles();
 
   const dbDataState = useSelector((state: State) => state.dbData);

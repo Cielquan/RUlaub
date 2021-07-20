@@ -8,15 +8,12 @@ import useStyles, { STYLE_CONST } from "../styles";
 import CalendarRowLabelsUserCell from "./CalendarRowLabelsUserCell";
 import innerElementType from "./multigridInnerElementType";
 
-type CalendarRowLabelsUserProps = {
+type Props = {
   height: number;
   positionY: number;
 };
 
-const CalendarRowLabelsUser = ({
-  height,
-  positionY,
-}: CalendarRowLabelsUserProps): ReactElement => {
+const CalendarRowLabelsUser = ({ height, positionY }: Props): ReactElement => {
   const classes = useStyles();
 
   const dbDataState = useSelector((state: State) => state.dbData);

@@ -6,7 +6,7 @@ import React, { CSSProperties, ReactElement } from "react";
 import useStyles, { STYLE_CONST } from "../styles";
 import { getMonthNameList } from "../utils/dateutils";
 
-type CalendarColumnLabelsMonthCellProps = {
+type Props = {
   index: number;
   style: CSSProperties;
 };
@@ -14,7 +14,7 @@ type CalendarColumnLabelsMonthCellProps = {
 const CalendarColumnLabelsMonthCell = ({
   index: columnIndex,
   style,
-}: CalendarColumnLabelsMonthCellProps): ReactElement => {
+}: Props): ReactElement => {
   const classes = useStyles();
 
   const { i18n } = useLingui();

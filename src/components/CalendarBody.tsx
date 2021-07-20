@@ -8,7 +8,7 @@ import useStyles, { STYLE_CONST } from "../styles";
 import CalendarBodyCell from "./CalendarBodyCell";
 import innerElementType from "./multigridInnerElementType";
 
-type CalendarBodyProps = {
+type Props = {
   width: number;
   height: number;
   positionX: number;
@@ -24,7 +24,7 @@ const CalendarBody = ({
   positionY,
   scrollHandle,
   daysInYear,
-}: CalendarBodyProps): ReactElement => {
+}: Props): ReactElement => {
   const classes = useStyles();
 
   const dbDataState = useSelector((state: State) => state.dbData);

@@ -3,15 +3,12 @@ import React, { CSSProperties, ReactElement } from "react";
 
 import useStyles from "../styles";
 
-type CalendarTableHeadCellProps = {
+type Props = {
   data: number;
   style: CSSProperties;
 };
 
-const CalendarTableHeadCell = ({
-  data,
-  style,
-}: CalendarTableHeadCellProps): ReactElement => {
+const CalendarTableHeadCell = ({ data, style }: Props): ReactElement => {
   const classes = useStyles();
 
   return (

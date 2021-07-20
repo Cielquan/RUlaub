@@ -7,7 +7,7 @@ import useStyles, { STYLE_CONST } from "../styles";
 import CalendarColumnLabelsDayCell from "./CalendarColumnLabelsDayCell";
 import innerElementType from "./multigridInnerElementType";
 
-type CalendarColumnLabelsDayProps = {
+type Props = {
   width: number;
   positionX: number;
   year: number;
@@ -19,7 +19,7 @@ const CalendarColumnLabelsDay = ({
   positionX,
   year,
   daysInYear,
-}: CalendarColumnLabelsDayProps): ReactElement => {
+}: Props): ReactElement => {
   const classes = useStyles();
 
   const columnLabelRef = useRef<Grid>(null);

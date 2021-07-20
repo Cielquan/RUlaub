@@ -7,17 +7,13 @@ import { getDaysInMonth } from "../utils/dateutils";
 import CalendarColumnLabelsMonthCell from "./CalendarColumnLabelsMonthCell";
 import innerElementType from "./multigridInnerElementType";
 
-type CalendarColumnLabelsMonthProps = {
+type Props = {
   width: number;
   positionX: number;
   year: number;
 };
 
-const CalendarColumnLabelsMonth = ({
-  width,
-  positionX,
-  year,
-}: CalendarColumnLabelsMonthProps): ReactElement => {
+const CalendarColumnLabelsMonth = ({ width, positionX, year }: Props): ReactElement => {
   const classes = useStyles();
 
   const columnLabelRef = useRef<List>(null);

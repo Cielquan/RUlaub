@@ -5,17 +5,13 @@ export type CloseFunction = {
   closeFn: () => void;
 };
 
-type LanguageMenuButtonProps = {
+type Props = {
   text: string;
   selected: boolean;
   onClick: () => void;
 };
 
-const LanguageMenuButton = ({
-  text,
-  selected,
-  onClick,
-}: LanguageMenuButtonProps): ReactElement => (
+const LanguageMenuButton = ({ text, selected, onClick }: Props): ReactElement => (
   <MenuItem selected={selected} onClick={onClick}>
     {text}
   </MenuItem>

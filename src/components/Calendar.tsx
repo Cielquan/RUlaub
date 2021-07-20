@@ -13,11 +13,11 @@ import CalendarColumnLabelsMonth from "./CalendarColumnLabelsMonth";
 import CalendarTableHead from "./CalendarTableHead";
 import CalendarRowLabelsUser from "./CalendarRowLabelsUser";
 
-type CalendarProps = {
+type Props = {
   theme: Theme;
 };
 
-const Calendar = ({ theme }: CalendarProps): ReactElement => {
+const Calendar = ({ theme }: Props): ReactElement => {
   const classes = useStyles();
 
   const localConfigState = useSelector((state: State) => state.localConfig);
