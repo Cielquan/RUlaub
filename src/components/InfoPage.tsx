@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { TransitionProps } from "@material-ui/core/transitions";
-import React, { ReactElement } from "react";
+import React, { forwardRef, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -20,7 +20,7 @@ import useStyles from "../styles";
 
 import * as pjson from "../../package.json";
 
-const Transition = React.forwardRef(
+const Transition = forwardRef(
   (
     props: TransitionProps & { children?: ReactElement },
     ref: React.Ref<unknown>
