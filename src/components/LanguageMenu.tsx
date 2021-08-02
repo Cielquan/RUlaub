@@ -49,6 +49,7 @@ const LanguageMenu = (): ReactElement => {
       >
         {languages.map((lang) => (
           <LanguageMenuButton
+            key={lang.lang.locale}
             closeHandle={handleClose}
             changeHandle={lang.changeHandle}
             language={lang.lang}

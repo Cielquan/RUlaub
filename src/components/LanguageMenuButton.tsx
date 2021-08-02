@@ -24,7 +24,6 @@ const LanguageMenuButton = forwardRef(
     return (
       <MenuItem
         ref={ref}
-        key={language.locale}
         selected={active}
         onClick={active ? closeHandle : changeHandle}
       >
