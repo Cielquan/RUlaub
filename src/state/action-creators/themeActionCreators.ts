@@ -3,6 +3,8 @@ import { Dispatch } from "redux";
 import { ThemeType } from "../action-types";
 import { ThemeAction } from "../actions";
 
+import store from "../store";
+
 export const useDarkTheme =
   () =>
   (dispatch: Dispatch<ThemeAction>): void => {
@@ -17,4 +19,24 @@ export const useLightTheme =
     dispatch({
       type: ThemeType.LIGHT,
     });
+  };
+
+export const loadTheme =
+  () =>
+  (
+    dispatch: Dispatch<ThemeAction>,
+    getState: () => ReturnType<typeof store.getState>
+  ): void => {
+    const states = getState();
+    if (states.localConfig.settings.theme !== states.theme) {
+      if (states.localConfig.settings.theme === "dark") {
+        dispatch({
+          type: ThemeType.DARK,
+        });
+      } else {
+        dispatch({
+          type: ThemeType.LIGHT,
+        });
+      }
+    }
   };
