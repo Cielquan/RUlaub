@@ -2,15 +2,22 @@ import { Button, Menu, Typography } from "@material-ui/core";
 import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 import TranslateIcon from "@material-ui/icons/Translate";
 import React, { MouseEvent, ReactElement, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import { State } from "../state";
-
-import LanguageMenuDEButton from "./LanguageMenuDEButton";
-import LanguageMenuENButton from "./LanguageMenuENButton";
+import Languages from "../i18n";
+import { actionCreators, State } from "../state";
+import LanguageMenuButton from "./LanguageMenuButton";
 
 const LanguageMenu = (): ReactElement => {
+  const dispatch = useDispatch();
+  const { useDE, useEN } = bindActionCreators(actionCreators, dispatch);
   const langState = useSelector((state: State) => state.language);
+
+  const languages = [
+    { changeHandle: useDE, lang: Languages.german },
+    { changeHandle: useEN, lang: Languages.english },
+  ];
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -40,8 +47,13 @@ const LanguageMenu = (): ReactElement => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <LanguageMenuDEButton closeFn={handleClose} />
-        <LanguageMenuENButton closeFn={handleClose} />
+        {languages.map((lang) => (
+          <LanguageMenuButton
+            closeHandle={handleClose}
+            changeHandle={lang.changeHandle}
+            language={lang.lang}
+          />
+        ))}
       </Menu>
     </>
   );
