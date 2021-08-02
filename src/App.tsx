@@ -21,7 +21,10 @@ import SideMenu from "./components/SideMenu";
 
 const App = (): ReactElement => {
   const dispatch = useDispatch();
-  const { loadLang, loadTheme } = bindActionCreators(actionCreators, dispatch);
+  const { loadLangState, loadThemeState } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   const themeState = useSelector((state: State) => state.theme);
   const langState = useSelector((state: State) => state.language);
 
@@ -29,8 +32,8 @@ const App = (): ReactElement => {
   const classes = useStyles();
 
   useMountEffect(() => {
-    loadLang();
-    loadTheme();
+    loadLangState();
+    loadThemeState();
   });
 
   useEffect(() => {

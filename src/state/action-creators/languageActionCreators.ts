@@ -21,7 +21,7 @@ export const useEN =
     });
   };
 
-export const loadLang =
+export const loadLangState =
   () =>
   (
     dispatch: Dispatch<LanguageAction>,

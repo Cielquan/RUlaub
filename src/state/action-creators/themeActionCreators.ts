@@ -21,7 +21,7 @@ export const useLightTheme =
     });
   };
 
-export const loadTheme =
+export const loadThemeState =
   () =>
   (
     dispatch: Dispatch<ThemeAction>,
