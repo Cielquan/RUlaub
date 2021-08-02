@@ -11,16 +11,13 @@ const LanguageMenuDEButton = ({ closeFn }: CloseFunction): ReactElement => {
   const dispatch = useDispatch();
   const { useDE } = bindActionCreators(actionCreators, dispatch);
   const langState = useSelector((state: State) => state.language);
+  const active = langState.locale === Languages.german.locale;
 
   return (
     <LanguageMenuButton
       text={Languages.german.name}
-      selected={langState.locale === Languages.german.locale}
-      onClick={() => {
-        closeFn();
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useDE();
-      }}
+      selected={active}
+      onClick={active ? closeFn : useDE}
     />
   );
 };
