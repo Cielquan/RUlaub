@@ -11,6 +11,7 @@
     "@material-ui/lab": "^4.0.0-alpha.58",
     "@tauri-apps/api": "^1.0.0-beta.1",
     "clsx": "^1.1.1",
+    "make-plural": "^6.2.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",

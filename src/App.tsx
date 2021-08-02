@@ -7,6 +7,7 @@ import React, { ReactElement, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { changeLanguage } from "./i18n";
 import { actionCreators, State } from "./state";
 import useStyles from "./styles";
 import createTheme from "./theme";
@@ -18,12 +19,6 @@ import Navbar from "./components/Navbar";
 import NewHolidayButton from "./components/NewHolidayButton";
 import SideMenu from "./components/SideMenu";
 
-export async function dynamicActivate(locale: string): Promise<void> {
-  const { messages } = await import(`./locales/${locale}/messages`);
-  i18n.load(locale, messages);
-  i18n.activate(locale);
-}
-
 const App = (): ReactElement => {
   const dispatch = useDispatch();
   const { loadLang, loadTheme } = bindActionCreators(actionCreators, dispatch);
@@ -33,14 +28,14 @@ const App = (): ReactElement => {
   const theme = createTheme(themeState, locales[langState.importName]);
   const classes = useStyles();
 
-  useEffect(() => {
-    dynamicActivate(langState.locale);
-  }, [langState.locale]);
-
   useMountEffect(() => {
     loadLang();
     loadTheme();
   });
+
+  useEffect(() => {
+    changeLanguage(langState.locale);
+  }, [langState.locale]);
 
   return (
     <I18nProvider i18n={i18n}>
