@@ -29,6 +29,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "format": "prettier --write --end-of-line=auto \"./**/*.{js,jsx,ts,tsx,html,css,json}\" --ignore-path .gitignore",
+    "fmt": "yarn format",
     "extract": "lingui extract --clean",
     "compile": "lingui compile"
   },
