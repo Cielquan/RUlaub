@@ -1,4 +1,4 @@
-import Languages, { defaultLanguage, defaultLocale } from "./i18n";
+import Languages, { defaultLanguage, defaultLocale } from "../i18n";
 
 test("default i18n locale is en-US", () => {
   expect(defaultLocale).toEqual("en-US");

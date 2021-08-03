@@ -3,7 +3,7 @@ import {
   LocalConfigPayload,
   SettingsConfig,
   updateLocalConfig,
-} from "./localConfig";
+} from "../localConfig";
 
 describe("updateLocalConfig", () => {
   let orig: LocalConfig;
