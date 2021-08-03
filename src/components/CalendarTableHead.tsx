@@ -7,9 +7,9 @@ import useStyles, { STYLE_CONST } from "../styles";
 import CalendarTableHeadCell from "./CalendarTableHeadCell";
 import innerElementType from "./multigridInnerElementType";
 
-type Props = {
+interface Props {
   year: number;
-};
+}
 
 const CalendarTableHead = ({ year }: Props): ReactElement => {
   const classes = useStyles();

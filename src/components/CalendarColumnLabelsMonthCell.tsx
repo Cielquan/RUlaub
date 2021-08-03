@@ -6,10 +6,10 @@ import React, { CSSProperties, ReactElement } from "react";
 import useStyles, { STYLE_CONST } from "../styles";
 import { getMonthNameList } from "../utils/dateUtils";
 
-type Props = {
+interface Props {
   index: number;
   style: CSSProperties;
-};
+}
 
 const CalendarColumnLabelsMonthCell = ({
   index: columnIndex,

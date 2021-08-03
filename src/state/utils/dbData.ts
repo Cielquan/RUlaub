@@ -1,13 +1,13 @@
-type Vacation = {
+interface Vacation {
   id: number;
   startDate: string;
   startDay: number;
   endDate: string;
   endDay: number;
   typeId: number;
-};
+}
 
-type UserConfig = {
+interface UserConfig {
   id: number;
   name: string;
   abbr: string;
@@ -15,15 +15,15 @@ type UserConfig = {
   hexColor: number;
   groupManagerId: number;
   vacations: Vacation[];
-};
+}
 
-export type DBData = {
+export interface DBData {
   users: UserConfig[];
-};
+}
 
-export type DBDataPayload = {
+export interface DBDataPayload {
   users?: Partial<UserConfig>[];
-};
+}
 
 export const updateDBData = (
   currentData: DBData,

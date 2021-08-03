@@ -13,9 +13,9 @@ import CalendarColumnLabelsMonth from "./CalendarColumnLabelsMonth";
 import CalendarTableHead from "./CalendarTableHead";
 import CalendarRowLabelsUser from "./CalendarRowLabelsUser";
 
-type Props = {
+interface Props {
   theme: Theme;
-};
+}
 
 const Calendar = ({ theme }: Props): ReactElement => {
   const classes = useStyles();

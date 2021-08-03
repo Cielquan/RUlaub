@@ -7,12 +7,12 @@ import useStyles, { STYLE_CONST } from "../styles";
 import CalendarColumnLabelsDayCell from "./CalendarColumnLabelsDayCell";
 import innerElementType from "./multigridInnerElementType";
 
-type Props = {
+interface Props {
   width: number;
   positionX: number;
   year: number;
   daysInYear: number;
-};
+}
 
 const CalendarColumnLabelsDay = ({
   width,

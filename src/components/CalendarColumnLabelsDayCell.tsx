@@ -9,12 +9,12 @@ import { datePlusDays, sameDay } from "../utils/dateUtils";
 
 const today = new Date();
 
-type Props = {
+interface Props {
   columnIndex: number;
   rowIndex: number;
   data: Date;
   style: CSSProperties;
-};
+}
 
 const CalendarColumnLabelsDayCell = ({
   columnIndex,

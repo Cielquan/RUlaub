@@ -1,29 +1,29 @@
 import { SupportedLocales } from "../../i18n";
 import { SupportedThemes } from "../../theme";
 
-export type UserConfig = {
+export interface UserConfig {
   name: string;
   abbr: string;
   vacationDays: number;
   hexColor: number;
-};
+}
 
-export type SettingsConfig = {
+export interface SettingsConfig {
   databaseURI: string;
   yearToShow: number;
   theme: SupportedThemes;
   language: SupportedLocales;
-};
+}
 
-export type LocalConfig = {
+export interface LocalConfig {
   user: UserConfig;
   settings: SettingsConfig;
-};
+}
 
-export type LocalConfigPayload = {
+export interface LocalConfigPayload {
   user?: Partial<UserConfig>;
   settings?: Partial<SettingsConfig>;
-};
+}
 
 export const updateLocalConfig = (
   currentConfig: LocalConfig,

@@ -8,14 +8,14 @@ import useStyles, { STYLE_CONST } from "../styles";
 import CalendarBodyCell from "./CalendarBodyCell";
 import innerElementType from "./multigridInnerElementType";
 
-type Props = {
+interface Props {
   width: number;
   height: number;
   positionX: number;
   positionY: number;
   scrollHandle: (e: GridOnScrollProps) => void;
   daysInYear: number;
-};
+}
 
 const CalendarBody = ({
   width,

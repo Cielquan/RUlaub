@@ -7,11 +7,11 @@ import { Language } from "../i18n";
 import { State } from "../state";
 import { LanguageAction } from "../state/actions";
 
-type Props = {
+interface Props {
   language: Language;
   closeHandle: () => void;
   changeHandle: () => (dispatch: Dispatch<LanguageAction>) => void;
-};
+}
 
 const LanguageMenuButton = forwardRef(
   (

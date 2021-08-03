@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 import { State } from "../state";
 import useStyles, { STYLE_CONST } from "../styles";
 
-type Props = {
+interface Props {
   columnIndex: number;
   rowIndex: number;
   style: CSSProperties;
-};
+}
 
 const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement => {
   const classes = useStyles();

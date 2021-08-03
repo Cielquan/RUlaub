@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 import { State } from "../state";
 import useStyles, { STYLE_CONST } from "../styles";
 
-type Props = {
+interface Props {
   index: number;
   style: CSSProperties;
-};
+}
 
 const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElement => {
   const classes = useStyles();
