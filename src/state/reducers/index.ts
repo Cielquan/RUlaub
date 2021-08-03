@@ -5,7 +5,6 @@ import infoPageReducer from "./infoPageReducer";
 import languageReducer from "./languageReducer";
 import localConfigReducer from "./localConfigReducer";
 import sideMenuReducer from "./sideMenuReducer";
-import sideMenuDatabaseReducer from "./sideMenuDatabaseReducer";
 import themeReducer from "./themeReducer";
 
 const rootReducer = combineReducers({
@@ -14,7 +13,6 @@ const rootReducer = combineReducers({
   language: languageReducer,
   localConfig: localConfigReducer,
   sideMenu: sideMenuReducer,
-  sideMenuDatabase: sideMenuDatabaseReducer,
   theme: themeReducer,
 });
 

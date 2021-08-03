@@ -3,23 +3,16 @@ import { Collapse, List } from "@material-ui/core";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import StorageIcon from "@material-ui/icons/Storage";
-import React, { ReactElement } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
-
-import { actionCreators, State } from "../state";
+import React, { ReactElement, useState } from "react";
 
 import SideMenuButton from "./SideMenuButton";
 import SideMenuDatabaseCreateButton from "./SideMenuDatabaseCreateButton";
 import SideMenuDatabaseModifyButton from "./SideMenuDatabaseModifyButton";
 
 const SideMenuDatabaseButton = (): ReactElement => {
-  const dispatch = useDispatch();
-  const { closeSideMenuDatabase, openSideMenuDatabase } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
-  const sideMenuDatabaseState = useSelector((state: State) => state.sideMenuDatabase);
+  const [sideMenuDatabaseState, setSideMenuDatabaseState] = useState<boolean>(false);
+  const closeSideMenuDatabase = (): void => setSideMenuDatabaseState(false);
+  const openSideMenuDatabase = (): void => setSideMenuDatabaseState(true);
 
   return (
     <>
