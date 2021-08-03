@@ -8,25 +8,11 @@ export type UserConfig = {
   hexColor: number;
 };
 
-export type UserConfigPayload = {
-  name?: string;
-  abbr?: string;
-  vacationDays?: number;
-  hexColor?: number;
-};
-
 export type SettingsConfig = {
   databaseURI: string;
   yearToShow: number;
   theme: SupportedThemes;
   language: SupportedLocales;
-};
-
-export type SettingsConfigPayload = {
-  databaseURI?: string;
-  yearToShow?: number;
-  theme?: SupportedThemes;
-  language?: SupportedLocales;
 };
 
 export type LocalConfig = {
@@ -35,8 +21,8 @@ export type LocalConfig = {
 };
 
 export type LocalConfigPayload = {
-  user?: UserConfigPayload;
-  settings?: SettingsConfigPayload;
+  user?: Partial<UserConfig>;
+  settings?: Partial<SettingsConfig>;
 };
 
 export const updateLocalConfig = (

@@ -17,22 +17,12 @@ type UserConfig = {
   vacations: Vacation[];
 };
 
-type UserConfigPayload = {
-  id?: number;
-  name?: string;
-  abbr?: string;
-  vacationDays?: number;
-  hexColor?: number;
-  groupManagerId?: number;
-  vacations?: Vacation[];
-};
-
 export type DBData = {
   users: UserConfig[];
 };
 
 export type DBDataPayload = {
-  users?: UserConfigPayload[];
+  users?: Partial<UserConfig>[];
 };
 
 export const updateDBData = (

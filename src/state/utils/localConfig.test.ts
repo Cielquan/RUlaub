@@ -1,7 +1,7 @@
 import {
   LocalConfig,
   LocalConfigPayload,
-  SettingsConfigPayload,
+  SettingsConfig,
   updateLocalConfig,
 } from "./localConfig";
 
@@ -62,7 +62,7 @@ describe("updateLocalConfig", () => {
   });
 
   it("updates whole 'settings' data correctly", () => {
-    const changedValue: SettingsConfigPayload = {
+    const changedValue: Partial<SettingsConfig> = {
       databaseURI: "changed",
       yearToShow: 1919,
       theme: "light",
