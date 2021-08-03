@@ -4,7 +4,7 @@ import clsx from "clsx";
 import React, { CSSProperties, ReactElement } from "react";
 
 import useStyles, { STYLE_CONST } from "../styles";
-import { getMonthNameList } from "../utils/dateutils";
+import { getMonthNameList } from "../utils/dateUtils";
 
 type Props = {
   index: number;

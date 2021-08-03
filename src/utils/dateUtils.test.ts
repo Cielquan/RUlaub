@@ -4,7 +4,7 @@ import {
   getDaysInMonth,
   isLeapYear,
   sameDay,
-} from "./dateutils";
+} from "./dateUtils";
 
 describe("isLeapYear", () => {
   it("is 'true' when divisable by 4 and not 100", () => {

@@ -11,7 +11,7 @@ import { changeLanguage } from "./i18n";
 import { actionCreators, State } from "./state";
 import useStyles from "./styles";
 import createTheme from "./theme";
-import { useMountEffect } from "./utils/reactutils";
+import { useMountEffect } from "./utils/reactUtils";
 
 import Calendar from "./components/Calendar";
 import InfoPage from "./components/InfoPage";

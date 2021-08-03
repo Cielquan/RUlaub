@@ -5,7 +5,7 @@ import AutoSizer from "react-virtualized-auto-sizer";
 
 import { State } from "../state";
 import useStyles from "../styles";
-import { isLeapYear } from "../utils/dateutils";
+import { isLeapYear } from "../utils/dateUtils";
 
 import CalendarColumnLabelsDay from "./CalendarColumnLabelsDay";
 import CalendarBody from "./CalendarBody";

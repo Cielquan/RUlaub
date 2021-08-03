@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { State } from "../state";
 
 import useStyles, { STYLE_CONST } from "../styles";
-import { datePlusDays, sameDay } from "../utils/dateutils";
+import { datePlusDays, sameDay } from "../utils/dateUtils";
 
 const today = new Date();
 

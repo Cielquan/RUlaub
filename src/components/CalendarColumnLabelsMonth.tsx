@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useRef } from "react";
 import { VariableSizeList as List } from "react-window";
 
 import useStyles, { STYLE_CONST } from "../styles";
-import { getDaysInMonth } from "../utils/dateutils";
+import { getDaysInMonth } from "../utils/dateUtils";
 
 import CalendarColumnLabelsMonthCell from "./CalendarColumnLabelsMonthCell";
 import innerElementType from "./multigridInnerElementType";
