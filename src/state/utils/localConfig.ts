@@ -1,28 +1,28 @@
 import { SupportedLocales } from "../../i18n";
 import { SupportedThemes } from "../../theme";
 
-type UserConfig = {
+export type UserConfig = {
   name: string;
   abbr: string;
   vacationDays: number;
   hexColor: number;
 };
 
-type UserConfigPayload = {
+export type UserConfigPayload = {
   name?: string;
   abbr?: string;
   vacationDays?: number;
   hexColor?: number;
 };
 
-type SettingsConfig = {
+export type SettingsConfig = {
   databaseURI: string;
   yearToShow: number;
   theme: SupportedThemes;
   language: SupportedLocales;
 };
 
-type SettingsConfigPayload = {
+export type SettingsConfigPayload = {
   databaseURI?: string;
   yearToShow?: number;
   theme?: SupportedThemes;
@@ -43,7 +43,7 @@ export const updateLocalConfig = (
   currentConfig: LocalConfig,
   updatePayload: LocalConfigPayload
 ): LocalConfig => {
-  const rv = currentConfig;
+  const rv: LocalConfig = JSON.parse(JSON.stringify(currentConfig));
 
   if ("user" in updatePayload) {
     rv.user = { ...rv.user, ...updatePayload.user };
