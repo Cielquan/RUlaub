@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CalendarBodyCell component renders correctly 1`] = `
+<div
+  className="makeStyles-multigridCell-21"
+  style={
+    Object {
+      "height": -1,
+      "left": 4,
+      "top": 5,
+      "width": 2,
+    }
+  }
+/>
+`;

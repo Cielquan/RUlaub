@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CalendarRowLabelsUserCell component renders correctly 1`] = `
+<div
+  className="makeStyles-multigridCell-21"
+  style={
+    Object {
+      "height": -1,
+      "left": 2,
+      "top": 5,
+      "width": 4,
+    }
+  }
+>
+  <p
+    className="MuiTypography-root makeStyles-multigridRowLabelsUser-16 MuiTypography-body1 MuiTypography-noWrap"
+  >
+    HP Second
+  </p>
+</div>
+`;

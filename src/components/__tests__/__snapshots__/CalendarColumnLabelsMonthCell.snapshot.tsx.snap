@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CalendarColumnLabelsMonthCell component renders correctly 1`] = `
+<div
+  className="makeStyles-multigridCell-21"
+  style={
+    Object {
+      "height": 1,
+      "left": 4,
+      "top": 3,
+      "width": 2,
+    }
+  }
+>
+  <div
+    className="MuiTypography-root makeStyles-multigridColumnLabelsMonth-19 makeStyles-typographyGrow-5 MuiTypography-h5 MuiTypography-alignLeft"
+  >
+    February
+  </div>
+  <div
+    className="MuiTypography-root makeStyles-multigridColumnLabelsMonth-19 makeStyles-typographyGrow-5 MuiTypography-h5 MuiTypography-alignCenter"
+  >
+    February
+  </div>
+  <div
+    className="MuiTypography-root makeStyles-multigridColumnLabelsMonth-19 makeStyles-typographyGrow-5 MuiTypography-h5 MuiTypography-alignRight"
+  >
+    February
+  </div>
+</div>
+`;

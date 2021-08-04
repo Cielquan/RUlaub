@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CalendarTableHeadCell component renders correctly 1`] = `
+<div
+  className="makeStyles-multigridCell-21"
+  style={
+    Object {
+      "height": 1,
+      "left": 2,
+      "top": 3,
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="MuiTypography-root makeStyles-typographyGrow-5 MuiTypography-h3 MuiTypography-alignCenter"
+  >
+    1
+  </div>
+</div>
+`;

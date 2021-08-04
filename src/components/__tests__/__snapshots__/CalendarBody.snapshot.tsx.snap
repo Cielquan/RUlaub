@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CalendarBody component renders correctly with mocked subComponents 1`] = `
+<div
+  className="makeStyles-multigridMainGrid-20"
+  onScroll={[Function]}
+  style={
+    Object {
+      "WebkitOverflowScrolling": "touch",
+      "direction": "ltr",
+      "height": -68,
+      "overflow": "auto",
+      "position": "relative",
+      "width": -249,
+      "willChange": "transform",
+    }
+  }
+>
+  multigridInnerElementType
+</div>
+`;

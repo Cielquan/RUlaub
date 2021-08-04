@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CalendarColumnLabelsDayCell component renders correctly 1`] = `
+<div
+  className="makeStyles-multigridCell-21"
+  style={
+    Object {
+      "height": -1,
+      "left": 4,
+      "top": 5,
+      "width": 2,
+    }
+  }
+>
+  <p
+    className="MuiTypography-root makeStyles-typographyGrow-5 MuiTypography-body2 MuiTypography-alignCenter"
+  >
+    Th
+  </p>
+</div>
+`;
