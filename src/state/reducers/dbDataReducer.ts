@@ -4,7 +4,7 @@ import { DBData, updateDBData } from "../utils/dbData";
 
 import dbData from "../../dev_temp/test.db.json";
 
-const initialState: DBData = dbData;
+export const initialState: DBData = dbData;
 
 const reducer = (state: DBData = initialState, action: DBDataAction): DBData => {
   switch (action.type) {

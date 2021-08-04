@@ -4,7 +4,7 @@ import { LocalConfig, updateLocalConfig } from "../utils/localConfig";
 
 import localConfig from "../../dev_temp/test.local_config.json";
 
-const initialState = localConfig as LocalConfig;
+export const initialState = localConfig as LocalConfig;
 
 const reducer = (
   state: LocalConfig = initialState,

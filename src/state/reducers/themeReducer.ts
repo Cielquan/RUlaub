@@ -2,7 +2,7 @@ import { ThemeType } from "../action-types";
 import { ThemeAction } from "../actions";
 import { SupportedThemes } from "../../theme";
 
-const initialState: SupportedThemes = "dark";
+export const initialState: SupportedThemes = "dark";
 
 const reducer = (
   state: SupportedThemes = initialState,

@@ -1,7 +1,7 @@
 import { InfoPageType } from "../action-types";
 import { InfoPageAction } from "../actions";
 
-const initialState = false;
+export const initialState = false;
 
 const reducer = (state: boolean = initialState, action: InfoPageAction): boolean => {
   switch (action.type) {
