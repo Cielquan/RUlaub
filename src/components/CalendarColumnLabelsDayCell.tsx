@@ -2,8 +2,8 @@ import { Typography } from "@material-ui/core";
 import clsx from "clsx";
 import React, { CSSProperties, ReactElement } from "react";
 import { useSelector } from "react-redux";
-import { State } from "../state";
 
+import { State } from "../state";
 import useStyles, { STYLE_CONST } from "../styles";
 import { datePlusDays, sameDay } from "../utils/dateUtils";
 
