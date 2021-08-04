@@ -19,9 +19,9 @@ const Calendar = (): ReactElement => {
 
   const themeState = useSelector((state: State) => state.theme);
   const langState = useSelector((state: State) => state.language);
+  const localConfigState = useSelector((state: State) => state.localConfig);
 
   const theme = createTheme(themeState, locales[langState.importName]);
-  const localConfigState = useSelector((state: State) => state.localConfig);
   const year = localConfigState.settings.yearToShow;
 
   const [scrollX, setScrollX] = useState(0);
