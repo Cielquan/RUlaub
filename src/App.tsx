@@ -48,7 +48,7 @@ const App = (): ReactElement => {
           <Navbar />
           <SideMenu />
           <main data-testid="rulaub-main" className={classes.content}>
-            <Calendar theme={theme} />
+            <Calendar />
             <NewHolidayButton />
           </main>
         </div>

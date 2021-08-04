@@ -1,10 +1,11 @@
-import { Theme } from "@material-ui/core";
+import * as locales from "@material-ui/core/locale";
 import React, { ReactElement, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import AutoSizer from "react-virtualized-auto-sizer";
 
 import { State } from "../state";
 import useStyles from "../styles";
+import createTheme from "../theme";
 import { isLeapYear } from "../utils/dateUtils";
 
 import CalendarColumnLabelsDay from "./CalendarColumnLabelsDay";
@@ -13,13 +14,13 @@ import CalendarColumnLabelsMonth from "./CalendarColumnLabelsMonth";
 import CalendarTableHead from "./CalendarTableHead";
 import CalendarRowLabelsUser from "./CalendarRowLabelsUser";
 
-interface Props {
-  theme: Theme;
-}
-
-const Calendar = ({ theme }: Props): ReactElement => {
+const Calendar = (): ReactElement => {
   const classes = useStyles();
 
+  const themeState = useSelector((state: State) => state.theme);
+  const langState = useSelector((state: State) => state.language);
+
+  const theme = createTheme(themeState, locales[langState.importName]);
   const localConfigState = useSelector((state: State) => state.localConfig);
   const year = localConfigState.settings.yearToShow;
 
