@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Base App renders correctly with mocked subComponents 1`] = `
+Array [
+  <div
+    className="makeStyles-root-1"
+    data-testid="rulaub-root"
+  >
+    Navbar
+    SideMenu
+    <main
+      className="makeStyles-content-2"
+      data-testid="rulaub-main"
+    >
+      Calendar
+      NewHolidayButton
+    </main>
+  </div>,
+  "InfoPage",
+]
+`;
