@@ -17,7 +17,7 @@ const SideMenuDatabaseModifyButton = (): ReactElement => {
 
   return (
     <SideMenuButton
-      key={t`Modify existing`}
+      listKey={t`Modify existing`}
       text={t`Modify existing`}
       icon={<CreateIcon />}
       onClick={closeSideMenu}

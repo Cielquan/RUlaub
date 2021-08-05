@@ -17,7 +17,7 @@ describe("SideMenuButton component", () => {
     const tree = renderer
       .create(
         <Provider store={mockStore}>
-          <SideMenuButton key="key" text="text" onClick={() => undefined} />
+          <SideMenuButton listKey="key" text="text" onClick={() => undefined} />
         </Provider>
       )
       .toJSON();

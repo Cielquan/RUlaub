@@ -14,7 +14,7 @@ const SideMenuInfoButton = (): ReactElement => {
 
   return (
     <SideMenuButton
-      key={t`Info`}
+      listKey={t`Info`}
       text={t`Info`}
       icon={<InfoIcon />}
       onClick={() => {

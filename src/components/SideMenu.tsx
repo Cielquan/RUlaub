@@ -33,7 +33,7 @@ const SideMenu = (): ReactElement => {
       <List>
         {itemList.map((item) => (
           <SideMenuButton
-            key={item[0]}
+            listKey={item[0]}
             text={item[0]}
             icon={item[1]}
             onClick={() => undefined}

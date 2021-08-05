@@ -2,7 +2,7 @@ import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import React, { ReactElement } from "react";
 
 interface Props {
-  key: string;
+  listKey: string;
   text: string;
   icon?: ReactElement;
   onClick: () => void;
@@ -11,14 +11,14 @@ interface Props {
 }
 
 const SideMenuButton = ({
-  key,
+  listKey,
   text,
   icon,
   onClick,
   foldIcon,
   className,
 }: Props): ReactElement => (
-  <ListItem key={key} button onClick={onClick} className={className}>
+  <ListItem key={listKey} button onClick={onClick} className={className}>
     <ListItemIcon>{icon}</ListItemIcon>
     <ListItemText primary={text} />
     {foldIcon}

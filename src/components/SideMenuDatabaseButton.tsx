@@ -17,7 +17,7 @@ const SideMenuDatabaseButton = (): ReactElement => {
   return (
     <>
       <SideMenuButton
-        key={t`Database`}
+        listKey={t`Database`}
         text={t`Database`}
         icon={<StorageIcon />}
         onClick={sideMenuDatabaseState ? closeSideMenuDatabase : openSideMenuDatabase}
