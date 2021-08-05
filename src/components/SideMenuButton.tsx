@@ -24,7 +24,6 @@ const SideMenuButton = ({
     {foldIcon}
   </ListItem>
 );
-
 SideMenuButton.defaultProps = {
   foldIcon: <></>,
   className: "",

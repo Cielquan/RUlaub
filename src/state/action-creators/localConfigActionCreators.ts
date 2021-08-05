@@ -4,6 +4,7 @@ import { LocalConfigType } from "../action-types";
 import { LocalConfigAction } from "../actions";
 import { LocalConfigPayload } from "../utils/localConfig";
 
+// eslint-disable-next-line import/prefer-default-export
 export const updateLocalConfig =
   (payload: LocalConfigPayload) =>
   (dispatch: Dispatch<LocalConfigAction>): void => {
@@ -12,5 +13,3 @@ export const updateLocalConfig =
       payload,
     });
   };
-
-export default updateLocalConfig;

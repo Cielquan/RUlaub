@@ -29,7 +29,6 @@ const innerElementType = forwardRef(
     );
   }
 );
-
 innerElementType.defaultProps = {
   children: <></>,
 };

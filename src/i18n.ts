@@ -24,7 +24,6 @@ export const Languages: { [key: string]: Language } = {
     importName: "enUS",
   },
 };
-export default Languages;
 
 export const defaultLocale: SupportedLocales = "en-US";
 export const defaultLanguage: Language = Object.values(Languages).filter(
@@ -42,3 +41,5 @@ export const changeLanguage = (locale: SupportedLocales): void => {
   i18n.activate(locale);
 };
 changeLanguage(defaultLocale);
+
+export default Languages;
