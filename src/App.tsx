@@ -7,7 +7,6 @@ import React, { ReactElement, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { changeLanguage } from "./i18n";
 import { actionCreators, State } from "./state";
 import useStyles from "./styles";
 import createTheme from "./theme";
@@ -37,7 +36,7 @@ const App = (): ReactElement => {
   });
 
   useEffect(() => {
-    changeLanguage(langState.locale);
+    i18n.activate(langState.locale);
   }, [langState.locale]);
 
   return (

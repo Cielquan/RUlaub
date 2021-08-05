@@ -36,10 +36,6 @@ i18n.loadLocaleData({
 });
 i18n.load("de-DE", deMessages);
 i18n.load("en-US", enMessages);
-
-export const changeLanguage = (locale: SupportedLocales): void => {
-  i18n.activate(locale);
-};
-changeLanguage(defaultLocale);
+i18n.activate(defaultLocale);
 
 export default Languages;
