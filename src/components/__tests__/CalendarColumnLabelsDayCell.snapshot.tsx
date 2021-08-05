@@ -20,7 +20,7 @@ describe("CalendarColumnLabelsDayCell component", () => {
           <CalendarColumnLabelsDayCell
             columnIndex={1}
             rowIndex={1}
-            data={new Date()}
+            data={new Date("2020-01-01")}
             style={{ height: 1, left: 2, top: 3, width: 4 }}
           />
         </Provider>
