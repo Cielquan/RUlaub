@@ -1,13 +1,5 @@
 import { t } from "@lingui/macro";
-import {
-  Divider,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@material-ui/core";
+import { Divider, Drawer, IconButton, List } from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import SettingsIcon from "@material-ui/icons/Settings";
 import React, { ReactElement } from "react";
@@ -17,6 +9,7 @@ import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
 
+import SideMenuButton from "./SideMenuButton";
 import SideMenuDatabaseButton from "./SideMenuDatabaseButton";
 import SideMenuInfoButton from "./SideMenuInfoButton";
 
@@ -39,10 +32,12 @@ const SideMenu = (): ReactElement => {
       <Divider />
       <List>
         {itemList.map((item) => (
-          <ListItem button key={item[0]}>
-            <ListItemIcon>{item[1]}</ListItemIcon>
-            <ListItemText primary={item[0]} />
-          </ListItem>
+          <SideMenuButton
+            key={item[0]}
+            text={item[0]}
+            icon={item[1]}
+            onClick={() => undefined}
+          />
         ))}
         <SideMenuDatabaseButton />
       </List>
