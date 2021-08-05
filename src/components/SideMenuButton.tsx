@@ -4,7 +4,7 @@ import React, { ReactElement } from "react";
 interface Props {
   key: string;
   text: string;
-  icon: ReactElement;
+  icon?: ReactElement;
   onClick: () => void;
   foldIcon?: ReactElement;
   className?: string;
@@ -25,6 +25,7 @@ const SideMenuButton = ({
   </ListItem>
 );
 SideMenuButton.defaultProps = {
+  icon: <></>,
   foldIcon: <></>,
   className: "",
 };
