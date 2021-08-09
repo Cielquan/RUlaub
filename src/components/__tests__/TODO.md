@@ -8,7 +8,6 @@
 
 #### Error b/c of forwardRef()
 
-- LanguageMenuButton
 - multigridInnerElementType
 
 ### Snapshot tests to add
