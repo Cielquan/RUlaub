@@ -6,10 +6,6 @@
 - LanguageMenu
 - SideMenu
 
-#### Error b/c of forwardRef()
-
-- multigridInnerElementType
-
 ### Snapshot tests to add
 
 - DarkThemeSwitch tooltip

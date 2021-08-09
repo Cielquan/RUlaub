@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`innerElementType component renders correctly 1`] = `
+<div
+  className="makeStyles-multigridBackground-12"
+  style={
+    Object {
+      "paddingLeft": 2,
+      "paddingTop": 2,
+    }
+  }
+/>
+`;
