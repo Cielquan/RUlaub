@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 
 import Languages from "../i18n";
 import { actionCreators, State } from "../state";
+
 import LanguageMenuButton from "./LanguageMenuButton";
 
 const LanguageMenu = (): ReactElement => {
