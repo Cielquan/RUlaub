@@ -12,6 +12,4 @@
 - FAB tooltip
 - InfoPage when open else NULL
 - LanguageMenu when open
-- SideMenuDatabaseButton when unfolded
-- SideMenuSectionButton when unmocked
 - SideMenu when open else NULL
