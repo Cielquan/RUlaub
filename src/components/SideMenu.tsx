@@ -1,7 +1,11 @@
 import { t } from "@lingui/macro";
 import { Divider, Drawer, IconButton, List } from "@material-ui/core";
+import AddIcon from "@material-ui/icons/Add";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import CreateIcon from "@material-ui/icons/Create";
+import InfoIcon from "@material-ui/icons/Info";
 import SettingsIcon from "@material-ui/icons/Settings";
+import StorageIcon from "@material-ui/icons/Storage";
 import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -9,18 +13,34 @@ import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
 import useStyles from "../styles";
 
-import SideMenuButton from "./SideMenuButton";
-import SideMenuDatabaseButton from "./SideMenuDatabaseButton";
-import SideMenuInfoButton from "./SideMenuInfoButton";
+import SideMenuButton, {
+  ButtonText,
+  ButtonListKey,
+  ButtonOnClick,
+  ButtonIcon,
+  ButtonClassName,
+} from "./SideMenuButton";
+import SideMenuSectionButton, { SectionItemList } from "./SideMenuSectionButton";
+
+type SectionlessItemList = Array<
+  [ButtonText, ButtonListKey, ButtonOnClick, ButtonIcon?, ButtonClassName?]
+>;
 
 const SideMenu = (): ReactElement => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const { closeSideMenu } = bindActionCreators(actionCreators, dispatch);
+  const { closeSideMenu, openInfoPage } = bindActionCreators(actionCreators, dispatch);
   const sideMenuState = useSelector((state: State) => state.sideMenu);
 
-  const itemList: Array<[string, ReactElement]> = [[t`Settings`, <SettingsIcon />]];
+  const sectionlessItemList: SectionlessItemList = [
+    [t`Settings`, "Settings", closeSideMenu, <SettingsIcon />],
+  ];
+
+  const DatabaseSectionItemList: SectionItemList = [
+    [t`Create new`, "DB-Create new", closeSideMenu, <AddIcon />],
+    [t`Modify existing`, "DB-Modify existing", closeSideMenu, <CreateIcon />],
+  ];
 
   return (
     <Drawer anchor="left" open={sideMenuState} onClose={closeSideMenu}>
@@ -31,20 +51,34 @@ const SideMenu = (): ReactElement => {
       </div>
       <Divider />
       <List>
-        {itemList.map((item) => (
+        {sectionlessItemList.map((item) => (
           <SideMenuButton
-            listKey={item[0]}
             text={item[0]}
-            icon={item[1]}
-            onClick={() => undefined}
+            listKey={item[1]}
+            onClick={item[2]}
+            icon={item[3]}
+            className={item[4]}
           />
         ))}
-        <SideMenuDatabaseButton />
+        <SideMenuSectionButton
+          text={t`Database`}
+          listKey={t`Database`}
+          icon={<StorageIcon />}
+          sectionItemList={DatabaseSectionItemList}
+        />
       </List>
       <div className={classes.infoButton}>
         <Divider />
         <List>
-          <SideMenuInfoButton />
+          <SideMenuButton
+            listKey={t`Info`}
+            text={t`Info`}
+            icon={<InfoIcon />}
+            onClick={() => {
+              closeSideMenu();
+              openInfoPage();
+            }}
+          />
         </List>
       </div>
     </Drawer>
