@@ -1,12 +1,18 @@
 import { ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import React, { ReactElement } from "react";
 
+export type ButtonText = string;
+export type ButtonListKey = string;
+export type ButtonOnClick = () => void;
+export type ButtonIcon = ReactElement;
+export type ButtonClassName = string;
+
 interface Props {
-  text: string;
-  listKey: string;
-  onClick: () => void;
-  icon?: ReactElement;
-  className?: string;
+  text: ButtonText;
+  listKey: ButtonListKey;
+  onClick: ButtonOnClick;
+  icon?: ButtonIcon;
+  className?: ButtonClassName;
   foldIcon?: ReactElement;
 }
 
