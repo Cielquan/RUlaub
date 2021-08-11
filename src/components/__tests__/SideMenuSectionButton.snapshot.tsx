@@ -2,13 +2,13 @@ import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 
-import SideMenuDatabaseModifyButton from "../SideMenuDatabaseModifyButton";
+import SideMenuSectionButton from "../SideMenuSectionButton";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
 
 jest.mock("../SideMenuButton", () => () => "SideMenuButton");
 
-describe("SideMenuDatabaseModifyButton component", () => {
+describe("SideMenuSectionButton component", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {
@@ -19,7 +19,7 @@ describe("SideMenuDatabaseModifyButton component", () => {
     const tree = renderer
       .create(
         <Provider store={mockStore}>
-          <SideMenuDatabaseModifyButton />
+          <SideMenuSectionButton text="text" listKey="key" sectionItemList={[]} />
         </Provider>
       )
       .toJSON();

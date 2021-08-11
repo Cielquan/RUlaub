@@ -1,3 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`SideMenuDatabaseButton component renders correctly with mocked subComponents 1`] = `"SideMenuButton"`;
