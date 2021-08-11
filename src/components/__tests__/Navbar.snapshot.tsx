@@ -16,7 +16,7 @@ describe("Navbar component", () => {
     mockStore.clearActions();
   });
 
-  it("renders correctly", () => {
+  it("renders correctly with mocked subComponents", () => {
     const tree = renderer
       .create(
         <Provider store={mockStore}>
