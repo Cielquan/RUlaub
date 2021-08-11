@@ -1,3 +1,4 @@
+import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
@@ -41,5 +42,20 @@ describe("SideMenuSectionButton component", () => {
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  it("renders correctly folded and unfolded", () => {
+    const { asFragment, getByText } = render(
+      <Provider store={mockStore}>
+        <SideMenuSectionButton
+          text="text-mocked"
+          listKey="key-mocked"
+          sectionItemList={[["btn-txt", "lst-key", () => undefined]]}
+        />
+      </Provider>
+    );
+    expect(asFragment()).toMatchSnapshot();
+    fireEvent.click(getByText("text-mocked"));
+    expect(asFragment()).toMatchSnapshot();
   });
 });

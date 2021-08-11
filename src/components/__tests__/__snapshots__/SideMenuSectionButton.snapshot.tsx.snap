@@ -44,4 +44,117 @@ exports[`SideMenuSectionButton component renders correctly (unmocked) 1`] = `
 </div>
 `;
 
+exports[`SideMenuSectionButton component renders correctly folded and unfolded 1`] = `
+<DocumentFragment>
+  <div
+    aria-disabled="false"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+    role="button"
+    tabindex="0"
+  >
+    <div
+      class="MuiListItemIcon-root"
+    />
+    <div
+      class="MuiListItemText-root"
+    >
+      <span
+        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+      >
+        text-mocked
+      </span>
+    </div>
+    <svg
+      aria-hidden="true"
+      class="MuiSvgIcon-root"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+      />
+    </svg>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`SideMenuSectionButton component renders correctly folded and unfolded 2`] = `
+<DocumentFragment>
+  <div
+    aria-disabled="false"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+    role="button"
+    tabindex="0"
+  >
+    <div
+      class="MuiListItemIcon-root"
+    />
+    <div
+      class="MuiListItemText-root"
+    >
+      <span
+        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+      >
+        text-mocked
+      </span>
+    </div>
+    <svg
+      aria-hidden="true"
+      class="MuiSvgIcon-root"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"
+      />
+    </svg>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </div>
+  <div
+    class="MuiCollapse-root"
+    style="min-height: 0px; height: 0px; transition-duration: 0ms;"
+  >
+    <div
+      class="MuiCollapse-wrapper"
+    >
+      <div
+        class="MuiCollapse-wrapperInner"
+      >
+        <div
+          class="MuiList-root"
+        >
+          <div
+            aria-disabled="false"
+            class="MuiButtonBase-root MuiListItem-root makeStyles-sideMenuNestedButton-8 MuiListItem-gutters MuiListItem-button"
+            role="button"
+            tabindex="0"
+          >
+            <div
+              class="MuiListItemIcon-root"
+            />
+            <div
+              class="MuiListItemText-root"
+            >
+              <span
+                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+              >
+                btn-txt
+              </span>
+            </div>
+            <span
+              class="MuiTouchRipple-root"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`SideMenuSectionButton component renders correctly with string-mocked subComponents 1`] = `"SideMenuButton"`;
