@@ -19,7 +19,7 @@ describe("Calendar component", () => {
     mockStore.clearActions();
   });
 
-  it("renders correctly with mocked subComponents", () => {
+  it("renders correctly with string-mocked subComponents", () => {
     const tree = renderer
       .create(
         <Provider store={mockStore}>

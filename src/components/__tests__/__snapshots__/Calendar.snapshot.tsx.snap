@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Calendar component renders correctly with mocked subComponents 1`] = `
+exports[`Calendar component renders correctly with string-mocked subComponents 1`] = `
 <div
   style={
     Object {

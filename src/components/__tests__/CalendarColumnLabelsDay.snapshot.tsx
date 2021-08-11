@@ -15,7 +15,7 @@ describe("CalendarColumnLabelsDay component", () => {
     mockStore.clearActions();
   });
 
-  it("renders correctly with mocked subComponents", () => {
+  it("renders correctly with string-mocked subComponents", () => {
     const tree = renderer
       .create(
         <CalendarColumnLabelsDay width={1} positionX={2} year={3} daysInYear={4} />

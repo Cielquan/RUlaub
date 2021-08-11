@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CalendarRowLabelsUser component renders correctly with mocked subComponents 1`] = `
+exports[`CalendarRowLabelsUser component renders correctly with string-mocked subComponents 1`] = `
 <div
   className="makeStyles-multigridRowLabels-15"
   onScroll={[Function]}
