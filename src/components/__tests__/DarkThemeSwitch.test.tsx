@@ -1,12 +1,12 @@
+import { fireEvent, render } from "@testing-library/react";
 import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
-import { render, fireEvent } from "@testing-library/react";
 
 import DarkThemeSwitch from "../DarkThemeSwitch";
+import Languages from "../../i18n";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
-import Languages from "../../i18n";
 
 describe("DarkThemeSwitch component", () => {
   const mockStore = generateMockStore(initialState);
