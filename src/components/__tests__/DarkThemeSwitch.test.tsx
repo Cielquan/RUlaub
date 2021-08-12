@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
@@ -27,15 +27,15 @@ describe("DarkThemeSwitch component", () => {
   });
 
   it("renders tooltip", async () => {
-    const { findByText, getByTestId } = render(
+    render(
       <Provider store={mockStore}>
         <DarkThemeSwitch />
       </Provider>
     );
     expect(mockStore.getState().language).toEqual(Languages.english);
-    fireEvent.mouseOver(getByTestId("theme-switch"));
+    fireEvent.mouseOver(screen.getByTestId("theme-switch"));
     expect(
-      await findByText(
+      await screen.findByText(
         mockStore.getState().theme === "dark"
           ? "Activate Light Theme"
           : "Activate Dark Theme"
