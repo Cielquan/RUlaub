@@ -53,6 +53,7 @@ const SideMenuSectionButton = ({
           {sectionItemList.map((item) => (
             <SideMenuButton
               text={item[0]}
+              key={`${item[1]}-outer`}
               listKey={item[1]}
               onClick={item[2]}
               icon={item[3]}
