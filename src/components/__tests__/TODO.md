@@ -8,7 +8,6 @@
 
 ### Snapshot tests to add
 
-- FAB tooltip
 - InfoPage when open else NULL
 - LanguageMenu when open
 - SideMenu when open else NULL

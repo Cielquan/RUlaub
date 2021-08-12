@@ -4,6 +4,7 @@ exports[`NewHolidayButton component renders correctly 1`] = `
 <button
   aria-describedby={null}
   className="MuiButtonBase-root MuiFab-root makeStyles-newHolidayButton-10 MuiFab-primary"
+  data-testid="new-holiday-fab"
   disabled={false}
   onBlur={[Function]}
   onDragLeave={[Function]}
