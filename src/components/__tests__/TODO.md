@@ -8,7 +8,6 @@
 
 ### Snapshot tests to add
 
-- DarkThemeSwitch tooltip
 - FAB tooltip
 - InfoPage when open else NULL
 - LanguageMenu when open

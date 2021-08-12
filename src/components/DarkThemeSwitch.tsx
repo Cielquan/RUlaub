@@ -18,7 +18,10 @@ const DarkThemeSwitch = (): ReactElement => {
       arrow
       title={themeState === "dark" ? t`Activate Light Theme` : t`Activate Dark Theme`}
     >
-      <IconButton onClick={themeState === "dark" ? useLightTheme : useDarkTheme}>
+      <IconButton
+        data-testid="theme-switch"
+        onClick={themeState === "dark" ? useLightTheme : useDarkTheme}
+      >
         {themeState === "dark" ? <BrightnessHighIcon /> : <BrightnessLowIcon />}
       </IconButton>
     </Tooltip>

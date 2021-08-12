@@ -4,6 +4,7 @@ exports[`DarkThemeSwitch component renders correctly 1`] = `
 <button
   aria-describedby={null}
   className="MuiButtonBase-root MuiIconButton-root"
+  data-testid="theme-switch"
   disabled={false}
   onBlur={[Function]}
   onClick={[Function]}
