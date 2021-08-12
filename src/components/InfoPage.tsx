@@ -31,7 +31,10 @@ Transition.defaultProps = {
   children: <></>,
 };
 
-const InfoPage = (): ReactElement => {
+interface Props {
+  onClick?: () => void | null;
+}
+const InfoPage = ({ onClick }: Props): ReactElement => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -46,6 +49,7 @@ const InfoPage = (): ReactElement => {
 
   return (
     <Dialog
+      data-testid="info-page"
       open={infoPageState}
       TransitionComponent={Transition}
       keepMounted
@@ -69,12 +73,20 @@ const InfoPage = (): ReactElement => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={closeInfoPage} color="primary" autoFocus>
+        <Button
+          data-testid="info-page-btn"
+          onClick={typeof onClick === "function" ? onClick : closeInfoPage}
+          color="primary"
+          autoFocus
+        >
           <Trans>Close</Trans>
         </Button>
       </DialogActions>
     </Dialog>
   );
+};
+InfoPage.defaultProps = {
+  onClick: null,
 };
 
 export default InfoPage;
