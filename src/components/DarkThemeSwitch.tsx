@@ -10,7 +10,10 @@ import { actionCreators, State } from "../state";
 
 const DarkThemeSwitch = (): ReactElement => {
   const dispatch = useDispatch();
-  const { useDarkTheme, useLightTheme } = bindActionCreators(actionCreators, dispatch);
+  const { activateDarkTheme, activateLightTheme } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   const themeState = useSelector((state: State) => state.theme);
 
   return (
@@ -20,7 +23,7 @@ const DarkThemeSwitch = (): ReactElement => {
     >
       <IconButton
         data-testid="theme-switch"
-        onClick={themeState === "dark" ? useLightTheme : useDarkTheme}
+        onClick={themeState === "dark" ? activateLightTheme : activateDarkTheme}
       >
         {themeState === "dark" ? <BrightnessHighIcon /> : <BrightnessLowIcon />}
       </IconButton>

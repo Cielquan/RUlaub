@@ -5,24 +5,24 @@ import { LanguageAction } from "../actions";
 
 import store from "../store";
 
-export const useDEAction = (): LanguageAction => ({
+export const activateDEAction = (): LanguageAction => ({
   type: LanguageType.DE,
 });
 
-export const useDE =
+export const activateDE =
   () =>
   (dispatch: Dispatch<LanguageAction>): void => {
-    dispatch(useDEAction());
+    dispatch(activateDEAction());
   };
 
-export const useENAction = (): LanguageAction => ({
+export const activateENAction = (): LanguageAction => ({
   type: LanguageType.EN,
 });
 
-export const useEN =
+export const activateEN =
   () =>
   (dispatch: Dispatch<LanguageAction>): void => {
-    dispatch(useENAction());
+    dispatch(activateENAction());
   };
 
 export const loadLangState =
@@ -34,9 +34,9 @@ export const loadLangState =
     const states = getState();
     if (states.localConfig.settings.language !== states.language.locale) {
       if (states.localConfig.settings.language === "de-DE") {
-        dispatch(useDEAction());
+        dispatch(activateDEAction());
       } else {
-        dispatch(useENAction());
+        dispatch(activateENAction());
       }
     }
   };

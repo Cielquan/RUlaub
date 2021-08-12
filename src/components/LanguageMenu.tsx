@@ -12,12 +12,12 @@ import LanguageMenuButton from "./LanguageMenuButton";
 
 const LanguageMenu = (): ReactElement => {
   const dispatch = useDispatch();
-  const { useDE, useEN } = bindActionCreators(actionCreators, dispatch);
+  const { activateDE, activateEN } = bindActionCreators(actionCreators, dispatch);
   const langState = useSelector((state: State) => state.language);
 
   const languages = [
-    { changeHandle: useDE, lang: Languages.german },
-    { changeHandle: useEN, lang: Languages.english },
+    { changeHandle: activateDE, lang: Languages.german },
+    { changeHandle: activateEN, lang: Languages.english },
   ];
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

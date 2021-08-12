@@ -5,24 +5,24 @@ import { ThemeAction } from "../actions";
 
 import store from "../store";
 
-export const useDarkThemeAction = (): ThemeAction => ({
+export const activateDarkThemeAction = (): ThemeAction => ({
   type: ThemeType.DARK,
 });
 
-export const useDarkTheme =
+export const activateDarkTheme =
   () =>
   (dispatch: Dispatch<ThemeAction>): void => {
-    dispatch(useDarkThemeAction());
+    dispatch(activateDarkThemeAction());
   };
 
-export const useLightThemeAction = (): ThemeAction => ({
+export const activateLightThemeAction = (): ThemeAction => ({
   type: ThemeType.LIGHT,
 });
 
-export const useLightTheme =
+export const activateLightTheme =
   () =>
   (dispatch: Dispatch<ThemeAction>): void => {
-    dispatch(useLightThemeAction());
+    dispatch(activateLightThemeAction());
   };
 
 export const loadThemeState =
@@ -34,9 +34,9 @@ export const loadThemeState =
     const states = getState();
     if (states.localConfig.settings.theme !== states.theme) {
       if (states.localConfig.settings.theme === "dark") {
-        dispatch(useDarkThemeAction());
+        dispatch(activateDarkThemeAction());
       } else {
-        dispatch(useLightThemeAction());
+        dispatch(activateLightThemeAction());
       }
     }
   };
