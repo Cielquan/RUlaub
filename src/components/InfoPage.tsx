@@ -34,6 +34,7 @@ Transition.defaultProps = {
 interface Props {
   onClick?: () => void | null;
 }
+
 const InfoPage = ({ onClick }: Props): ReactElement => {
   const classes = useStyles();
 
