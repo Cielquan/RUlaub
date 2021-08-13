@@ -99,7 +99,7 @@ exports[`InfoPage component renders correctly when open 1`] = `
 </div>
 `;
 
-exports[`InfoPage component renders not by default 1`] = `
+exports[`InfoPage component renders invisible by default 1`] = `
 <div
   aria-hidden="true"
   class="MuiDialog-root"

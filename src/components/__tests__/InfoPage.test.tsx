@@ -21,7 +21,7 @@ describe("InfoPage component", () => {
     mockStore = generateMockStore(testState);
   });
 
-  it("renders not by default", () => {
+  it("renders invisible by default", () => {
     expect(mockStore.getState().infoPage).toBe(false);
     render(
       <Provider store={mockStore}>
