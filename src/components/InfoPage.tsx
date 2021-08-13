@@ -32,7 +32,7 @@ Transition.defaultProps = {
 };
 
 interface Props {
-  onClick?: () => void | null;
+  onClick?: () => void;
 }
 
 const InfoPage = ({ onClick }: Props): ReactElement => {
@@ -76,7 +76,10 @@ const InfoPage = ({ onClick }: Props): ReactElement => {
       <DialogActions>
         <Button
           data-testid="info-page-btn"
-          onClick={typeof onClick === "function" ? onClick : closeInfoPage}
+          onClick={() => {
+            if (typeof onClick === "function") onClick();
+            closeInfoPage();
+          }}
           color="primary"
           autoFocus
         >
@@ -87,7 +90,7 @@ const InfoPage = ({ onClick }: Props): ReactElement => {
   );
 };
 InfoPage.defaultProps = {
-  onClick: null,
+  onClick: () => undefined,
 };
 
 export default InfoPage;

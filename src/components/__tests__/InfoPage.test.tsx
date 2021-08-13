@@ -10,7 +10,7 @@ import { MockStoreEnhanced } from "redux-mock-store";
 import InfoPage from "../InfoPage";
 import { initialState, State } from "../../state";
 import generateMockStore from "../../testUtils";
-import { openInfoPageAction } from "../../state/action-creators";
+import { closeInfoPageAction } from "../../state/action-creators";
 
 describe("InfoPage component", () => {
   let testState: State;
@@ -60,9 +60,7 @@ describe("InfoPage component", () => {
   it("closes when button is clicked", () => {
     testState.infoPage = true;
     const alteredMockStore = generateMockStore(testState);
-    const onClickMock = jest.fn(() => {
-      alteredMockStore.dispatch(openInfoPageAction());
-    });
+    const onClickMock = jest.fn();
 
     expect(alteredMockStore.getState().infoPage).toBe(true);
     render(
@@ -80,7 +78,7 @@ describe("InfoPage component", () => {
 
     userEvent.click(screen.getByTestId("info-page-btn"));
     expect(onClickMock).toHaveBeenCalledTimes(1);
-    const expectedActions = [openInfoPageAction()];
+    const expectedActions = [closeInfoPageAction()];
     expect(alteredMockStore.getActions()).toEqual(expectedActions);
   });
 });
