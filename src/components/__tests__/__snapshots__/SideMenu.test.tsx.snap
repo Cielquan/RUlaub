@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SideMenu component renders correctly when open 1`] = `
+<div
+  class="MuiDrawer-root MuiDrawer-modal"
+  data-testid="side-menu"
+  role="presentation"
+  style="position: fixed; z-index: 1300; right: 0px; bottom: 0px; top: 0px; left: 0px;"
+>
+  <div
+    aria-hidden="true"
+    class="MuiBackdrop-root"
+    style="opacity: 1; webkit-transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms; transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;"
+  />
+  <div
+    data-test="sentinelStart"
+    tabindex="0"
+  />
+  <div
+    class="MuiPaper-root MuiDrawer-paper MuiDrawer-paperAnchorLeft MuiPaper-elevation16"
+    tabindex="-1"
+  >
+    <div
+      class="makeStyles-sideMenuHeader-30"
+    >
+      <button
+        class="MuiButtonBase-root MuiIconButton-root"
+        data-testid="side-menu-btn"
+        tabindex="0"
+        type="button"
+      >
+        <span
+          class="MuiIconButton-label"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root"
+            focusable="false"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
+            />
+          </svg>
+        </span>
+        <span
+          class="MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+    <hr
+      class="MuiDivider-root"
+    />
+    <ul
+      class="MuiList-root MuiList-padding"
+    >
+      SideMenuButton
+      SideMenuSectionButton
+    </ul>
+    <div
+      class="makeStyles-infoButton-26"
+    >
+      <hr
+        class="MuiDivider-root"
+      />
+      <ul
+        class="MuiList-root MuiList-padding"
+      >
+        SideMenuButton
+      </ul>
+    </div>
+  </div>
+  <div
+    data-test="sentinelEnd"
+    tabindex="0"
+  />
+</div>
+`;

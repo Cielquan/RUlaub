@@ -47,9 +47,15 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
   ];
 
   return (
-    <Drawer anchor="left" open={sideMenuState} onClose={closeSideMenu}>
+    <Drawer
+      data-testid="side-menu"
+      anchor="left"
+      open={sideMenuState}
+      onClose={closeSideMenu}
+    >
       <div className={classes.sideMenuHeader}>
         <IconButton
+          data-testid="side-menu-btn"
           onClick={() => {
             if (typeof onClick === "function") onClick();
             closeSideMenu();
