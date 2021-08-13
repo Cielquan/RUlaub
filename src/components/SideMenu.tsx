@@ -26,7 +26,11 @@ type SectionlessItemList = Array<
   [ButtonText, ButtonListKey, ButtonOnClick, ButtonIcon?, ButtonClassName?]
 >;
 
-const SideMenu = (): ReactElement => {
+interface Props {
+  onClick?: () => void | null;
+}
+
+const SideMenu = ({ onClick }: Props): ReactElement => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -45,7 +49,12 @@ const SideMenu = (): ReactElement => {
   return (
     <Drawer anchor="left" open={sideMenuState} onClose={closeSideMenu}>
       <div className={classes.sideMenuHeader}>
-        <IconButton onClick={closeSideMenu}>
+        <IconButton
+          onClick={() => {
+            if (typeof onClick === "function") onClick();
+            closeSideMenu();
+          }}
+        >
           <ChevronLeftIcon />
         </IconButton>
       </div>
@@ -55,7 +64,11 @@ const SideMenu = (): ReactElement => {
           <SideMenuButton
             text={item[0]}
             listKey={item[1]}
-            onClick={item[2]}
+            onClick={() => {
+              if (typeof onClick === "function") onClick();
+              closeSideMenu();
+              item[2]();
+            }}
             icon={item[3]}
             className={item[4]}
           />
@@ -75,6 +88,7 @@ const SideMenu = (): ReactElement => {
             text={t`Info`}
             icon={<InfoIcon />}
             onClick={() => {
+              if (typeof onClick === "function") onClick();
               closeSideMenu();
               openInfoPage();
             }}
@@ -83,6 +97,9 @@ const SideMenu = (): ReactElement => {
       </div>
     </Drawer>
   );
+};
+SideMenu.defaultProps = {
+  onClick: () => undefined,
 };
 
 export default SideMenu;
