@@ -69,6 +69,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
         {sectionlessItemList.map((item) => (
           <SideMenuButton
             text={item[0]}
+            key={item[1]}
             listKey={item[1]}
             onClick={() => {
               if (typeof onClick === "function") onClick();
