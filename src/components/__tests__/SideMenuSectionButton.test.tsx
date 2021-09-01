@@ -55,7 +55,8 @@ describe("SideMenuSectionButton component", () => {
       </Provider>
     );
     expect(asFragment()).toMatchSnapshot();
-    fireEvent.click(screen.getByText("text-mocked"));
+    // NOTE: `userEvent.click` changes snapshot, change not shown in browser in real app
+    fireEvent.click(screen.getByRole("button"));
     expect(asFragment()).toMatchSnapshot();
   });
 });
