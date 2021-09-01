@@ -55,11 +55,7 @@ describe("SideMenu component", () => {
         <SideMenu onClick={onClickMock} />
       </Provider>
     );
-    expect(screen.getByTestId("side-menu")).not.toHaveAttribute("aria-hidden");
-    expect(screen.getByTestId("side-menu")).not.toHaveAttribute(
-      "style",
-      expect.stringMatching(/.*visibility: hidden.*/i)
-    );
+    expect(screen.getByTestId("side-menu")).toBeVisible();
 
     userEvent.click(screen.getByTestId("side-menu-btn"));
     expect(onClickMock).toHaveBeenCalledTimes(1);

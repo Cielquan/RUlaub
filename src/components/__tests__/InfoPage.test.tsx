@@ -33,11 +33,7 @@ describe("InfoPage component", () => {
       </Provider>
     );
     expect(screen.getByTestId("info-page")).toMatchSnapshot();
-    expect(screen.getByTestId("info-page")).toHaveAttribute("aria-hidden", "true");
-    expect(screen.getByTestId("info-page")).toHaveAttribute(
-      "style",
-      expect.stringMatching(/.*visibility: hidden.*/i)
-    );
+    expect(screen.getByTestId("info-page")).not.toBeVisible();
   });
 
   it("renders correctly when open", () => {
@@ -53,11 +49,7 @@ describe("InfoPage component", () => {
       </Provider>
     );
     expect(screen.getByTestId("info-page")).toMatchSnapshot();
-    expect(screen.getByTestId("info-page")).not.toHaveAttribute("aria-hidden");
-    expect(screen.getByTestId("info-page")).not.toHaveAttribute(
-      "style",
-      expect.stringMatching(/.*visibility: hidden.*/i)
-    );
+    expect(screen.getByTestId("info-page")).toBeVisible();
   });
 
   it("closes when button is clicked", () => {
@@ -73,11 +65,7 @@ describe("InfoPage component", () => {
         </I18nProvider>
       </Provider>
     );
-    expect(screen.getByTestId("info-page")).not.toHaveAttribute("aria-hidden");
-    expect(screen.getByTestId("info-page")).not.toHaveAttribute(
-      "style",
-      expect.stringMatching(/.*visibility: hidden.*/i)
-    );
+    expect(screen.getByTestId("info-page")).toBeVisible();
 
     userEvent.click(screen.getByTestId("info-page-btn"));
     expect(onClickMock).toHaveBeenCalledTimes(1);

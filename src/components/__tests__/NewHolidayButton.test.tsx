@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import React from "react";
 import renderer from "react-test-renderer";
 
@@ -22,7 +23,7 @@ describe("NewHolidayButton component", () => {
   it("renders tooltip", async () => {
     render(<NewHolidayButton />);
     expect(mockStore.getState().language).toEqual(Languages.english);
-    fireEvent.mouseOver(screen.getByTestId("new-holiday-fab"));
+    userEvent.hover(screen.getByTestId("new-holiday-fab"));
     expect(await screen.findByText("Add new Holiday")).toBeInTheDocument();
   });
 });

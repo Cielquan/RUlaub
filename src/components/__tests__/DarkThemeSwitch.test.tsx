@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
@@ -33,7 +34,7 @@ describe("DarkThemeSwitch component", () => {
       </Provider>
     );
     expect(mockStore.getState().language).toEqual(Languages.english);
-    fireEvent.mouseOver(screen.getByTestId("theme-switch"));
+    userEvent.hover(screen.getByTestId("theme-switch"));
     expect(
       await screen.findByText(
         mockStore.getState().theme === "dark"
