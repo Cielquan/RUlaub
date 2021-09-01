@@ -13,7 +13,7 @@ import { closeSideMenuAction } from "../../state/action-creators";
 jest.mock("../SideMenuButton", () => () => "SideMenuButton");
 jest.mock("../SideMenuSectionButton", () => () => "SideMenuSectionButton");
 
-describe("SideMenu component", () => {
+describe("<SideMenu />", () => {
   let testState: State;
   let mockStore: MockStoreEnhanced<Partial<CombinedState<State>>>;
 

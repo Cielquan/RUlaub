@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Base App renders correctly with string-mocked subComponents 1`] = `
+exports[`<App /> renders correctly with subComponents mocked as string 1`] = `
 Array [
   <div
     className="makeStyles-root-1"

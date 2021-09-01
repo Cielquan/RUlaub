@@ -6,7 +6,7 @@ import SideMenuButton from "../SideMenuButton";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
 
-describe("SideMenuButton component", () => {
+describe("<SideMenuButton />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {

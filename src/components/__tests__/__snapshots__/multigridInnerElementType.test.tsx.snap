@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`innerElementType component renders correctly 1`] = `
+exports[`<innerElementType /> renders correctly 1`] = `
 <div
   className="makeStyles-multigridBackground-12"
   style={

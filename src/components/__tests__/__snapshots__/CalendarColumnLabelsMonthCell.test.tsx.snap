@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CalendarColumnLabelsMonthCell component renders correctly 1`] = `
+exports[`<CalendarColumnLabelsMonthCell /> renders correctly 1`] = `
 <div
   className="makeStyles-multigridCell-21"
   style={

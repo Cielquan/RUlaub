@@ -12,14 +12,14 @@ jest.mock("../CalendarColumnLabelsMonth", () => () => "CalendarColumnLabelsMonth
 jest.mock("../CalendarTableHead", () => () => "CalendarTableHead");
 jest.mock("../CalendarRowLabelsUser", () => () => "CalendarRowLabelsUser");
 
-describe("Calendar component", () => {
+describe("<Calendar />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {
     mockStore.clearActions();
   });
 
-  it("renders correctly with string-mocked subComponents", () => {
+  it("renders correctly with subComponents mocked as string", () => {
     const tree = renderer
       .create(
         <Provider store={mockStore}>

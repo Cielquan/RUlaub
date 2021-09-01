@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NewHolidayButton component renders correctly 1`] = `
+exports[`<NewHolidayButton /> renders correctly 1`] = `
 <button
   aria-describedby={null}
   className="MuiButtonBase-root MuiFab-root makeStyles-newHolidayButton-10 MuiFab-primary"

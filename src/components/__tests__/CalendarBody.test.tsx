@@ -9,14 +9,14 @@ import generateMockStore from "../../testUtils";
 jest.mock("../CalendarBodyCell", () => () => "CalendarBodyCell");
 jest.mock("../multigridInnerElementType", () => () => "multigridInnerElementType");
 
-describe("CalendarBody component", () => {
+describe("<CalendarBody />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {
     mockStore.clearActions();
   });
 
-  it("renders correctly with string-mocked subComponents", () => {
+  it("renders correctly with subComponents mocked as string", () => {
     const tree = renderer
       .create(
         <Provider store={mockStore}>

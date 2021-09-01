@@ -5,7 +5,7 @@ import CalendarTableHeadCell from "../CalendarTableHeadCell";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
 
-describe("CalendarTableHeadCell component", () => {
+describe("<CalendarTableHeadCell />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {

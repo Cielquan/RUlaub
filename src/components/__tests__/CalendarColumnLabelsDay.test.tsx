@@ -8,14 +8,14 @@ import generateMockStore from "../../testUtils";
 jest.mock("../CalendarColumnLabelsDayCell", () => () => "CalendarColumnLabelsDayCell");
 jest.mock("../multigridInnerElementType", () => () => "multigridInnerElementType");
 
-describe("CalendarColumnLabelsDay component", () => {
+describe("<CalendarColumnLabelsDay />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {
     mockStore.clearActions();
   });
 
-  it("renders correctly with string-mocked subComponents", () => {
+  it("renders correctly with subComponents mocked as string", () => {
     const tree = renderer
       .create(
         <CalendarColumnLabelsDay width={1} positionX={2} year={3} daysInYear={4} />

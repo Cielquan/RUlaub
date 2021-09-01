@@ -13,7 +13,7 @@ import { initialState, State } from "../../state";
 import generateMockStore from "../../testUtils";
 import { closeInfoPageAction } from "../../state/action-creators";
 
-describe("InfoPage component", () => {
+describe("<InfoPage />", () => {
   let testState: State;
   let mockStore: MockStoreEnhanced<Partial<CombinedState<State>>>;
 

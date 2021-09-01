@@ -7,7 +7,7 @@ import CalendarColumnLabelsMonthCell from "../CalendarColumnLabelsMonthCell";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
 
-describe("CalendarColumnLabelsMonthCell component", () => {
+describe("<CalendarColumnLabelsMonthCell />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {

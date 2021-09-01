@@ -11,14 +11,14 @@ jest.mock(
 );
 jest.mock("../multigridInnerElementType", () => () => "multigridInnerElementType");
 
-describe("CalendarColumnLabelsMonth component", () => {
+describe("<CalendarColumnLabelsMonth />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {
     mockStore.clearActions();
   });
 
-  it("renders correctly with string-mocked subComponents", () => {
+  it("renders correctly with subComponents mocked as string", () => {
     const tree = renderer
       .create(<CalendarColumnLabelsMonth width={1} positionX={2} year={3} />)
       .toJSON();

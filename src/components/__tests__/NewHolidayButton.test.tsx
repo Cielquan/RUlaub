@@ -8,7 +8,7 @@ import Languages from "../../i18n";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
 
-describe("NewHolidayButton component", () => {
+describe("<NewHolidayButton />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {

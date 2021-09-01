@@ -9,7 +9,7 @@ import Languages from "../../i18n";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
 
-describe("DarkThemeSwitch component", () => {
+describe("<DarkThemeSwitch />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {

@@ -9,7 +9,7 @@ import { initialState } from "../../state";
 import { LanguageAction } from "../../state/actions";
 import generateMockStore from "../../testUtils";
 
-describe("LanguageMenuButton component", () => {
+describe("<LanguageMenuButton />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {

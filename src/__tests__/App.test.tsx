@@ -12,14 +12,14 @@ jest.mock("../components/Navbar", () => () => "Navbar");
 jest.mock("../components/NewHolidayButton", () => () => "NewHolidayButton");
 jest.mock("../components/SideMenu", () => () => "SideMenu");
 
-describe("Base App", () => {
+describe("<App />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {
     mockStore.clearActions();
   });
 
-  it("renders correctly with string-mocked subComponents", () => {
+  it("renders correctly with subComponents mocked as string", () => {
     const tree = renderer
       .create(
         <Provider store={mockStore}>

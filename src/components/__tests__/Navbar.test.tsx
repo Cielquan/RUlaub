@@ -9,14 +9,14 @@ import generateMockStore from "../../testUtils";
 jest.mock("../DarkThemeSwitch", () => () => "DarkThemeSwitch");
 jest.mock("../LanguageMenu", () => () => "LanguageMenu");
 
-describe("Navbar component", () => {
+describe("<Navbar />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {
     mockStore.clearActions();
   });
 
-  it("renders correctly with string-mocked subComponents", () => {
+  it("renders correctly with subComponents mocked as string", () => {
     const tree = renderer
       .create(
         <Provider store={mockStore}>

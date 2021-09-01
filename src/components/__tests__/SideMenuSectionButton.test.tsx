@@ -10,7 +10,7 @@ import generateMockStore from "../../testUtils";
 
 jest.mock("../SideMenuButton", () => ({ __esModule: true, default: jest.fn() }));
 
-describe("SideMenuSectionButton component", () => {
+describe("<SideMenuSectionButton />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe("SideMenuSectionButton component", () => {
     );
   });
 
-  it("renders correctly (unmocked)", () => {
+  it("renders correctly with no mocks", () => {
     const tree = renderer
       .create(
         <Provider store={mockStore}>
@@ -32,7 +32,7 @@ describe("SideMenuSectionButton component", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("renders correctly with string-mocked subComponents", () => {
+  it("renders correctly with subComponents mocked as string", () => {
     (SideMenuButton as unknown as jest.Mock).mockImplementation(() => "SideMenuButton");
     const tree = renderer
       .create(

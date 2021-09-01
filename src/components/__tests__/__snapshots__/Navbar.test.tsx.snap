@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Navbar component renders correctly with string-mocked subComponents 1`] = `
+exports[`<Navbar /> renders correctly with subComponents mocked as string 1`] = `
 <header
   className="MuiPaper-root MuiAppBar-root MuiAppBar-positionFixed MuiAppBar-colorPrimary mui-fixed MuiPaper-elevation4"
 >

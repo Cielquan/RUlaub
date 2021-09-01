@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CalendarTableHead component renders correctly with string-mocked subComponents 1`] = `
+exports[`<CalendarTableHead /> renders correctly with subComponents mocked as string 1`] = `
 <div
   className="makeStyles-multigridTableHead-13"
   onScroll={[Function]}

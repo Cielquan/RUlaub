@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`SideMenuButton component renders correctly 1`] = `
+exports[`<SideMenuButton /> renders correctly 1`] = `
 <div
   aria-disabled={false}
   className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"

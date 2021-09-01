@@ -6,7 +6,7 @@ import InnerElementType from "../multigridInnerElementType";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
 
-describe("innerElementType component", () => {
+describe("<innerElementType />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DarkThemeSwitch component renders correctly 1`] = `
+exports[`<DarkThemeSwitch /> renders correctly 1`] = `
 <button
   aria-describedby={null}
   className="MuiButtonBase-root MuiIconButton-root"
