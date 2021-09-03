@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import { CombinedState } from "redux";
 import { MockStoreEnhanced } from "redux-mock-store";
 
-import Languages from "../../i18n";
 import InfoPage from "../InfoPage";
 import { initialState, State } from "../../state";
 import generateMockStore from "../../testUtils";
@@ -23,7 +22,6 @@ describe("<InfoPage />", () => {
   });
 
   it("renders invisible by default", () => {
-    expect(mockStore.getState().language).toEqual(Languages.english);
     expect(mockStore.getState().infoPage).toBe(false);
     render(
       <Provider store={mockStore}>
@@ -37,7 +35,6 @@ describe("<InfoPage />", () => {
   });
 
   it("renders correctly when open", () => {
-    expect(mockStore.getState().language).toEqual(Languages.english);
     testState.infoPage = true;
     const alteredMockStore = generateMockStore(testState);
     expect(alteredMockStore.getState().infoPage).toBe(true);

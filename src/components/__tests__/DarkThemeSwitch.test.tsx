@@ -33,14 +33,7 @@ describe("<DarkThemeSwitch />", () => {
         <DarkThemeSwitch />
       </Provider>
     );
-    expect(mockStore.getState().language).toEqual(Languages.english);
     userEvent.hover(screen.getByTestId("theme-switch"));
-    expect(
-      await screen.findByText(
-        mockStore.getState().theme === "dark"
-          ? "Activate Light Theme"
-          : "Activate Dark Theme"
-      )
-    ).toBeInTheDocument();
+    expect(await screen.findByText("Activate Light Theme")).toBeInTheDocument();
   });
 });
