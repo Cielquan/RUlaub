@@ -3,11 +3,11 @@ import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 import { Dispatch } from "redux";
 
-import { defaultLanguage } from "../../i18n";
 import LanguageMenuButton from "../LanguageMenuButton";
 import { initialState } from "../../state";
 import { LanguageAction } from "../../state/actions";
 import generateMockStore from "../../testUtils";
+import Languages from "../../i18n";
 
 describe("<LanguageMenuButton />", () => {
   const mockStore = generateMockStore(initialState);
@@ -21,7 +21,7 @@ describe("<LanguageMenuButton />", () => {
       .create(
         <Provider store={mockStore}>
           <LanguageMenuButton
-            language={defaultLanguage}
+            language={Languages.english}
             closeHandle={() => undefined}
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             changeHandle={() => (dispatch: Dispatch<LanguageAction>) => undefined}
