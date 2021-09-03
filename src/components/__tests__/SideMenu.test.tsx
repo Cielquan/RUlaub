@@ -57,7 +57,7 @@ describe("<SideMenu />", () => {
     );
     expect(screen.getByTestId("side-menu")).toBeVisible();
 
-    userEvent.click(screen.getByTestId("side-menu-btn"));
+    userEvent.click(screen.getByRole("button"));
     expect(onClickMock).toHaveBeenCalledTimes(1);
     const expectedActions = [closeSideMenuAction()];
     expect(alteredMockStore.getActions()).toEqual(expectedActions);

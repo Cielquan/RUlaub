@@ -55,7 +55,6 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     >
       <div className={classes.sideMenuHeader}>
         <IconButton
-          data-testid="side-menu-btn"
           onClick={() => {
             if (typeof onClick === "function") onClick();
             closeSideMenu();

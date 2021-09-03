@@ -25,7 +25,6 @@ exports[`<SideMenu /> renders correctly when open 1`] = `
     >
       <button
         class="MuiButtonBase-root MuiIconButton-root"
-        data-testid="side-menu-btn"
         tabindex="0"
         type="button"
       >
