@@ -23,7 +23,7 @@ describe("<NewHolidayButton />", () => {
   it("renders tooltip", async () => {
     render(<NewHolidayButton />);
     expect(mockStore.getState().language).toEqual(Languages.english);
-    userEvent.hover(screen.getByTestId("new-holiday-fab"));
+    userEvent.hover(screen.getByRole("button"));
     expect(await screen.findByText("Add new Holiday")).toBeInTheDocument();
   });
 });

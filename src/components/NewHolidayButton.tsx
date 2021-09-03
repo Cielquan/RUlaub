@@ -10,7 +10,7 @@ const NewHolidayButton = (): ReactElement => {
 
   return (
     <Tooltip arrow title={t`Add new Holiday`} className={classes.newHolidayButton}>
-      <Fab data-testid="new-holiday-fab" color="primary">
+      <Fab color="primary">
         <AddIcon />
       </Fab>
     </Tooltip>
