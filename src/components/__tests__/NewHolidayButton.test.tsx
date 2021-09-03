@@ -4,7 +4,6 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import NewHolidayButton from "../NewHolidayButton";
-import Languages from "../../i18n";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
 
@@ -22,7 +21,6 @@ describe("<NewHolidayButton />", () => {
 
   it("renders tooltip", async () => {
     render(<NewHolidayButton />);
-    expect(mockStore.getState().language).toEqual(Languages.english);
     userEvent.hover(screen.getByRole("button"));
     expect(await screen.findByText("Add new Holiday")).toBeInTheDocument();
   });
