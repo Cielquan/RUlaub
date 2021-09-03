@@ -2,20 +2,16 @@ import { render, screen } from "@testing-library/react";
 // import userEvent from "@testing-library/user-event";
 import React from "react";
 import { Provider } from "react-redux";
-import { CombinedState } from "redux";
-import { MockStoreEnhanced } from "redux-mock-store";
 
 import LanguageMenu from "../LanguageMenu";
-import { initialState, State } from "../../state";
+import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
 
 describe("<LanguageMenu />", () => {
-  let testState: State;
-  let mockStore: MockStoreEnhanced<Partial<CombinedState<State>>>;
+  const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {
-    testState = JSON.parse(JSON.stringify(initialState));
-    mockStore = generateMockStore(testState);
+    mockStore.clearActions();
   });
 
   it("renders button correctly", () => {
