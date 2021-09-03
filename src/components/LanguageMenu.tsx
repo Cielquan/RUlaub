@@ -42,10 +42,12 @@ const LanguageMenu = (): ReactElement => {
         <KeyboardArrowDownIcon />
       </Button>
       <Menu
+        data-testid="lang-menu"
         id="language-button"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
+        onClick={handleClose}
         onClose={handleClose}
       >
         {languages.map((lang) => (
