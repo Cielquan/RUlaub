@@ -37,7 +37,7 @@ describe("<SideMenu />", () => {
     const alteredMockStore = generateMockStore(testState);
     expect(alteredMockStore.getState().sideMenu).toBe(true);
     render(
-      <Provider store={mockStore}>
+      <Provider store={alteredMockStore}>
         <SideMenu />
       </Provider>
     );
