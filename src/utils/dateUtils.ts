@@ -1,5 +1,6 @@
-import { i18n as i18nObj } from "@lingui/core";
 import { t } from "@lingui/macro";
+
+import i18nObj from "../i18n";
 
 export const isLeapYear = (year: number): boolean => {
   if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {

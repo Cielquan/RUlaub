@@ -1,4 +1,3 @@
-import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { CssBaseline } from "@material-ui/core";
 import * as locales from "@material-ui/core/locale";
@@ -7,6 +6,7 @@ import React, { ReactElement, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import i18n from "./i18n";
 import { actionCreators, State } from "./state";
 import useStyles from "./styles";
 import createTheme from "./theme";

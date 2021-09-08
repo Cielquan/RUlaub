@@ -1,6 +1,6 @@
 import { LanguageType } from "../action-types";
 import { LanguageAction } from "../actions";
-import { defaultLanguage, Language, Languages } from "../../i18n";
+import { defaultLanguage, Language, Languages } from "../utils/i18n";
 
 export const initialState = defaultLanguage;
 

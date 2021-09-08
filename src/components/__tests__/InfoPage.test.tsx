@@ -1,4 +1,3 @@
-import { i18n } from "@lingui/core";
 import { I18nProvider } from "@lingui/react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
@@ -6,6 +5,8 @@ import React from "react";
 import { Provider } from "react-redux";
 import { CombinedState } from "redux";
 import { MockStoreEnhanced } from "redux-mock-store";
+
+import i18n from "../../i18n";
 
 import InfoPage from "../InfoPage";
 import { initialState, State } from "../../state";

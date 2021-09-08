@@ -7,7 +7,7 @@ import LanguageMenuButton from "../LanguageMenuButton";
 import { initialState } from "../../state";
 import { LanguageAction } from "../../state/actions";
 import generateMockStore from "../../testUtils";
-import Languages from "../../i18n";
+import Languages from "../../state/utils/i18n";
 
 describe("<LanguageMenuButton />", () => {
   const mockStore = generateMockStore(initialState);

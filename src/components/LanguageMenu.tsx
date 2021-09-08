@@ -5,7 +5,7 @@ import React, { MouseEvent, ReactElement, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import Languages from "../i18n";
+import Languages from "../state/utils/i18n";
 import { actionCreators, State } from "../state";
 
 import LanguageMenuButton from "./LanguageMenuButton";

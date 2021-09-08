@@ -1,4 +1,4 @@
-import { SupportedLocales } from "../../i18n";
+import { SupportedLocales } from "./i18n";
 import { SupportedThemes } from "../../theme";
 
 export interface UserConfig {
