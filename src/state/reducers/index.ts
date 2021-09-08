@@ -1,13 +1,19 @@
 import { combineReducers } from "redux";
 
-import dbDataReducer, { initialState as dbDataInitState } from "./dbDataReducer";
-import infoPageReducer, { initialState as infoPageInitState } from "./infoPageReducer";
-import languageReducer, { initialState as languageInitState } from "./languageReducer";
-import localConfigReducer, {
-  initialState as localConfigInitState,
-} from "./localConfigReducer";
-import sideMenuReducer, { initialState as sideMenuInitState } from "./sideMenuReducer";
-import themeReducer, { initialState as themeInitState } from "./themeReducer";
+import dbDataReducer from "./dbDataReducer";
+import infoPageReducer from "./infoPageReducer";
+import {
+  dbDataInitState,
+  infoPageInitState,
+  languageInitState,
+  localConfigInitState,
+  sideMenuInitState,
+  themeInitState,
+} from "./initialStates";
+import languageReducer from "./languageReducer";
+import localConfigReducer from "./localConfigReducer";
+import sideMenuReducer from "./sideMenuReducer";
+import themeReducer from "./themeReducer";
 
 const rootReducer = combineReducers({
   dbData: dbDataReducer,

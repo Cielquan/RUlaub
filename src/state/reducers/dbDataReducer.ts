@@ -1,12 +1,9 @@
 import { DBDataType } from "../action-types";
 import { DBDataAction } from "../actions";
+import { dbDataInitState as initState } from "./initialStates";
 import { DBData, updateDBData } from "../utils/dbData";
 
-import dbData from "../../dev_temp/test.db.json";
-
-export const initialState: DBData = dbData;
-
-const reducer = (state: DBData = initialState, action: DBDataAction): DBData => {
+const reducer = (state: DBData = initState, action: DBDataAction): DBData => {
   switch (action.type) {
     case DBDataType.UPDATE:
       return updateDBData(state, action.payload);

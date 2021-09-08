@@ -3,7 +3,7 @@ import { de, en } from "make-plural/plurals";
 
 import { messages as deMessages } from "./locales/de-DE/messages";
 import { messages as enMessages } from "./locales/en-US/messages";
-import { defaultLocale } from "./state/utils/i18n";
+import { defaultLocale } from "./state/reducers/initialStates";
 
 i18n.loadLocaleData({
   "de-DE": { plurals: de },

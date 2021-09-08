@@ -1,10 +1,9 @@
 import { LanguageType } from "../action-types";
 import { LanguageAction } from "../actions";
-import { defaultLanguage, Language, Languages } from "../utils/i18n";
+import { languageInitState as initState } from "./initialStates";
+import { Language, Languages } from "../utils/i18n";
 
-export const initialState = defaultLanguage;
-
-const reducer = (state: Language = initialState, action: LanguageAction): Language => {
+const reducer = (state: Language = initState, action: LanguageAction): Language => {
   switch (action.type) {
     case LanguageType.DE:
       return Languages.german;
