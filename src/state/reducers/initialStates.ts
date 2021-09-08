@@ -7,6 +7,8 @@ import dbDataJSON from "../../dev_temp/test.db.json";
 // import localConfigJSON from "../../dev_temp/test.local_config.json";
 
 export const defaultLocale: SupportedLocales = "en-US";
+export const defaultTheme: SupportedThemes = "dark";
+
 export const defaultLanguage: Language = Object.values(Languages).filter(
   (lang) => lang.locale === defaultLocale
 )[0];
@@ -24,9 +26,9 @@ export const localConfigInitState: LocalConfig = {
   settings: {
     databaseURI: "",
     yearToShow: 2000,
-    theme: "dark",
+    theme: defaultTheme,
     language: defaultLocale,
   },
 };
 export const sideMenuInitState = false;
-export const themeInitState: SupportedThemes = "dark";
+export const themeInitState = defaultTheme;
