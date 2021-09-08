@@ -25,7 +25,7 @@ export const localConfigInitState: LocalConfig = {
   },
   settings: {
     databaseURI: "",
-    yearToShow: 2000,
+    yearToShow: 0,
     theme: defaultTheme,
     language: defaultLocale,
   },
