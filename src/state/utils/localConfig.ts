@@ -3,9 +3,6 @@ import { SupportedThemes } from "../../theme";
 
 export interface UserConfig {
   name: string | undefined;
-  abbr: string | undefined;
-  vacationDays: number | undefined;
-  hexColor: number | undefined;
 }
 
 export interface SettingsConfig {

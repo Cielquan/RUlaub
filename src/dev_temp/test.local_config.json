@@ -1,9 +1,6 @@
 {
   "user": {
-    "name": "HP First",
-    "abbr": "HPF",
-    "vacationDays": 30,
-    "hexColor": 123
+    "name": "HP First"
   },
   "settings": {
     "databaseURI": "here is the database",

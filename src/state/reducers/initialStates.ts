@@ -19,9 +19,6 @@ export const languageInitState = defaultLanguage;
 export const localConfigInitState: LocalConfig = {
   user: {
     name: undefined,
-    abbr: undefined,
-    vacationDays: undefined,
-    hexColor: undefined,
   },
   settings: {
     databaseURI: undefined,
