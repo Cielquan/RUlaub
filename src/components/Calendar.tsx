@@ -8,11 +8,12 @@ import useStyles from "../styles";
 import createTheme from "../theme";
 import { isLeapYear } from "../utils/dateUtils";
 
-import CalendarColumnLabelsDay from "./CalendarColumnLabelsDay";
 import CalendarBody from "./CalendarBody";
+import CalendarColumnLabelsDay from "./CalendarColumnLabelsDay";
 import CalendarColumnLabelsMonth from "./CalendarColumnLabelsMonth";
-import CalendarTableHead from "./CalendarTableHead";
+import CalendarDummyPage from "./CalendarDummyPage";
 import CalendarRowLabelsUser from "./CalendarRowLabelsUser";
+import CalendarTableHead from "./CalendarTableHead";
 
 const Calendar = (): ReactElement => {
   const classes = useStyles();
@@ -33,7 +34,7 @@ const Calendar = (): ReactElement => {
   }, []);
 
   if (year === undefined) {
-    return <></>;
+    return <CalendarDummyPage />;
   }
 
   const daysInYear = 365 + (isLeapYear(year) ? 1 : 0);

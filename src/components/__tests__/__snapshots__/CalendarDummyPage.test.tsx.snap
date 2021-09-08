@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CalendarDummyPage /> renders correctly 1`] = `
+<h4
+  className="MuiTypography-root MuiTypography-h4 MuiTypography-alignCenter"
+>
+  No year to show selected.
+</h4>
+`;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Calendar /> renders correctly with subComponents mocked as string 1`] = `
+exports[`<Calendar /> renders correctly year to show and with subComponents mocked as string 1`] = `
 <div
   style={
     Object {
@@ -11,3 +11,5 @@ exports[`<Calendar /> renders correctly with subComponents mocked as string 1`] 
   }
 />
 `;
+
+exports[`<Calendar /> renders dummy page without year to show set 1`] = `"CalendarDummyPage"`;
