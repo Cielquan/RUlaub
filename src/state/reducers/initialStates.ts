@@ -18,14 +18,14 @@ export const infoPageInitState = false;
 export const languageInitState = defaultLanguage;
 export const localConfigInitState: LocalConfig = {
   user: {
-    name: "",
-    abbr: "",
-    vacationDays: 0,
-    hexColor: 0,
+    name: undefined,
+    abbr: undefined,
+    vacationDays: undefined,
+    hexColor: undefined,
   },
   settings: {
-    databaseURI: "",
-    yearToShow: 0,
+    databaseURI: undefined,
+    yearToShow: undefined,
     theme: defaultTheme,
     language: defaultLocale,
   },

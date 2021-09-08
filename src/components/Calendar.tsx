@@ -32,6 +32,10 @@ const Calendar = (): ReactElement => {
     setScrollY(e.scrollTop);
   }, []);
 
+  if (year === undefined) {
+    return <></>;
+  }
+
   const daysInYear = 365 + (isLeapYear(year) ? 1 : 0);
 
   return (

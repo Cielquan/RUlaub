@@ -2,15 +2,15 @@ import { SupportedLocales } from "./i18n";
 import { SupportedThemes } from "../../theme";
 
 export interface UserConfig {
-  name: string;
-  abbr: string;
-  vacationDays: number;
-  hexColor: number;
+  name: string | undefined;
+  abbr: string | undefined;
+  vacationDays: number | undefined;
+  hexColor: number | undefined;
 }
 
 export interface SettingsConfig {
-  databaseURI: string;
-  yearToShow: number;
+  databaseURI: string | undefined;
+  yearToShow: number | undefined;
   theme: SupportedThemes;
   language: SupportedLocales;
 }
