@@ -1,6 +1,6 @@
-import { Button, Menu, Typography } from "@material-ui/core";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
-import TranslateIcon from "@material-ui/icons/Translate";
+import { Button, Menu, Typography } from "@mui/material";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import TranslateIcon from "@mui/icons-material/Translate";
 import React, { MouseEvent, ReactElement, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";

@@ -1,6 +1,11 @@
+import { styled } from "@mui/material/styles";
 import React, { CSSProperties, forwardRef, LegacyRef, ReactElement } from "react";
 
-import useStyles, { STYLE_CONST } from "../styles";
+import { STYLE_CONST } from "../styles";
+
+const StyledElement = styled("div")(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper,
+}));
 
 interface Props {
   style: CSSProperties;
@@ -11,23 +16,18 @@ const innerElementType = forwardRef(
   (
     { style, ...rest }: Props,
     ref: LegacyRef<HTMLDivElement> | undefined
-  ): ReactElement => {
-    const classes = useStyles();
-
-    return (
-      <div
-        ref={ref}
-        className={classes.multigridBackground}
-        style={{
-          ...style,
-          paddingLeft: STYLE_CONST.CALENDAR_GUTTER_SIZE,
-          paddingTop: STYLE_CONST.CALENDAR_GUTTER_SIZE,
-        }}
-        // eslint-disable-next-line react/jsx-props-no-spreading
-        {...rest}
-      />
-    );
-  }
+  ): ReactElement => (
+    <StyledElement
+      ref={ref}
+      style={{
+        ...style,
+        paddingLeft: STYLE_CONST.CALENDAR_GUTTER_SIZE,
+        paddingTop: STYLE_CONST.CALENDAR_GUTTER_SIZE,
+      }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...rest}
+    />
+  )
 );
 innerElementType.defaultProps = {
   children: <></>,

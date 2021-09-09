@@ -1,11 +1,19 @@
-import clsx from "clsx";
+import { styled } from "@mui/material/styles";
 import React, { ReactElement, useEffect, useRef } from "react";
 import { FixedSizeGrid as Grid } from "react-window";
 
-import useStyles, { STYLE_CONST } from "../styles";
+import { STYLE_CONST } from "../styles";
 
 import CalendarColumnLabelsDayCell from "./CalendarColumnLabelsDayCell";
 import innerElementType from "./multigridInnerElementType";
+
+const StyledGrid = styled("div")(({ theme }) => ({
+  // absolutely position the label and move it right by a col
+  position: "absolute !important" as "absolute",
+  left: STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH,
+  borderLeft: `1px solid ${theme.palette.text.primary}`,
+  top: STYLE_CONST.CALENDAR_ROW_HEIGHT,
+}));
 
 interface Props {
   width: number;
@@ -20,8 +28,6 @@ const CalendarColumnLabelsDay = ({
   year,
   daysInYear,
 }: Props): ReactElement => {
-  const classes = useStyles();
-
   const columnLabelRef = useRef<Grid>(null);
 
   useEffect(() => {
@@ -34,26 +40,27 @@ const CalendarColumnLabelsDay = ({
   const firstDayOfYear = new Date(`${year}-01-01`);
 
   return (
-    <Grid
-      className={clsx(classes.multigridColumnLabels, classes.multigridColumnLabelsDay)}
-      height={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL * 2}
-      width={
-        width -
-        STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH -
-        STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS
-      }
-      innerElementType={innerElementType}
-      columnCount={daysInYear}
-      columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL}
-      rowCount={2}
-      rowHeight={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL}
-      itemData={firstDayOfYear}
-      ref={columnLabelRef}
-      // needs this local manual overwrite to work, css class gets overwritten
-      style={{ overflow: "hidden" }}
-    >
-      {CalendarColumnLabelsDayCell}
-    </Grid>
+    <StyledGrid>
+      <Grid
+        height={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL * 2}
+        width={
+          width -
+          STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH -
+          STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS
+        }
+        innerElementType={innerElementType}
+        columnCount={daysInYear}
+        columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL}
+        rowCount={2}
+        rowHeight={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL}
+        itemData={firstDayOfYear}
+        ref={columnLabelRef}
+        // needs this local manual overwrite to work, css class gets overwritten
+        style={{ overflow: "hidden" }}
+      >
+        {CalendarColumnLabelsDayCell}
+      </Grid>
+    </StyledGrid>
   );
 };
 

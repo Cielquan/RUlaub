@@ -1,18 +1,15 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import React, { ReactElement } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { actionCreators } from "../state";
-import useStyles from "../styles";
 
 import DarkThemeSwitch from "./DarkThemeSwitch";
 import LanguageMenu from "./LanguageMenu";
 
 const Navbar = (): ReactElement => {
-  const classes = useStyles();
-
   const dispatch = useDispatch();
   const { openSideMenu } = bindActionCreators(actionCreators, dispatch);
 
@@ -20,13 +17,14 @@ const Navbar = (): ReactElement => {
     <AppBar position="fixed">
       <Toolbar>
         <IconButton
-          className={classes.sideMenuButton}
+          sx={{ marginRight: 2 }}
           edge="start"
           onClick={openSideMenu}
+          size="large"
         >
           <MenuIcon />
         </IconButton>
-        <Typography className={classes.typographyGrow} variant="h6" align="left" noWrap>
+        <Typography sx={{ flexGrow: 1 }} variant="h6" align="left" noWrap>
           RUlaub
         </Typography>
         <LanguageMenu />
