@@ -1,4 +1,6 @@
 import { I18nProvider } from "@lingui/react";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import * as locales from "@mui/material/locale";
 import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import React, { ReactElement, useEffect } from "react";
@@ -33,13 +35,15 @@ const ProviderWrapper = (): ReactElement => {
   }, [langState.locale]);
 
   return (
-    <I18nProvider i18n={i18n}>
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </StyledEngineProvider>
-    </I18nProvider>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <I18nProvider i18n={i18n}>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <App />
+          </ThemeProvider>
+        </StyledEngineProvider>
+      </I18nProvider>
+    </LocalizationProvider>
   );
 };
 

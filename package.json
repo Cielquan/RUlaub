@@ -9,6 +9,7 @@
     "@lingui/macro": "^3.10.2",
     "@lingui/react": "^3.10.2",
     "@mui/icons-material": "^5.0.0-rc.1",
+    "@mui/lab": "^5.0.0-alpha.45",
     "@mui/material": "^5.0.0-rc.1",
     "@mui/system": "^5.0.0-rc.1",
     "@tauri-apps/api": "^1.0.0-beta.1",
