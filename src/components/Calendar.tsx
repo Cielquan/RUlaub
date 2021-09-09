@@ -1,11 +1,10 @@
 import * as locales from "@mui/material/locale";
-import { adaptV4Theme } from "@mui/material/styles";
+import { Box } from "@mui/system";
 import React, { ReactElement, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import AutoSizer from "react-virtualized-auto-sizer";
 
 import { State } from "../state";
-import useStyles from "../styles";
 import createTheme from "../theme";
 import { isLeapYear } from "../utils/dateUtils";
 
@@ -17,8 +16,6 @@ import CalendarRowLabelsUser from "./CalendarRowLabelsUser";
 import CalendarTableHead from "./CalendarTableHead";
 
 const Calendar = (): ReactElement => {
-  const classes = useStyles();
-
   const themeState = useSelector((state: State) => state.theme);
   const langState = useSelector((state: State) => state.language);
   const localConfigState = useSelector((state: State) => state.localConfig);
@@ -46,7 +43,7 @@ const Calendar = (): ReactElement => {
         // FAB is 7 spacing in diameter
         const trueHeight = height - Number(theme.spacing(7 + 1).slice(0, -2));
         return (
-          <div className={classes.multigrid}>
+          <Box sx={{ position: "relative" }}>
             <CalendarTableHead year={year} />
 
             <CalendarColumnLabelsMonth width={width} positionX={scrollX} year={year} />
@@ -68,7 +65,7 @@ const Calendar = (): ReactElement => {
               scrollHandle={handleGridScroll}
               daysInYear={daysInYear}
             />
-          </div>
+          </Box>
         );
       }}
     </AutoSizer>

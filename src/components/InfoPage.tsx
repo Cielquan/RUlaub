@@ -16,7 +16,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { actionCreators, State } from "../state";
-import useStyles from "../styles";
 
 import * as pjson from "../../package.json";
 
@@ -36,8 +35,6 @@ interface Props {
 }
 
 const InfoPage = ({ onClick }: Props): ReactElement => {
-  const classes = useStyles();
-
   const dispatch = useDispatch();
   const { closeInfoPage } = bindActionCreators(actionCreators, dispatch);
   const infoPageState = useSelector((state: State) => state.infoPage);
@@ -58,7 +55,7 @@ const InfoPage = ({ onClick }: Props): ReactElement => {
     >
       <DialogTitle>{`RUlaub v${pjson.version}`}</DialogTitle>
       <DialogContent>
-        <DialogContentText className={classes.helpPageText}>
+        <DialogContentText sx={{ whiteSpace: "pre-wrap" }}>
           <Typography component="span">
             <Trans>
               RUlaub is licensed under either &apos;Apache License 2.0&apos; or

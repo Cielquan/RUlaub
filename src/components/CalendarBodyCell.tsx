@@ -1,9 +1,9 @@
-import clsx from "clsx";
+import { Box } from "@mui/system";
 import React, { CSSProperties, ReactElement } from "react";
 import { useSelector } from "react-redux";
 
 import { State } from "../state";
-import useStyles, { STYLE_CONST } from "../styles";
+import { STYLE_CONST } from "../styles";
 
 interface Props {
   columnIndex: number;
@@ -12,8 +12,6 @@ interface Props {
 }
 
 const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement => {
-  const classes = useStyles();
-
   const dbDataState = useSelector((state: State) => state.dbData);
 
   const isHoliday = (): boolean => {
@@ -29,8 +27,14 @@ const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement
   };
 
   return (
-    <div
-      className={clsx(classes.multigridCell, { [classes.holiday]: isHoliday() })}
+    <Box
+      sx={{
+        height: STYLE_CONST.CALENDAR_ROW_HEIGHT,
+        display: "flex",
+        alignItems: "center",
+        padding: "0 0.2em",
+        backgroundColor: isHoliday() ? "secondary.light" : "background.default",
+      }}
       style={{
         ...style,
         left: Number(style.left) + STYLE_CONST.CALENDAR_GUTTER_SIZE,

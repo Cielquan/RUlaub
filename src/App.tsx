@@ -1,7 +1,7 @@
 import { CssBaseline } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { Box } from "@mui/system";
 import React, { ReactElement } from "react";
-
-import useStyles from "./styles";
 
 import Calendar from "./components/Calendar";
 import InfoPage from "./components/InfoPage";
@@ -9,23 +9,43 @@ import Navbar from "./components/Navbar";
 import NewHolidayButton from "./components/NewHolidayButton";
 import SideMenu from "./components/SideMenu";
 
-const App = (): ReactElement => {
-  const classes = useStyles();
+const StyledMain = styled("main")(({ theme }) => ({
+  flexGrow: 1,
+  padding: theme.spacing(3),
+  marginTop: `${theme.mixins.toolbar.minHeight}px`,
 
-  return (
-    <>
-      <CssBaseline />
-      <div data-testid="rulaub-root" className={classes.root}>
-        <Navbar />
-        <SideMenu />
-        <main data-testid="rulaub-main" className={classes.content}>
-          <Calendar />
-          <NewHolidayButton />
-        </main>
-      </div>
-      <InfoPage />
-    </>
-  );
-};
+  "@media (min-width:0px) and (orientation: landscape)": {
+    marginTop: `calc(${theme.mixins.toolbar.minHeight}px - 6px)`,
+  },
+
+  "@media (min-width:600px)": {
+    marginTop: `calc(${theme.mixins.toolbar.minHeight}px + 8px)`,
+  },
+}));
+
+const App = (): ReactElement => (
+  <>
+    <CssBaseline />
+    <Box
+      data-testid="rulaub-root"
+      sx={{
+        display: "flex",
+        position: "absolute",
+        top: "0",
+        bottom: "0",
+        left: "0",
+        right: "0",
+      }}
+    >
+      <Navbar />
+      <SideMenu />
+      <StyledMain data-testid="rulaub-main">
+        <Calendar />
+        <NewHolidayButton />
+      </StyledMain>
+    </Box>
+    <InfoPage />
+  </>
+);
 
 export default App;

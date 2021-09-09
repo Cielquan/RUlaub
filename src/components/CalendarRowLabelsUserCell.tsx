@@ -1,9 +1,10 @@
 import { Typography } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { CSSProperties, ReactElement } from "react";
 import { useSelector } from "react-redux";
 
 import { State } from "../state";
-import useStyles, { STYLE_CONST } from "../styles";
+import { STYLE_CONST } from "../styles";
 
 interface Props {
   index: number;
@@ -11,23 +12,27 @@ interface Props {
 }
 
 const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElement => {
-  const classes = useStyles();
-
   const dbDataState = useSelector((state: State) => state.dbData);
 
   return (
-    <div
-      className={classes.multigridCell}
+    <Box
+      sx={{
+        height: STYLE_CONST.CALENDAR_ROW_HEIGHT,
+        display: "flex",
+        alignItems: "center",
+        padding: "0 0.2em",
+        backgroundColor: "background.default",
+      }}
       style={{
         ...style,
         top: Number(style.top) + STYLE_CONST.CALENDAR_GUTTER_SIZE,
         height: Number(style.height) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
       }}
     >
-      <Typography className={classes.multigridRowLabelsUser} variant="body1" noWrap>
+      <Typography sx={{ padding: "0 0.3em" }} variant="body1" noWrap>
         {dbDataState.users[rowIndex].name}
       </Typography>
-    </div>
+    </Box>
   );
 };
 

@@ -1,9 +1,9 @@
 import { useLingui } from "@lingui/react";
 import { Typography } from "@mui/material";
-import clsx from "clsx";
+import { Box } from "@mui/system";
 import React, { CSSProperties, ReactElement } from "react";
 
-import useStyles, { STYLE_CONST } from "../styles";
+import { STYLE_CONST } from "../styles";
 import { getMonthNameList } from "../utils/dateUtils";
 
 interface Props {
@@ -15,15 +15,19 @@ const CalendarColumnLabelsMonthCell = ({
   index: columnIndex,
   style,
 }: Props): ReactElement => {
-  const classes = useStyles();
-
   const { i18n } = useLingui();
 
   const monthNameList = getMonthNameList(i18n);
 
   return (
-    <div
-      className={clsx(classes.multigridCell)}
+    <Box
+      sx={{
+        height: STYLE_CONST.CALENDAR_ROW_HEIGHT,
+        display: "flex",
+        alignItems: "center",
+        padding: "0 0.2em",
+        backgroundColor: "background.default",
+      }}
       style={{
         ...style,
         left: Number(style.left) + STYLE_CONST.CALENDAR_GUTTER_SIZE,
@@ -31,7 +35,7 @@ const CalendarColumnLabelsMonthCell = ({
       }}
     >
       <Typography
-        className={clsx(classes.multigridColumnLabelsMonth, classes.typographyGrow)}
+        sx={{ padding: "0 0.7em", flexGrow: 1 }}
         variant="h5"
         component="div"
         align="left"
@@ -39,7 +43,7 @@ const CalendarColumnLabelsMonthCell = ({
         {monthNameList[columnIndex]}
       </Typography>
       <Typography
-        className={clsx(classes.multigridColumnLabelsMonth, classes.typographyGrow)}
+        sx={{ padding: "0 0.7em", flexGrow: 1 }}
         variant="h5"
         component="div"
         align="center"
@@ -47,14 +51,14 @@ const CalendarColumnLabelsMonthCell = ({
         {monthNameList[columnIndex]}
       </Typography>
       <Typography
-        className={clsx(classes.multigridColumnLabelsMonth, classes.typographyGrow)}
+        sx={{ padding: "0 0.7em", flexGrow: 1 }}
         variant="h5"
         component="div"
         align="right"
       >
         {monthNameList[columnIndex]}
       </Typography>
-    </div>
+    </Box>
   );
 };
 

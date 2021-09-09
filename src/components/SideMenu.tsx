@@ -6,24 +6,36 @@ import CreateIcon from "@mui/icons-material/Create";
 import InfoIcon from "@mui/icons-material/Info";
 import SettingsIcon from "@mui/icons-material/Settings";
 import StorageIcon from "@mui/icons-material/Storage";
+import { styled } from "@mui/material/styles";
+import { Box } from "@mui/system";
 import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { actionCreators, State } from "../state";
-import useStyles from "../styles";
 
 import SideMenuButton, {
   ButtonText,
   ButtonListKey,
   ButtonOnClick,
   ButtonIcon,
-  ButtonClassName,
+  ButtonSxStyle,
 } from "./SideMenuButton";
 import SideMenuSectionButton, { SectionItemList } from "./SideMenuSectionButton";
 
+const SideMenuHeader = styled("div")(({ theme }) => ({
+  width: 240,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
+
+  // necessary to match toolbar height
+  ...theme.mixins.toolbar,
+}));
+
 type SectionlessItemList = Array<
-  [ButtonText, ButtonListKey, ButtonOnClick, ButtonIcon?, ButtonClassName?]
+  [ButtonText, ButtonListKey, ButtonOnClick, ButtonIcon?, ButtonSxStyle?]
 >;
 
 interface Props {
@@ -31,8 +43,6 @@ interface Props {
 }
 
 const SideMenu = ({ onClick }: Props): ReactElement => {
-  const classes = useStyles();
-
   const dispatch = useDispatch();
   const { closeSideMenu, openInfoPage } = bindActionCreators(actionCreators, dispatch);
   const sideMenuState = useSelector((state: State) => state.sideMenu);
@@ -53,7 +63,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
       open={sideMenuState}
       onClose={closeSideMenu}
     >
-      <div className={classes.sideMenuHeader}>
+      <SideMenuHeader>
         <IconButton
           onClick={() => {
             if (typeof onClick === "function") onClick();
@@ -63,7 +73,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
         >
           <ChevronLeftIcon />
         </IconButton>
-      </div>
+      </SideMenuHeader>
       <Divider />
       <List>
         {sectionlessItemList.map((item) => (
@@ -77,7 +87,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
               item[2]();
             }}
             icon={item[3]}
-            className={item[4]}
+            sxStyle={item[4]}
           />
         ))}
         <SideMenuSectionButton
@@ -87,7 +97,12 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
           sectionItemList={DatabaseSectionItemList}
         />
       </List>
-      <div className={classes.infoButton}>
+      <Box
+        sx={{
+          marginTop: "auto",
+          marginBottom: 2,
+        }}
+      >
         <Divider />
         <List>
           <SideMenuButton
@@ -101,7 +116,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
             }}
           />
         </List>
-      </div>
+      </Box>
     </Drawer>
   );
 };
