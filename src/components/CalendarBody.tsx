@@ -1,12 +1,29 @@
+import { styled } from "@mui/material/styles";
 import React, { ReactElement, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { FixedSizeGrid as Grid, GridOnScrollProps } from "react-window";
 
 import { State } from "../state";
-import useStyles, { STYLE_CONST } from "../styles";
+import { STYLE_CONST } from "../styles";
 
 import CalendarBodyCell from "./CalendarBodyCell";
 import innerElementType from "./multigridInnerElementType";
+
+const StyledGrid = styled("div")(({ theme }) => ({
+  // absolutely position the label and move it down by a row and right by a col
+  position: "absolute !important" as "absolute",
+  top: STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL * 2,
+  left: STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH,
+  borderTop: `1px solid ${theme.palette.text.primary}`,
+  borderLeft: `1px solid ${theme.palette.text.primary}`,
+  "&::-webkit-scrollbar": {
+    width: STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS,
+    height: STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS,
+  },
+  "&::-webkit-scrollbar-thumb": {
+    backgroundColor: theme.palette.text.primary,
+  },
+}));
 
 interface Props {
   width: number;
@@ -25,8 +42,6 @@ const CalendarBody = ({
   scrollHandle,
   daysInYear,
 }: Props): ReactElement => {
-  const classes = useStyles();
-
   const dbDataState = useSelector((state: State) => state.dbData);
 
   const gridRef = useRef<Grid>(null);
@@ -39,20 +54,21 @@ const CalendarBody = ({
   }, [positionY, positionX, gridRef]);
 
   return (
-    <Grid
-      className={classes.multigridMainGrid}
-      height={height - STYLE_CONST.CALENDAR_ROW_HEIGHT * 2}
-      width={width - STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
-      innerElementType={innerElementType}
-      columnCount={daysInYear}
-      columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL}
-      rowCount={dbDataState.users.length}
-      rowHeight={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL}
-      ref={gridRef}
-      onScroll={scrollHandle}
-    >
-      {CalendarBodyCell}
-    </Grid>
+    <StyledGrid>
+      <Grid
+        height={height - STYLE_CONST.CALENDAR_ROW_HEIGHT * 2}
+        width={width - STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
+        innerElementType={innerElementType}
+        columnCount={daysInYear}
+        columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL}
+        rowCount={dbDataState.users.length}
+        rowHeight={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL}
+        ref={gridRef}
+        onScroll={scrollHandle}
+      >
+        {CalendarBodyCell}
+      </Grid>
+    </StyledGrid>
   );
 };
 
