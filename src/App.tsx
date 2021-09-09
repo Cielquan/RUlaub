@@ -1,4 +1,4 @@
-import { CssBaseline } from "@material-ui/core";
+import { CssBaseline } from "@mui/material";
 import React, { ReactElement } from "react";
 
 import useStyles from "./styles";

@@ -1,5 +1,5 @@
-import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import React, { ReactElement } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -23,6 +23,7 @@ const Navbar = (): ReactElement => {
           className={classes.sideMenuButton}
           edge="start"
           onClick={openSideMenu}
+          size="large"
         >
           <MenuIcon />
         </IconButton>

@@ -9,8 +9,8 @@ import {
   Link,
   Slide,
   Typography,
-} from "@material-ui/core";
-import { TransitionProps } from "@material-ui/core/transitions";
+} from "@mui/material";
+import { TransitionProps } from "@mui/material/transitions";
 import React, { forwardRef, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -80,7 +80,6 @@ const InfoPage = ({ onClick }: Props): ReactElement => {
             if (typeof onClick === "function") onClick();
             closeInfoPage();
           }}
-          color="primary"
           autoFocus
         >
           <Trans>Close</Trans>

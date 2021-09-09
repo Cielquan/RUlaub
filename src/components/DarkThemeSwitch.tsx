@@ -1,7 +1,7 @@
 import { t } from "@lingui/macro";
-import { IconButton, Tooltip } from "@material-ui/core";
-import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
-import BrightnessLowIcon from "@material-ui/icons/BrightnessLow";
+import { IconButton, Tooltip } from "@mui/material";
+import BrightnessHighIcon from "@mui/icons-material/BrightnessHigh";
+import BrightnessLowIcon from "@mui/icons-material/BrightnessLow";
 import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -24,6 +24,7 @@ const DarkThemeSwitch = (): ReactElement => {
       <IconButton
         data-testid="theme-switch"
         onClick={themeState === "dark" ? activateLightTheme : activateDarkTheme}
+        size="large"
       >
         {themeState === "dark" ? <BrightnessHighIcon /> : <BrightnessLowIcon />}
       </IconButton>

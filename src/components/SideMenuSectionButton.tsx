@@ -1,6 +1,6 @@
-import { Collapse, List } from "@material-ui/core";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
+import { Collapse, List } from "@mui/material";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
 import React, { ReactElement, useState } from "react";
 
 import useStyles from "../styles";

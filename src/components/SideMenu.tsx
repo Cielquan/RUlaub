@@ -1,11 +1,11 @@
 import { t } from "@lingui/macro";
-import { Divider, Drawer, IconButton, List } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import CreateIcon from "@material-ui/icons/Create";
-import InfoIcon from "@material-ui/icons/Info";
-import SettingsIcon from "@material-ui/icons/Settings";
-import StorageIcon from "@material-ui/icons/Storage";
+import { Divider, Drawer, IconButton, List } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import CreateIcon from "@mui/icons-material/Create";
+import InfoIcon from "@mui/icons-material/Info";
+import SettingsIcon from "@mui/icons-material/Settings";
+import StorageIcon from "@mui/icons-material/Storage";
 import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -59,6 +59,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
             if (typeof onClick === "function") onClick();
             closeSideMenu();
           }}
+          size="large"
         >
           <ChevronLeftIcon />
         </IconButton>

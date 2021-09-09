@@ -1,5 +1,5 @@
 import { useLingui } from "@lingui/react";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 import clsx from "clsx";
 import React, { CSSProperties, ReactElement } from "react";
 

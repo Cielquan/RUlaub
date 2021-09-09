@@ -1,4 +1,5 @@
-import * as locales from "@material-ui/core/locale";
+import * as locales from "@mui/material/locale";
+import { adaptV4Theme } from "@mui/material/styles";
 import React, { ReactElement, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import AutoSizer from "react-virtualized-auto-sizer";
@@ -43,7 +44,7 @@ const Calendar = (): ReactElement => {
     <AutoSizer>
       {({ height, width }) => {
         // FAB is 7 spacing in diameter
-        const trueHeight = height - theme.spacing(7 + 1);
+        const trueHeight = height - Number(theme.spacing(7 + 1).slice(0, -2));
         return (
           <div className={classes.multigrid}>
             <CalendarTableHead year={year} />

@@ -1,4 +1,4 @@
-import { MenuItem } from "@material-ui/core";
+import { MenuItem } from "@mui/material";
 import React, { forwardRef, ReactElement } from "react";
 import { useSelector } from "react-redux";
 import { Dispatch } from "redux";

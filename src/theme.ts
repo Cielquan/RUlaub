@@ -1,12 +1,10 @@
+import { deepOrange, deepPurple, grey, lightBlue, orange } from "@mui/material/colors";
+import { Localization } from "@mui/material/locale";
 import {
-  deepOrange,
-  deepPurple,
-  grey,
-  lightBlue,
-  orange,
-} from "@material-ui/core/colors";
-import { Localization } from "@material-ui/core/locale";
-import { createTheme as createMuiTheme, Theme } from "@material-ui/core/styles";
+  createTheme as createMuiTheme,
+  Theme,
+  adaptV4Theme,
+} from "@mui/material/styles";
 
 export type SupportedThemes = "dark" | "light";
 
@@ -14,9 +12,9 @@ const createTheme = (themeState: SupportedThemes, language: Localization): Theme
   const palletType = themeState;
 
   return createMuiTheme(
-    {
+    adaptV4Theme({
       palette: {
-        type: palletType,
+        mode: palletType,
         primary: {
           main: themeState === "dark" ? orange[500] : lightBlue[500],
         },
@@ -27,7 +25,7 @@ const createTheme = (themeState: SupportedThemes, language: Localization): Theme
           paper: themeState === "dark" ? grey[700] : grey[300],
         },
       },
-    },
+    }),
     language
   );
 };

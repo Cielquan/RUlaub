@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from "@mui/styles/makeStyles";
 
 export const STYLE_CONST = {
   CALENDAR_COLUMN_WIDTH: 35,
