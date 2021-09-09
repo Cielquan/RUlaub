@@ -4,12 +4,12 @@ import { Provider as ReduxProvider } from "react-redux";
 
 import { store } from "./state";
 
-import App from "./App";
+import ProviderWrapper from "./ProviderWrapper";
 
 ReactDOM.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
-      <App />
+      <ProviderWrapper />
     </ReduxProvider>
   </React.StrictMode>,
   document.getElementById("root")
