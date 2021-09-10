@@ -2,7 +2,6 @@ import { Dispatch } from "redux";
 
 import { ThemeType } from "../action-types";
 import { ThemeAction } from "../actions";
-
 import store from "../store";
 
 export const activateDarkThemeAction = (): ThemeAction => ({

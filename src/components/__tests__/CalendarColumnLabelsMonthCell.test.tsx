@@ -3,10 +3,10 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import i18n from "../../i18n";
-
-import CalendarColumnLabelsMonthCell from "../CalendarColumnLabelsMonthCell";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
+
+import CalendarColumnLabelsMonthCell from "../CalendarColumnLabelsMonthCell";
 
 describe("<CalendarColumnLabelsMonthCell />", () => {
   const mockStore = generateMockStore(initialState);

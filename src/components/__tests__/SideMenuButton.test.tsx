@@ -2,9 +2,10 @@ import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 
-import SideMenuButton from "../SideMenuButton";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
+
+import SideMenuButton from "../SideMenuButton";
 
 describe("<SideMenuButton />", () => {
   const mockStore = generateMockStore(initialState);

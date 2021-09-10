@@ -3,10 +3,11 @@ import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 
-import SideMenuButton from "../SideMenuButton";
-import SideMenuSectionButton from "../SideMenuSectionButton";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
+
+import SideMenuButton from "../SideMenuButton";
+import SideMenuSectionButton from "../SideMenuSectionButton";
 
 jest.mock("../SideMenuButton", () => ({ __esModule: true, default: jest.fn() }));
 

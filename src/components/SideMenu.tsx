@@ -1,11 +1,13 @@
 import { t } from "@lingui/macro";
+import {
+  Add as AddIcon,
+  ChevronLeft as ChevronLeftIcon,
+  Create as CreateIcon,
+  Info as InfoIcon,
+  Settings as SettingsIcon,
+  Storage as StorageIcon,
+} from "@mui/icons-material";
 import { Divider, Drawer, IconButton, List } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import CreateIcon from "@mui/icons-material/Create";
-import InfoIcon from "@mui/icons-material/Info";
-import SettingsIcon from "@mui/icons-material/Settings";
-import StorageIcon from "@mui/icons-material/Storage";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import React, { ReactElement } from "react";
@@ -15,11 +17,11 @@ import { bindActionCreators } from "redux";
 import { actionCreators, State } from "../state";
 
 import SideMenuButton, {
-  ButtonText,
+  ButtonIcon,
   ButtonListKey,
   ButtonOnClick,
-  ButtonIcon,
   ButtonSxStyle,
+  ButtonText,
 } from "./SideMenuButton";
 import SideMenuSectionButton, { SectionItemList } from "./SideMenuSectionButton";
 

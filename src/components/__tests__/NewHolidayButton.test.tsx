@@ -3,9 +3,10 @@ import userEvent from "@testing-library/user-event";
 import React from "react";
 import renderer from "react-test-renderer";
 
-import NewHolidayButton from "../NewHolidayButton";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
+
+import NewHolidayButton from "../NewHolidayButton";
 
 describe("<NewHolidayButton />", () => {
   const mockStore = generateMockStore(initialState);

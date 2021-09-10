@@ -5,10 +5,11 @@ import { Provider } from "react-redux";
 import { CombinedState } from "redux";
 import { MockStoreEnhanced } from "redux-mock-store";
 
-import SideMenu from "../SideMenu";
 import { initialState, State } from "../../state";
-import generateMockStore from "../../testUtils";
 import { closeSideMenuAction } from "../../state/action-creators";
+import generateMockStore from "../../testUtils";
+
+import SideMenu from "../SideMenu";
 
 jest.mock("../SideMenuButton", () => () => "SideMenuButton");
 jest.mock("../SideMenuSectionButton", () => () => "SideMenuSectionButton");

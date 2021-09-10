@@ -1,9 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import CalendarTableHead from "../CalendarTableHead";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
+
+import CalendarTableHead from "../CalendarTableHead";
 
 jest.mock("../CalendarTableHeadCell", () => () => "CalendarTableHeadCell");
 jest.mock("../multigridInnerElementType", () => () => "innerElementType");

@@ -1,14 +1,16 @@
 import { Collapse, List } from "@mui/material";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
+import {
+  ExpandLess as ExpandLessIcon,
+  ExpandMore as ExpandMoreIcon,
+} from "@mui/icons-material";
 import React, { ReactElement, useState } from "react";
 
 import SideMenuButton, {
-  ButtonText,
+  ButtonIcon,
   ButtonListKey,
   ButtonOnClick,
-  ButtonIcon,
   ButtonSxStyle,
+  ButtonText,
 } from "./SideMenuButton";
 
 export type SectionItemList = Array<
@@ -42,7 +44,7 @@ const SideMenuSectionButton = ({
         onClick={sideMenuSectionState ? closeSideMenuDatabase : openSideMenuDatabase}
         icon={icon}
         sxStyle={sxStyle}
-        foldIcon={sideMenuSectionState ? <ExpandLess /> : <ExpandMore />}
+        foldIcon={sideMenuSectionState ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       />
       <Collapse in={sideMenuSectionState} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>

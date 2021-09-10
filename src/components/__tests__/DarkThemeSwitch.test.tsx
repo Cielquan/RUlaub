@@ -4,10 +4,10 @@ import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 
-import DarkThemeSwitch from "../DarkThemeSwitch";
-import Languages from "../../i18n";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
+
+import DarkThemeSwitch from "../DarkThemeSwitch";
 
 describe("<DarkThemeSwitch />", () => {
   const mockStore = generateMockStore(initialState);

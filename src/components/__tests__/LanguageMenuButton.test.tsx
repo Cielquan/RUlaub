@@ -3,11 +3,12 @@ import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 import { Dispatch } from "redux";
 
-import LanguageMenuButton from "../LanguageMenuButton";
 import { initialState } from "../../state";
 import { LanguageAction } from "../../state/actions";
-import generateMockStore from "../../testUtils";
 import Languages from "../../state/utils/i18n";
+import generateMockStore from "../../testUtils";
+
+import LanguageMenuButton from "../LanguageMenuButton";
 
 describe("<LanguageMenuButton />", () => {
   const mockStore = generateMockStore(initialState);

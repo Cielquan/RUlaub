@@ -3,9 +3,9 @@ import React, { forwardRef, ReactElement } from "react";
 import { useSelector } from "react-redux";
 import { Dispatch } from "redux";
 
-import { Language } from "../state/utils/i18n";
 import { State } from "../state";
 import { LanguageAction } from "../state/actions";
+import { Language } from "../state/utils/i18n";
 
 interface Props {
   language: Language;

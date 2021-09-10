@@ -2,7 +2,6 @@ import { Dispatch } from "redux";
 
 import { LanguageType } from "../action-types";
 import { LanguageAction } from "../actions";
-
 import store from "../store";
 
 export const activateDEAction = (): LanguageAction => ({

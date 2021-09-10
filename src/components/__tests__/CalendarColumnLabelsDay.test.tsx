@@ -1,9 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import CalendarColumnLabelsDay from "../CalendarColumnLabelsDay";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
+
+import CalendarColumnLabelsDay from "../CalendarColumnLabelsDay";
 
 jest.mock("../CalendarColumnLabelsDayCell", () => () => "CalendarColumnLabelsDayCell");
 jest.mock("../multigridInnerElementType", () => () => "multigridInnerElementType");

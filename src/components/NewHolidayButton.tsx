@@ -1,7 +1,7 @@
 import { t } from "@lingui/macro";
+import { Add as AddIcon } from "@mui/icons-material";
 import { Fab, Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import AddIcon from "@mui/icons-material/Add";
 import React, { ReactElement } from "react";
 
 const StyledNewHolidayButton = styled("div")(({ theme }) => ({

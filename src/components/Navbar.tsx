@@ -1,5 +1,5 @@
+import { Menu as MenuIcon } from "@mui/icons-material";
 import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import React, { ReactElement } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";

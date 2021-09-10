@@ -2,9 +2,10 @@ import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 
-import App from "../App";
 import { initialState } from "../state";
 import generateMockStore from "../testUtils";
+
+import App from "../App";
 
 jest.mock("../components/Calendar", () => () => "Calendar");
 jest.mock("../components/InfoPage", () => () => "InfoPage");

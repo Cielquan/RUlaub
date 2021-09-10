@@ -1,12 +1,14 @@
+import {
+  KeyboardArrowDown as KeyboardArrowDownIcon,
+  Translate as TranslateIcon,
+} from "@mui/icons-material";
 import { Button, Menu, Typography } from "@mui/material";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import TranslateIcon from "@mui/icons-material/Translate";
 import React, { MouseEvent, ReactElement, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import Languages from "../state/utils/i18n";
 import { actionCreators, State } from "../state";
+import Languages from "../state/utils/i18n";
 
 import LanguageMenuButton from "./LanguageMenuButton";
 

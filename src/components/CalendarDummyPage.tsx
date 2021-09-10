@@ -1,6 +1,6 @@
 import { Trans } from "@lingui/macro";
-import { TextField, Typography } from "@mui/material";
 import DatePicker from "@mui/lab/DatePicker";
+import { TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { ReactElement } from "react";
 import { useDispatch } from "react-redux";

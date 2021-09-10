@@ -7,11 +7,11 @@ import { CombinedState } from "redux";
 import { MockStoreEnhanced } from "redux-mock-store";
 
 import i18n from "../../i18n";
+import { initialState, State } from "../../state";
+import { closeInfoPageAction } from "../../state/action-creators";
+import generateMockStore from "../../testUtils";
 
 import InfoPage from "../InfoPage";
-import { initialState, State } from "../../state";
-import generateMockStore from "../../testUtils";
-import { closeInfoPageAction } from "../../state/action-creators";
 
 describe("<InfoPage />", () => {
   let testState: State;

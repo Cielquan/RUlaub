@@ -2,9 +2,10 @@ import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 
-import CalendarBodyCell from "../CalendarBodyCell";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
+
+import CalendarBodyCell from "../CalendarBodyCell";
 
 describe("<CalendarBodyCell />", () => {
   const mockStore = generateMockStore(initialState);

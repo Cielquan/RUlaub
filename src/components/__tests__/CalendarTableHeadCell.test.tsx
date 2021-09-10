@@ -1,9 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import CalendarTableHeadCell from "../CalendarTableHeadCell";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
+
+import CalendarTableHeadCell from "../CalendarTableHeadCell";
 
 describe("<CalendarTableHeadCell />", () => {
   const mockStore = generateMockStore(initialState);

@@ -1,9 +1,10 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import CalendarColumnLabelsMonth from "../CalendarColumnLabelsMonth";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
+
+import CalendarColumnLabelsMonth from "../CalendarColumnLabelsMonth";
 
 jest.mock(
   "../CalendarColumnLabelsMonthCell",

@@ -1,7 +1,9 @@
 import { t } from "@lingui/macro";
+import {
+  BrightnessHigh as BrightnessHighIcon,
+  BrightnessLow as BrightnessLowIcon,
+} from "@mui/icons-material";
 import { IconButton, Tooltip } from "@mui/material";
-import BrightnessHighIcon from "@mui/icons-material/BrightnessHigh";
-import BrightnessLowIcon from "@mui/icons-material/BrightnessLow";
 import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";

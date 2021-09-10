@@ -2,9 +2,10 @@ import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 
-import Navbar from "../Navbar";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
+
+import Navbar from "../Navbar";
 
 jest.mock("../DarkThemeSwitch", () => () => "DarkThemeSwitch");
 jest.mock("../LanguageMenu", () => () => "LanguageMenu");
