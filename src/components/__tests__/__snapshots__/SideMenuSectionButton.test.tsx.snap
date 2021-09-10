@@ -3,35 +3,35 @@
 exports[`<SideMenuSectionButton /> renders correctly folded and unfolded 1`] = `
 <DocumentFragment>
   <div
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-bshv44-MuiButtonBase-root-MuiListItem-root"
     role="button"
     tabindex="0"
   >
     <div
-      class="MuiListItemIcon-root"
+      class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
     />
     <div
-      class="MuiListItemText-root"
+      class="MuiListItemText-root css-tlelie-MuiListItemText-root"
     >
       <span
-        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
       >
         text-mocked
       </span>
     </div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      data-testid="ExpandMoreIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
       <path
-        d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+        d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
       />
     </svg>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </div>
 </DocumentFragment>
@@ -40,70 +40,69 @@ exports[`<SideMenuSectionButton /> renders correctly folded and unfolded 1`] = `
 exports[`<SideMenuSectionButton /> renders correctly folded and unfolded 2`] = `
 <DocumentFragment>
   <div
-    aria-disabled="false"
-    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-bshv44-MuiButtonBase-root-MuiListItem-root"
     role="button"
     tabindex="0"
   >
     <div
-      class="MuiListItemIcon-root"
+      class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
     />
     <div
-      class="MuiListItemText-root"
+      class="MuiListItemText-root css-tlelie-MuiListItemText-root"
     >
       <span
-        class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+        class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
       >
         text-mocked
       </span>
     </div>
     <svg
       aria-hidden="true"
-      class="MuiSvgIcon-root"
+      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+      data-testid="ExpandLessIcon"
       focusable="false"
       viewBox="0 0 24 24"
     >
       <path
-        d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"
+        d="m12 8-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"
       />
     </svg>
     <span
-      class="MuiTouchRipple-root"
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
     />
   </div>
   <div
-    class="MuiCollapse-root"
+    class="MuiCollapse-root MuiCollapse-vertical css-1fkrdiv-MuiCollapse-root"
     style="min-height: 0px; height: 0px; transition-duration: 0ms;"
   >
     <div
-      class="MuiCollapse-wrapper"
+      class="MuiCollapse-wrapper MuiCollapse-vertical css-smkl36-MuiCollapse-wrapper"
     >
       <div
-        class="MuiCollapse-wrapperInner"
+        class="MuiCollapse-wrapperInner MuiCollapse-vertical css-9l5vo-MuiCollapse-wrapperInner"
       >
         <div
-          class="MuiList-root"
+          class="MuiList-root css-1mk9mw3-MuiList-root"
         >
           <div
-            aria-disabled="false"
-            class="MuiButtonBase-root MuiListItem-root makeStyles-sideMenuNestedButton-8 MuiListItem-gutters MuiListItem-button"
+            class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-1aosqlb-MuiButtonBase-root-MuiListItem-root"
             role="button"
             tabindex="0"
           >
             <div
-              class="MuiListItemIcon-root"
+              class="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
             />
             <div
-              class="MuiListItemText-root"
+              class="MuiListItemText-root css-tlelie-MuiListItemText-root"
             >
               <span
-                class="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+                class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
               >
                 btn-txt
               </span>
             </div>
             <span
-              class="MuiTouchRipple-root"
+              class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
             />
           </div>
         </div>
@@ -115,10 +114,10 @@ exports[`<SideMenuSectionButton /> renders correctly folded and unfolded 2`] = `
 
 exports[`<SideMenuSectionButton /> renders correctly with no mocks 1`] = `
 <div
-  aria-disabled={false}
-  className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+  className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-bshv44-MuiButtonBase-root-MuiListItem-root"
   onBlur={[Function]}
   onClick={[Function]}
+  onContextMenu={[Function]}
   onDragLeave={[Function]}
   onFocus={[Function]}
   onKeyDown={[Function]}
@@ -133,25 +132,26 @@ exports[`<SideMenuSectionButton /> renders correctly with no mocks 1`] = `
   tabIndex={0}
 >
   <div
-    className="MuiListItemIcon-root"
+    className="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
   />
   <div
-    className="MuiListItemText-root"
+    className="MuiListItemText-root css-tlelie-MuiListItemText-root"
   >
     <span
-      className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+      className="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
     >
       text
     </span>
   </div>
   <svg
     aria-hidden={true}
-    className="MuiSvgIcon-root"
+    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+    data-testid="ExpandMoreIcon"
     focusable="false"
     viewBox="0 0 24 24"
   >
     <path
-      d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"
+      d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"
     />
   </svg>
 </div>

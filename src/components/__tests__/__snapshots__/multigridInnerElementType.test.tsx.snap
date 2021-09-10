@@ -2,7 +2,7 @@
 
 exports[`<innerElementType /> renders correctly 1`] = `
 <div
-  className="makeStyles-multigridBackground-12"
+  className="css-1k9ek97"
   style={
     Object {
       "paddingLeft": 2,

@@ -2,10 +2,10 @@
 
 exports[`<SideMenuButton /> renders correctly 1`] = `
 <div
-  aria-disabled={false}
-  className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-button"
+  className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-bshv44-MuiButtonBase-root-MuiListItem-root"
   onBlur={[Function]}
   onClick={[Function]}
+  onContextMenu={[Function]}
   onDragLeave={[Function]}
   onFocus={[Function]}
   onKeyDown={[Function]}
@@ -20,13 +20,13 @@ exports[`<SideMenuButton /> renders correctly 1`] = `
   tabIndex={0}
 >
   <div
-    className="MuiListItemIcon-root"
+    className="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
   />
   <div
-    className="MuiListItemText-root"
+    className="MuiListItemText-root css-tlelie-MuiListItemText-root"
   >
     <span
-      className="MuiTypography-root MuiListItemText-primary MuiTypography-body1 MuiTypography-displayBlock"
+      className="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
     >
       text
     </span>

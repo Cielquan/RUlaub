@@ -2,20 +2,23 @@
 
 exports[`<CalendarColumnLabelsDay /> renders correctly with subComponents mocked as string 1`] = `
 <div
-  className="makeStyles-multigridColumnLabels-17 makeStyles-multigridColumnLabelsDay-18"
-  onScroll={[Function]}
-  style={
-    Object {
-      "WebkitOverflowScrolling": "touch",
-      "direction": "ltr",
-      "height": 74,
-      "overflow": "hidden",
-      "position": "relative",
-      "width": -255,
-      "willChange": "transform",
-    }
-  }
+  className="css-1mggg5w"
 >
-  multigridInnerElementType
+  <div
+    onScroll={[Function]}
+    style={
+      Object {
+        "WebkitOverflowScrolling": "touch",
+        "direction": "ltr",
+        "height": 74,
+        "overflow": "hidden",
+        "position": "relative",
+        "width": -255,
+        "willChange": "transform",
+      }
+    }
+  >
+    multigridInnerElementType
+  </div>
 </div>
 `;

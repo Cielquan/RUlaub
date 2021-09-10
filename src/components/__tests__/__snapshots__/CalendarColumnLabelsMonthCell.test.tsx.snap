@@ -2,7 +2,7 @@
 
 exports[`<CalendarColumnLabelsMonthCell /> renders correctly 1`] = `
 <div
-  className="makeStyles-multigridCell-21"
+  className="MuiBox-root css-1ge3q6u"
   style={
     Object {
       "height": 1,
@@ -13,17 +13,17 @@ exports[`<CalendarColumnLabelsMonthCell /> renders correctly 1`] = `
   }
 >
   <div
-    className="MuiTypography-root makeStyles-multigridColumnLabelsMonth-19 makeStyles-typographyGrow-5 MuiTypography-h5 MuiTypography-alignLeft"
+    className="MuiTypography-root MuiTypography-h5 MuiTypography-alignLeft css-tvtibg-MuiTypography-root"
   >
     February
   </div>
   <div
-    className="MuiTypography-root makeStyles-multigridColumnLabelsMonth-19 makeStyles-typographyGrow-5 MuiTypography-h5 MuiTypography-alignCenter"
+    className="MuiTypography-root MuiTypography-h5 MuiTypography-alignCenter css-do31sq-MuiTypography-root"
   >
     February
   </div>
   <div
-    className="MuiTypography-root makeStyles-multigridColumnLabelsMonth-19 makeStyles-typographyGrow-5 MuiTypography-h5 MuiTypography-alignRight"
+    className="MuiTypography-root MuiTypography-h5 MuiTypography-alignRight css-12q22bs-MuiTypography-root"
   >
     February
   </div>

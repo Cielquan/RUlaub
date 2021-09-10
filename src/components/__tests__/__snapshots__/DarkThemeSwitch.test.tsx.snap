@@ -2,12 +2,15 @@
 
 exports[`<DarkThemeSwitch /> renders correctly 1`] = `
 <button
-  aria-describedby={null}
-  className="MuiButtonBase-root MuiIconButton-root"
+  aria-label="Activate Light Theme"
+  aria-labelledby={null}
+  className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeLarge css-mf1cb5-MuiButtonBase-root-MuiIconButton-root"
+  data-mui-internal-clone-element={true}
   data-testid="theme-switch"
   disabled={false}
   onBlur={[Function]}
   onClick={[Function]}
+  onContextMenu={[Function]}
   onDragLeave={[Function]}
   onFocus={[Function]}
   onKeyDown={[Function]}
@@ -20,25 +23,21 @@ exports[`<DarkThemeSwitch /> renders correctly 1`] = `
   onTouchMove={[Function]}
   onTouchStart={[Function]}
   tabIndex={0}
-  title="Activate Light Theme"
   type="button"
 >
-  <span
-    className="MuiIconButton-label"
+  <svg
+    aria-hidden={true}
+    className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+    data-testid="BrightnessHighIcon"
+    focusable="false"
+    viewBox="0 0 24 24"
   >
-    <svg
-      aria-hidden={true}
-      className="MuiSvgIcon-root"
-      focusable="false"
-      viewBox="0 0 24 24"
-    >
-      <path
-        d="M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"
-      />
-    </svg>
-  </span>
+    <path
+      d="M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69zM12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6zm0-10c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4z"
+    />
+  </svg>
   <span
-    className="MuiTouchRipple-root"
+    className="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
   />
 </button>
 `;

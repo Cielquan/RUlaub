@@ -2,7 +2,7 @@
 
 exports[`<CalendarRowLabelsUserCell /> renders correctly 1`] = `
 <div
-  className="makeStyles-multigridCell-21"
+  className="MuiBox-root css-1ge3q6u"
   style={
     Object {
       "height": -1,
@@ -13,7 +13,7 @@ exports[`<CalendarRowLabelsUserCell /> renders correctly 1`] = `
   }
 >
   <p
-    className="MuiTypography-root makeStyles-multigridRowLabelsUser-16 MuiTypography-body1 MuiTypography-noWrap"
+    className="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-1qr43t8-MuiTypography-root"
   >
     HP Second
   </p>

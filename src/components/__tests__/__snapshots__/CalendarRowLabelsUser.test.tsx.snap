@@ -2,20 +2,23 @@
 
 exports[`<CalendarRowLabelsUser /> renders correctly with subComponents mocked as string 1`] = `
 <div
-  className="makeStyles-multigridRowLabels-15"
-  onScroll={[Function]}
-  style={
-    Object {
-      "WebkitOverflowScrolling": "touch",
-      "direction": "ltr",
-      "height": -75,
-      "overflow": "hidden",
-      "position": "relative",
-      "width": 250,
-      "willChange": "transform",
-    }
-  }
+  className="css-1rzrka3"
 >
-  innerElementType
+  <div
+    onScroll={[Function]}
+    style={
+      Object {
+        "WebkitOverflowScrolling": "touch",
+        "direction": "ltr",
+        "height": -75,
+        "overflow": "hidden",
+        "position": "relative",
+        "width": 250,
+        "willChange": "transform",
+      }
+    }
+  >
+    innerElementType
+  </div>
 </div>
 `;

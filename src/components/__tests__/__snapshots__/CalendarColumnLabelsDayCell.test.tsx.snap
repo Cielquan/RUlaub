@@ -2,7 +2,7 @@
 
 exports[`<CalendarColumnLabelsDayCell /> renders correctly 1`] = `
 <div
-  className="makeStyles-multigridCell-21"
+  className="MuiBox-root css-6czgv6"
   style={
     Object {
       "height": -1,
@@ -13,7 +13,7 @@ exports[`<CalendarColumnLabelsDayCell /> renders correctly 1`] = `
   }
 >
   <p
-    className="MuiTypography-root makeStyles-typographyGrow-5 MuiTypography-body2 MuiTypography-alignCenter"
+    className="MuiTypography-root MuiTypography-body2 MuiTypography-alignCenter css-1ns5xdl-MuiTypography-root"
   >
     Th
   </p>

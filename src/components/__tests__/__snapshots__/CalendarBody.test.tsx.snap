@@ -2,20 +2,23 @@
 
 exports[`<CalendarBody /> renders correctly with subComponents mocked as string 1`] = `
 <div
-  className="makeStyles-multigridMainGrid-20"
-  onScroll={[Function]}
-  style={
-    Object {
-      "WebkitOverflowScrolling": "touch",
-      "direction": "ltr",
-      "height": -68,
-      "overflow": "auto",
-      "position": "relative",
-      "width": -249,
-      "willChange": "transform",
-    }
-  }
+  className="css-d4nco"
 >
-  multigridInnerElementType
+  <div
+    onScroll={[Function]}
+    style={
+      Object {
+        "WebkitOverflowScrolling": "touch",
+        "direction": "ltr",
+        "height": -68,
+        "overflow": "auto",
+        "position": "relative",
+        "width": -249,
+        "willChange": "transform",
+      }
+    }
+  >
+    multigridInnerElementType
+  </div>
 </div>
 `;

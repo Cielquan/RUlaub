@@ -2,7 +2,7 @@
 
 exports[`<CalendarBodyCell /> renders correctly 1`] = `
 <div
-  className="makeStyles-multigridCell-21"
+  className="MuiBox-root css-1ge3q6u"
   style={
     Object {
       "height": -1,
