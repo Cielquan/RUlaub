@@ -14,6 +14,7 @@ const LanguageMenu = (): ReactElement => {
   const dispatch = useDispatch();
   const { activateDE, activateEN } = bindActionCreators(actionCreators, dispatch);
   const langState = useSelector((state: State) => state.language);
+  const themeState = useSelector((state: State) => state.theme);
 
   const languages = [
     { changeHandle: activateDE, lang: Languages.german },
@@ -30,6 +31,12 @@ const LanguageMenu = (): ReactElement => {
     setAnchorEl(null);
   };
 
+  const buttonStyle = {
+    // NOTE: in light theme Navbar is 'primary.main' like the button
+    color: "rgba(0, 0, 0, 0.54)",
+    fill: "rgba(0, 0, 0, 0.54)",
+  };
+
   return (
     <>
       <Button
@@ -37,9 +44,11 @@ const LanguageMenu = (): ReactElement => {
         aria-haspopup="true"
         onClick={handleClick}
       >
-        <TranslateIcon />
-        <Typography>{langState.name}</Typography>
-        <KeyboardArrowDownIcon />
+        <TranslateIcon sx={themeState === "dark" ? {} : buttonStyle} />
+        <Typography sx={themeState === "dark" ? {} : buttonStyle}>
+          {langState.name}
+        </Typography>
+        <KeyboardArrowDownIcon sx={themeState === "dark" ? {} : buttonStyle} />
       </Button>
       <Menu
         data-testid="lang-menu"
