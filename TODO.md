@@ -1,4 +1,17 @@
-- Add a year picker to calendar dummy page
-    https://material-ui-pickers.dev/demo/datepicker#different-views
+## Misc
+
+- Fix test for <InfoPage/> changing id attr
 - Add logic to dis-/enable new holiday FAB
-- Make ProviderWrapper a HOC ?
+- Check scrollbars CSS .. seem not styled anymore ?
+
+### Calendar
+
+- Add Datepicker to year display in calendar
+- Add marker for Sat & Sun in calendar
+- Add marker for school holidays in calendar
+- Add marker for public holidays in calendar
+
+### Theming / Style
+
+- Use default background color
+    NOTE: calendar gutter uses this color
