@@ -10,7 +10,7 @@ describe("updateLocalConfig", () => {
 
   beforeEach(() => {
     orig = {
-      user: { name: "test", abbr: "t", vacationDays: 1, hexColor: 1 },
+      user: { name: "test" },
       settings: {
         databaseURI: "URL",
         yearToShow: 2021,
@@ -33,9 +33,6 @@ describe("updateLocalConfig", () => {
     const result = updateLocalConfig(orig, toAdd);
 
     expect(result.user.name).toBe(changedValue);
-    expect(result.user.abbr).toBe(orig.user.abbr);
-    expect(result.user.vacationDays).toBe(orig.user.vacationDays);
-    expect(result.user.hexColor).toBe(orig.user.hexColor);
     expect(result.settings).toEqual(orig.settings);
   });
 
