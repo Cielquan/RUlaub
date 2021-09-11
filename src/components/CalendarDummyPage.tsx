@@ -36,4 +36,5 @@ const CalendarDummyPage = (): ReactElement => {
     </Box>
   );
 };
+
 export default CalendarDummyPage;
