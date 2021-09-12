@@ -1,5 +1,5 @@
 import { Trans } from "@lingui/macro";
-import DatePicker from "@mui/lab/DatePicker";
+import { DatePicker } from "@mui/lab";
 import { TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { ReactElement } from "react";
