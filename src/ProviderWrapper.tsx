@@ -7,10 +7,10 @@ import React, { ReactElement, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { useMountEffect } from "./hooks";
 import i18n from "./i18n";
 import { actionCreators, State } from "./state";
 import createTheme from "./theme";
-import { useMountEffect } from "./utils/reactUtils";
 
 import App from "./App";
 
