@@ -1,8 +1,10 @@
 import { t } from "@lingui/macro";
 import {
   Add as AddIcon,
+  Build as BuildIcon,
   ChevronLeft as ChevronLeftIcon,
   Create as CreateIcon,
+  Folder as FolderIcon,
   Info as InfoIcon,
   Settings as SettingsIcon,
   Storage as StorageIcon,
@@ -54,8 +56,9 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
   ];
 
   const DatabaseSectionItemList: SectionItemList = [
-    [t`Create new`, "DB-Create new", closeSideMenu, <AddIcon />],
-    [t`Modify existing`, "DB-Modify existing", closeSideMenu, <CreateIcon />],
+    [t`Create new`, "DB-Create new", closeSideMenu, <CreateIcon />],
+    [t`Select existing`, "DB-Select existing", closeSideMenu, <FolderIcon />],
+    [t`Modify existing`, "DB-Modify existing", closeSideMenu, <BuildIcon />],
   ];
 
   return (

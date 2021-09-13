@@ -1,8 +1,8 @@
 ### Functionallity
 
-- Add new DB-Sidemenu button: 'select existing'
 - Add (local) 'Settings' menu
 - Add 'Create new DB' menu
+- Add 'Select DB' menu
 - Add 'Modify DB' menu
 - Add 'add new holiday' menu
 
