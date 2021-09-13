@@ -1,4 +1,4 @@
-import { DatePicker } from "@mui/lab";
+import { StaticDatePicker } from "@mui/lab";
 import { Button, Popover, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { CSSProperties, ReactElement } from "react";
@@ -77,9 +77,12 @@ const CalendarTableHeadCell = ({ data, style }: Props): ReactElement => {
           horizontal: "left",
         }}
       >
-        <DatePicker
+        <StaticDatePicker
+          displayStaticWrapperAs="desktop"
           views={["year"]}
-          value={new Date().setFullYear(data)}
+          value={new Date(`${data}-01-01`)}
+          allowSameDateSelection
+          autoFocus
           onChange={handleChange}
           // eslint-disable-next-line react/jsx-props-no-spreading
           renderInput={(params) => <TextField {...params} />}

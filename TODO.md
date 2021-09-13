@@ -6,7 +6,6 @@
 
 ### Calendar
 
-- Add Datepicker to year display in calendar
 - Add marker for Sat & Sun in calendar
 - Add marker for school holidays in calendar
 - Add marker for public holidays in calendar

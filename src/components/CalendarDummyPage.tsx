@@ -1,5 +1,5 @@
 import { Trans } from "@lingui/macro";
-import { DatePicker } from "@mui/lab";
+import { StaticDatePicker } from "@mui/lab";
 import { TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { ReactElement } from "react";
@@ -12,7 +12,7 @@ const CalendarDummyPage = (): ReactElement => {
   const dispatch = useDispatch();
   const { updateLocalConfig } = bindActionCreators(actionCreators, dispatch);
 
-  const [date, setDate] = React.useState(new Date());
+  const [date, setDate] = React.useState<Date>();
 
   const handleChange = (newDate: Date | null): void => {
     if (newDate !== null) {
@@ -22,13 +22,23 @@ const CalendarDummyPage = (): ReactElement => {
   };
 
   return (
-    <Box sx={{ textAlign: "center" }}>
-      <Typography variant="h4" sx={{ padding: 4 }}>
-        <Trans>No year to show selected.</Trans>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+      }}
+    >
+      <Typography variant="h4" sx={{ paddingTop: 4, paddingBottom: 8 }}>
+        <Trans>No year to show selected. Please select one below:</Trans>
       </Typography>
-      <DatePicker
+      <StaticDatePicker
+        displayStaticWrapperAs="desktop"
         views={["year"]}
         value={date}
+        allowSameDateSelection
+        autoFocus
         onChange={handleChange}
         // eslint-disable-next-line react/jsx-props-no-spreading
         renderInput={(params) => <TextField {...params} />}
