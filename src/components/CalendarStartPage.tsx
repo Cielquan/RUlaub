@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 
 import { actionCreators } from "../state";
 
-const CalendarDummyPage = (): ReactElement => {
+const CalendarStartPage = (): ReactElement => {
   const dispatch = useDispatch();
   const { updateLocalConfig } = bindActionCreators(actionCreators, dispatch);
 
@@ -47,4 +47,4 @@ const CalendarDummyPage = (): ReactElement => {
   );
 };
 
-export default CalendarDummyPage;
+export default CalendarStartPage;

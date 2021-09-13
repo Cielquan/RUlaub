@@ -9,9 +9,9 @@ import i18n from "../../i18n";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
 
-import CalendarDummyPage from "../CalendarDummyPage";
+import CalendarStartPage from "../CalendarStartPage";
 
-describe("<CalendarDummyPage />", () => {
+describe("<CalendarStartPage />", () => {
   const mockStore = generateMockStore(initialState);
 
   beforeEach(() => {
@@ -24,7 +24,7 @@ describe("<CalendarDummyPage />", () => {
         <Provider store={mockStore}>
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <I18nProvider i18n={i18n}>
-              <CalendarDummyPage />
+              <CalendarStartPage />
             </I18nProvider>
           </LocalizationProvider>
         </Provider>

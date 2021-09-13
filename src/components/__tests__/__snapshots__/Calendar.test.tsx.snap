@@ -12,4 +12,4 @@ exports[`<Calendar /> renders correctly year to show and with subComponents mock
 />
 `;
 
-exports[`<Calendar /> renders dummy page without year to show set 1`] = `"CalendarDummyPage"`;
+exports[`<Calendar /> renders dummy page without year to show set 1`] = `"CalendarStartPage"`;

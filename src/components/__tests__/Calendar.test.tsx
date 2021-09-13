@@ -12,7 +12,7 @@ import Calendar from "../Calendar";
 jest.mock("../CalendarBody", () => () => "CalendarBody");
 jest.mock("../CalendarColumnLabelsDay", () => () => "CalendarColumnLabelsDay");
 jest.mock("../CalendarColumnLabelsMonth", () => () => "CalendarColumnLabelsMonth");
-jest.mock("../CalendarDummyPage", () => () => "CalendarDummyPage");
+jest.mock("../CalendarStartPage", () => () => "CalendarStartPage");
 jest.mock("../CalendarRowLabelsUser", () => () => "CalendarRowLabelsUser");
 jest.mock("../CalendarTableHead", () => () => "CalendarTableHead");
 
