@@ -11,7 +11,7 @@ The frontend is written in [TypeScript](https://www.typescriptlang.org/) and use
 [React](https://reactjs.org/) with mainly [Material-UI](https://material-ui.com/)
 components.
 
-See the [Roadmap](ROADMAP.md) for the next planned steps.
+See the [TODO file](TODO.md) for the next planned steps.
 
 ## Credits
 
