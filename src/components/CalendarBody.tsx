@@ -16,13 +16,6 @@ const StyledGrid = styled("div")(({ theme }) => ({
   left: STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH,
   borderTop: `1px solid ${theme.palette.text.primary}`,
   borderLeft: `1px solid ${theme.palette.text.primary}`,
-  "&::-webkit-scrollbar": {
-    width: STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS,
-    height: STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS,
-  },
-  "&::-webkit-scrollbar-thumb": {
-    backgroundColor: theme.palette.text.primary,
-  },
 }));
 
 interface Props {

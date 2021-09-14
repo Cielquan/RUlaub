@@ -43,11 +43,7 @@ const CalendarColumnLabelsDay = ({
     <StyledGrid>
       <Grid
         height={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL * 2}
-        width={
-          width -
-          STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH -
-          STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS
-        }
+        width={width - STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
         innerElementType={innerElementType}
         columnCount={daysInYear}
         columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL}

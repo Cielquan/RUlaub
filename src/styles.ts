@@ -8,7 +8,6 @@ export const STYLE_CONST = {
   CALENDAR_ROW_HEIGHT_FULL: 35 + 2, // incl. gutter size
   CALENDAR_GUTTER_SIZE: 2,
   CALENDAR_ROW_LABEL_WIDTH: 250,
-  CALENDAR_SCROLLBAR_THINCKNESS: 6,
 };
 
 export type SxStyle =

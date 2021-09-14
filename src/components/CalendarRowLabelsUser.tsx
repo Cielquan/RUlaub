@@ -33,11 +33,7 @@ const CalendarRowLabelsUser = ({ height, positionY }: Props): ReactElement => {
   return (
     <StyledList>
       <List
-        height={
-          height -
-          STYLE_CONST.CALENDAR_ROW_HEIGHT * 2 -
-          STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS
-        }
+        height={height - STYLE_CONST.CALENDAR_ROW_HEIGHT * 2}
         width={STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
         innerElementType={innerElementType}
         itemCount={dbDataState.users.length}

@@ -36,11 +36,7 @@ const CalendarColumnLabelsMonth = ({ width, positionX, year }: Props): ReactElem
       <List
         layout="horizontal"
         height={STYLE_CONST.CALENDAR_ROW_HEIGHT}
-        width={
-          width -
-          STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH -
-          STYLE_CONST.CALENDAR_SCROLLBAR_THINCKNESS
-        }
+        width={width - STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
         innerElementType={innerElementType}
         itemCount={12}
         itemSize={getMonthWidth}
