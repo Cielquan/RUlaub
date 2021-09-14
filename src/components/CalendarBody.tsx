@@ -49,7 +49,11 @@ const CalendarBody = ({
   return (
     <StyledGrid>
       <Grid
-        height={height - STYLE_CONST.CALENDAR_ROW_HEIGHT * 2}
+        height={
+          height -
+          STYLE_CONST.CALENDAR_ROW_HEIGHT -
+          STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL * 2
+        }
         width={width - STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
         innerElementType={innerElementType}
         columnCount={daysInYear}
