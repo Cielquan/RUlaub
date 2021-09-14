@@ -1,10 +1,25 @@
 ### Functionallity
 
-- Add (local) 'Settings' menu
-- Add 'Create new DB' menu
-- Add 'Select DB' menu
-- Add 'Modify DB' menu
 - Add 'add new holiday' menu
+- Add 'edit/remove holiday' menu
+
+- Add (local) 'Settings' menu
+  - change username
+    - evtl. add user (as badge) to navbar instead
+  - change state (for showing school/public holidays)
+- Add 'Create new DB' menu
+  - file explorer to create new db file and save URI
+- Add 'Select DB' menu
+  - file explorer to save URI
+- Add 'Modify DB' menu
+  - add/edit vacation types
+    (or hide and not remove .. b/c of DB relations)
+  - add/edit states
+    (or hide and not remove .. b/c of DB relations)
+  - add/edit school holiday types
+    (or hide and not remove .. b/c of DB relations)
+  - add/edit/remove school holidays
+  - add/edit/remove public holidays
 
 ### Calendar
 
