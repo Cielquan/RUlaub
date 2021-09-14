@@ -15,9 +15,6 @@
 
 ### Theming / Style
 
-- Use default background color
-  NOTE: calendar gutter uses this color
-
 ## Misc
 
 - Fix test for <InfoPage/> changing id attr

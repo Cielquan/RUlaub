@@ -4,7 +4,8 @@ import React, { CSSProperties, forwardRef, LegacyRef, ReactElement } from "react
 import { STYLE_CONST } from "../styles";
 
 const StyledElement = styled("div")(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor:
+    theme.palette.mode === "dark" ? theme.palette.grey.A700 : theme.palette.grey.A400,
 }));
 
 interface Props {
