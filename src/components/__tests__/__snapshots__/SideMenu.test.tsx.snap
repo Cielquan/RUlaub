@@ -23,7 +23,7 @@ exports[`<SideMenu /> renders correctly when open 1`] = `
       class="css-1nmeykx"
     >
       <button
-        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeLarge css-mf1cb5-MuiButtonBase-root-MuiIconButton-root"
+        class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
         tabindex="0"
         type="button"
       >
@@ -47,23 +47,26 @@ exports[`<SideMenu /> renders correctly when open 1`] = `
       class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
     />
     <ul
-      class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
+      class="MuiList-root MuiList-padding css-1ccm1cv-MuiList-root"
     >
       SideMenuButton
+      <hr
+        class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+      />
+      SideMenuSectionButton
+      <hr
+        class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+      />
       SideMenuSectionButton
     </ul>
-    <div
-      class="MuiBox-root css-1rnyznj"
+    <ul
+      class="MuiList-root MuiList-padding css-mes3qp-MuiList-root"
     >
       <hr
         class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
       />
-      <ul
-        class="MuiList-root MuiList-padding css-h4y409-MuiList-root"
-      >
-        SideMenuButton
-      </ul>
-    </div>
+      SideMenuButton
+    </ul>
   </div>
   <div
     data-test="sentinelEnd"

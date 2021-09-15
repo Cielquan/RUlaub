@@ -4,6 +4,7 @@ import {
   Build as BuildIcon,
   ChevronLeft as ChevronLeftIcon,
   Create as CreateIcon,
+  Flight as FlightIcon,
   Folder as FolderIcon,
   Info as InfoIcon,
   Settings as SettingsIcon,
@@ -55,10 +56,15 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     [t`Settings`, "Settings", closeSideMenu, <SettingsIcon />],
   ];
 
+  const VacationSectionItemList: SectionItemList = [
+    [t`Create new`, "Vac-Create new", closeSideMenu, <AddIcon />],
+    [t`Edit existing`, "Vac-Edit existing", closeSideMenu, <CreateIcon />],
+  ];
+
   const DatabaseSectionItemList: SectionItemList = [
-    [t`Create new`, "DB-Create new", closeSideMenu, <CreateIcon />],
+    [t`Create new`, "DB-Create new", closeSideMenu, <AddIcon />],
     [t`Select existing`, "DB-Select existing", closeSideMenu, <FolderIcon />],
-    [t`Modify existing`, "DB-Modify existing", closeSideMenu, <BuildIcon />],
+    [t`Modify selected`, "DB-Modify selected", closeSideMenu, <BuildIcon />],
   ];
 
   return (
@@ -74,54 +80,60 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
             if (typeof onClick === "function") onClick();
             closeSideMenu();
           }}
-          size="large"
         >
           <ChevronLeftIcon />
         </IconButton>
       </SideMenuHeader>
       <Divider />
-      <List>
+      <List sx={{ paddingTop: 0 }}>
         {sectionlessItemList.map((item) => (
-          <SideMenuButton
-            text={item[0]}
-            key={item[1]}
-            listKey={item[1]}
-            onClick={() => {
-              if (typeof onClick === "function") onClick();
-              closeSideMenu();
-              item[2]();
-            }}
-            icon={item[3]}
-            sxStyle={item[4]}
-          />
+          <React.Fragment key={item[1]}>
+            <SideMenuButton
+              text={item[0]}
+              listKey={item[1]}
+              onClick={() => {
+                if (typeof onClick === "function") onClick();
+                closeSideMenu();
+                item[2]();
+              }}
+              icon={item[3]}
+              sxStyle={item[4]}
+            />
+            <Divider />
+          </React.Fragment>
         ))}
         <SideMenuSectionButton
+          text={t`Vacation`}
+          listKey="Vacation"
+          icon={<FlightIcon />}
+          sectionItemList={VacationSectionItemList}
+        />
+        <Divider />
+        <SideMenuSectionButton
           text={t`Database`}
-          listKey={t`Database`}
+          listKey="Database"
           icon={<StorageIcon />}
           sectionItemList={DatabaseSectionItemList}
         />
       </List>
-      <Box
+      <List
         sx={{
           marginTop: "auto",
           marginBottom: 2,
         }}
       >
         <Divider />
-        <List>
-          <SideMenuButton
-            listKey={t`Info`}
-            text={t`Info`}
-            icon={<InfoIcon />}
-            onClick={() => {
-              if (typeof onClick === "function") onClick();
-              closeSideMenu();
-              openInfoPage();
-            }}
-          />
-        </List>
-      </Box>
+        <SideMenuButton
+          text={t`Info`}
+          listKey="Info"
+          icon={<InfoIcon />}
+          onClick={() => {
+            if (typeof onClick === "function") onClick();
+            closeSideMenu();
+            openInfoPage();
+          }}
+        />
+      </List>
     </Drawer>
   );
 };
