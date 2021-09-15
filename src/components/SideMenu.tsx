@@ -12,7 +12,6 @@ import {
 } from "@mui/icons-material";
 import { Divider, Drawer, IconButton, List } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { Box } from "@mui/system";
 import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
