@@ -2,7 +2,7 @@
 
 exports[`<innerElementType /> renders correctly 1`] = `
 <div
-  className="css-1k9ek97"
+  className="css-1oiwuu9"
   style={
     Object {
       "paddingLeft": 2,

@@ -35,7 +35,7 @@ const CalendarTableHeadCell = ({ data, style }: Props): ReactElement => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? "yearpicker-popover" : undefined;
 
   return (
     <Box

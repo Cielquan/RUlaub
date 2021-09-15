@@ -22,13 +22,13 @@ exports[`<InfoPage /> renders correctly when open 1`] = `
     tabindex="-1"
   >
     <div
-      aria-labelledby="mui-665340718"
+      aria-labelledby="info-page"
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm css-1t1j96h-MuiPaper-root-MuiDialog-paper"
       role="dialog"
     >
       <h2
         class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-bdhsul-MuiTypography-root-MuiDialogTitle-root"
-        id="mui-665340718"
+        id="info-page"
       >
         RUlaub v1.0.0
       </h2>
@@ -115,13 +115,13 @@ exports[`<InfoPage /> renders invisible by default 1`] = `
     tabindex="-1"
   >
     <div
-      aria-labelledby="mui-696713830"
+      aria-labelledby="info-page"
       class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation24 MuiDialog-paper MuiDialog-paperScrollPaper MuiDialog-paperWidthSm css-1t1j96h-MuiPaper-root-MuiDialog-paper"
       role="dialog"
     >
       <h2
         class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-bdhsul-MuiTypography-root-MuiDialogTitle-root"
-        id="mui-696713830"
+        id="info-page"
       >
         RUlaub v1.0.0
       </h2>

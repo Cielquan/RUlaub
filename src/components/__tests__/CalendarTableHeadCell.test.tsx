@@ -1,4 +1,5 @@
 import React from "react";
+import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 
 import { initialState } from "../../state";
@@ -16,10 +17,12 @@ describe("<CalendarTableHeadCell />", () => {
   it("renders correctly", () => {
     const tree = renderer
       .create(
-        <CalendarTableHeadCell
-          data={1}
-          style={{ height: 1, left: 2, top: 3, width: 4 }}
-        />
+        <Provider store={mockStore}>
+          <CalendarTableHeadCell
+            data={1}
+            style={{ height: 1, left: 2, top: 3, width: 4 }}
+          />
+        </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

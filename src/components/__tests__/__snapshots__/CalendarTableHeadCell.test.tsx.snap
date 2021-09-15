@@ -12,10 +12,30 @@ exports[`<CalendarTableHeadCell /> renders correctly 1`] = `
     }
   }
 >
-  <div
-    className="MuiTypography-root MuiTypography-h3 MuiTypography-alignCenter css-112kzpp-MuiTypography-root"
+  <button
+    className="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButton-fullWidth MuiButtonBase-root css-gxc0n2-MuiButtonBase-root-MuiButton-root"
+    disabled={false}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onContextMenu={[Function]}
+    onDragLeave={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseLeave={[Function]}
+    onMouseUp={[Function]}
+    onTouchEnd={[Function]}
+    onTouchMove={[Function]}
+    onTouchStart={[Function]}
+    tabIndex={0}
+    type="button"
   >
-    1
-  </div>
+    <div
+      className="MuiTypography-root MuiTypography-h3 MuiTypography-alignCenter css-112kzpp-MuiTypography-root"
+    >
+      1
+    </div>
+  </button>
 </div>
 `;

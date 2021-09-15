@@ -10,7 +10,7 @@ exports[`<CalendarRowLabelsUser /> renders correctly with subComponents mocked a
       Object {
         "WebkitOverflowScrolling": "touch",
         "direction": "ltr",
-        "height": -75,
+        "height": -108,
         "overflow": "hidden",
         "position": "relative",
         "width": 250,

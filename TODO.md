@@ -41,7 +41,6 @@
 
 ### Misc
 
-- Fix test for <InfoPage/> changing id attr
 - Add logic to dis-/enable new holiday FAB
 - add API call to get school holidays and public holidays
 

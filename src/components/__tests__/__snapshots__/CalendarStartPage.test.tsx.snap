@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CalendarStartPage /> renders correctly 1`] = `
+<div
+  className="MuiBox-root css-gdx2i7"
+>
+  <h4
+    className="MuiTypography-root MuiTypography-h4 css-9avr96-MuiTypography-root"
+  >
+    No year to show selected. Please select one below:
+  </h4>
+  StaticDatePicker
+</div>
+`;

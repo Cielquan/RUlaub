@@ -11,6 +11,8 @@ import generateMockStore from "../../testUtils";
 
 import CalendarStartPage from "../CalendarStartPage";
 
+jest.mock("@mui/lab/StaticDatePicker", () => () => "StaticDatePicker");
+
 describe("<CalendarStartPage />", () => {
   const mockStore = generateMockStore(initialState);
 

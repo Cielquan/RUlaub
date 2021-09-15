@@ -2,7 +2,7 @@
 
 exports[`<CalendarBody /> renders correctly with subComponents mocked as string 1`] = `
 <div
-  className="css-d4nco"
+  className="css-1rr1d02"
 >
   <div
     onScroll={[Function]}
@@ -10,7 +10,7 @@ exports[`<CalendarBody /> renders correctly with subComponents mocked as string 
       Object {
         "WebkitOverflowScrolling": "touch",
         "direction": "ltr",
-        "height": -68,
+        "height": -107,
         "overflow": "auto",
         "position": "relative",
         "width": -249,

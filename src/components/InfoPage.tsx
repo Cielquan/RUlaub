@@ -45,15 +45,18 @@ const InfoPage = ({ onClick }: Props): ReactElement => {
     </Link>
   );
 
+  const id = "info-page";
+
   return (
     <Dialog
-      data-testid="info-page"
+      aria-labelledby={id}
+      data-testid={id}
       open={infoPageState}
       TransitionComponent={Transition}
       keepMounted
       onClose={closeInfoPage}
     >
-      <DialogTitle>{`RUlaub v${pjson.version}`}</DialogTitle>
+      <DialogTitle id={id}>{`RUlaub v${pjson.version}`}</DialogTitle>
       <DialogContent>
         <DialogContentText sx={{ whiteSpace: "pre-wrap" }}>
           <Typography component="span">
@@ -72,7 +75,7 @@ const InfoPage = ({ onClick }: Props): ReactElement => {
       </DialogContent>
       <DialogActions>
         <Button
-          data-testid="info-page-btn"
+          data-testid={`${id}-btn`}
           onClick={() => {
             if (typeof onClick === "function") onClick();
             closeInfoPage();

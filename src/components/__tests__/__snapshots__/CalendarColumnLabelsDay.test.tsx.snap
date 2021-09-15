@@ -13,7 +13,7 @@ exports[`<CalendarColumnLabelsDay /> renders correctly with subComponents mocked
         "height": 74,
         "overflow": "hidden",
         "position": "relative",
-        "width": -255,
+        "width": -249,
         "willChange": "transform",
       }
     }
