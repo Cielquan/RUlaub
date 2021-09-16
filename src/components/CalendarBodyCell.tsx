@@ -18,7 +18,7 @@ const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement
     if (
       vacationDataState.users[rowIndex].vacations.filter(
         (vacation) =>
-          vacation.startDay <= columnIndex + 1 && vacation.endDay >= columnIndex
+          vacation.startYearDay <= columnIndex + 1 && vacation.endYearDay >= columnIndex
       ).length > 0
     ) {
       return true;

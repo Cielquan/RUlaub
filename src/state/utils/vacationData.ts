@@ -1,28 +1,36 @@
 interface Vacation {
   id: number;
   startDate: string;
-  startDay: number;
+  startYearDay: number;
   endDate: string;
-  endDay: number;
-  typeId: number;
+  endYearDay: number;
+  hexcolor: number;
 }
 
-interface UserConfig {
+interface VacationStat {
+  type: string;
+  count: number;
+}
+
+interface UserStats {
+  availableVacationDays: number;
+  takenVacationDays: number;
+  vacationStats: VacationStat[];
+}
+
+interface UserData {
   id: number;
   name: string;
-  abbr: string;
-  vacationDays: number;
-  hexColor: number;
-  groupManagerId: number;
+  userStats: UserStats;
   vacations: Vacation[];
 }
 
 export interface VacationData {
-  users: UserConfig[];
+  users: UserData[];
 }
 
 export interface VacationDataPayload {
-  users?: Partial<UserConfig>[];
+  users?: Partial<UserData>[];
 }
 
 export const updateVacationData = (

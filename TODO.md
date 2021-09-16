@@ -4,7 +4,6 @@
 
 - Add state for school holidays
 - Add state for public holidays
-- Work out state for user data/vacations
 
 ### Data queries
 
