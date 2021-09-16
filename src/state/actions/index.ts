@@ -1,5 +1,10 @@
 import { DBDataPayload } from "../utils/dbData";
-import { LocalConfigPayload } from "../utils/localConfig";
+import { ConfigPayload } from "../utils/config";
+
+export type ConfigAction = {
+  type: string;
+  payload: ConfigPayload;
+};
 
 export type DBDataAction = {
   type: string;
@@ -10,19 +15,6 @@ export type InfoPageAction = {
   type: string;
 };
 
-export type LanguageAction = {
-  type: string;
-};
-
-export type LocalConfigAction = {
-  type: string;
-  payload: LocalConfigPayload;
-};
-
 export type SideMenuAction = {
-  type: string;
-};
-
-export type ThemeAction = {
   type: string;
 };

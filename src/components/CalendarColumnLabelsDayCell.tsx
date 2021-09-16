@@ -22,7 +22,7 @@ const CalendarColumnLabelsDayCell = ({
   data,
   style,
 }: Props): ReactElement => {
-  const { locale } = useSelector((state: State) => state.language);
+  const { locale } = useSelector((state: State) => state.config.settings.language);
 
   const date = datePlusDays(data, columnIndex);
 

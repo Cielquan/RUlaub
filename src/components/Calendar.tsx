@@ -16,12 +16,12 @@ import CalendarRowLabelsUser from "./CalendarRowLabelsUser";
 import CalendarTableHead from "./CalendarTableHead";
 
 const Calendar = (): ReactElement => {
-  const themeState = useSelector((state: State) => state.theme);
-  const langState = useSelector((state: State) => state.language);
-  const localConfigState = useSelector((state: State) => state.localConfig);
+  const configState = useSelector((state: State) => state.config);
+  const themeState = configState.settings.theme;
+  const langState = configState.settings.language;
 
   const theme = createTheme(themeState, locales[langState.importName]);
-  const year = localConfigState.settings.yearToShow;
+  const year = configState.settings.yearToShow;
 
   const [scrollX, setScrollX] = useState(0);
   const [scrollY, setScrollY] = useState(0);

@@ -4,31 +4,20 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import * as locales from "@mui/material/locale";
 import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import React, { ReactElement, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
+import { useSelector } from "react-redux";
 
-import { useMountEffect } from "./hooks";
 import i18n from "./i18n";
-import { actionCreators, State } from "./state";
+import { State } from "./state";
 import createTheme from "./theme";
 
 import App from "./App";
 
 const ProviderWrapper = (): ReactElement => {
-  const dispatch = useDispatch();
-  const { loadLangState, loadThemeState } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
-  const themeState = useSelector((state: State) => state.theme);
-  const langState = useSelector((state: State) => state.language);
+  const configState = useSelector((state: State) => state.config);
+  const themeState = configState.settings.theme;
+  const langState = configState.settings.language;
 
   const theme = createTheme(themeState, locales[langState.importName]);
-
-  useMountEffect(() => {
-    loadLangState();
-    loadThemeState();
-  });
 
   useEffect(() => {
     i18n.activate(langState.locale);

@@ -1,4 +1,4 @@
-import { SupportedLocales } from "./i18n";
+import { Language } from "./i18n";
 import { SupportedThemes } from "../../theme";
 
 export interface UserConfig {
@@ -9,24 +9,24 @@ export interface SettingsConfig {
   databaseURI: string | undefined;
   yearToShow: number | undefined;
   theme: SupportedThemes;
-  language: SupportedLocales;
+  language: Language;
 }
 
-export interface LocalConfig {
+export interface Config {
   user: UserConfig;
   settings: SettingsConfig;
 }
 
-export interface LocalConfigPayload {
+export interface ConfigPayload {
   user?: Partial<UserConfig>;
   settings?: Partial<SettingsConfig>;
 }
 
-export const updateLocalConfig = (
-  currentConfig: LocalConfig,
-  updatePayload: LocalConfigPayload
-): LocalConfig => {
-  const rv: LocalConfig = JSON.parse(JSON.stringify(currentConfig));
+export const updateConfig = (
+  currentConfig: Config,
+  updatePayload: ConfigPayload
+): Config => {
+  const rv: Config = JSON.parse(JSON.stringify(currentConfig));
 
   if ("user" in updatePayload) {
     rv.user = { ...rv.user, ...updatePayload.user };

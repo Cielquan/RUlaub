@@ -16,7 +16,8 @@ const DarkThemeSwitch = (): ReactElement => {
     actionCreators,
     dispatch
   );
-  const themeState = useSelector((state: State) => state.theme);
+  const configState = useSelector((state: State) => state.config);
+  const themeState = configState.settings.theme;
 
   return (
     <Tooltip

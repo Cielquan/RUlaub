@@ -1,11 +1,5 @@
 ## App
 
-### Sidemenu
-
-- Add group for holidays
-  - new
-  - edit/remove
-
 ### Menus (popups)
 
 - Add 'add new holiday' menu
