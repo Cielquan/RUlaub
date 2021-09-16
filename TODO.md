@@ -59,6 +59,7 @@
 - Add marker for school holidays in calendar
 - Add marker for public holidays in calendar
 - If year == current_year: focus on current_day
+- Add new view to show team overview with how many days taken etc.
 
 ##### Functional
 
