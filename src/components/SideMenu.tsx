@@ -56,14 +56,14 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
   ];
 
   const VacationSectionItemList: SectionItemList = [
-    [t`Create new`, "Vac-Create new", closeSideMenu, <AddIcon />],
-    [t`Edit existing`, "Vac-Edit existing", closeSideMenu, <CreateIcon />],
+    [t`Create`, "Vac-Create", closeSideMenu, <AddIcon />],
+    [t`Edit`, "Vac-Edit", closeSideMenu, <CreateIcon />],
   ];
 
   const DatabaseSectionItemList: SectionItemList = [
-    [t`Create new`, "DB-Create new", closeSideMenu, <AddIcon />],
-    [t`Select existing`, "DB-Select existing", closeSideMenu, <FolderIcon />],
-    [t`Modify selected`, "DB-Modify selected", closeSideMenu, <BuildIcon />],
+    [t`Create`, "DB-Create", closeSideMenu, <AddIcon />],
+    [t`Select`, "DB-Select", closeSideMenu, <FolderIcon />],
+    [t`Modify`, "DB-Modify", closeSideMenu, <BuildIcon />],
   ];
 
   return (
