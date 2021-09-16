@@ -12,7 +12,7 @@ interface Props {
 }
 
 const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElement => {
-  const dbDataState = useSelector((state: State) => state.dbData);
+  const vacationDataState = useSelector((state: State) => state.vacationData);
 
   return (
     <Box
@@ -30,7 +30,7 @@ const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElem
       }}
     >
       <Typography sx={{ padding: "0 0.3em" }} variant="body1" noWrap>
-        {dbDataState.users[rowIndex].name}
+        {vacationDataState.users[rowIndex].name}
       </Typography>
     </Box>
   );

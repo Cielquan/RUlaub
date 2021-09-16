@@ -1,5 +1,5 @@
 import { SupportedThemes } from "../../theme";
-import { DBData } from "../utils/dbData";
+import { VacationData } from "../utils/vacationData";
 import { localeToLanguage, SupportedLocales } from "../utils/i18n";
 import { Config } from "../utils/config";
 
@@ -22,6 +22,6 @@ export const configInitState: Config = {
     language: defaultLanguage,
   },
 };
-export const dbDataInitState: DBData = dbDataJSON;
 export const infoPageInitState = false;
 export const sideMenuInitState = false;
+export const vacationDataInitState: VacationData = dbDataJSON;

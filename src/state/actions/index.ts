@@ -1,14 +1,9 @@
-import { DBDataPayload } from "../utils/dbData";
+import { VacationDataPayload } from "../utils/vacationData";
 import { ConfigPayload } from "../utils/config";
 
 export type ConfigAction = {
   type: string;
   payload: ConfigPayload;
-};
-
-export type DBDataAction = {
-  type: string;
-  payload: DBDataPayload;
 };
 
 export type InfoPageAction = {
@@ -17,4 +12,9 @@ export type InfoPageAction = {
 
 export type SideMenuAction = {
   type: string;
+};
+
+export type VacationDataAction = {
+  type: string;
+  payload: VacationDataPayload;
 };

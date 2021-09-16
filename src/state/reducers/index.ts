@@ -1,30 +1,30 @@
 import { combineReducers } from "redux";
 
 import configReducer from "./configReducer";
-import dbDataReducer from "./dbDataReducer";
 import infoPageReducer from "./infoPageReducer";
 import {
-  dbDataInitState,
+  vacationDataInitState,
   infoPageInitState,
   configInitState,
   sideMenuInitState,
 } from "./initialStates";
 import sideMenuReducer from "./sideMenuReducer";
+import vacationDataReducer from "./vacationDataReducer";
 
 const rootReducer = combineReducers({
   config: configReducer,
-  dbData: dbDataReducer,
   infoPage: infoPageReducer,
   sideMenu: sideMenuReducer,
+  vacationData: vacationDataReducer,
 });
 
 export type State = ReturnType<typeof rootReducer>;
 
 export const initialState: State = {
   config: configInitState,
-  dbData: dbDataInitState,
   infoPage: infoPageInitState,
   sideMenu: sideMenuInitState,
+  vacationData: vacationDataInitState,
 };
 
 export default rootReducer;

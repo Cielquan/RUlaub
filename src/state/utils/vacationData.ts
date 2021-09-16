@@ -17,15 +17,15 @@ interface UserConfig {
   vacations: Vacation[];
 }
 
-export interface DBData {
+export interface VacationData {
   users: UserConfig[];
 }
 
-export interface DBDataPayload {
+export interface VacationDataPayload {
   users?: Partial<UserConfig>[];
 }
 
-export const updateDBData = (
-  currentData: DBData,
-  updatePayload: DBDataPayload
-): DBData => currentData;
+export const updateVacationData = (
+  currentData: VacationData,
+  updatePayload: VacationDataPayload
+): VacationData => currentData;

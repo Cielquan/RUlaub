@@ -12,11 +12,11 @@ interface Props {
 }
 
 const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement => {
-  const dbDataState = useSelector((state: State) => state.dbData);
+  const vacationDataState = useSelector((state: State) => state.vacationData);
 
   const isHoliday = (): boolean => {
     if (
-      dbDataState.users[rowIndex].vacations.filter(
+      vacationDataState.users[rowIndex].vacations.filter(
         (vacation) =>
           vacation.startDay <= columnIndex + 1 && vacation.endDay >= columnIndex
       ).length > 0
