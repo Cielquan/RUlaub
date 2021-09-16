@@ -1,0 +1,42 @@
+{
+  "title": "Config Schema",
+  "type": "object",
+  "properties": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "databaseURI": {
+          "type": "string",
+          "nullable": true
+        },
+        "yearToShow": {
+          "type": "number",
+          "nullable": true,
+          "minimum": 1900
+        },
+        "theme": {
+          "type": "string",
+          "nullable": true,
+          "enum": ["dark", "light"]
+        },
+        "language": {
+          "type": "string",
+          "nullable": true,
+          "enum": ["de-DE", "en-US"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

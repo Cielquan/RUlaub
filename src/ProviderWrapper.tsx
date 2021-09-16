@@ -4,15 +4,20 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import * as locales from "@mui/material/locale";
 import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import React, { ReactElement, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import i18n from "./i18n";
-import { State } from "./state";
+import { actionCreators, State } from "./state";
 import createTheme from "./theme";
 
 import App from "./App";
+import { useMountEffect } from "./hooks";
 
 const ProviderWrapper = (): ReactElement => {
+  const dispatch = useDispatch();
+  const { loadConfig } = bindActionCreators(actionCreators, dispatch);
+
   const configState = useSelector((state: State) => state.config);
   const themeState = configState.settings.theme;
   const langState = configState.settings.language;
@@ -22,6 +27,10 @@ const ProviderWrapper = (): ReactElement => {
   useEffect(() => {
     i18n.activate(langState.locale);
   }, [langState.locale]);
+
+  useMountEffect(() => {
+    loadConfig();
+  });
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>

@@ -13,6 +13,8 @@
     "@mui/material": "^5.0.0-rc.1",
     "@mui/system": "^5.0.0-rc.1",
     "@tauri-apps/api": "^1.0.0-beta.1",
+    "ajv": "^8.6.3",
+    "json-schema-to-typescript": "^10.1.5",
     "make-plural": "^6.2.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -33,7 +35,8 @@
     "format": "prettier --write --end-of-line=auto \"./**/*.{js,jsx,ts,tsx,html,css,json}\" --ignore-path .gitignore",
     "fmt": "yarn format",
     "extract": "lingui extract --clean",
-    "compile": "lingui compile"
+    "compile": "lingui compile",
+    "schemas": "json2ts -i 'src/schemas/*.json' -o src/types/"
   },
   "jest": {
     "transform": {
