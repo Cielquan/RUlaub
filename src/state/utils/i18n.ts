@@ -20,4 +20,7 @@ export const Languages: { [key: string]: Language } = {
   },
 };
 
+export const localeToLanguage = (locale: SupportedLocales): Language =>
+  Object.values(Languages).filter((lang) => lang.locale === locale)[0];
+
 export default Languages;
