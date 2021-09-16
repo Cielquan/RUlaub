@@ -13,98 +13,111 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/DarkThemeSwitch.tsx:17
+#: src/components/CalendarStartPage.tsx:37
+msgid "No year to show selected. Please select one below:"
+msgstr "No year to show selected. Please select one below:"
+
+#: src/components/DarkThemeSwitch.tsx:25
 msgid "Activate Light Theme"
 msgstr "Activate Light Theme"
 
-#: src/components/DarkThemeSwitch.tsx:17
+#: src/components/DarkThemeSwitch.tsx:25
 msgid "Activate Dark Theme"
 msgstr "Activate Dark Theme"
 
-#: src/components/InfoPage.tsx:57
+#: src/components/InfoPage.tsx:63
 msgid "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
 msgstr "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
 
-#: src/components/InfoPage.tsx:63
+#: src/components/InfoPage.tsx:69
 msgid "For the Source Code, Documentation and copies of the License files please see the github repository at: {ghLink}."
 msgstr "For the Source Code, Documentation and copies of the License files please see the github repository at: {ghLink}."
 
-#: src/components/InfoPage.tsx:72
+#: src/components/InfoPage.tsx:85
 msgid "Close"
 msgstr "Close"
 
-#: src/components/NewHolidayButton.tsx:12
+#: src/components/NewHolidayButton.tsx:15
 msgid "Add new Holiday"
 msgstr "Add new Holiday"
 
-#: src/components/SideMenu.tsx:29
+#: src/components/SideMenu.tsx:55
 msgid "Settings"
 msgstr "Settings"
 
-#: src/components/SideMenuDatabaseButton.tsx:27
-#: src/components/SideMenuDatabaseButton.tsx:28
+#: src/components/SideMenu.tsx:59
+#: src/components/SideMenu.tsx:64
+msgid "Create"
+msgstr "Create"
+
+#: src/components/SideMenu.tsx:60
+msgid "Edit"
+msgstr "Edit"
+
+#: src/components/SideMenu.tsx:65
+msgid "Select"
+msgstr "Select"
+
+#: src/components/SideMenu.tsx:66
+msgid "Modify"
+msgstr "Modify"
+
+#: src/components/SideMenu.tsx:105
+msgid "Vacation"
+msgstr "Vacation"
+
+#: src/components/SideMenu.tsx:112
 msgid "Database"
 msgstr "Database"
 
-#: src/components/SideMenuDatabaseCreateButton.tsx:20
-#: src/components/SideMenuDatabaseCreateButton.tsx:21
-msgid "Create new"
-msgstr "Create new"
-
-#: src/components/SideMenuDatabaseModifyButton.tsx:20
-#: src/components/SideMenuDatabaseModifyButton.tsx:21
-msgid "Modify existing"
-msgstr "Modify existing"
-
-#: src/components/SideMenuInfoButton.tsx:17
-#: src/components/SideMenuInfoButton.tsx:18
+#: src/components/SideMenu.tsx:126
 msgid "Info"
 msgstr "Info"
 
-#: src/utils/dateutils.ts:20
+#: src/utils/dateUtils.ts:20
 msgid "January"
 msgstr "January"
 
-#: src/utils/dateutils.ts:21
+#: src/utils/dateUtils.ts:21
 msgid "February"
 msgstr "February"
 
-#: src/utils/dateutils.ts:22
+#: src/utils/dateUtils.ts:22
 msgid "March"
 msgstr "March"
 
-#: src/utils/dateutils.ts:23
+#: src/utils/dateUtils.ts:23
 msgid "April"
 msgstr "April"
 
-#: src/utils/dateutils.ts:24
+#: src/utils/dateUtils.ts:24
 msgid "May"
 msgstr "May"
 
-#: src/utils/dateutils.ts:25
+#: src/utils/dateUtils.ts:25
 msgid "June"
 msgstr "June"
 
-#: src/utils/dateutils.ts:26
+#: src/utils/dateUtils.ts:26
 msgid "July"
 msgstr "July"
 
-#: src/utils/dateutils.ts:27
+#: src/utils/dateUtils.ts:27
 msgid "August"
 msgstr "August"
 
-#: src/utils/dateutils.ts:28
+#: src/utils/dateUtils.ts:28
 msgid "September"
 msgstr "September"
 
-#: src/utils/dateutils.ts:29
+#: src/utils/dateUtils.ts:29
 msgid "October"
 msgstr "October"
 
-#: src/utils/dateutils.ts:30
+#: src/utils/dateUtils.ts:30
 msgid "November"
 msgstr "November"
 
-#: src/utils/dateutils.ts:31
+#: src/utils/dateUtils.ts:31
 msgid "December"
 msgstr "December"
