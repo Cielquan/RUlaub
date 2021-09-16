@@ -3,13 +3,12 @@ import { Dispatch } from "redux";
 
 import { ConfigType } from "../action-types";
 import { ConfigAction } from "../actions";
+import { ConfigSchema as ConfigSchemaType } from "../../types/config.schema";
+import ConfigSchema from "../../schemas/config.schema.json";
 import { ConfigPayload } from "../utils/config";
 import Languages, { localeToLanguage } from "../utils/i18n";
 
-import ConfigSchema from "../../schemas/config.schema.json";
-
 import localConfigJSON from "../../dev_temp/test.local_config.json";
-import { ConfigSchema as ConfigSchemaType } from "../../types/config.schema";
 
 export const updateConfigAction = (payload: ConfigPayload): ConfigAction => ({
   type: ConfigType.UPDATE,
