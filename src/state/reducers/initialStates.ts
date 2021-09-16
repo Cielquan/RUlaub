@@ -3,7 +3,7 @@ import { VacationData } from "../utils/vacationData";
 import { localeToLanguage, SupportedLocales } from "../utils/i18n";
 import { Config } from "../utils/config";
 
-import dbDataJSON from "../../dev_temp/test.db.json";
+// import dbDataJSON from "../../dev_temp/test.db.json";
 // import localConfigJSON from "../../dev_temp/test.local_config.json";
 
 export const defaultLocale: SupportedLocales = "en-US";
@@ -24,4 +24,4 @@ export const configInitState: Config = {
 };
 export const infoPageInitState = false;
 export const sideMenuInitState = false;
-export const vacationDataInitState: VacationData = dbDataJSON;
+export const vacationDataInitState: VacationData = { users: [] };
