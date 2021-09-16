@@ -1,5 +1,11 @@
 ## App
 
+### State
+
+- Add state for school holidays
+- Add state for public holidays
+- Work out state for user data/vacations
+
 ### Data queries
 
 ##### Config
@@ -60,6 +66,7 @@
 - Add marker for public holidays in calendar
 - If year == current_year: focus on current_day
 - Add new view to show team overview with how many days taken etc.
+- Add popup on hover over names that shows vac taken stats
 
 ##### Functional
 
@@ -90,8 +97,8 @@
 #### vacation_types
 
 - id
-- name
-- count (to user's vacation_days)
+- type
+- doCount (to user's vacation_days)
 - hexcolor
 
 #### vacations
