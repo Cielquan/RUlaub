@@ -3,8 +3,8 @@ import { Dispatch } from "redux";
 
 import { ConfigType } from "../action-types";
 import { ConfigAction } from "../actions";
-import { ConfigSchema as ConfigSchemaType } from "../../types/config.schema";
-import ConfigSchema from "../../schemas/config.schema.json";
+import { ConfigFileSchema as ConfigFileType } from "../../types/configFile.schema";
+import ConfigFileSchema from "../../schemas/configFile.schema.json";
 import { ConfigPayload } from "../utils/config";
 import Languages, { localeToLanguage } from "../utils/i18n";
 
@@ -52,7 +52,7 @@ export const loadConfig =
     const conf: any = localConfigJSON;
 
     const ajv = new Ajv();
-    const validate = ajv.compile<ConfigSchemaType>(ConfigSchema);
+    const validate = ajv.compile<ConfigFileType>(ConfigFileSchema);
     if (validate(conf)) {
       if (conf.settings?.language !== undefined) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
