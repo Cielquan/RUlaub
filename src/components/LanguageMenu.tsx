@@ -15,8 +15,9 @@ import LanguageMenuButton from "./LanguageMenuButton";
 const LanguageMenu = (): ReactElement => {
   const dispatch = useDispatch();
   const { activateDE, activateEN } = bindActionCreators(actionCreators, dispatch);
-  const langState = useSelector((state: State) => state.language);
-  const themeState = useSelector((state: State) => state.theme);
+  const configState = useSelector((state: State) => state.config);
+  const themeState = configState.settings.theme;
+  const langState = configState.settings.language;
 
   const languages = [
     { changeHandle: activateDE, lang: Languages.german },

@@ -21,11 +21,9 @@ export const configInitState: Config = {
     databaseURI: undefined,
     yearToShow: undefined,
     theme: defaultTheme,
-    language: defaultLocale,
+    language: defaultLanguage,
   },
 };
 export const dbDataInitState: DBData = dbDataJSON;
 export const infoPageInitState = false;
-export const languageInitState = defaultLanguage;
 export const sideMenuInitState = false;
-export const themeInitState = defaultTheme;

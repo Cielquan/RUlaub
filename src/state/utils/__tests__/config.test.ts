@@ -10,7 +10,11 @@ describe("updateLocalConfig", () => {
         databaseURI: "URL",
         yearToShow: 2021,
         theme: "dark",
-        language: "en-US",
+        language: {
+          name: "English",
+          locale: "en-US",
+          importName: "enUS",
+        },
       },
     };
   });
@@ -49,7 +53,7 @@ describe("updateLocalConfig", () => {
     expect(result.settings.theme).toBe(changedValue);
     expect(result.settings.databaseURI).toBe(orig.settings.databaseURI);
     expect(result.settings.yearToShow).toBe(orig.settings.yearToShow);
-    expect(result.settings.language).toBe(orig.settings.language);
+    expect(result.settings.language).toEqual(orig.settings.language);
     expect(result.user).toEqual(orig.user);
   });
 
@@ -58,7 +62,11 @@ describe("updateLocalConfig", () => {
       databaseURI: "changed",
       yearToShow: 1919,
       theme: "light",
-      language: "de-DE",
+      language: {
+        name: "Deutsch",
+        locale: "de-DE",
+        importName: "deDE",
+      },
     };
     const toAdd: ConfigPayload = { settings: changedValue };
     const result = updateConfig(orig, toAdd);

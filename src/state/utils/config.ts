@@ -1,4 +1,4 @@
-import { SupportedLocales } from "./i18n";
+import { Language } from "./i18n";
 import { SupportedThemes } from "../../theme";
 
 export interface UserConfig {
@@ -9,7 +9,7 @@ export interface SettingsConfig {
   databaseURI: string | undefined;
   yearToShow: number | undefined;
   theme: SupportedThemes;
-  language: SupportedLocales;
+  language: Language;
 }
 
 export interface Config {

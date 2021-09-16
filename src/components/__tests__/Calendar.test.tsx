@@ -37,9 +37,9 @@ describe("<Calendar />", () => {
   });
 
   it("renders correctly year to show and with subComponents mocked as string", () => {
-    testState.localConfig.settings.yearToShow = 2020;
+    testState.config.settings.yearToShow = 2020;
     const alteredMockStore = generateMockStore(testState);
-    expect(alteredMockStore.getState().localConfig?.settings.yearToShow).toBe(2020);
+    expect(alteredMockStore.getState().config?.settings.yearToShow).toBe(2020);
 
     const tree = renderer
       .create(
