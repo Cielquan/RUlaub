@@ -1,5 +1,36 @@
 ## App
 
+### Data queries
+
+##### Config
+
+- On first load only
+- If rust can send data actively then add file watcher and update config on change
+- Update file on change via UI
+- Always overwrite whole file ???
+
+##### User data
+
+- On addition/hide/(removal?) send update to DB
+
+##### Vacations
+
+- On year change query for data for this year only
+- On addition/removal send update to DB
+
+##### Holidays
+
+- On year change query for data for this year only
+- On addition/removal send update to DB
+
+##### Vacation types
+
+- On addition/hide send update to DB
+
+##### Holidays types
+
+- On addition/hide send update to DB
+
 ### Menus (popups)
 
 - Add 'add new holiday' menu
@@ -67,6 +98,7 @@
 - id
 - user_id
 - type_id
+- year
 - start_date
 - end_date
 
