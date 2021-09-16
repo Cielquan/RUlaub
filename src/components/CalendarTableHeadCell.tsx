@@ -77,16 +77,18 @@ const CalendarTableHeadCell = ({ data, style }: Props): ReactElement => {
           horizontal: "left",
         }}
       >
-        <StaticDatePicker
-          displayStaticWrapperAs="desktop"
-          views={["year"]}
-          value={new Date(`${data}-01-01`)}
-          allowSameDateSelection
-          autoFocus
-          onChange={handleChange}
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          renderInput={(params) => <TextField {...params} />}
-        />
+        <Box sx={{ border: 2, borderRadius: 0 }}>
+          <StaticDatePicker
+            displayStaticWrapperAs="desktop"
+            views={["year"]}
+            value={new Date(`${data}-01-01`)}
+            allowSameDateSelection
+            autoFocus
+            onChange={handleChange}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            renderInput={(params) => <TextField {...params} />}
+          />
+        </Box>
       </Popover>
     </Box>
   );
