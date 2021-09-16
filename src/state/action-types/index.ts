@@ -1,3 +1,7 @@
+export enum ConfigType {
+  UPDATE = "update config",
+}
+
 export enum DBDataType {
   UPDATE = "update db data",
 }
@@ -10,10 +14,6 @@ export enum InfoPageType {
 export enum LanguageType {
   DE = "use german",
   EN = "use english",
-}
-
-export enum LocalConfigType {
-  UPDATE = "update local config",
 }
 
 export enum SideMenuType {

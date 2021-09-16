@@ -10,7 +10,10 @@ import { actionCreators } from "../state";
 
 const CalendarStartPage = (): ReactElement => {
   const dispatch = useDispatch();
-  const { updateLocalConfig } = bindActionCreators(actionCreators, dispatch);
+  const { updateConfig: updateLocalConfig } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   const [date, setDate] = React.useState<Date>();
 

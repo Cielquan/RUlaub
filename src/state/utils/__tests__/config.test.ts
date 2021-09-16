@@ -1,12 +1,7 @@
-import {
-  LocalConfig,
-  LocalConfigPayload,
-  SettingsConfig,
-  updateLocalConfig,
-} from "../localConfig";
+import { Config, ConfigPayload, SettingsConfig, updateConfig } from "../config";
 
 describe("updateLocalConfig", () => {
-  let orig: LocalConfig;
+  let orig: Config;
 
   beforeEach(() => {
     orig = {
@@ -21,16 +16,16 @@ describe("updateLocalConfig", () => {
   });
 
   it("does not change with 'nothing' given", () => {
-    const toAdd: LocalConfigPayload = {};
-    const result = updateLocalConfig(orig, toAdd);
+    const toAdd: ConfigPayload = {};
+    const result = updateConfig(orig, toAdd);
 
     expect(result).toEqual(orig);
   });
 
   it("updates single 'user' data point correctly (name)", () => {
     const changedValue = "changed";
-    const toAdd: LocalConfigPayload = { user: { name: changedValue } };
-    const result = updateLocalConfig(orig, toAdd);
+    const toAdd: ConfigPayload = { user: { name: changedValue } };
+    const result = updateConfig(orig, toAdd);
 
     expect(result.user.name).toBe(changedValue);
     expect(result.settings).toEqual(orig.settings);
@@ -38,8 +33,8 @@ describe("updateLocalConfig", () => {
 
   it("updates whole 'user' data correctly", () => {
     const changedValue = { name: "changed", abbr: "c", vacationDays: 2, hexColor: 2 };
-    const toAdd: LocalConfigPayload = { user: changedValue };
-    const result = updateLocalConfig(orig, toAdd);
+    const toAdd: ConfigPayload = { user: changedValue };
+    const result = updateConfig(orig, toAdd);
 
     expect(result.user).toEqual(changedValue);
     expect(result.settings).toEqual(orig.settings);
@@ -47,8 +42,8 @@ describe("updateLocalConfig", () => {
 
   it("updates single 'settings' data point correctly (theme)", () => {
     const changedValue = "light";
-    const toAdd: LocalConfigPayload = { settings: { theme: changedValue } };
-    const result = updateLocalConfig(orig, toAdd);
+    const toAdd: ConfigPayload = { settings: { theme: changedValue } };
+    const result = updateConfig(orig, toAdd);
 
     expect(orig.settings.theme).not.toBe(changedValue);
     expect(result.settings.theme).toBe(changedValue);
@@ -65,8 +60,8 @@ describe("updateLocalConfig", () => {
       theme: "light",
       language: "de-DE",
     };
-    const toAdd: LocalConfigPayload = { settings: changedValue };
-    const result = updateLocalConfig(orig, toAdd);
+    const toAdd: ConfigPayload = { settings: changedValue };
+    const result = updateConfig(orig, toAdd);
 
     expect(result.settings).toEqual(changedValue);
     expect(result.user).toEqual(orig.user);

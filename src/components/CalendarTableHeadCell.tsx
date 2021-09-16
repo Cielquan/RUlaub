@@ -15,7 +15,10 @@ interface Props {
 
 const CalendarTableHeadCell = ({ data, style }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { updateLocalConfig } = bindActionCreators(actionCreators, dispatch);
+  const { updateConfig: updateLocalConfig } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
