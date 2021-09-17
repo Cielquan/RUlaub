@@ -2,36 +2,38 @@
   {
     "id": 1,
     "name": "HP First",
-    "abbr": "HPF",
-    "vacationDays": 30,
-    "hexColor": 123,
-    "groupManagerId": 1,
+    "userStats": {
+      "availableVacationDays": 30,
+      "takenVacationDays": 30,
+      "vacationStats": []
+    },
     "vacations": [
       {
         "id": 1,
         "startDate": "2021-01-01",
-        "startDay": 1,
+        "startYearDay": 1,
         "endDate": "2021-01-15",
-        "endDay": 15,
-        "typeId": 1
+        "endYearDay": 15,
+        "hexColor": 123
       }
     ]
   },
   {
     "id": 2,
     "name": "HP Second",
-    "abbr": "HPS",
-    "vacationDays": 30,
-    "hexColor": 12345,
-    "groupManagerId": 1,
+    "userStats": {
+      "availableVacationDays": 30,
+      "takenVacationDays": 30,
+      "vacationStats": []
+    },
     "vacations": [
       {
         "id": 2,
         "startDate": "2021-01-03",
-        "startDay": 3,
+        "startYearDay": 3,
         "endDate": "2021-02-15",
-        "endDay": 46,
-        "typeId": 1
+        "endYearDay": 46,
+        "hexColor": 12345
       }
     ]
   }
