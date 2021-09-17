@@ -60,13 +60,13 @@
           "type": "number"
         },
         "startDate": {
-          "type": "string"
+          "$ref": "#/$defs/ISODate"
         },
         "startYearDay": {
           "type": "number"
         },
         "endDate": {
-          "type": "string"
+          "$ref": "#/$defs/ISODate"
         },
         "endYearDay": {
           "type": "number"
@@ -84,6 +84,10 @@
         "hexcolor"
       ],
       "additionalProperties": false
+    },
+    "ISODate": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
     }
   }
 }

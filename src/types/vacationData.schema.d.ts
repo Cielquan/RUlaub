@@ -5,6 +5,7 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+export type ISODate = string;
 /**
  * Schema for vacation data coming from the backend
  */
@@ -27,9 +28,9 @@ export interface VacationStat {
 }
 export interface Vacation {
   id: number;
-  startDate: string;
+  startDate: ISODate;
   startYearDay: number;
-  endDate: string;
+  endDate: ISODate;
   endYearDay: number;
   hexcolor: number;
 }
