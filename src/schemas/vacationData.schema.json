@@ -8,12 +8,8 @@
     "userData": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "number"
-        },
-        "name": {
-          "type": "string"
-        },
+        "id": { "type": "number" },
+        "name": { "type": "string" },
         "userStats": { "$ref": "#/$defs/userStat" },
         "vacations": {
           "type": "array",
@@ -26,12 +22,8 @@
     "userStat": {
       "type": "object",
       "properties": {
-        "availableVacationDays": {
-          "type": "number"
-        },
-        "takenVacationDays": {
-          "type": "number"
-        },
+        "availableVacationDays": { "type": "number" },
+        "takenVacationDays": { "type": "number" },
         "vacationStats": {
           "type": "array",
           "items": { "$ref": "#/$defs/vacationStat" }
@@ -43,12 +35,8 @@
     "vacationStat": {
       "type": "object",
       "properties": {
-        "type": {
-          "type": "string"
-        },
-        "count": {
-          "type": "number"
-        }
+        "type": { "type": "string" },
+        "count": { "type": "number" }
       },
       "required": ["type", "count"],
       "additionalProperties": false
@@ -56,24 +44,12 @@
     "vacation": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "number"
-        },
-        "startDate": {
-          "$ref": "#/$defs/ISODate"
-        },
-        "startYearDay": {
-          "type": "number"
-        },
-        "endDate": {
-          "$ref": "#/$defs/ISODate"
-        },
-        "endYearDay": {
-          "type": "number"
-        },
-        "hexcolor": {
-          "type": "number"
-        }
+        "id": { "type": "number" },
+        "startDate": { "$ref": "#/$defs/ISODate" },
+        "startYearDay": { "type": "number" },
+        "endDate": { "$ref": "#/$defs/ISODate" },
+        "endYearDay": { "type": "number" },
+        "hexcolor": { "type": "number" }
       },
       "required": [
         "id",

@@ -5,18 +5,14 @@
     "user": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string"
-        }
+        "name": { "type": "string" }
       },
       "additionalProperties": false
     },
     "settings": {
       "type": "object",
       "properties": {
-        "databaseURI": {
-          "type": "string"
-        },
+        "databaseURI": { "type": "string" },
         "yearToShow": {
           "type": "number",
           "minimum": 1900
