@@ -2,7 +2,6 @@
 
 ### State
 
-- Add state for school holidays
 - Add state for public holidays
 
 ### Data queries
