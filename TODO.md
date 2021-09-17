@@ -55,7 +55,6 @@
 
 ##### Visual
 
-- Add marker for Sat & Sun in calendar
 - Add marker for school holidays in calendar
 - Add marker for public holidays in calendar
 - If year == current_year: focus on current_day

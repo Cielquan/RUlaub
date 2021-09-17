@@ -26,6 +26,19 @@ const CalendarColumnLabelsDayCell = ({
 
   const date = datePlusDays(data, columnIndex);
 
+  let backgroundColor;
+  let color;
+  if (sameDay(date, today)) {
+    backgroundColor = "primary.light";
+    color = "primary.contrastText";
+  } else if (date.getDay() === 6 || date.getDay() === 0) {
+    backgroundColor = "secondary.dark";
+    color = "secondary.contrastText";
+  } else {
+    backgroundColor = "background.default";
+    color = "text.primary";
+  }
+
   return (
     <Box
       sx={{
@@ -33,8 +46,8 @@ const CalendarColumnLabelsDayCell = ({
         display: "flex",
         alignItems: "center",
         padding: "0 0.2em",
-        backgroundColor: sameDay(date, today) ? "secondary.main" : "background.default",
-        color: sameDay(date, today) ? "secondary.contrastText" : "text.primary",
+        backgroundColor,
+        color,
       }}
       style={{
         ...style,
