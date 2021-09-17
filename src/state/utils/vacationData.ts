@@ -1,31 +1,15 @@
-interface Vacation {
-  id: number;
-  startDate: string;
-  startYearDay: number;
-  endDate: string;
-  endYearDay: number;
-  hexcolor: number;
-}
+// interface Vacation {
+//   id: number;
+//   startDate: string;
+//   startYearDay: number;
+//   endDate: string;
+//   endYearDay: number;
+//   hexcolor: number;
+// }
 
-interface VacationStat {
-  type: string;
-  count: number;
-}
+import { UserData, VacationDataSchema } from "../../types/vacationData.schema";
 
-interface UserStats {
-  availableVacationDays: number;
-  takenVacationDays: number;
-  vacationStats: VacationStat[];
-}
-
-interface UserData {
-  id: number;
-  name: string;
-  userStats: UserStats;
-  vacations: Vacation[];
-}
-
-export type VacationData = UserData[];
+export type VacationData = VacationDataSchema;
 
 export type VacationDataPayload = Partial<UserData>[];
 
