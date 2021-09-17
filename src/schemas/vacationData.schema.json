@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Vacation Data Schema",
+  "description": "Schema for vacation data coming from the backend",
+  "type": "array",
+  "items": { "$ref": "#/$defs/userData" },
+  "$defs": {
+    "userData": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "userStats": { "$ref": "#/$defs/userStat" },
+        "vacations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/vacation" }
+        }
+      },
+      "required": ["id", "name", "userStats", "vacations"],
+      "additionalProperties": false
+    },
+    "userStat": {
+      "type": "object",
+      "properties": {
+        "availableVacationDays": {
+          "type": "number"
+        },
+        "takenVacationDays": {
+          "type": "number"
+        },
+        "vacationStats": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/vacationStat" }
+        }
+      },
+      "required": ["availableVacationDays", "takenVacationDays", "vacationStats"],
+      "additionalProperties": false
+    },
+    "vacationStat": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "count": {
+          "type": "number"
+        }
+      },
+      "required": ["type", "count"],
+      "additionalProperties": false
+    },
+    "vacation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "startYearDay": {
+          "type": "number"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "endYearDay": {
+          "type": "number"
+        },
+        "hexcolor": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "id",
+        "startDate",
+        "startYearDay",
+        "endDate",
+        "endYearDay",
+        "hexcolor"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
