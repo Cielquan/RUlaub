@@ -30,7 +30,7 @@ const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElem
       }}
     >
       <Typography sx={{ padding: "0 0.3em" }} variant="body1" noWrap>
-        {vacationDataState.users[rowIndex].name}
+        {vacationDataState[rowIndex].name}
       </Typography>
     </Box>
   );

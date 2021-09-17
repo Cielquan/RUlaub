@@ -24,4 +24,4 @@ export const configInitState: Config = {
 };
 export const infoPageInitState = false;
 export const sideMenuInitState = false;
-export const vacationDataInitState: VacationData = { users: [] };
+export const vacationDataInitState: VacationData = [];
