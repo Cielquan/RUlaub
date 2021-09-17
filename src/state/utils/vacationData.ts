@@ -25,13 +25,9 @@ interface UserData {
   vacations: Vacation[];
 }
 
-export interface VacationData {
-  users: UserData[];
-}
+export type VacationData = UserData[];
 
-export interface VacationDataPayload {
-  users?: Partial<UserData>[];
-}
+export type VacationDataPayload = Partial<UserData>[];
 
 export const updateVacationData = (
   currentData: VacationData,
