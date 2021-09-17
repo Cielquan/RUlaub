@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "School Holidays Data Schema",
+  "description": "Schema for school holiday data coming from the backend",
+  "type": "array",
+  "items": { "$ref": "#/$defs/schoolHoliday" },
+  "$defs": {
+    "schoolHoliday": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "name": { "type": "string" },
+        "startYearDay": { "type": "number" },
+        "endYearDay": { "type": "number" }
+      },
+      "required": [
+        "id",
+        "name",
+        "startYearDay",
+        "endYearDay"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Public Holidays Data Schema",
+  "description": "Schema for public holiday data coming from the backend",
+  "type": "array",
+  "items": { "$ref": "#/$defs/publicHoliday" },
+  "$defs": {
+    "publicHoliday": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "number" },
+        "name": { "type": "string" },
+        "yearDay": { "type": "number" }
+      },
+      "required": [
+        "id",
+        "name",
+        "yearDay"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
