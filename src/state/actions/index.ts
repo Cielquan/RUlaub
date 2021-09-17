@@ -1,5 +1,6 @@
 import { ConfigPayload } from "../utils/config";
 import { VacationDataPayload } from "../utils/vacationData";
+import { PublicHolidaysDataPayload } from "../utils/publicHolidaysData";
 import { SchoolHolidaysDataPayload } from "../utils/schoolHolidaysData";
 
 export type ConfigAction = {
@@ -9,6 +10,11 @@ export type ConfigAction = {
 
 export type InfoPageAction = {
   type: string;
+};
+
+export type PublicHolidaysDataAction = {
+  type: string;
+  payload: PublicHolidaysDataPayload;
 };
 
 export type SchoolHolidaysDataAction = {

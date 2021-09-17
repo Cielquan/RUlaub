@@ -7,6 +7,10 @@ export enum InfoPageType {
   CLOSE = "close InfoPage",
 }
 
+export enum PublicHolidaysDataType {
+  UPDATE = "update public holidays data",
+}
+
 export enum SchoolHolidaysDataType {
   UPDATE = "update school holidays data",
 }

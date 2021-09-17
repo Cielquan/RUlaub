@@ -1,9 +1,5 @@
 ## App
 
-### State
-
-- Add state for public holidays
-
 ### Data queries
 
 ##### Config

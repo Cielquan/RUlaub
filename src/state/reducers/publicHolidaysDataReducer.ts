@@ -1,0 +1,21 @@
+import { PublicHolidaysDataType } from "../action-types";
+import { PublicHolidaysDataAction } from "../actions";
+import { publicHolidaysDataInitState as initState } from "./initialStates";
+import {
+  PublicHolidaysData,
+  updatePublicHolidaysData,
+} from "../utils/publicHolidaysData";
+
+const reducer = (
+  state: PublicHolidaysData = initState,
+  action: PublicHolidaysDataAction
+): PublicHolidaysData => {
+  switch (action.type) {
+    case PublicHolidaysDataType.UPDATE:
+      return updatePublicHolidaysData(state, action.payload);
+    default:
+      return state;
+  }
+};
+
+export default reducer;

@@ -2,6 +2,7 @@ import { SupportedThemes } from "../../theme";
 import { VacationData } from "../utils/vacationData";
 import { localeToLanguage, SupportedLocales } from "../utils/i18n";
 import { Config } from "../utils/config";
+import { PublicHolidaysData } from "../utils/publicHolidaysData";
 import { SchoolHolidaysData } from "../utils/schoolHolidaysData";
 
 // import dbDataJSON from "../../dev_temp/test.db.json";
@@ -24,6 +25,7 @@ export const configInitState: Config = {
   },
 };
 export const infoPageInitState = false;
+export const publicHolidaysDataInitState: PublicHolidaysData = [];
 export const schoolHolidaysDataInitState: SchoolHolidaysData = [];
 export const sideMenuInitState = false;
 export const vacationDataInitState: VacationData = [];
