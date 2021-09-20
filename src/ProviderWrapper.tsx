@@ -16,7 +16,7 @@ import { useMountEffect } from "./hooks";
 
 const ProviderWrapper = (): ReactElement => {
   const dispatch = useDispatch();
-  const { loadConfig } = bindActionCreators(actionCreators, dispatch);
+  const { loadConfig, loadVacationData } = bindActionCreators(actionCreators, dispatch);
 
   const configState = useSelector((state: State) => state.config);
   const themeState = configState.settings.theme;
@@ -30,6 +30,7 @@ const ProviderWrapper = (): ReactElement => {
 
   useMountEffect(() => {
     loadConfig();
+    loadVacationData();
   });
 
   return (
