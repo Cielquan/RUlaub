@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Vacation Data Schema",
   "description": "Schema for vacation data coming from the backend",
   "type": "array",

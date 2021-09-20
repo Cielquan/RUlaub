@@ -1,5 +1,6 @@
 {
   "title": "Config File Schema",
+  "description": "Schema for config file read by the backend",
   "type": "object",
   "properties": {
     "user": {

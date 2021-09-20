@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Public Holidays Data Schema",
   "description": "Schema for public holiday data coming from the backend",
   "type": "array",

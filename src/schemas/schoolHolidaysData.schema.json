@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "School Holidays Data Schema",
   "description": "Schema for school holiday data coming from the backend",
   "type": "array",
