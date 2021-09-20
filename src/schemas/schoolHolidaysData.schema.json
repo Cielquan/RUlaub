@@ -13,12 +13,7 @@
         "startYearDay": { "type": "number" },
         "endYearDay": { "type": "number" }
       },
-      "required": [
-        "id",
-        "name",
-        "startYearDay",
-        "endYearDay"
-      ],
+      "required": ["id", "name", "startYearDay", "endYearDay"],
       "additionalProperties": false
     }
   }

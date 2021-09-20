@@ -12,11 +12,7 @@
         "name": { "type": "string" },
         "yearDay": { "type": "number" }
       },
-      "required": [
-        "id",
-        "name",
-        "yearDay"
-      ],
+      "required": ["id", "name", "yearDay"],
       "additionalProperties": false
     }
   }
