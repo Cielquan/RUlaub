@@ -1,13 +1,13 @@
 import { Dispatch } from "redux";
 
-import { SchoolHolidaysDataType } from "../action-types";
+import { SchoolHolidaysDataActionType } from "../action-types";
 import { SchoolHolidaysDataAction } from "../actions";
 import { SchoolHolidaysDataPayload } from "../utils/schoolHolidaysData";
 
 export const updateSchoolHolidaysDataAction = (
   payload: SchoolHolidaysDataPayload
 ): SchoolHolidaysDataAction => ({
-  type: SchoolHolidaysDataType.UPDATE,
+  type: SchoolHolidaysDataActionType.UPDATE,
   payload,
 });
 

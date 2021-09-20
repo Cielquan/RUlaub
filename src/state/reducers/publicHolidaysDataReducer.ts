@@ -1,4 +1,4 @@
-import { PublicHolidaysDataType } from "../action-types";
+import { PublicHolidaysDataActionType } from "../action-types";
 import { PublicHolidaysDataAction } from "../actions";
 import { publicHolidaysDataInitState as initState } from "./initialStates";
 import {
@@ -11,7 +11,7 @@ const reducer = (
   action: PublicHolidaysDataAction
 ): PublicHolidaysData => {
   switch (action.type) {
-    case PublicHolidaysDataType.UPDATE:
+    case PublicHolidaysDataActionType.UPDATE:
       return updatePublicHolidaysData(state, action.payload);
     default:
       return state;

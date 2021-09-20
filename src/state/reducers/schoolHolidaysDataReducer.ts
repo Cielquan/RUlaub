@@ -1,4 +1,4 @@
-import { SchoolHolidaysDataType } from "../action-types";
+import { SchoolHolidaysDataActionType } from "../action-types";
 import { SchoolHolidaysDataAction } from "../actions";
 import { schoolHolidaysDataInitState as initState } from "./initialStates";
 import {
@@ -11,7 +11,7 @@ const reducer = (
   action: SchoolHolidaysDataAction
 ): SchoolHolidaysData => {
   switch (action.type) {
-    case SchoolHolidaysDataType.UPDATE:
+    case SchoolHolidaysDataActionType.UPDATE:
       return updateSchoolHolidaysData(state, action.payload);
     default:
       return state;

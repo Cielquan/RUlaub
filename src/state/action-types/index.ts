@@ -1,25 +1,25 @@
-export enum ConfigType {
+export enum ConfigActionType {
   UPDATE = "update config",
 }
 
-export enum InfoPageType {
+export enum InfoPageActionType {
   OPEN = "open InfoPage",
   CLOSE = "close InfoPage",
 }
 
-export enum PublicHolidaysDataType {
+export enum PublicHolidaysDataActionType {
   UPDATE = "update public holidays data",
 }
 
-export enum SchoolHolidaysDataType {
+export enum SchoolHolidaysDataActionType {
   UPDATE = "update school holidays data",
 }
 
-export enum SideMenuType {
+export enum SideMenuActionType {
   OPEN = "open SideMenu",
   CLOSE = "close SideMenu",
 }
 
-export enum VacationDataType {
+export enum VacationDataActionType {
   UPDATE = "update vacation data",
 }

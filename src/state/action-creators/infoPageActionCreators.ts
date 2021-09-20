@@ -1,10 +1,10 @@
 import { Dispatch } from "redux";
 
-import { InfoPageType } from "../action-types";
+import { InfoPageActionType } from "../action-types";
 import { InfoPageAction } from "../actions";
 
 export const openInfoPageAction = (): InfoPageAction => ({
-  type: InfoPageType.OPEN,
+  type: InfoPageActionType.OPEN,
 });
 
 export const openInfoPage =
@@ -14,7 +14,7 @@ export const openInfoPage =
   };
 
 export const closeInfoPageAction = (): InfoPageAction => ({
-  type: InfoPageType.CLOSE,
+  type: InfoPageActionType.CLOSE,
 });
 
 export const closeInfoPage =

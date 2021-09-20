@@ -1,10 +1,10 @@
 import { Dispatch } from "redux";
 
-import { SideMenuType } from "../action-types";
+import { SideMenuActionType } from "../action-types";
 import { SideMenuAction } from "../actions";
 
 export const openSideMenuAction = (): SideMenuAction => ({
-  type: SideMenuType.OPEN,
+  type: SideMenuActionType.OPEN,
 });
 
 export const openSideMenu =
@@ -14,7 +14,7 @@ export const openSideMenu =
   };
 
 export const closeSideMenuAction = (): SideMenuAction => ({
-  type: SideMenuType.CLOSE,
+  type: SideMenuActionType.CLOSE,
 });
 
 export const closeSideMenu =

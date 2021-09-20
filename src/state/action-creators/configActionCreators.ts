@@ -1,7 +1,7 @@
 import Ajv from "ajv";
 import { Dispatch } from "redux";
 
-import { ConfigType } from "../action-types";
+import { ConfigActionType } from "../action-types";
 import { ConfigAction } from "../actions";
 import { ConfigFileSchema as ConfigFileType } from "../../types/configFile.schema";
 import ConfigFileSchema from "../../schemas/configFile.schema.json";
@@ -11,7 +11,7 @@ import Languages, { localeToLanguage } from "../utils/i18n";
 import localConfigJSON from "../../dev_temp/test.local_config.json";
 
 export const updateConfigAction = (payload: ConfigPayload): ConfigAction => ({
-  type: ConfigType.UPDATE,
+  type: ConfigActionType.UPDATE,
   payload,
 });
 

@@ -1,4 +1,4 @@
-import { VacationDataType } from "../action-types";
+import { VacationDataActionType } from "../action-types";
 import { VacationDataAction } from "../actions";
 import { vacationDataInitState as initState } from "./initialStates";
 import { VacationData, updateVacationData } from "../utils/vacationData";
@@ -8,7 +8,7 @@ const reducer = (
   action: VacationDataAction
 ): VacationData => {
   switch (action.type) {
-    case VacationDataType.UPDATE:
+    case VacationDataActionType.UPDATE:
       return updateVacationData(state, action.payload);
     default:
       return state;

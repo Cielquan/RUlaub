@@ -1,13 +1,13 @@
 import { Dispatch } from "redux";
 
-import { VacationDataType } from "../action-types";
+import { VacationDataActionType } from "../action-types";
 import { VacationDataAction } from "../actions";
 import { VacationDataPayload } from "../utils/vacationData";
 
 export const updateVacationDataAction = (
   payload: VacationDataPayload
 ): VacationDataAction => ({
-  type: VacationDataType.UPDATE,
+  type: VacationDataActionType.UPDATE,
   payload,
 });
 
