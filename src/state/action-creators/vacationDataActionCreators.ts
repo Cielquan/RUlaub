@@ -7,7 +7,7 @@ import { VacationDataSchema as VacDataType } from "../../types/vacationData.sche
 import VacationDataSchema from "../../schemas/vacationData.schema.json";
 import { VacationDataPayload } from "../utils/vacationData";
 
-import dbDataJSON from "../../dev_temp/test.db.json";
+import vacationDataJSON from "../../dev_temp/test.vacationData.json";
 
 export const updateVacationDataAction = (
   payload: VacationDataPayload
@@ -26,7 +26,7 @@ export const loadVacationData =
   () =>
   (dispatch: Dispatch<VacationDataAction>): void => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const conf: any = dbDataJSON;
+    const conf: any = vacationDataJSON;
 
     const ajv = new Ajv();
     const validate = ajv.compile<VacDataType>(VacationDataSchema);
