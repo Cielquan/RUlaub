@@ -10,7 +10,7 @@ import { datePlusDays, sameDay } from "../utils/dateUtils";
 interface Props {
   columnIndex: number;
   rowIndex: number;
-  data: Date[];
+  data: [Date, Date]; // date for current cell; today
   style: CSSProperties;
 }
 
