@@ -18,6 +18,7 @@ const StyledGrid = styled("div")(({ theme }) => ({
 interface Props {
   width: number;
   positionX: number;
+  today: Date;
   year: number;
   daysInYear: number;
 }
@@ -25,6 +26,7 @@ interface Props {
 const CalendarColumnLabelsDay = ({
   width,
   positionX,
+  today,
   year,
   daysInYear,
 }: Props): ReactElement => {
@@ -49,7 +51,7 @@ const CalendarColumnLabelsDay = ({
         columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL}
         rowCount={2}
         rowHeight={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL}
-        itemData={firstDayOfYear}
+        itemData={[firstDayOfYear, today]}
         ref={columnLabelRef}
         // needs this local manual overwrite to work, css class gets overwritten
         style={{ overflow: "hidden" }}

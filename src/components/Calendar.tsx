@@ -65,6 +65,7 @@ const Calendar = (): ReactElement => {
             <CalendarColumnLabelsDay
               width={width}
               positionX={scrollX}
+              today={today}
               year={year}
               daysInYear={daysInYear}
             />

@@ -7,12 +7,10 @@ import { State } from "../state";
 import { STYLE_CONST } from "../styles";
 import { datePlusDays, sameDay } from "../utils/dateUtils";
 
-const today = new Date();
-
 interface Props {
   columnIndex: number;
   rowIndex: number;
-  data: Date;
+  data: Date[];
   style: CSSProperties;
 }
 
@@ -40,11 +38,11 @@ const CalendarColumnLabelsDayCell = ({
         holiday.startYearDay <= columnIndex + 1 && holiday.endYearDay >= columnIndex
     ).length > 0;
 
-  const date = datePlusDays(data, columnIndex);
+  const date = datePlusDays(data[0], columnIndex);
 
   let backgroundColor;
   let color;
-  if (rowIndex % 2 && sameDay(date, today)) {
+  if (rowIndex % 2 && sameDay(date, data[1])) {
     backgroundColor = "primary.light";
     color = "primary.contrastText";
   } else if (!(rowIndex % 2) && isPublicHoliday()) {
