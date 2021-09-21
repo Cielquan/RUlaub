@@ -14,17 +14,11 @@ interface Props {
 const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement => {
   const vacationDataState = useSelector((state: State) => state.vacationData);
 
-  const isVacation = (): boolean => {
-    if (
-      vacationDataState[rowIndex].vacations.filter(
-        (vacation) =>
-          vacation.startYearDay <= columnIndex + 1 && vacation.endYearDay >= columnIndex
-      ).length > 0
-    ) {
-      return true;
-    }
-    return false;
-  };
+  const isVacation = (): boolean =>
+    vacationDataState[rowIndex].vacations.filter(
+      (vacation) =>
+        vacation.startYearDay <= columnIndex + 1 && vacation.endYearDay >= columnIndex
+    ).length > 0;
 
   return (
     <Box
