@@ -14,7 +14,7 @@ interface Props {
 const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement => {
   const vacationDataState = useSelector((state: State) => state.vacationData);
 
-  const isHoliday = (): boolean => {
+  const isVacation = (): boolean => {
     if (
       vacationDataState[rowIndex].vacations.filter(
         (vacation) =>
@@ -33,7 +33,7 @@ const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement
         display: "flex",
         alignItems: "center",
         padding: "0 0.2em",
-        backgroundColor: isHoliday() ? "secondary.light" : "background.default",
+        backgroundColor: isVacation() ? "secondary.light" : "background.default",
       }}
       style={{
         ...style,
