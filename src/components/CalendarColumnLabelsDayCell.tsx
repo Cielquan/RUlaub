@@ -29,13 +29,13 @@ const CalendarColumnLabelsDayCell = ({
   );
 
   const isPublicHoliday = (): boolean =>
-    publicHolidaysDataState.filter((holiday) => holiday.yearDay === columnIndex)
+    publicHolidaysDataState.filter((holiday) => holiday.yearDay === columnIndex + 1)
       .length > 0;
 
   const isSchoolHoliday = (): boolean =>
     schoolHolidaysDataState.filter(
       (holiday) =>
-        holiday.startYearDay <= columnIndex + 1 && holiday.endYearDay >= columnIndex
+        holiday.startYearDay <= columnIndex + 1 && holiday.endYearDay >= columnIndex + 1
     ).length > 0;
 
   const date = datePlusDays(data[0], columnIndex);
