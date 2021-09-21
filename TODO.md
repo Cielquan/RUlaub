@@ -55,8 +55,6 @@
 
 ##### Visual
 
-- Add marker for school holidays in calendar
-- Add marker for public holidays in calendar
 - Add new view to show team overview with how many days taken etc.
 - Add popup on hover over names that shows vac taken stats
 
@@ -75,6 +73,15 @@
 - change ico to a (self made) less "complex" one?
 - move calc of bigger things to backend for performance?
 - rewrite the calender without react-window?
+
+### Theming / Style
+
+- Improve coloring for:
+  - marker for school holidays in calendar
+  - marker for public holidays in calendar
+  - marker for weekends
+  - marker for today
+- Find good default colors for vacations
 
 ---
 
