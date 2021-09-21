@@ -4,9 +4,11 @@ import React, { ReactElement, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import AutoSizer from "react-virtualized-auto-sizer";
 
+import { useMountDelayOrUpdateEffect } from "../hooks";
 import { State } from "../state";
+import { STYLE_CONST } from "../styles";
 import createTheme from "../theme";
-import { isLeapYear } from "../utils/dateUtils";
+import { getDaysForDate, isLeapYear } from "../utils/dateUtils";
 
 import CalendarBody from "./CalendarBody";
 import CalendarColumnLabelsDay from "./CalendarColumnLabelsDay";
@@ -14,6 +16,8 @@ import CalendarColumnLabelsMonth from "./CalendarColumnLabelsMonth";
 import CalendarStartPage from "./CalendarStartPage";
 import CalendarRowLabelsUser from "./CalendarRowLabelsUser";
 import CalendarTableHead from "./CalendarTableHead";
+
+const today = new Date();
 
 const Calendar = (): ReactElement => {
   const configState = useSelector((state: State) => state.config);
@@ -30,6 +34,16 @@ const Calendar = (): ReactElement => {
     setScrollX(e.scrollLeft);
     setScrollY(e.scrollTop);
   }, []);
+
+  useMountDelayOrUpdateEffect(
+    () => {
+      if (today.getFullYear() !== year) return;
+      const days = getDaysForDate(today);
+      setScrollX((days - 3) * STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL);
+    },
+    0,
+    [year]
+  );
 
   if (year === undefined) {
     return <CalendarStartPage />;
