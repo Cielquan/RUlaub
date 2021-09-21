@@ -23,15 +23,37 @@ const CalendarColumnLabelsDayCell = ({
   style,
 }: Props): ReactElement => {
   const { locale } = useSelector((state: State) => state.config.settings.language);
+  const publicHolidaysDataState = useSelector(
+    (state: State) => state.publicHolidaysData
+  );
+  const schoolHolidaysDataState = useSelector(
+    (state: State) => state.schoolHolidaysData
+  );
+
+  const isPublicHoliday = (): boolean =>
+    publicHolidaysDataState.filter((holiday) => holiday.yearDay === columnIndex)
+      .length > 0;
+
+  const isSchoolHoliday = (): boolean =>
+    schoolHolidaysDataState.filter(
+      (holiday) =>
+        holiday.startYearDay <= columnIndex + 1 && holiday.endYearDay >= columnIndex
+    ).length > 0;
 
   const date = datePlusDays(data, columnIndex);
 
   let backgroundColor;
   let color;
-  if (sameDay(date, today)) {
+  if (rowIndex % 2 && sameDay(date, today)) {
     backgroundColor = "primary.light";
     color = "primary.contrastText";
-  } else if (date.getDay() === 6 || date.getDay() === 0) {
+  } else if (!(rowIndex % 2) && isPublicHoliday()) {
+    backgroundColor = "error.light";
+    color = "error.contrastText";
+  } else if (!(rowIndex % 2) && isSchoolHoliday()) {
+    backgroundColor = "warning.light";
+    color = "warning.contrastText";
+  } else if (rowIndex % 2 && (date.getDay() === 6 || date.getDay() === 0)) {
     backgroundColor = "secondary.dark";
     color = "secondary.contrastText";
   } else {
