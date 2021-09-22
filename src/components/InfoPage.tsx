@@ -1,4 +1,5 @@
 import { Trans } from "@lingui/macro";
+import { Info as InfoIcon } from "@mui/icons-material";
 import {
   Button,
   Dialog,
@@ -11,6 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
+import { Box } from "@mui/system";
 import React, { forwardRef, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -56,16 +58,19 @@ const InfoPage = ({ onClick }: Props): ReactElement => {
       keepMounted
       onClose={closeInfoPage}
     >
-      <DialogTitle id={id}>{`RUlaub v${pjson.version}`}</DialogTitle>
+      <DialogTitle id={id} sx={{ display: "flex", alignItems: "center" }}>
+        <Box sx={{ flexGrow: 1 }}>{`RUlaub v${pjson.version}`}</Box>
+        <InfoIcon />
+      </DialogTitle>
       <DialogContent>
         <DialogContentText sx={{ whiteSpace: "pre-wrap" }}>
-          <Typography component="span">
+          <Typography gutterBottom>
             <Trans>
               RUlaub is licensed under either &apos;Apache License 2.0&apos; or
               &apos;MIT License&apos; at your option.
             </Trans>
           </Typography>
-          <Typography component="span">
+          <Typography>
             <Trans>
               For the Source Code, Documentation and copies of the License files please
               see the github repository at: {ghLink}.

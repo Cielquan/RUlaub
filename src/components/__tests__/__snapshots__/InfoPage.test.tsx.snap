@@ -27,10 +27,25 @@ exports[`<InfoPage /> renders correctly when open 1`] = `
       role="dialog"
     >
       <h2
-        class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-bdhsul-MuiTypography-root-MuiDialogTitle-root"
+        class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-tqj0yt-MuiTypography-root-MuiDialogTitle-root"
         id="info-page"
       >
-        RUlaub v1.0.0
+        <div
+          class="MuiBox-root css-i9gxme"
+        >
+          RUlaub v1.0.0
+        </div>
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="InfoIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+          />
+        </svg>
       </h2>
       <div
         class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
@@ -38,12 +53,12 @@ exports[`<InfoPage /> renders correctly when open 1`] = `
         <p
           class="MuiDialogContentText-root MuiTypography-root MuiTypography-body1 css-e901ri-MuiTypography-root-MuiDialogContentText-root"
         >
-          <span
-            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+          <p
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-d3wcwz-MuiTypography-root"
           >
             RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option.
-          </span>
-          <span
+          </p>
+          <p
             class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
           >
             For the Source Code, Documentation and copies of the License files please see the github repository at: 
@@ -56,7 +71,7 @@ exports[`<InfoPage /> renders correctly when open 1`] = `
               github
             </a>
             .
-          </span>
+          </p>
         </p>
       </div>
       <div
@@ -120,10 +135,25 @@ exports[`<InfoPage /> renders invisible by default 1`] = `
       role="dialog"
     >
       <h2
-        class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-bdhsul-MuiTypography-root-MuiDialogTitle-root"
+        class="MuiTypography-root MuiTypography-h6 MuiDialogTitle-root css-tqj0yt-MuiTypography-root-MuiDialogTitle-root"
         id="info-page"
       >
-        RUlaub v1.0.0
+        <div
+          class="MuiBox-root css-i9gxme"
+        >
+          RUlaub v1.0.0
+        </div>
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+          data-testid="InfoIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+          />
+        </svg>
       </h2>
       <div
         class="MuiDialogContent-root css-ypiqx9-MuiDialogContent-root"
@@ -131,12 +161,12 @@ exports[`<InfoPage /> renders invisible by default 1`] = `
         <p
           class="MuiDialogContentText-root MuiTypography-root MuiTypography-body1 css-e901ri-MuiTypography-root-MuiDialogContentText-root"
         >
-          <span
-            class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+          <p
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-d3wcwz-MuiTypography-root"
           >
             RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option.
-          </span>
-          <span
+          </p>
+          <p
             class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
           >
             For the Source Code, Documentation and copies of the License files please see the github repository at: 
@@ -149,7 +179,7 @@ exports[`<InfoPage /> renders invisible by default 1`] = `
               github
             </a>
             .
-          </span>
+          </p>
         </p>
       </div>
       <div
