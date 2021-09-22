@@ -46,9 +46,23 @@ exports[`<Navbar /> renders correctly with subComponents mocked as string 1`] = 
     <ul
       className="MuiList-root MuiList-padding css-17yarjg-MuiList-root"
     >
-      <li
-        className="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-pwjuc1-MuiListItem-root"
-        disabled={false}
+      <div
+        className="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-button css-55aqy4-MuiButtonBase-root-MuiListItem-root"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onContextMenu={[Function]}
+        onDragLeave={[Function]}
+        onFocus={[Function]}
+        onKeyDown={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseLeave={[Function]}
+        onMouseUp={[Function]}
+        onTouchEnd={[Function]}
+        onTouchMove={[Function]}
+        onTouchStart={[Function]}
+        role="button"
+        tabIndex={0}
       >
         <div
           className="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
@@ -72,7 +86,7 @@ exports[`<Navbar /> renders correctly with subComponents mocked as string 1`] = 
         <div
           className="MuiListItemText-root css-tlelie-MuiListItemText-root"
         />
-      </li>
+      </div>
     </ul>
     LanguageMenu
     DarkThemeSwitch

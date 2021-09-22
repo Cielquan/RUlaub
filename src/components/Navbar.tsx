@@ -22,7 +22,10 @@ import LanguageMenu from "./LanguageMenu";
 
 const Navbar = (): ReactElement => {
   const dispatch = useDispatch();
-  const { openSideMenu } = bindActionCreators(actionCreators, dispatch);
+  const { openSideMenu, openSettingsDialog } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   const configState = useSelector((state: State) => state.config);
   const themeState = configState.settings.theme;
 
@@ -42,6 +45,9 @@ const Navbar = (): ReactElement => {
         </Typography>
         <List sx={{ paddingRight: 2 }}>
           <ListItem
+            key="userName"
+            button
+            onClick={openSettingsDialog}
             sx={{
               border: "1px solid",
               borderColor: themeState === "dark" ? "primary.main" : "action.active",
