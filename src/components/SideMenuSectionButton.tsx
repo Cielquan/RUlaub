@@ -4,6 +4,10 @@ import {
   ExpandMore as ExpandMoreIcon,
 } from "@mui/icons-material";
 import React, { ReactElement, useState } from "react";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import { actionCreators } from "../state";
 
 import SideMenuButton, {
   ButtonIcon,
@@ -23,6 +27,7 @@ interface Props {
   icon?: ReactElement;
   sxStyle?: ButtonSxStyle;
   sectionItemList: SectionItemList;
+  onClick?: () => void | null;
 }
 
 const SideMenuSectionButton = ({
@@ -31,10 +36,14 @@ const SideMenuSectionButton = ({
   icon,
   sxStyle,
   sectionItemList,
+  onClick,
 }: Props): ReactElement => {
   const [sideMenuSectionState, setSideMenuSectionState] = useState<boolean>(false);
   const closeSideMenuDatabase = (): void => setSideMenuSectionState(false);
   const openSideMenuDatabase = (): void => setSideMenuSectionState(true);
+
+  const dispatch = useDispatch();
+  const { closeSideMenu } = bindActionCreators(actionCreators, dispatch);
 
   return (
     <>
@@ -53,7 +62,11 @@ const SideMenuSectionButton = ({
               text={item[0]}
               key={`${item[1]}-outer`}
               listKey={item[1]}
-              onClick={item[2]}
+              onClick={() => {
+                if (typeof onClick === "function") onClick();
+                closeSideMenu();
+                item[2]();
+              }}
               icon={item[3]}
               sxStyle={item[4] !== undefined ? item[4] : { paddingLeft: 4 }}
             />
@@ -66,6 +79,7 @@ const SideMenuSectionButton = ({
 SideMenuSectionButton.defaultProps = {
   icon: <></>,
   sxStyle: {},
+  onClick: () => undefined,
 };
 
 export default SideMenuSectionButton;
