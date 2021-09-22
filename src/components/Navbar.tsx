@@ -1,16 +1,15 @@
 import { Menu as MenuIcon, Person as PersonIcon } from "@mui/icons-material";
 import {
   AppBar,
-  Avatar,
   IconButton,
   List,
   ListItem,
-  ListItemAvatar,
+  ListItemButton,
+  ListItemIcon,
   ListItemText,
   Toolbar,
   Typography,
 } from "@mui/material";
-import { Box } from "@mui/system";
 import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -43,26 +42,33 @@ const Navbar = (): ReactElement => {
         <Typography sx={{ flexGrow: 1 }} variant="h6" align="left" noWrap>
           RUlaub
         </Typography>
-        <List sx={{ paddingRight: 2 }}>
+        <List sx={{ display: "flex", flexDirection: "row" }}>
           <ListItem
             key="userName"
-            button
-            onClick={openSettingsDialog}
             sx={{
-              border: "1px solid",
-              borderColor: themeState === "dark" ? "primary.main" : "action.active",
-              borderRadius: 2,
+              padding: 0,
+              marginRight: 2,
             }}
           >
-            <ListItemAvatar>
-              <Avatar>
+            <ListItemButton
+              onClick={openSettingsDialog}
+              sx={{
+                border: "1px solid",
+                borderColor: themeState === "dark" ? "primary.main" : "action.active",
+                borderRadius: 2,
+              }}
+            >
+              <ListItemIcon>
                 <PersonIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={configState.user.name} />
+              </ListItemIcon>
+              <ListItemText
+                primary={configState.user.name}
+                primaryTypographyProps={{ noWrap: true }}
+              />
+            </ListItemButton>
           </ListItem>
+          <LanguageMenu />
         </List>
-        <LanguageMenu />
         <DarkThemeSwitch />
       </Toolbar>
     </AppBar>
