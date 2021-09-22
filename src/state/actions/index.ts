@@ -22,6 +22,10 @@ export type SchoolHolidaysDataAction = {
   payload: SchoolHolidaysDataPayload;
 };
 
+export type SettingsDialogAction = {
+  type: string;
+};
+
 export type SideMenuAction = {
   type: string;
 };

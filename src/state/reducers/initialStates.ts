@@ -5,9 +5,6 @@ import { Config } from "../utils/config";
 import { PublicHolidaysData } from "../utils/publicHolidaysData";
 import { SchoolHolidaysData } from "../utils/schoolHolidaysData";
 
-// import dbDataJSON from "../../dev_temp/test.db.json";
-// import localConfigJSON from "../../dev_temp/test.local_config.json";
-
 export const defaultLocale: SupportedLocales = "en-US";
 export const defaultTheme: SupportedThemes = "dark";
 
@@ -27,5 +24,6 @@ export const configInitState: Config = {
 export const infoPageInitState = false;
 export const publicHolidaysDataInitState: PublicHolidaysData = [];
 export const schoolHolidaysDataInitState: SchoolHolidaysData = [];
+export const settingsDialogInitState = false;
 export const sideMenuInitState = false;
 export const vacationDataInitState: VacationData = [];

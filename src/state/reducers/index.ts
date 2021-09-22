@@ -7,11 +7,13 @@ import {
   configInitState,
   publicHolidaysDataInitState,
   schoolHolidaysDataInitState,
+  settingsDialogInitState,
   sideMenuInitState,
   vacationDataInitState,
 } from "./initialStates";
 import publicHolidaysDataReducer from "./publicHolidaysDataReducer";
 import schoolHolidaysDataReducer from "./schoolHolidaysDataReducer";
+import settingsDialogReducer from "./settingsDialogReducer";
 import sideMenuReducer from "./sideMenuReducer";
 import vacationDataReducer from "./vacationDataReducer";
 
@@ -20,6 +22,7 @@ const rootReducer = combineReducers({
   infoPage: infoPageReducer,
   publicHolidaysData: publicHolidaysDataReducer,
   schoolHolidaysData: schoolHolidaysDataReducer,
+  settingsDialog: settingsDialogReducer,
   sideMenu: sideMenuReducer,
   vacationData: vacationDataReducer,
 });
@@ -30,6 +33,7 @@ export const initialState: State = {
   config: configInitState,
   infoPage: infoPageInitState,
   publicHolidaysData: publicHolidaysDataInitState,
+  settingsDialog: settingsDialogInitState,
   schoolHolidaysData: schoolHolidaysDataInitState,
   sideMenu: sideMenuInitState,
   vacationData: vacationDataInitState,
