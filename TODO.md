@@ -36,9 +36,6 @@
 - Add 'add new holiday' menu
 - Add 'edit/remove holiday' menu
 
-- Add (local) 'Settings' menu
-  - change username
-    - evtl. add user (as badge) to navbar instead
 - Add 'Create new DB' menu
   - file explorer to create new db file and save URI
 - Add 'Select DB' menu
