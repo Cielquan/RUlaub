@@ -52,18 +52,18 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
   const sideMenuState = useSelector((state: State) => state.sideMenu);
 
   const sectionlessItemList: SectionlessItemList = [
-    [t`Settings`, "Settings", closeSideMenu, <SettingsIcon />],
+    [t`Settings`, "Settings", () => undefined, <SettingsIcon />],
   ];
 
   const VacationSectionItemList: SectionItemList = [
-    [t`Create`, "Vac-Create", closeSideMenu, <AddIcon />],
-    [t`Edit`, "Vac-Edit", closeSideMenu, <CreateIcon />],
+    [t`Create`, "Vac-Create", () => undefined, <AddIcon />],
+    [t`Edit`, "Vac-Edit", () => undefined, <CreateIcon />],
   ];
 
   const DatabaseSectionItemList: SectionItemList = [
-    [t`Create`, "DB-Create", closeSideMenu, <AddIcon />],
-    [t`Select`, "DB-Select", closeSideMenu, <FolderIcon />],
-    [t`Modify`, "DB-Modify", closeSideMenu, <BuildIcon />],
+    [t`Create`, "DB-Create", () => undefined, <AddIcon />],
+    [t`Select`, "DB-Select", () => undefined, <FolderIcon />],
+    [t`Modify`, "DB-Modify", () => undefined, <BuildIcon />],
   ];
 
   return (
