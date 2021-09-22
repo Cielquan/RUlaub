@@ -43,6 +43,37 @@ exports[`<Navbar /> renders correctly with subComponents mocked as string 1`] = 
     >
       RUlaub
     </h6>
+    <ul
+      className="MuiList-root MuiList-padding css-17yarjg-MuiList-root"
+    >
+      <li
+        className="MuiListItem-root MuiListItem-gutters MuiListItem-padding css-pwjuc1-MuiListItem-root"
+        disabled={false}
+      >
+        <div
+          className="MuiListItemAvatar-root css-1e9lk82-MuiListItemAvatar-root"
+        >
+          <div
+            className="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault css-2s90m6-MuiAvatar-root"
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+              data-testid="PersonIcon"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          className="MuiListItemText-root css-tlelie-MuiListItemText-root"
+        />
+      </li>
+    </ul>
     LanguageMenu
     DarkThemeSwitch
   </div>
