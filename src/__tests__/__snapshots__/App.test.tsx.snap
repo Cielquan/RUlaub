@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<App /> renders correctly with subComponents mocked as string 1`] = `
-Array [
+<div
+  className="MuiBox-root css-roynbj"
+>
   <div
     className="MuiBox-root css-1jzuftr"
     data-testid="rulaub-root"
@@ -15,8 +17,8 @@ Array [
       Calendar
       NewHolidayButton
     </main>
-  </div>,
-  "InfoPage",
-  "SettingsDialog",
-]
+  </div>
+  InfoPage
+  SettingsDialog
+</div>
 `;

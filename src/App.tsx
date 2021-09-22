@@ -25,7 +25,7 @@ const StyledMain = styled("main")(({ theme }) => ({
 }));
 
 const App = (): ReactElement => (
-  <>
+  <Box sx={{ boxSizing: "border-box" }}>
     <CssBaseline />
     <Box
       data-testid="rulaub-root"
@@ -47,7 +47,7 @@ const App = (): ReactElement => (
     </Box>
     <InfoPage />
     <SettingsDialog />
-  </>
+  </Box>
 );
 
 export default App;
