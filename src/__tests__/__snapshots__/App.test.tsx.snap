@@ -17,5 +17,6 @@ Array [
     </main>
   </div>,
   "InfoPage",
+  "SettingsDialog",
 ]
 `;

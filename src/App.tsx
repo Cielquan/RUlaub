@@ -7,6 +7,7 @@ import Calendar from "./components/Calendar";
 import InfoPage from "./components/InfoPage";
 import Navbar from "./components/Navbar";
 import NewHolidayButton from "./components/NewHolidayButton";
+import SettingsDialog from "./components/SettingsDialog";
 import SideMenu from "./components/SideMenu";
 
 const StyledMain = styled("main")(({ theme }) => ({
@@ -45,6 +46,7 @@ const App = (): ReactElement => (
       </StyledMain>
     </Box>
     <InfoPage />
+    <SettingsDialog />
   </>
 );
 

@@ -11,6 +11,7 @@ jest.mock("../components/Calendar", () => () => "Calendar");
 jest.mock("../components/InfoPage", () => () => "InfoPage");
 jest.mock("../components/Navbar", () => () => "Navbar");
 jest.mock("../components/NewHolidayButton", () => () => "NewHolidayButton");
+jest.mock("../components/SettingsDialog", () => () => "SettingsDialog");
 jest.mock("../components/SideMenu", () => () => "SideMenu");
 
 describe("<App />", () => {

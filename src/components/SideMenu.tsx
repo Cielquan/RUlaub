@@ -48,11 +48,14 @@ interface Props {
 
 const SideMenu = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { closeSideMenu, openInfoPage } = bindActionCreators(actionCreators, dispatch);
+  const { closeSideMenu, openInfoPage, openSettingsDialog } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   const sideMenuState = useSelector((state: State) => state.sideMenu);
 
   const sectionlessItemList: SectionlessItemList = [
-    [t`Settings`, "Settings", () => undefined, <SettingsIcon />],
+    [t`Settings`, "Settings", openSettingsDialog, <SettingsIcon />],
   ];
 
   const VacationSectionItemList: SectionItemList = [
