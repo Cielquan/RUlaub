@@ -10,7 +10,7 @@ exports[`<LanguageMenu /> renders button correctly 1`] = `
 >
   <svg
     aria-hidden="true"
-    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-euno13-MuiSvgIcon-root"
     data-testid="TranslateIcon"
     focusable="false"
     viewBox="0 0 24 24"
@@ -20,13 +20,13 @@ exports[`<LanguageMenu /> renders button correctly 1`] = `
     />
   </svg>
   <p
-    class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+    class="MuiTypography-root MuiTypography-body1 css-19yqy1t-MuiTypography-root"
   >
     English
   </p>
   <svg
     aria-hidden="true"
-    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-i4bv87-MuiSvgIcon-root"
+    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-euno13-MuiSvgIcon-root"
     data-testid="KeyboardArrowDownIcon"
     focusable="false"
     viewBox="0 0 24 24"

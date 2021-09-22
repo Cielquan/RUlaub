@@ -14,8 +14,6 @@ exports[`<CalendarRowLabelsUserCell /> renders correctly 1`] = `
 >
   <p
     className="MuiTypography-root MuiTypography-body1 MuiTypography-noWrap css-1qr43t8-MuiTypography-root"
-  >
-    HP Second
-  </p>
+  />
 </div>
 `;
