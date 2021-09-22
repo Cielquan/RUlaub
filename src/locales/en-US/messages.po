@@ -25,15 +25,15 @@ msgstr "Activate Light Theme"
 msgid "Activate Dark Theme"
 msgstr "Activate Dark Theme"
 
-#: src/components/InfoPage.tsx:63
+#: src/components/InfoPage.tsx:68
 msgid "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
 msgstr "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
 
-#: src/components/InfoPage.tsx:69
+#: src/components/InfoPage.tsx:74
 msgid "For the Source Code, Documentation and copies of the License files please see the github repository at: {ghLink}."
 msgstr "For the Source Code, Documentation and copies of the License files please see the github repository at: {ghLink}."
 
-#: src/components/InfoPage.tsx:85
+#: src/components/InfoPage.tsx:90
 msgid "Close"
 msgstr "Close"
 
@@ -41,36 +41,45 @@ msgstr "Close"
 msgid "Add new Holiday"
 msgstr "Add new Holiday"
 
-#: src/components/SideMenu.tsx:55
+#: src/components/SettingsDialog.tsx:59
+#: src/components/SideMenu.tsx:58
 msgid "Settings"
 msgstr "Settings"
 
-#: src/components/SideMenu.tsx:59
-#: src/components/SideMenu.tsx:64
+#: src/components/SettingsDialog.tsx:66
+msgid "Enter your name to have it be preselected when entering new vacation."
+msgstr "Enter your name to have it be preselected when entering new vacation."
+
+#: src/components/SettingsDialog.tsx:95
+msgid "Save"
+msgstr "Save"
+
+#: src/components/SideMenu.tsx:62
+#: src/components/SideMenu.tsx:67
 msgid "Create"
 msgstr "Create"
 
-#: src/components/SideMenu.tsx:60
+#: src/components/SideMenu.tsx:63
 msgid "Edit"
 msgstr "Edit"
 
-#: src/components/SideMenu.tsx:65
+#: src/components/SideMenu.tsx:68
 msgid "Select"
 msgstr "Select"
 
-#: src/components/SideMenu.tsx:66
+#: src/components/SideMenu.tsx:69
 msgid "Modify"
 msgstr "Modify"
 
-#: src/components/SideMenu.tsx:105
+#: src/components/SideMenu.tsx:108
 msgid "Vacation"
 msgstr "Vacation"
 
-#: src/components/SideMenu.tsx:112
+#: src/components/SideMenu.tsx:115
 msgid "Database"
 msgstr "Database"
 
-#: src/components/SideMenu.tsx:126
+#: src/components/SideMenu.tsx:129
 msgid "Info"
 msgstr "Info"
 
