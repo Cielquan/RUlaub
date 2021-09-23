@@ -3,6 +3,7 @@ export * from "./infoPageActionCreators";
 export * from "./publicHolidaysDataActionCreators";
 export * from "./publicHolidaysDialogActionCreators";
 export * from "./schoolHolidaysDataActionCreators";
+export * from "./schoolHolidaysDialogActionCreators";
 export * from "./settingsDialogActionCreators";
 export * from "./sideMenuActionCreators";
 export * from "./vacationDataActionCreators";

@@ -26,6 +26,10 @@ export type SchoolHolidaysDataAction = {
   payload: SchoolHolidaysDataPayload;
 };
 
+export type SchoolHolidaysDialogAction = {
+  type: string;
+};
+
 export type SettingsDialogAction = {
   type: string;
 };

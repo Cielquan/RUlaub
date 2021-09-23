@@ -25,6 +25,7 @@ export const infoPageInitState = false;
 export const publicHolidaysDataInitState: PublicHolidaysData = [];
 export const publicHolidaysDialogInitState = false;
 export const schoolHolidaysDataInitState: SchoolHolidaysData = [];
+export const schoolHolidaysDialogInitState = false;
 export const settingsDialogInitState = false;
 export const sideMenuInitState = false;
 export const vacationDataInitState: VacationData = [];
