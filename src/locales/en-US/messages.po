@@ -42,7 +42,7 @@ msgid "Add new Holiday"
 msgstr "Add new Holiday"
 
 #: src/components/SettingsDialog.tsx:59
-#: src/components/SideMenu.tsx:58
+#: src/components/SideMenu.tsx:79
 msgid "Settings"
 msgstr "Settings"
 
@@ -54,32 +54,52 @@ msgstr "Enter your name to have it be preselected when entering new vacation."
 msgid "Save"
 msgstr "Save"
 
-#: src/components/SideMenu.tsx:62
-#: src/components/SideMenu.tsx:67
+#: src/components/SideMenu.tsx:83
+#: src/components/SideMenu.tsx:88
+#: src/components/SideMenu.tsx:93
+#: src/components/SideMenu.tsx:98
+#: src/components/SideMenu.tsx:103
+#: src/components/SideMenu.tsx:108
 msgid "Create"
 msgstr "Create"
 
-#: src/components/SideMenu.tsx:63
-msgid "Edit"
-msgstr "Edit"
-
-#: src/components/SideMenu.tsx:68
+#: src/components/SideMenu.tsx:84
 msgid "Select"
 msgstr "Select"
 
-#: src/components/SideMenu.tsx:69
-msgid "Modify"
-msgstr "Modify"
+#: src/components/SideMenu.tsx:89
+#: src/components/SideMenu.tsx:94
+#: src/components/SideMenu.tsx:99
+#: src/components/SideMenu.tsx:104
+#: src/components/SideMenu.tsx:109
+msgid "Edit"
+msgstr "Edit"
 
-#: src/components/SideMenu.tsx:108
-msgid "Vacation"
-msgstr "Vacation"
-
-#: src/components/SideMenu.tsx:115
+#: src/components/SideMenu.tsx:133
 msgid "Database"
 msgstr "Database"
 
-#: src/components/SideMenu.tsx:129
+#: src/components/SideMenu.tsx:140
+msgid "User"
+msgstr "User"
+
+#: src/components/SideMenu.tsx:147
+msgid "Public Holidays"
+msgstr "Public Holidays"
+
+#: src/components/SideMenu.tsx:154
+msgid "School Holidays"
+msgstr "School Holidays"
+
+#: src/components/SideMenu.tsx:161
+msgid "Vacation types"
+msgstr "Vacation types"
+
+#: src/components/SideMenu.tsx:168
+msgid "Vacation"
+msgstr "Vacation"
+
+#: src/components/SideMenu.tsx:182
 msgid "Info"
 msgstr "Info"
 

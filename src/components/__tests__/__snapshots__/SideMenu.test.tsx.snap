@@ -58,6 +58,22 @@ exports[`<SideMenu /> renders correctly when open 1`] = `
         class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
       />
       SideMenuSectionButton
+      <hr
+        class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+      />
+      SideMenuSectionButton
+      <hr
+        class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+      />
+      SideMenuSectionButton
+      <hr
+        class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+      />
+      SideMenuSectionButton
+      <hr
+        class="MuiDivider-root MuiDivider-fullWidth css-9mgopn-MuiDivider-root"
+      />
+      SideMenuSectionButton
     </ul>
     <ul
       class="MuiList-root MuiList-padding css-mes3qp-MuiList-root"

@@ -1,11 +1,14 @@
 import { t } from "@lingui/macro";
 import {
   Add as AddIcon,
-  Build as BuildIcon,
   ChevronLeft as ChevronLeftIcon,
   Create as CreateIcon,
+  DateRange as DateRangeIcon,
+  EventBusy as EventBusyIcon,
+  EventNote as EventNoteIcon,
   Flight as FlightIcon,
   Folder as FolderIcon,
+  Group as GroupIcon,
   Info as InfoIcon,
   Settings as SettingsIcon,
   Storage as StorageIcon,
@@ -54,19 +57,56 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
   );
   const sideMenuState = useSelector((state: State) => state.sideMenu);
 
+  const createSectionlessItems = (itemList: SectionlessItemList): ReactElement[] =>
+    itemList.map((item) => (
+      <React.Fragment key={item[1]}>
+        <SideMenuButton
+          text={item[0]}
+          listKey={item[1]}
+          onClick={() => {
+            if (typeof onClick === "function") onClick();
+            closeSideMenu();
+            item[2]();
+          }}
+          icon={item[3]}
+          sxStyle={item[4]}
+        />
+        <Divider />
+      </React.Fragment>
+    ));
+
   const sectionlessItemList: SectionlessItemList = [
     [t`Settings`, "Settings", openSettingsDialog, <SettingsIcon />],
-  ];
-
-  const VacationSectionItemList: SectionItemList = [
-    [t`Create`, "Vac-Create", () => undefined, <AddIcon />],
-    [t`Edit`, "Vac-Edit", () => undefined, <CreateIcon />],
   ];
 
   const DatabaseSectionItemList: SectionItemList = [
     [t`Create`, "DB-Create", () => undefined, <AddIcon />],
     [t`Select`, "DB-Select", () => undefined, <FolderIcon />],
-    [t`Modify`, "DB-Modify", () => undefined, <BuildIcon />],
+  ];
+
+  const UserSectionItemList: SectionItemList = [
+    [t`Create`, "User-Create", () => undefined, <AddIcon />],
+    [t`Edit`, "User-Edit", () => undefined, <CreateIcon />],
+  ];
+
+  const PublicHolidaySectionItemList: SectionItemList = [
+    [t`Create`, "Pub-Holiday-Create", () => undefined, <AddIcon />],
+    [t`Edit`, "Pub-Holiday-Edit", () => undefined, <CreateIcon />],
+  ];
+
+  const SchoolHolidaySectionItemList: SectionItemList = [
+    [t`Create`, "School-Holiday-Create", () => undefined, <AddIcon />],
+    [t`Edit`, "School-Holiday-Edit", () => undefined, <CreateIcon />],
+  ];
+
+  const VacationTypesSectionItemList: SectionItemList = [
+    [t`Create`, "Vac-Types-Create", () => undefined, <CreateIcon />],
+    [t`Edit`, "Vac-Types-Edit", () => undefined, <CreateIcon />],
+  ];
+
+  const VacationSectionItemList: SectionItemList = [
+    [t`Create`, "Vac-Create", () => undefined, <AddIcon />],
+    [t`Edit`, "Vac-Edit", () => undefined, <CreateIcon />],
   ];
 
   return (
@@ -88,34 +128,47 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
       </SideMenuHeader>
       <Divider />
       <List sx={{ paddingTop: 0 }}>
-        {sectionlessItemList.map((item) => (
-          <React.Fragment key={item[1]}>
-            <SideMenuButton
-              text={item[0]}
-              listKey={item[1]}
-              onClick={() => {
-                if (typeof onClick === "function") onClick();
-                closeSideMenu();
-                item[2]();
-              }}
-              icon={item[3]}
-              sxStyle={item[4]}
-            />
-            <Divider />
-          </React.Fragment>
-        ))}
-        <SideMenuSectionButton
-          text={t`Vacation`}
-          listKey="Vacation"
-          icon={<FlightIcon />}
-          sectionItemList={VacationSectionItemList}
-        />
-        <Divider />
+        {createSectionlessItems(sectionlessItemList)}
         <SideMenuSectionButton
           text={t`Database`}
           listKey="Database"
           icon={<StorageIcon />}
           sectionItemList={DatabaseSectionItemList}
+        />
+        <Divider />
+        <SideMenuSectionButton
+          text={t`User`}
+          listKey="user"
+          icon={<GroupIcon />}
+          sectionItemList={UserSectionItemList}
+        />
+        <Divider />
+        <SideMenuSectionButton
+          text={t`Public Holidays`}
+          listKey="Public Holidays"
+          icon={<EventBusyIcon />}
+          sectionItemList={PublicHolidaySectionItemList}
+        />
+        <Divider />
+        <SideMenuSectionButton
+          text={t`School Holidays`}
+          listKey="School Holidays"
+          icon={<DateRangeIcon />}
+          sectionItemList={SchoolHolidaySectionItemList}
+        />
+        <Divider />
+        <SideMenuSectionButton
+          text={t`Vacation types`}
+          listKey="Vacation types"
+          icon={<EventNoteIcon />}
+          sectionItemList={VacationTypesSectionItemList}
+        />
+        <Divider />
+        <SideMenuSectionButton
+          text={t`Vacation`}
+          listKey="Vacation"
+          icon={<FlightIcon />}
+          sectionItemList={VacationSectionItemList}
         />
       </List>
       <List
