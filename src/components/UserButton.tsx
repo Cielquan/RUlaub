@@ -1,4 +1,4 @@
-import { Person as PersonIcon } from "@mui/icons-material";
+import { AccountCircle as AccountCircleIcon } from "@mui/icons-material";
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +29,7 @@ const UserButton = (): ReactElement => {
         }}
       >
         <ListItemIcon>
-          <PersonIcon />
+          <AccountCircleIcon />
         </ListItemIcon>
         <ListItemText
           primary={configState.user.name}
