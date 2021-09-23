@@ -1,6 +1,6 @@
 import { SchoolHolidaysDialogActionType } from "../action-types";
 import { SchoolHolidaysDialogAction } from "../actions";
-import { sideMenuInitState as initState } from "./initialStates";
+import { schoolHolidaysDialogInitState as initState } from "./initialStates";
 
 const reducer = (
   state: boolean = initState,

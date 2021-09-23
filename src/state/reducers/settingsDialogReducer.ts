@@ -1,6 +1,6 @@
 import { SettingsDialogActionType } from "../action-types";
 import { SettingsDialogAction } from "../actions";
-import { sideMenuInitState as initState } from "./initialStates";
+import { settingsDialogInitState as initState } from "./initialStates";
 
 const reducer = (state: boolean = initState, action: SettingsDialogAction): boolean => {
   switch (action.type) {

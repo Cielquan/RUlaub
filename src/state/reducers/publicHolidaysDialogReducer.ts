@@ -1,6 +1,6 @@
 import { PublicHolidaysDialogActionType } from "../action-types";
 import { PublicHolidaysDialogAction } from "../actions";
-import { sideMenuInitState as initState } from "./initialStates";
+import { publicHolidaysDialogInitState as initState } from "./initialStates";
 
 const reducer = (
   state: boolean = initState,
