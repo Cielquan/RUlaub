@@ -28,4 +28,7 @@ export const schoolHolidaysDataInitState: SchoolHolidaysData = [];
 export const schoolHolidaysDialogInitState = false;
 export const settingsDialogInitState = false;
 export const sideMenuInitState = false;
+export const usersDialogInitState = false;
 export const vacationDataInitState: VacationData = [];
+export const vacationDialogInitState = false;
+export const vacationTypesDialogInitState = false;

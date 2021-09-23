@@ -38,7 +38,19 @@ export type SideMenuAction = {
   type: string;
 };
 
+export type UsersDialogAction = {
+  type: string;
+};
+
 export type VacationDataAction = {
   type: string;
   payload: VacationDataPayload;
+};
+
+export type VacationDialogAction = {
+  type: string;
+};
+
+export type VacationTypesDialogAction = {
+  type: string;
 };

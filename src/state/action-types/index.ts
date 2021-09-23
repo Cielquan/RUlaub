@@ -35,6 +35,21 @@ export enum SideMenuActionType {
   CLOSE = "close SideMenu",
 }
 
+export enum UsersDialogActionType {
+  OPEN = "open UsersDialog",
+  CLOSE = "close UsersDialog",
+}
+
 export enum VacationDataActionType {
   UPDATE = "update vacation data",
+}
+
+export enum VacationDialogActionType {
+  OPEN = "open VacationDialog",
+  CLOSE = "close VacationDialog",
+}
+
+export enum VacationTypesDialogActionType {
+  OPEN = "open VacationTypesDialog",
+  CLOSE = "close VacationTypesDialog",
 }
