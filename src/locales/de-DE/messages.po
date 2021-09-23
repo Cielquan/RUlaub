@@ -80,7 +80,7 @@ msgid "Database"
 msgstr "Datenbank"
 
 #: src/components/SideMenu.tsx:140
-msgid "User"
+msgid "Users"
 msgstr "Benutzer"
 
 #: src/components/SideMenu.tsx:147

@@ -80,8 +80,8 @@ msgid "Database"
 msgstr "Database"
 
 #: src/components/SideMenu.tsx:140
-msgid "User"
-msgstr "User"
+msgid "Users"
+msgstr "Users"
 
 #: src/components/SideMenu.tsx:147
 msgid "Public Holidays"

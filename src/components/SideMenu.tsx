@@ -84,19 +84,19 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     [t`Select`, "DB-Select", () => undefined, <FolderIcon />],
   ];
 
-  const UserSectionItemList: SectionItemList = [
-    [t`Create`, "User-Create", () => undefined, <AddIcon />],
-    [t`Edit`, "User-Edit", () => undefined, <CreateIcon />],
+  const UsersSectionItemList: SectionItemList = [
+    [t`Create`, "Users-Create", () => undefined, <AddIcon />],
+    [t`Edit`, "Users-Edit", () => undefined, <CreateIcon />],
   ];
 
-  const PublicHolidaySectionItemList: SectionItemList = [
-    [t`Create`, "Pub-Holiday-Create", () => undefined, <AddIcon />],
-    [t`Edit`, "Pub-Holiday-Edit", () => undefined, <CreateIcon />],
+  const PublicHolidaysSectionItemList: SectionItemList = [
+    [t`Create`, "Pub-Holidays-Create", () => undefined, <AddIcon />],
+    [t`Edit`, "Pub-Holidays-Edit", () => undefined, <CreateIcon />],
   ];
 
-  const SchoolHolidaySectionItemList: SectionItemList = [
-    [t`Create`, "School-Holiday-Create", () => undefined, <AddIcon />],
-    [t`Edit`, "School-Holiday-Edit", () => undefined, <CreateIcon />],
+  const SchoolHolidaysSectionItemList: SectionItemList = [
+    [t`Create`, "School-Holidays-Create", () => undefined, <AddIcon />],
+    [t`Edit`, "School-Holidays-Edit", () => undefined, <CreateIcon />],
   ];
 
   const VacationTypesSectionItemList: SectionItemList = [
@@ -137,24 +137,24 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
         />
         <Divider />
         <SideMenuSectionButton
-          text={t`User`}
-          listKey="user"
+          text={t`Users`}
+          listKey="users"
           icon={<GroupIcon />}
-          sectionItemList={UserSectionItemList}
+          sectionItemList={UsersSectionItemList}
         />
         <Divider />
         <SideMenuSectionButton
           text={t`Public Holidays`}
           listKey="Public Holidays"
           icon={<EventBusyIcon />}
-          sectionItemList={PublicHolidaySectionItemList}
+          sectionItemList={PublicHolidaysSectionItemList}
         />
         <Divider />
         <SideMenuSectionButton
           text={t`School Holidays`}
           listKey="School Holidays"
           icon={<DateRangeIcon />}
-          sectionItemList={SchoolHolidaySectionItemList}
+          sectionItemList={SchoolHolidaysSectionItemList}
         />
         <Divider />
         <SideMenuSectionButton
