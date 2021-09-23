@@ -17,6 +17,10 @@ export type PublicHolidaysDataAction = {
   payload: PublicHolidaysDataPayload;
 };
 
+export type PublicHolidaysDialogAction = {
+  type: string;
+};
+
 export type SchoolHolidaysDataAction = {
   type: string;
   payload: SchoolHolidaysDataPayload;
