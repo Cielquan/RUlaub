@@ -12,7 +12,7 @@ import generateMockStore from "../../testUtils";
 import SideMenu from "../SideMenu";
 
 jest.mock("../SideMenuButton", () => () => "SideMenuButton");
-jest.mock("../SideMenuSectionButton", () => () => "SideMenuSectionButton");
+jest.mock("../SideMenuDoubleButton", () => () => "SideMenuDoubleButton");
 
 describe("<SideMenu />", () => {
   let testState: State;

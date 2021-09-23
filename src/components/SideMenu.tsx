@@ -28,7 +28,7 @@ import SideMenuButton, {
   ButtonSxStyle,
   ButtonText,
 } from "./SideMenuButton";
-import SideMenuSectionButton, { SectionItemList } from "./SideMenuSectionButton";
+import SideMenuDoubleButton, { DoubleButtonItemList } from "./SideMenuDoubleButton";
 
 const SideMenuHeader = styled("div")(({ theme }) => ({
   width: 240,
@@ -75,38 +75,104 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
       </React.Fragment>
     ));
 
+  const createDoubleButtons = (itemList: DoubleButtonItemList): ReactElement[] =>
+    itemList.map((item) => (
+      <React.Fragment key={item[1]}>
+        <SideMenuDoubleButton
+          text={item[0]}
+          listKey={item[1]}
+          icon={item[6]}
+          firstButtonIcon={item[2]}
+          firstButtonOnClick={() => {
+            if (typeof onClick === "function") onClick();
+            closeSideMenu();
+            item[3]();
+          }}
+          firstButtonTooltip={item[7]}
+          secondButtonIcon={item[4]}
+          secondButtonOnClick={() => {
+            if (typeof onClick === "function") onClick();
+            closeSideMenu();
+            item[5]();
+          }}
+          secondButtonTooltip={item[8]}
+          sxStyle={item[9]}
+        />
+        <Divider />
+      </React.Fragment>
+    ));
+
   const sectionlessItemList: SectionlessItemList = [
     [t`Settings`, "Settings", openSettingsDialog, <SettingsIcon />],
   ];
 
-  const DatabaseSectionItemList: SectionItemList = [
-    [t`Create`, "DB-Create", () => undefined, <AddIcon />],
-    [t`Select`, "DB-Select", () => undefined, <FolderIcon />],
-  ];
-
-  const UsersSectionItemList: SectionItemList = [
-    [t`Create`, "Users-Create", () => undefined, <AddIcon />],
-    [t`Edit`, "Users-Edit", () => undefined, <CreateIcon />],
-  ];
-
-  const PublicHolidaysSectionItemList: SectionItemList = [
-    [t`Create`, "Pub-Holidays-Create", () => undefined, <AddIcon />],
-    [t`Edit`, "Pub-Holidays-Edit", () => undefined, <CreateIcon />],
-  ];
-
-  const SchoolHolidaysSectionItemList: SectionItemList = [
-    [t`Create`, "School-Holidays-Create", () => undefined, <AddIcon />],
-    [t`Edit`, "School-Holidays-Edit", () => undefined, <CreateIcon />],
-  ];
-
-  const VacationTypesSectionItemList: SectionItemList = [
-    [t`Create`, "Vac-Types-Create", () => undefined, <CreateIcon />],
-    [t`Edit`, "Vac-Types-Edit", () => undefined, <CreateIcon />],
-  ];
-
-  const VacationSectionItemList: SectionItemList = [
-    [t`Create`, "Vac-Create", () => undefined, <AddIcon />],
-    [t`Edit`, "Vac-Edit", () => undefined, <CreateIcon />],
+  const doubleButtonItemList: DoubleButtonItemList = [
+    [
+      t`Database`,
+      "Database",
+      <AddIcon />,
+      () => undefined,
+      <FolderIcon />,
+      () => undefined,
+      <StorageIcon />,
+      t`Create`,
+      t`Select`,
+    ],
+    [
+      t`Users`,
+      "Users",
+      <AddIcon />,
+      () => undefined,
+      <CreateIcon />,
+      () => undefined,
+      <GroupIcon />,
+      t`Create`,
+      t`Edit`,
+    ],
+    [
+      t`Public Holidays`,
+      "Public Holidays",
+      <AddIcon />,
+      () => undefined,
+      <CreateIcon />,
+      () => undefined,
+      <EventBusyIcon />,
+      t`Create`,
+      t`Edit`,
+    ],
+    [
+      t`School Holidays`,
+      "School Holidays",
+      <AddIcon />,
+      () => undefined,
+      <CreateIcon />,
+      () => undefined,
+      <DateRangeIcon />,
+      t`Create`,
+      t`Edit`,
+    ],
+    [
+      t`Vacation types`,
+      "Vacation types",
+      <AddIcon />,
+      () => undefined,
+      <CreateIcon />,
+      () => undefined,
+      <EventNoteIcon />,
+      t`Create`,
+      t`Edit`,
+    ],
+    [
+      t`Vacation`,
+      "Vacation",
+      <AddIcon />,
+      () => undefined,
+      <CreateIcon />,
+      () => undefined,
+      <FlightIcon />,
+      t`Create`,
+      t`Edit`,
+    ],
   ];
 
   return (
@@ -129,47 +195,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
       <Divider />
       <List sx={{ paddingTop: 0 }}>
         {createSectionlessItems(sectionlessItemList)}
-        <SideMenuSectionButton
-          text={t`Database`}
-          listKey="Database"
-          icon={<StorageIcon />}
-          sectionItemList={DatabaseSectionItemList}
-        />
-        <Divider />
-        <SideMenuSectionButton
-          text={t`Users`}
-          listKey="users"
-          icon={<GroupIcon />}
-          sectionItemList={UsersSectionItemList}
-        />
-        <Divider />
-        <SideMenuSectionButton
-          text={t`Public Holidays`}
-          listKey="Public Holidays"
-          icon={<EventBusyIcon />}
-          sectionItemList={PublicHolidaysSectionItemList}
-        />
-        <Divider />
-        <SideMenuSectionButton
-          text={t`School Holidays`}
-          listKey="School Holidays"
-          icon={<DateRangeIcon />}
-          sectionItemList={SchoolHolidaysSectionItemList}
-        />
-        <Divider />
-        <SideMenuSectionButton
-          text={t`Vacation types`}
-          listKey="Vacation types"
-          icon={<EventNoteIcon />}
-          sectionItemList={VacationTypesSectionItemList}
-        />
-        <Divider />
-        <SideMenuSectionButton
-          text={t`Vacation`}
-          listKey="Vacation"
-          icon={<FlightIcon />}
-          sectionItemList={VacationSectionItemList}
-        />
+        {createDoubleButtons(doubleButtonItemList)}
       </List>
       <List
         sx={{
