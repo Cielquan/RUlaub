@@ -116,8 +116,8 @@
 
 - id
 - name
-- start_day
-- end_day
+- start_date
+- end_date
 
 ---
 
@@ -133,3 +133,70 @@ yearToShow = 2000
 theme = "dark"
 langauge = "de-DE"
 ```
+
+---
+
+## Thoughts
+
+#### DB modifying menus
+
+- Split 'modify' menu into different menus for different tables.
+- Make component for DB table menus and sub component for different types
+
+- Menu for vac types:
+  - Show all entries ordered by DB-id
+  - Button to hide non-applicable ones
+  - Each entry has:
+    - invisible id
+    - unique name
+    - 'doCount' bool if counted towards year-vac-days
+    - hex-color via picker
+    - ? second hex-color for dark-theme?
+    - ? switch checkbox for activating color-split
+    - checkbox if applicable
+
+- Menu for pub holidays:
+  - Show all entries ordered by start-date and then by id
+  - Button to hide non-applicable ones
+  - Each entry has:
+    - invisible id
+    - unique name
+    - date
+    - checkbox if applicable
+
+- Menu for school holidays:
+  - Show all entries ordered by start-date and then by id
+  - Field at top for link to load holidays from
+  - show all holidays .. like pub holidays
+  - each entry has:
+    - invisible id
+    - unique name
+    - start date
+    - end date
+    - button to edit
+    - button to remove
+
+- Menu for vacations:
+  - Show all entries ordered by start-date and then by id
+  - FAB down right opens 'add vac' menu
+  - via sidemenu you can open 'add vac' menu
+  - via vac-menu you can open 'add vac' menu
+  - later via click on vac inside calendar you can open 'edit vac' menu
+  - show each vac
+  - each entry has:
+    - invisible id
+    - user name
+    - type (dropdown)
+    - start date
+    - end date
+    - button to edit
+    - button to remove
+
+- Menu for userbase:
+  - Show all entries ordered by DB-id
+  - each entry has:
+    - unique id
+    - unique name
+    - amount vac days
+    - workdays selection .. for calc non-workdays out of vac-ranges
+    - button to remove user .. caskading down to remove vac as well
