@@ -33,6 +33,8 @@
 
 ### Menus (popups)
 
+- Add 'cancel' btn to SettingsDialog
+
 - Add 'add new holiday' menu
 - Add 'edit/remove holiday' menu
 
