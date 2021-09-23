@@ -26,8 +26,8 @@ const SideMenuButton = ({
   sxStyle,
   foldIcon,
 }: Props): ReactElement => (
-  <ListItem key={listKey} button onClick={onClick} sx={sxStyle}>
-    <ListItemIcon>{icon}</ListItemIcon>
+  <ListItem key={listKey} button onClick={onClick} sx={{ ...sxStyle }}>
+    <ListItemIcon sx={{ paddingY: "8px" }}>{icon}</ListItemIcon>
     <ListItemText primary={text} />
     {foldIcon}
   </ListItem>
