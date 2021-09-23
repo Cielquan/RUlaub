@@ -9,6 +9,7 @@ import Navbar from "../Navbar";
 
 jest.mock("../DarkThemeSwitch", () => () => "DarkThemeSwitch");
 jest.mock("../LanguageMenu", () => () => "LanguageMenu");
+jest.mock("../UserButton", () => () => "UserButton");
 
 describe("<Navbar />", () => {
   const mockStore = generateMockStore(initialState);
