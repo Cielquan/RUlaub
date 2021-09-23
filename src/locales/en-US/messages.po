@@ -42,7 +42,7 @@ msgid "Add new Holiday"
 msgstr "Add new Holiday"
 
 #: src/components/SettingsDialog.tsx:59
-#: src/components/SideMenu.tsx:79
+#: src/components/SideMenu.tsx:106
 msgid "Settings"
 msgstr "Settings"
 
@@ -54,52 +54,52 @@ msgstr "Enter your name to have it be preselected when entering new vacation."
 msgid "Save"
 msgstr "Save"
 
-#: src/components/SideMenu.tsx:83
-#: src/components/SideMenu.tsx:88
-#: src/components/SideMenu.tsx:93
-#: src/components/SideMenu.tsx:98
-#: src/components/SideMenu.tsx:103
-#: src/components/SideMenu.tsx:108
+#: src/components/SideMenu.tsx:111
+msgid "Database"
+msgstr "Database"
+
+#: src/components/SideMenu.tsx:118
+#: src/components/SideMenu.tsx:129
+#: src/components/SideMenu.tsx:140
+#: src/components/SideMenu.tsx:151
+#: src/components/SideMenu.tsx:162
+#: src/components/SideMenu.tsx:173
 msgid "Create"
 msgstr "Create"
 
-#: src/components/SideMenu.tsx:84
+#: src/components/SideMenu.tsx:119
 msgid "Select"
 msgstr "Select"
 
-#: src/components/SideMenu.tsx:89
-#: src/components/SideMenu.tsx:94
-#: src/components/SideMenu.tsx:99
-#: src/components/SideMenu.tsx:104
-#: src/components/SideMenu.tsx:109
+#: src/components/SideMenu.tsx:122
+msgid "Users"
+msgstr "Users"
+
+#: src/components/SideMenu.tsx:130
+#: src/components/SideMenu.tsx:141
+#: src/components/SideMenu.tsx:152
+#: src/components/SideMenu.tsx:163
+#: src/components/SideMenu.tsx:174
 msgid "Edit"
 msgstr "Edit"
 
 #: src/components/SideMenu.tsx:133
-msgid "Database"
-msgstr "Database"
-
-#: src/components/SideMenu.tsx:140
-msgid "Users"
-msgstr "Users"
-
-#: src/components/SideMenu.tsx:147
 msgid "Public Holidays"
 msgstr "Public Holidays"
 
-#: src/components/SideMenu.tsx:154
+#: src/components/SideMenu.tsx:144
 msgid "School Holidays"
 msgstr "School Holidays"
 
-#: src/components/SideMenu.tsx:161
+#: src/components/SideMenu.tsx:155
 msgid "Vacation types"
 msgstr "Vacation types"
 
-#: src/components/SideMenu.tsx:168
+#: src/components/SideMenu.tsx:166
 msgid "Vacation"
 msgstr "Vacation"
 
-#: src/components/SideMenu.tsx:182
+#: src/components/SideMenu.tsx:208
 msgid "Info"
 msgstr "Info"
 
