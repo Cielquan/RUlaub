@@ -95,16 +95,19 @@
 #### vacation_types
 
 - id
-- type
-- doCount (to user's vacation_days)
-- hexcolor
+- unique type/name
+- do_count (to user's vacation_days)
+- hexcolor_dark
+- hexcolor_light
+- active
 
 #### vacations
 
 - id
 - user_id
 - type_id
-- year
+- start_year
+- end_year
 - start_date
 - end_date
 
@@ -113,6 +116,7 @@
 - id
 - name
 - date
+- active
 
 #### school_holiday
 
@@ -130,8 +134,8 @@
 name = "xy"
 
 [settings]
-databaseURI = "path/to/DB"
-yearToShow = 2000
+database_uri = "path/to/DB"
+year_to_show = 2000
 theme = "dark"
 langauge = "de-DE"
 ```
@@ -172,7 +176,7 @@ langauge = "de-DE"
   - show all holidays .. like pub holidays
   - each entry has:
     - invisible id
-    - unique name
+    - name
     - start date
     - end date
     - button to edit
