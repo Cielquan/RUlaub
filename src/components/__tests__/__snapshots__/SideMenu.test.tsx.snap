@@ -20,7 +20,7 @@ exports[`<SideMenu /> renders correctly when open 1`] = `
     tabindex="-1"
   >
     <div
-      class="css-1nmeykx"
+      class="css-3bgsz6"
     >
       <button
         class="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"

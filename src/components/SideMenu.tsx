@@ -31,11 +31,10 @@ import SideMenuButton, {
 import SideMenuDoubleButton, { DoubleButtonItemList } from "./SideMenuDoubleButton";
 
 const SideMenuHeader = styled("div")(({ theme }) => ({
-  width: 240,
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
+  padding: theme.spacing(1, 2),
 
   // necessary to match toolbar height
   ...theme.mixins.toolbar,
