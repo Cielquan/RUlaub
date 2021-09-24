@@ -42,7 +42,7 @@ msgid "Add new Holiday"
 msgstr "Add new Holiday"
 
 #: src/components/SettingsDialog.tsx:59
-#: src/components/SideMenu.tsx:106
+#: src/components/SideMenu.tsx:105
 msgid "Settings"
 msgstr "Settings"
 
@@ -54,52 +54,56 @@ msgstr "Enter your name to have it be preselected when entering new vacation."
 msgid "Save"
 msgstr "Save"
 
-#: src/components/SideMenu.tsx:111
+#: src/components/SettingsDialog.tsx:105
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/components/SideMenu.tsx:110
 msgid "Database"
 msgstr "Database"
 
+#: src/components/SideMenu.tsx:117
+#: src/components/SideMenu.tsx:128
+#: src/components/SideMenu.tsx:139
+#: src/components/SideMenu.tsx:150
+#: src/components/SideMenu.tsx:161
+#: src/components/SideMenu.tsx:172
+msgid "Create"
+msgstr "Create"
+
 #: src/components/SideMenu.tsx:118
+msgid "Select"
+msgstr "Select"
+
+#: src/components/SideMenu.tsx:121
+msgid "Users"
+msgstr "Users"
+
 #: src/components/SideMenu.tsx:129
 #: src/components/SideMenu.tsx:140
 #: src/components/SideMenu.tsx:151
 #: src/components/SideMenu.tsx:162
 #: src/components/SideMenu.tsx:173
-msgid "Create"
-msgstr "Create"
-
-#: src/components/SideMenu.tsx:119
-msgid "Select"
-msgstr "Select"
-
-#: src/components/SideMenu.tsx:122
-msgid "Users"
-msgstr "Users"
-
-#: src/components/SideMenu.tsx:130
-#: src/components/SideMenu.tsx:141
-#: src/components/SideMenu.tsx:152
-#: src/components/SideMenu.tsx:163
-#: src/components/SideMenu.tsx:174
 msgid "Edit"
 msgstr "Edit"
 
-#: src/components/SideMenu.tsx:133
+#: src/components/SideMenu.tsx:132
 msgid "Public Holidays"
 msgstr "Public Holidays"
 
-#: src/components/SideMenu.tsx:144
+#: src/components/SideMenu.tsx:143
 msgid "School Holidays"
 msgstr "School Holidays"
 
-#: src/components/SideMenu.tsx:155
+#: src/components/SideMenu.tsx:154
 msgid "Vacation types"
 msgstr "Vacation types"
 
-#: src/components/SideMenu.tsx:166
+#: src/components/SideMenu.tsx:165
 msgid "Vacation"
 msgstr "Vacation"
 
-#: src/components/SideMenu.tsx:208
+#: src/components/SideMenu.tsx:207
 msgid "Info"
 msgstr "Info"
 

@@ -84,7 +84,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
       </DialogContent>
       <DialogActions>
         <Button
-          data-testid={`${id}-btn`}
+          data-testid={`${id}-btn-save`}
           onClick={() => {
             if (typeof onClick === "function") onClick();
             closeSettingsDialog();
@@ -93,6 +93,16 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           autoFocus
         >
           <Trans>Save</Trans>
+        </Button>
+        <Button
+          data-testid={`${id}-btn-cancel`}
+          onClick={() => {
+            if (typeof onClick === "function") onClick();
+            closeSettingsDialog();
+          }}
+          autoFocus
+        >
+          <Trans>Cancel</Trans>
         </Button>
       </DialogActions>
     </Dialog>

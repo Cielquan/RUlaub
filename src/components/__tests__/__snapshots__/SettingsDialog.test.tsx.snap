@@ -87,12 +87,23 @@ exports[`<SettingsDialog /> renders correctly when open 1`] = `
         class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
       >
         <button
-          class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root Mui-focusVisible css-1e6y48t-MuiButtonBase-root-MuiButton-root"
-          data-testid="settings-dialog-btn"
+          class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+          data-testid="settings-dialog-btn-save"
           tabindex="0"
           type="button"
         >
           Save
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root Mui-focusVisible css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+          data-testid="settings-dialog-btn-cancel"
+          tabindex="0"
+          type="button"
+        >
+          Cancel
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           >
@@ -204,12 +215,23 @@ exports[`<SettingsDialog /> renders invisible by default 1`] = `
         class="MuiDialogActions-root MuiDialogActions-spacing css-hlj6pa-MuiDialogActions-root"
       >
         <button
-          class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root Mui-focusVisible css-1e6y48t-MuiButtonBase-root-MuiButton-root"
-          data-testid="settings-dialog-btn"
+          class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+          data-testid="settings-dialog-btn-save"
           tabindex="0"
           type="button"
         >
           Save
+          <span
+            class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          />
+        </button>
+        <button
+          class="MuiButton-root MuiButton-text MuiButton-textPrimary MuiButton-sizeMedium MuiButton-textSizeMedium MuiButtonBase-root Mui-focusVisible css-1e6y48t-MuiButtonBase-root-MuiButton-root"
+          data-testid="settings-dialog-btn-cancel"
+          tabindex="0"
+          type="button"
+        >
+          Cancel
           <span
             class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
           >
