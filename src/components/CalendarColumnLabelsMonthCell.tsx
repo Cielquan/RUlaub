@@ -1,4 +1,3 @@
-import { useLingui } from "@lingui/react";
 import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { CSSProperties, ReactElement } from "react";
@@ -15,9 +14,7 @@ const CalendarColumnLabelsMonthCell = ({
   index: columnIndex,
   style,
 }: Props): ReactElement => {
-  const { i18n } = useLingui();
-
-  const monthNameList = getMonthNameList(i18n);
+  const monthNameList = getMonthNameList();
 
   return (
     <Box

@@ -1,6 +1,7 @@
 import { t } from "@lingui/macro";
 
-import i18nObj from "../i18n";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import i18n from "../i18n";
 
 export const isLeapYear = (year: number): boolean => {
   if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
@@ -15,8 +16,7 @@ export const datePlusDays = (currentDate: Date, daysToAdd: number): Date => {
   return newDate;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getMonthNameList = (i18n: typeof i18nObj): string[] => [
+export const getMonthNameList = (): string[] => [
   t`January`,
   t`February`,
   t`March`,
