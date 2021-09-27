@@ -31,6 +31,16 @@ export const getMonthNameList = (): string[] => [
   t`December`,
 ];
 
+export const getWeekdayNameList = (): string[] => [
+  t`Monday`,
+  t`Tuesday`,
+  t`Wednesday`,
+  t`Thursday`,
+  t`Friday`,
+  t`Saturday`,
+  t`Sunday`,
+];
+
 const DaysInMonth: { [key: number]: number } = {
   1: 31,
   2: 28,

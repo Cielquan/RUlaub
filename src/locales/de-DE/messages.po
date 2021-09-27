@@ -154,3 +154,31 @@ msgstr "November"
 #: src/utils/dateUtils.ts:31
 msgid "December"
 msgstr "Dezember"
+
+#: src/utils/dateUtils.ts:35
+msgid "Monday"
+msgstr "Montag"
+
+#: src/utils/dateUtils.ts:36
+msgid "Tuesday"
+msgstr "Dienstag"
+
+#: src/utils/dateUtils.ts:37
+msgid "Wednesday"
+msgstr "Mittwoch"
+
+#: src/utils/dateUtils.ts:38
+msgid "Thursday"
+msgstr "Donnerstag"
+
+#: src/utils/dateUtils.ts:39
+msgid "Friday"
+msgstr "Freitag"
+
+#: src/utils/dateUtils.ts:40
+msgid "Saturday"
+msgstr "Samstag"
+
+#: src/utils/dateUtils.ts:41
+msgid "Sunday"
+msgstr "Sonntag"
