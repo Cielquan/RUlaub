@@ -3,7 +3,11 @@
   "description": "Schema for school holiday data coming from the backend",
   "type": "object",
   "patternProperties": {
-    "^\\d+$": {
+    "^\\d+$": { "$ref": "#/$defs/schoolHolidayData" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "schoolHolidayData": {
       "type": "object",
       "properties": {
         "name": { "type": "string" },
@@ -13,6 +17,5 @@
       "required": ["name", "startYearDay", "endYearDay"],
       "additionalProperties": false
     }
-  },
-  "additionalProperties": false
+  }
 }

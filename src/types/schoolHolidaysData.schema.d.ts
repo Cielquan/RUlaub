@@ -9,13 +9,14 @@
  * Schema for school holiday data coming from the backend
  */
 export interface SchoolHolidaysDataSchema {
-  /**
-   * This interface was referenced by `SchoolHolidaysDataSchema`'s JSON-Schema definition
-   * via the `patternProperty` "^\d+$".
-   */
-  [k: string]: {
-    name: string;
-    startYearDay: number;
-    endYearDay: number;
-  };
+  [k: string]: SchoolHolidayData;
+}
+/**
+ * This interface was referenced by `SchoolHolidaysDataSchema`'s JSON-Schema definition
+ * via the `patternProperty` "^\d+$".
+ */
+export interface SchoolHolidayData {
+  name: string;
+  startYearDay: number;
+  endYearDay: number;
 }

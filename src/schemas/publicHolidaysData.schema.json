@@ -3,7 +3,11 @@
   "description": "Schema for public holiday data coming from the backend",
   "type": "object",
   "patternProperties": {
-    "^\\d+$": {
+    "^\\d+$": { "$ref": "#/$defs/publicHolidayData" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "publicHolidayData": {
       "type": "object",
       "properties": {
         "name": { "type": "string" },
@@ -12,6 +16,5 @@
       "required": ["name", "yearDay"],
       "additionalProperties": false
     }
-  },
-  "additionalProperties": false
+  }
 }

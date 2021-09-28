@@ -9,12 +9,13 @@
  * Schema for public holiday data coming from the backend
  */
 export interface PublicHolidaysDataSchema {
-  /**
-   * This interface was referenced by `PublicHolidaysDataSchema`'s JSON-Schema definition
-   * via the `patternProperty` "^\d+$".
-   */
-  [k: string]: {
-    name: string;
-    yearDay: number;
-  };
+  [k: string]: PublicHolidayData;
+}
+/**
+ * This interface was referenced by `PublicHolidaysDataSchema`'s JSON-Schema definition
+ * via the `patternProperty` "^\d+$".
+ */
+export interface PublicHolidayData {
+  name: string;
+  yearDay: number;
 }

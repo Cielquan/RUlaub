@@ -3,7 +3,11 @@
   "description": "Schema for users data coming from the backend",
   "type": "object",
   "patternProperties": {
-    "^\\d+$": {
+    "^\\d+$": { "$ref": "#/$defs/userData" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "userData": {
       "type": "object",
       "properties": {
         "name": { "type": "string" },
@@ -16,10 +20,7 @@
       },
       "required": ["name", "workdays", "userStats", "vacations"],
       "additionalProperties": false
-    }
-  },
-  "additionalProperties": false,
-  "$defs": {
+    },
     "workdays": {
       "type": "object",
       "properties": {
