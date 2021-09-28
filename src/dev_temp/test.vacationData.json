@@ -2,6 +2,15 @@
   {
     "id": 1,
     "name": "HP First",
+    "workdays": {
+      "monday": true,
+      "tuesday": true,
+      "wednesday": true,
+      "thursday": true,
+      "friday": true,
+      "saturday": false,
+      "sunday": false
+    },
     "userStats": {
       "availableVacationDays": 30,
       "takenVacationDays": 30,
@@ -21,6 +30,15 @@
   {
     "id": 2,
     "name": "HP Second",
+    "workdays": {
+      "monday": false,
+      "tuesday": true,
+      "wednesday": true,
+      "thursday": true,
+      "friday": true,
+      "saturday": false,
+      "sunday": false
+    },
     "userStats": {
       "availableVacationDays": 30,
       "takenVacationDays": 30,

@@ -9,13 +9,36 @@
       "properties": {
         "id": { "type": "number" },
         "name": { "type": "string" },
+        "workdays": { "$ref": "#/$defs/workdays" },
         "userStats": { "$ref": "#/$defs/userStat" },
         "vacations": {
           "type": "array",
           "items": { "$ref": "#/$defs/vacation" }
         }
       },
-      "required": ["id", "name", "userStats", "vacations"],
+      "required": ["id", "name", "workdays", "userStats", "vacations"],
+      "additionalProperties": false
+    },
+    "workdays": {
+      "type": "object",
+      "properties": {
+        "monday": { "type": "boolean" },
+        "tuesday": { "type": "boolean" },
+        "wednesday": { "type": "boolean" },
+        "thursday": { "type": "boolean" },
+        "friday": { "type": "boolean" },
+        "saturday": { "type": "boolean" },
+        "sunday": { "type": "boolean" }
+      },
+      "required": [
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday"
+      ],
       "additionalProperties": false
     },
     "userStat": {

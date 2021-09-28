@@ -14,8 +14,18 @@ export type VacationDataSchema = UserData[];
 export interface UserData {
   id: number;
   name: string;
+  workdays: Workdays;
   userStats: UserStat;
   vacations: Vacation[];
+}
+export interface Workdays {
+  monday: boolean;
+  tuesday: boolean;
+  wednesday: boolean;
+  thursday: boolean;
+  friday: boolean;
+  saturday: boolean;
+  sunday: boolean;
 }
 export interface UserStat {
   availableVacationDays: number;
@@ -32,5 +42,5 @@ export interface Vacation {
   startYearDay: number;
   endDate: ISODate;
   endYearDay: number;
-  hexcolor: number;
+  hexColor: number;
 }
