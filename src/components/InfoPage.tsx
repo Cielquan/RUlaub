@@ -64,13 +64,13 @@ const InfoPage = ({ onClick }: Props): ReactElement => {
       </DialogTitle>
       <DialogContent>
         <DialogContentText sx={{ whiteSpace: "pre-wrap" }}>
-          <Typography gutterBottom>
+          <Typography gutterBottom component="span">
             <Trans>
               RUlaub is licensed under either &apos;Apache License 2.0&apos; or
               &apos;MIT License&apos; at your option.
             </Trans>
           </Typography>
-          <Typography>
+          <Typography component="span">
             <Trans>
               For the Source Code, Documentation and copies of the License files please
               see the github repository at: {ghLink}.
