@@ -74,13 +74,7 @@
         "endYearDay": { "type": "number" },
         "hexColor": { "type": "number" }
       },
-      "required": [
-        "startDate",
-        "startYearDay",
-        "endDate",
-        "endYearDay",
-        "hexColor"
-      ],
+      "required": ["startDate", "startYearDay", "endDate", "endYearDay", "hexColor"],
       "additionalProperties": false
     },
     "ISODate": {
