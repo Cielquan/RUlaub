@@ -18,7 +18,7 @@ describe("<SideMenuButton />", () => {
     const tree = renderer
       .create(
         <Provider store={mockStore}>
-          <SideMenuButton text="text" listKey="key" onClick={() => undefined} />
+          <SideMenuButton text="text" onClick={() => undefined} />
         </Provider>
       )
       .toJSON();

@@ -8,13 +8,7 @@ import {
 } from "@mui/material";
 import React, { ReactElement } from "react";
 
-import {
-  ButtonText,
-  ButtonListKey,
-  ButtonOnClick,
-  ButtonIcon,
-  ButtonSxStyle,
-} from "./SideMenuButton";
+import { ButtonText, ButtonOnClick, ButtonIcon, ButtonSxStyle } from "./SideMenuButton";
 
 export type FirstButtonIcon = ButtonIcon;
 export type FirstButtonOnClick = ButtonOnClick;
@@ -25,7 +19,6 @@ export type SecondButtonTooltip = string;
 export type DoubleButtonItemList = Array<
   [
     ButtonText,
-    ButtonListKey,
     FirstButtonIcon,
     FirstButtonOnClick,
     SecondButtonIcon,
@@ -39,7 +32,6 @@ export type DoubleButtonItemList = Array<
 
 interface Props {
   text: ButtonText;
-  listKey: ButtonListKey;
   icon?: ButtonIcon;
   firstButtonIcon: ButtonIcon;
   firstButtonOnClick: ButtonOnClick;
@@ -52,7 +44,6 @@ interface Props {
 
 const SideMenuDoubleButton = ({
   text,
-  listKey,
   icon,
   firstButtonIcon,
   firstButtonOnClick,
@@ -75,7 +66,7 @@ const SideMenuDoubleButton = ({
   };
 
   return (
-    <ListItem key={listKey} sx={{ padding: 0, marginRight: 2, ...sxStyle }}>
+    <ListItem sx={{ padding: 0, marginRight: 2, ...sxStyle }}>
       <ListItemButton onClick={secondButtonOnClick}>
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={text} />

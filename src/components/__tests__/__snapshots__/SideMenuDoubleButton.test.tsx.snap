@@ -36,7 +36,7 @@ exports[`<SideMenuDoubleButton /> renders correctly 1`] = `
       </span>
     </div>
     <button
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1e9ebnl-MuiButtonBase-root-MuiIconButton-root"
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -55,7 +55,7 @@ exports[`<SideMenuDoubleButton /> renders correctly 1`] = `
       type="button"
     />
     <button
-      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-1e9ebnl-MuiButtonBase-root-MuiIconButton-root"
+      className="MuiButtonBase-root MuiIconButton-root MuiIconButton-sizeMedium css-78trlr-MuiButtonBase-root-MuiIconButton-root"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}

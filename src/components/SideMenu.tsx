@@ -23,7 +23,6 @@ import { actionCreators, State } from "../state";
 
 import SideMenuButton, {
   ButtonIcon,
-  ButtonListKey,
   ButtonOnClick,
   ButtonSxStyle,
   ButtonText,
@@ -41,7 +40,7 @@ const SideMenuHeader = styled("div")(({ theme }) => ({
 }));
 
 type SectionlessItemList = Array<
-  [ButtonText, ButtonListKey, ButtonOnClick, ButtonIcon?, ButtonSxStyle?]
+  [ButtonText, ButtonOnClick, ButtonIcon?, ButtonSxStyle?]
 >;
 
 interface Props {
@@ -58,17 +57,16 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
 
   const createSectionlessItems = (itemList: SectionlessItemList): ReactElement[] =>
     itemList.map((item) => (
-      <React.Fragment key={item[1]}>
+      <React.Fragment key={item[0]}>
         <SideMenuButton
           text={item[0]}
-          listKey={item[1]}
           onClick={() => {
             if (typeof onClick === "function") onClick();
             closeSideMenu();
-            item[2]();
+            item[1]();
           }}
-          icon={item[3]}
-          sxStyle={item[4]}
+          icon={item[2]}
+          sxStyle={item[3]}
         />
         <Divider />
       </React.Fragment>
@@ -76,39 +74,37 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
 
   const createDoubleButtons = (itemList: DoubleButtonItemList): ReactElement[] =>
     itemList.map((item) => (
-      <React.Fragment key={item[1]}>
+      <React.Fragment key={item[0]}>
         <SideMenuDoubleButton
           text={item[0]}
-          listKey={item[1]}
-          icon={item[6]}
-          firstButtonIcon={item[2]}
+          icon={item[5]}
+          firstButtonIcon={item[1]}
           firstButtonOnClick={() => {
             if (typeof onClick === "function") onClick();
             closeSideMenu();
-            item[3]();
+            item[2]();
           }}
-          firstButtonTooltip={item[7]}
-          secondButtonIcon={item[4]}
+          firstButtonTooltip={item[6]}
+          secondButtonIcon={item[3]}
           secondButtonOnClick={() => {
             if (typeof onClick === "function") onClick();
             closeSideMenu();
-            item[5]();
+            item[4]();
           }}
-          secondButtonTooltip={item[8]}
-          sxStyle={item[9]}
+          secondButtonTooltip={item[7]}
+          sxStyle={item[8]}
         />
         <Divider />
       </React.Fragment>
     ));
 
   const sectionlessItemList: SectionlessItemList = [
-    [t`Settings`, "Settings", openSettingsDialog, <SettingsIcon />],
+    [t`Settings`, openSettingsDialog, <SettingsIcon />],
   ];
 
   const doubleButtonItemList: DoubleButtonItemList = [
     [
       t`Database`,
-      "Database",
       <AddIcon />,
       () => undefined,
       <FolderIcon />,
@@ -119,7 +115,6 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     ],
     [
       t`Users`,
-      "Users",
       <AddIcon />,
       () => undefined,
       <CreateIcon />,
@@ -130,7 +125,6 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     ],
     [
       t`Public Holidays`,
-      "Public Holidays",
       <AddIcon />,
       () => undefined,
       <CreateIcon />,
@@ -141,7 +135,6 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     ],
     [
       t`School Holidays`,
-      "School Holidays",
       <AddIcon />,
       () => undefined,
       <CreateIcon />,
@@ -152,7 +145,6 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     ],
     [
       t`Vacation types`,
-      "Vacation types",
       <AddIcon />,
       () => undefined,
       <CreateIcon />,
@@ -163,7 +155,6 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     ],
     [
       t`Vacation`,
-      "Vacation",
       <AddIcon />,
       () => undefined,
       <CreateIcon />,
@@ -204,8 +195,8 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
       >
         <Divider />
         <SideMenuButton
+          key="Info"
           text={t`Info`}
-          listKey="Info"
           icon={<InfoIcon />}
           onClick={() => {
             if (typeof onClick === "function") onClick();

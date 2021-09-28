@@ -20,7 +20,6 @@ describe("<SideMenuDoubleButton />", () => {
         <Provider store={mockStore}>
           <SideMenuDoubleButton
             text="text"
-            listKey="key"
             firstButtonIcon={<></>}
             firstButtonOnClick={() => undefined}
             secondButtonIcon={<></>}

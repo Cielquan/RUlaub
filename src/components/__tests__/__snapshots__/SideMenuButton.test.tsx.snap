@@ -20,7 +20,7 @@ exports[`<SideMenuButton /> renders correctly 1`] = `
   tabIndex={0}
 >
   <div
-    className="MuiListItemIcon-root css-cveggr-MuiListItemIcon-root"
+    className="MuiListItemIcon-root css-13m3tzr-MuiListItemIcon-root"
   />
   <div
     className="MuiListItemText-root css-tlelie-MuiListItemText-root"
