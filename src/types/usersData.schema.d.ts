@@ -41,6 +41,7 @@ export interface VacationStat {
   count: number;
 }
 export interface Vacation {
+  id?: number;
   startDate: ISODate;
   startYearDay: number;
   endDate: ISODate;

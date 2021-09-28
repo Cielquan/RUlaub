@@ -67,6 +67,7 @@
     "vacation": {
       "type": "object",
       "properties": {
+        "id": { "type": "number" },
         "startDate": { "$ref": "#/$defs/ISODate" },
         "startYearDay": { "type": "number" },
         "endDate": { "$ref": "#/$defs/ISODate" },
