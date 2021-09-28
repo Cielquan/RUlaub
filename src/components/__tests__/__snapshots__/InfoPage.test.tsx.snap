@@ -53,12 +53,12 @@ exports[`<InfoPage /> renders correctly when open 1`] = `
         <p
           class="MuiDialogContentText-root MuiTypography-root MuiTypography-body1 css-e901ri-MuiTypography-root-MuiDialogContentText-root"
         >
-          <p
+          <span
             class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-d3wcwz-MuiTypography-root"
           >
             RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option.
-          </p>
-          <p
+          </span>
+          <span
             class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
           >
             For the Source Code, Documentation and copies of the License files please see the github repository at: 
@@ -71,7 +71,7 @@ exports[`<InfoPage /> renders correctly when open 1`] = `
               github
             </a>
             .
-          </p>
+          </span>
         </p>
       </div>
       <div
@@ -161,12 +161,12 @@ exports[`<InfoPage /> renders invisible by default 1`] = `
         <p
           class="MuiDialogContentText-root MuiTypography-root MuiTypography-body1 css-e901ri-MuiTypography-root-MuiDialogContentText-root"
         >
-          <p
+          <span
             class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-d3wcwz-MuiTypography-root"
           >
             RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option.
-          </p>
-          <p
+          </span>
+          <span
             class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
           >
             For the Source Code, Documentation and copies of the License files please see the github repository at: 
@@ -179,7 +179,7 @@ exports[`<InfoPage /> renders invisible by default 1`] = `
               github
             </a>
             .
-          </p>
+          </span>
         </p>
       </div>
       <div
