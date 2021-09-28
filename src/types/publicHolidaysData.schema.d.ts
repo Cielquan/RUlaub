@@ -9,7 +9,11 @@
  * Schema for public holiday data coming from the backend
  */
 export interface PublicHolidaysDataSchema {
-  id?: {
+  /**
+   * This interface was referenced by `PublicHolidaysDataSchema`'s JSON-Schema definition
+   * via the `patternProperty` "^\d+$".
+   */
+  [k: string]: {
     name: string;
     yearDay: number;
   };

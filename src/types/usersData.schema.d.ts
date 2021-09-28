@@ -11,7 +11,11 @@ export type ISODate = string;
  * Schema for users data coming from the backend
  */
 export interface UsersDataSchema {
-  id?: {
+  /**
+   * This interface was referenced by `UsersDataSchema`'s JSON-Schema definition
+   * via the `patternProperty` "^\d+$".
+   */
+  [k: string]: {
     name: string;
     workdays: Workdays;
     userStats: UserStat;

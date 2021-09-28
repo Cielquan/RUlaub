@@ -2,8 +2,8 @@
   "title": "School Holidays Data Schema",
   "description": "Schema for school holiday data coming from the backend",
   "type": "object",
-  "properties": {
-    "id": {
+  "patternProperties": {
+    "^\\d+$": {
       "type": "object",
       "properties": {
         "name": { "type": "string" },
