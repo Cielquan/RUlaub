@@ -2,6 +2,7 @@ import { t } from "@lingui/macro";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import i18n from "../i18n";
+import { Workdays } from "../types/vacationData.schema";
 
 export const isLeapYear = (year: number): boolean => {
   if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
@@ -40,6 +41,16 @@ export const getWeekdayNameList = (): string[] => [
   t`Saturday`,
   t`Sunday`,
 ];
+
+export const getWeekdayNameDict = (): { [key in keyof Workdays]: string } => ({
+  monday: t`Monday`,
+  tuesday: t`Tuesday`,
+  wednesday: t`Wednesday`,
+  thursday: t`Thursday`,
+  friday: t`Friday`,
+  saturday: t`Saturday`,
+  sunday: t`Sunday`,
+});
 
 const DaysInMonth: { [key: number]: number } = {
   1: 31,
