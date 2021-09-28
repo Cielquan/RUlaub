@@ -2,6 +2,12 @@ import { ConfigPayload } from "../utils/config";
 import { VacationDataPayload } from "../utils/vacationData";
 import { PublicHolidaysDataPayload } from "../utils/publicHolidaysData";
 import { SchoolHolidaysDataPayload } from "../utils/schoolHolidaysData";
+import { VacationDataSchema } from "../../types/vacationData.schema";
+
+export type CalendarRowUserMapAction = {
+  type: string;
+  payload: VacationDataSchema;
+};
 
 export type ConfigAction = {
   type: string;

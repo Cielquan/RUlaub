@@ -10,6 +10,11 @@ export const defaultTheme: SupportedThemes = "dark";
 
 export const defaultLanguage = localeToLanguage(defaultLocale);
 
+export interface CalendarRowUserMap {
+  [k: string]: number;
+}
+
+export const calendarRowUserMapInitState: CalendarRowUserMap = {};
 export const configInitState: Config = {
   user: {
     name: undefined,
@@ -22,13 +27,13 @@ export const configInitState: Config = {
   },
 };
 export const infoPageInitState = false;
-export const publicHolidaysDataInitState: PublicHolidaysData = [];
+export const publicHolidaysDataInitState: PublicHolidaysData = {};
 export const publicHolidaysDialogInitState = false;
-export const schoolHolidaysDataInitState: SchoolHolidaysData = [];
+export const schoolHolidaysDataInitState: SchoolHolidaysData = {};
 export const schoolHolidaysDialogInitState = false;
 export const settingsDialogInitState = false;
 export const sideMenuInitState = false;
 export const usersDialogInitState = false;
-export const vacationDataInitState: VacationData = [];
+export const vacationDataInitState: VacationData = {};
 export const vacationDialogInitState = false;
 export const vacationTypesDialogInitState = false;

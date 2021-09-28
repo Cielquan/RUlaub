@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 
 import { State } from "../state";
 import { STYLE_CONST } from "../styles";
+import { VacationDataSchema } from "../types/vacationData.schema";
 
 interface Props {
   columnIndex: number;
@@ -12,12 +13,20 @@ interface Props {
 }
 
 const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement => {
+  const calendarRowUserMapState = useSelector(
+    (state: State) => state.calendarRowUserMap
+  );
+  const userID = calendarRowUserMapState[
+    rowIndex.toString()
+  ].toString() as keyof VacationDataSchema;
+
   const vacationDataState = useSelector((state: State) => state.vacationData);
 
   const isVacation = (): boolean => {
-    if (!vacationDataState[rowIndex]?.vacations) return false;
+    const vacations = vacationDataState[userID]?.vacations;
+    if (!vacations) return false;
     return (
-      vacationDataState[rowIndex].vacations.filter(
+      vacations.filter(
         (vacation) =>
           vacation.startYearDay <= columnIndex + 1 &&
           vacation.endYearDay >= columnIndex + 1

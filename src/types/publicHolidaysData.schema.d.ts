@@ -8,10 +8,9 @@
 /**
  * Schema for public holiday data coming from the backend
  */
-export type PublicHolidaysDataSchema = PublicHoliday[];
-
-export interface PublicHoliday {
-  id: number;
-  name: string;
-  yearDay: number;
+export interface PublicHolidaysDataSchema {
+  id?: {
+    name: string;
+    yearDay: number;
+  };
 }
