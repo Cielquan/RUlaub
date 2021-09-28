@@ -8,11 +8,10 @@
 /**
  * Schema for school holiday data coming from the backend
  */
-export type SchoolHolidaysDataSchema = SchoolHoliday[];
-
-export interface SchoolHoliday {
-  id: number;
-  name: string;
-  startYearDay: number;
-  endYearDay: number;
+export interface SchoolHolidaysDataSchema {
+  id: {
+    name: string;
+    startYearDay: number;
+    endYearDay: number;
+  };
 }

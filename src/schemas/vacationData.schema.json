@@ -1,13 +1,11 @@
 {
   "title": "Vacation Data Schema",
   "description": "Schema for vacation data coming from the backend",
-  "type": "array",
-  "items": { "$ref": "#/$defs/userData" },
-  "$defs": {
-    "userData": {
+  "type": "object",
+  "properties": {
+    "id": {
       "type": "object",
       "properties": {
-        "id": { "type": "number" },
         "name": { "type": "string" },
         "workdays": { "$ref": "#/$defs/workdays" },
         "userStats": { "$ref": "#/$defs/userStat" },
@@ -16,9 +14,13 @@
           "items": { "$ref": "#/$defs/vacation" }
         }
       },
-      "required": ["id", "name", "workdays", "userStats", "vacations"],
+      "required": ["name", "workdays", "userStats", "vacations"],
       "additionalProperties": false
-    },
+    }
+  },
+  "required": ["id"],
+  "additionalProperties": false,
+  "$defs": {
     "workdays": {
       "type": "object",
       "properties": {
@@ -66,7 +68,6 @@
     "vacation": {
       "type": "object",
       "properties": {
-        "id": { "type": "number" },
         "startDate": { "$ref": "#/$defs/ISODate" },
         "startYearDay": { "type": "number" },
         "endDate": { "$ref": "#/$defs/ISODate" },
@@ -74,7 +75,6 @@
         "hexColor": { "type": "number" }
       },
       "required": [
-        "id",
         "startDate",
         "startYearDay",
         "endDate",

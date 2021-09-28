@@ -6,17 +6,17 @@
  */
 
 export type ISODate = string;
+
 /**
  * Schema for vacation data coming from the backend
  */
-export type VacationDataSchema = UserData[];
-
-export interface UserData {
-  id: number;
-  name: string;
-  workdays: Workdays;
-  userStats: UserStat;
-  vacations: Vacation[];
+export interface VacationDataSchema {
+  id: {
+    name: string;
+    workdays: Workdays;
+    userStats: UserStat;
+    vacations: Vacation[];
+  };
 }
 export interface Workdays {
   monday: boolean;
@@ -37,7 +37,6 @@ export interface VacationStat {
   count: number;
 }
 export interface Vacation {
-  id: number;
   startDate: ISODate;
   startYearDay: number;
   endDate: ISODate;
