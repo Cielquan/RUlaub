@@ -5,6 +5,9 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+/**
+ * Schema for config file read by the backend
+ */
 export interface ConfigFileSchema {
   user?: {
     name?: string;
