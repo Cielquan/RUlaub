@@ -1,12 +1,12 @@
 import { ConfigPayload } from "../utils/config";
-import { VacationDataPayload } from "../utils/vacationData";
+import { UsersDataPayload } from "../utils/usersData";
 import { PublicHolidaysDataPayload } from "../utils/publicHolidaysData";
 import { SchoolHolidaysDataPayload } from "../utils/schoolHolidaysData";
-import { VacationDataSchema } from "../../types/vacationData.schema";
+import { UsersDataSchema } from "../../types/usersData.schema";
 
 export type CalendarRowUserMapAction = {
   type: string;
-  payload: VacationDataSchema;
+  payload: UsersDataSchema;
 };
 
 export type ConfigAction = {
@@ -44,13 +44,13 @@ export type SideMenuAction = {
   type: string;
 };
 
-export type UsersDialogAction = {
+export type UsersDataAction = {
   type: string;
+  payload: UsersDataPayload;
 };
 
-export type VacationDataAction = {
+export type UsersDialogAction = {
   type: string;
-  payload: VacationDataPayload;
 };
 
 export type VacationDialogAction = {

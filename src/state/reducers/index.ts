@@ -14,7 +14,7 @@ import {
   settingsDialogInitState,
   sideMenuInitState,
   usersDialogInitState,
-  vacationDataInitState,
+  usersDataInitState,
   vacationDialogInitState,
   vacationTypesDialogInitState,
 } from "./initialStates";
@@ -24,8 +24,8 @@ import schoolHolidaysDataReducer from "./schoolHolidaysDataReducer";
 import schoolHolidaysDialogReducer from "./schoolHolidaysDialogReducer";
 import settingsDialogReducer from "./settingsDialogReducer";
 import sideMenuReducer from "./sideMenuReducer";
+import usersDataReducer from "./usersDataReducer";
 import usersDialogReducer from "./usersDialogReducer";
-import vacationDataReducer from "./vacationDataReducer";
 import vacationDialogReducer from "./vacationDialogReducer";
 import vacationTypesDialogReducer from "./vacationTypesDialogReducer";
 
@@ -39,8 +39,8 @@ const rootReducer = combineReducers({
   schoolHolidaysDialog: schoolHolidaysDialogReducer,
   settingsDialog: settingsDialogReducer,
   sideMenu: sideMenuReducer,
+  usersData: usersDataReducer,
   usersDialog: usersDialogReducer,
-  vacationData: vacationDataReducer,
   vacationDialog: vacationDialogReducer,
   vacationTypesDialog: vacationTypesDialogReducer,
 });
@@ -57,8 +57,8 @@ export const initialState: State = {
   schoolHolidaysDialog: schoolHolidaysDialogInitState,
   settingsDialog: settingsDialogInitState,
   sideMenu: sideMenuInitState,
+  usersData: usersDataInitState,
   usersDialog: usersDialogInitState,
-  vacationData: vacationDataInitState,
   vacationDialog: vacationDialogInitState,
   vacationTypesDialog: vacationTypesDialogInitState,
 };

@@ -35,7 +35,7 @@ const CalendarBody = ({
   scrollHandle,
   daysInYear,
 }: Props): ReactElement => {
-  const vacationDataState = useSelector((state: State) => state.vacationData);
+  const usersDataState = useSelector((state: State) => state.usersData);
 
   const gridRef = useRef<Grid>(null);
 
@@ -58,7 +58,7 @@ const CalendarBody = ({
         innerElementType={innerElementType}
         columnCount={daysInYear}
         columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL}
-        rowCount={Object.keys(vacationDataState).length}
+        rowCount={Object.keys(usersDataState).length}
         rowHeight={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL}
         ref={gridRef}
         onScroll={scrollHandle}

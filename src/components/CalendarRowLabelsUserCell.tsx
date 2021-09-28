@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 import { State } from "../state";
 import { STYLE_CONST } from "../styles";
-import { VacationDataSchema } from "../types/vacationData.schema";
+import { UsersDataSchema } from "../types/usersData.schema";
 
 interface Props {
   index: number;
@@ -18,9 +18,9 @@ const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElem
   );
   const userID = calendarRowUserMapState[
     rowIndex.toString()
-  ].toString() as keyof VacationDataSchema;
+  ].toString() as keyof UsersDataSchema;
 
-  const vacationDataState = useSelector((state: State) => state.vacationData);
+  const usersDataState = useSelector((state: State) => state.usersData);
 
   return (
     <Box
@@ -38,7 +38,7 @@ const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElem
       }}
     >
       <Typography sx={{ padding: "0 0.3em" }} variant="body1" noWrap>
-        {vacationDataState[userID]?.name}
+        {usersDataState[userID]?.name}
       </Typography>
     </Box>
   );

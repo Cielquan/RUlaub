@@ -21,7 +21,7 @@ import CalendarTableHead from "./CalendarTableHead";
 const today = new Date();
 
 const Calendar = (): ReactElement => {
-  const vacationDataState = useSelector((state: State) => state.vacationData);
+  const usersDataState = useSelector((state: State) => state.usersData);
   const configState = useSelector((state: State) => state.config);
   const themeState = configState.settings.theme;
   const langState = configState.settings.language;
@@ -51,8 +51,8 @@ const Calendar = (): ReactElement => {
   );
 
   useEffect(() => {
-    updateCalendarRowUserMap(vacationDataState);
-  }, [vacationDataState, updateCalendarRowUserMap]);
+    updateCalendarRowUserMap(usersDataState);
+  }, [usersDataState, updateCalendarRowUserMap]);
 
   if (year === undefined) {
     return <CalendarStartPage />;

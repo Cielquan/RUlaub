@@ -1,6 +1,6 @@
 {
-  "title": "Vacation Data Schema",
-  "description": "Schema for vacation data coming from the backend",
+  "title": "Users Data Schema",
+  "description": "Schema for users data coming from the backend",
   "type": "object",
   "properties": {
     "id": {

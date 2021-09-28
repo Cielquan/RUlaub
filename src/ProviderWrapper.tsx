@@ -16,12 +16,8 @@ import { useMountEffect } from "./hooks";
 
 const ProviderWrapper = (): ReactElement => {
   const dispatch = useDispatch();
-  const {
-    loadConfig,
-    loadPublicHolidaysData,
-    loadSchoolHolidaysData,
-    loadVacationData,
-  } = bindActionCreators(actionCreators, dispatch);
+  const { loadConfig, loadPublicHolidaysData, loadSchoolHolidaysData, loadUsersData } =
+    bindActionCreators(actionCreators, dispatch);
 
   const configState = useSelector((state: State) => state.config);
   const themeState = configState.settings.theme;
@@ -37,7 +33,7 @@ const ProviderWrapper = (): ReactElement => {
     loadConfig();
     loadPublicHolidaysData();
     loadSchoolHolidaysData();
-    loadVacationData();
+    loadUsersData();
   });
 
   return (

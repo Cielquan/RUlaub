@@ -1,9 +1,9 @@
 import { SupportedThemes } from "../../theme";
-import { VacationData } from "../utils/vacationData";
-import { localeToLanguage, SupportedLocales } from "../utils/i18n";
 import { Config } from "../utils/config";
+import { localeToLanguage, SupportedLocales } from "../utils/i18n";
 import { PublicHolidaysData } from "../utils/publicHolidaysData";
 import { SchoolHolidaysData } from "../utils/schoolHolidaysData";
+import { UsersData } from "../utils/usersData";
 
 export const defaultLocale: SupportedLocales = "en-US";
 export const defaultTheme: SupportedThemes = "dark";
@@ -33,7 +33,7 @@ export const schoolHolidaysDataInitState: SchoolHolidaysData = {};
 export const schoolHolidaysDialogInitState = false;
 export const settingsDialogInitState = false;
 export const sideMenuInitState = false;
+export const usersDataInitState: UsersData = {};
 export const usersDialogInitState = false;
-export const vacationDataInitState: VacationData = {};
 export const vacationDialogInitState = false;
 export const vacationTypesDialogInitState = false;

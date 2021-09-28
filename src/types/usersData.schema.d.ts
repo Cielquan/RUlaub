@@ -8,9 +8,9 @@
 export type ISODate = string;
 
 /**
- * Schema for vacation data coming from the backend
+ * Schema for users data coming from the backend
  */
-export interface VacationDataSchema {
+export interface UsersDataSchema {
   id?: {
     name: string;
     workdays: Workdays;

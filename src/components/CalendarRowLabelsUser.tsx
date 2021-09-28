@@ -22,7 +22,7 @@ interface Props {
 }
 
 const CalendarRowLabelsUser = ({ height, positionY }: Props): ReactElement => {
-  const vacationDataState = useSelector((state: State) => state.vacationData);
+  const usersDataState = useSelector((state: State) => state.usersData);
 
   const rowLabelRef = useRef<List>(null);
 
@@ -40,7 +40,7 @@ const CalendarRowLabelsUser = ({ height, positionY }: Props): ReactElement => {
         }
         width={STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
         innerElementType={innerElementType}
-        itemCount={Object.keys(vacationDataState).length}
+        itemCount={Object.keys(usersDataState).length}
         itemSize={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL}
         ref={rowLabelRef}
         // needs this local manual overwrite to work, css class gets overwritten
