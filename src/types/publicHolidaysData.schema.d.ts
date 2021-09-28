@@ -9,7 +9,7 @@
  * Schema for public holiday data coming from the backend
  */
 export interface PublicHolidaysDataSchema {
-  id: {
+  id?: {
     name: string;
     yearDay: number;
   };

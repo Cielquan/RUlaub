@@ -18,7 +18,6 @@
       "additionalProperties": false
     }
   },
-  "required": ["id"],
   "additionalProperties": false,
   "$defs": {
     "workdays": {

@@ -11,7 +11,7 @@ export type ISODate = string;
  * Schema for vacation data coming from the backend
  */
 export interface VacationDataSchema {
-  id: {
+  id?: {
     name: string;
     workdays: Workdays;
     userStats: UserStat;

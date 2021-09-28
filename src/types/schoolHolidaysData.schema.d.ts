@@ -9,7 +9,7 @@
  * Schema for school holiday data coming from the backend
  */
 export interface SchoolHolidaysDataSchema {
-  id: {
+  id?: {
     name: string;
     startYearDay: number;
     endYearDay: number;
