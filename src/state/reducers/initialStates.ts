@@ -10,6 +10,11 @@ export const defaultTheme: SupportedThemes = "dark";
 
 export const defaultLanguage = localeToLanguage(defaultLocale);
 
+export interface CalendarRowUserMap {
+  [k: string]: number;
+}
+
+export const calendarRowUserMapInitState: CalendarRowUserMap = {};
 export const configInitState: Config = {
   user: {
     name: undefined,

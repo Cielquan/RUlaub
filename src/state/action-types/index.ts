@@ -1,3 +1,7 @@
+export enum CalendarRowUserMapActionType {
+  UPDATE = "update calendar user order",
+}
+
 export enum ConfigActionType {
   UPDATE = "update config",
 }
