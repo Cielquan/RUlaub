@@ -1,8 +1,7 @@
-[
-  {
-    "id": 1,
+{
+  "0": {
     "name": "Winterferien",
     "startYearDay": 1,
     "endYearDay": 6
   }
-]
+}
