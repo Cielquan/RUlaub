@@ -1,7 +1,7 @@
 import { UserData, UsersDataSchema } from "../../types/usersData.schema";
 
 export type UsersData = UsersDataSchema;
-export type UserDataPayload = [number, UserData];
+export type UserDataPayload = [string, UserData];
 
 export const updateUsersData = (
   currentData: UsersData,

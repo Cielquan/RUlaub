@@ -4,7 +4,7 @@ import {
 } from "../../types/publicHolidaysData.schema";
 
 export type PublicHolidaysData = PublicHolidaysDataSchema;
-export type PublicHolidayDataPayload = [number, PublicHolidayData];
+export type PublicHolidayDataPayload = [string, PublicHolidayData];
 
 export const updatePublicHolidaysData = (
   currentData: PublicHolidaysData,
