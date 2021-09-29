@@ -4,9 +4,9 @@ import { Dispatch } from "redux";
 import { UsersDataActionType } from "../action-types";
 import { UsersDataLoadAction, UsersDataUpdateAction } from "../actions";
 import UsersDataSchema from "../../schemas/usersData.schema.json";
+import { UsersData, UserDataPayload } from "../utils/usersData";
 
 import usersDataJSON from "../../dev_temp/test.usersData.json";
-import { UsersData, UserDataPayload } from "../utils/usersData";
 
 export const updateUsersDataAction = (
   payload: UserDataPayload
