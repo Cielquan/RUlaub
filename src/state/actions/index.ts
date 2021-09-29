@@ -1,62 +1,77 @@
+import {
+  CalendarRowUserMapActionType,
+  ConfigActionType,
+  InfoPageActionType,
+  PublicHolidaysDataActionType,
+  PublicHolidaysDialogActionType,
+  SchoolHolidaysDataActionType,
+  SchoolHolidaysDialogActionType,
+  SettingsDialogActionType,
+  SideMenuActionType,
+  UsersDataActionType,
+  UsersDialogActionType,
+  VacationDialogActionType,
+  VacationTypesDialogActionType,
+} from "../action-types";
 import { ConfigPayload } from "../utils/config";
-import { UsersDataPayload } from "../utils/usersData";
 import { PublicHolidaysDataPayload } from "../utils/publicHolidaysData";
 import { SchoolHolidaysDataPayload } from "../utils/schoolHolidaysData";
+import { UsersDataPayload } from "../utils/usersData";
 import { UsersDataSchema } from "../../types/usersData.schema";
 
 export type CalendarRowUserMapAction = {
-  type: string;
+  type: CalendarRowUserMapActionType;
   payload: UsersDataSchema;
 };
 
 export type ConfigAction = {
-  type: string;
+  type: ConfigActionType;
   payload: ConfigPayload;
 };
 
 export type InfoPageAction = {
-  type: string;
+  type: InfoPageActionType;
 };
 
 export type PublicHolidaysDataAction = {
-  type: string;
+  type: PublicHolidaysDataActionType;
   payload: PublicHolidaysDataPayload;
 };
 
 export type PublicHolidaysDialogAction = {
-  type: string;
+  type: PublicHolidaysDialogActionType;
 };
 
 export type SchoolHolidaysDataAction = {
-  type: string;
+  type: SchoolHolidaysDataActionType;
   payload: SchoolHolidaysDataPayload;
 };
 
 export type SchoolHolidaysDialogAction = {
-  type: string;
+  type: SchoolHolidaysDialogActionType;
 };
 
 export type SettingsDialogAction = {
-  type: string;
+  type: SettingsDialogActionType;
 };
 
 export type SideMenuAction = {
-  type: string;
+  type: SideMenuActionType;
 };
 
 export type UsersDataAction = {
-  type: string;
+  type: UsersDataActionType;
   payload: UsersDataPayload;
 };
 
 export type UsersDialogAction = {
-  type: string;
+  type: UsersDialogActionType;
 };
 
 export type VacationDialogAction = {
-  type: string;
+  type: VacationDialogActionType;
 };
 
 export type VacationTypesDialogAction = {
-  type: string;
+  type: VacationTypesDialogActionType;
 };
