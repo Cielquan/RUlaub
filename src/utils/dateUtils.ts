@@ -42,6 +42,17 @@ export const getWeekdayNameList = (): string[] => [
   t`Sunday`,
 ];
 
+type workdayKey = keyof Workdays;
+export const getWeekdayKeyList = (): workdayKey[] => [
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+  "sunday",
+];
+
 export const getWeekdayNameDict = (): { [key in keyof Workdays]: string } => ({
   monday: t`Monday`,
   tuesday: t`Tuesday`,
