@@ -11,6 +11,8 @@ const reducer = (
   action: SchoolHolidaysDataAction
 ): SchoolHolidaysData => {
   switch (action.type) {
+    case SchoolHolidaysDataActionType.LOAD:
+      return action.payload;
     case SchoolHolidaysDataActionType.UPDATE:
       return updateSchoolHolidaysData(state, action.payload);
     default:

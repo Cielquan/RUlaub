@@ -14,8 +14,14 @@ import {
   VacationTypesDialogActionType,
 } from "../action-types";
 import { ConfigPayload } from "../utils/config";
-import { PublicHolidaysDataPayload } from "../utils/publicHolidaysData";
-import { SchoolHolidaysDataPayload } from "../utils/schoolHolidaysData";
+import {
+  PublicHolidaysData,
+  PublicHolidayDataPayload,
+} from "../utils/publicHolidaysData";
+import {
+  SchoolHolidaysData,
+  SchoolHolidayDataPayload,
+} from "../utils/schoolHolidaysData";
 import { UsersData, UserDataPayload } from "../utils/usersData";
 
 export type CalendarRowUserMapAction = {
@@ -32,19 +38,37 @@ export type InfoPageAction = {
   type: InfoPageActionType;
 };
 
-export type PublicHolidaysDataAction = {
-  type: PublicHolidaysDataActionType;
-  payload: PublicHolidaysDataPayload;
+export type PublicHolidaysDataLoadAction = {
+  type: PublicHolidaysDataActionType.LOAD;
+  payload: PublicHolidaysData;
 };
+
+export type PublicHolidaysDataUpdateAction = {
+  type: PublicHolidaysDataActionType.UPDATE;
+  payload: PublicHolidayDataPayload;
+};
+
+export type PublicHolidaysDataAction =
+  | PublicHolidaysDataLoadAction
+  | PublicHolidaysDataUpdateAction;
 
 export type PublicHolidaysDialogAction = {
   type: PublicHolidaysDialogActionType;
 };
 
-export type SchoolHolidaysDataAction = {
-  type: SchoolHolidaysDataActionType;
-  payload: SchoolHolidaysDataPayload;
+export type SchoolHolidaysDataLoadAction = {
+  type: SchoolHolidaysDataActionType.LOAD;
+  payload: SchoolHolidaysData;
 };
+
+export type SchoolHolidaysDataUpdateAction = {
+  type: SchoolHolidaysDataActionType.UPDATE;
+  payload: SchoolHolidayDataPayload;
+};
+
+export type SchoolHolidaysDataAction =
+  | SchoolHolidaysDataLoadAction
+  | SchoolHolidaysDataUpdateAction;
 
 export type SchoolHolidaysDialogAction = {
   type: SchoolHolidaysDialogActionType;
