@@ -23,7 +23,7 @@ interface Props {
   height: number;
   positionX: number;
   positionY: number;
-  scrollHandle: (e: GridOnScrollProps) => void;
+  scrollHandle(e: GridOnScrollProps): void;
   daysInYear: number;
 }
 

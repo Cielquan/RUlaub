@@ -9,9 +9,9 @@ const useStateWithHistory = <T>(
   {
     history: T[];
     pointer: number;
-    back: () => void;
-    forward: () => void;
-    go: (index: number) => void;
+    back(): void;
+    forward(): void;
+    go(index: number): void;
   }
 ] => {
   const [value, setValue] = useState(defaultValue);

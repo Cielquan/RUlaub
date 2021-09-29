@@ -6,10 +6,10 @@ const useArray = <T>(
   array: T[];
   set: React.Dispatch<React.SetStateAction<T[]>>;
   push: (element: T) => void;
-  filter: (callback: () => void) => void;
-  update: (index: number, newElement: T) => void;
-  remove: (index: number) => void;
-  clear: () => void;
+  filter(callback: () => void): void;
+  update(index: number, newElement: T): void;
+  remove(index: number): void;
+  clear(): void;
 } => {
   const [array, setArray] = useState(defaultValue);
 

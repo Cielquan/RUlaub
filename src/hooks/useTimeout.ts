@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef } from "react";
 
 interface returnType {
-  reset: () => void;
-  clear: () => void;
+  reset(): void;
+  clear(): void;
 }
 
 const useTimeout = (callback: () => void, delay: number): returnType => {

@@ -44,7 +44,7 @@ type SectionlessItemList = Array<
 >;
 
 interface Props {
-  onClick?: () => void | null;
+  onClick?(): void;
 }
 
 const SideMenu = ({ onClick }: Props): ReactElement => {

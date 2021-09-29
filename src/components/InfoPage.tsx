@@ -33,7 +33,7 @@ Transition.defaultProps = {
 };
 
 interface Props {
-  onClick?: () => void;
+  onClick?(): void;
 }
 
 const InfoPage = ({ onClick }: Props): ReactElement => {

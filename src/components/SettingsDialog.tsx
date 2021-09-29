@@ -31,7 +31,7 @@ Transition.defaultProps = {
 };
 
 interface Props {
-  onClick?: () => void;
+  onClick?(): void;
 }
 
 const SettingsDialog = ({ onClick }: Props): ReactElement => {

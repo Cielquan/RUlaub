@@ -9,8 +9,8 @@ import { Language } from "../state/utils/i18n";
 
 interface Props {
   language: Language;
-  closeHandle: () => void;
-  changeHandle: () => (dispatch: Dispatch<ConfigAction>) => void;
+  closeHandle(): void;
+  changeHandle(): (dispatch: Dispatch<ConfigAction>) => void;
 }
 
 const LanguageMenuButton = forwardRef(
