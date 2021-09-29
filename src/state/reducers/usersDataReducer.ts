@@ -5,6 +5,8 @@ import { UsersData, updateUsersData } from "../utils/usersData";
 
 const reducer = (state: UsersData = initState, action: UsersDataAction): UsersData => {
   switch (action.type) {
+    case UsersDataActionType.LOAD:
+      return action.payload;
     case UsersDataActionType.UPDATE:
       return updateUsersData(state, action.payload);
     default:

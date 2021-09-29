@@ -1,10 +1,15 @@
-import { UsersDataSchema } from "../../types/usersData.schema";
+import { UserData, UsersDataSchema } from "../../types/usersData.schema";
 
 export type UsersData = UsersDataSchema;
-
-export type UsersDataPayload = UsersDataSchema;
+export type UserDataPayload = [number, UserData];
 
 export const updateUsersData = (
   currentData: UsersData,
-  updatePayload: UsersDataPayload
-): UsersData => updatePayload;
+  updatePayload: UserDataPayload
+): UsersData => {
+  const rv: UsersData = JSON.parse(JSON.stringify(currentData));
+  const [id, updatedUserData] = updatePayload;
+  rv[id] = updatedUserData;
+
+  return rv;
+};
