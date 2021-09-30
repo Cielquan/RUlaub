@@ -3,14 +3,27 @@ import { Dispatch } from "redux";
 
 import { UsersDataActionType } from "../action-types";
 import {
+  UsersDataAddAction,
   UsersDataLoadAction,
   UsersDataRemoveAction,
   UsersDataUpdateAction,
 } from "../actions";
 import UsersDataSchema from "../../schemas/usersData.schema.json";
+import { UserData } from "../../types/usersData.schema";
 import { UsersData, UserDataPayload } from "../utils/usersData";
 
 import usersDataJSON from "../../dev_temp/test.usersData.json";
+
+export const addUsersDataAction = (payload: UserData[]): UsersDataAddAction => ({
+  type: UsersDataActionType.ADD,
+  payload,
+});
+
+export const addUsersData =
+  (payload: UserData[]) =>
+  (dispatch: Dispatch<UsersDataAddAction>): void => {
+    dispatch(addUsersDataAction(payload));
+  };
 
 export const loadUsersDataAction = (payload: UsersData): UsersDataLoadAction => ({
   type: UsersDataActionType.LOAD,
