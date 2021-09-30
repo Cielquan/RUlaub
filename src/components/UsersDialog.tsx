@@ -108,8 +108,8 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
                 key={userId}
                 id={userId}
                 user={user}
-                addUserToUpdateQueue={addUpdatedUser}
-                removeUserFromUpdateQueue={removeUpdatedUser}
+                addUserToQueue={addUpdatedUser}
+                removeUserFromQueue={removeUpdatedUser}
               />
             );
           })}

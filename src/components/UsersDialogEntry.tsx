@@ -32,15 +32,15 @@ import DialogDataEntry, {
 interface Props {
   id: string;
   user: UserData;
-  addUserToUpdateQueue(e: UserDataPayload | [string, undefined]): void;
-  removeUserFromUpdateQueue(e: string): void;
+  addUserToQueue(e: UserDataPayload | [string, undefined]): void;
+  removeUserFromQueue(e: string): void;
 }
 
 const UsersDialogEntry = ({
   id,
   user,
-  addUserToUpdateQueue,
-  removeUserFromUpdateQueue,
+  addUserToQueue,
+  removeUserFromQueue,
 }: Props): ReactElement => {
   const usersDialogState = useSelector((state: State) => state.usersDialog);
 
@@ -152,7 +152,7 @@ const UsersDialogEntry = ({
     setVacDays(vacDaysForm);
     setWorkdays(workdaysForm);
     setEditable(false);
-    addUserToUpdateQueue([
+    addUserToQueue([
       id,
       {
         ...user,
@@ -176,11 +176,11 @@ const UsersDialogEntry = ({
   };
   const onClickDelete = (): void => {
     setToBeRemoved(true);
-    addUserToUpdateQueue([id, undefined]);
+    addUserToQueue([id, undefined]);
   };
   const onClickCancelDelete = (): void => {
     setToBeRemoved(false);
-    removeUserFromUpdateQueue(id);
+    removeUserFromQueue(id);
   };
 
   let rightButtonOnClick;
