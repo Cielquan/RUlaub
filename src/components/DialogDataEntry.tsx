@@ -22,6 +22,7 @@ export const DBDialogEntryContentList = styled(List)(() => ({
 export enum EntryStyle {
   DEFAULT,
   HIDDEN,
+  NEW,
   REMOVED,
 }
 
@@ -61,6 +62,11 @@ const DialogDataEntry = ({
       entryStyles.borderColor = "action.disabled";
       entryStyles.background = { opacity: 0.7 };
       entryStyles.contentStyle = { color: "text.disabled" };
+      break;
+    case EntryStyle.NEW:
+      entryStyles.borderColor = "success.dark";
+      entryStyles.background = { backgroundColor: "success.light", opacity: 0.7 };
+      entryStyles.contentStyle = { color: "success.contrastText" };
       break;
     case EntryStyle.REMOVED:
       entryStyles.borderColor = "error.dark";
