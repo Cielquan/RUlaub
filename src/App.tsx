@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import NewHolidayButton from "./components/NewHolidayButton";
 import SettingsDialog from "./components/SettingsDialog";
 import SideMenu from "./components/SideMenu";
+import UsersDialog from "./components/UsersDialog";
 
 const StyledMain = styled("main")(({ theme }) => ({
   flexGrow: 1,
@@ -47,6 +48,7 @@ const App = (): ReactElement => (
     </Box>
     <InfoPage />
     <SettingsDialog />
+    <UsersDialog />
   </Box>
 );
 

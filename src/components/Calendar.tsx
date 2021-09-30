@@ -50,9 +50,7 @@ const Calendar = (): ReactElement => {
     [year]
   );
 
-  useEffect(() => {
-    updateCalendarRowUserMap(usersDataState);
-  }, [usersDataState, updateCalendarRowUserMap]);
+  updateCalendarRowUserMap(usersDataState);
 
   if (year === undefined) {
     return <CalendarStartPage />;

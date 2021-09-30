@@ -1,3 +1,4 @@
+import { UserData } from "../../types/usersData.schema";
 import {
   CalendarRowUserMapActionType,
   ConfigActionType,
@@ -82,17 +83,31 @@ export type SideMenuAction = {
   type: SideMenuActionType;
 };
 
+export type UsersDataAddAction = {
+  type: UsersDataActionType.ADD;
+  payload: UserData[];
+};
+
 export type UsersDataLoadAction = {
   type: UsersDataActionType.LOAD;
   payload: UsersData;
 };
 
-export type UsersDataUpdateAction = {
-  type: UsersDataActionType.UPDATE;
-  payload: UserDataPayload;
+export type UsersDataRemoveAction = {
+  type: UsersDataActionType.REMOVE;
+  payload: string[];
 };
 
-export type UsersDataAction = UsersDataLoadAction | UsersDataUpdateAction;
+export type UsersDataUpdateAction = {
+  type: UsersDataActionType.UPDATE;
+  payload: UserDataPayload[];
+};
+
+export type UsersDataAction =
+  | UsersDataAddAction
+  | UsersDataLoadAction
+  | UsersDataRemoveAction
+  | UsersDataUpdateAction;
 
 export type UsersDialogAction = {
   type: UsersDialogActionType;

@@ -2,23 +2,27 @@ import Ajv from "ajv";
 import { Dispatch } from "redux";
 
 import { UsersDataActionType } from "../action-types";
-import { UsersDataLoadAction, UsersDataUpdateAction } from "../actions";
+import {
+  UsersDataAddAction,
+  UsersDataLoadAction,
+  UsersDataRemoveAction,
+  UsersDataUpdateAction,
+} from "../actions";
 import UsersDataSchema from "../../schemas/usersData.schema.json";
+import { UserData } from "../../types/usersData.schema";
 import { UsersData, UserDataPayload } from "../utils/usersData";
 
 import usersDataJSON from "../../dev_temp/test.usersData.json";
 
-export const updateUsersDataAction = (
-  payload: UserDataPayload
-): UsersDataUpdateAction => ({
-  type: UsersDataActionType.UPDATE,
+export const addUsersDataAction = (payload: UserData[]): UsersDataAddAction => ({
+  type: UsersDataActionType.ADD,
   payload,
 });
 
-export const updateUsersData =
-  (payload: UserDataPayload) =>
-  (dispatch: Dispatch<UsersDataUpdateAction>): void => {
-    dispatch(updateUsersDataAction(payload));
+export const addUsersData =
+  (payload: UserData[]) =>
+  (dispatch: Dispatch<UsersDataAddAction>): void => {
+    dispatch(addUsersDataAction(payload));
   };
 
 export const loadUsersDataAction = (payload: UsersData): UsersDataLoadAction => ({
@@ -37,4 +41,28 @@ export const loadUsersData =
     if (validate(conf)) {
       dispatch(loadUsersDataAction(conf));
     }
+  };
+
+export const removeUsersDataAction = (payload: string[]): UsersDataRemoveAction => ({
+  type: UsersDataActionType.REMOVE,
+  payload,
+});
+
+export const removeUsersData =
+  (payload: string[]) =>
+  (dispatch: Dispatch<UsersDataRemoveAction>): void => {
+    dispatch(removeUsersDataAction(payload));
+  };
+
+export const updateUsersDataAction = (
+  payload: UserDataPayload[]
+): UsersDataUpdateAction => ({
+  type: UsersDataActionType.UPDATE,
+  payload,
+});
+
+export const updateUsersData =
+  (payload: UserDataPayload[]) =>
+  (dispatch: Dispatch<UsersDataUpdateAction>): void => {
+    dispatch(updateUsersDataAction(payload));
   };

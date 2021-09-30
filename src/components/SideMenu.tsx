@@ -49,10 +49,8 @@ interface Props {
 
 const SideMenu = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { closeSideMenu, openInfoPage, openSettingsDialog } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { closeSideMenu, openInfoPage, openSettingsDialog, openUsersDialog } =
+    bindActionCreators(actionCreators, dispatch);
   const sideMenuState = useSelector((state: State) => state.sideMenu);
 
   const createSectionlessItems = (itemList: SectionlessItemList): ReactElement[] =>
@@ -116,9 +114,9 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     [
       t`Users`,
       <AddIcon />,
-      () => undefined,
+      openUsersDialog,
       <CreateIcon />,
-      () => undefined,
+      openUsersDialog,
       <GroupIcon />,
       t`Create`,
       t`Edit`,

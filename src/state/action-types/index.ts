@@ -42,7 +42,9 @@ export enum SideMenuActionType {
 }
 
 export enum UsersDataActionType {
+  ADD = "add users data",
   LOAD = "load users data",
+  REMOVE = "remove users data",
   UPDATE = "update users data",
 }
 
