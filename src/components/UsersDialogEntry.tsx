@@ -44,7 +44,8 @@ const UsersDialogEntry = ({
 }: Props): ReactElement => {
   const usersDialogState = useSelector((state: State) => state.usersDialog);
 
-  const [editable, setEditable] = useState(false);
+  const [newEntry] = useState(Number(id) < 0);
+  const [editable, setEditable] = useState(newEntry);
   const [toBeRemoved, setToBeRemoved] = useState(false);
 
   const [name, setName] = useState(user.name);
@@ -176,7 +177,11 @@ const UsersDialogEntry = ({
   };
   const onClickDelete = (): void => {
     setToBeRemoved(true);
-    addUserToQueue([id, undefined]);
+    if (newEntry) {
+      removeUserFromQueue(id);
+    } else {
+      addUserToQueue([id, undefined]);
+    }
   };
   const onClickCancelDelete = (): void => {
     setToBeRemoved(false);
@@ -186,7 +191,6 @@ const UsersDialogEntry = ({
   let rightButtonOnClick;
   let rightButtonTooltip;
   let rightButtonIcon;
-
   if (editable) {
     rightButtonOnClick = onClickCancel;
     rightButtonTooltip = t`Cancel`;
@@ -201,6 +205,15 @@ const UsersDialogEntry = ({
     rightButtonIcon = <DeleteIcon />;
   }
 
+  let entryStyle;
+  if (toBeRemoved) {
+    entryStyle = EntryStyle.REMOVED;
+  } else if (newEntry) {
+    entryStyle = EntryStyle.NEW;
+  } else {
+    entryStyle = EntryStyle.DEFAULT;
+  }
+
   return (
     <DialogDataEntry
       ContentComponent={editable ? ContentComponentEdit : ContentComponentView}
@@ -211,7 +224,7 @@ const UsersDialogEntry = ({
       rightButtonOnClick={rightButtonOnClick}
       rightButtonTooltip={rightButtonTooltip}
       rightButtonIcon={rightButtonIcon}
-      entryStyle={toBeRemoved ? EntryStyle.REMOVED : EntryStyle.DEFAULT}
+      entryStyle={entryStyle}
     />
   );
 };
