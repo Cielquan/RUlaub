@@ -12,30 +12,6 @@ import { UsersData, UserDataPayload } from "../utils/usersData";
 
 import usersDataJSON from "../../dev_temp/test.usersData.json";
 
-export const updateUsersDataAction = (
-  payload: UserDataPayload[]
-): UsersDataUpdateAction => ({
-  type: UsersDataActionType.UPDATE,
-  payload,
-});
-
-export const updateUsersData =
-  (payload: UserDataPayload[]) =>
-  (dispatch: Dispatch<UsersDataUpdateAction>): void => {
-    dispatch(updateUsersDataAction(payload));
-  };
-
-export const removeUsersDataAction = (payload: string[]): UsersDataRemoveAction => ({
-  type: UsersDataActionType.REMOVE,
-  payload,
-});
-
-export const removeUsersData =
-  (payload: string[]) =>
-  (dispatch: Dispatch<UsersDataRemoveAction>): void => {
-    dispatch(removeUsersDataAction(payload));
-  };
-
 export const loadUsersDataAction = (payload: UsersData): UsersDataLoadAction => ({
   type: UsersDataActionType.LOAD,
   payload,
@@ -52,4 +28,28 @@ export const loadUsersData =
     if (validate(conf)) {
       dispatch(loadUsersDataAction(conf));
     }
+  };
+
+export const removeUsersDataAction = (payload: string[]): UsersDataRemoveAction => ({
+  type: UsersDataActionType.REMOVE,
+  payload,
+});
+
+export const removeUsersData =
+  (payload: string[]) =>
+  (dispatch: Dispatch<UsersDataRemoveAction>): void => {
+    dispatch(removeUsersDataAction(payload));
+  };
+
+export const updateUsersDataAction = (
+  payload: UserDataPayload[]
+): UsersDataUpdateAction => ({
+  type: UsersDataActionType.UPDATE,
+  payload,
+});
+
+export const updateUsersData =
+  (payload: UserDataPayload[]) =>
+  (dispatch: Dispatch<UsersDataUpdateAction>): void => {
+    dispatch(updateUsersDataAction(payload));
   };
