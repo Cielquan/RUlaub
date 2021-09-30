@@ -1,6 +1,6 @@
 import * as locales from "@mui/material/locale";
 import { Box } from "@mui/system";
-import React, { ReactElement, useCallback, useEffect, useState } from "react";
+import React, { ReactElement, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { bindActionCreators } from "redux";
