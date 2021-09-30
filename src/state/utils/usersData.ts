@@ -5,12 +5,13 @@ export type UserDataPayload = [string, UserData];
 
 export const updateUsersData = (
   currentData: UsersData,
-  updatePayload: UserDataPayload
+  updatePayload: UserDataPayload[]
 ): UsersData => {
   const rv: UsersData = JSON.parse(JSON.stringify(currentData));
-  const [id, updatedUserData] = updatePayload;
-  rv[id] = updatedUserData;
-
+  updatePayload.forEach((userUpdate) => {
+    const [id, updatedUserData] = userUpdate;
+    rv[id] = updatedUserData;
+  });
   return rv;
 };
 

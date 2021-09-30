@@ -13,14 +13,14 @@ import { UsersData, UserDataPayload } from "../utils/usersData";
 import usersDataJSON from "../../dev_temp/test.usersData.json";
 
 export const updateUsersDataAction = (
-  payload: UserDataPayload
+  payload: UserDataPayload[]
 ): UsersDataUpdateAction => ({
   type: UsersDataActionType.UPDATE,
   payload,
 });
 
 export const updateUsersData =
-  (payload: UserDataPayload) =>
+  (payload: UserDataPayload[]) =>
   (dispatch: Dispatch<UsersDataUpdateAction>): void => {
     dispatch(updateUsersDataAction(payload));
   };

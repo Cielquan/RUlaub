@@ -94,7 +94,7 @@ export type UsersDataRemoveAction = {
 
 export type UsersDataUpdateAction = {
   type: UsersDataActionType.UPDATE;
-  payload: UserDataPayload;
+  payload: UserDataPayload[];
 };
 
 export type UsersDataAction =
