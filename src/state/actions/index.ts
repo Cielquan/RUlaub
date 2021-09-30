@@ -87,12 +87,20 @@ export type UsersDataLoadAction = {
   payload: UsersData;
 };
 
+export type UsersDataRemoveAction = {
+  type: UsersDataActionType.REMOVE;
+  payload: string[];
+};
+
 export type UsersDataUpdateAction = {
   type: UsersDataActionType.UPDATE;
   payload: UserDataPayload;
 };
 
-export type UsersDataAction = UsersDataLoadAction | UsersDataUpdateAction;
+export type UsersDataAction =
+  | UsersDataLoadAction
+  | UsersDataRemoveAction
+  | UsersDataUpdateAction;
 
 export type UsersDialogAction = {
   type: UsersDialogActionType;

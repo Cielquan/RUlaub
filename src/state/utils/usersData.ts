@@ -13,3 +13,14 @@ export const updateUsersData = (
 
   return rv;
 };
+
+export const removeUsersData = (
+  currentData: UsersData,
+  userIDsToRemove: string[]
+): UsersData => {
+  const rv: UsersData = JSON.parse(JSON.stringify(currentData));
+  userIDsToRemove.forEach((userID) => {
+    delete rv[userID];
+  });
+  return rv;
+};

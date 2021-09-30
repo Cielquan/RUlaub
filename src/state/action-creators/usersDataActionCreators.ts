@@ -2,7 +2,11 @@ import Ajv from "ajv";
 import { Dispatch } from "redux";
 
 import { UsersDataActionType } from "../action-types";
-import { UsersDataLoadAction, UsersDataUpdateAction } from "../actions";
+import {
+  UsersDataLoadAction,
+  UsersDataRemoveAction,
+  UsersDataUpdateAction,
+} from "../actions";
 import UsersDataSchema from "../../schemas/usersData.schema.json";
 import { UsersData, UserDataPayload } from "../utils/usersData";
 
@@ -19,6 +23,17 @@ export const updateUsersData =
   (payload: UserDataPayload) =>
   (dispatch: Dispatch<UsersDataUpdateAction>): void => {
     dispatch(updateUsersDataAction(payload));
+  };
+
+export const removeUsersDataAction = (payload: string[]): UsersDataRemoveAction => ({
+  type: UsersDataActionType.REMOVE,
+  payload,
+});
+
+export const removeUsersData =
+  (payload: string[]) =>
+  (dispatch: Dispatch<UsersDataRemoveAction>): void => {
+    dispatch(removeUsersDataAction(payload));
   };
 
 export const loadUsersDataAction = (payload: UsersData): UsersDataLoadAction => ({
