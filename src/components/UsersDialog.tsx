@@ -143,24 +143,28 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
       </DialogTitle>
       <DialogContent>
         <List sx={{ display: "flex", flexDirection: "column", paddingBottom: 0 }}>
-          {Object.keys(usersDataState).map((userId) => (
-            <UsersDialogEntry
-              key={userId}
-              id={userId}
-              user={usersDataState[userId]}
-              addUserToQueue={addUpdatedUser}
-              removeUserFromQueue={removeUpdatedUser}
-            />
-          ))}
-          {Object.keys(newUsers).map((userId) => (
-            <UsersDialogEntry
-              key={userId}
-              id={userId}
-              user={newUsers[userId]}
-              addUserToQueue={updateNewUser}
-              removeUserFromQueue={removeNewUser}
-            />
-          ))}
+          {Object.keys(usersDataState)
+            .sort()
+            .map((userId) => (
+              <UsersDialogEntry
+                key={userId}
+                id={userId}
+                user={usersDataState[userId]}
+                addUserToQueue={addUpdatedUser}
+                removeUserFromQueue={removeUpdatedUser}
+              />
+            ))}
+          {Object.keys(newUsers)
+            .sort()
+            .map((userId) => (
+              <UsersDialogEntry
+                key={userId}
+                id={userId}
+                user={newUsers[userId]}
+                addUserToQueue={updateNewUser}
+                removeUserFromQueue={removeNewUser}
+              />
+            ))}
           <ListItem sx={{ display: "flex", justifyContent: "center", padding: 0 }}>
             <IconButton onClick={addNewUser}>
               <AddIcon fontSize="large" />
