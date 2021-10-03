@@ -25,7 +25,7 @@
 
 - Dialog-Menu
   - File explorer to create new
-  - File explorer to select existing  
+  - File explorer to select existing
   - save URI to local config
 
 ### Users
