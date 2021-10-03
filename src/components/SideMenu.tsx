@@ -40,7 +40,7 @@ const SideMenuHeader = styled("div")(({ theme }) => ({
 }));
 
 type SectionlessItemList = Array<
-  [ButtonText, ButtonOnClick, ButtonIcon?, ButtonSxStyle?]
+  [ButtonText, ButtonIcon, ButtonOnClick, ButtonSxStyle?]
 >;
 
 interface Props {
@@ -53,17 +53,21 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     bindActionCreators(actionCreators, dispatch);
   const sideMenuState = useSelector((state: State) => state.sideMenu);
 
+  const wrapOnClick =
+    (fn: () => void): (() => void) =>
+    () => {
+      if (typeof onClick === "function") onClick();
+      closeSideMenu();
+      fn();
+    };
+
   const createSectionlessItems = (itemList: SectionlessItemList): ReactElement[] =>
     itemList.map((item) => (
       <React.Fragment key={item[0]}>
         <SideMenuButton
           text={item[0]}
-          onClick={() => {
-            if (typeof onClick === "function") onClick();
-            closeSideMenu();
-            item[1]();
-          }}
-          icon={item[2]}
+          icon={item[1]}
+          onClick={wrapOnClick(item[2])}
           sxStyle={item[3]}
         />
         <Divider />
@@ -72,94 +76,51 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
 
   const createDoubleButtons = (itemList: DoubleButtonItemList): ReactElement[] =>
     itemList.map((item) => (
-      <React.Fragment key={item[0]}>
+      <React.Fragment key={item[0][0]}>
         <SideMenuDoubleButton
-          text={item[0]}
-          icon={item[5]}
-          firstButtonIcon={item[1]}
-          firstButtonOnClick={() => {
-            if (typeof onClick === "function") onClick();
-            closeSideMenu();
-            item[2]();
-          }}
-          firstButtonTooltip={item[6]}
-          secondButtonIcon={item[3]}
-          secondButtonOnClick={() => {
-            if (typeof onClick === "function") onClick();
-            closeSideMenu();
-            item[4]();
-          }}
-          secondButtonTooltip={item[7]}
-          sxStyle={item[8]}
+          mainButton={item[0]}
+          secondButton={[item[1][0], wrapOnClick(item[1][1]), item[1][2]]}
+          firstButton={
+            item[2] ? [item[2][0], wrapOnClick(item[2][1]), item[2][2]] : undefined
+          }
         />
         <Divider />
       </React.Fragment>
     ));
 
   const sectionlessItemList: SectionlessItemList = [
-    [t`Settings`, openSettingsDialog, <SettingsIcon />],
+    [t`Settings`, <SettingsIcon />, openSettingsDialog],
   ];
 
   const doubleButtonItemList: DoubleButtonItemList = [
     [
-      t`Database`,
-      <AddIcon />,
-      () => undefined,
-      <FolderIcon />,
-      () => undefined,
-      <StorageIcon />,
-      t`Create`,
-      t`Select`,
+      [t`Database`, <StorageIcon />],
+      [<FolderIcon />, () => undefined, t`Select`],
+      [<AddIcon />, () => undefined, t`Create`],
     ],
     [
-      t`Users`,
-      <AddIcon />,
-      openUsersDialog,
-      <CreateIcon />,
-      openUsersDialog,
-      <GroupIcon />,
-      t`Create`,
-      t`Edit`,
+      [t`Users`, <GroupIcon />],
+      [<CreateIcon />, openUsersDialog, t`Edit`],
     ],
     [
-      t`Public Holidays`,
-      <AddIcon />,
-      () => undefined,
-      <CreateIcon />,
-      () => undefined,
-      <EventBusyIcon />,
-      t`Create`,
-      t`Edit`,
+      [t`Public Holidays`, <EventBusyIcon />],
+      [<CreateIcon />, () => undefined, t`Edit`],
+      [<AddIcon />, () => undefined, t`Create`],
     ],
     [
-      t`School Holidays`,
-      <AddIcon />,
-      () => undefined,
-      <CreateIcon />,
-      () => undefined,
-      <DateRangeIcon />,
-      t`Create`,
-      t`Edit`,
+      [t`School Holidays`, <DateRangeIcon />],
+      [<CreateIcon />, () => undefined, t`Edit`],
+      [<AddIcon />, () => undefined, t`Create`],
     ],
     [
-      t`Vacation types`,
-      <AddIcon />,
-      () => undefined,
-      <CreateIcon />,
-      () => undefined,
-      <EventNoteIcon />,
-      t`Create`,
-      t`Edit`,
+      [t`Vacation types`, <EventNoteIcon />],
+      [<CreateIcon />, () => undefined, t`Edit`],
+      [<AddIcon />, () => undefined, t`Create`],
     ],
     [
-      t`Vacation`,
-      <AddIcon />,
-      () => undefined,
-      <CreateIcon />,
-      () => undefined,
-      <FlightIcon />,
-      t`Create`,
-      t`Edit`,
+      [t`Vacation`, <FlightIcon />],
+      [<CreateIcon />, () => undefined, t`Edit`],
+      [<AddIcon />, () => undefined, t`Create`],
     ],
   ];
 

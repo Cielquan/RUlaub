@@ -10,48 +10,22 @@ import React, { ReactElement } from "react";
 
 import { ButtonText, ButtonOnClick, ButtonIcon, ButtonSxStyle } from "./SideMenuButton";
 
-export type FirstButtonIcon = ButtonIcon;
-export type FirstButtonOnClick = ButtonOnClick;
-export type FirstButtonTooltip = string;
-export type SecondButtonIcon = ButtonIcon;
-export type SecondButtonOnClick = ButtonOnClick;
-export type SecondButtonTooltip = string;
-export type DoubleButtonItemList = Array<
-  [
-    ButtonText,
-    FirstButtonIcon,
-    FirstButtonOnClick,
-    SecondButtonIcon,
-    SecondButtonOnClick,
-    ButtonIcon?,
-    FirstButtonTooltip?,
-    SecondButtonTooltip?,
-    ButtonSxStyle?
-  ]
->;
+type ButtonTooltip = string;
+type MainButton = [ButtonText, ButtonIcon, ButtonSxStyle?];
+type FirstButton = [ButtonIcon, ButtonOnClick, ButtonTooltip?];
+type SecondButton = [ButtonIcon, ButtonOnClick, ButtonTooltip?];
+export type DoubleButtonItemList = Array<[MainButton, SecondButton, FirstButton?]>;
 
 interface Props {
-  text: ButtonText;
-  icon?: ButtonIcon;
-  firstButtonIcon: ButtonIcon;
-  firstButtonOnClick: ButtonOnClick;
-  firstButtonTooltip?: string;
-  secondButtonIcon: ButtonIcon;
-  secondButtonOnClick: ButtonOnClick;
-  secondButtonTooltip?: string;
-  sxStyle?: ButtonSxStyle;
+  mainButton: MainButton;
+  secondButton: SecondButton;
+  firstButton?: FirstButton;
 }
 
 const SideMenuDoubleButton = ({
-  text,
-  icon,
-  firstButtonIcon,
-  firstButtonOnClick,
-  firstButtonTooltip,
-  secondButtonIcon,
-  secondButtonOnClick,
-  secondButtonTooltip,
-  sxStyle,
+  mainButton,
+  secondButton,
+  firstButton,
 }: Props): ReactElement => {
   const wrapInTooltip = (
     component: ReactElement,
@@ -64,29 +38,31 @@ const SideMenuDoubleButton = ({
       </Tooltip>
     );
   };
+  const sxStyle = mainButton[2] ?? {};
 
   return (
     <ListItem sx={{ padding: 0, marginRight: 2, ...sxStyle }}>
-      <ListItemButton onClick={secondButtonOnClick}>
-        <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText primary={text} />
-        {wrapInTooltip(
-          <IconButton onClick={firstButtonOnClick}>{firstButtonIcon}</IconButton>,
-          firstButtonTooltip
+      <ListItemButton onClick={secondButton[1]}>
+        <ListItemIcon>{mainButton[1]}</ListItemIcon>
+        <ListItemText primary={mainButton[0]} />
+        {firstButton ? (
+          wrapInTooltip(
+            <IconButton onClick={firstButton[1]}>{firstButton[0]}</IconButton>,
+            firstButton[2]
+          )
+        ) : (
+          <></>
         )}
         {wrapInTooltip(
-          <IconButton onClick={secondButtonOnClick}>{secondButtonIcon}</IconButton>,
-          secondButtonTooltip
+          <IconButton onClick={secondButton[1]}>{secondButton[0]}</IconButton>,
+          secondButton[2]
         )}
       </ListItemButton>
     </ListItem>
   );
 };
 SideMenuDoubleButton.defaultProps = {
-  icon: <></>,
-  firstButtonTooltip: undefined,
-  secondButtonTooltip: undefined,
-  sxStyle: {},
+  firstButton: undefined,
 };
 
 export default SideMenuDoubleButton;
