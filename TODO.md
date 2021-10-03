@@ -18,9 +18,6 @@
 - Update file on change via UI
 - Always overwrite whole file ???
 
-- Dialog-Menu:
-  - Add 'cancel' btn to SettingsDialog
-
 ### Database
 
 - Dialog-Menu
@@ -30,18 +27,10 @@
 
 ### Users
 
-- on update (add/remove) send data to DB
+- on update `Save` send data to DB
   && load data fresh from DB || or update state only
-
-- Dialog-Menu:
-  - Show all entries ordered by DB-id
-  - Each entry has:
-    - id
-    - unique name
-    - amount vac days
-    - workdays selection (for calc non-workdays out of vac-ranges)
-    - button to edit
-    - button to remove user .. caskading down to remove vac as well (in DB)
+- on remove user .. caskading down to remove vac as well (in DB)
+- use workdays selection for calc non-workdays out of vac-ranges
 
 ### Public Holidays
 
@@ -143,7 +132,7 @@
 #### users
 
 - id
-- name
+- unique name
 - vacation_days
 
 #### vacation_types
