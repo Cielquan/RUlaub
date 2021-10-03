@@ -5,6 +5,8 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+export type ISODate = string;
+
 /**
  * Schema for public holiday data coming from the backend
  */
@@ -17,5 +19,6 @@ export interface PublicHolidaysDataSchema {
  */
 export interface PublicHolidayData {
   name: string;
+  date?: ISODate;
   yearDay: number;
 }
