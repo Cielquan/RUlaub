@@ -127,6 +127,47 @@
 
 ---
 
+## Thoughts
+
+### Database
+
+- `user` deletable with caskading down to vacations
+- `vacation_type` not deleteable (only hidable)
+- `vacation` deletable
+- `public_holiday`
+  - split col `date` to `year` (nullable), `day` ({month}-{day}, nullable),
+    `easter_sunday_offset` (+/- integer, nullable)
+    - make *FE* only `day` oder `offset` can be entered)
+    - `day` or `easter_sunday_offset` - if both: `day` takes precedence
+  - all entries are removable
+  - name can be double
+    - if entry has `year` it takes precedence, if year == current_year
+    - if two or more entries are applicable for the current year, higher ID takes precedence
+- `school_holiday` deletable
+
+### Rust side
+
+- file watcher for config file
+  - On change load config anew and send event + payload for state update
+  - *FE*: make snackbar with `Load` button to update state
+- file watcher for DB file
+  - On change send events + payloads for all state updates
+  - *FE*: make snackbar with `Load` button to update state
+- pub holidays:
+  - on query get data from DB, if no date -> calc moving holiday date
+  - add key to DB table for calc -> how many days to add to day 0
+
+### TS side
+
+- split current state & new/update for DB stuff
+  - so on DB update the state can be updated w/o corrupting new/update data
+- on creation of new DB:
+  - add default `vacation_types`
+  - ask to add entries for `pub holidays` (or checkbox ?)
+    - default: german holidays (NW or all?)
+
+---
+
 ## Database plan
 
 #### users
