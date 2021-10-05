@@ -1,7 +1,5 @@
 import { t } from "@lingui/macro";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import i18n from "../i18n";
 import { Workdays } from "../types/usersData.schema";
 
 export const isLeapYear = (year: number): boolean => {
