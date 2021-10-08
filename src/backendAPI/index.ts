@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import Ajv, { Schema } from "ajv";
 
 export const createDataValidater =
@@ -12,3 +11,7 @@ export const createDataValidater =
       reject(validate.errors);
     });
   };
+
+export const writeErrorToLogFile = (error: Error): void => {
+  console.error("ERROR IN LOGFILE: ", error);
+};
