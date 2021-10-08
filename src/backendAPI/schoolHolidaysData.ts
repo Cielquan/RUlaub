@@ -1,4 +1,4 @@
-import Ajv from "ajv";
+import { createDataValidater } from ".";
 import SchoolHolidaysDataSchema from "./schemas/schoolHolidaysData.schema.json";
 // eslint-disable-next-line max-len
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "./types/schoolHolidaysData.schema";
@@ -6,19 +6,7 @@ import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "./types/schoolHo
 import schoolHolidaysDataJSON from "./dev_temp/test.schoolHolidaysData.json";
 
 export const validateData = (data: unknown): Promise<SchoolHolidaysData> =>
-  new Promise((resolve, reject) => {
-    const ajv = new Ajv();
-    const validate = ajv.compile<SchoolHolidaysData>(SchoolHolidaysDataSchema);
-    if (validate(data)) resolve(data);
-    reject(validate.errors);
-  });
+  createDataValidater<SchoolHolidaysData>(SchoolHolidaysDataSchema)(data);
 
 export const load = (): Promise<SchoolHolidaysData> =>
   validateData(schoolHolidaysDataJSON);
-// new Promise((resolve, reject) => {
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-// const data = validateData(schoolHolidaysDataJSON);
-
-// if (data) resolve(data);
-// reject(data);
-// });
