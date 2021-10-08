@@ -1,6 +1,7 @@
 import Ajv from "ajv";
 import PublicHolidaysDataSchema from "./schemas/publicHolidaysData.schema.json";
-import { PublicHolidaysData } from "../state/utils/publicHolidaysData";
+// eslint-disable-next-line max-len
+import { PublicHolidaysDataSchema as PublicHolidaysData } from "./types/publicHolidaysData.schema";
 
 import publicHolidaysDataJSON from "./dev_temp/test.publicHolidaysData.json";
 

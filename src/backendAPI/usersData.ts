@@ -1,6 +1,6 @@
 import Ajv from "ajv";
 import UsersDataSchema from "./schemas/usersData.schema.json";
-import { UsersData } from "../state/utils/usersData";
+import { UsersDataSchema as UsersData } from "./types/usersData.schema";
 
 import usersDataJSON from "./dev_temp/test.usersData.json";
 
