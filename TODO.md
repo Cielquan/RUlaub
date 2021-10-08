@@ -9,6 +9,7 @@
 
 ### Misc
 
+- add key combi to open error log in app as dialog
 - Make component for DB table menus and sub component for different types/entries
 - split current state & new/update for DB stuff
   - so on DB update the state can be updated w/o corrupting new/update data
