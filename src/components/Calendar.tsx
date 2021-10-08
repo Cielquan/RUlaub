@@ -1,12 +1,11 @@
 import * as locales from "@mui/material/locale";
 import { Box } from "@mui/system";
 import React, { ReactElement, useCallback, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import AutoSizer from "react-virtualized-auto-sizer";
-import { bindActionCreators } from "redux";
 
 import { useMountDelayOrUpdateEffect } from "../hooks";
-import { actionCreators, State } from "../state";
+import { State } from "../state";
 import { STYLE_CONST } from "../styles";
 import createTheme from "../theme";
 import { getDaysForDate, isLeapYear } from "../utils/dateUtils";
@@ -21,16 +20,12 @@ import CalendarTableHead from "./CalendarTableHead";
 const today = new Date();
 
 const Calendar = (): ReactElement => {
-  const usersDataState = useSelector((state: State) => state.usersData);
   const configState = useSelector((state: State) => state.config);
   const themeState = configState.settings.theme;
   const langState = configState.settings.language;
 
   const theme = createTheme(themeState, locales[langState.importName]);
   const year = configState.settings.yearToShow;
-
-  const dispatch = useDispatch();
-  const { updateCalendarRowUserMap } = bindActionCreators(actionCreators, dispatch);
 
   const [scrollX, setScrollX] = useState(0);
   const [scrollY, setScrollY] = useState(0);
@@ -49,8 +44,6 @@ const Calendar = (): ReactElement => {
     0,
     [year]
   );
-
-  updateCalendarRowUserMap(usersDataState);
 
   if (year === undefined) {
     return <CalendarStartPage />;
