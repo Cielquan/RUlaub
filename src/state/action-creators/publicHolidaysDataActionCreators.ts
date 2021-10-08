@@ -27,7 +27,7 @@ export const loadPublicHolidaysData =
       dispatch(loadPublicHolidaysDataAction(data));
     } catch (error) {
       // TODO:#i# add snackbar
-      console.log("Error: ", error);
+      console.error(error);
     }
   };
 

@@ -54,6 +54,6 @@ export const loadConfig =
       dispatch(updateConfigAction(conf as ConfigPayload));
     } catch (error) {
       // TODO:#i# add snackbar
-      console.log("Error: ", error);
+      console.error(error);
     }
   };

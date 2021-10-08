@@ -49,7 +49,7 @@ export const loadUsersData =
       });
     } catch (error) {
       // TODO:#i# add snackbar
-      console.log("Error: ", error);
+      console.error(error);
     }
   };
 
