@@ -1,7 +1,8 @@
-import Ajv from "ajv";
 import { batch } from "react-redux";
 import { Dispatch } from "redux";
 
+import { updateCalendarRowUserMapAction } from ".";
+import { store } from "..";
 import { UsersDataActionType } from "../action-types";
 import {
   CalendarRowUserMapAction,
@@ -10,13 +11,9 @@ import {
   UsersDataRemoveAction,
   UsersDataUpdateAction,
 } from "../actions";
-import UsersDataSchema from "../../schemas/usersData.schema.json";
+import { load } from "../../backendAPI/usersData";
 import { UserData } from "../../types/usersData.schema";
 import { UsersData, UserDataPayload } from "../utils/usersData";
-
-import usersDataJSON from "../../dev_temp/test.usersData.json";
-import { updateCalendarRowUserMapAction } from ".";
-import { store } from "..";
 
 export const addUsersDataAction = (payload: UserData[]): UsersDataAddAction => ({
   type: UsersDataActionType.ADD,
@@ -39,17 +36,20 @@ export const loadUsersDataAction = (payload: UsersData): UsersDataLoadAction => 
 
 export const loadUsersData =
   () =>
-  (dispatch: Dispatch<UsersDataLoadAction | CalendarRowUserMapAction>): void => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const conf: any = usersDataJSON;
+  async (
+    dispatch: Dispatch<UsersDataLoadAction | CalendarRowUserMapAction>,
+    getState: typeof store.getState
+  ): Promise<void> => {
+    try {
+      const data = await load();
 
-    const ajv = new Ajv();
-    const validate = ajv.compile<UsersData>(UsersDataSchema);
-    if (validate(conf)) {
       batch(() => {
-        dispatch(loadUsersDataAction(conf));
-        dispatch(updateCalendarRowUserMapAction(store.getState().usersData));
+        dispatch(loadUsersDataAction(data));
+        dispatch(updateCalendarRowUserMapAction(getState().usersData));
       });
+    } catch (error) {
+      // TODO:#i# add snackbar
+      console.log("Error: ", error);
     }
   };
 

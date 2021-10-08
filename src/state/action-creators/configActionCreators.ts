@@ -1,14 +1,10 @@
-import Ajv from "ajv";
 import { Dispatch } from "redux";
 
 import { ConfigActionType } from "../action-types";
 import { ConfigAction } from "../actions";
-import { ConfigFileSchema as ConfigFileType } from "../../types/configFile.schema";
-import ConfigFileSchema from "../../schemas/configFile.schema.json";
+import { load } from "../../backendAPI/config";
 import { ConfigPayload } from "../utils/config";
 import Languages, { localeToLanguage } from "../utils/i18n";
-
-import localConfigJSON from "../../dev_temp/test.local_config.json";
 
 export const updateConfigAction = (payload: ConfigPayload): ConfigAction => ({
   type: ConfigActionType.UPDATE,
@@ -47,17 +43,17 @@ export const activateLightTheme =
 
 export const loadConfig =
   () =>
-  (dispatch: Dispatch<ConfigAction>): void => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const conf: any = localConfigJSON;
+  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+    try {
+      const conf = await load();
 
-    const ajv = new Ajv();
-    const validate = ajv.compile<ConfigFileType>(ConfigFileSchema);
-    if (validate(conf)) {
       if (conf.settings?.language !== undefined) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (conf as any).settings.language = localeToLanguage(conf.settings.language);
       }
       dispatch(updateConfigAction(conf as ConfigPayload));
+    } catch (error) {
+      // TODO:#i# add snackbar
+      console.log("Error: ", error);
     }
   };

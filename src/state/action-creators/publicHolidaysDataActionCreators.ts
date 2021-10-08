@@ -1,4 +1,3 @@
-import Ajv from "ajv";
 import { Dispatch } from "redux";
 
 import { PublicHolidaysDataActionType } from "../action-types";
@@ -6,14 +5,31 @@ import {
   PublicHolidaysDataLoadAction,
   PublicHolidaysDataUpdateAction,
 } from "../actions";
-// eslint-disable-next-line max-len
-import PublicHolidaysDataSchema from "../../schemas/publicHolidaysData.schema.json";
+import { load } from "../../backendAPI/publicHolidaysData";
 import {
   PublicHolidaysData,
   PublicHolidayDataPayload,
 } from "../utils/publicHolidaysData";
 
-import publicHolidaysDataJSON from "../../dev_temp/test.publicHolidaysData.json";
+export const loadPublicHolidaysDataAction = (
+  payload: PublicHolidaysData
+): PublicHolidaysDataLoadAction => ({
+  type: PublicHolidaysDataActionType.LOAD,
+  payload,
+});
+
+export const loadPublicHolidaysData =
+  () =>
+  async (dispatch: Dispatch<PublicHolidaysDataLoadAction>): Promise<void> => {
+    try {
+      const data = await load();
+
+      dispatch(loadPublicHolidaysDataAction(data));
+    } catch (error) {
+      // TODO:#i# add snackbar
+      console.log("Error: ", error);
+    }
+  };
 
 export const updatePublicHolidaysDataAction = (
   payload: PublicHolidayDataPayload
@@ -26,24 +42,4 @@ export const updatePublicHolidaysData =
   (payload: PublicHolidayDataPayload) =>
   (dispatch: Dispatch<PublicHolidaysDataUpdateAction>): void => {
     dispatch(updatePublicHolidaysDataAction(payload));
-  };
-
-export const loadPublicHolidaysDataAction = (
-  payload: PublicHolidaysData
-): PublicHolidaysDataLoadAction => ({
-  type: PublicHolidaysDataActionType.LOAD,
-  payload,
-});
-
-export const loadPublicHolidaysData =
-  () =>
-  (dispatch: Dispatch<PublicHolidaysDataLoadAction>): void => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const conf: any = publicHolidaysDataJSON;
-
-    const ajv = new Ajv();
-    const validate = ajv.compile<PublicHolidaysData>(PublicHolidaysDataSchema);
-    if (validate(conf)) {
-      dispatch(loadPublicHolidaysDataAction(conf));
-    }
   };
