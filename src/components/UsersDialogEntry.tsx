@@ -20,7 +20,7 @@ import { useSelector } from "react-redux";
 
 import { State } from "../state";
 import { UserDataPayload } from "../state/utils/usersData";
-import { UserData, Workdays } from "../types/usersData.schema";
+import { UserData, Workdays } from "../backendAPI/types/usersData.schema";
 import { getWeekdayKeyList, getWeekdayNameDict } from "../utils/dateUtils";
 
 import DialogDataEntry, {

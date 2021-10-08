@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { UsersDataSchema } from "../../types/usersData.schema";
+import { UsersDataSchema } from "../../backendAPI/types/usersData.schema";
 
 import { CalendarRowUserMapActionType } from "../action-types";
 import { CalendarRowUserMapAction } from "../actions";

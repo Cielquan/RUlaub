@@ -12,7 +12,7 @@ import {
   UsersDataUpdateAction,
 } from "../actions";
 import { load } from "../../backendAPI/usersData";
-import { UserData } from "../../types/usersData.schema";
+import { UserData } from "../../backendAPI/types/usersData.schema";
 import { UsersData, UserDataPayload } from "../utils/usersData";
 
 export const addUsersDataAction = (payload: UserData[]): UsersDataAddAction => ({

@@ -1,5 +1,5 @@
 import Ajv from "ajv";
-import SchoolHolidaysDataSchema from "../schemas/schoolHolidaysData.schema.json";
+import SchoolHolidaysDataSchema from "./schemas/schoolHolidaysData.schema.json";
 import { SchoolHolidaysData } from "../state/utils/schoolHolidaysData";
 
 import schoolHolidaysDataJSON from "./dev_temp/test.schoolHolidaysData.json";

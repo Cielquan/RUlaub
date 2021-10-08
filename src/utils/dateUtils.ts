@@ -1,6 +1,6 @@
 import { t } from "@lingui/macro";
 
-import { Workdays } from "../types/usersData.schema";
+import { Workdays } from "../backendAPI/types/usersData.schema";
 
 export const isLeapYear = (year: number): boolean => {
   if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {

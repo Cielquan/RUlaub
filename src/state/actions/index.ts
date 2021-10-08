@@ -1,4 +1,4 @@
-import { UserData } from "../../types/usersData.schema";
+import { UserData } from "../../backendAPI/types/usersData.schema";
 import {
   CalendarRowUserMapActionType,
   ConfigActionType,

@@ -1,7 +1,7 @@
 import {
   SchoolHolidayData,
   SchoolHolidaysDataSchema,
-} from "../../types/schoolHolidaysData.schema";
+} from "../../backendAPI/types/schoolHolidaysData.schema";
 
 export type SchoolHolidaysData = SchoolHolidaysDataSchema;
 export type SchoolHolidayDataPayload = [string, SchoolHolidayData];

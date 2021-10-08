@@ -1,7 +1,7 @@
 import {
   PublicHolidayData,
   PublicHolidaysDataSchema,
-} from "../../types/publicHolidaysData.schema";
+} from "../../backendAPI/types/publicHolidaysData.schema";
 
 export type PublicHolidaysData = PublicHolidaysDataSchema;
 export type PublicHolidayDataPayload = [string, PublicHolidayData];

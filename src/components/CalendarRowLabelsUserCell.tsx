@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 import { State } from "../state";
 import { STYLE_CONST } from "../styles";
-import { UsersDataSchema } from "../types/usersData.schema";
+import { UsersDataSchema } from "../backendAPI/types/usersData.schema";
 
 interface Props {
   index: number;

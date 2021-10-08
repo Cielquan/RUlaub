@@ -1,5 +1,5 @@
 import Ajv from "ajv";
-import PublicHolidaysDataSchema from "../schemas/publicHolidaysData.schema.json";
+import PublicHolidaysDataSchema from "./schemas/publicHolidaysData.schema.json";
 import { PublicHolidaysData } from "../state/utils/publicHolidaysData";
 
 import publicHolidaysDataJSON from "./dev_temp/test.publicHolidaysData.json";

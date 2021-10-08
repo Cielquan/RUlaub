@@ -1,6 +1,6 @@
 import Ajv from "ajv";
-import ConfigFileSchema from "../schemas/configFile.schema.json";
-import { ConfigFileSchema as ConfigFile } from "../types/configFile.schema";
+import ConfigFileSchema from "./schemas/configFile.schema.json";
+import { ConfigFileSchema as ConfigFile } from "./types/configFile.schema";
 
 import configDataJSON from "./dev_temp/test.local_config.json";
 
