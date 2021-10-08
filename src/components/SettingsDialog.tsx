@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
-import React, { forwardRef, ReactElement, useState } from "react";
+import React, { forwardRef, ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -41,7 +41,13 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
     dispatch
   );
   const settingsDialogState = useSelector((state: State) => state.settingsDialog);
-  const [name, setName] = useState<string>();
+  const configState = useSelector((state: State) => state.config);
+  const [name, setName] = useState(configState.user.name);
+
+  useEffect(() => {
+    setName(configState.user.name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [settingsDialogState]);
 
   const id = "settings-dialog";
 
