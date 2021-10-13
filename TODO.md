@@ -9,10 +9,83 @@
 
 ### Misc
 
-- add key combi to open error log in app as dialog
 - Make component for DB table menus and sub component for different types/entries
 - split current state & new/update for DB stuff
   - so on DB update the state can be updated w/o corrupting new/update data
+
+### Error handling
+
+- add setting for log-level to user settings
+  (default: ``INFO`` for conf, ``DEBUG`` for app, before loading conf)
+- add "no config state" (error with file access/creation) to
+  - show warning in settings and DB link/creation menus
+  - send snackbars on changes (theme, i18n, year selection)
+- Add logging / tracing to front and backend with exchange of data:
+  - backend errors to front for showing only and only those errors:
+    - via Promise for calls
+    - via events for automated and sending stuff
+    - **"events" with config**
+      - file loaded successfully (init)
+        DO: -
+        LVL: success
+        INFO: -
+        VIA: -
+      - file not found
+        DO: create new with defaults
+        LVL: info
+        INFO: New config created + where?
+        VIA: snackbar
+      - cannot create / change file (permission or others)
+        DO: work with default settings, set "no config state"
+        LVL: error
+        INFO: changes work for current session but cannot be preserved
+          (add reason and advice if applicable)
+        VIA: snackbar
+      - invalid data
+        DO: use defaults, overwrite setting in file with default
+        LVL: warning
+        INFO: invalid data, using defaults, overwrote setting in file with default
+        VIA: snackbar
+    - **"events" with DB**
+      - file found and data fetched
+        DO: (work with data +) send data to frontend
+        LVL: success
+        INFO: -
+        VIA: -
+      - file not found
+        DO: -
+        LVL: warning
+        INFO: needs to create/link database (with buttons to both)]
+        VIA: snackbar
+      - cannot create file (permission or others)
+        DO: -
+        LVL: error
+        INFO: need to fix reason
+          (add reason and advice if applicable)
+        VIA: dialog
+      - cannot access file b/c in action by other user
+        DO: retry after x time
+        LVL: error
+        INFO: db in use, trying again in x time
+        VIA: dialog, shown timer, button for manual retry, abort
+      - cannot access file b/c permission
+        DO: -
+        LVL: error
+        INFO: need to get permission
+        VIA: dialog
+      - failed SQL command
+        DO: -
+        LVL: error
+        INFO: failed command, contact support
+        VIA: dialog
+    - **"events" with 'log file'**
+      - cannot create / change file (permission or others)
+        DO: work with default settings, set "no config state"
+        LVL: warning
+        INFO: no logging (add reason and advice if applicable)
+        VIA: snackbar
+  - front to back to write to logfile (all with metadata)
+    - data validation for data from backend
 
 ### Config
 
@@ -205,6 +278,7 @@ deletable
 name = "xy"
 
 [settings]
+log_level = "INFO"
 database_uri = "path/to/DB"
 year_to_show = 2000
 theme = "dark"
