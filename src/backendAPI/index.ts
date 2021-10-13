@@ -1,6 +1,6 @@
 import Ajv, { Schema } from "ajv";
 
-export const createDataValidater =
+export const createDataValidator =
   <T>(schema: Schema) =>
   (data: unknown): Promise<T> => {
     const ajv = new Ajv();
