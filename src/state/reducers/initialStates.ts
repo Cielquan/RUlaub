@@ -1,13 +1,13 @@
 import { LogLevel } from "../../backendAPI/types/configFile.schema";
 import { SupportedThemes } from "../../theme";
-import { Config } from "../utils/config";
+import { Config, LogLevels } from "../utils/config";
 import { localeToLanguage, SupportedLocales } from "../utils/i18n";
 import { PublicHolidaysData } from "../utils/publicHolidaysData";
 import { SchoolHolidaysData } from "../utils/schoolHolidaysData";
 import { UsersData } from "../utils/usersData";
 
 export const defaultLocale: SupportedLocales = "en-US";
-export const defaultLogLevel: LogLevel = "INFO";
+export const defaultLogLevel: LogLevel = LogLevels.INFO;
 export const defaultTheme: SupportedThemes = "dark";
 
 export const defaultLanguage = localeToLanguage(defaultLocale);

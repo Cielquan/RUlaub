@@ -2,6 +2,14 @@ import { Language } from "./i18n";
 import { SupportedThemes } from "../../theme";
 import { LogLevel } from "../../backendAPI/types/configFile.schema";
 
+export enum LogLevels {
+  TRACE = "TRACE",
+  DEBUG = "DEBUG",
+  INFO = "INFO",
+  WARNING = "WARNING",
+  ERROR = "ERROR",
+}
+
 export interface UserConfig {
   name: string | undefined;
 }
