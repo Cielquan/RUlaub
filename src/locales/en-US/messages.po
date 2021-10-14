@@ -41,144 +41,194 @@ msgstr "Close"
 msgid "Add new Holiday"
 msgstr "Add new Holiday"
 
-#: src/components/SettingsDialog.tsx:59
-#: src/components/SideMenu.tsx:105
+#: src/components/SettingsDialog.tsx:71
+#: src/components/SideMenu.tsx:92
 msgid "Settings"
 msgstr "Settings"
 
-#: src/components/SettingsDialog.tsx:66
+#: src/components/SettingsDialog.tsx:78
 msgid "Enter your name to have it be preselected when entering new vacation."
 msgstr "Enter your name to have it be preselected when entering new vacation."
 
-#: src/components/SettingsDialog.tsx:95
+#: src/components/SettingsDialog.tsx:97
+#: src/components/SettingsDialog.tsx:102
+msgid "Logging Level"
+msgstr "Logging Level"
+
+#: src/components/SettingsDialog.tsx:125
+#: src/components/UsersDialog.tsx:187
 msgid "Save"
 msgstr "Save"
 
-#: src/components/SettingsDialog.tsx:105
+#: src/components/SettingsDialog.tsx:135
+#: src/components/UsersDialog.tsx:197
+#: src/components/UsersDialogEntry.tsx:196
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/components/SideMenu.tsx:110
+#: src/components/SideMenu.tsx:97
 msgid "Database"
 msgstr "Database"
 
-#: src/components/SideMenu.tsx:117
-#: src/components/SideMenu.tsx:128
-#: src/components/SideMenu.tsx:139
-#: src/components/SideMenu.tsx:150
-#: src/components/SideMenu.tsx:161
-#: src/components/SideMenu.tsx:172
-msgid "Create"
-msgstr "Create"
-
-#: src/components/SideMenu.tsx:118
+#: src/components/SideMenu.tsx:98
 msgid "Select"
 msgstr "Select"
 
-#: src/components/SideMenu.tsx:121
+#: src/components/SideMenu.tsx:99
+#: src/components/SideMenu.tsx:108
+#: src/components/SideMenu.tsx:113
+#: src/components/SideMenu.tsx:118
+#: src/components/SideMenu.tsx:123
+msgid "Create"
+msgstr "Create"
+
+#: src/components/SideMenu.tsx:102
+#: src/components/UsersDialog.tsx:140
 msgid "Users"
 msgstr "Users"
 
-#: src/components/SideMenu.tsx:129
-#: src/components/SideMenu.tsx:140
-#: src/components/SideMenu.tsx:151
-#: src/components/SideMenu.tsx:162
-#: src/components/SideMenu.tsx:173
+#: src/components/SideMenu.tsx:103
+#: src/components/SideMenu.tsx:107
+#: src/components/SideMenu.tsx:112
+#: src/components/SideMenu.tsx:117
+#: src/components/SideMenu.tsx:122
 msgid "Edit"
 msgstr "Edit"
 
-#: src/components/SideMenu.tsx:132
+#: src/components/SideMenu.tsx:106
 msgid "Public Holidays"
 msgstr "Public Holidays"
 
-#: src/components/SideMenu.tsx:143
+#: src/components/SideMenu.tsx:111
 msgid "School Holidays"
 msgstr "School Holidays"
 
-#: src/components/SideMenu.tsx:154
+#: src/components/SideMenu.tsx:116
 msgid "Vacation types"
 msgstr "Vacation types"
 
-#: src/components/SideMenu.tsx:165
+#: src/components/SideMenu.tsx:121
 msgid "Vacation"
 msgstr "Vacation"
 
-#: src/components/SideMenu.tsx:207
+#: src/components/SideMenu.tsx:158
 msgid "Info"
 msgstr "Info"
 
-#: src/utils/dateUtils.ts:20
+#: src/components/UsersDialog.tsx:176
+msgid "Save changes to database"
+msgstr "Save changes to database"
+
+#: src/components/UsersDialogEntry.tsx:81
+#: src/components/UsersDialogEntry.tsx:105
+msgid "Name"
+msgstr "Name"
+
+#: src/components/UsersDialogEntry.tsx:84
+#: src/components/UsersDialogEntry.tsx:118
+msgid "Vacation Days"
+msgstr "Vacation Days"
+
+#: src/components/UsersDialogEntry.tsx:92
+#: src/components/UsersDialogEntry.tsx:129
+msgid "Workdays"
+msgstr "Workdays"
+
+#: src/components/UsersDialogEntry.tsx:200
+msgid "Cancel deletion of entry"
+msgstr "Cancel deletion of entry"
+
+#: src/components/UsersDialogEntry.tsx:204
+msgid "Delete entry"
+msgstr "Delete entry"
+
+#: src/components/UsersDialogEntry.tsx:221
+msgid "Save entry"
+msgstr "Save entry"
+
+#: src/components/UsersDialogEntry.tsx:221
+msgid "Edit entry"
+msgstr "Edit entry"
+
+#: src/utils/dateUtils.ts:19
 msgid "January"
 msgstr "January"
 
-#: src/utils/dateUtils.ts:21
+#: src/utils/dateUtils.ts:20
 msgid "February"
 msgstr "February"
 
-#: src/utils/dateUtils.ts:22
+#: src/utils/dateUtils.ts:21
 msgid "March"
 msgstr "March"
 
-#: src/utils/dateUtils.ts:23
+#: src/utils/dateUtils.ts:22
 msgid "April"
 msgstr "April"
 
-#: src/utils/dateUtils.ts:24
+#: src/utils/dateUtils.ts:23
 msgid "May"
 msgstr "May"
 
-#: src/utils/dateUtils.ts:25
+#: src/utils/dateUtils.ts:24
 msgid "June"
 msgstr "June"
 
-#: src/utils/dateUtils.ts:26
+#: src/utils/dateUtils.ts:25
 msgid "July"
 msgstr "July"
 
-#: src/utils/dateUtils.ts:27
+#: src/utils/dateUtils.ts:26
 msgid "August"
 msgstr "August"
 
-#: src/utils/dateUtils.ts:28
+#: src/utils/dateUtils.ts:27
 msgid "September"
 msgstr "September"
 
-#: src/utils/dateUtils.ts:29
+#: src/utils/dateUtils.ts:28
 msgid "October"
 msgstr "October"
 
-#: src/utils/dateUtils.ts:30
+#: src/utils/dateUtils.ts:29
 msgid "November"
 msgstr "November"
 
-#: src/utils/dateUtils.ts:31
+#: src/utils/dateUtils.ts:30
 msgid "December"
 msgstr "December"
 
-#: src/utils/dateUtils.ts:35
+#: src/utils/dateUtils.ts:34
+#: src/utils/dateUtils.ts:55
 msgid "Monday"
 msgstr "Monday"
 
-#: src/utils/dateUtils.ts:36
+#: src/utils/dateUtils.ts:35
+#: src/utils/dateUtils.ts:56
 msgid "Tuesday"
 msgstr "Tuesday"
 
-#: src/utils/dateUtils.ts:37
+#: src/utils/dateUtils.ts:36
+#: src/utils/dateUtils.ts:57
 msgid "Wednesday"
 msgstr "Wednesday"
 
-#: src/utils/dateUtils.ts:38
+#: src/utils/dateUtils.ts:37
+#: src/utils/dateUtils.ts:58
 msgid "Thursday"
 msgstr "Thursday"
 
-#: src/utils/dateUtils.ts:39
+#: src/utils/dateUtils.ts:38
+#: src/utils/dateUtils.ts:59
 msgid "Friday"
 msgstr "Friday"
 
-#: src/utils/dateUtils.ts:40
+#: src/utils/dateUtils.ts:39
+#: src/utils/dateUtils.ts:60
 msgid "Saturday"
 msgstr "Saturday"
 
-#: src/utils/dateUtils.ts:41
+#: src/utils/dateUtils.ts:40
+#: src/utils/dateUtils.ts:61
 msgid "Sunday"
 msgstr "Sunday"
