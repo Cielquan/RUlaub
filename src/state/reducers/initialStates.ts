@@ -1,3 +1,4 @@
+import { LogLevel } from "../../backendAPI/types/configFile.schema";
 import { SupportedThemes } from "../../theme";
 import { Config } from "../utils/config";
 import { localeToLanguage, SupportedLocales } from "../utils/i18n";
@@ -6,6 +7,7 @@ import { SchoolHolidaysData } from "../utils/schoolHolidaysData";
 import { UsersData } from "../utils/usersData";
 
 export const defaultLocale: SupportedLocales = "en-US";
+export const defaultLogLevel: LogLevel = "INFO";
 export const defaultTheme: SupportedThemes = "dark";
 
 export const defaultLanguage = localeToLanguage(defaultLocale);
@@ -24,7 +26,7 @@ export const configInitState: Config = {
     yearToShow: undefined,
     theme: defaultTheme,
     language: defaultLanguage,
-    logLevel: "INFO",
+    logLevel: defaultLogLevel,
   },
 };
 export const infoPageInitState = false;
