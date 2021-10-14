@@ -2,7 +2,7 @@ import Ajv, { Schema } from "ajv";
 
 import { DataFetchingError, DataValidationError } from "../errors";
 
-export const writeErrorToLogFile = (error: Error): void => {
+export const logError = (error: Error): void => {
   console.error("ERROR IN LOGFILE: ", error);
 };
 
@@ -25,7 +25,7 @@ export const createDataLoader =
     try {
       data = await fetchFn();
     } catch (error) {
-      writeErrorToLogFile(error as Error);
+      logError(error as Error);
       return Promise.reject(new DataFetchingError((error as Error).toString()));
     }
 
@@ -33,7 +33,7 @@ export const createDataLoader =
     try {
       validatedData = await validateFn(data);
     } catch (error) {
-      writeErrorToLogFile(error as Error);
+      logError(error as Error);
       return Promise.reject(new DataValidationError((error as Error).toString()));
     }
 
