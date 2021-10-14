@@ -24,6 +24,7 @@ export const configInitState: Config = {
     yearToShow: undefined,
     theme: defaultTheme,
     language: defaultLanguage,
+    logLevel: "INFO",
   },
 };
 export const infoPageInitState = false;

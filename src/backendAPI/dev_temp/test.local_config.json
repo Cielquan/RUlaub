@@ -6,6 +6,7 @@
     "databaseURI": "here is the database",
     "yearToShow": 2021,
     "theme": "dark",
-    "language": "de-DE"
+    "language": "de-DE",
+    "logLevel": "INFO"
   }
 }

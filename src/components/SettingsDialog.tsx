@@ -1,4 +1,4 @@
-import { Trans } from "@lingui/macro";
+import { t, Trans } from "@lingui/macro";
 import { Settings as SettingsIcon } from "@mui/icons-material";
 import {
   Button,
@@ -7,6 +7,10 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
   Slide,
   TextField,
   Typography,
@@ -17,6 +21,7 @@ import React, { forwardRef, ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { LogLevel } from "../backendAPI/types/configFile.schema";
 import { actionCreators, State } from "../state";
 
 const Transition = forwardRef(
@@ -43,6 +48,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
   const settingsDialogState = useSelector((state: State) => state.settingsDialog);
   const configState = useSelector((state: State) => state.config);
   const [name, setName] = useState(configState.user.name);
+  const [level, setLevel] = useState<LogLevel>(configState.settings.logLevel);
 
   useEffect(() => {
     setName(configState.user.name);
@@ -87,6 +93,24 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
             setName(event.target.value);
           }}
         />
+        <FormControl fullWidth sx={{ marginTop: 2 }}>
+          <InputLabel id="log-level-select-label">{t`Logging Level`}</InputLabel>
+          <Select
+            labelId="log-level-select-label"
+            id="log-level-select"
+            value={level}
+            label={t`Logging Level`}
+            onChange={(event): void => {
+              setLevel(event.target.value as LogLevel);
+            }}
+          >
+            {(["TRACE", "DEBUG", "INFO", "WARNING", "ERROR"] as LogLevel[]).map(
+              (lvl: LogLevel) => (
+                <MenuItem value={lvl}>{lvl}</MenuItem>
+              )
+            )}
+          </Select>
+        </FormControl>
       </DialogContent>
       <DialogActions>
         <Button

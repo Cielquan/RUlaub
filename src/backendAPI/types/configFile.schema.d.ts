@@ -5,6 +5,8 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+export type LogLevel = "TRACE" | "DEBUG" | "INFO" | "WARNING" | "ERROR";
+
 /**
  * Schema for config file read by the backend
  */
@@ -17,5 +19,6 @@ export interface ConfigFileSchema {
     yearToShow?: number;
     theme?: "dark" | "light";
     language?: "de-DE" | "en-US";
+    logLevel?: LogLevel;
   };
 }

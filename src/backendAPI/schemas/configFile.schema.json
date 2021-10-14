@@ -25,10 +25,17 @@
         "language": {
           "type": "string",
           "enum": ["de-DE", "en-US"]
-        }
+        },
+        "logLevel": { "$ref": "#/$defs/LogLevel" }
       },
       "additionalProperties": false
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "$defs": {
+    "LogLevel": {
+      "type": "string",
+      "enum": ["TRACE", "DEBUG", "INFO", "WARNING", "ERROR"]
+    }
+  }
 }

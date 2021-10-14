@@ -1,5 +1,6 @@
 import { Language } from "./i18n";
 import { SupportedThemes } from "../../theme";
+import { LogLevel } from "../../backendAPI/types/configFile.schema";
 
 export interface UserConfig {
   name: string | undefined;
@@ -10,6 +11,7 @@ export interface SettingsConfig {
   yearToShow: number | undefined;
   theme: SupportedThemes;
   language: Language;
+  logLevel: LogLevel;
 }
 
 export interface Config {

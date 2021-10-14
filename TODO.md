@@ -15,8 +15,7 @@
 
 ### Error handling
 
-- add setting for log-level to user settings
-  (default: ``INFO`` for conf, ``DEBUG`` for app, before loading conf)
+- default logging level on startup: ``DEBUG`` (before loading conf)
 - add "no config state" (error with file access/creation) to
   - show warning in settings and DB link/creation menus
   - send snackbars on changes (theme, i18n, year selection)
