@@ -2,16 +2,20 @@
 
 ### Ideas
 
-- self updater
 - change ico to a (self made) less "complex" one?
 - move calc of bigger things to backend for performance?
 - rewrite the calender without react-window?
+- Add advance settings for "styling":
+  - scroll to day 1 on year change or stay at current day?
+  - left offset of today when auto scroll; default 2
 
 ### Misc
 
+- self updater (**BEFORE 1.0**)
 - Make component for DB table menus and sub component for different types/entries
 - split current state & new/update for DB stuff
   - so on DB update the state can be updated w/o corrupting new/update data
+- Copy pub holiday system to mark special days like `Karneval`
 
 ### Error handling
 
