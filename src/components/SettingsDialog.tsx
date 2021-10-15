@@ -8,10 +8,8 @@ import {
   DialogContentText,
   DialogTitle,
   FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
   Slide,
+  Slider,
   TextField,
   Typography,
 } from "@mui/material";
@@ -52,10 +50,17 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
 
   useEffect(() => {
     setName(configState.user.name);
+    setLevel(configState.settings.logLevel);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settingsDialogState]);
 
   const id = "settings-dialog";
+
+  const logLevels: LogLevel[] = ["ERROR", "WARNING", "INFO", "DEBUG", "TRACE"];
+  const marks = logLevels.map((lvl, index) => ({
+    value: index,
+    label: lvl.charAt(0).toUpperCase() + lvl.slice(1).toLowerCase(),
+  }));
 
   return (
     <Dialog
@@ -94,22 +99,26 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           }}
         />
         <FormControl fullWidth sx={{ marginTop: 2 }}>
-          <InputLabel id="log-level-select-label">{t`Logging Level`}</InputLabel>
-          <Select
-            labelId="log-level-select-label"
-            id="log-level-select"
-            value={level}
-            label={t`Logging Level`}
-            onChange={(event): void => {
-              setLevel(event.target.value as LogLevel);
-            }}
+          <Typography
+            id="log-level-slider-label"
+            gutterBottom
+            sx={{ color: "text.secondary" }}
           >
-            {(["TRACE", "DEBUG", "INFO", "WARNING", "ERROR"] as LogLevel[]).map(
-              (lvl: LogLevel) => (
-                <MenuItem value={lvl}>{lvl}</MenuItem>
-              )
-            )}
-          </Select>
+            {t`Logging Level`}
+          </Typography>
+          <Box sx={{ width: "90%", marginX: "5%" }}>
+            <Slider
+              key={`log-level-slider-at-${logLevels.indexOf(level)}`}
+              aria-labelledby="log-level-slider-label"
+              marks={marks}
+              defaultValue={logLevels.indexOf(level)}
+              min={0}
+              max={marks.length - 1}
+              onChangeCommitted={(event, newValue) => {
+                setLevel(logLevels[newValue as number]);
+              }}
+            />
+          </Box>
         </FormControl>
       </DialogContent>
       <DialogActions>
@@ -118,7 +127,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           onClick={() => {
             if (typeof onClick === "function") onClick();
             closeSettingsDialog();
-            updateConfig({ user: { name } });
+            updateConfig({ user: { name }, settings: { logLevel: level } });
           }}
           autoFocus
         >
