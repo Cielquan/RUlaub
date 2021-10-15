@@ -37,9 +37,12 @@ const Calendar = (): ReactElement => {
 
   useMountDelayOrUpdateEffect(
     () => {
-      if (today.getFullYear() !== year) return;
-      const days = getDaysForDate(today);
-      setScrollX((days - 3) * STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL);
+      if (today.getFullYear() !== year) {
+        setScrollX(0);
+      } else {
+        const days = getDaysForDate(today);
+        setScrollX((days - 3) * STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL);
+      }
     },
     0,
     [year]
