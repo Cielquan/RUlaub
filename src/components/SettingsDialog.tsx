@@ -1,7 +1,12 @@
 import { t, Trans } from "@lingui/macro";
-import { Settings as SettingsIcon } from "@mui/icons-material";
+import {
+  KeyboardArrowDown as KeyboardArrowDownIcon,
+  KeyboardArrowUp as KeyboardArrowUpIcon,
+  Settings as SettingsIcon,
+} from "@mui/icons-material";
 import {
   Button,
+  Collapse,
   Dialog,
   DialogActions,
   DialogContent,
@@ -46,6 +51,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
   const settingsDialogState = useSelector((state: State) => state.settingsDialog);
   const configState = useSelector((state: State) => state.config);
   const [name, setName] = useState(configState.user.name);
+  const [showAdvanced, setShowAdvanced] = useState(false);
   const [level, setLevel] = useState<LogLevel>(configState.settings.logLevel);
 
   useEffect(() => {
@@ -77,7 +83,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
         </Box>
         <SettingsIcon />
       </DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
         <DialogContentText sx={{ whiteSpace: "pre-wrap" }}>
           <Typography component="span">
             <Trans>
@@ -98,28 +104,37 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
             setName(event.target.value);
           }}
         />
-        <FormControl fullWidth sx={{ marginTop: 2 }}>
-          <Typography
-            id="log-level-slider-label"
-            gutterBottom
-            sx={{ color: "text.secondary" }}
-          >
-            {t`Logging Level`}
-          </Typography>
-          <Box sx={{ width: "90%", marginX: "5%" }}>
-            <Slider
-              key={`log-level-slider-at-${logLevels.indexOf(level)}`}
-              aria-labelledby="log-level-slider-label"
-              marks={marks}
-              defaultValue={logLevels.indexOf(level)}
-              min={0}
-              max={marks.length - 1}
-              onChangeCommitted={(event, newValue) => {
-                setLevel(logLevels[newValue as number]);
-              }}
-            />
-          </Box>
-        </FormControl>
+        <Button
+          sx={{ marginTop: 2 }}
+          onClick={() => setShowAdvanced(!showAdvanced)}
+          endIcon={showAdvanced ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        >
+          {t`Advanced Settings`}
+        </Button>
+        <Collapse in={showAdvanced}>
+          <FormControl fullWidth sx={{ marginTop: 2 }}>
+            <Typography
+              id="log-level-slider-label"
+              gutterBottom
+              sx={{ color: "text.secondary" }}
+            >
+              {t`Logging Level`}
+            </Typography>
+            <Box sx={{ width: "90%", marginX: "5%" }}>
+              <Slider
+                key={`log-level-slider-at-${logLevels.indexOf(level)}`}
+                aria-labelledby="log-level-slider-label"
+                marks={marks}
+                defaultValue={logLevels.indexOf(level)}
+                min={0}
+                max={marks.length - 1}
+                onChangeCommitted={(event, newValue) => {
+                  setLevel(logLevels[newValue as number]);
+                }}
+              />
+            </Box>
+          </FormControl>
+        </Collapse>
       </DialogContent>
       <DialogActions>
         <Button
