@@ -20,6 +20,8 @@ export interface SettingsConfig {
   theme: SupportedThemes;
   language: Language;
   logLevel: LogLevel;
+  todayAutoscrollLeftOffset: number;
+  yearChangeScrollBegin: boolean;
 }
 
 export interface Config {

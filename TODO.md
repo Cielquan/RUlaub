@@ -281,9 +281,11 @@ deletable
 name = "xy"
 
 [settings]
-log_level = "INFO"
 database_uri = "path/to/DB"
 year_to_show = 2000
 theme = "dark"
 langauge = "de-DE"
+log_level = "INFO"
+today_autoscroll_left_offset = 2
+year_change_scroll_begin = true
 ```

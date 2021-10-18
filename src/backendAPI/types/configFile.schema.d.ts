@@ -20,5 +20,7 @@ export interface ConfigFileSchema {
     theme?: "dark" | "light";
     language?: "de-DE" | "en-US";
     logLevel?: LogLevel;
+    todayAutoscrollLeftOffset?: number;
+    yearChangeScrollBegin?: boolean;
   };
 }

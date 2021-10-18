@@ -8,6 +8,8 @@ import { UsersData } from "../utils/usersData";
 
 export const defaultLocale: SupportedLocales = "en-US";
 export const defaultLogLevel: LogLevel = LogLevels.INFO;
+export const defaultScrollLeftOffset = 2;
+export const defaultScrollYearBegin = true;
 export const defaultTheme: SupportedThemes = "dark";
 
 export const defaultLanguage = localeToLanguage(defaultLocale);
@@ -27,6 +29,8 @@ export const configInitState: Config = {
     theme: defaultTheme,
     language: defaultLanguage,
     logLevel: defaultLogLevel,
+    todayAutoscrollLeftOffset: defaultScrollLeftOffset,
+    yearChangeScrollBegin: defaultScrollYearBegin,
   },
 };
 export const infoPageInitState = false;
