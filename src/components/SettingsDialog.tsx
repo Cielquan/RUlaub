@@ -6,6 +6,7 @@ import {
 } from "@mui/icons-material";
 import {
   Button,
+  Checkbox,
   Collapse,
   Dialog,
   DialogActions,
@@ -13,6 +14,7 @@ import {
   DialogContentText,
   DialogTitle,
   FormControl,
+  FormControlLabel,
   Slide,
   Slider,
   TextField,
@@ -53,10 +55,19 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
   const [name, setName] = useState(configState.user.name);
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [level, setLevel] = useState<LogLevel>(configState.settings.logLevel);
+  const [offset, setOffset] = useState(
+    configState.settings.todayAutoscrollLeftOffset.toString()
+  );
+  const [offsetError, setOffsetError] = useState(false);
+  const [scroll, setScroll] = useState(configState.settings.yearChangeScrollBegin);
 
   useEffect(() => {
     setName(configState.user.name);
     setLevel(configState.settings.logLevel);
+    setShowAdvanced(false);
+    setOffset(configState.settings.todayAutoscrollLeftOffset.toString());
+    setOffsetError(false);
+    setScroll(configState.settings.yearChangeScrollBegin);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settingsDialogState]);
 
@@ -134,6 +145,36 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
               />
             </Box>
           </FormControl>
+          <TextField
+            margin="dense"
+            id="offset"
+            label={t`Left side offset for auto scroll to today`}
+            type="text"
+            inputProps={{ inputMode: "numeric", pattern: "[0-9]+" }}
+            fullWidth
+            variant="standard"
+            value={offset}
+            error={offsetError}
+            helperText={offsetError ? t`Only positive numbers are permitted.` : ""}
+            onChange={(event) => {
+              const newValue = event.target.value;
+              if (newValue !== "" && Number.isNaN(Number(newValue))) {
+                setOffsetError(true);
+              } else {
+                setOffsetError(false);
+              }
+              setOffset(newValue);
+            }}
+          />
+          <FormControlLabel
+            label={t`Scroll to beginning of year`}
+            control={
+              <Checkbox
+                checked={scroll}
+                onChange={(event) => setScroll(event.target.checked)}
+              />
+            }
+          />
         </Collapse>
       </DialogContent>
       <DialogActions>
@@ -142,7 +183,16 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           onClick={() => {
             if (typeof onClick === "function") onClick();
             closeSettingsDialog();
-            updateConfig({ user: { name }, settings: { logLevel: level } });
+            updateConfig({
+              user: { name },
+              settings: {
+                logLevel: level,
+                todayAutoscrollLeftOffset: offsetError
+                  ? configState.settings.todayAutoscrollLeftOffset
+                  : Number(offset),
+                yearChangeScrollBegin: scroll,
+              },
+            });
           }}
           autoFocus
         >
