@@ -95,7 +95,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           autoFocus
           margin="dense"
           id="name"
-          label="Name"
+          label={t`Name`}
           type="text"
           fullWidth
           variant="standard"

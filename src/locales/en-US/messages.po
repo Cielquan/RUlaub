@@ -41,29 +41,35 @@ msgstr "Close"
 msgid "Add new Holiday"
 msgstr "Add new Holiday"
 
-#: src/components/SettingsDialog.tsx:82
+#: src/components/SettingsDialog.tsx:84
 #: src/components/SideMenu.tsx:92
 msgid "Settings"
 msgstr "Settings"
 
-#: src/components/SettingsDialog.tsx:89
+#: src/components/SettingsDialog.tsx:91
 msgid "Enter your name to have it be preselected when entering new vacation."
 msgstr "Enter your name to have it be preselected when entering new vacation."
 
-#: src/components/SettingsDialog.tsx:112
+#: src/components/SettingsDialog.tsx:100
+#: src/components/UsersDialogEntry.tsx:81
+#: src/components/UsersDialogEntry.tsx:105
+msgid "Name"
+msgstr "Name"
+
+#: src/components/SettingsDialog.tsx:114
 msgid "Advanced Settings"
 msgstr "Advanced Settings"
 
-#: src/components/SettingsDialog.tsx:121
+#: src/components/SettingsDialog.tsx:123
 msgid "Logging Level"
 msgstr "Logging Level"
 
-#: src/components/SettingsDialog.tsx:149
+#: src/components/SettingsDialog.tsx:163
 #: src/components/UsersDialog.tsx:187
 msgid "Save"
 msgstr "Save"
 
-#: src/components/SettingsDialog.tsx:159
+#: src/components/SettingsDialog.tsx:173
 #: src/components/UsersDialog.tsx:197
 #: src/components/UsersDialogEntry.tsx:196
 msgid "Cancel"
@@ -121,11 +127,6 @@ msgstr "Info"
 #: src/components/UsersDialog.tsx:176
 msgid "Save changes to database"
 msgstr "Save changes to database"
-
-#: src/components/UsersDialogEntry.tsx:81
-#: src/components/UsersDialogEntry.tsx:105
-msgid "Name"
-msgstr "Name"
 
 #: src/components/UsersDialogEntry.tsx:84
 #: src/components/UsersDialogEntry.tsx:118
