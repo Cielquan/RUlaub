@@ -41,35 +41,47 @@ msgstr "Close"
 msgid "Add new Holiday"
 msgstr "Add new Holiday"
 
-#: src/components/SettingsDialog.tsx:84
+#: src/components/SettingsDialog.tsx:92
 #: src/components/SideMenu.tsx:92
 msgid "Settings"
 msgstr "Settings"
 
-#: src/components/SettingsDialog.tsx:91
-msgid "Enter your name to have it be preselected when entering new vacation."
-msgstr "Enter your name to have it be preselected when entering new vacation."
-
-#: src/components/SettingsDialog.tsx:100
+#: src/components/SettingsDialog.tsx:101
 #: src/components/UsersDialogEntry.tsx:81
 #: src/components/UsersDialogEntry.tsx:105
 msgid "Name"
 msgstr "Name"
 
-#: src/components/SettingsDialog.tsx:114
+#: src/components/SettingsDialog.tsx:107
+msgid "Enter your name to have it be preselected when entering new vacation."
+msgstr "Enter your name to have it be preselected when entering new vacation."
+
+#: src/components/SettingsDialog.tsx:132
 msgid "Advanced Settings"
 msgstr "Advanced Settings"
 
-#: src/components/SettingsDialog.tsx:123
+#: src/components/SettingsDialog.tsx:151
 msgid "Logging Level"
 msgstr "Logging Level"
 
-#: src/components/SettingsDialog.tsx:163
+#: src/components/SettingsDialog.tsx:169
+msgid "Left side offset on auto scroll to today."
+msgstr "Left side offset on auto scroll to today."
+
+#: src/components/SettingsDialog.tsx:176
+msgid "Only positive numbers are permitted."
+msgstr "Only positive numbers are permitted."
+
+#: src/components/SettingsDialog.tsx:204
+msgid "On year switch, scroll to beginning of the year, if not current year."
+msgstr "On year switch, scroll to beginning of the year, if not current year."
+
+#: src/components/SettingsDialog.tsx:234
 #: src/components/UsersDialog.tsx:187
 msgid "Save"
 msgstr "Save"
 
-#: src/components/SettingsDialog.tsx:173
+#: src/components/SettingsDialog.tsx:244
 #: src/components/UsersDialog.tsx:197
 #: src/components/UsersDialogEntry.tsx:196
 msgid "Cancel"

@@ -11,14 +11,13 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   FormControl,
   FormControlLabel,
+  FormLabel,
   Slide,
   Slider,
   TextField,
-  Typography,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
@@ -95,13 +94,6 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
         <SettingsIcon />
       </DialogTitle>
       <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
-        <DialogContentText sx={{ whiteSpace: "pre-wrap" }}>
-          <Typography component="span">
-            <Trans>
-              Enter your name to have it be preselected when entering new vacation.
-            </Trans>
-          </Typography>
-        </DialogContentText>
         <TextField
           autoFocus
           margin="dense"
@@ -109,32 +101,58 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           label={t`Name`}
           type="text"
           fullWidth
-          variant="standard"
+          variant="outlined"
           value={name}
+          // eslint-disable-next-line max-len
+          helperText={t`Enter your name to have it be preselected when entering new vacation.`}
           onChange={(event): void => {
             setName(event.target.value);
           }}
+          sx={{ marginY: 1 }}
         />
-        <Button
-          sx={{ marginTop: 2 }}
-          onClick={() => setShowAdvanced(!showAdvanced)}
-          endIcon={showAdvanced ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        <Box
+          sx={{
+            marginY: 2,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            "&::before, &::after": {
+              content: "''",
+              borderBottom: "solid 2px",
+              borderColor: "primary.main",
+              flexGrow: 1,
+              marginX: 1,
+            },
+          }}
         >
-          {t`Advanced Settings`}
-        </Button>
+          <Button
+            onClick={() => setShowAdvanced(!showAdvanced)}
+            endIcon={showAdvanced ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          >
+            {t`Advanced Settings`}
+          </Button>
+        </Box>
         <Collapse in={showAdvanced}>
-          <FormControl fullWidth sx={{ marginTop: 2 }}>
-            <Typography
-              id="log-level-slider-label"
-              gutterBottom
-              sx={{ color: "text.secondary" }}
-            >
+          <FormControl
+            component="fieldset"
+            fullWidth
+            sx={{
+              marginY: 1,
+              padding: 1,
+              border: 1,
+              borderRadius: 1,
+              borderColor: "action.disabled",
+              "&:hover": {
+                borderColor: "action.active",
+              },
+            }}
+          >
+            <FormLabel component="legend" sx={{ paddingX: 1, fontSize: "0.75em" }}>
               {t`Logging Level`}
-            </Typography>
+            </FormLabel>
             <Box sx={{ width: "90%", marginX: "5%" }}>
               <Slider
                 key={`log-level-slider-at-${logLevels.indexOf(level)}`}
-                aria-labelledby="log-level-slider-label"
                 marks={marks}
                 defaultValue={logLevels.indexOf(level)}
                 min={0}
@@ -148,33 +166,46 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           <TextField
             margin="dense"
             id="offset"
-            label={t`Left side offset for auto scroll to today`}
+            label={t`Left side offset on auto scroll to today.`}
             type="text"
             inputProps={{ inputMode: "numeric", pattern: "[0-9]+" }}
             fullWidth
-            variant="standard"
+            variant="outlined"
             value={offset}
             error={offsetError}
             helperText={offsetError ? t`Only positive numbers are permitted.` : ""}
             onChange={(event) => {
               const newValue = event.target.value;
-              if (newValue !== "" && Number.isNaN(Number(newValue))) {
-                setOffsetError(true);
-              } else {
-                setOffsetError(false);
-              }
+              setOffsetError(newValue === "" || Number.isNaN(Number(newValue)));
               setOffset(newValue);
             }}
+            sx={{ marginY: 1 }}
           />
-          <FormControlLabel
-            label={t`Scroll to beginning of year`}
-            control={
-              <Checkbox
-                checked={scroll}
-                onChange={(event) => setScroll(event.target.checked)}
-              />
-            }
-          />
+          <FormControl
+            component="fieldset"
+            fullWidth
+            sx={{
+              marginY: 1,
+              padding: 1,
+              border: 1,
+              borderRadius: 1,
+              borderColor: "action.disabled",
+              "&:hover": {
+                borderColor: "action.active",
+              },
+            }}
+          >
+            <FormControlLabel
+              // eslint-disable-next-line max-len
+              label={t`On year switch, scroll to beginning of the year, if not current year.`}
+              control={
+                <Checkbox
+                  checked={scroll}
+                  onChange={(event) => setScroll(event.target.checked)}
+                />
+              }
+            />
+          </FormControl>
         </Collapse>
       </DialogContent>
       <DialogActions>
