@@ -54,6 +54,8 @@ const UsersDialogEntry = ({
   const [vacDaysForm, setVacDaysForm] = useState(vacDays);
   const [workdaysForm, setWorkdaysForm] = useState(workdays);
 
+  const [savedOnce, setSavedOnce] = useState(false);
+
   const setWorkdayForm = (day: keyof Workdays, newValue: boolean): void => {
     const rv = { ...workdaysForm };
     rv[day] = newValue;
@@ -166,6 +168,7 @@ const UsersDialogEntry = ({
     setVacDays(vacDaysForm);
     setWorkdays(workdaysForm);
     setEditable(false);
+    setSavedOnce(true);
     addUserToQueue([
       id,
       {
@@ -183,10 +186,14 @@ const UsersDialogEntry = ({
     setEditable(true);
   };
   const onClickCancel = (): void => {
-    setNameForm(name);
-    setVacDaysForm(vacDays);
-    setWorkdaysForm(workdays);
-    setEditable(false);
+    if (newEntry && !savedOnce) {
+      removeUserFromQueue(id);
+    } else {
+      setNameForm(name);
+      setVacDaysForm(vacDays);
+      setWorkdaysForm(workdays);
+      setEditable(false);
+    }
   };
   const onClickDelete = (): void => {
     setToBeRemoved(true);
