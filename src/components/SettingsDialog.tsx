@@ -176,7 +176,11 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
             helperText={offsetError ? t`Only positive numbers are permitted.` : ""}
             onChange={(event) => {
               const newValue = event.target.value;
-              setOffsetError(newValue === "" || Number.isNaN(Number(newValue)));
+              setOffsetError(
+                newValue === "" ||
+                  Number.isNaN(Number(newValue)) ||
+                  Number(newValue) < 0
+              );
               setOffset(newValue);
             }}
             sx={{ marginY: 1 }}
