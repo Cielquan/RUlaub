@@ -9,15 +9,13 @@ import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import React, { ReactElement } from "react";
 
-export const DBDialogEntryContentListItem = styled(ListItem)(() => ({
-  width: "fit-content",
-}));
+export const DBDialogEntryContentViewListItem = styled(ListItem)(() => ({}));
 
-export const DBDialogEntryContentList = styled(List)(() => ({
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-}));
+export const DBDialogEntryContentViewList = styled(List)(() => ({}));
+
+export const DBDialogEntryContentEditListItem = styled(ListItem)(() => ({}));
+
+export const DBDialogEntryContentEditList = styled(List)(() => ({}));
 
 export enum EntryStyle {
   DEFAULT,
@@ -89,7 +87,7 @@ const DialogDataEntry = ({
         ...entryStyles.background,
       }}
     >
-      <Box sx={entryStyles.contentStyle}>{ContentComponent}</Box>
+      <Box sx={{ ...entryStyles.contentStyle, width: "100%" }}>{ContentComponent}</Box>
       <ListItemSecondaryAction>
         <Tooltip arrow title={leftButtonTooltip}>
           <IconButton onClick={leftButtonOnClick} disabled={leftButtonDisabled}>
