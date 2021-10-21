@@ -1,21 +1,6 @@
-import {
-  IconButton,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  Tooltip,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { IconButton, ListItem, ListItemSecondaryAction, Tooltip } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { ReactElement } from "react";
-
-export const DBDialogEntryContentViewListItem = styled(ListItem)(() => ({}));
-
-export const DBDialogEntryContentViewList = styled(List)(() => ({}));
-
-export const DBDialogEntryContentEditListItem = styled(ListItem)(() => ({}));
-
-export const DBDialogEntryContentEditList = styled(List)(() => ({}));
 
 export enum EntryStyle {
   DEFAULT,
