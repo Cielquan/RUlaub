@@ -119,7 +119,7 @@ const UsersDialogEntry = ({
           id="name"
           label={t`Name`}
           type="text"
-          variant="standard"
+          variant="outlined"
           value={nameForm}
           onChange={(event): void => {
             setNameForm(event.target.value);
@@ -132,7 +132,7 @@ const UsersDialogEntry = ({
           id="vacation-days"
           label={t`Vacation Days`}
           type="number"
-          variant="standard"
+          variant="outlined"
           value={vacDaysForm}
           onChange={(event): void => {
             setVacDaysForm(Number(event.target.value));
@@ -140,8 +140,22 @@ const UsersDialogEntry = ({
         />
       </ListItem>
       <ListItem key={`${id}-edit-workdays`} sx={{ gridArea: "workdays" }}>
-        <FormControl component="fieldset">
-          <FormLabel component="legend">{t`Workdays`}</FormLabel>
+        <FormControl
+          component="fieldset"
+          sx={{
+            marginY: 1,
+            padding: 1,
+            border: 1,
+            borderRadius: 1,
+            borderColor: "action.disabled",
+            "&:hover": {
+              borderColor: "action.active",
+            },
+          }}
+        >
+          <FormLabel component="legend" sx={{ paddingX: 1, fontSize: "0.75em" }}>
+            {t`Workdays`}
+          </FormLabel>
           <FormGroup aria-label="position" row>
             {weekdayKeys.map((day) => (
               <FormControlLabel
