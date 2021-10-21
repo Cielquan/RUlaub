@@ -12,6 +12,8 @@ import {
   FormControlLabel,
   FormGroup,
   FormLabel,
+  List,
+  ListItem,
   ListItemText,
   TextField,
 } from "@mui/material";
@@ -23,13 +25,7 @@ import { UserDataPayload } from "../state/utils/usersData";
 import { UserData, Workdays } from "../backendAPI/types/usersData.schema";
 import { getWeekdayKeyList, getWeekdayNameDict } from "../utils/dateUtils";
 
-import DialogDataEntry, {
-  DBDialogEntryContentViewList as StyledViewList,
-  DBDialogEntryContentViewListItem as StyledViewListItem,
-  DBDialogEntryContentEditList as StyledEditList,
-  DBDialogEntryContentEditListItem as StyledEditListItem,
-  EntryStyle,
-} from "./DialogDataEntry";
+import DialogDataEntry, { EntryStyle } from "./DialogDataEntry";
 
 interface Props {
   id: string;
@@ -78,14 +74,21 @@ const UsersDialogEntry = ({
   const weekdayKeys = getWeekdayKeyList();
 
   const ContentComponentView = (
-    <StyledViewList>
-      <StyledViewListItem key={`${id}-view-name`}>
+    <List
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "2fr 1fr 1fr",
+        gridTemplateRows: "auto",
+        gridTemplateAreas: `"name days workdays"`,
+      }}
+    >
+      <ListItem key={`${id}-view-name`} sx={{ gridArea: "name" }}>
         <ListItemText primary={name} secondary={t`Name`} />
-      </StyledViewListItem>
-      <StyledViewListItem key={`${id}-view-vacDays`}>
+      </ListItem>
+      <ListItem key={`${id}-view-vacDays`} sx={{ gridArea: "days" }}>
         <ListItemText primary={vacDays} secondary={t`Vacation Days`} />
-      </StyledViewListItem>
-      <StyledViewListItem key={`${id}-view-workdays`}>
+      </ListItem>
+      <ListItem key={`${id}-view-workdays`} sx={{ gridArea: "workdays" }}>
         <ListItemText
           primary={Object.keys(weekdays)
             .filter((weekday) => workdays[weekday as keyof Workdays])
@@ -93,13 +96,21 @@ const UsersDialogEntry = ({
             .join(", ")}
           secondary={t`Workdays`}
         />
-      </StyledViewListItem>
-    </StyledViewList>
+      </ListItem>
+    </List>
   );
 
   const ContentComponentEdit = (
-    <StyledEditList>
-      <StyledEditListItem key={`${id}-edit-name`} sx={{ width: "fit-content" }}>
+    <List
+      sx={{
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gridTemplateRows: "auto",
+        gridTemplateAreas: `"name days"
+        "workdays workdays"`,
+      }}
+    >
+      <ListItem key={`${id}-edit-name`} sx={{ gridArea: "name" }}>
         <TextField
           autoFocus
           margin="dense"
@@ -112,8 +123,8 @@ const UsersDialogEntry = ({
             setNameForm(event.target.value);
           }}
         />
-      </StyledEditListItem>
-      <StyledEditListItem key={`${id}-edit-vacDays`} sx={{ width: "fit-content" }}>
+      </ListItem>
+      <ListItem key={`${id}-edit-vacDays`} sx={{ gridArea: "days" }}>
         <TextField
           margin="dense"
           id="vacation-days"
@@ -125,8 +136,8 @@ const UsersDialogEntry = ({
             setVacDaysForm(Number(event.target.value));
           }}
         />
-      </StyledEditListItem>
-      <StyledEditListItem key={`${id}-edit-workdays`}>
+      </ListItem>
+      <ListItem key={`${id}-edit-workdays`} sx={{ gridArea: "workdays" }}>
         <FormControl component="fieldset">
           <FormLabel component="legend">{t`Workdays`}</FormLabel>
           <FormGroup aria-label="position" row>
@@ -146,8 +157,8 @@ const UsersDialogEntry = ({
             ))}
           </FormGroup>
         </FormControl>
-      </StyledEditListItem>
-    </StyledEditList>
+      </ListItem>
+    </List>
   );
 
   const onClickSave = (): void => {
