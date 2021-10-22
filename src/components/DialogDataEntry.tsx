@@ -75,9 +75,11 @@ const DialogDataEntry = ({
       <Box sx={{ ...entryStyles.contentStyle, width: "100%" }}>{ContentComponent}</Box>
       <ListItemSecondaryAction>
         <Tooltip arrow title={leftButtonTooltip}>
-          <IconButton onClick={leftButtonOnClick} disabled={leftButtonDisabled}>
-            {leftButtonIcon}
-          </IconButton>
+          <span>
+            <IconButton onClick={leftButtonOnClick} disabled={leftButtonDisabled}>
+              {leftButtonIcon}
+            </IconButton>
+          </span>
         </Tooltip>
         <Tooltip arrow title={rightButtonTooltip}>
           <IconButton onClick={rightButtonOnClick}>{rightButtonIcon}</IconButton>
