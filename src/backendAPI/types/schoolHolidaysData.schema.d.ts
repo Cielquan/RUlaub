@@ -19,8 +19,8 @@ export interface SchoolHolidaysDataSchema {
  */
 export interface SchoolHolidayData {
   name: string;
-  startDate?: ISODate;
+  startDate: ISODate;
   startYearDay: number;
-  endDate?: ISODate;
+  endDate: ISODate;
   endYearDay: number;
 }

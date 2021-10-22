@@ -16,7 +16,7 @@
         "endDate": { "$ref": "#/$defs/ISODate" },
         "endYearDay": { "type": "number" }
       },
-      "required": ["name", "startYearDay", "endYearDay"],
+      "required": ["name", "startDate", "startYearDay", "endDate", "endYearDay"],
       "additionalProperties": false
     },
     "ISODate": {
