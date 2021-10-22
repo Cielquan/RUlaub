@@ -51,7 +51,8 @@ const UsersDialogEntry = ({
   const [workdays, setWorkdays] = useState(user.workdays);
 
   const [nameForm, setNameForm] = useState(name);
-  const [vacDaysForm, setVacDaysForm] = useState(vacDays);
+  const [vacDaysForm, setVacDaysForm] = useState(vacDays.toString());
+  const [vacDaysFormError, setVacDaysFormError] = useState(false);
   const [workdaysForm, setWorkdaysForm] = useState(workdays);
 
   const [savedOnce, setSavedOnce] = useState(false);
@@ -67,8 +68,10 @@ const UsersDialogEntry = ({
     setVacDays(user.userStats.availableVacationDays);
     setWorkdays(user.workdays);
     setNameForm(user.name);
-    setVacDaysForm(user.userStats.availableVacationDays);
+    setVacDaysForm(user.userStats.availableVacationDays.toString());
+    setVacDaysFormError(false);
     setWorkdaysForm(user.workdays);
+    setEditable(false);
     setToBeRemoved(false);
   }, [user, usersDialogState]);
 
@@ -131,11 +134,18 @@ const UsersDialogEntry = ({
           margin="dense"
           id="vacation-days"
           label={t`Vacation Days`}
-          type="number"
+          type="text"
+          inputProps={{ inputMode: "numeric", pattern: "[0-9]+" }}
           variant="outlined"
           value={vacDaysForm}
-          onChange={(event): void => {
-            setVacDaysForm(Number(event.target.value));
+          error={vacDaysFormError}
+          helperText={vacDaysFormError ? t`Only positive numbers are permitted.` : ""}
+          onChange={(event) => {
+            const newValue = event.target.value;
+            setVacDaysFormError(
+              newValue === "" || Number.isNaN(Number(newValue)) || Number(newValue) < 0
+            );
+            setVacDaysForm(newValue);
           }}
         />
       </ListItem>
@@ -178,8 +188,9 @@ const UsersDialogEntry = ({
   );
 
   const onClickSave = (): void => {
+    if (vacDaysFormError) return;
     setName(nameForm);
-    setVacDays(vacDaysForm);
+    setVacDays(Number(vacDaysForm));
     setWorkdays(workdaysForm);
     setEditable(false);
     setSavedOnce(true);
@@ -189,13 +200,13 @@ const UsersDialogEntry = ({
         ...user,
         name: nameForm,
         workdays: workdaysForm,
-        userStats: { ...user.userStats, availableVacationDays: vacDaysForm },
+        userStats: { ...user.userStats, availableVacationDays: Number(vacDaysForm) },
       },
     ]);
   };
   const onClickEdit = (): void => {
     setNameForm(name);
-    setVacDaysForm(vacDays);
+    setVacDaysForm(vacDays.toString());
     setWorkdaysForm(workdays);
     setEditable(true);
   };
@@ -204,7 +215,8 @@ const UsersDialogEntry = ({
       removeUserFromQueue(id);
     } else {
       setNameForm(name);
-      setVacDaysForm(vacDays);
+      setVacDaysForm(vacDays.toString());
+      setVacDaysFormError(false);
       setWorkdaysForm(workdays);
       setEditable(false);
     }
@@ -254,7 +266,7 @@ const UsersDialogEntry = ({
       leftButtonOnClick={editable ? onClickSave : onClickEdit}
       leftButtonTooltip={editable ? t`Save entry` : t`Edit entry`}
       leftButtonIcon={editable ? <SaveIcon /> : <CreateIcon />}
-      leftButtonDisabled={toBeRemoved}
+      leftButtonDisabled={toBeRemoved || vacDaysFormError}
       rightButtonOnClick={rightButtonOnClick}
       rightButtonTooltip={rightButtonTooltip}
       rightButtonIcon={rightButtonIcon}
