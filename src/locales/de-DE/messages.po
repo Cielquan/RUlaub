@@ -17,6 +17,10 @@ msgstr ""
 msgid "No year to show selected. Please select one below:"
 msgstr "Kein Jahr zum Anzeigen ausgewählt. Bitte unten auswählen:"
 
+#: src/components/CalendarTableHeadCell.tsx:59
+msgid "Change displayed year."
+msgstr "Angezeigtes Jahr ändern."
+
 #: src/components/DarkThemeSwitch.tsx:25
 msgid "Activate Light Theme"
 msgstr "Helles Design aktivieren"
@@ -47,8 +51,8 @@ msgid "Settings"
 msgstr "Einstellungen"
 
 #: src/components/SettingsDialog.tsx:101
-#: src/components/UsersDialogEntry.tsx:96
 #: src/components/UsersDialogEntry.tsx:128
+#: src/components/UsersDialogEntry.tsx:160
 msgid "Name"
 msgstr "Name"
 
@@ -69,7 +73,7 @@ msgid "Left side offset on auto scroll to today."
 msgstr "Anzahl Tage links von 'Heute' beim Auto-Scroll."
 
 #: src/components/SettingsDialog.tsx:176
-#: src/components/UsersDialogEntry.tsx:151
+#: src/components/UsersDialogEntry.tsx:183
 msgid "Only positive numbers are permitted."
 msgstr "Nur positive Nummern sind erlaubt."
 
@@ -84,7 +88,7 @@ msgstr "Speichern"
 
 #: src/components/SettingsDialog.tsx:244
 #: src/components/UsersDialog.tsx:197
-#: src/components/UsersDialogEntry.tsx:260
+#: src/components/UsersDialogEntry.tsx:291
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -141,37 +145,37 @@ msgstr "Info"
 msgid "Save changes to database"
 msgstr "Änderungen in Datenbank speichern"
 
-#: src/components/UsersDialogEntry.tsx:99
-#: src/components/UsersDialogEntry.tsx:145
+#: src/components/UsersDialogEntry.tsx:131
+#: src/components/UsersDialogEntry.tsx:177
 msgid "Vacation Days"
 msgstr "Urlaubstage"
 
-#: src/components/UsersDialogEntry.tsx:107
-#: src/components/UsersDialogEntry.tsx:177
+#: src/components/UsersDialogEntry.tsx:139
+#: src/components/UsersDialogEntry.tsx:207
 msgid "Workdays"
 msgstr "Arbeitstage"
 
-#: src/components/UsersDialogEntry.tsx:133
+#: src/components/UsersDialogEntry.tsx:165
 msgid "User must have a name."
 msgstr "Nutzer müssen einen Namen haben."
 
-#: src/components/UsersDialogEntry.tsx:180
+#: src/components/UsersDialogEntry.tsx:210
 msgid "At least one workday must be selected."
 msgstr "Mindestens ein Arbeitstag muss ausgewählt werden."
 
-#: src/components/UsersDialogEntry.tsx:264
+#: src/components/UsersDialogEntry.tsx:295
 msgid "Cancel deletion of entry"
 msgstr "Löschung des Eintrags abbrechen"
 
-#: src/components/UsersDialogEntry.tsx:268
+#: src/components/UsersDialogEntry.tsx:299
 msgid "Delete entry"
 msgstr "Eintrag löschen"
 
-#: src/components/UsersDialogEntry.tsx:285
+#: src/components/UsersDialogEntry.tsx:316
 msgid "Save entry"
 msgstr "Eintrag speichern"
 
-#: src/components/UsersDialogEntry.tsx:285
+#: src/components/UsersDialogEntry.tsx:316
 msgid "Edit entry"
 msgstr "Eintrag ändern"
 

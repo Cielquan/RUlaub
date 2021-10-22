@@ -1,5 +1,6 @@
+import { t } from "@lingui/macro";
 import { StaticDatePicker } from "@mui/lab";
-import { Button, Popover, TextField, Typography } from "@mui/material";
+import { Button, Popover, TextField, Tooltip, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { CSSProperties, ReactElement } from "react";
 import { useDispatch } from "react-redux";
@@ -55,17 +56,19 @@ const CalendarTableHeadCell = ({ data, style }: Props): ReactElement => {
         width: "100%",
       }}
     >
-      <Button
-        aria-describedby={id}
-        variant="text"
-        fullWidth
-        sx={{ height: "100%" }}
-        onClick={handleClick}
-      >
-        <Typography sx={{ flexGrow: 1 }} variant="h3" component="div" align="center">
-          {data}
-        </Typography>
-      </Button>
+      <Tooltip arrow placement="top" title={t`Change displayed year.`}>
+        <Button
+          aria-describedby={id}
+          variant="text"
+          fullWidth
+          sx={{ height: "100%" }}
+          onClick={handleClick}
+        >
+          <Typography sx={{ flexGrow: 1 }} variant="h3" component="div" align="center">
+            {data}
+          </Typography>
+        </Button>
+      </Tooltip>
       <Popover
         id={id}
         open={open}
