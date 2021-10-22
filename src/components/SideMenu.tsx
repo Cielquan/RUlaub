@@ -157,11 +157,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
           key="Info"
           text={t`Info`}
           icon={<InfoIcon />}
-          onClick={() => {
-            if (typeof onClick === "function") onClick();
-            closeSideMenu();
-            openInfoPage();
-          }}
+          onClick={wrapOnClick(openInfoPage)}
         />
       </List>
     </Drawer>
