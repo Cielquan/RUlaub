@@ -76,7 +76,6 @@ const UsersDialogEntry = ({
     setVacDaysFormError(false);
     setWorkdaysForm(user.workdays);
     setWorkdaysFormError(false);
-    setEditable(false);
     setToBeRemoved(false);
   }, [user, usersDialogState]);
 
