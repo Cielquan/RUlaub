@@ -2,14 +2,30 @@ import { Dispatch } from "redux";
 
 import { PublicHolidaysDataActionType } from "../action-types";
 import {
+  PublicHolidaysDataAddAction,
   PublicHolidaysDataLoadAction,
+  PublicHolidaysDataRemoveAction,
   PublicHolidaysDataUpdateAction,
 } from "../actions";
 import { load } from "../../backendAPI/publicHolidaysData";
+import { PublicHolidayData } from "../../backendAPI/types/publicHolidaysData.schema";
 import {
   PublicHolidaysData,
   PublicHolidayDataPayload,
 } from "../utils/publicHolidaysData";
+
+export const addPublicHolidaysDataAction = (
+  payload: PublicHolidayData[]
+): PublicHolidaysDataAddAction => ({
+  type: PublicHolidaysDataActionType.ADD,
+  payload,
+});
+
+export const addPublicHolidaysData =
+  (payload: PublicHolidayData[]) =>
+  (dispatch: Dispatch<PublicHolidaysDataAddAction>): void => {
+    dispatch(addPublicHolidaysDataAction(payload));
+  };
 
 export const loadPublicHolidaysDataAction = (
   payload: PublicHolidaysData
@@ -31,15 +47,28 @@ export const loadPublicHolidaysData =
     }
   };
 
+export const removePublicHolidaysDataAction = (
+  payload: string[]
+): PublicHolidaysDataRemoveAction => ({
+  type: PublicHolidaysDataActionType.REMOVE,
+  payload,
+});
+
+export const removePublicHolidaysData =
+  (payload: string[]) =>
+  (dispatch: Dispatch<PublicHolidaysDataRemoveAction>): void => {
+    dispatch(removePublicHolidaysDataAction(payload));
+  };
+
 export const updatePublicHolidaysDataAction = (
-  payload: PublicHolidayDataPayload
+  payload: PublicHolidayDataPayload[]
 ): PublicHolidaysDataUpdateAction => ({
   type: PublicHolidaysDataActionType.UPDATE,
   payload,
 });
 
 export const updatePublicHolidaysData =
-  (payload: PublicHolidayDataPayload) =>
+  (payload: PublicHolidayDataPayload[]) =>
   (dispatch: Dispatch<PublicHolidaysDataUpdateAction>): void => {
     dispatch(updatePublicHolidaysDataAction(payload));
   };
