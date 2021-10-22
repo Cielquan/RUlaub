@@ -133,7 +133,7 @@
   - Each entry has:
     - invisible id
     - name
-    - month-day
+    - yearlessDate
     - easter sunday offset
     - (year)
     - button to edit
@@ -257,7 +257,7 @@ deletable
   - if entry has `year` it takes precedence, if year == current_year
   - if two or more entries are applicable for the current year, higher ID takes precedence
 - year (nullable)
-- day_month (nullable)
+- yearless_date (nullable)
   - `day` or `easter_sunday_offset` - if both: `day` takes precedence
 - easter_sunday_offset (+/- interger, nullable)
   - `day` or `easter_sunday_offset` - if both: `day` takes precedence

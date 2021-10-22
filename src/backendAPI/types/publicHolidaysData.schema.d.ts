@@ -5,7 +5,12 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type ISODate = string;
+/**
+ * This interface was referenced by `PublicHolidaysDataSchema`'s JSON-Schema definition
+ * via the `patternProperty` "^\d+$".
+ */
+export type PublicHolidayData = DateBasedHoliday | EasterBasedHoliday;
+export type YearlessISODate = string;
 
 /**
  * Schema for public holiday data coming from the backend
@@ -13,12 +18,17 @@ export type ISODate = string;
 export interface PublicHolidaysDataSchema {
   [k: string]: PublicHolidayData;
 }
-/**
- * This interface was referenced by `PublicHolidaysDataSchema`'s JSON-Schema definition
- * via the `patternProperty` "^\d+$".
- */
-export interface PublicHolidayData {
+export interface DateBasedHoliday {
   name: string;
-  date?: ISODate;
+  yearlessDate: YearlessISODate;
+  easterSundayOffset?: number;
+  year?: number;
+  yearDay: number;
+}
+export interface EasterBasedHoliday {
+  name: string;
+  yearlessDate?: YearlessISODate;
+  easterSundayOffset: number;
+  year?: number;
   yearDay: number;
 }
