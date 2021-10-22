@@ -1,3 +1,4 @@
+import { addData, removeData, updateData } from ".";
 import {
   PublicHolidayData,
   PublicHolidaysDataSchema,
@@ -9,34 +10,14 @@ export type PublicHolidayDataPayload = [string, PublicHolidayData];
 export const addPublicHolidaysData = (
   currentData: PublicHolidaysData,
   dataToAdd: PublicHolidayData[]
-): PublicHolidaysData => {
-  const rv: PublicHolidaysData = JSON.parse(JSON.stringify(currentData));
-  const highestID = Math.max(...Object.keys(currentData).map((id) => Number(id)));
-  dataToAdd.forEach((user, idx) => {
-    rv[highestID + idx + 1] = user;
-  });
-  return rv;
-};
+): PublicHolidaysData => addData<PublicHolidayData>(currentData, dataToAdd);
 
 export const removePublicHolidaysData = (
   currentData: PublicHolidaysData,
   dataIDsToRemove: string[]
-): PublicHolidaysData => {
-  const rv: PublicHolidaysData = JSON.parse(JSON.stringify(currentData));
-  dataIDsToRemove.forEach((userID) => {
-    delete rv[userID];
-  });
-  return rv;
-};
+): PublicHolidaysData => removeData<PublicHolidayData>(currentData, dataIDsToRemove);
 
 export const updatePublicHolidaysData = (
   currentData: PublicHolidaysData,
   updatePayload: PublicHolidayDataPayload[]
-): PublicHolidaysData => {
-  const rv: PublicHolidaysData = JSON.parse(JSON.stringify(currentData));
-  updatePayload.forEach((userUpdate) => {
-    const [id, updatedPublicHolidayData] = userUpdate;
-    rv[id] = updatedPublicHolidayData;
-  });
-  return rv;
-};
+): PublicHolidaysData => updateData<PublicHolidayData>(currentData, updatePayload);
