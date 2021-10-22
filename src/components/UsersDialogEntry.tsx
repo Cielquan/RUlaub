@@ -66,6 +66,39 @@ const UsersDialogEntry = ({
     setWorkdaysForm(rv);
   };
 
+  const validateName = (value: string): boolean => {
+    const error = value === "";
+    setNameFormError(error);
+    return !error;
+  };
+  const validateVacDays = (value: string): boolean => {
+    const error = value === "" || Number.isNaN(Number(value)) || Number(value) < 0;
+    setVacDaysFormError(error);
+    return !error;
+  };
+  interface validateWorkdaysParam {
+    day?: keyof Workdays;
+    value?: boolean;
+  }
+  const validateWorkdays = (param?: validateWorkdaysParam): boolean => {
+    const error =
+      Object.keys(workdaysForm).filter((workday) => {
+        if (param !== undefined && (workday as keyof Workdays) === param.day)
+          return param.value;
+        return workdaysForm[workday as keyof Workdays];
+      }).length === 0;
+    setWorkdaysFormError(error);
+    return !error;
+  };
+
+  const validateForm = (): boolean => {
+    let error = false;
+    error = !validateName(nameForm) || error;
+    error = !validateVacDays(vacDaysForm) || error;
+    error = !validateWorkdays() || error;
+    return !error;
+  };
+
   useEffect(() => {
     setName(user.name);
     setVacDays(user.userStats.availableVacationDays);
@@ -132,7 +165,7 @@ const UsersDialogEntry = ({
           helperText={nameFormError ? t`User must have a name.` : ""}
           onChange={(event): void => {
             const newValue = event.target.value;
-            setNameFormError(newValue === "");
+            setNameFormError(!validateName(newValue));
             setNameForm(newValue);
           }}
         />
@@ -150,9 +183,7 @@ const UsersDialogEntry = ({
           helperText={vacDaysFormError ? t`Only positive numbers are permitted.` : ""}
           onChange={(event) => {
             const newValue = event.target.value;
-            setVacDaysFormError(
-              newValue === "" || Number.isNaN(Number(newValue)) || Number(newValue) < 0
-            );
+            setVacDaysFormError(!validateVacDays(newValue));
             setVacDaysForm(newValue);
           }}
         />
@@ -189,7 +220,7 @@ const UsersDialogEntry = ({
                 onChange={(event): void => {
                   const target = event.target as HTMLInputElement;
                   setWorkdaysFormError(
-                    Object.values(workdaysForm).filter((v) => v).length === 1
+                    !validateWorkdays({ day, value: target.checked })
                   );
                   setWorkdayForm(day, target.checked);
                 }}
@@ -203,7 +234,8 @@ const UsersDialogEntry = ({
   );
 
   const onClickSave = (): void => {
-    if (nameFormError || vacDaysFormError || workdaysFormError) return;
+    if (nameFormError || vacDaysFormError || workdaysFormError || !validateForm())
+      return;
     setName(nameForm);
     setVacDays(Number(vacDaysForm));
     setWorkdays(workdaysForm);
