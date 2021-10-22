@@ -11,6 +11,7 @@ import {
   FormControl,
   FormControlLabel,
   FormGroup,
+  FormHelperText,
   FormLabel,
   List,
   ListItem,
@@ -51,9 +52,11 @@ const UsersDialogEntry = ({
   const [workdays, setWorkdays] = useState(user.workdays);
 
   const [nameForm, setNameForm] = useState(name);
+  const [nameFormError, setNameFormError] = useState(false);
   const [vacDaysForm, setVacDaysForm] = useState(vacDays.toString());
   const [vacDaysFormError, setVacDaysFormError] = useState(false);
   const [workdaysForm, setWorkdaysForm] = useState(workdays);
+  const [workdaysFormError, setWorkdaysFormError] = useState(false);
 
   const [savedOnce, setSavedOnce] = useState(false);
 
@@ -68,9 +71,11 @@ const UsersDialogEntry = ({
     setVacDays(user.userStats.availableVacationDays);
     setWorkdays(user.workdays);
     setNameForm(user.name);
+    setNameFormError(false);
     setVacDaysForm(user.userStats.availableVacationDays.toString());
     setVacDaysFormError(false);
     setWorkdaysForm(user.workdays);
+    setWorkdaysFormError(false);
     setEditable(false);
     setToBeRemoved(false);
   }, [user, usersDialogState]);
@@ -124,8 +129,12 @@ const UsersDialogEntry = ({
           type="text"
           variant="outlined"
           value={nameForm}
+          error={nameFormError}
+          helperText={nameFormError ? t`User must have a name.` : ""}
           onChange={(event): void => {
-            setNameForm(event.target.value);
+            const newValue = event.target.value;
+            setNameFormError(newValue === "");
+            setNameForm(newValue);
           }}
         />
       </ListItem>
@@ -152,20 +161,24 @@ const UsersDialogEntry = ({
       <ListItem key={`${id}-edit-workdays`} sx={{ gridArea: "workdays" }}>
         <FormControl
           component="fieldset"
+          error={workdaysFormError}
           sx={{
             marginY: 1,
             padding: 1,
             border: 1,
             borderRadius: 1,
-            borderColor: "action.disabled",
+            borderColor: workdaysFormError ? "error.main" : "action.disabled",
             "&:hover": {
-              borderColor: "action.active",
+              borderColor: workdaysFormError ? "error.main" : "action.active",
             },
           }}
         >
           <FormLabel component="legend" sx={{ paddingX: 1, fontSize: "0.75em" }}>
             {t`Workdays`}
           </FormLabel>
+          <FormHelperText error={workdaysFormError}>
+            {workdaysFormError ? t`At least one workday must be selected.` : ""}
+          </FormHelperText>
           <FormGroup aria-label="position" row>
             {weekdayKeys.map((day) => (
               <FormControlLabel
@@ -176,6 +189,9 @@ const UsersDialogEntry = ({
                 checked={workdaysForm[day]}
                 onChange={(event): void => {
                   const target = event.target as HTMLInputElement;
+                  setWorkdaysFormError(
+                    Object.values(workdaysForm).filter((v) => v).length === 1
+                  );
                   setWorkdayForm(day, target.checked);
                 }}
                 sx={{ margin: 0 }}
@@ -188,7 +204,7 @@ const UsersDialogEntry = ({
   );
 
   const onClickSave = (): void => {
-    if (vacDaysFormError) return;
+    if (nameFormError || vacDaysFormError || workdaysFormError) return;
     setName(nameForm);
     setVacDays(Number(vacDaysForm));
     setWorkdays(workdaysForm);
@@ -215,9 +231,11 @@ const UsersDialogEntry = ({
       removeUserFromQueue(id);
     } else {
       setNameForm(name);
+      setNameFormError(false);
       setVacDaysForm(vacDays.toString());
       setVacDaysFormError(false);
       setWorkdaysForm(workdays);
+      setWorkdaysFormError(false);
       setEditable(false);
     }
   };
@@ -266,7 +284,9 @@ const UsersDialogEntry = ({
       leftButtonOnClick={editable ? onClickSave : onClickEdit}
       leftButtonTooltip={editable ? t`Save entry` : t`Edit entry`}
       leftButtonIcon={editable ? <SaveIcon /> : <CreateIcon />}
-      leftButtonDisabled={toBeRemoved || vacDaysFormError}
+      leftButtonDisabled={
+        toBeRemoved || nameFormError || vacDaysFormError || workdaysFormError
+      }
       rightButtonOnClick={rightButtonOnClick}
       rightButtonTooltip={rightButtonTooltip}
       rightButtonIcon={rightButtonIcon}

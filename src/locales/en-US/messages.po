@@ -47,8 +47,8 @@ msgid "Settings"
 msgstr "Settings"
 
 #: src/components/SettingsDialog.tsx:101
-#: src/components/UsersDialogEntry.tsx:81
-#: src/components/UsersDialogEntry.tsx:105
+#: src/components/UsersDialogEntry.tsx:96
+#: src/components/UsersDialogEntry.tsx:128
 msgid "Name"
 msgstr "Name"
 
@@ -69,6 +69,7 @@ msgid "Left side offset on auto scroll to today."
 msgstr "Left side offset on auto scroll to today."
 
 #: src/components/SettingsDialog.tsx:176
+#: src/components/UsersDialogEntry.tsx:151
 msgid "Only positive numbers are permitted."
 msgstr "Only positive numbers are permitted."
 
@@ -83,7 +84,7 @@ msgstr "Save"
 
 #: src/components/SettingsDialog.tsx:244
 #: src/components/UsersDialog.tsx:197
-#: src/components/UsersDialogEntry.tsx:196
+#: src/components/UsersDialogEntry.tsx:260
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -140,29 +141,37 @@ msgstr "Info"
 msgid "Save changes to database"
 msgstr "Save changes to database"
 
-#: src/components/UsersDialogEntry.tsx:84
-#: src/components/UsersDialogEntry.tsx:118
+#: src/components/UsersDialogEntry.tsx:99
+#: src/components/UsersDialogEntry.tsx:145
 msgid "Vacation Days"
 msgstr "Vacation Days"
 
-#: src/components/UsersDialogEntry.tsx:92
-#: src/components/UsersDialogEntry.tsx:129
+#: src/components/UsersDialogEntry.tsx:107
+#: src/components/UsersDialogEntry.tsx:177
 msgid "Workdays"
 msgstr "Workdays"
 
-#: src/components/UsersDialogEntry.tsx:200
+#: src/components/UsersDialogEntry.tsx:133
+msgid "User must have a name."
+msgstr "User must have a name."
+
+#: src/components/UsersDialogEntry.tsx:180
+msgid "At least one workday must be selected."
+msgstr "At least one workday must be selected."
+
+#: src/components/UsersDialogEntry.tsx:264
 msgid "Cancel deletion of entry"
 msgstr "Cancel deletion of entry"
 
-#: src/components/UsersDialogEntry.tsx:204
+#: src/components/UsersDialogEntry.tsx:268
 msgid "Delete entry"
 msgstr "Delete entry"
 
-#: src/components/UsersDialogEntry.tsx:221
+#: src/components/UsersDialogEntry.tsx:285
 msgid "Save entry"
 msgstr "Save entry"
 
-#: src/components/UsersDialogEntry.tsx:221
+#: src/components/UsersDialogEntry.tsx:285
 msgid "Edit entry"
 msgstr "Edit entry"
 
