@@ -46,7 +46,7 @@ msgid "Add new Holiday"
 msgstr "Neuen Urlaub hinzufügen"
 
 #: src/components/SettingsDialog.tsx:92
-#: src/components/SideMenu.tsx:92
+#: src/components/SideMenu.tsx:138
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -92,52 +92,52 @@ msgstr "Speichern"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/components/SideMenu.tsx:97
+#: src/components/SideMenu.tsx:80
 msgid "Database"
 msgstr "Datenbank"
 
-#: src/components/SideMenu.tsx:98
+#: src/components/SideMenu.tsx:81
 msgid "Select"
 msgstr "Auswählen"
 
-#: src/components/SideMenu.tsx:99
-#: src/components/SideMenu.tsx:108
-#: src/components/SideMenu.tsx:113
-#: src/components/SideMenu.tsx:118
-#: src/components/SideMenu.tsx:123
+#: src/components/SideMenu.tsx:82
+#: src/components/SideMenu.tsx:91
+#: src/components/SideMenu.tsx:96
+#: src/components/SideMenu.tsx:101
+#: src/components/SideMenu.tsx:106
 msgid "Create"
 msgstr "Erstellen"
 
-#: src/components/SideMenu.tsx:102
+#: src/components/SideMenu.tsx:85
 #: src/components/UsersDialog.tsx:140
 msgid "Users"
 msgstr "Benutzer"
 
-#: src/components/SideMenu.tsx:103
-#: src/components/SideMenu.tsx:107
-#: src/components/SideMenu.tsx:112
-#: src/components/SideMenu.tsx:117
-#: src/components/SideMenu.tsx:122
+#: src/components/SideMenu.tsx:86
+#: src/components/SideMenu.tsx:90
+#: src/components/SideMenu.tsx:95
+#: src/components/SideMenu.tsx:100
+#: src/components/SideMenu.tsx:105
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: src/components/SideMenu.tsx:106
+#: src/components/SideMenu.tsx:89
 msgid "Public Holidays"
 msgstr "Feiertage"
 
-#: src/components/SideMenu.tsx:111
+#: src/components/SideMenu.tsx:94
 msgid "School Holidays"
 msgstr "Ferien"
 
-#: src/components/SideMenu.tsx:116
+#: src/components/SideMenu.tsx:99
 msgid "Vacation types"
 msgstr "Urlaubsarten"
 
-#: src/components/SideMenu.tsx:121
+#: src/components/SideMenu.tsx:104
 msgid "Vacation"
 msgstr "Urlaub"
 
-#: src/components/SideMenu.tsx:158
+#: src/components/SideMenu.tsx:145
 msgid "Info"
 msgstr "Info"
 

@@ -61,19 +61,6 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
       fn();
     };
 
-  const createSectionlessItems = (itemList: SectionlessItemList): ReactElement[] =>
-    itemList.map((item) => (
-      <React.Fragment key={item[0]}>
-        <SideMenuButton
-          text={item[0]}
-          icon={item[1]}
-          onClick={wrapOnClick(item[2])}
-          sxStyle={item[3]}
-        />
-        <Divider />
-      </React.Fragment>
-    ));
-
   const createDoubleButtons = (itemList: DoubleButtonItemList): ReactElement[] =>
     itemList.map((item) => (
       <React.Fragment key={item[0][0]}>
@@ -87,10 +74,6 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
         <Divider />
       </React.Fragment>
     ));
-
-  const sectionlessItemList: SectionlessItemList = [
-    [t`Settings`, <SettingsIcon />, openSettingsDialog],
-  ];
 
   const doubleButtonItemList: DoubleButtonItemList = [
     [
@@ -142,16 +125,20 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
         </IconButton>
       </SideMenuHeader>
       <Divider />
-      <List sx={{ paddingTop: 0 }}>
-        {createSectionlessItems(sectionlessItemList)}
-        {createDoubleButtons(doubleButtonItemList)}
-      </List>
+      <List sx={{ paddingTop: 0 }}>{createDoubleButtons(doubleButtonItemList)}</List>
       <List
         sx={{
           marginTop: "auto",
           marginBottom: 2,
         }}
       >
+        <Divider />
+        <SideMenuButton
+          key="Settings"
+          text={t`Settings`}
+          icon={<SettingsIcon />}
+          onClick={wrapOnClick(openSettingsDialog)}
+        />
         <Divider />
         <SideMenuButton
           key="Info"
