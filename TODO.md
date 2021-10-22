@@ -125,7 +125,6 @@
   && load data fresh from DB || or update state only
 - on year change query data for new year only
 - on query calc easter_sunday, if no day-month -> calc moving holiday date with offset
-- #TODO: think about calculated holidays
 
 - Dialog-Menu:
   - Show all entries ordered by start-date and then by id

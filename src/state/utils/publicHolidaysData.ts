@@ -1,3 +1,4 @@
+import { addData, removeData, updateData } from ".";
 import {
   PublicHolidayData,
   PublicHolidaysDataSchema,
@@ -6,13 +7,17 @@ import {
 export type PublicHolidaysData = PublicHolidaysDataSchema;
 export type PublicHolidayDataPayload = [string, PublicHolidayData];
 
+export const addPublicHolidaysData = (
+  currentData: PublicHolidaysData,
+  dataToAdd: PublicHolidayData[]
+): PublicHolidaysData => addData<PublicHolidayData>(currentData, dataToAdd);
+
+export const removePublicHolidaysData = (
+  currentData: PublicHolidaysData,
+  dataIDsToRemove: string[]
+): PublicHolidaysData => removeData<PublicHolidayData>(currentData, dataIDsToRemove);
+
 export const updatePublicHolidaysData = (
   currentData: PublicHolidaysData,
-  updatePayload: PublicHolidayDataPayload
-): PublicHolidaysData => {
-  const rv: PublicHolidaysData = JSON.parse(JSON.stringify(currentData));
-  const [id, updatedUserData] = updatePayload;
-  rv[id] = updatedUserData;
-
-  return rv;
-};
+  updatePayload: PublicHolidayDataPayload[]
+): PublicHolidaysData => updateData<PublicHolidayData>(currentData, updatePayload);

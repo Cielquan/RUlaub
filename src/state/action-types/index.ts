@@ -12,7 +12,9 @@ export enum InfoPageActionType {
 }
 
 export enum PublicHolidaysDataActionType {
+  ADD = "add public holidays data",
   LOAD = "load public holidays data",
+  REMOVE = "remove public holidays data",
   UPDATE = "update public holidays data",
 }
 
@@ -22,7 +24,9 @@ export enum PublicHolidaysDialogActionType {
 }
 
 export enum SchoolHolidaysDataActionType {
+  ADD = "add school holidays data",
   LOAD = "load school holidays data",
+  REMOVE = "remove school holidays data",
   UPDATE = "update school holidays data",
 }
 

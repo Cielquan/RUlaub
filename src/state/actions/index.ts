@@ -1,3 +1,5 @@
+import { PublicHolidayData } from "../../backendAPI/types/publicHolidaysData.schema";
+import { SchoolHolidayData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import { UserData } from "../../backendAPI/types/usersData.schema";
 import {
   CalendarRowUserMapActionType,
@@ -39,22 +41,39 @@ export type InfoPageAction = {
   type: InfoPageActionType;
 };
 
+export type PublicHolidaysDataAddAction = {
+  type: PublicHolidaysDataActionType.ADD;
+  payload: PublicHolidayData[];
+};
+
 export type PublicHolidaysDataLoadAction = {
   type: PublicHolidaysDataActionType.LOAD;
   payload: PublicHolidaysData;
 };
 
+export type PublicHolidaysDataRemoveAction = {
+  type: PublicHolidaysDataActionType.REMOVE;
+  payload: string[];
+};
+
 export type PublicHolidaysDataUpdateAction = {
   type: PublicHolidaysDataActionType.UPDATE;
-  payload: PublicHolidayDataPayload;
+  payload: PublicHolidayDataPayload[];
 };
 
 export type PublicHolidaysDataAction =
+  | PublicHolidaysDataAddAction
   | PublicHolidaysDataLoadAction
+  | PublicHolidaysDataRemoveAction
   | PublicHolidaysDataUpdateAction;
 
 export type PublicHolidaysDialogAction = {
   type: PublicHolidaysDialogActionType;
+};
+
+export type SchoolHolidaysDataAddAction = {
+  type: SchoolHolidaysDataActionType.ADD;
+  payload: SchoolHolidayData[];
 };
 
 export type SchoolHolidaysDataLoadAction = {
@@ -62,13 +81,20 @@ export type SchoolHolidaysDataLoadAction = {
   payload: SchoolHolidaysData;
 };
 
+export type SchoolHolidaysDataRemoveAction = {
+  type: SchoolHolidaysDataActionType.REMOVE;
+  payload: string[];
+};
+
 export type SchoolHolidaysDataUpdateAction = {
   type: SchoolHolidaysDataActionType.UPDATE;
-  payload: SchoolHolidayDataPayload;
+  payload: SchoolHolidayDataPayload[];
 };
 
 export type SchoolHolidaysDataAction =
+  | SchoolHolidaysDataAddAction
   | SchoolHolidaysDataLoadAction
+  | SchoolHolidaysDataRemoveAction
   | SchoolHolidaysDataUpdateAction;
 
 export type SchoolHolidaysDialogAction = {
