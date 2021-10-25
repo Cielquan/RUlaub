@@ -11,12 +11,40 @@
       "type": "object",
       "properties": {
         "name": { "type": "string" },
-        "startDate": { "$ref": "#/$defs/ISODate" },
-        "startYearDay": { "type": "number" },
-        "endDate": { "$ref": "#/$defs/ISODate" },
-        "endYearDay": { "type": "number" }
+        "start": {
+          "type": "object",
+          "properties": {
+            "date": { "$ref": "#/$defs/ISODate" },
+            "yearDay": {
+              "type": "number",
+              "description": "gets calculated in frontend on date selection in form"
+            },
+            "year": {
+              "type": "number",
+              "description": "gets calculated in frontend on date selection in form"
+            }
+          },
+          "required": ["date", "yearDay", "year"],
+          "additionalProperties": false
+        },
+        "end": {
+          "type": "object",
+          "properties": {
+            "date": { "$ref": "#/$defs/ISODate" },
+            "yearDay": {
+              "type": "number",
+              "description": "gets calculated in frontend on date selection in form"
+            },
+            "year": {
+              "type": "number",
+              "description": "gets calculated in frontend on date selection in form"
+            }
+          },
+          "required": ["date", "yearDay", "year"],
+          "additionalProperties": false
+        }
       },
-      "required": ["name", "startDate", "startYearDay", "endDate", "endYearDay"],
+      "required": ["name", "start", "end"],
       "additionalProperties": false
     },
     "ISODate": {

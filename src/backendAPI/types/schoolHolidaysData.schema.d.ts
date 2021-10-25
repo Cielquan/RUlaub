@@ -19,8 +19,26 @@ export interface SchoolHolidaysDataSchema {
  */
 export interface SchoolHolidayData {
   name: string;
-  startDate: ISODate;
-  startYearDay: number;
-  endDate: ISODate;
-  endYearDay: number;
+  start: {
+    date: ISODate;
+    /**
+     * gets calculated in frontend on date selection in form
+     */
+    yearDay: number;
+    /**
+     * gets calculated in frontend on date selection in form
+     */
+    year: number;
+  };
+  end: {
+    date: ISODate;
+    /**
+     * gets calculated in frontend on date selection in form
+     */
+    yearDay: number;
+    /**
+     * gets calculated in frontend on date selection in form
+     */
+    year: number;
+  };
 }

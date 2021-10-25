@@ -23,12 +23,18 @@ export interface DateBasedHoliday {
   yearlessDate: YearlessISODate;
   easterSundayOffset?: number;
   year?: number;
-  yearDay: number;
+  /**
+   * gets calculated in backend on load from DB
+   */
+  yearDay?: number;
 }
 export interface EasterBasedHoliday {
   name: string;
   yearlessDate?: YearlessISODate;
   easterSundayOffset: number;
   year?: number;
-  yearDay: number;
+  /**
+   * gets calculated in backend on load from DB
+   */
+  yearDay?: number;
 }

@@ -34,18 +34,42 @@ export interface Workdays {
 }
 export interface UserStat {
   availableVacationDays: number;
+  /**
+   * gets calculated in backend on load from DB for current year
+   */
   takenVacationDays: number;
   vacationStats: VacationStat[];
 }
+/**
+ * gets calculated in backend on load from DB for current year
+ */
 export interface VacationStat {
   type: string;
   count: number;
 }
 export interface Vacation {
-  id?: number;
-  startDate: ISODate;
-  startYearDay: number;
-  endDate: ISODate;
-  endYearDay: number;
-  hexColor: number;
+  id: number;
+  typeId: number;
+  start: {
+    date: ISODate;
+    /**
+     * gets calculated in frontend on date selection in form
+     */
+    yearDay: number;
+    /**
+     * gets calculated in frontend on date selection in form
+     */
+    year: number;
+  };
+  end: {
+    date: ISODate;
+    /**
+     * gets calculated in frontend on date selection in form
+     */
+    yearDay: number;
+    /**
+     * gets calculated in frontend on date selection in form
+     */
+    year: number;
+  };
 }

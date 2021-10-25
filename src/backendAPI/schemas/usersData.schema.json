@@ -47,7 +47,10 @@
       "type": "object",
       "properties": {
         "availableVacationDays": { "type": "number" },
-        "takenVacationDays": { "type": "number" },
+        "takenVacationDays": {
+          "type": "number",
+          "description": "gets calculated in backend on load from DB for current year"
+        },
         "vacationStats": {
           "type": "array",
           "items": { "$ref": "#/$defs/vacationStat" }
@@ -58,6 +61,7 @@
     },
     "vacationStat": {
       "type": "object",
+      "description": "gets calculated in backend on load from DB for current year",
       "properties": {
         "type": { "type": "string" },
         "count": { "type": "number" }
@@ -69,13 +73,41 @@
       "type": "object",
       "properties": {
         "id": { "type": "number" },
-        "startDate": { "$ref": "#/$defs/ISODate" },
-        "startYearDay": { "type": "number" },
-        "endDate": { "$ref": "#/$defs/ISODate" },
-        "endYearDay": { "type": "number" },
-        "hexColor": { "type": "number" }
+        "typeId": { "type": "number" },
+        "start": {
+          "type": "object",
+          "properties": {
+            "date": { "$ref": "#/$defs/ISODate" },
+            "yearDay": {
+              "type": "number",
+              "description": "gets calculated in frontend on date selection in form"
+            },
+            "year": {
+              "type": "number",
+              "description": "gets calculated in frontend on date selection in form"
+            }
+          },
+          "required": ["date", "yearDay", "year"],
+          "additionalProperties": false
+        },
+        "end": {
+          "type": "object",
+          "properties": {
+            "date": { "$ref": "#/$defs/ISODate" },
+            "yearDay": {
+              "type": "number",
+              "description": "gets calculated in frontend on date selection in form"
+            },
+            "year": {
+              "type": "number",
+              "description": "gets calculated in frontend on date selection in form"
+            }
+          },
+          "required": ["date", "yearDay", "year"],
+          "additionalProperties": false
+        }
       },
-      "required": ["startDate", "startYearDay", "endDate", "endYearDay", "hexColor"],
+      "required": ["id", "typeId", "start", "end"],
       "additionalProperties": false
     },
     "ISODate": {

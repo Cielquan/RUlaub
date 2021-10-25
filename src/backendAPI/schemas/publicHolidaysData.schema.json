@@ -21,9 +21,12 @@
         "yearlessDate": { "$ref": "#/$defs/YearlessISODate" },
         "easterSundayOffset": { "type": "number" },
         "year": { "type": "number" },
-        "yearDay": { "type": "number" }
+        "yearDay": {
+          "type": "number",
+          "description": "gets calculated in backend on load from DB"
+        }
       },
-      "required": ["name", "yearDay", "yearlessDate"],
+      "required": ["name", "yearlessDate"],
       "additionalProperties": false
     },
     "EasterBasedHoliday": {
@@ -33,9 +36,12 @@
         "yearlessDate": { "$ref": "#/$defs/YearlessISODate" },
         "easterSundayOffset": { "type": "number" },
         "year": { "type": "number" },
-        "yearDay": { "type": "number" }
+        "yearDay": {
+          "type": "number",
+          "description": "gets calculated in backend on load from DB"
+        }
       },
-      "required": ["name", "yearDay", "easterSundayOffset"],
+      "required": ["name", "easterSundayOffset"],
       "additionalProperties": false
     },
     "YearlessISODate": {
