@@ -3,11 +3,16 @@
 ### Ideas
 
 - change ico to a (self made) less "complex" one?
-- move calc of bigger things to backend for performance?
 - rewrite the calender without react-window?
-- Add advance settings for "styling":
-  - scroll to day 1 on year change or stay at current day?
-  - left offset of today when auto scroll; default 2
+
+- move calc of bigger things to backend for performance?
+- use backend only for file handling
+- by default load data from DB only for current year.
+  Add button to settings menu to load all data.
+  ? Add range slider to select range of years to load.
+  - on change of DB data / config:
+    1. send update to DB
+    2. after success load whole data from DB anew
 
 ### Misc
 
@@ -224,6 +229,13 @@ deletable with caskading down to vacations
 - id
 - name (unique)
 - vacation_days
+- monday
+- tuesday
+- wednesday
+- thursday
+- friday
+- saturday
+- sunday
 
 #### vacation_types
 
@@ -243,10 +255,12 @@ deletable
 - id
 - user_id
 - vacation_type_id
-- start_year
-- end_year
 - start_date
+- start_year_day
+- start_year
 - end_date
+- end_year_day
+- end_year
 
 #### public_holidays
 
@@ -269,7 +283,11 @@ deletable
 - id
 - name
 - start_date
+- start_year_day
+- start_year
 - end_date
+- end_year_day
+- end_year
 
 ---
 
