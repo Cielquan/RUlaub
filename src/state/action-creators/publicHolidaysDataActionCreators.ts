@@ -8,11 +8,11 @@ import {
   PublicHolidaysDataUpdateAction,
 } from "../actions";
 import { load } from "../../backendAPI/publicHolidaysData";
-import { PublicHolidayData } from "../../backendAPI/types/publicHolidaysData.schema";
 import {
-  PublicHolidaysData,
-  PublicHolidayDataPayload,
-} from "../utils/publicHolidaysData";
+  PublicHolidayData,
+  PublicHolidaysDataSchema as PublicHolidaysData,
+} from "../../backendAPI/types/publicHolidaysData.schema";
+import { PublicHolidayDataPayload } from "../utils/publicHolidaysData";
 
 export const addPublicHolidaysDataAction = (
   payload: PublicHolidayData[]

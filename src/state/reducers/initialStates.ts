@@ -2,9 +2,11 @@ import { LogLevel } from "../../backendAPI/types/configFile.schema";
 import { SupportedThemes } from "../../theme";
 import { Config, LogLevels } from "../utils/config";
 import { localeToLanguage, SupportedLocales } from "../utils/i18n";
-import { PublicHolidaysData } from "../utils/publicHolidaysData";
-import { SchoolHolidaysData } from "../utils/schoolHolidaysData";
-import { UsersData } from "../utils/usersData";
+// eslint-disable-next-line max-len
+import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
+// eslint-disable-next-line max-len
+import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
+import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 
 export const defaultLocale: SupportedLocales = "en-US";
 export const defaultLogLevel: LogLevel = LogLevels.INFO;

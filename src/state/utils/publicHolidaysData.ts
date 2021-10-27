@@ -1,10 +1,9 @@
 import { addData, removeData, updateData } from ".";
 import {
   PublicHolidayData,
-  PublicHolidaysDataSchema,
+  PublicHolidaysDataSchema as PublicHolidaysData,
 } from "../../backendAPI/types/publicHolidaysData.schema";
 
-export type PublicHolidaysData = PublicHolidaysDataSchema;
 export type PublicHolidayDataPayload = [string, PublicHolidayData];
 
 export const addPublicHolidaysData = (

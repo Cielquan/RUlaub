@@ -1,6 +1,15 @@
-import { PublicHolidayData } from "../../backendAPI/types/publicHolidaysData.schema";
-import { SchoolHolidayData } from "../../backendAPI/types/schoolHolidaysData.schema";
-import { UserData } from "../../backendAPI/types/usersData.schema";
+import {
+  PublicHolidayData,
+  PublicHolidaysDataSchema as PublicHolidaysData,
+} from "../../backendAPI/types/publicHolidaysData.schema";
+import {
+  SchoolHolidayData,
+  SchoolHolidaysDataSchema as SchoolHolidaysData,
+} from "../../backendAPI/types/schoolHolidaysData.schema";
+import {
+  UserData,
+  UsersDataSchema as UsersData,
+} from "../../backendAPI/types/usersData.schema";
 import {
   CalendarRowUserMapActionType,
   ConfigActionType,
@@ -17,15 +26,9 @@ import {
   VacationTypesDialogActionType,
 } from "../action-types";
 import { ConfigPayload } from "../utils/config";
-import {
-  PublicHolidaysData,
-  PublicHolidayDataPayload,
-} from "../utils/publicHolidaysData";
-import {
-  SchoolHolidaysData,
-  SchoolHolidayDataPayload,
-} from "../utils/schoolHolidaysData";
-import { UsersData, UserDataPayload } from "../utils/usersData";
+import { PublicHolidayDataPayload } from "../utils/publicHolidaysData";
+import { SchoolHolidayDataPayload } from "../utils/schoolHolidaysData";
+import { UserDataPayload } from "../utils/usersData";
 
 export type CalendarRowUserMapAction = {
   type: CalendarRowUserMapActionType;

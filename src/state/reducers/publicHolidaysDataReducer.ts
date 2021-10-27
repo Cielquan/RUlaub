@@ -1,10 +1,9 @@
 import { PublicHolidaysDataActionType } from "../action-types";
 import { PublicHolidaysDataAction } from "../actions";
+// eslint-disable-next-line max-len
+import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
 import { publicHolidaysDataInitState as initState } from "./initialStates";
-import {
-  PublicHolidaysData,
-  updatePublicHolidaysData,
-} from "../utils/publicHolidaysData";
+import { updatePublicHolidaysData } from "../utils/publicHolidaysData";
 
 const reducer = (
   state: PublicHolidaysData = initState,

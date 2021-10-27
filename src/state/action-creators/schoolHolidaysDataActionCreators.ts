@@ -8,11 +8,11 @@ import {
   SchoolHolidaysDataUpdateAction,
 } from "../actions";
 import { load } from "../../backendAPI/schoolHolidaysData";
-import { SchoolHolidayData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import {
-  SchoolHolidaysData,
-  SchoolHolidayDataPayload,
-} from "../utils/schoolHolidaysData";
+  SchoolHolidayData,
+  SchoolHolidaysDataSchema as SchoolHolidaysData,
+} from "../../backendAPI/types/schoolHolidaysData.schema";
+import { SchoolHolidayDataPayload } from "../utils/schoolHolidaysData";
 
 export const addSchoolHolidaysDataAction = (
   payload: SchoolHolidayData[]

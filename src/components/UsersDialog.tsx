@@ -19,8 +19,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { actionCreators, State } from "../state";
-import { UserDataPayload, UsersData } from "../state/utils/usersData";
-import { UserData } from "../backendAPI/types/usersData.schema";
+import { UserDataPayload } from "../state/utils/usersData";
+import {
+  UserData,
+  UsersDataSchema as UsersData,
+} from "../backendAPI/types/usersData.schema";
 
 import UsersDialogEntry from "./UsersDialogEntry";
 
@@ -57,6 +60,7 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
   }
   const [updatedUsers, setUpdatedUsers] = useState<updatedUsersQueue>({});
   const [newUsers, setNewUsers] = useState<UsersData>({});
+  // const [newUsers, setNewUsers] = useState<Omit<UsersData, "calc">>({});
 
   const addUpdatedUser = ([id, userData]:
     | UserDataPayload
