@@ -9,11 +9,12 @@ import {
 } from "../actions";
 import { logError } from "../../backendAPI";
 import { add, load, remove } from "../../backendAPI/schoolHolidaysData";
+// eslint-disable-next-line max-len
+import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import {
-  SchoolHolidayData,
-  SchoolHolidaysDataSchema as SchoolHolidaysData,
-} from "../../backendAPI/types/schoolHolidaysData.schema";
-import { SchoolHolidayDataPayload } from "../utils/schoolHolidaysData";
+  NewSchoolHolidayData,
+  SchoolHolidayDataPayload,
+} from "../utils/schoolHolidaysData";
 
 export const addSchoolHolidaysDataAction = (
   payload: SchoolHolidaysData
@@ -23,7 +24,7 @@ export const addSchoolHolidaysDataAction = (
 });
 
 export const addSchoolHolidaysData =
-  (payload: SchoolHolidayData[]) =>
+  (payload: NewSchoolHolidayData[]) =>
   async (dispatch: Dispatch<SchoolHolidaysDataAddAction>): Promise<void> => {
     try {
       const data = await add(payload);
