@@ -35,7 +35,6 @@
         "name",
         "workdays",
         "availableVacationDays",
-        "userStats",
         "vacations",
         "calc"
       ],
@@ -78,28 +77,20 @@
       "properties": {
         "id": { "type": "number" },
         "typeId": { "type": "number" },
-        "start": {
-          "type": "object",
-          "properties": {
-            "date": { "$ref": "#/$defs/ISODate" },
-            "yearDay": { "type": "number" },
-            "year": { "type": "number" }
-          },
-          "required": ["date", "yearDay", "year"],
-          "additionalProperties": false
-        },
-        "end": {
-          "type": "object",
-          "properties": {
-            "date": { "$ref": "#/$defs/ISODate" },
-            "yearDay": { "type": "number" },
-            "year": { "type": "number" }
-          },
-          "required": ["date", "yearDay", "year"],
-          "additionalProperties": false
-        }
+        "start":  { "$ref": "#/$defs/DateData" },
+        "end": { "$ref": "#/$defs/DateData" }
       },
       "required": ["id", "typeId", "start", "end"],
+      "additionalProperties": false
+    },
+    "DateData": {
+      "type": "object",
+      "properties": {
+        "date": { "$ref": "#/$defs/ISODate" },
+        "yearDay": { "type": "number" },
+        "year": { "type": "number" }
+      },
+      "required": ["date", "yearDay", "year"],
       "additionalProperties": false
     },
     "ISODate": {

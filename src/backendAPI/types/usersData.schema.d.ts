@@ -42,16 +42,13 @@ export interface Workdays {
 export interface Vacation {
   id: number;
   typeId: number;
-  start: {
-    date: ISODate;
-    yearDay: number;
-    year: number;
-  };
-  end: {
-    date: ISODate;
-    yearDay: number;
-    year: number;
-  };
+  start: DateData;
+  end: DateData;
+}
+export interface DateData {
+  date: ISODate;
+  yearDay: number;
+  year: number;
 }
 /**
  * gets calculated in backend on load from DB for current year
