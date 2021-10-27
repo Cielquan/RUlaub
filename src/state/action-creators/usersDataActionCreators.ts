@@ -11,7 +11,7 @@ import {
   UsersDataRemoveAction,
   UsersDataUpdateAction,
 } from "../actions";
-import { add, load } from "../../backendAPI/usersData";
+import { add, load, remove } from "../../backendAPI/usersData";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import { NewUserData, UserDataPayload } from "../utils/usersData";
 import { logError } from "../../backendAPI";
@@ -64,18 +64,28 @@ export const loadUsersData =
     }
   };
 
-export const removeUsersDataAction = (payload: string[]): UsersDataRemoveAction => ({
+export const removeUsersDataAction = (payload: UsersData): UsersDataRemoveAction => ({
   type: UsersDataActionType.REMOVE,
   payload,
 });
 
 export const removeUsersData =
   (payload: string[]) =>
-  (dispatch: Dispatch<UsersDataRemoveAction | CalendarRowUserMapAction>): void => {
-    batch(() => {
-      dispatch(removeUsersDataAction(payload));
-      dispatch(updateCalendarRowUserMapAction(store.getState().usersData));
-    });
+  async (
+    dispatch: Dispatch<UsersDataRemoveAction | CalendarRowUserMapAction>,
+    getState: typeof store.getState
+  ): Promise<void> => {
+    try {
+      const data = await remove(payload);
+
+      batch(() => {
+        dispatch(removeUsersDataAction(data));
+        dispatch(updateCalendarRowUserMapAction(getState().usersData));
+      });
+    } catch (error) {
+      // TODO:#i# add snackbar
+      logError(error as Error);
+    }
   };
 
 export const updateUsersDataAction = (

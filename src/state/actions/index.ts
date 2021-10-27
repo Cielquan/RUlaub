@@ -121,7 +121,7 @@ export type UsersDataLoadAction = {
 
 export type UsersDataRemoveAction = {
   type: UsersDataActionType.REMOVE;
-  payload: string[];
+  payload: UsersData;
 };
 
 export type UsersDataUpdateAction = {

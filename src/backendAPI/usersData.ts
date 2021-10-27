@@ -15,3 +15,5 @@ export const load = (): Promise<UsersData> =>
   createDataLoader<UsersData>("Users", fetchData, validateData)();
 
 export const add = (payload: NewUserData[]): Promise<UsersData> => load();
+
+export const remove = (payload: string[]): Promise<UsersData> => load();

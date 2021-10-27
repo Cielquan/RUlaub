@@ -1,4 +1,4 @@
-import { removeData, updateData } from ".";
+import { updateData } from ".";
 import {
   UserData,
   UsersDataSchema as UsersData,
@@ -7,11 +7,6 @@ import {
 export type UserDataPayload = [string, UserData];
 export type NewUserData = Omit<UserData, "calc" | "vacations">;
 export type NewUserDataPayload = [string, NewUserData];
-
-export const removeUsersData = (
-  currentData: UsersData,
-  dataIDsToRemove: string[]
-): UsersData => removeData<UserData>(currentData, dataIDsToRemove);
 
 export const updateUsersData = (
   currentData: UsersData,
