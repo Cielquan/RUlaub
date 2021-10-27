@@ -63,7 +63,7 @@
       "type": "object",
       "description": "gets calculated in backend on load from DB for current year",
       "properties": {
-        "type": { "type": "string" },
+        "typeId": { "type": "number" },
         "count": { "type": "number" }
       },
       "required": ["type", "count"],

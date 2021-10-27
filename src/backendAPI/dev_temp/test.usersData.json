@@ -13,7 +13,7 @@
     "userStats": {
       "availableVacationDays": 30,
       "takenVacationDays": 30,
-      "vacationStats": [{"type": "Vacation", "count": 10}]
+      "vacationStats": [{ "typeId": 0, "count": 10 }]
     },
     "vacations": [
       {
@@ -38,7 +38,7 @@
     "userStats": {
       "availableVacationDays": 30,
       "takenVacationDays": 30,
-      "vacationStats": [{"type": "Vacation", "count": 24}]
+      "vacationStats": [{ "typeId": 0, "count": 24 }]
     },
     "vacations": [
       {
