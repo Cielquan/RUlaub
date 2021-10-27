@@ -7,7 +7,8 @@ import {
   SchoolHolidaysDataRemoveAction,
   SchoolHolidaysDataUpdateAction,
 } from "../actions";
-import { load } from "../../backendAPI/schoolHolidaysData";
+import { logError } from "../../backendAPI";
+import { add, load, remove } from "../../backendAPI/schoolHolidaysData";
 import {
   SchoolHolidayData,
   SchoolHolidaysDataSchema as SchoolHolidaysData,
@@ -15,7 +16,7 @@ import {
 import { SchoolHolidayDataPayload } from "../utils/schoolHolidaysData";
 
 export const addSchoolHolidaysDataAction = (
-  payload: SchoolHolidayData[]
+  payload: SchoolHolidaysData
 ): SchoolHolidaysDataAddAction => ({
   type: SchoolHolidaysDataActionType.ADD,
   payload,
@@ -23,8 +24,15 @@ export const addSchoolHolidaysDataAction = (
 
 export const addSchoolHolidaysData =
   (payload: SchoolHolidayData[]) =>
-  (dispatch: Dispatch<SchoolHolidaysDataAddAction>): void => {
-    dispatch(addSchoolHolidaysDataAction(payload));
+  async (dispatch: Dispatch<SchoolHolidaysDataAddAction>): Promise<void> => {
+    try {
+      const data = await add(payload);
+
+      dispatch(addSchoolHolidaysDataAction(data));
+    } catch (error) {
+      // TODO:#i# add snackbar
+      logError(error as Error);
+    }
   };
 
 export const loadSchoolHolidaysDataAction = (
@@ -43,12 +51,12 @@ export const loadSchoolHolidaysData =
       dispatch(loadSchoolHolidaysDataAction(data));
     } catch (error) {
       // TODO:#i# add snackbar
-      console.error(error);
+      logError(error as Error);
     }
   };
 
 export const removeSchoolHolidaysDataAction = (
-  payload: string[]
+  payload: SchoolHolidaysData
 ): SchoolHolidaysDataRemoveAction => ({
   type: SchoolHolidaysDataActionType.REMOVE,
   payload,
@@ -56,8 +64,15 @@ export const removeSchoolHolidaysDataAction = (
 
 export const removeSchoolHolidaysData =
   (payload: string[]) =>
-  (dispatch: Dispatch<SchoolHolidaysDataRemoveAction>): void => {
-    dispatch(removeSchoolHolidaysDataAction(payload));
+  async (dispatch: Dispatch<SchoolHolidaysDataRemoveAction>): Promise<void> => {
+    try {
+      const data = await remove(payload);
+
+      dispatch(removeSchoolHolidaysDataAction(data));
+    } catch (error) {
+      // TODO:#i# add snackbar
+      logError(error as Error);
+    }
   };
 
 export const updateSchoolHolidaysDataAction = (

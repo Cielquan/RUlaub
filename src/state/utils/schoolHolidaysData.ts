@@ -1,20 +1,12 @@
-import { addData, removeData, updateData } from ".";
+import { updateData } from ".";
 import {
   SchoolHolidayData,
   SchoolHolidaysDataSchema as SchoolHolidaysData,
 } from "../../backendAPI/types/schoolHolidaysData.schema";
 
 export type SchoolHolidayDataPayload = [string, SchoolHolidayData];
-
-export const addSchoolHolidaysData = (
-  currentData: SchoolHolidaysData,
-  dataToAdd: SchoolHolidayData[]
-): SchoolHolidaysData => addData<SchoolHolidayData>(currentData, dataToAdd);
-
-export const removeSchoolHolidaysData = (
-  currentData: SchoolHolidaysData,
-  dataIDsToRemove: string[]
-): SchoolHolidaysData => removeData<SchoolHolidayData>(currentData, dataIDsToRemove);
+export type NewSchoolHolidayData = Omit<SchoolHolidayData, "calc">;
+export type NewSchoolHolidayDataPayload = [string, NewSchoolHolidayData];
 
 export const updateSchoolHolidaysData = (
   currentData: SchoolHolidaysData,

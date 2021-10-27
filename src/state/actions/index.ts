@@ -1,9 +1,7 @@
 // eslint-disable-next-line max-len
 import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
-import {
-  SchoolHolidayData,
-  SchoolHolidaysDataSchema as SchoolHolidaysData,
-} from "../../backendAPI/types/schoolHolidaysData.schema";
+// eslint-disable-next-line max-len
+import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import {
   CalendarRowUserMapActionType,
@@ -71,7 +69,7 @@ export type PublicHolidaysDialogAction = {
 
 export type SchoolHolidaysDataAddAction = {
   type: SchoolHolidaysDataActionType.ADD;
-  payload: SchoolHolidayData[];
+  payload: SchoolHolidaysData;
 };
 
 export type SchoolHolidaysDataLoadAction = {
@@ -81,7 +79,7 @@ export type SchoolHolidaysDataLoadAction = {
 
 export type SchoolHolidaysDataRemoveAction = {
   type: SchoolHolidaysDataActionType.REMOVE;
-  payload: string[];
+  payload: SchoolHolidaysData;
 };
 
 export type SchoolHolidaysDataUpdateAction = {
