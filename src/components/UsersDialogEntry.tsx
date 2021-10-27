@@ -48,7 +48,7 @@ const UsersDialogEntry = ({
   const [toBeRemoved, setToBeRemoved] = useState(false);
 
   const [name, setName] = useState(user.name);
-  const [vacDays, setVacDays] = useState(user.userStats.availableVacationDays);
+  const [vacDays, setVacDays] = useState(user.availableVacationDays);
   const [workdays, setWorkdays] = useState(user.workdays);
 
   const [nameForm, setNameForm] = useState(name);
@@ -101,11 +101,11 @@ const UsersDialogEntry = ({
 
   useEffect(() => {
     setName(user.name);
-    setVacDays(user.userStats.availableVacationDays);
+    setVacDays(user.availableVacationDays);
     setWorkdays(user.workdays);
     setNameForm(user.name);
     setNameFormError(false);
-    setVacDaysForm(user.userStats.availableVacationDays.toString());
+    setVacDaysForm(user.availableVacationDays.toString());
     setVacDaysFormError(false);
     setWorkdaysForm(user.workdays);
     setWorkdaysFormError(false);
@@ -247,7 +247,8 @@ const UsersDialogEntry = ({
         ...user,
         name: nameForm,
         workdays: workdaysForm,
-        userStats: { ...user.userStats, availableVacationDays: Number(vacDaysForm) },
+        availableVacationDays: Number(vacDaysForm),
+        calc: { ...user.calc },
       },
     ]);
   };

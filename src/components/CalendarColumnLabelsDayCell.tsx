@@ -30,7 +30,7 @@ const CalendarColumnLabelsDayCell = ({
 
   const isPublicHoliday = (): boolean =>
     Object.values(publicHolidaysDataState).filter(
-      (holiday) => holiday.yearDay === columnIndex + 1
+      (holiday) => holiday.calc.yearDay === columnIndex + 1
     ).length > 0;
 
   const isSchoolHoliday = (): boolean =>

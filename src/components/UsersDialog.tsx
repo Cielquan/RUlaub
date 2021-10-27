@@ -84,12 +84,12 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
         saturday: false,
         sunday: false,
       },
-      userStats: {
-        availableVacationDays: 0,
+      availableVacationDays: 0,
+      vacations: [],
+      calc: {
         takenVacationDays: 0,
         vacationStats: [],
       },
-      vacations: [],
     };
     setNewUsers(rv);
   };
