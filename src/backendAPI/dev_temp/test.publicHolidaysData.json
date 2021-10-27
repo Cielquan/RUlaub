@@ -2,6 +2,6 @@
   "0": {
     "name": "Neujahr",
     "yearlessDate": "01-01",
-    "calc": {"yearDay": 1}
+    "calc": { "yearDay": 1 }
   }
 }
