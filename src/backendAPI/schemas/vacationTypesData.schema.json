@@ -1,0 +1,23 @@
+{
+  "title": "Vacation Types Data Schema",
+  "description": "Schema for vacation types data coming from the backend",
+  "type": "object",
+  "patternProperties": {
+    "^\\d+$": { "$ref": "#/$defs/vacationTypeData" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "vacationTypeData": {
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "doCount": { "type": "boolean" },
+        "hexcolorDark": { "type": "string" },
+        "hexcolorLight": { "type": "string" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["type", "doCount", "hexcolorDark", "hexcolorLight", "active"],
+      "additionalProperties": false
+    }
+  }
+}

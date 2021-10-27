@@ -1,0 +1,9 @@
+{
+  "0": {
+    "type": "Vacation",
+    "doCount": true,
+    "hexcolorDark": "123456",
+    "hexcolorLight": "123456",
+    "active": true
+  }
+}
