@@ -11,25 +11,33 @@ import {
   UsersDataRemoveAction,
   UsersDataUpdateAction,
 } from "../actions";
-import { load } from "../../backendAPI/usersData";
-import {
-  UserData,
-  UsersDataSchema as UsersData,
-} from "../../backendAPI/types/usersData.schema";
-import { UserDataPayload } from "../utils/usersData";
+import { add, load } from "../../backendAPI/usersData";
+import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
+import { NewUserData, UserDataPayload } from "../utils/usersData";
+import { logError } from "../../backendAPI";
 
-export const addUsersDataAction = (payload: UserData[]): UsersDataAddAction => ({
+export const addUsersDataAction = (payload: UsersData): UsersDataAddAction => ({
   type: UsersDataActionType.ADD,
   payload,
 });
 
 export const addUsersData =
-  (payload: UserData[]) =>
-  (dispatch: Dispatch<UsersDataAddAction | CalendarRowUserMapAction>): void => {
-    batch(() => {
-      dispatch(addUsersDataAction(payload));
-      dispatch(updateCalendarRowUserMapAction(store.getState().usersData));
-    });
+  (payload: NewUserData[]) =>
+  async (
+    dispatch: Dispatch<UsersDataAddAction | CalendarRowUserMapAction>,
+    getState: typeof store.getState
+  ): Promise<void> => {
+    try {
+      const data = await add(payload);
+
+      batch(() => {
+        dispatch(addUsersDataAction(data));
+        dispatch(updateCalendarRowUserMapAction(getState().usersData));
+      });
+    } catch (error) {
+      // TODO:#i# add snackbar
+      logError(error as Error);
+    }
   };
 
 export const loadUsersDataAction = (payload: UsersData): UsersDataLoadAction => ({
@@ -52,7 +60,7 @@ export const loadUsersData =
       });
     } catch (error) {
       // TODO:#i# add snackbar
-      console.error(error);
+      logError(error as Error);
     }
   };
 

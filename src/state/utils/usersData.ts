@@ -1,15 +1,12 @@
-import { addData, removeData, updateData } from ".";
+import { removeData, updateData } from ".";
 import {
   UserData,
   UsersDataSchema as UsersData,
 } from "../../backendAPI/types/usersData.schema";
 
 export type UserDataPayload = [string, UserData];
-
-export const addUsersData = (
-  currentData: UsersData,
-  dataToAdd: UserData[]
-): UsersData => addData<UserData>(currentData, dataToAdd);
+export type NewUserData = Omit<UserData, "calc" | "vacations">;
+export type NewUserDataPayload = [string, NewUserData];
 
 export const removeUsersData = (
   currentData: UsersData,

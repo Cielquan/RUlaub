@@ -18,12 +18,9 @@ import React, { forwardRef, ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { UserData } from "../backendAPI/types/usersData.schema";
 import { actionCreators, State } from "../state";
-import { UserDataPayload } from "../state/utils/usersData";
-import {
-  UserData,
-  UsersDataSchema as UsersData,
-} from "../backendAPI/types/usersData.schema";
+import { NewUserData, UserDataPayload } from "../state/utils/usersData";
 
 import UsersDialogEntry from "./UsersDialogEntry";
 
@@ -59,8 +56,10 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
     [k: string]: UserData | undefined;
   }
   const [updatedUsers, setUpdatedUsers] = useState<updatedUsersQueue>({});
-  const [newUsers, setNewUsers] = useState<UsersData>({});
-  // const [newUsers, setNewUsers] = useState<Omit<UsersData, "calc">>({});
+  interface newUsersQueue {
+    [k: string]: NewUserData;
+  }
+  const [newUsers, setNewUsers] = useState<newUsersQueue>({});
 
   const addUpdatedUser = ([id, userData]:
     | UserDataPayload
@@ -89,11 +88,6 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
         sunday: false,
       },
       availableVacationDays: 0,
-      vacations: [],
-      calc: {
-        takenVacationDays: 0,
-        vacationStats: [],
-      },
     };
     setNewUsers(rv);
   };
@@ -119,7 +113,7 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
         .map((userID) => [userID, updatedUsers[userID]] as UserDataPayload)
     );
 
-    addUsersData(Object.values(newUsers).filter((user) => user.name !== ""));
+    addUsersData(Object.values(newUsers));
   };
 
   useEffect(() => {

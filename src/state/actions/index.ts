@@ -6,10 +6,7 @@ import {
   SchoolHolidayData,
   SchoolHolidaysDataSchema as SchoolHolidaysData,
 } from "../../backendAPI/types/schoolHolidaysData.schema";
-import {
-  UserData,
-  UsersDataSchema as UsersData,
-} from "../../backendAPI/types/usersData.schema";
+import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import {
   CalendarRowUserMapActionType,
   ConfigActionType,
@@ -114,7 +111,7 @@ export type SideMenuAction = {
 
 export type UsersDataAddAction = {
   type: UsersDataActionType.ADD;
-  payload: UserData[];
+  payload: UsersData;
 };
 
 export type UsersDataLoadAction = {

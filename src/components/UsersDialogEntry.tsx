@@ -21,17 +21,21 @@ import {
 import React, { ReactElement, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { State } from "../state";
-import { UserDataPayload } from "../state/utils/usersData";
 import { UserData, Workdays } from "../backendAPI/types/usersData.schema";
+import { State } from "../state";
+import {
+  NewUserData,
+  NewUserDataPayload,
+  UserDataPayload,
+} from "../state/utils/usersData";
 import { getWeekdayKeyList, getWeekdayNameDict } from "../utils/dateUtils";
 
 import DialogDataEntry, { EntryStyle } from "./DialogDataEntry";
 
 interface Props {
   id: string;
-  user: UserData;
-  addUserToQueue(e: UserDataPayload | [string, undefined]): void;
+  user: UserData | NewUserData;
+  addUserToQueue(e: UserDataPayload | [string, undefined] | NewUserDataPayload): void;
   removeUserFromQueue(e: string): void;
 }
 
@@ -248,7 +252,6 @@ const UsersDialogEntry = ({
         name: nameForm,
         workdays: workdaysForm,
         availableVacationDays: Number(vacDaysForm),
-        calc: { ...user.calc },
       },
     ]);
   };
