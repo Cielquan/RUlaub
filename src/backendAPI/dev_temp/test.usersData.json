@@ -43,10 +43,10 @@
         "start": { "date": "2021-01-03", "yearDay": 3, "year": 2021 },
         "end": { "date": "2021-02-15", "yearDay": 46, "year": 2021 }
       }
-    ]
-  },
-  "calc": {
-    "takenVacationDays": 30,
-    "vacationStats": [{ "typeId": 0, "count": 24 }]
+    ],
+    "calc": {
+      "takenVacationDays": 30,
+      "vacationStats": [{ "typeId": 0, "count": 24 }]
+    }
   }
 }
