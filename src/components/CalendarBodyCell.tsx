@@ -28,8 +28,8 @@ const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement
     return (
       vacations.filter(
         (vacation) =>
-          vacation.startYearDay <= columnIndex + 1 &&
-          vacation.endYearDay >= columnIndex + 1
+          vacation.start.yearDay <= columnIndex + 1 &&
+          vacation.end.yearDay >= columnIndex + 1
       ).length > 0
     );
   };

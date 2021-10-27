@@ -36,7 +36,8 @@ const CalendarColumnLabelsDayCell = ({
   const isSchoolHoliday = (): boolean =>
     Object.values(schoolHolidaysDataState).filter(
       (holiday) =>
-        holiday.startYearDay <= columnIndex + 1 && holiday.endYearDay >= columnIndex + 1
+        holiday.start.yearDay <= columnIndex + 1 &&
+        holiday.end.yearDay >= columnIndex + 1
     ).length > 0;
 
   const date = datePlusDays(data[0], columnIndex);
