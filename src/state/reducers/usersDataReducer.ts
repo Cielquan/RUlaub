@@ -6,9 +6,11 @@ import { updateUsersData } from "../utils/usersData";
 
 const reducer = (state: UsersData = initState, action: UsersDataAction): UsersData => {
   switch (action.type) {
-    case UsersDataActionType.ADD ||
-      UsersDataActionType.LOAD ||
-      UsersDataActionType.REMOVE:
+    case UsersDataActionType.ADD:
+      return action.payload;
+    case UsersDataActionType.LOAD:
+      return action.payload;
+    case UsersDataActionType.REMOVE:
       return action.payload;
     case UsersDataActionType.UPDATE:
       return updateUsersData(state, action.payload);
