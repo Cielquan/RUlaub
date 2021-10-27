@@ -1,8 +1,8 @@
 export default class DataFetchingError extends Error {
   additionalInfo: string;
 
-  constructor(additionalInfo = "") {
-    super("Error while fetching data from backend.");
+  constructor(dataTarget: string, additionalInfo = "") {
+    super(`Error while fetching data (${dataTarget}) from backend.`);
     this.name = "DataValidationError";
     this.additionalInfo = additionalInfo;
   }

@@ -11,4 +11,4 @@ export const validateData = (data: unknown): Promise<UsersData> =>
   createDataValidator<UsersData>(UsersDataSchema)(data);
 
 export const load = (): Promise<UsersData> =>
-  createDataLoader<UsersData>(fetchData, validateData)();
+  createDataLoader<UsersData>("Users", fetchData, validateData)();

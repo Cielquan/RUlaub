@@ -11,4 +11,4 @@ export const validateData = (data: unknown): Promise<ConfigFile> =>
   createDataValidator<ConfigFile>(ConfigFileSchema)(data);
 
 export const load = (): Promise<ConfigFile> =>
-  createDataLoader<ConfigFile>(fetchData, validateData)();
+  createDataLoader<ConfigFile>("Config", fetchData, validateData)();

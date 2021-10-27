@@ -1,8 +1,8 @@
 export default class DataValidationError extends Error {
   additionalInfo: string;
 
-  constructor(additionalInfo = "") {
-    super("Error while validating data from backend.");
+  constructor(dataTarget: string, additionalInfo = "") {
+    super(`Error while validating data (${dataTarget}) from backend.`);
     this.name = "DataValidationError";
     this.additionalInfo = additionalInfo;
   }

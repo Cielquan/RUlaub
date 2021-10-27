@@ -12,4 +12,4 @@ export const validateData = (data: unknown): Promise<PublicHolidaysData> =>
   createDataValidator<PublicHolidaysData>(PublicHolidaysDataSchema)(data);
 
 export const load = (): Promise<PublicHolidaysData> =>
-  createDataLoader<PublicHolidaysData>(fetchData, validateData)();
+  createDataLoader<PublicHolidaysData>("Public Holidays", fetchData, validateData)();

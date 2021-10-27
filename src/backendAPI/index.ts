@@ -19,14 +19,18 @@ export const createDataValidator =
   };
 
 export const createDataLoader =
-  <T>(fetchFn: () => Promise<unknown>, validateFn: (data: unknown) => Promise<T>) =>
+  <T>(
+    target: string,
+    fetchFn: () => Promise<unknown>,
+    validateFn: (data: unknown) => Promise<T>
+  ) =>
   async (): Promise<T> => {
     let data;
     try {
       data = await fetchFn();
     } catch (error) {
       logError(error as Error);
-      return Promise.reject(new DataFetchingError((error as Error).toString()));
+      return Promise.reject(new DataFetchingError(target, (error as Error).toString()));
     }
 
     let validatedData;
@@ -34,7 +38,9 @@ export const createDataLoader =
       validatedData = await validateFn(data);
     } catch (error) {
       logError(error as Error);
-      return Promise.reject(new DataValidationError((error as Error).toString()));
+      return Promise.reject(
+        new DataValidationError(target, (error as Error).toString())
+      );
     }
 
     return Promise.resolve(validatedData);
