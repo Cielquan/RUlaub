@@ -1,8 +1,3 @@
-// eslint-disable-next-line max-len
-import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
-// eslint-disable-next-line max-len
-import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
-import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import {
   CalendarRowUserMapActionType,
   ConfigActionType,
@@ -18,6 +13,11 @@ import {
   VacationDialogActionType,
   VacationTypesDialogActionType,
 } from "../action-types";
+// eslint-disable-next-line max-len
+import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
+// eslint-disable-next-line max-len
+import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
+import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import { ConfigPayload } from "../utils/config";
 import { PublicHolidayDataPayload } from "../utils/publicHolidaysData";
 import { SchoolHolidayDataPayload } from "../utils/schoolHolidaysData";
