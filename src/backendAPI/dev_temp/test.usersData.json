@@ -13,16 +13,14 @@
     "userStats": {
       "availableVacationDays": 30,
       "takenVacationDays": 30,
-      "vacationStats": []
+      "vacationStats": [{"type": "Vacation", "count": 10}]
     },
     "vacations": [
       {
-        "id": 1,
-        "startDate": "2021-01-01",
-        "startYearDay": 1,
-        "endDate": "2021-01-15",
-        "endYearDay": 15,
-        "hexColor": 123
+        "id": 0,
+        "typeId": 0,
+        "start": { "date": "2021-01-01", "yearDay": 1, "year": 2021 },
+        "end": { "date": "2021-01-15", "yearDay": 15, "year": 2021 }
       }
     ]
   },
@@ -40,16 +38,14 @@
     "userStats": {
       "availableVacationDays": 30,
       "takenVacationDays": 30,
-      "vacationStats": []
+      "vacationStats": [{"type": "Vacation", "count": 24}]
     },
     "vacations": [
       {
-        "id": 2,
-        "startDate": "2021-01-03",
-        "startYearDay": 3,
-        "endDate": "2021-02-15",
-        "endYearDay": 46,
-        "hexColor": 12345
+        "id": 1,
+        "typeId": 0,
+        "start": { "date": "2021-01-03", "yearDay": 3, "year": 2021 },
+        "end": { "date": "2021-02-15", "yearDay": 46, "year": 2021 }
       }
     ]
   }
