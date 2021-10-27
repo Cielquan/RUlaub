@@ -31,13 +31,7 @@
           "additionalProperties": false
         }
       },
-      "required": [
-        "name",
-        "workdays",
-        "availableVacationDays",
-        "vacations",
-        "calc"
-      ],
+      "required": ["name", "workdays", "availableVacationDays", "vacations", "calc"],
       "additionalProperties": false
     },
     "workdays": {
@@ -77,7 +71,7 @@
       "properties": {
         "id": { "type": "number" },
         "typeId": { "type": "number" },
-        "start":  { "$ref": "#/$defs/DateData" },
+        "start": { "$ref": "#/$defs/DateData" },
         "end": { "$ref": "#/$defs/DateData" }
       },
       "required": ["id", "typeId", "start", "end"],
