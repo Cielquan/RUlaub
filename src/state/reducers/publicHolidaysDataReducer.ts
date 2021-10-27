@@ -10,7 +10,11 @@ const reducer = (
   action: PublicHolidaysDataAction
 ): PublicHolidaysData => {
   switch (action.type) {
+    case PublicHolidaysDataActionType.ADD:
+      return action.payload;
     case PublicHolidaysDataActionType.LOAD:
+      return action.payload;
+    case PublicHolidaysDataActionType.REMOVE:
       return action.payload;
     case PublicHolidaysDataActionType.UPDATE:
       return updatePublicHolidaysData(state, action.payload);

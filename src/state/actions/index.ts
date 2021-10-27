@@ -1,7 +1,5 @@
-import {
-  PublicHolidayData,
-  PublicHolidaysDataSchema as PublicHolidaysData,
-} from "../../backendAPI/types/publicHolidaysData.schema";
+// eslint-disable-next-line max-len
+import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
 import {
   SchoolHolidayData,
   SchoolHolidaysDataSchema as SchoolHolidaysData,
@@ -43,7 +41,7 @@ export type InfoPageAction = {
 
 export type PublicHolidaysDataAddAction = {
   type: PublicHolidaysDataActionType.ADD;
-  payload: PublicHolidayData[];
+  payload: PublicHolidaysData;
 };
 
 export type PublicHolidaysDataLoadAction = {
@@ -53,7 +51,7 @@ export type PublicHolidaysDataLoadAction = {
 
 export type PublicHolidaysDataRemoveAction = {
   type: PublicHolidaysDataActionType.REMOVE;
-  payload: string[];
+  payload: PublicHolidaysData;
 };
 
 export type PublicHolidaysDataUpdateAction = {
