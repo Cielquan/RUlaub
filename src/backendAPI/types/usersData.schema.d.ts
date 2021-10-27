@@ -20,8 +20,15 @@ export interface UsersDataSchema {
 export interface UserData {
   name: string;
   workdays: Workdays;
-  userStats: UserStat;
+  availableVacationDays: number;
   vacations: Vacation[];
+  /**
+   * gets calculated in backend on load from DB for current year
+   */
+  calc: {
+    takenVacationDays: number;
+    vacationStats: VacationStat[];
+  };
 }
 export interface Workdays {
   monday: boolean;
@@ -32,44 +39,24 @@ export interface Workdays {
   saturday: boolean;
   sunday: boolean;
 }
-export interface UserStat {
-  availableVacationDays: number;
-  /**
-   * gets calculated in backend on load from DB for current year
-   */
-  takenVacationDays: number;
-  vacationStats: VacationStat[];
-}
-/**
- * gets calculated in backend on load from DB for current year
- */
-export interface VacationStat {
-  type: string;
-  count: number;
-}
 export interface Vacation {
   id: number;
   typeId: number;
   start: {
     date: ISODate;
-    /**
-     * gets calculated in frontend on date selection in form
-     */
     yearDay: number;
-    /**
-     * gets calculated in frontend on date selection in form
-     */
     year: number;
   };
   end: {
     date: ISODate;
-    /**
-     * gets calculated in frontend on date selection in form
-     */
     yearDay: number;
-    /**
-     * gets calculated in frontend on date selection in form
-     */
     year: number;
   };
+}
+/**
+ * gets calculated in backend on load from DB for current year
+ */
+export interface VacationStat {
+  typeId: number;
+  count: number;
 }

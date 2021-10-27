@@ -21,12 +21,17 @@
         "yearlessDate": { "$ref": "#/$defs/YearlessISODate" },
         "easterSundayOffset": { "type": "number" },
         "year": { "type": "number" },
-        "yearDay": {
-          "type": "number",
-          "description": "gets calculated in backend on load from DB"
+        "calc": {
+          "type": "object",
+          "description": "gets calculated in backend on load from DB",
+          "properties": {
+            "yearDay": { "type": "number" }
+          },
+          "required": ["yearDay"],
+          "additionalProperties": false
         }
       },
-      "required": ["name", "yearlessDate"],
+      "required": ["name", "yearlessDate", "calc"],
       "additionalProperties": false
     },
     "EasterBasedHoliday": {
@@ -36,12 +41,17 @@
         "yearlessDate": { "$ref": "#/$defs/YearlessISODate" },
         "easterSundayOffset": { "type": "number" },
         "year": { "type": "number" },
-        "yearDay": {
-          "type": "number",
-          "description": "gets calculated in backend on load from DB"
+        "calc": {
+          "type": "object",
+          "description": "gets calculated in backend on load from DB",
+          "properties": {
+            "yearDay": { "type": "number" }
+          },
+          "required": ["yearDay"],
+          "additionalProperties": false
         }
       },
-      "required": ["name", "easterSundayOffset"],
+      "required": ["name", "easterSundayOffset", "calc"],
       "additionalProperties": false
     },
     "YearlessISODate": {

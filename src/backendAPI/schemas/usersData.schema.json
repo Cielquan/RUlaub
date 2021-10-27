@@ -12,13 +12,33 @@
       "properties": {
         "name": { "type": "string" },
         "workdays": { "$ref": "#/$defs/workdays" },
-        "userStats": { "$ref": "#/$defs/userStat" },
+        "availableVacationDays": { "type": "number" },
         "vacations": {
           "type": "array",
           "items": { "$ref": "#/$defs/vacation" }
+        },
+        "calc": {
+          "type": "object",
+          "description": "gets calculated in backend on load from DB for current year",
+          "properties": {
+            "takenVacationDays": { "type": "number" },
+            "vacationStats": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/vacationStat" }
+            }
+          },
+          "required": ["takenVacationDays", "vacationStats"],
+          "additionalProperties": false
         }
       },
-      "required": ["name", "workdays", "userStats", "vacations"],
+      "required": [
+        "name",
+        "workdays",
+        "availableVacationDays",
+        "userStats",
+        "vacations",
+        "calc"
+      ],
       "additionalProperties": false
     },
     "workdays": {
@@ -43,22 +63,6 @@
       ],
       "additionalProperties": false
     },
-    "userStat": {
-      "type": "object",
-      "properties": {
-        "availableVacationDays": { "type": "number" },
-        "takenVacationDays": {
-          "type": "number",
-          "description": "gets calculated in backend on load from DB for current year"
-        },
-        "vacationStats": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/vacationStat" }
-        }
-      },
-      "required": ["availableVacationDays", "takenVacationDays", "vacationStats"],
-      "additionalProperties": false
-    },
     "vacationStat": {
       "type": "object",
       "description": "gets calculated in backend on load from DB for current year",
@@ -66,7 +70,7 @@
         "typeId": { "type": "number" },
         "count": { "type": "number" }
       },
-      "required": ["type", "count"],
+      "required": ["typeId", "count"],
       "additionalProperties": false
     },
     "vacation": {
@@ -78,14 +82,8 @@
           "type": "object",
           "properties": {
             "date": { "$ref": "#/$defs/ISODate" },
-            "yearDay": {
-              "type": "number",
-              "description": "gets calculated in frontend on date selection in form"
-            },
-            "year": {
-              "type": "number",
-              "description": "gets calculated in frontend on date selection in form"
-            }
+            "yearDay": { "type": "number" },
+            "year": { "type": "number" }
           },
           "required": ["date", "yearDay", "year"],
           "additionalProperties": false
@@ -94,14 +92,8 @@
           "type": "object",
           "properties": {
             "date": { "$ref": "#/$defs/ISODate" },
-            "yearDay": {
-              "type": "number",
-              "description": "gets calculated in frontend on date selection in form"
-            },
-            "year": {
-              "type": "number",
-              "description": "gets calculated in frontend on date selection in form"
-            }
+            "yearDay": { "type": "number" },
+            "year": { "type": "number" }
           },
           "required": ["date", "yearDay", "year"],
           "additionalProperties": false

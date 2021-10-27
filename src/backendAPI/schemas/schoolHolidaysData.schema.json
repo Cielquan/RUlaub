@@ -15,14 +15,8 @@
           "type": "object",
           "properties": {
             "date": { "$ref": "#/$defs/ISODate" },
-            "yearDay": {
-              "type": "number",
-              "description": "gets calculated in frontend on date selection in form"
-            },
-            "year": {
-              "type": "number",
-              "description": "gets calculated in frontend on date selection in form"
-            }
+            "yearDay": { "type": "number" },
+            "year": { "type": "number" }
           },
           "required": ["date", "yearDay", "year"],
           "additionalProperties": false
@@ -31,14 +25,8 @@
           "type": "object",
           "properties": {
             "date": { "$ref": "#/$defs/ISODate" },
-            "yearDay": {
-              "type": "number",
-              "description": "gets calculated in frontend on date selection in form"
-            },
-            "year": {
-              "type": "number",
-              "description": "gets calculated in frontend on date selection in form"
-            }
+            "yearDay": { "type": "number" },
+            "year": { "type": "number" }
           },
           "required": ["date", "yearDay", "year"],
           "additionalProperties": false

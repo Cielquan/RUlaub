@@ -26,7 +26,9 @@ export interface DateBasedHoliday {
   /**
    * gets calculated in backend on load from DB
    */
-  yearDay?: number;
+  calc: {
+    yearDay: number;
+  };
 }
 export interface EasterBasedHoliday {
   name: string;
@@ -36,5 +38,7 @@ export interface EasterBasedHoliday {
   /**
    * gets calculated in backend on load from DB
    */
-  yearDay?: number;
+  calc: {
+    yearDay: number;
+  };
 }
