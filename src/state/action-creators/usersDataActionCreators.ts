@@ -11,10 +11,10 @@ import {
   UsersDataRemoveAction,
   UsersDataUpdateAction,
 } from "../actions";
+import { logError } from "../../backendAPI";
 import { add, load, remove } from "../../backendAPI/usersData";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import { NewUserData, UserDataPayload } from "../utils/usersData";
-import { logError } from "../../backendAPI";
 
 export const addUsersDataAction = (payload: UsersData): UsersDataAddAction => ({
   type: UsersDataActionType.ADD,
