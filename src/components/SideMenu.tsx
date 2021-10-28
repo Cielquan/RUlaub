@@ -21,12 +21,7 @@ import { bindActionCreators } from "redux";
 
 import { actionCreators, State } from "../state";
 
-import SideMenuButton, {
-  ButtonIcon,
-  ButtonOnClick,
-  ButtonSxStyle,
-  ButtonText,
-} from "./SideMenuButton";
+import SideMenuButton from "./SideMenuButton";
 import SideMenuDoubleButton, { DoubleButtonItemList } from "./SideMenuDoubleButton";
 
 const SideMenuHeader = styled("div")(({ theme }) => ({
@@ -38,10 +33,6 @@ const SideMenuHeader = styled("div")(({ theme }) => ({
   // necessary to match toolbar height
   ...theme.mixins.toolbar,
 }));
-
-type SectionlessItemList = Array<
-  [ButtonText, ButtonIcon, ButtonOnClick, ButtonSxStyle?]
->;
 
 interface Props {
   onClick?(): void;
