@@ -68,14 +68,14 @@ const UsersDialogEntry = ({
 
   type NameFormError = typeof NameFormError[keyof typeof NameFormError];
   const NameFormError = {
-    NONE: false,
+    NONE: "",
     EMPTY: t`User must have a name.`,
   } as const;
   const [nameFormError, setNameFormError] = useState<NameFormError>(NameFormError.NONE);
 
   type VacDaysFormError = typeof VacDaysFormError[keyof typeof VacDaysFormError];
   const VacDaysFormError = {
-    NONE: false,
+    NONE: "",
     EMPTY: t`User must a number of Vacation days.`,
     INVALID: t`Only positive whole numbers are permitted.`,
   } as const;
@@ -85,7 +85,7 @@ const UsersDialogEntry = ({
 
   type WorkdaysFormError = typeof WorkdaysFormError[keyof typeof WorkdaysFormError];
   const WorkdaysFormError = {
-    NONE: false,
+    NONE: "",
     EMPTY: t`At least one workday must be selected.`,
   } as const;
   const [workdaysFormError, setWorkdaysFormError] = useState<WorkdaysFormError>(
@@ -139,21 +139,28 @@ const UsersDialogEntry = ({
 
   const validateForm = (): boolean => {
     let error = false;
-    error = validateName(nameForm) !== NameFormError.NONE || error;
-    error = validateVacDays(vacDaysForm) !== VacDaysFormError.NONE || error;
-    error = validateWorkdays() !== WorkdaysFormError.NONE || error;
+    error = !validateName(nameForm) || error;
+    error = !validateVacDays(vacDaysForm) || error;
+    error = !validateWorkdays() || error;
     return !error;
   };
 
   useEffect(() => {
-    setName(user.name);
-    setVacDays(user.availableVacationDays);
-    setWorkdays(user.workdays);
-    setNameForm(user.name);
-    setVacDaysForm(user.availableVacationDays.toString());
-    setWorkdaysForm(user.workdays);
-    resetErrorStates();
-    setToBeRemoved(false);
+    if (!usersDialogState) {
+      setEditable(false);
+      setToBeRemoved(false);
+      setSavedOnce(false);
+
+      setName(user.name);
+      setVacDays(user.availableVacationDays);
+      setWorkdays(user.workdays);
+
+      setNameForm(user.name);
+      setVacDaysForm(user.availableVacationDays.toString());
+      setWorkdaysForm(user.workdays);
+
+      resetErrorStates();
+    }
   }, [resetErrorStates, user, usersDialogState]);
 
   const weekdays = getWeekdayNameDict();
@@ -208,9 +215,8 @@ const UsersDialogEntry = ({
           error={nameFormError !== NameFormError.NONE}
           helperText={nameFormError}
           onChange={(event): void => {
-            const newValue = event.target.value;
-            validateName(newValue);
-            setNameForm(newValue);
+            validateName(event.target.value);
+            setNameForm(event.target.value);
           }}
         />
       </ListItem>
@@ -226,9 +232,8 @@ const UsersDialogEntry = ({
           error={vacDaysFormError !== VacDaysFormError.NONE}
           helperText={vacDaysFormError}
           onChange={(event) => {
-            const newValue = event.target.value;
-            validateVacDays(newValue);
-            setVacDaysForm(newValue);
+            validateVacDays(event.target.value);
+            setVacDaysForm(event.target.value);
           }}
         />
       </ListItem>
