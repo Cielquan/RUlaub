@@ -46,13 +46,13 @@ msgid "Add new Holiday"
 msgstr "Neuen Urlaub hinzufügen"
 
 #: src/components/SettingsDialog.tsx:92
-#: src/components/SideMenu.tsx:138
+#: src/components/SideMenu.tsx:133
 msgid "Settings"
 msgstr "Einstellungen"
 
 #: src/components/SettingsDialog.tsx:101
-#: src/components/UsersDialogEntry.tsx:128
-#: src/components/UsersDialogEntry.tsx:160
+#: src/components/UsersDialogEntry.tsx:132
+#: src/components/UsersDialogEntry.tsx:164
 msgid "Name"
 msgstr "Name"
 
@@ -73,7 +73,6 @@ msgid "Left side offset on auto scroll to today."
 msgstr "Anzahl Tage links von 'Heute' beim Auto-Scroll."
 
 #: src/components/SettingsDialog.tsx:176
-#: src/components/UsersDialogEntry.tsx:183
 msgid "Only positive numbers are permitted."
 msgstr "Nur positive Nummern sind erlaubt."
 
@@ -82,100 +81,103 @@ msgid "On year switch, scroll to beginning of the year, if not current year."
 msgstr "Scoll zum Jahrsstart beim Jahreswechsel, wenn es nicht das aktuelle Jahr ist."
 
 #: src/components/SettingsDialog.tsx:234
-#: src/components/UsersDialog.tsx:187
+#: src/components/UsersDialog.tsx:185
 msgid "Save"
 msgstr "Speichern"
 
 #: src/components/SettingsDialog.tsx:244
-#: src/components/UsersDialog.tsx:197
-#: src/components/UsersDialogEntry.tsx:291
+#: src/components/UsersDialog.tsx:195
+#: src/components/UsersDialogEntry.tsx:297
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/components/SideMenu.tsx:80
+#: src/components/SideMenu.tsx:76
 msgid "Database"
 msgstr "Datenbank"
 
-#: src/components/SideMenu.tsx:81
+#: src/components/SideMenu.tsx:77
 msgid "Select"
 msgstr "Auswählen"
 
-#: src/components/SideMenu.tsx:82
+#: src/components/SideMenu.tsx:78
 #: src/components/SideMenu.tsx:91
 #: src/components/SideMenu.tsx:96
 #: src/components/SideMenu.tsx:101
-#: src/components/SideMenu.tsx:106
 msgid "Create"
 msgstr "Erstellen"
 
-#: src/components/SideMenu.tsx:85
-#: src/components/UsersDialog.tsx:140
+#: src/components/SideMenu.tsx:81
+#: src/components/UsersDialog.tsx:138
 msgid "Users"
 msgstr "Benutzer"
 
+#: src/components/SideMenu.tsx:82
 #: src/components/SideMenu.tsx:86
 #: src/components/SideMenu.tsx:90
 #: src/components/SideMenu.tsx:95
 #: src/components/SideMenu.tsx:100
-#: src/components/SideMenu.tsx:105
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: src/components/SideMenu.tsx:89
+#: src/components/SideMenu.tsx:85
 msgid "Public Holidays"
 msgstr "Feiertage"
 
-#: src/components/SideMenu.tsx:94
+#: src/components/SideMenu.tsx:89
 msgid "School Holidays"
 msgstr "Ferien"
 
-#: src/components/SideMenu.tsx:99
+#: src/components/SideMenu.tsx:94
 msgid "Vacation types"
 msgstr "Urlaubsarten"
 
-#: src/components/SideMenu.tsx:104
+#: src/components/SideMenu.tsx:99
 msgid "Vacation"
 msgstr "Urlaub"
 
-#: src/components/SideMenu.tsx:145
+#: src/components/SideMenu.tsx:140
 msgid "Info"
 msgstr "Info"
 
-#: src/components/UsersDialog.tsx:176
+#: src/components/UsersDialog.tsx:174
 msgid "Save changes to database"
 msgstr "Änderungen in Datenbank speichern"
 
-#: src/components/UsersDialogEntry.tsx:131
-#: src/components/UsersDialogEntry.tsx:177
+#: src/components/UsersDialogEntry.tsx:135
+#: src/components/UsersDialogEntry.tsx:181
 msgid "Vacation Days"
 msgstr "Urlaubstage"
 
-#: src/components/UsersDialogEntry.tsx:139
-#: src/components/UsersDialogEntry.tsx:207
+#: src/components/UsersDialogEntry.tsx:143
+#: src/components/UsersDialogEntry.tsx:213
 msgid "Workdays"
 msgstr "Arbeitstage"
 
-#: src/components/UsersDialogEntry.tsx:165
+#: src/components/UsersDialogEntry.tsx:169
 msgid "User must have a name."
 msgstr "Nutzer müssen einen Namen haben."
 
-#: src/components/UsersDialogEntry.tsx:210
+#: src/components/UsersDialogEntry.tsx:188
+msgid "Only positive whole numbers are permitted."
+msgstr "Nur positive ganze Zahlen sind zulässig."
+
+#: src/components/UsersDialogEntry.tsx:216
 msgid "At least one workday must be selected."
 msgstr "Mindestens ein Arbeitstag muss ausgewählt werden."
 
-#: src/components/UsersDialogEntry.tsx:295
+#: src/components/UsersDialogEntry.tsx:301
 msgid "Cancel deletion of entry"
 msgstr "Löschung des Eintrags abbrechen"
 
-#: src/components/UsersDialogEntry.tsx:299
+#: src/components/UsersDialogEntry.tsx:305
 msgid "Delete entry"
 msgstr "Eintrag löschen"
 
-#: src/components/UsersDialogEntry.tsx:316
+#: src/components/UsersDialogEntry.tsx:322
 msgid "Save entry"
 msgstr "Eintrag speichern"
 
-#: src/components/UsersDialogEntry.tsx:316
+#: src/components/UsersDialogEntry.tsx:322
 msgid "Edit entry"
 msgstr "Eintrag ändern"
 

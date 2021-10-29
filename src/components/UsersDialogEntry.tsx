@@ -76,7 +76,7 @@ const UsersDialogEntry = ({
     return !error;
   };
   const validateVacDays = (value: string): boolean => {
-    const error = value === "" || Number.isNaN(Number(value)) || Number(value) < 0;
+    const error = value === "" || !Number.isInteger(Number(value)) || Number(value) < 0;
     setVacDaysFormError(error);
     return !error;
   };
@@ -184,7 +184,9 @@ const UsersDialogEntry = ({
           variant="outlined"
           value={vacDaysForm}
           error={vacDaysFormError}
-          helperText={vacDaysFormError ? t`Only positive numbers are permitted.` : ""}
+          helperText={
+            vacDaysFormError ? t`Only positive whole numbers are permitted.` : ""
+          }
           onChange={(event) => {
             const newValue = event.target.value;
             setVacDaysFormError(!validateVacDays(newValue));
