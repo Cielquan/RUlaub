@@ -40,8 +40,13 @@ interface Props {
 
 const SideMenu = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { closeSideMenu, openInfoPage, openSettingsDialog, openUsersDialog } =
-    bindActionCreators(actionCreators, dispatch);
+  const {
+    closeSideMenu,
+    openInfoPage,
+    openPublicHolidaysDialog,
+    openSettingsDialog,
+    openUsersDialog,
+  } = bindActionCreators(actionCreators, dispatch);
   const sideMenuState = useSelector((state: State) => state.sideMenu);
 
   const wrapOnClick =
@@ -78,8 +83,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     ],
     [
       [t`Public Holidays`, <EventBusyIcon />],
-      [<CreateIcon />, () => undefined, t`Edit`],
-      [<AddIcon />, () => undefined, t`Create`],
+      [<CreateIcon />, openPublicHolidaysDialog, t`Edit`],
     ],
     [
       [t`School Holidays`, <DateRangeIcon />],

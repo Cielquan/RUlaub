@@ -45,16 +45,113 @@ msgstr "Close"
 msgid "Add new Holiday"
 msgstr "Add new Holiday"
 
+#: src/components/PublicHolidaysDialog.tsx:155
+#: src/components/SideMenu.tsx:85
+msgid "Public Holidays"
+msgstr "Public Holidays"
+
+#: src/components/PublicHolidaysDialog.tsx:191
+#: src/components/UsersDialog.tsx:174
+msgid "Save changes to database"
+msgstr "Save changes to database"
+
+#: src/components/PublicHolidaysDialog.tsx:202
+#: src/components/SettingsDialog.tsx:234
+#: src/components/UsersDialog.tsx:185
+msgid "Save"
+msgstr "Save"
+
+#: src/components/PublicHolidaysDialog.tsx:212
+#: src/components/PublicHolidaysDialogEntry.tsx:455
+#: src/components/SettingsDialog.tsx:244
+#: src/components/UsersDialog.tsx:195
+#: src/components/UsersDialogEntry.tsx:349
+msgid "Cancel"
+msgstr "Cancel"
+
+#: src/components/PublicHolidaysDialogEntry.tsx:81
+msgid "Public Holiday must have a name."
+msgstr "Public Holiday must have a name."
+
+#: src/components/PublicHolidaysDialogEntry.tsx:88
+#: src/components/PublicHolidaysDialogEntry.tsx:108
+#: src/components/UsersDialogEntry.tsx:80
+msgid "Only positive whole numbers are permitted."
+msgstr "Only positive whole numbers are permitted."
+
+#: src/components/PublicHolidaysDialogEntry.tsx:96
+msgid "A date must be entered."
+msgstr "A date must be entered."
+
+#: src/components/PublicHolidaysDialogEntry.tsx:97
+msgid "Invalid Format. Please use format: Day-Month e.g. 31-01"
+msgstr "Invalid Format. Please use format: Day-Month e.g. 31-01"
+
+#: src/components/PublicHolidaysDialogEntry.tsx:98
+msgid "Invalid Date. Please enter date in format: Day-Month e.g. 31-01"
+msgstr "Invalid Date. Please enter date in format: Day-Month e.g. 31-01"
+
+#: src/components/PublicHolidaysDialogEntry.tsx:107
+msgid "An offset must be entered."
+msgstr "An offset must be entered."
+
+#: src/components/PublicHolidaysDialogEntry.tsx:224
+#: src/components/PublicHolidaysDialogEntry.tsx:252
+#: src/components/SettingsDialog.tsx:101
+#: src/components/UsersDialogEntry.tsx:179
+#: src/components/UsersDialogEntry.tsx:211
+msgid "Name"
+msgstr "Name"
+
+#: src/components/PublicHolidaysDialogEntry.tsx:229
+#: src/components/PublicHolidaysDialogEntry.tsx:319
+#: src/components/PublicHolidaysDialogEntry.tsx:332
+msgid "Day-Month"
+msgstr "Day-Month"
+
+#: src/components/PublicHolidaysDialogEntry.tsx:229
+#: src/components/PublicHolidaysDialogEntry.tsx:324
+#: src/components/PublicHolidaysDialogEntry.tsx:347
+msgid "Easter Sunday Offset"
+msgstr "Easter Sunday Offset"
+
+#: src/components/PublicHolidaysDialogEntry.tsx:233
+msgid "Every"
+msgstr "Every"
+
+#: src/components/PublicHolidaysDialogEntry.tsx:233
+#: src/components/PublicHolidaysDialogEntry.tsx:367
+msgid "Year"
+msgstr "Year"
+
+#: src/components/PublicHolidaysDialogEntry.tsx:293
+msgid "Date"
+msgstr "Date"
+
+#: src/components/PublicHolidaysDialogEntry.tsx:459
+#: src/components/UsersDialogEntry.tsx:353
+msgid "Cancel deletion of entry"
+msgstr "Cancel deletion of entry"
+
+#: src/components/PublicHolidaysDialogEntry.tsx:463
+#: src/components/UsersDialogEntry.tsx:357
+msgid "Delete entry"
+msgstr "Delete entry"
+
+#: src/components/PublicHolidaysDialogEntry.tsx:480
+#: src/components/UsersDialogEntry.tsx:374
+msgid "Save entry"
+msgstr "Save entry"
+
+#: src/components/PublicHolidaysDialogEntry.tsx:480
+#: src/components/UsersDialogEntry.tsx:374
+msgid "Edit entry"
+msgstr "Edit entry"
+
 #: src/components/SettingsDialog.tsx:92
 #: src/components/SideMenu.tsx:133
 msgid "Settings"
 msgstr "Settings"
-
-#: src/components/SettingsDialog.tsx:101
-#: src/components/UsersDialogEntry.tsx:172
-#: src/components/UsersDialogEntry.tsx:204
-msgid "Name"
-msgstr "Name"
 
 #: src/components/SettingsDialog.tsx:107
 msgid "Enter your name to have it be preselected when entering new vacation."
@@ -79,17 +176,6 @@ msgstr "Only positive numbers are permitted."
 #: src/components/SettingsDialog.tsx:204
 msgid "On year switch, scroll to beginning of the year, if not current year."
 msgstr "On year switch, scroll to beginning of the year, if not current year."
-
-#: src/components/SettingsDialog.tsx:234
-#: src/components/UsersDialog.tsx:185
-msgid "Save"
-msgstr "Save"
-
-#: src/components/SettingsDialog.tsx:244
-#: src/components/UsersDialog.tsx:195
-#: src/components/UsersDialogEntry.tsx:344
-msgid "Cancel"
-msgstr "Cancel"
 
 #: src/components/SideMenu.tsx:76
 msgid "Database"
@@ -119,10 +205,6 @@ msgstr "Users"
 msgid "Edit"
 msgstr "Edit"
 
-#: src/components/SideMenu.tsx:85
-msgid "Public Holidays"
-msgstr "Public Holidays"
-
 #: src/components/SideMenu.tsx:89
 msgid "School Holidays"
 msgstr "School Holidays"
@@ -139,10 +221,6 @@ msgstr "Vacation"
 msgid "Info"
 msgstr "Info"
 
-#: src/components/UsersDialog.tsx:174
-msgid "Save changes to database"
-msgstr "Save changes to database"
-
 #: src/components/UsersDialogEntry.tsx:72
 msgid "User must have a name."
 msgstr "User must have a name."
@@ -151,39 +229,19 @@ msgstr "User must have a name."
 msgid "User must a number of Vacation days."
 msgstr "User must a number of Vacation days."
 
-#: src/components/UsersDialogEntry.tsx:80
-msgid "Only positive whole numbers are permitted."
-msgstr "Only positive whole numbers are permitted."
-
 #: src/components/UsersDialogEntry.tsx:89
 msgid "At least one workday must be selected."
 msgstr "At least one workday must be selected."
 
-#: src/components/UsersDialogEntry.tsx:175
-#: src/components/UsersDialogEntry.tsx:221
+#: src/components/UsersDialogEntry.tsx:182
+#: src/components/UsersDialogEntry.tsx:227
 msgid "Vacation Days"
 msgstr "Vacation Days"
 
-#: src/components/UsersDialogEntry.tsx:183
-#: src/components/UsersDialogEntry.tsx:257
+#: src/components/UsersDialogEntry.tsx:190
+#: src/components/UsersDialogEntry.tsx:262
 msgid "Workdays"
 msgstr "Workdays"
-
-#: src/components/UsersDialogEntry.tsx:348
-msgid "Cancel deletion of entry"
-msgstr "Cancel deletion of entry"
-
-#: src/components/UsersDialogEntry.tsx:352
-msgid "Delete entry"
-msgstr "Delete entry"
-
-#: src/components/UsersDialogEntry.tsx:369
-msgid "Save entry"
-msgstr "Save entry"
-
-#: src/components/UsersDialogEntry.tsx:369
-msgid "Edit entry"
-msgstr "Edit entry"
 
 #: src/utils/dateUtils.ts:19
 msgid "January"

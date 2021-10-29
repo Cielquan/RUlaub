@@ -7,6 +7,7 @@ import Calendar from "./components/Calendar";
 import InfoPage from "./components/InfoPage";
 import Navbar from "./components/Navbar";
 import NewHolidayButton from "./components/NewHolidayButton";
+import PublicHolidaysDialog from "./components/PublicHolidaysDialog";
 import SettingsDialog from "./components/SettingsDialog";
 import SideMenu from "./components/SideMenu";
 import UsersDialog from "./components/UsersDialog";
@@ -47,6 +48,7 @@ const App = (): ReactElement => (
       </StyledMain>
     </Box>
     <InfoPage />
+    <PublicHolidaysDialog />
     <SettingsDialog />
     <UsersDialog />
   </Box>
