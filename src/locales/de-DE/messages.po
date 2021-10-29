@@ -51,8 +51,8 @@ msgid "Settings"
 msgstr "Einstellungen"
 
 #: src/components/SettingsDialog.tsx:101
-#: src/components/UsersDialogEntry.tsx:132
-#: src/components/UsersDialogEntry.tsx:164
+#: src/components/UsersDialogEntry.tsx:172
+#: src/components/UsersDialogEntry.tsx:204
 msgid "Name"
 msgstr "Name"
 
@@ -87,7 +87,7 @@ msgstr "Speichern"
 
 #: src/components/SettingsDialog.tsx:244
 #: src/components/UsersDialog.tsx:195
-#: src/components/UsersDialogEntry.tsx:297
+#: src/components/UsersDialogEntry.tsx:344
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -143,41 +143,45 @@ msgstr "Info"
 msgid "Save changes to database"
 msgstr "Änderungen in Datenbank speichern"
 
-#: src/components/UsersDialogEntry.tsx:135
-#: src/components/UsersDialogEntry.tsx:181
-msgid "Vacation Days"
-msgstr "Urlaubstage"
-
-#: src/components/UsersDialogEntry.tsx:143
-#: src/components/UsersDialogEntry.tsx:213
-msgid "Workdays"
-msgstr "Arbeitstage"
-
-#: src/components/UsersDialogEntry.tsx:169
+#: src/components/UsersDialogEntry.tsx:72
 msgid "User must have a name."
-msgstr "Nutzer müssen einen Namen haben."
+msgstr "Nutzer muss einen Namen haben."
 
-#: src/components/UsersDialogEntry.tsx:188
+#: src/components/UsersDialogEntry.tsx:79
+msgid "User must a number of Vacation days."
+msgstr "Nutzer muss eine Anzahl an Urlaubstagen haben."
+
+#: src/components/UsersDialogEntry.tsx:80
 msgid "Only positive whole numbers are permitted."
 msgstr "Nur positive ganze Zahlen sind zulässig."
 
-#: src/components/UsersDialogEntry.tsx:216
+#: src/components/UsersDialogEntry.tsx:89
 msgid "At least one workday must be selected."
 msgstr "Mindestens ein Arbeitstag muss ausgewählt werden."
 
-#: src/components/UsersDialogEntry.tsx:301
+#: src/components/UsersDialogEntry.tsx:175
+#: src/components/UsersDialogEntry.tsx:221
+msgid "Vacation Days"
+msgstr "Urlaubstage"
+
+#: src/components/UsersDialogEntry.tsx:183
+#: src/components/UsersDialogEntry.tsx:257
+msgid "Workdays"
+msgstr "Arbeitstage"
+
+#: src/components/UsersDialogEntry.tsx:348
 msgid "Cancel deletion of entry"
 msgstr "Löschung des Eintrags abbrechen"
 
-#: src/components/UsersDialogEntry.tsx:305
+#: src/components/UsersDialogEntry.tsx:352
 msgid "Delete entry"
 msgstr "Eintrag löschen"
 
-#: src/components/UsersDialogEntry.tsx:322
+#: src/components/UsersDialogEntry.tsx:369
 msgid "Save entry"
 msgstr "Eintrag speichern"
 
-#: src/components/UsersDialogEntry.tsx:322
+#: src/components/UsersDialogEntry.tsx:369
 msgid "Edit entry"
 msgstr "Eintrag ändern"
 

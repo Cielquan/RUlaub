@@ -18,7 +18,7 @@ import {
   ListItemText,
   TextField,
 } from "@mui/material";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import { UserData, Workdays } from "../backendAPI/types/usersData.schema";
@@ -66,46 +66,82 @@ const UsersDialogEntry = ({
     setWorkdaysForm(rv);
   };
 
-  const [nameFormError, setNameFormError] = useState(false);
-  const [vacDaysFormError, setVacDaysFormError] = useState(false);
-  const [workdaysFormError, setWorkdaysFormError] = useState(false);
+  type NameFormError = typeof NameFormError[keyof typeof NameFormError];
+  const NameFormError = {
+    NONE: false,
+    EMPTY: t`User must have a name.`,
+  } as const;
+  const [nameFormError, setNameFormError] = useState<NameFormError>(NameFormError.NONE);
 
-  const resetErrorStates = (): void => {
-    setNameFormError(false);
-    setVacDaysFormError(false);
-    setWorkdaysFormError(false);
-  };
+  type VacDaysFormError = typeof VacDaysFormError[keyof typeof VacDaysFormError];
+  const VacDaysFormError = {
+    NONE: false,
+    EMPTY: t`User must a number of Vacation days.`,
+    INVALID: t`Only positive whole numbers are permitted.`,
+  } as const;
+  const [vacDaysFormError, setVacDaysFormError] = useState<VacDaysFormError>(
+    VacDaysFormError.NONE
+  );
+
+  type WorkdaysFormError = typeof WorkdaysFormError[keyof typeof WorkdaysFormError];
+  const WorkdaysFormError = {
+    NONE: false,
+    EMPTY: t`At least one workday must be selected.`,
+  } as const;
+  const [workdaysFormError, setWorkdaysFormError] = useState<WorkdaysFormError>(
+    WorkdaysFormError.NONE
+  );
+
+  const resetErrorStates = useCallback((): void => {
+    setNameFormError(NameFormError.NONE);
+    setVacDaysFormError(VacDaysFormError.NONE);
+    setWorkdaysFormError(WorkdaysFormError.NONE);
+  }, [NameFormError, VacDaysFormError, WorkdaysFormError]);
 
   const validateName = (value: string): boolean => {
-    const error = value === "";
-    setNameFormError(error);
-    return !error;
+    if (value === "") {
+      setNameFormError(NameFormError.EMPTY);
+      return false;
+    }
+    setNameFormError(NameFormError.NONE);
+    return true;
   };
   const validateVacDays = (value: string): boolean => {
-    const error = value === "" || !Number.isInteger(Number(value)) || Number(value) < 0;
-    setVacDaysFormError(error);
-    return !error;
+    if (value === "") {
+      setVacDaysFormError(VacDaysFormError.EMPTY);
+      return false;
+    }
+    if (!Number.isInteger(Number(value)) || Number(value) < 0) {
+      setVacDaysFormError(VacDaysFormError.INVALID);
+      return false;
+    }
+    setVacDaysFormError(VacDaysFormError.NONE);
+    return true;
   };
   interface validateWorkdaysParam {
     day?: keyof Workdays;
     value?: boolean;
   }
   const validateWorkdays = (param?: validateWorkdaysParam): boolean => {
-    const error =
+    if (
       Object.keys(workdaysForm).filter((workday) => {
         if (param !== undefined && (workday as keyof Workdays) === param.day)
           return param.value;
         return workdaysForm[workday as keyof Workdays];
-      }).length === 0;
-    setWorkdaysFormError(error);
-    return !error;
+      }).length === 0
+    ) {
+      setWorkdaysFormError(WorkdaysFormError.EMPTY);
+      return false;
+    }
+    setWorkdaysFormError(WorkdaysFormError.NONE);
+    return true;
   };
 
   const validateForm = (): boolean => {
     let error = false;
-    error = !validateName(nameForm) || error;
-    error = !validateVacDays(vacDaysForm) || error;
-    error = !validateWorkdays() || error;
+    error = validateName(nameForm) !== NameFormError.NONE || error;
+    error = validateVacDays(vacDaysForm) !== VacDaysFormError.NONE || error;
+    error = validateWorkdays() !== WorkdaysFormError.NONE || error;
     return !error;
   };
 
@@ -118,7 +154,7 @@ const UsersDialogEntry = ({
     setWorkdaysForm(user.workdays);
     resetErrorStates();
     setToBeRemoved(false);
-  }, [user, usersDialogState]);
+  }, [resetErrorStates, user, usersDialogState]);
 
   const weekdays = getWeekdayNameDict();
   const weekdayKeys = getWeekdayKeyList();
@@ -169,11 +205,11 @@ const UsersDialogEntry = ({
           type="text"
           variant="outlined"
           value={nameForm}
-          error={nameFormError}
-          helperText={nameFormError ? t`User must have a name.` : ""}
+          error={nameFormError !== NameFormError.NONE}
+          helperText={nameFormError}
           onChange={(event): void => {
             const newValue = event.target.value;
-            setNameFormError(!validateName(newValue));
+            validateName(newValue);
             setNameForm(newValue);
           }}
         />
@@ -187,13 +223,11 @@ const UsersDialogEntry = ({
           inputProps={{ inputMode: "numeric", pattern: "[0-9]+" }}
           variant="outlined"
           value={vacDaysForm}
-          error={vacDaysFormError}
-          helperText={
-            vacDaysFormError ? t`Only positive whole numbers are permitted.` : ""
-          }
+          error={vacDaysFormError !== VacDaysFormError.NONE}
+          helperText={vacDaysFormError}
           onChange={(event) => {
             const newValue = event.target.value;
-            setVacDaysFormError(!validateVacDays(newValue));
+            validateVacDays(newValue);
             setVacDaysForm(newValue);
           }}
         />
@@ -201,23 +235,29 @@ const UsersDialogEntry = ({
       <ListItem key={`${id}-edit-workdays`} sx={{ gridArea: "workdays" }}>
         <FormControl
           component="fieldset"
-          error={workdaysFormError}
+          error={workdaysFormError !== WorkdaysFormError.NONE}
           sx={{
             marginY: 1,
             padding: 1,
             border: 1,
             borderRadius: 1,
-            borderColor: workdaysFormError ? "error.main" : "action.disabled",
+            borderColor:
+              workdaysFormError !== WorkdaysFormError.NONE
+                ? "error.main"
+                : "action.disabled",
             "&:hover": {
-              borderColor: workdaysFormError ? "error.main" : "action.active",
+              borderColor:
+                workdaysFormError !== WorkdaysFormError.NONE
+                  ? "error.main"
+                  : "action.active",
             },
           }}
         >
           <FormLabel component="legend" sx={{ paddingX: 1, fontSize: "0.75em" }}>
             {t`Workdays`}
           </FormLabel>
-          <FormHelperText error={workdaysFormError}>
-            {workdaysFormError ? t`At least one workday must be selected.` : ""}
+          <FormHelperText error={workdaysFormError !== WorkdaysFormError.NONE}>
+            {workdaysFormError}
           </FormHelperText>
           <FormGroup aria-label="position" row>
             {weekdayKeys.map((day) => (
@@ -229,9 +269,7 @@ const UsersDialogEntry = ({
                 checked={workdaysForm[day]}
                 onChange={(event): void => {
                   const target = event.target as HTMLInputElement;
-                  setWorkdaysFormError(
-                    !validateWorkdays({ day, value: target.checked })
-                  );
+                  validateWorkdays({ day, value: target.checked });
                   setWorkdayForm(day, target.checked);
                 }}
                 sx={{ margin: 0 }}
@@ -244,7 +282,12 @@ const UsersDialogEntry = ({
   );
 
   const onClickSave = (): void => {
-    if (nameFormError || vacDaysFormError || workdaysFormError || !validateForm())
+    if (
+      nameFormError !== NameFormError.NONE ||
+      vacDaysFormError !== VacDaysFormError.NONE ||
+      workdaysFormError !== WorkdaysFormError.NONE ||
+      !validateForm()
+    )
       return;
     setName(nameForm);
     setVacDays(Number(vacDaysForm));
@@ -326,7 +369,10 @@ const UsersDialogEntry = ({
       leftButtonTooltip={editable ? t`Save entry` : t`Edit entry`}
       leftButtonIcon={editable ? <SaveIcon /> : <CreateIcon />}
       leftButtonDisabled={
-        toBeRemoved || nameFormError || vacDaysFormError || workdaysFormError
+        toBeRemoved ||
+        nameFormError !== NameFormError.NONE ||
+        vacDaysFormError !== VacDaysFormError.NONE ||
+        workdaysFormError !== WorkdaysFormError.NONE
       }
       rightButtonOnClick={rightButtonOnClick}
       rightButtonTooltip={rightButtonTooltip}
