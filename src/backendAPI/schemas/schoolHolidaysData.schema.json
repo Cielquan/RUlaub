@@ -14,25 +14,47 @@
         "start": {
           "type": "object",
           "properties": {
-            "date": { "$ref": "#/$defs/ISODate" },
-            "yearDay": { "type": "number" },
-            "year": { "type": "number" }
+            "date": { "$ref": "#/$defs/ISODate" }
           },
-          "required": ["date", "yearDay", "year"],
+          "required": ["date"],
           "additionalProperties": false
         },
         "end": {
           "type": "object",
           "properties": {
-            "date": { "$ref": "#/$defs/ISODate" },
-            "yearDay": { "type": "number" },
-            "year": { "type": "number" }
+            "date": { "$ref": "#/$defs/ISODate" }
           },
-          "required": ["date", "yearDay", "year"],
+          "required": ["date"],
+          "additionalProperties": false
+        },
+        "calc": {
+          "type": "object",
+          "description": "gets calculated in backend on load from DB",
+          "properties": {
+            "start": {
+              "type": "object",
+              "properties": {
+                "yearDay": { "type": "number" },
+                "year": { "type": "number" }
+              },
+              "required": ["yearDay", "year"],
+              "additionalProperties": false
+            },
+            "end": {
+              "type": "object",
+              "properties": {
+                "yearDay": { "type": "number" },
+                "year": { "type": "number" }
+              },
+              "required": ["yearDay", "year"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["start", "end"],
           "additionalProperties": false
         }
       },
-      "required": ["name", "start", "end"],
+      "required": ["name", "start", "end", "calc"],
       "additionalProperties": false
     },
     "ISODate": {

@@ -21,12 +21,21 @@ export interface SchoolHolidayData {
   name: string;
   start: {
     date: ISODate;
-    yearDay: number;
-    year: number;
   };
   end: {
     date: ISODate;
-    yearDay: number;
-    year: number;
+  };
+  /**
+   * gets calculated in backend on load from DB
+   */
+  calc: {
+    start: {
+      yearDay: number;
+      year: number;
+    };
+    end: {
+      yearDay: number;
+      year: number;
+    };
   };
 }
