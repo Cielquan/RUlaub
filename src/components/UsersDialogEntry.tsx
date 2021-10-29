@@ -103,16 +103,20 @@ const UsersDialogEntry = ({
     return !error;
   };
 
+  const resetErrorStates = (): void => {
+    setNameFormError(false);
+    setVacDaysFormError(false);
+    setWorkdaysFormError(false);
+  };
+
   useEffect(() => {
     setName(user.name);
     setVacDays(user.availableVacationDays);
     setWorkdays(user.workdays);
     setNameForm(user.name);
-    setNameFormError(false);
     setVacDaysForm(user.availableVacationDays.toString());
-    setVacDaysFormError(false);
     setWorkdaysForm(user.workdays);
-    setWorkdaysFormError(false);
+    resetErrorStates();
     setToBeRemoved(false);
   }, [user, usersDialogState]);
 
@@ -246,6 +250,7 @@ const UsersDialogEntry = ({
     setVacDays(Number(vacDaysForm));
     setWorkdays(workdaysForm);
     setEditable(false);
+    resetErrorStates();
     setSavedOnce(true);
     addUserToQueue([
       id,
@@ -261,6 +266,7 @@ const UsersDialogEntry = ({
     setNameForm(name);
     setVacDaysForm(vacDays.toString());
     setWorkdaysForm(workdays);
+    resetErrorStates();
     setEditable(true);
   };
   const onClickCancel = (): void => {
@@ -268,11 +274,9 @@ const UsersDialogEntry = ({
       removeUserFromQueue(id);
     } else {
       setNameForm(name);
-      setNameFormError(false);
       setVacDaysForm(vacDays.toString());
-      setVacDaysFormError(false);
       setWorkdaysForm(workdays);
-      setWorkdaysFormError(false);
+      resetErrorStates();
       setEditable(false);
     }
   };
