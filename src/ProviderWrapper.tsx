@@ -7,7 +7,7 @@ import React, { ReactElement, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import i18n from "./i18n";
+import i18n, { localeMap } from "./i18n";
 import { actionCreators, State } from "./state";
 import createTheme from "./theme";
 
@@ -37,7 +37,10 @@ const ProviderWrapper = (): ReactElement => {
   });
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <LocalizationProvider
+      dateAdapter={AdapterDateFns}
+      locale={localeMap[langState.locale]}
+    >
       <I18nProvider i18n={i18n}>
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={theme}>
