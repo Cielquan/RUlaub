@@ -5,6 +5,7 @@ export interface Language {
   name: string;
   locale: SupportedLocales;
   importName: SupportedLocalesShorted;
+  dateMask: string;
 }
 
 export const Languages: { [key: string]: Language } = {
@@ -12,11 +13,13 @@ export const Languages: { [key: string]: Language } = {
     name: "Deutsch",
     locale: "de-DE",
     importName: "deDE",
+    dateMask: "__.__.____",
   },
   english: {
     name: "English",
     locale: "en-US",
     importName: "enUS",
+    dateMask: "__/__/____",
   },
 };
 
