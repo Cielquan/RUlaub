@@ -50,24 +50,30 @@ const UsersDialogEntry = ({
   const [newEntry] = useState(Number(id) < 0);
   const [editable, setEditable] = useState(newEntry);
   const [toBeRemoved, setToBeRemoved] = useState(false);
+  const [savedOnce, setSavedOnce] = useState(false);
 
   const [name, setName] = useState(user.name);
   const [vacDays, setVacDays] = useState(user.availableVacationDays);
   const [workdays, setWorkdays] = useState(user.workdays);
 
   const [nameForm, setNameForm] = useState(name);
-  const [nameFormError, setNameFormError] = useState(false);
   const [vacDaysForm, setVacDaysForm] = useState(vacDays.toString());
-  const [vacDaysFormError, setVacDaysFormError] = useState(false);
   const [workdaysForm, setWorkdaysForm] = useState(workdays);
-  const [workdaysFormError, setWorkdaysFormError] = useState(false);
-
-  const [savedOnce, setSavedOnce] = useState(false);
 
   const setWorkdayForm = (day: keyof Workdays, newValue: boolean): void => {
     const rv = { ...workdaysForm };
     rv[day] = newValue;
     setWorkdaysForm(rv);
+  };
+
+  const [nameFormError, setNameFormError] = useState(false);
+  const [vacDaysFormError, setVacDaysFormError] = useState(false);
+  const [workdaysFormError, setWorkdaysFormError] = useState(false);
+
+  const resetErrorStates = (): void => {
+    setNameFormError(false);
+    setVacDaysFormError(false);
+    setWorkdaysFormError(false);
   };
 
   const validateName = (value: string): boolean => {
@@ -101,12 +107,6 @@ const UsersDialogEntry = ({
     error = !validateVacDays(vacDaysForm) || error;
     error = !validateWorkdays() || error;
     return !error;
-  };
-
-  const resetErrorStates = (): void => {
-    setNameFormError(false);
-    setVacDaysFormError(false);
-    setWorkdaysFormError(false);
   };
 
   useEffect(() => {
