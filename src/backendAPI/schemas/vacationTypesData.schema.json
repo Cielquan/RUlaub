@@ -10,13 +10,13 @@
     "vacationTypeData": {
       "type": "object",
       "properties": {
-        "type": { "type": "string" },
+        "name": { "type": "string" },
         "doCount": { "type": "boolean" },
         "hexcolorDark": { "type": "string" },
         "hexcolorLight": { "type": "string" },
         "active": { "type": "boolean" }
       },
-      "required": ["type", "doCount", "hexcolorDark", "hexcolorLight", "active"],
+      "required": ["name", "doCount", "hexcolorDark", "hexcolorLight", "active"],
       "additionalProperties": false
     }
   }

@@ -242,7 +242,7 @@ deletable with caskading down to vacations
 not deleteable (only hidable)
 
 - id
-- type/name (unique)
+- name (unique)
 - do_count (to user's vacation_days)
 - hexcolor_dark
 - hexcolor_light

@@ -1,6 +1,6 @@
 {
   "0": {
-    "type": "Vacation",
+    "name": "Vacation",
     "doCount": true,
     "hexcolorDark": "123456",
     "hexcolorLight": "123456",

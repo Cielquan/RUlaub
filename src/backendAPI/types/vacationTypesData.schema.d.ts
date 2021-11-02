@@ -16,7 +16,7 @@ export interface VacationTypesDataSchema {
  * via the `patternProperty` "^\d+$".
  */
 export interface VacationTypeData {
-  type: string;
+  name: string;
   doCount: boolean;
   hexcolorDark: string;
   hexcolorLight: string;
