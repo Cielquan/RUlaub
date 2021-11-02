@@ -116,10 +116,10 @@ const PublicHolidaysDialogEntry = ({
     setYearlessDateFormError(YearlessDateFormError.NONE);
     setEasterSundayOffsetFormError(EasterSundayOffsetFormError.NONE);
   }, [
-    EasterSundayOffsetFormError,
-    NameFormError,
-    YearFormError,
-    YearlessDateFormError,
+    EasterSundayOffsetFormError.NONE,
+    NameFormError.NONE,
+    YearFormError.NONE,
+    YearlessDateFormError.NONE,
   ]);
 
   const validateName = (value: string): boolean => {

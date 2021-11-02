@@ -96,7 +96,7 @@ const UsersDialogEntry = ({
     setNameFormError(NameFormError.NONE);
     setVacDaysFormError(VacDaysFormError.NONE);
     setWorkdaysFormError(WorkdaysFormError.NONE);
-  }, [NameFormError, VacDaysFormError, WorkdaysFormError]);
+  }, [NameFormError.NONE, VacDaysFormError.NONE, WorkdaysFormError.NONE]);
 
   const validateName = (value: string): boolean => {
     if (value === "") {

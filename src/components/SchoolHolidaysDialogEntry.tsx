@@ -85,7 +85,7 @@ const SchoolHolidaysDialogEntry = ({
     setNameFormError(NameFormError.NONE);
     setStartDateFormError(StartDateFormError.NONE);
     setEndDateFormError(EndDateFormError.NONE);
-  }, [NameFormError, StartDateFormError, EndDateFormError]);
+  }, [NameFormError.NONE, StartDateFormError.NONE, EndDateFormError.NONE]);
 
   const validateName = (value: string): boolean => {
     if (value === "") {
