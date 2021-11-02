@@ -10,4 +10,5 @@ export * from "./sideMenuActionCreators";
 export * from "./usersDataActionCreators";
 export * from "./usersDialogActionCreators";
 export * from "./vacationDialogActionCreators";
+export * from "./vacationTypesDataActionCreators";
 export * from "./vacationTypesDialogActionCreators";

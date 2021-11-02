@@ -11,6 +11,7 @@ import {
   UsersDataActionType,
   UsersDialogActionType,
   VacationDialogActionType,
+  VacationTypesDataActionType,
   VacationTypesDialogActionType,
 } from "../action-types";
 // eslint-disable-next-line max-len
@@ -18,10 +19,13 @@ import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI
 // eslint-disable-next-line max-len
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
+// eslint-disable-next-line max-len
+import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 import { ConfigPayload } from "../utils/config";
 import { PublicHolidayDataPayload } from "../utils/publicHolidaysData";
 import { SchoolHolidayDataPayload } from "../utils/schoolHolidaysData";
 import { UserDataPayload } from "../utils/usersData";
+import { VacationTypeDataPayload } from "../utils/vacationTypesData";
 
 export type CalendarRowUserMapAction = {
   type: CalendarRowUserMapActionType;
@@ -138,6 +142,32 @@ export type UsersDialogAction = {
 export type VacationDialogAction = {
   type: VacationDialogActionType;
 };
+
+export type VacationTypesDataAddAction = {
+  type: VacationTypesDataActionType.ADD;
+  payload: VacationTypesData;
+};
+
+export type VacationTypesDataLoadAction = {
+  type: VacationTypesDataActionType.LOAD;
+  payload: VacationTypesData;
+};
+
+export type VacationTypesDataRemoveAction = {
+  type: VacationTypesDataActionType.REMOVE;
+  payload: VacationTypesData;
+};
+
+export type VacationTypesDataUpdateAction = {
+  type: VacationTypesDataActionType.UPDATE;
+  payload: VacationTypeDataPayload[];
+};
+
+export type VacationTypesDataAction =
+  | VacationTypesDataAddAction
+  | VacationTypesDataLoadAction
+  | VacationTypesDataRemoveAction
+  | VacationTypesDataUpdateAction;
 
 export type VacationTypesDialogAction = {
   type: VacationTypesDialogActionType;

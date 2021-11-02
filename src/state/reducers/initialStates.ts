@@ -7,6 +7,8 @@ import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI
 // eslint-disable-next-line max-len
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
+// eslint-disable-next-line max-len
+import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 
 export const defaultLocale: SupportedLocales = "en-US";
 export const defaultLogLevel: LogLevel = LogLevels.INFO;
@@ -45,4 +47,5 @@ export const sideMenuInitState = false;
 export const usersDataInitState: UsersData = {};
 export const usersDialogInitState = false;
 export const vacationDialogInitState = false;
+export const vacationTypesDataInitState: VacationTypesData = {};
 export const vacationTypesDialogInitState = false;
