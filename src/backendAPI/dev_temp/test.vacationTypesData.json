@@ -2,8 +2,8 @@
   "0": {
     "name": "Vacation",
     "doCount": true,
-    "hexcolorDark": "123456",
-    "hexcolorLight": "123456",
+    "hexcolorDark": "#123456",
+    "hexcolorLight": "#123456",
     "active": true
   }
 }
