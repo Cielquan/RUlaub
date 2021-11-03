@@ -12,11 +12,11 @@
       "properties": {
         "name": { "type": "string" },
         "doCount": { "type": "boolean" },
-        "hexcolorDark": { "type": "string" },
-        "hexcolorLight": { "type": "string" },
+        "colorDark": { "type": "string" },
+        "colorLight": { "type": "string" },
         "active": { "type": "boolean" }
       },
-      "required": ["name", "doCount", "hexcolorDark", "hexcolorLight", "active"],
+      "required": ["name", "doCount", "colorDark", "colorLight", "active"],
       "additionalProperties": false
     }
   }

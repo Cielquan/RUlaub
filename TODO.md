@@ -174,8 +174,8 @@
     - invisible id
     - unique name
     - do_count (bool if counted towards year-vac-days)
-    - hex-color via picker
-    - ? second hex-color for dark-theme?
+    - color via picker
+    - ? second color for dark-theme?
     - ? switch checkbox for activating color-split
     - checkbox if applicable
 
@@ -244,8 +244,8 @@ not deleteable (only hidable)
 - id
 - name (unique)
 - do_count (to user's vacation_days)
-- hexcolor_dark
-- hexcolor_light
+- color_dark (str)
+- color_light (str)
 - active
 
 #### vacation

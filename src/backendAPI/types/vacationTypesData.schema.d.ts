@@ -18,7 +18,7 @@ export interface VacationTypesDataSchema {
 export interface VacationTypeData {
   name: string;
   doCount: boolean;
-  hexcolorDark: string;
-  hexcolorLight: string;
+  colorDark: string;
+  colorLight: string;
   active: boolean;
 }
