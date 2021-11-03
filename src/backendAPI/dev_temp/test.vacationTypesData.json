@@ -1,9 +1,9 @@
 {
   "0": {
     "name": "Vacation",
-    "doCount": true,
+    "charge": true,
     "colorDark": "#123456",
-    "colorLight": "#123456",
+    "colorLight": "#FFFFFF80",
     "active": true
   }
 }

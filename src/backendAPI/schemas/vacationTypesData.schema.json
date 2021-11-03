@@ -11,12 +11,12 @@
       "type": "object",
       "properties": {
         "name": { "type": "string" },
-        "doCount": { "type": "boolean" },
+        "charge": { "type": "boolean" },
         "colorDark": { "type": "string" },
         "colorLight": { "type": "string" },
         "active": { "type": "boolean" }
       },
-      "required": ["name", "doCount", "colorDark", "colorLight", "active"],
+      "required": ["name", "charge", "colorDark", "colorLight", "active"],
       "additionalProperties": false
     }
   }

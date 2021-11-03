@@ -17,7 +17,7 @@ export interface VacationTypesDataSchema {
  */
 export interface VacationTypeData {
   name: string;
-  doCount: boolean;
+  charge: boolean;
   colorDark: string;
   colorLight: string;
   active: boolean;

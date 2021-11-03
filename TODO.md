@@ -173,7 +173,7 @@
   - Each entry has:
     - invisible id
     - unique name
-    - do_count (bool if counted towards year-vac-days)
+    - charge (bool if counted towards year-vac-days)
     - color via picker
     - ? second color for dark-theme?
     - ? switch checkbox for activating color-split
@@ -243,7 +243,7 @@ not deleteable (only hidable)
 
 - id
 - name (unique)
-- do_count (to user's vacation_days)
+- charge (to user's vacation_days)
 - color_dark (str)
 - color_light (str)
 - active
