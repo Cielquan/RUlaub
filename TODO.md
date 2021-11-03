@@ -1,5 +1,9 @@
 ## App
 
+### Links for help to do things (dev)
+
+https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
+
 ### Ideas
 
 - change ico to a (self made) less "complex" one?
