@@ -239,7 +239,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           }}
           autoFocus
         >
-          {t`Cancel`}
+          {t`Discard`}
         </Button>
       </DialogActions>
     </Dialog>
