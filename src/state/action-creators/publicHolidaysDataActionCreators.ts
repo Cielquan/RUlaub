@@ -1,14 +1,9 @@
 import { Dispatch } from "redux";
 
 import { PublicHolidaysDataActionType } from "../action-types";
-import {
-  PublicHolidaysDataAddAction,
-  PublicHolidaysDataLoadAction,
-  PublicHolidaysDataRemoveAction,
-  PublicHolidaysDataUpdateAction,
-} from "../actions";
+import { PublicHolidaysDataAction } from "../actions";
 import { logError } from "../../backendAPI";
-import { add, load, remove } from "../../backendAPI/publicHolidaysData";
+import { add, load, remove, update } from "../../backendAPI/publicHolidaysData";
 // eslint-disable-next-line max-len
 import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
 import {
@@ -18,14 +13,14 @@ import {
 
 export const addPublicHolidaysDataAction = (
   payload: PublicHolidaysData
-): PublicHolidaysDataAddAction => ({
+): PublicHolidaysDataAction => ({
   type: PublicHolidaysDataActionType.ADD,
   payload,
 });
 
 export const addPublicHolidaysData =
   (payload: NewPublicHolidayData[]) =>
-  async (dispatch: Dispatch<PublicHolidaysDataAddAction>): Promise<void> => {
+  async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
     try {
       const data = await add(payload);
 
@@ -38,14 +33,14 @@ export const addPublicHolidaysData =
 
 export const loadPublicHolidaysDataAction = (
   payload: PublicHolidaysData
-): PublicHolidaysDataLoadAction => ({
+): PublicHolidaysDataAction => ({
   type: PublicHolidaysDataActionType.LOAD,
   payload,
 });
 
 export const loadPublicHolidaysData =
   () =>
-  async (dispatch: Dispatch<PublicHolidaysDataLoadAction>): Promise<void> => {
+  async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
     try {
       const data = await load();
 
@@ -58,14 +53,14 @@ export const loadPublicHolidaysData =
 
 export const removePublicHolidaysDataAction = (
   payload: PublicHolidaysData
-): PublicHolidaysDataRemoveAction => ({
+): PublicHolidaysDataAction => ({
   type: PublicHolidaysDataActionType.REMOVE,
   payload,
 });
 
 export const removePublicHolidaysData =
   (payload: string[]) =>
-  async (dispatch: Dispatch<PublicHolidaysDataRemoveAction>): Promise<void> => {
+  async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
     try {
       const data = await remove(payload);
 
@@ -77,14 +72,21 @@ export const removePublicHolidaysData =
   };
 
 export const updatePublicHolidaysDataAction = (
-  payload: PublicHolidayDataPayload[]
-): PublicHolidaysDataUpdateAction => ({
+  payload: PublicHolidaysData
+): PublicHolidaysDataAction => ({
   type: PublicHolidaysDataActionType.UPDATE,
   payload,
 });
 
 export const updatePublicHolidaysData =
   (payload: PublicHolidayDataPayload[]) =>
-  (dispatch: Dispatch<PublicHolidaysDataUpdateAction>): void => {
-    dispatch(updatePublicHolidaysDataAction(payload));
+  async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
+    try {
+      const data = await update(payload);
+
+      dispatch(updatePublicHolidaysDataAction(data));
+    } catch (error) {
+      // TODO:#i# add snackbar
+      logError(error as Error);
+    }
   };

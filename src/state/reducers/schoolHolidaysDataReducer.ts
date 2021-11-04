@@ -3,7 +3,6 @@ import { SchoolHolidaysDataAction } from "../actions";
 // eslint-disable-next-line max-len
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import { schoolHolidaysDataInitState as initState } from "./initialStates";
-import { updateSchoolHolidaysData } from "../utils/schoolHolidaysData";
 
 const reducer = (
   state: SchoolHolidaysData = initState,
@@ -11,13 +10,10 @@ const reducer = (
 ): SchoolHolidaysData => {
   switch (action.type) {
     case SchoolHolidaysDataActionType.ADD:
-      return action.payload;
     case SchoolHolidaysDataActionType.LOAD:
-      return action.payload;
     case SchoolHolidaysDataActionType.REMOVE:
-      return action.payload;
     case SchoolHolidaysDataActionType.UPDATE:
-      return updateSchoolHolidaysData(state, action.payload);
+      return action.payload;
     default:
       return state;
   }

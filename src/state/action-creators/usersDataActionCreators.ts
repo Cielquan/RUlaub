@@ -4,19 +4,13 @@ import { Dispatch } from "redux";
 import { updateCalendarRowUserMapAction } from ".";
 import { store } from "..";
 import { UsersDataActionType } from "../action-types";
-import {
-  CalendarRowUserMapAction,
-  UsersDataAddAction,
-  UsersDataLoadAction,
-  UsersDataRemoveAction,
-  UsersDataUpdateAction,
-} from "../actions";
+import { CalendarRowUserMapAction, UsersDataAction } from "../actions";
 import { logError } from "../../backendAPI";
-import { add, load, remove } from "../../backendAPI/usersData";
+import { add, load, remove, update } from "../../backendAPI/usersData";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import { NewUserData, UserDataPayload } from "../utils/usersData";
 
-export const addUsersDataAction = (payload: UsersData): UsersDataAddAction => ({
+export const addUsersDataAction = (payload: UsersData): UsersDataAction => ({
   type: UsersDataActionType.ADD,
   payload,
 });
@@ -24,7 +18,7 @@ export const addUsersDataAction = (payload: UsersData): UsersDataAddAction => ({
 export const addUsersData =
   (payload: NewUserData[]) =>
   async (
-    dispatch: Dispatch<UsersDataAddAction | CalendarRowUserMapAction>,
+    dispatch: Dispatch<UsersDataAction | CalendarRowUserMapAction>,
     getState: typeof store.getState
   ): Promise<void> => {
     try {
@@ -40,7 +34,7 @@ export const addUsersData =
     }
   };
 
-export const loadUsersDataAction = (payload: UsersData): UsersDataLoadAction => ({
+export const loadUsersDataAction = (payload: UsersData): UsersDataAction => ({
   type: UsersDataActionType.LOAD,
   payload,
 });
@@ -48,7 +42,7 @@ export const loadUsersDataAction = (payload: UsersData): UsersDataLoadAction => 
 export const loadUsersData =
   () =>
   async (
-    dispatch: Dispatch<UsersDataLoadAction | CalendarRowUserMapAction>,
+    dispatch: Dispatch<UsersDataAction | CalendarRowUserMapAction>,
     getState: typeof store.getState
   ): Promise<void> => {
     try {
@@ -64,7 +58,7 @@ export const loadUsersData =
     }
   };
 
-export const removeUsersDataAction = (payload: UsersData): UsersDataRemoveAction => ({
+export const removeUsersDataAction = (payload: UsersData): UsersDataAction => ({
   type: UsersDataActionType.REMOVE,
   payload,
 });
@@ -72,7 +66,7 @@ export const removeUsersDataAction = (payload: UsersData): UsersDataRemoveAction
 export const removeUsersData =
   (payload: string[]) =>
   async (
-    dispatch: Dispatch<UsersDataRemoveAction | CalendarRowUserMapAction>,
+    dispatch: Dispatch<UsersDataAction | CalendarRowUserMapAction>,
     getState: typeof store.getState
   ): Promise<void> => {
     try {
@@ -88,18 +82,26 @@ export const removeUsersData =
     }
   };
 
-export const updateUsersDataAction = (
-  payload: UserDataPayload[]
-): UsersDataUpdateAction => ({
+export const updateUsersDataAction = (payload: UsersData): UsersDataAction => ({
   type: UsersDataActionType.UPDATE,
   payload,
 });
 
 export const updateUsersData =
   (payload: UserDataPayload[]) =>
-  (dispatch: Dispatch<UsersDataUpdateAction | CalendarRowUserMapAction>): void => {
-    batch(() => {
-      dispatch(updateUsersDataAction(payload));
-      dispatch(updateCalendarRowUserMapAction(store.getState().usersData));
-    });
+  async (
+    dispatch: Dispatch<UsersDataAction | CalendarRowUserMapAction>,
+    getState: typeof store.getState
+  ): Promise<void> => {
+    try {
+      const data = await update(payload);
+
+      batch(() => {
+        dispatch(updateUsersDataAction(data));
+        dispatch(updateCalendarRowUserMapAction(getState().usersData));
+      });
+    } catch (error) {
+      // TODO:#i# add snackbar
+      logError(error as Error);
+    }
   };

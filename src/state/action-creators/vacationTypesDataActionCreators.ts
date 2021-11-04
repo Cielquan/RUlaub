@@ -1,13 +1,9 @@
 import { Dispatch } from "redux";
 
 import { VacationTypesDataActionType } from "../action-types";
-import {
-  VacationTypesDataAddAction,
-  VacationTypesDataLoadAction,
-  VacationTypesDataUpdateAction,
-} from "../actions";
+import { VacationTypesDataAction } from "../actions";
 import { logError } from "../../backendAPI";
-import { add, load } from "../../backendAPI/vacationTypesData";
+import { add, load, update } from "../../backendAPI/vacationTypesData";
 // eslint-disable-next-line max-len
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 import {
@@ -17,14 +13,14 @@ import {
 
 export const addVacationTypesDataAction = (
   payload: VacationTypesData
-): VacationTypesDataAddAction => ({
+): VacationTypesDataAction => ({
   type: VacationTypesDataActionType.ADD,
   payload,
 });
 
 export const addVacationTypesData =
   (payload: NewVacationTypeData[]) =>
-  async (dispatch: Dispatch<VacationTypesDataAddAction>): Promise<void> => {
+  async (dispatch: Dispatch<VacationTypesDataAction>): Promise<void> => {
     try {
       const data = await add(payload);
 
@@ -37,14 +33,14 @@ export const addVacationTypesData =
 
 export const loadVacationTypesDataAction = (
   payload: VacationTypesData
-): VacationTypesDataLoadAction => ({
+): VacationTypesDataAction => ({
   type: VacationTypesDataActionType.LOAD,
   payload,
 });
 
 export const loadVacationTypesData =
   () =>
-  async (dispatch: Dispatch<VacationTypesDataLoadAction>): Promise<void> => {
+  async (dispatch: Dispatch<VacationTypesDataAction>): Promise<void> => {
     try {
       const data = await load();
 
@@ -56,14 +52,21 @@ export const loadVacationTypesData =
   };
 
 export const updateVacationTypesDataAction = (
-  payload: VacationTypeDataPayload[]
-): VacationTypesDataUpdateAction => ({
+  payload: VacationTypesData
+): VacationTypesDataAction => ({
   type: VacationTypesDataActionType.UPDATE,
   payload,
 });
 
 export const updateVacationTypesData =
   (payload: VacationTypeDataPayload[]) =>
-  (dispatch: Dispatch<VacationTypesDataUpdateAction>): void => {
-    dispatch(updateVacationTypesDataAction(payload));
+  async (dispatch: Dispatch<VacationTypesDataAction>): Promise<void> => {
+    try {
+      const data = await update(payload);
+
+      dispatch(updateVacationTypesDataAction(data));
+    } catch (error) {
+      // TODO:#i# add snackbar
+      logError(error as Error);
+    }
   };
