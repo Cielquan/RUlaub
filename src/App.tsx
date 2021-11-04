@@ -12,6 +12,7 @@ import SchoolHolidaysDialog from "./components/SchoolHolidaysDialog";
 import SettingsDialog from "./components/SettingsDialog";
 import SideMenu from "./components/SideMenu";
 import UsersDialog from "./components/UsersDialog";
+import VacationTypesDialog from "./components/VacationTypesDialog";
 
 const StyledMain = styled("main")(({ theme }) => ({
   flexGrow: 1,
@@ -53,6 +54,7 @@ const App = (): ReactElement => (
     <SchoolHolidaysDialog />
     <SettingsDialog />
     <UsersDialog />
+    <VacationTypesDialog />
   </Box>
 );
 
