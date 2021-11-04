@@ -20,6 +20,7 @@ import {
   TextField,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { Box } from "@mui/system";
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { HexColorInput, HexColorPicker } from "react-colorful";
 import { useSelector } from "react-redux";
@@ -127,33 +128,38 @@ const VacationTypesDialogEntry = ({
   }, [vacationType, vacationTypesDialogState, resetErrorStates]);
 
   const ContentComponentView = (
-    <List
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr 1fr 1fr",
-        gridTemplateRows: "auto",
-        gridTemplateAreas: `"name charge colorDark colorLight"`,
-      }}
-      dense
-    >
-      <ListItem key={`${id}-view-name`} sx={{ gridArea: "name" }}>
-        <ListItemText primary={name} secondary={t`Name`} />
-      </ListItem>
-      <ListItem key={`${id}-view-charge`} sx={{ gridArea: "charge" }}>
-        <ListItemText
-          primary={charge ? t`Yes` : t`No`}
-          secondary={t`Charge to annual leave`}
-        />
-      </ListItem>
-      <ListItem key={`${id}-view-color-dark`} sx={{ gridArea: "colorDark" }}>
-        <CircleIcon sx={{ color: colorDark, marginRight: 1 }} />
-        <ListItemText primary={colorDark} secondary={t`Color (Dark theme)`} />
-      </ListItem>
-      <ListItem key={`${id}-view-color-light`} sx={{ gridArea: "colorLight" }}>
-        <CircleIcon sx={{ color: colorLight, marginRight: 1 }} />
-        <ListItemText primary={colorLight} secondary={t`Color (Light theme)`} />
-      </ListItem>
-    </List>
+    <>
+      <Box sx={{ position: "absolute", left: 5, top: 3, color: "text.disabled" }}>
+        {Number(id) >= 0 ? id : ""}
+      </Box>
+      <List
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr 1fr",
+          gridTemplateRows: "auto",
+          gridTemplateAreas: `"name charge colorDark colorLight"`,
+        }}
+        dense
+      >
+        <ListItem key={`${id}-view-name`} sx={{ gridArea: "name" }}>
+          <ListItemText primary={name} secondary={t`Name`} />
+        </ListItem>
+        <ListItem key={`${id}-view-charge`} sx={{ gridArea: "charge" }}>
+          <ListItemText
+            primary={charge ? t`Yes` : t`No`}
+            secondary={t`Charge to annual leave`}
+          />
+        </ListItem>
+        <ListItem key={`${id}-view-color-dark`} sx={{ gridArea: "colorDark" }}>
+          <CircleIcon sx={{ color: colorDark, marginRight: 1 }} />
+          <ListItemText primary={colorDark} secondary={t`Color (Dark theme)`} />
+        </ListItem>
+        <ListItem key={`${id}-view-color-light`} sx={{ gridArea: "colorLight" }}>
+          <CircleIcon sx={{ color: colorLight, marginRight: 1 }} />
+          <ListItemText primary={colorLight} secondary={t`Color (Light theme)`} />
+        </ListItem>
+      </List>
+    </>
   );
 
   const ContentComponentEdit = (

@@ -8,6 +8,7 @@ import {
 } from "@mui/icons-material";
 import { DatePicker } from "@mui/lab";
 import { List, ListItem, ListItemText, TextField } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -154,24 +155,29 @@ const SchoolHolidaysDialogEntry = ({
   }, [schoolHoliday, schoolHolidaysDialogState, resetErrorStates]);
 
   const ContentComponentView = (
-    <List
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "1fr 1fr 1fr",
-        gridTemplateRows: "auto",
-        gridTemplateAreas: `"name startDate endDate"`,
-      }}
-    >
-      <ListItem key={`${id}-view-name`} sx={{ gridArea: "name" }}>
-        <ListItemText primary={name} secondary={t`Name`} />
-      </ListItem>
-      <ListItem key={`${id}-view-start-date`} sx={{ gridArea: "startDate" }}>
-        <ListItemText primary={startDate} secondary={t`Start Date`} />
-      </ListItem>
-      <ListItem key={`${id}-view-end-date`} sx={{ gridArea: "endDate" }}>
-        <ListItemText primary={endDate} secondary={t`End Date`} />
-      </ListItem>
-    </List>
+    <>
+      <Box sx={{ position: "absolute", left: 5, top: 3, color: "text.disabled" }}>
+        {Number(id) >= 0 ? id : ""}
+      </Box>
+      <List
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gridTemplateRows: "auto",
+          gridTemplateAreas: `"name startDate endDate"`,
+        }}
+      >
+        <ListItem key={`${id}-view-name`} sx={{ gridArea: "name" }}>
+          <ListItemText primary={name} secondary={t`Name`} />
+        </ListItem>
+        <ListItem key={`${id}-view-start-date`} sx={{ gridArea: "startDate" }}>
+          <ListItemText primary={startDate} secondary={t`Start Date`} />
+        </ListItem>
+        <ListItem key={`${id}-view-end-date`} sx={{ gridArea: "endDate" }}>
+          <ListItemText primary={endDate} secondary={t`End Date`} />
+        </ListItem>
+      </List>
+    </>
   );
 
   const ContentComponentEdit = (

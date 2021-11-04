@@ -18,6 +18,7 @@ import {
   ListItemText,
   TextField,
 } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -163,30 +164,35 @@ const UsersDialogEntry = ({
   const weekdayKeys = getWeekdayKeyList();
 
   const ContentComponentView = (
-    <List
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "2fr 1fr 1fr",
-        gridTemplateRows: "auto",
-        gridTemplateAreas: `"name days workdays"`,
-      }}
-    >
-      <ListItem key={`${id}-view-name`} sx={{ gridArea: "name" }}>
-        <ListItemText primary={name} secondary={t`Name`} />
-      </ListItem>
-      <ListItem key={`${id}-view-vacDays`} sx={{ gridArea: "days" }}>
-        <ListItemText primary={vacDays} secondary={t`Vacation Days`} />
-      </ListItem>
-      <ListItem key={`${id}-view-workdays`} sx={{ gridArea: "workdays" }}>
-        <ListItemText
-          primary={Object.keys(weekdays)
-            .filter((weekday) => workdays[weekday as keyof Workdays])
-            .map((weekday) => weekdays[weekday as keyof Workdays].slice(0, 2))
-            .join(", ")}
-          secondary={t`Workdays`}
-        />
-      </ListItem>
-    </List>
+    <>
+      <Box sx={{ position: "absolute", left: 5, top: 3, color: "text.disabled" }}>
+        {Number(id) >= 0 ? id : ""}
+      </Box>
+      <List
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "2fr 1fr 1fr",
+          gridTemplateRows: "auto",
+          gridTemplateAreas: `"name days workdays"`,
+        }}
+      >
+        <ListItem key={`${id}-view-name`} sx={{ gridArea: "name" }}>
+          <ListItemText primary={name} secondary={t`Name`} />
+        </ListItem>
+        <ListItem key={`${id}-view-vacDays`} sx={{ gridArea: "days" }}>
+          <ListItemText primary={vacDays} secondary={t`Vacation Days`} />
+        </ListItem>
+        <ListItem key={`${id}-view-workdays`} sx={{ gridArea: "workdays" }}>
+          <ListItemText
+            primary={Object.keys(weekdays)
+              .filter((weekday) => workdays[weekday as keyof Workdays])
+              .map((weekday) => weekdays[weekday as keyof Workdays].slice(0, 2))
+              .join(", ")}
+            secondary={t`Workdays`}
+          />
+        </ListItem>
+      </List>
+    </>
   );
 
   const ContentComponentEdit = (

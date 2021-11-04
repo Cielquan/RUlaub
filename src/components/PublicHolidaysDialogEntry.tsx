@@ -19,6 +19,7 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
+import { Box } from "@mui/system";
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -212,27 +213,32 @@ const PublicHolidaysDialogEntry = ({
   }, [publicHoliday, publicHolidaysDialogState, resetErrorStates]);
 
   const ContentComponentView = (
-    <List
-      sx={{
-        display: "grid",
-        gridTemplateColumns: "2fr 1fr 1fr",
-        gridTemplateRows: "auto",
-        gridTemplateAreas: `"name date year"`,
-      }}
-    >
-      <ListItem key={`${id}-view-name`} sx={{ gridArea: "name" }}>
-        <ListItemText primary={name} secondary={t`Name`} />
-      </ListItem>
-      <ListItem key={`${id}-view-date`} sx={{ gridArea: "date" }}>
-        <ListItemText
-          primary={yearlessDate || easterSundayOffset}
-          secondary={yearlessDate ? t`Day-Month` : t`Easter Sunday Offset`}
-        />
-      </ListItem>
-      <ListItem key={`${id}-view-year`} sx={{ gridArea: "year" }}>
-        <ListItemText primary={year || t`Every`} secondary={t`Year`} />
-      </ListItem>
-    </List>
+    <>
+      <Box sx={{ position: "absolute", left: 5, top: 3, color: "text.disabled" }}>
+        {Number(id) >= 0 ? id : ""}
+      </Box>
+      <List
+        sx={{
+          display: "grid",
+          gridTemplateColumns: "2fr 1fr 1fr",
+          gridTemplateRows: "auto",
+          gridTemplateAreas: `"name date year"`,
+        }}
+      >
+        <ListItem key={`${id}-view-name`} sx={{ gridArea: "name" }}>
+          <ListItemText primary={name} secondary={t`Name`} />
+        </ListItem>
+        <ListItem key={`${id}-view-date`} sx={{ gridArea: "date" }}>
+          <ListItemText
+            primary={yearlessDate || easterSundayOffset}
+            secondary={yearlessDate ? t`Day-Month` : t`Easter Sunday Offset`}
+          />
+        </ListItem>
+        <ListItem key={`${id}-view-year`} sx={{ gridArea: "year" }}>
+          <ListItemText primary={year || t`Every`} secondary={t`Year`} />
+        </ListItem>
+      </List>
+    </>
   );
 
   const ContentComponentEdit = (
