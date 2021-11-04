@@ -5,6 +5,8 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+export type HexColorCode = string;
+
 /**
  * Schema for vacation types data coming from the backend
  */
@@ -18,7 +20,7 @@ export interface VacationTypesDataSchema {
 export interface VacationTypeData {
   name: string;
   charge: boolean;
-  colorDark: string;
-  colorLight: string;
+  colorDark: HexColorCode;
+  colorLight: HexColorCode;
   active: boolean;
 }

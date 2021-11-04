@@ -3,7 +3,14 @@
     "name": "Vacation",
     "charge": true,
     "colorDark": "#123456",
-    "colorLight": "#FFFFFF80",
+    "colorLight": "#FFFFFF",
     "active": true
+  },
+  "1": {
+    "name": "Vacation 2",
+    "charge": false,
+    "colorDark": "#654321",
+    "colorLight": "#000000",
+    "active": false
   }
 }

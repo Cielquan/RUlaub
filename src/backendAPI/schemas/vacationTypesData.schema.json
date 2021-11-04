@@ -12,12 +12,16 @@
       "properties": {
         "name": { "type": "string" },
         "charge": { "type": "boolean" },
-        "colorDark": { "type": "string" },
-        "colorLight": { "type": "string" },
+        "colorDark": { "$ref": "#/$defs/HexColorCode" },
+        "colorLight": { "$ref": "#/$defs/HexColorCode" },
         "active": { "type": "boolean" }
       },
       "required": ["name", "charge", "colorDark", "colorLight", "active"],
       "additionalProperties": false
+    },
+    "HexColorCode": {
+      "type": "string",
+      "pattern": "^#[0-9A-Fa-f]{6}$"
     }
   }
 }
