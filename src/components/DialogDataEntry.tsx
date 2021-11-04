@@ -9,29 +9,12 @@ export enum EntryStyle {
   REMOVED,
 }
 
-interface Props {
-  ContentComponent: ReactElement;
-  leftButtonOnClick(): void;
-  leftButtonTooltip: string;
-  leftButtonIcon: ReactElement;
-  leftButtonDisabled: boolean;
-  rightButtonOnClick(): void;
-  rightButtonTooltip: string;
-  rightButtonIcon: ReactElement;
-  entryStyle?: EntryStyle;
+interface Styles {
+  borderColor: string;
+  background: { backgroundColor?: string; opacity?: number };
+  contentStyle: { color?: string };
 }
-
-const DialogDataEntry = ({
-  ContentComponent,
-  leftButtonOnClick,
-  leftButtonTooltip,
-  leftButtonIcon,
-  leftButtonDisabled,
-  rightButtonOnClick,
-  rightButtonTooltip,
-  rightButtonIcon,
-  entryStyle,
-}: Props): ReactElement => {
+export const getStyles = (entryStyle: EntryStyle | undefined): Styles => {
   const entryStyles = {
     borderColor: "primary.main",
     background: {},
@@ -59,6 +42,33 @@ const DialogDataEntry = ({
     default:
       break;
   }
+  return entryStyles;
+};
+
+interface Props {
+  ContentComponent: ReactElement;
+  leftButtonOnClick(): void;
+  leftButtonTooltip: string;
+  leftButtonIcon: ReactElement;
+  leftButtonDisabled: boolean;
+  rightButtonOnClick(): void;
+  rightButtonTooltip: string;
+  rightButtonIcon: ReactElement;
+  entryStyle?: EntryStyle;
+}
+
+const DialogDataEntry = ({
+  ContentComponent,
+  leftButtonOnClick,
+  leftButtonTooltip,
+  leftButtonIcon,
+  leftButtonDisabled,
+  rightButtonOnClick,
+  rightButtonTooltip,
+  rightButtonIcon,
+  entryStyle,
+}: Props): ReactElement => {
+  const entryStyles = getStyles(entryStyle);
 
   return (
     <ListItem

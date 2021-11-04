@@ -31,7 +31,7 @@ import {
   PublicHolidayDataPayload,
 } from "../state/utils/types";
 
-import DialogDataEntry, { EntryStyle } from "./DialogDataEntry";
+import DialogDataEntry, { EntryStyle, getStyles } from "./DialogDataEntry";
 
 interface Props {
   id: string;
@@ -212,11 +212,35 @@ const PublicHolidaysDialogEntry = ({
     }
   }, [publicHoliday, publicHolidaysDialogState, resetErrorStates]);
 
+  let entryStyle;
+  if (toBeRemoved) {
+    entryStyle = EntryStyle.REMOVED;
+  } else if (newEntry) {
+    entryStyle = EntryStyle.NEW;
+  } else {
+    entryStyle = EntryStyle.DEFAULT;
+  }
+
   const ContentComponentView = (
     <>
-      <Box sx={{ position: "absolute", left: 5, top: 3, color: "text.disabled" }}>
-        {Number(id) >= 0 ? id : ""}
-      </Box>
+      {Number(id) >= 0 && (
+        <Box
+          sx={{
+            position: "absolute",
+            left: -1,
+            top: -1,
+            paddingTop: "3px",
+            paddingX: 1,
+            color: "text.disabled",
+            border: "1px solid",
+            borderColor: getStyles(entryStyle).borderColor,
+            borderTopLeftRadius: 8,
+            borderBottomRightRadius: 8,
+          }}
+        >
+          {id}
+        </Box>
+      )}
       <List
         sx={{
           display: "grid",
@@ -468,15 +492,6 @@ const PublicHolidaysDialogEntry = ({
     rightButtonOnClick = onClickDelete;
     rightButtonTooltip = t`Delete entry`;
     rightButtonIcon = <DeleteIcon />;
-  }
-
-  let entryStyle;
-  if (toBeRemoved) {
-    entryStyle = EntryStyle.REMOVED;
-  } else if (newEntry) {
-    entryStyle = EntryStyle.NEW;
-  } else {
-    entryStyle = EntryStyle.DEFAULT;
   }
 
   return (

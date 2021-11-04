@@ -33,7 +33,7 @@ import {
   VacationTypeDataPayload,
 } from "../state/utils/types";
 
-import DialogDataEntry, { EntryStyle } from "./DialogDataEntry";
+import DialogDataEntry, { EntryStyle, getStyles } from "./DialogDataEntry";
 
 const StyledHexColorInput = styled(HexColorInput)(() => ({
   width: "100%",
@@ -127,11 +127,35 @@ const VacationTypesDialogEntry = ({
     }
   }, [vacationType, vacationTypesDialogState, resetErrorStates]);
 
+  let entryStyle;
+  if (!active) {
+    entryStyle = EntryStyle.HIDDEN;
+  } else if (newEntry) {
+    entryStyle = EntryStyle.NEW;
+  } else {
+    entryStyle = EntryStyle.DEFAULT;
+  }
+
   const ContentComponentView = (
     <>
-      <Box sx={{ position: "absolute", left: 5, top: 3, color: "text.disabled" }}>
-        {Number(id) >= 0 ? id : ""}
-      </Box>
+      {Number(id) >= 0 && (
+        <Box
+          sx={{
+            position: "absolute",
+            left: -1,
+            top: -1,
+            paddingTop: "3px",
+            paddingX: 1,
+            color: "text.disabled",
+            border: "1px solid",
+            borderColor: getStyles(entryStyle).borderColor,
+            borderTopLeftRadius: 8,
+            borderBottomRightRadius: 8,
+          }}
+        >
+          {id}
+        </Box>
+      )}
       <List
         sx={{
           display: "grid",
@@ -344,15 +368,6 @@ const VacationTypesDialogEntry = ({
     rightButtonOnClick = newEntry ? onClickDelete : onClickDeactivate;
     rightButtonTooltip = newEntry ? t`Delete entry` : t`Deactivate`;
     rightButtonIcon = newEntry ? <DeleteIcon /> : <VisibilityOffIcon />;
-  }
-
-  let entryStyle;
-  if (!active) {
-    entryStyle = EntryStyle.HIDDEN;
-  } else if (newEntry) {
-    entryStyle = EntryStyle.NEW;
-  } else {
-    entryStyle = EntryStyle.DEFAULT;
   }
 
   return (
