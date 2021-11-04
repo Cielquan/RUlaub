@@ -1,6 +1,9 @@
 import { createDataLoader, createDataValidator } from ".";
 import VacationTypesDataSchema from "./schemas/vacationTypesData.schema.json";
-import { NewVacationTypeData } from "../state/utils/vacationTypesData";
+import {
+  NewVacationTypeData,
+  VacationTypeDataPayload,
+} from "../state/utils/vacationTypesData";
 // eslint-disable-next-line max-len
 import { VacationTypesDataSchema as VacationTypesData } from "./types/vacationTypesData.schema";
 
@@ -19,3 +22,7 @@ export const add = (payload: NewVacationTypeData[]): Promise<VacationTypesData> 
   load();
 
 export const remove = (payload: string[]): Promise<VacationTypesData> => load();
+
+export const update = (
+  payload: VacationTypeDataPayload[]
+): Promise<VacationTypesData> => load();

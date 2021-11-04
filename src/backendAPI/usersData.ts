@@ -1,6 +1,6 @@
 import { createDataLoader, createDataValidator } from ".";
 import UsersDataSchema from "./schemas/usersData.schema.json";
-import { NewUserData } from "../state/utils/usersData";
+import { NewUserData, UserDataPayload } from "../state/utils/usersData";
 import { UsersDataSchema as UsersData } from "./types/usersData.schema";
 
 import usersDataJSON from "./dev_temp/test.usersData.json";
@@ -17,3 +17,5 @@ export const load = (): Promise<UsersData> =>
 export const add = (payload: NewUserData[]): Promise<UsersData> => load();
 
 export const remove = (payload: string[]): Promise<UsersData> => load();
+
+export const update = (payload: UserDataPayload[]): Promise<UsersData> => load();

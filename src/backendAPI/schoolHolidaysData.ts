@@ -1,6 +1,9 @@
 import { createDataLoader, createDataValidator } from ".";
 import SchoolHolidaysDataSchema from "./schemas/schoolHolidaysData.schema.json";
-import { NewSchoolHolidayData } from "../state/utils/schoolHolidaysData";
+import {
+  NewSchoolHolidayData,
+  SchoolHolidayDataPayload,
+} from "../state/utils/schoolHolidaysData";
 // eslint-disable-next-line max-len
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "./types/schoolHolidaysData.schema";
 
@@ -19,3 +22,7 @@ export const add = (payload: NewSchoolHolidayData[]): Promise<SchoolHolidaysData
   load();
 
 export const remove = (payload: string[]): Promise<SchoolHolidaysData> => load();
+
+export const update = (
+  payload: SchoolHolidayDataPayload[]
+): Promise<SchoolHolidaysData> => load();
