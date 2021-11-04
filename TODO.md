@@ -11,6 +11,8 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
 
 - move calc of bigger things to backend for performance?
 - use backend only for file handling
+- show entries for pub / school hoidays orderd by start-date in dialogs
+
 - by default load data from DB only for current year.
   Add button to settings menu to load all data.
   ? Add range slider to select range of years to load.
@@ -21,9 +23,9 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
 ### Misc
 
 - self updater (**BEFORE 1.0**)
-- Make component for DB table menus and sub component for different types/entries
 - split current state & new/update for DB stuff
   - so on DB update the state can be updated w/o corrupting new/update data
+  - the current payload is like the update state .. is enough?
 - Copy pub holiday system to mark special days like `Karneval`
 
 ### Error handling
@@ -135,19 +137,6 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
 - on year change query data for new year only
 - on query calc easter_sunday, if no day-month -> calc moving holiday date with offset
 
-- Dialog-Menu:
-  - Show all entries ordered by start-date and then by id
-  - Switch to hide/show non-active ones
-  - only `day` || `offset` can be entered)
-  - Each entry has:
-    - invisible id
-    - name
-    - yearlessDate
-    - easter sunday offset
-    - (year)
-    - button to edit
-    - checkbox if applicable || button to remove
-
 ### School Holidays
 
 - on update (add/remove) send data to DB
@@ -155,33 +144,13 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
 - on year change query data for new year only
 
 - Dialog-Menu:
-  - Show all entries ordered by start-date and then by id
   - Field at top for link to load holidays from
     - add API call to get school holidays
-  - Each entry has:
-    - invisible id
-    - name
-    - start date
-    - end date
-    - button to edit
-    - button to remove
 
 ### Vacation Types
 
 - on update (add/deactivate) send data to DB
   && load data fresh from DB || or update state only
-
-- Dialog-Menu:
-  - Show all entries ordered by DB-id
-  - Switch to hide/show non-active ones
-  - Each entry has:
-    - invisible id
-    - unique name
-    - charge (bool if counted towards year-vac-days)
-    - color via picker
-    - ? second color for dark-theme?
-    - ? switch checkbox for activating color-split
-    - checkbox if applicable
 
 ### Vacation
 
