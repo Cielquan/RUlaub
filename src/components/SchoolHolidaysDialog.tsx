@@ -20,10 +20,7 @@ import { bindActionCreators } from "redux";
 
 import { SchoolHolidayData } from "../backendAPI/types/schoolHolidaysData.schema";
 import { actionCreators, State } from "../state";
-import {
-  NewSchoolHolidayData,
-  SchoolHolidayDataPayload,
-} from "../state/utils/schoolHolidaysData";
+import { NewSchoolHolidayData, SchoolHolidayDataPayload } from "../state/utils/types";
 
 import SchoolHolidaysDialogEntry from "./SchoolHolidaysDialogEntry";
 

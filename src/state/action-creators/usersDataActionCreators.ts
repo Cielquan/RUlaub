@@ -8,7 +8,7 @@ import { CalendarRowUserMapAction, UsersDataAction } from "../actions";
 import { logError } from "../../backendAPI";
 import { add, load, remove, update } from "../../backendAPI/usersData";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
-import { NewUserData, UserDataPayload } from "../utils/usersData";
+import { NewUserData, UserDataPayload } from "../utils/types";
 
 export const addUsersDataAction = (payload: UsersData): UsersDataAction => ({
   type: UsersDataActionType.ADD,

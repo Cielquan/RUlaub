@@ -1,9 +1,6 @@
 import { createDataLoader, createDataValidator } from ".";
 import VacationTypesDataSchema from "./schemas/vacationTypesData.schema.json";
-import {
-  NewVacationTypeData,
-  VacationTypeDataPayload,
-} from "../state/utils/vacationTypesData";
+import { NewVacationTypeData, VacationTypeDataPayload } from "../state/utils/types";
 // eslint-disable-next-line max-len
 import { VacationTypesDataSchema as VacationTypesData } from "./types/vacationTypesData.schema";
 

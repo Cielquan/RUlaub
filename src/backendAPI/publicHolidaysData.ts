@@ -1,9 +1,6 @@
 import { createDataLoader, createDataValidator } from ".";
 import PublicHolidaysDataSchema from "./schemas/publicHolidaysData.schema.json";
-import {
-  NewPublicHolidayData,
-  PublicHolidayDataPayload,
-} from "../state/utils/publicHolidaysData";
+import { NewPublicHolidayData, PublicHolidayDataPayload } from "../state/utils/types";
 // eslint-disable-next-line max-len
 import { PublicHolidaysDataSchema as PublicHolidaysData } from "./types/publicHolidaysData.schema";
 

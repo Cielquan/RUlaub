@@ -28,7 +28,7 @@ import {
   NewPublicHolidayData,
   NewPublicHolidayDataPayload,
   PublicHolidayDataPayload,
-} from "../state/utils/publicHolidaysData";
+} from "../state/utils/types";
 
 import DialogDataEntry, { EntryStyle } from "./DialogDataEntry";
 

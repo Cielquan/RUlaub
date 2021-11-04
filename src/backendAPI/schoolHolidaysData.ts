@@ -1,9 +1,6 @@
 import { createDataLoader, createDataValidator } from ".";
 import SchoolHolidaysDataSchema from "./schemas/schoolHolidaysData.schema.json";
-import {
-  NewSchoolHolidayData,
-  SchoolHolidayDataPayload,
-} from "../state/utils/schoolHolidaysData";
+import { NewSchoolHolidayData, SchoolHolidayDataPayload } from "../state/utils/types";
 // eslint-disable-next-line max-len
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "./types/schoolHolidaysData.schema";
 
