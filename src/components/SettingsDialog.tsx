@@ -1,4 +1,4 @@
-import { t, Trans } from "@lingui/macro";
+import { t } from "@lingui/macro";
 import {
   KeyboardArrowDown as KeyboardArrowDownIcon,
   KeyboardArrowUp as KeyboardArrowUpIcon,
@@ -88,9 +88,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
       onClose={closeSettingsDialog}
     >
       <DialogTitle id={id} sx={{ display: "flex", alignItems: "center" }}>
-        <Box sx={{ flexGrow: 1 }}>
-          <Trans>Settings</Trans>
-        </Box>
+        <Box sx={{ flexGrow: 1 }}>{t`Settings`}</Box>
         <SettingsIcon />
       </DialogTitle>
       <DialogContent sx={{ display: "flex", flexDirection: "column" }}>
@@ -231,7 +229,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           }}
           autoFocus
         >
-          <Trans>Save</Trans>
+          {t`Save`}
         </Button>
         <Button
           data-testid={`${id}-btn-cancel`}
@@ -241,7 +239,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           }}
           autoFocus
         >
-          <Trans>Cancel</Trans>
+          {t`Cancel`}
         </Button>
       </DialogActions>
     </Dialog>

@@ -1,4 +1,4 @@
-import { t, Trans } from "@lingui/macro";
+import { t } from "@lingui/macro";
 import { AddCircle as AddIcon, Group as GroupIcon } from "@mui/icons-material";
 import {
   Button,
@@ -152,9 +152,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
       onClose={closeSchoolHolidaysDialog}
     >
       <DialogTitle id={id} sx={{ display: "flex", alignItems: "center" }}>
-        <Box sx={{ flexGrow: 1 }}>
-          <Trans>School Holidays</Trans>
-        </Box>
+        <Box sx={{ flexGrow: 1 }}>{t`School Holidays`}</Box>
         <GroupIcon />
       </DialogTitle>
       <DialogContent>
@@ -204,7 +202,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
               closeSchoolHolidaysDialog();
             }}
           >
-            <Trans>Save</Trans>
+            {t`Save`}
           </Button>
         </Tooltip>
         <Button
@@ -214,7 +212,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
             closeSchoolHolidaysDialog();
           }}
         >
-          <Trans>Discard</Trans>
+          {t`Discard`}
         </Button>
       </DialogActions>
     </Dialog>

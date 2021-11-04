@@ -1,4 +1,4 @@
-import { Trans } from "@lingui/macro";
+import { t } from "@lingui/macro";
 import { StaticDatePicker } from "@mui/lab";
 import { TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
@@ -34,7 +34,7 @@ const CalendarStartPage = (): ReactElement => {
       }}
     >
       <Typography variant="h4" sx={{ paddingTop: 4, paddingBottom: 8 }}>
-        <Trans>No year to show selected. Please select one below:</Trans>
+        {t`No year to show selected. Please select one below:`}
       </Typography>
       <StaticDatePicker
         displayStaticWrapperAs="desktop"

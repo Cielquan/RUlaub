@@ -1,4 +1,4 @@
-import { Trans } from "@lingui/macro";
+import { t, Trans } from "@lingui/macro";
 import { Info as InfoIcon } from "@mui/icons-material";
 import {
   Button,
@@ -87,7 +87,7 @@ const InfoPage = ({ onClick }: Props): ReactElement => {
           }}
           autoFocus
         >
-          <Trans>Close</Trans>
+          {t`Close`}
         </Button>
       </DialogActions>
     </Dialog>
