@@ -160,8 +160,12 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
       <DialogContent>
         <List sx={{ display: "flex", flexDirection: "column", paddingBottom: 0 }}>
           {Object.keys(schoolHolidaysDataState)
-            .sort()
-            .map((schoolHolidayId) => (
+            .map((schoolHolidayId): [string, number] => [
+              schoolHolidayId,
+              schoolHolidaysDataState[schoolHolidayId].calc.start.yearDay,
+            ])
+            .sort((a, b) => a[1] - b[1])
+            .map(([schoolHolidayId]) => (
               <SchoolHolidaysDialogEntry
                 key={schoolHolidayId}
                 id={schoolHolidayId}

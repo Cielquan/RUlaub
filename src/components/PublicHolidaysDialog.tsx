@@ -156,8 +156,12 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
       <DialogContent>
         <List sx={{ display: "flex", flexDirection: "column", paddingBottom: 0 }}>
           {Object.keys(publicHolidaysDataState)
-            .sort()
-            .map((publicHolidayId) => (
+            .map((publicHolidayId): [string, number] => [
+              publicHolidayId,
+              publicHolidaysDataState[publicHolidayId].calc.yearDay,
+            ])
+            .sort((a, b) => a[1] - b[1])
+            .map(([publicHolidayId]) => (
               <PublicHolidaysDialogEntry
                 key={publicHolidayId}
                 id={publicHolidayId}
