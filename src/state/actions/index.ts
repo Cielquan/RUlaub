@@ -153,11 +153,6 @@ export type VacationTypesDataLoadAction = {
   payload: VacationTypesData;
 };
 
-export type VacationTypesDataRemoveAction = {
-  type: VacationTypesDataActionType.REMOVE;
-  payload: VacationTypesData;
-};
-
 export type VacationTypesDataUpdateAction = {
   type: VacationTypesDataActionType.UPDATE;
   payload: VacationTypeDataPayload[];
@@ -166,7 +161,6 @@ export type VacationTypesDataUpdateAction = {
 export type VacationTypesDataAction =
   | VacationTypesDataAddAction
   | VacationTypesDataLoadAction
-  | VacationTypesDataRemoveAction
   | VacationTypesDataUpdateAction;
 
 export type VacationTypesDialogAction = {

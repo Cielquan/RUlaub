@@ -14,8 +14,6 @@ const reducer = (
       return action.payload;
     case VacationTypesDataActionType.LOAD:
       return action.payload;
-    case VacationTypesDataActionType.REMOVE:
-      return action.payload;
     case VacationTypesDataActionType.UPDATE:
       return updateVacationTypesData(state, action.payload);
     default:

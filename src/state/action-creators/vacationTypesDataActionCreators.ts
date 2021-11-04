@@ -4,11 +4,10 @@ import { VacationTypesDataActionType } from "../action-types";
 import {
   VacationTypesDataAddAction,
   VacationTypesDataLoadAction,
-  VacationTypesDataRemoveAction,
   VacationTypesDataUpdateAction,
 } from "../actions";
 import { logError } from "../../backendAPI";
-import { add, load, remove } from "../../backendAPI/vacationTypesData";
+import { add, load } from "../../backendAPI/vacationTypesData";
 // eslint-disable-next-line max-len
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 import {
@@ -50,26 +49,6 @@ export const loadVacationTypesData =
       const data = await load();
 
       dispatch(loadVacationTypesDataAction(data));
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
-    }
-  };
-
-export const removeVacationTypesDataAction = (
-  payload: VacationTypesData
-): VacationTypesDataRemoveAction => ({
-  type: VacationTypesDataActionType.REMOVE,
-  payload,
-});
-
-export const removeVacationTypesData =
-  (payload: string[]) =>
-  async (dispatch: Dispatch<VacationTypesDataRemoveAction>): Promise<void> => {
-    try {
-      const data = await remove(payload);
-
-      dispatch(removeVacationTypesDataAction(data));
     } catch (error) {
       // TODO:#i# add snackbar
       logError(error as Error);

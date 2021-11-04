@@ -65,7 +65,6 @@ export enum VacationDialogActionType {
 export enum VacationTypesDataActionType {
   ADD = "add vacation types data",
   LOAD = "load vacation types data",
-  REMOVE = "remove vacation types data",
   UPDATE = "update vacation types data",
 }
 
