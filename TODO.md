@@ -11,7 +11,6 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
 
 - move calc of bigger things to backend for performance?
 - use backend only for file handling
-- show entries for pub / school hoidays orderd by start-date in dialogs
 
 - by default load data from DB only for current year.
   Add button to settings menu to load all data.
