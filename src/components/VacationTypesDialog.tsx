@@ -187,7 +187,7 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
             closeVacationTypesDialog();
           }}
         >
-          <Trans>Cancel</Trans>
+          <Trans>Discard</Trans>
         </Button>
       </DialogActions>
     </Dialog>

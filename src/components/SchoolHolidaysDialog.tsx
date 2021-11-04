@@ -214,7 +214,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
             closeSchoolHolidaysDialog();
           }}
         >
-          <Trans>Cancel</Trans>
+          <Trans>Discard</Trans>
         </Button>
       </DialogActions>
     </Dialog>

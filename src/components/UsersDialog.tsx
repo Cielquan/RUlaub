@@ -192,7 +192,7 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
             closeUsersDialog();
           }}
         >
-          <Trans>Cancel</Trans>
+          <Trans>Discard</Trans>
         </Button>
       </DialogActions>
     </Dialog>
