@@ -15,7 +15,7 @@ import {
   sideMenuInitState,
   usersDialogInitState,
   usersDataInitState,
-  vacationDialogInitState,
+  vacationsDialogInitState,
   vacationTypesDataInitState,
   vacationTypesDialogInitState,
 } from "./initialStates";
@@ -27,7 +27,7 @@ import settingsDialogReducer from "./settingsDialogReducer";
 import sideMenuReducer from "./sideMenuReducer";
 import usersDataReducer from "./usersDataReducer";
 import usersDialogReducer from "./usersDialogReducer";
-import vacationDialogReducer from "./vacationDialogReducer";
+import vacationsDialogReducer from "./vacationsDialogReducer";
 import vacationTypesDataReducer from "./vacationTypesDataReducer";
 import vacationTypesDialogReducer from "./vacationTypesDialogReducer";
 
@@ -43,7 +43,7 @@ const rootReducer = combineReducers({
   sideMenu: sideMenuReducer,
   usersData: usersDataReducer,
   usersDialog: usersDialogReducer,
-  vacationDialog: vacationDialogReducer,
+  vacationsDialog: vacationsDialogReducer,
   vacationTypesData: vacationTypesDataReducer,
   vacationTypesDialog: vacationTypesDialogReducer,
 });
@@ -62,7 +62,7 @@ export const initialState: State = {
   sideMenu: sideMenuInitState,
   usersData: usersDataInitState,
   usersDialog: usersDialogInitState,
-  vacationDialog: vacationDialogInitState,
+  vacationsDialog: vacationsDialogInitState,
   vacationTypesData: vacationTypesDataInitState,
   vacationTypesDialog: vacationTypesDialogInitState,
 };

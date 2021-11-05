@@ -9,6 +9,6 @@ export * from "./settingsDialogActionCreators";
 export * from "./sideMenuActionCreators";
 export * from "./usersDataActionCreators";
 export * from "./usersDialogActionCreators";
-export * from "./vacationDialogActionCreators";
+export * from "./vacationsDialogActionCreators";
 export * from "./vacationTypesDataActionCreators";
 export * from "./vacationTypesDialogActionCreators";

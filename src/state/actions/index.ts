@@ -10,7 +10,7 @@ import {
   SideMenuActionType,
   UsersDataActionType,
   UsersDialogActionType,
-  VacationDialogActionType,
+  VacationsDialogActionType,
   VacationTypesDataActionType,
   VacationTypesDialogActionType,
 } from "../action-types";
@@ -72,8 +72,8 @@ export type UsersDialogAction = {
   type: UsersDialogActionType;
 };
 
-export type VacationDialogAction = {
-  type: VacationDialogActionType;
+export type VacationsDialogAction = {
+  type: VacationsDialogActionType;
 };
 
 export type VacationTypesDataAction = {

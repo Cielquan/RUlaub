@@ -46,6 +46,6 @@ export const settingsDialogInitState = false;
 export const sideMenuInitState = false;
 export const usersDataInitState: UsersData = {};
 export const usersDialogInitState = false;
-export const vacationDialogInitState = false;
+export const vacationsDialogInitState = false;
 export const vacationTypesDataInitState: VacationTypesData = {};
 export const vacationTypesDialogInitState = false;
