@@ -1,5 +1,35 @@
 ## App
 
+### Roadmap Frontend
+
+##### Essentiel
+
+Frontend:
+
+- Add vac dialog
+- Add DB dialog for creation
+- Add DB dialog for changing
+
+Backend:
+
+- Add Tracing
+- Add config loading (file watcher)
+- Add DB interaction (file watcher)
+- Add DB Data prep for Frontend
+- Add selfupdater
+
+##### Minor
+
+Frontend:
+
+- Add snackbars with Info of success/failures
+- Add add vac dialog for FAB
+- Tooltip on User for vac distribution
+- Tooltip on Day (top) for Info on Holiday if any
+- Tooltip on Day (body) for Info on vac + option to change it
+  - Add vac edit dialog
+- Add btn under users to open users dialog
+
 ### Links for help to do things (dev)
 
 https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
