@@ -11,50 +11,20 @@
       "type": "object",
       "properties": {
         "name": { "type": "string" },
-        "start": {
-          "type": "object",
-          "properties": {
-            "date": { "$ref": "#/$defs/ISODate" }
-          },
-          "required": ["date"],
-          "additionalProperties": false
-        },
-        "end": {
-          "type": "object",
-          "properties": {
-            "date": { "$ref": "#/$defs/ISODate" }
-          },
-          "required": ["date"],
-          "additionalProperties": false
-        },
-        "calc": {
-          "type": "object",
-          "description": "gets calculated in backend on load from DB",
-          "properties": {
-            "start": {
-              "type": "object",
-              "properties": {
-                "yearDay": { "type": "number" },
-                "year": { "type": "number" }
-              },
-              "required": ["yearDay", "year"],
-              "additionalProperties": false
-            },
-            "end": {
-              "type": "object",
-              "properties": {
-                "yearDay": { "type": "number" },
-                "year": { "type": "number" }
-              },
-              "required": ["yearDay", "year"],
-              "additionalProperties": false
-            }
-          },
-          "required": ["start", "end"],
-          "additionalProperties": false
-        }
+        "start": { "$ref": "#/$defs/DateData" },
+        "end": { "$ref": "#/$defs/DateData" }
       },
       "required": ["name", "start", "end", "calc"],
+      "additionalProperties": false
+    },
+    "DateData": {
+      "type": "object",
+      "properties": {
+        "date": { "$ref": "#/$defs/ISODate" },
+        "yearDay": { "type": "number" },
+        "year": { "type": "number" }
+      },
+      "required": ["date", "yearDay", "year"],
       "additionalProperties": false
     },
     "ISODate": {

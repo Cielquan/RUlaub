@@ -8,7 +8,7 @@ export type NewPublicHolidayData = Omit<PublicHolidayData, "calc">;
 export type NewPublicHolidayDataPayload = [string, NewPublicHolidayData];
 
 export type SchoolHolidayDataPayload = [string, SchoolHolidayData];
-export type NewSchoolHolidayData = Omit<SchoolHolidayData, "calc">;
+export type NewSchoolHolidayData = SchoolHolidayData;
 export type NewSchoolHolidayDataPayload = [string, NewSchoolHolidayData];
 
 export type UserDataPayload = [string, UserData];

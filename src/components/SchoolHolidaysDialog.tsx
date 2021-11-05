@@ -21,6 +21,7 @@ import { bindActionCreators } from "redux";
 import { SchoolHolidayData } from "../backendAPI/types/schoolHolidaysData.schema";
 import { actionCreators, State } from "../state";
 import { NewSchoolHolidayData, SchoolHolidayDataPayload } from "../state/utils/types";
+import { getDaysForDate } from "../utils/dateUtils";
 
 import SchoolHolidaysDialogEntry from "./SchoolHolidaysDialogEntry";
 
@@ -91,8 +92,16 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
     const rv = { ...newSchoolHolidays };
     rv[getTmpID()] = {
       name: "",
-      start: { date: today.toISOString().slice(0, 10) },
-      end: { date: today.toISOString().slice(0, 10) },
+      start: {
+        date: today.toISOString().slice(0, 10),
+        yearDay: getDaysForDate(today),
+        year: today.getFullYear(),
+      },
+      end: {
+        date: today.toISOString().slice(0, 10),
+        yearDay: getDaysForDate(today),
+        year: today.getFullYear(),
+      },
     };
     setNewSchoolHolidays(rv);
   };
@@ -163,7 +172,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
           {Object.keys(schoolHolidaysDataState)
             .map((schoolHolidayId): [string, number] => [
               schoolHolidayId,
-              schoolHolidaysDataState[schoolHolidayId].calc.start.yearDay,
+              schoolHolidaysDataState[schoolHolidayId].start.yearDay,
             ])
             .sort((a, b) => a[1] - b[1])
             .map(([schoolHolidayId]) => (

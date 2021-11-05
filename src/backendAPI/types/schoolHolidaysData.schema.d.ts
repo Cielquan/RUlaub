@@ -19,23 +19,11 @@ export interface SchoolHolidaysDataSchema {
  */
 export interface SchoolHolidayData {
   name: string;
-  start: {
-    date: ISODate;
-  };
-  end: {
-    date: ISODate;
-  };
-  /**
-   * gets calculated in backend on load from DB
-   */
-  calc: {
-    start: {
-      yearDay: number;
-      year: number;
-    };
-    end: {
-      yearDay: number;
-      year: number;
-    };
-  };
+  start: DateData;
+  end: DateData;
+}
+export interface DateData {
+  date: ISODate;
+  yearDay: number;
+  year: number;
 }

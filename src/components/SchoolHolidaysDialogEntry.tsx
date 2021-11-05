@@ -19,6 +19,7 @@ import {
   NewSchoolHolidayDataPayload,
   SchoolHolidayDataPayload,
 } from "../state/utils/types";
+import { getDaysForDate } from "../utils/dateUtils";
 
 import DialogDataEntry, { EntryStyle, getStyles } from "./DialogDataEntry";
 
@@ -294,10 +295,22 @@ const SchoolHolidaysDialogEntry = ({
       {
         ...schoolHoliday,
         name: nameForm,
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        start: { date: startDateForm!.toISOString().slice(0, 10) },
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        end: { date: endDateForm!.toISOString().slice(0, 10) },
+        start: {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          date: startDateForm!.toISOString().slice(0, 10),
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          yearDay: getDaysForDate(startDateForm!),
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          year: startDateForm!.getFullYear(),
+        },
+        end: {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          date: endDateForm!.toISOString().slice(0, 10),
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          yearDay: getDaysForDate(endDateForm!),
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          year: endDateForm!.getFullYear(),
+        },
       },
     ]);
   };
