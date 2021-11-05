@@ -21,7 +21,7 @@ export interface UserData {
   name: string;
   workdays: Workdays;
   availableVacationDays: number;
-  vacations: Vacation[];
+  vacations: VacationData[];
   /**
    * gets calculated in backend on load from DB for current year
    */
@@ -39,7 +39,7 @@ export interface Workdays {
   saturday: boolean;
   sunday: boolean;
 }
-export interface Vacation {
+export interface VacationData {
   id: number;
   typeId: number;
   start: DateData;

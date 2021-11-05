@@ -15,7 +15,7 @@
         "availableVacationDays": { "type": "number" },
         "vacations": {
           "type": "array",
-          "items": { "$ref": "#/$defs/vacation" }
+          "items": { "$ref": "#/$defs/VacationData" }
         },
         "calc": {
           "type": "object",
@@ -66,7 +66,7 @@
       "required": ["typeId", "count"],
       "additionalProperties": false
     },
-    "vacation": {
+    "VacationData": {
       "type": "object",
       "properties": {
         "id": { "type": "number" },
