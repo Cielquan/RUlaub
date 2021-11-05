@@ -111,27 +111,30 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
   };
 
   const saveChanges = (): void => {
-    removeSchoolHolidaysData(
-      Object.keys(updatedSchoolHolidays).filter(
-        (schoolHolidayID) => updatedSchoolHolidays[schoolHolidayID] === undefined
-      )
-    );
-
-    updateSchoolHolidaysData(
-      Object.keys(updatedSchoolHolidays)
-        .filter(
-          (schoolHolidayID) => updatedSchoolHolidays[schoolHolidayID] !== undefined
+    if (Object.keys(updatedSchoolHolidays).length > 0)
+      removeSchoolHolidaysData(
+        Object.keys(updatedSchoolHolidays).filter(
+          (schoolHolidayID) => updatedSchoolHolidays[schoolHolidayID] === undefined
         )
-        .map(
-          (schoolHolidayID) =>
-            [
-              schoolHolidayID,
-              updatedSchoolHolidays[schoolHolidayID],
-            ] as SchoolHolidayDataPayload
-        )
-    );
+      );
 
-    addSchoolHolidaysData(Object.values(newSchoolHolidays));
+    if (Object.keys(updatedSchoolHolidays).length > 0)
+      updateSchoolHolidaysData(
+        Object.keys(updatedSchoolHolidays)
+          .filter(
+            (schoolHolidayID) => updatedSchoolHolidays[schoolHolidayID] !== undefined
+          )
+          .map(
+            (schoolHolidayID) =>
+              [
+                schoolHolidayID,
+                updatedSchoolHolidays[schoolHolidayID],
+              ] as SchoolHolidayDataPayload
+          )
+      );
+
+    if (Object.keys(newSchoolHolidays))
+      addSchoolHolidaysData(Object.values(newSchoolHolidays));
   };
 
   useEffect(() => {

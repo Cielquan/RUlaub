@@ -103,17 +103,17 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
   };
 
   const saveChanges = (): void => {
-    removeUsersData(
-      Object.keys(updatedUsers).filter((userID) => updatedUsers[userID] === undefined)
+    const usersToRemove = Object.keys(updatedUsers).filter(
+      (userID) => updatedUsers[userID] === undefined
     );
+    if (usersToRemove.length > 0) removeUsersData(usersToRemove);
 
-    updateUsersData(
-      Object.keys(updatedUsers)
-        .filter((userID) => updatedUsers[userID] !== undefined)
-        .map((userID) => [userID, updatedUsers[userID]] as UserDataPayload)
-    );
+    const usersToUpdate = Object.keys(updatedUsers)
+      .filter((userID) => updatedUsers[userID] !== undefined)
+      .map((userID) => [userID, updatedUsers[userID]] as UserDataPayload);
+    if (usersToUpdate.length > 0) updateUsersData(usersToUpdate);
 
-    addUsersData(Object.values(newUsers));
+    if (Object.keys(newUsers).length > 0) addUsersData(Object.values(newUsers));
   };
 
   useEffect(() => {

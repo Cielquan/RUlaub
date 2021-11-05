@@ -107,27 +107,30 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
   };
 
   const saveChanges = (): void => {
-    removePublicHolidaysData(
-      Object.keys(updatedPublicHolidays).filter(
-        (publicHolidayID) => updatedPublicHolidays[publicHolidayID] === undefined
-      )
-    );
-
-    updatePublicHolidaysData(
-      Object.keys(updatedPublicHolidays)
-        .filter(
-          (publicHolidayID) => updatedPublicHolidays[publicHolidayID] !== undefined
+    if (Object.keys(updatedPublicHolidays).length > 0)
+      removePublicHolidaysData(
+        Object.keys(updatedPublicHolidays).filter(
+          (publicHolidayID) => updatedPublicHolidays[publicHolidayID] === undefined
         )
-        .map(
-          (publicHolidayID) =>
-            [
-              publicHolidayID,
-              updatedPublicHolidays[publicHolidayID],
-            ] as PublicHolidayDataPayload
-        )
-    );
+      );
 
-    addPublicHolidaysData(Object.values(newPublicHolidays));
+    if (Object.keys(updatedPublicHolidays).length > 0)
+      updatePublicHolidaysData(
+        Object.keys(updatedPublicHolidays)
+          .filter(
+            (publicHolidayID) => updatedPublicHolidays[publicHolidayID] !== undefined
+          )
+          .map(
+            (publicHolidayID) =>
+              [
+                publicHolidayID,
+                updatedPublicHolidays[publicHolidayID],
+              ] as PublicHolidayDataPayload
+          )
+      );
+
+    if (Object.keys(newPublicHolidays).length > 0)
+      addPublicHolidaysData(Object.values(newPublicHolidays));
   };
 
   useEffect(() => {

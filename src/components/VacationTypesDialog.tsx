@@ -99,16 +99,18 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
   };
 
   const saveChanges = (): void => {
-    updateVacationTypesData(
-      Object.keys(updatedVacationTypes).map(
-        (vacationTypeID) =>
-          [
-            vacationTypeID,
-            updatedVacationTypes[vacationTypeID],
-          ] as VacationTypeDataPayload
-      )
-    );
-    addVacationTypesData(Object.values(newVacationTypes));
+    if (Object.keys(updatedVacationTypes).length > 0)
+      updateVacationTypesData(
+        Object.keys(updatedVacationTypes).map(
+          (vacationTypeID) =>
+            [
+              vacationTypeID,
+              updatedVacationTypes[vacationTypeID],
+            ] as VacationTypeDataPayload
+        )
+      );
+    if (Object.values(newVacationTypes).length > 0)
+      addVacationTypesData(Object.values(newVacationTypes));
   };
 
   useEffect(() => {
