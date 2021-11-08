@@ -12,6 +12,7 @@ import SchoolHolidaysDialog from "./components/SchoolHolidaysDialog";
 import SettingsDialog from "./components/SettingsDialog";
 import SideMenu from "./components/SideMenu";
 import UsersDialog from "./components/UsersDialog";
+import VacationsDialog from "./components/VacationsDialog";
 import VacationTypesDialog from "./components/VacationTypesDialog";
 
 const StyledMain = styled("main")(({ theme }) => ({
@@ -54,6 +55,7 @@ const App = (): ReactElement => (
     <SchoolHolidaysDialog />
     <SettingsDialog />
     <UsersDialog />
+    <VacationsDialog />
     <VacationTypesDialog />
   </Box>
 );

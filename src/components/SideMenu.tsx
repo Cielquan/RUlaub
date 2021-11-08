@@ -47,6 +47,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     openSchoolHolidaysDialog,
     openSettingsDialog,
     openUsersDialog,
+    openVacationsDialog,
     openVacationTypesDialog,
   } = bindActionCreators(actionCreators, dispatch);
   const sideMenuState = useSelector((state: State) => state.sideMenu);
@@ -97,7 +98,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     ],
     [
       [t`Vacation`, <FlightIcon />],
-      [<CreateIcon />, () => undefined, t`Edit`],
+      [<CreateIcon />, openVacationsDialog, t`Edit`],
       [<AddIcon />, () => undefined, t`Create`],
     ],
   ];
