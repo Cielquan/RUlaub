@@ -1,6 +1,11 @@
 import { createDataLoader, createDataValidator } from ".";
 import UsersDataSchema from "./schemas/usersData.schema.json";
-import { NewUserData, UserDataPayload } from "../state/utils/types";
+import {
+  NewUserData,
+  NewVacationData,
+  UserDataPayload,
+  VacationDataPayload,
+} from "../state/utils/types";
 import { UsersDataSchema as UsersData } from "./types/usersData.schema";
 
 import usersDataJSON from "./dev_temp/test.usersData.json";
@@ -11,11 +16,20 @@ export const fetchData = (): Promise<unknown> =>
 export const validateData = (data: unknown): Promise<UsersData> =>
   createDataValidator<UsersData>(UsersDataSchema)(data);
 
-export const load = (): Promise<UsersData> =>
+export const loadUsers = (): Promise<UsersData> =>
   createDataLoader<UsersData>("Users", fetchData, validateData)();
 
-export const add = (payload: NewUserData[]): Promise<UsersData> => load();
+export const addUsers = (payload: NewUserData[]): Promise<UsersData> => loadUsers();
 
-export const remove = (payload: string[]): Promise<UsersData> => load();
+export const removeUsers = (payload: string[]): Promise<UsersData> => loadUsers();
 
-export const update = (payload: UserDataPayload[]): Promise<UsersData> => load();
+export const updateUsers = (payload: UserDataPayload[]): Promise<UsersData> =>
+  loadUsers();
+
+export const addVacations = (payload: NewVacationData[]): Promise<UsersData> =>
+  loadUsers();
+
+export const removeVacations = (payload: string[]): Promise<UsersData> => loadUsers();
+
+export const updateVacations = (payload: VacationDataPayload[]): Promise<UsersData> =>
+  loadUsers();
