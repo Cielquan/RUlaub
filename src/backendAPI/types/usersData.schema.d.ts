@@ -21,7 +21,7 @@ export interface UserData {
   name: string;
   workdays: Workdays;
   availableVacationDays: number;
-  vacations: VacationData[];
+  vacations: VacationsDataSchema;
   /**
    * gets calculated in backend on load from DB for current year
    */
@@ -39,8 +39,14 @@ export interface Workdays {
   saturday: boolean;
   sunday: boolean;
 }
+export interface VacationsDataSchema {
+  [k: string]: VacationData;
+}
+/**
+ * This interface was referenced by `VacationsDataSchema`'s JSON-Schema definition
+ * via the `patternProperty` "^\d+$".
+ */
 export interface VacationData {
-  id: number;
   typeId: number;
   start: DateData;
   end: DateData;

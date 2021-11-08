@@ -13,10 +13,7 @@
         "name": { "type": "string" },
         "workdays": { "$ref": "#/$defs/workdays" },
         "availableVacationDays": { "type": "number" },
-        "vacations": {
-          "type": "array",
-          "items": { "$ref": "#/$defs/VacationData" }
-        },
+        "vacations": { "$ref": "#/$defs/VacationsDataSchema" },
         "calc": {
           "type": "object",
           "description": "gets calculated in backend on load from DB for current year",
@@ -66,15 +63,20 @@
       "required": ["typeId", "count"],
       "additionalProperties": false
     },
+    "VacationsDataSchema": {
+      "type": "object",
+      "patternProperties": {
+        "^\\d+$": { "$ref": "#/$defs/VacationData" }
+      }
+    },
     "VacationData": {
       "type": "object",
       "properties": {
-        "id": { "type": "number" },
         "typeId": { "type": "number" },
         "start": { "$ref": "#/$defs/DateData" },
         "end": { "$ref": "#/$defs/DateData" }
       },
-      "required": ["id", "typeId", "start", "end"],
+      "required": ["typeId", "start", "end"],
       "additionalProperties": false
     },
     "DateData": {
