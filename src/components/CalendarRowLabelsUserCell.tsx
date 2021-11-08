@@ -1,11 +1,12 @@
-import { Typography } from "@mui/material";
+import { Create as CreateIcon } from "@mui/icons-material";
+import { IconButton, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { CSSProperties, ReactElement } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import { State } from "../state";
+import { actionCreators, State } from "../state";
 import { STYLE_CONST } from "../styles";
-import { UsersDataSchema } from "../backendAPI/types/usersData.schema";
 
 interface Props {
   index: number;
@@ -13,14 +14,20 @@ interface Props {
 }
 
 const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElement => {
+  const usersDataState = useSelector((state: State) => state.usersData);
   const calendarRowUserMapState = useSelector(
     (state: State) => state.calendarRowUserMap
   );
-  const userID = calendarRowUserMapState[
-    rowIndex.toString()
-  ].toString() as keyof UsersDataSchema;
 
-  const usersDataState = useSelector((state: State) => state.usersData);
+  const dispatch = useDispatch();
+  const { openUsersDialog } = bindActionCreators(actionCreators, dispatch);
+
+  let userID;
+  try {
+    userID = calendarRowUserMapState[rowIndex.toString()].toString();
+  } catch {
+    userID = undefined;
+  }
 
   return (
     <Box
@@ -37,9 +44,17 @@ const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElem
         height: Number(style.height) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
       }}
     >
-      <Typography sx={{ padding: "0 0.3em" }} variant="body1" noWrap>
-        {usersDataState[userID]?.name}
-      </Typography>
+      {userID === undefined ? (
+        <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
+          <IconButton onClick={openUsersDialog}>
+            <CreateIcon />
+          </IconButton>
+        </Box>
+      ) : (
+        <Typography sx={{ padding: "0 0.3em" }} variant="body1" noWrap>
+          {usersDataState[userID]?.name}
+        </Typography>
+      )}
     </Box>
   );
 };

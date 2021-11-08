@@ -27,7 +27,6 @@ Frontend:
 - Tooltip on Day (top) for Info on Holiday if any
 - Tooltip on Day (body) for Info on vac + option to change it
   - Add vac edit dialog
-- Add btn under users to open users dialog
 
 ### Links for help to do things (dev)
 

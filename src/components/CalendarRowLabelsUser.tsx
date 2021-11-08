@@ -40,7 +40,7 @@ const CalendarRowLabelsUser = ({ height, positionY }: Props): ReactElement => {
         }
         width={STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
         innerElementType={innerElementType}
-        itemCount={Object.keys(usersDataState).length}
+        itemCount={Object.keys(usersDataState).length + 1}
         itemSize={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL}
         ref={rowLabelRef}
         // needs this local manual overwrite to work, css class gets overwritten
