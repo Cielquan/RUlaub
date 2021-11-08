@@ -14,7 +14,7 @@
         "start": { "$ref": "#/$defs/DateData" },
         "end": { "$ref": "#/$defs/DateData" }
       },
-      "required": ["name", "start", "end", "calc"],
+      "required": ["name", "start", "end"],
       "additionalProperties": false
     },
     "DateData": {
