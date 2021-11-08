@@ -6,7 +6,6 @@
 
 Frontend:
 
-- Add vac dialog
 - Add DB dialog for creation
 - Add DB dialog for changing
 
@@ -59,7 +58,7 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
 
 ### Error handling
 
-- default logging level on startup: ``DEBUG`` (before loading conf)
+- default logging level on startup: `DEBUG` (before loading conf)
 - add "no config state" (error with file access/creation) to
   - show warning in settings and DB link/creation menus
   - send snackbars on changes (theme, i18n, year selection)
@@ -82,7 +81,7 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
         DO: work with default settings, set "no config state"
         LVL: error
         INFO: changes work for current session but cannot be preserved
-          (add reason and advice if applicable)
+        (add reason and advice if applicable)
         VIA: snackbar
       - invalid data
         DO: use defaults, overwrite setting in file with default
@@ -104,7 +103,7 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
         DO: -
         LVL: error
         INFO: need to fix reason
-          (add reason and advice if applicable)
+        (add reason and advice if applicable)
         VIA: dialog
       - cannot access file b/c in action by other user
         DO: retry after x time
