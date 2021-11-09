@@ -41,11 +41,10 @@ fn main() {
 
     println!(
         "File path: {:?}",
-        *rulaub_backend::config::loader::SETTINGS_FILE_PATH
-        // rulaub_backend::config::get_conf_file_path_str()
+        *rulaub_backend::config::loader::SETTINGS_FILE_PATH_STR // rulaub_backend::config::get_conf_file_path()
     );
 
-    rulaub_backend::config::loader::watch_settings();
+    rulaub_backend::config::loader::watch_settings_file();
 
     // let id = create_new_user();
     // println!("{}", id.unwrap());
@@ -69,6 +68,8 @@ fn create_new_user<'a>() -> anyhow::Result<i32> {
 
     let num = 1 + add;
     let name = format!("Name{}", &num);
-    let abbr = format!("na{}", &num);
-    User::new(&name, &abbr, &32, &num, None).save_to_db(&conn)
+    User::new(
+        &name, &32, &true, &true, &true, &true, &true, &false, &false,
+    )
+    .save_to_db(&conn)
 }
