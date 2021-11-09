@@ -1,19 +1,18 @@
 use std::fmt::{self, Display, Formatter};
 
 use anyhow::Result;
-use chrono::NaiveDate;
 use diesel::prelude::*;
 use tracing::{debug, instrument, trace};
 
-use crate::db::schema::public_holidays;
-use crate::db::util::last_insert_rowid;
+use crate::db::{schema::public_holidays, util::last_insert_rowid};
 
 #[derive(Queryable, Debug)]
 pub struct PublicHoliday {
     pub id: i32,
-    pub state_id: i32,
     pub name: String,
-    pub date: NaiveDate,
+    pub year: Option<i32>,
+    pub yearless_date: Option<String>,
+    pub easter_sunday_offset: Option<i32>,
 }
 
 impl Display for PublicHoliday {
@@ -23,8 +22,18 @@ impl Display for PublicHoliday {
         } else {
             write!(
                 f,
-                "<PublicHoliday {} (date: {} | State-ID: {} | ID: {})>",
-                self.name, self.state_id, self.date, self.id
+                concat!(
+                    "<PublicHoliday {}",
+                    " (Yearless date: {:?}",
+                    " | Easter sunday offset: {:?}",
+                    " | Year: {:?}",
+                    " | ID: {})>"
+                ),
+                self.name,
+                self.yearless_date,
+                self.easter_sunday_offset,
+                self.year,
+                self.id
             )
         }
     }
@@ -32,14 +41,16 @@ impl Display for PublicHoliday {
 
 impl PublicHoliday {
     pub fn new<'a>(
-        state_id: &'a i32,
         name: &'a str,
-        date: &'a NaiveDate,
+        year: Option<&'a i32>,
+        yearless_date: Option<&'a str>,
+        easter_sunday_offset: Option<&'a i32>,
     ) -> NewPublicHoliday<'a> {
         NewPublicHoliday {
-            state_id,
             name,
-            date,
+            year,
+            yearless_date,
+            easter_sunday_offset,
         }
     }
 }
@@ -47,9 +58,10 @@ impl PublicHoliday {
 #[derive(Insertable, Debug)]
 #[table_name = "public_holidays"]
 pub struct NewPublicHoliday<'a> {
-    pub state_id: &'a i32,
     pub name: &'a str,
-    pub date: &'a NaiveDate,
+    pub year: Option<&'a i32>,
+    pub yearless_date: Option<&'a str>,
+    pub easter_sunday_offset: Option<&'a i32>,
 }
 
 impl Display for NewPublicHoliday<'_> {
@@ -59,8 +71,13 @@ impl Display for NewPublicHoliday<'_> {
         } else {
             write!(
                 f,
-                "<NewPublicHoliday {} (date: {} | State-ID: {})>",
-                self.name, self.date, self.state_id
+                concat!(
+                    "<NewPublicHoliday {}",
+                    " (Yearless date: {:?}",
+                    " | Easter sunday offset: {:?}",
+                    " | Year: {:?})>"
+                ),
+                self.name, self.yearless_date, self.easter_sunday_offset, self.year
             )
         }
     }

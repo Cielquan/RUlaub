@@ -4,14 +4,16 @@ use anyhow::Result;
 use diesel::prelude::*;
 use tracing::{debug, instrument, trace};
 
-use crate::db::schema::vacation_types;
-use crate::db::util::last_insert_rowid;
+use crate::db::{schema::vacation_types, util::last_insert_rowid};
 
 #[derive(Queryable, Debug)]
 pub struct VacationType {
     pub id: i32,
     pub name: String,
-    pub count: bool,
+    pub charge: bool,
+    pub color_dark: String,
+    pub color_light: String,
+    pub active: bool,
 }
 
 impl Display for VacationType {
@@ -21,16 +23,34 @@ impl Display for VacationType {
         } else {
             write!(
                 f,
-                "<VacationType {} (Do count: {} | ID: {})>",
-                self.name, self.count, self.id
+                concat!(
+                    "<VacationType {}",
+                    " (Charge: {}",
+                    " | Color dark: {}",
+                    " | Color light: {}",
+                    " | ID: {})>"
+                ),
+                self.name, self.charge, self.color_dark, self.color_light, self.id
             )
         }
     }
 }
 
 impl VacationType {
-    pub fn new<'a>(name: &'a str, count: &'a bool) -> NewVacationType<'a> {
-        NewVacationType { name, count }
+    pub fn new<'a>(
+        name: &'a str,
+        charge: &'a bool,
+        color_dark: &'a str,
+        color_light: &'a str,
+        active: &'a bool,
+    ) -> NewVacationType<'a> {
+        NewVacationType {
+            name,
+            charge,
+            color_dark,
+            color_light,
+            active,
+        }
     }
 }
 
@@ -38,7 +58,10 @@ impl VacationType {
 #[table_name = "vacation_types"]
 pub struct NewVacationType<'a> {
     pub name: &'a str,
-    pub count: &'a bool,
+    pub charge: &'a bool,
+    pub color_dark: &'a str,
+    pub color_light: &'a str,
+    pub active: &'a bool,
 }
 
 impl Display for NewVacationType<'_> {
@@ -48,8 +71,13 @@ impl Display for NewVacationType<'_> {
         } else {
             write!(
                 f,
-                "<NewVacationType {} (Do count: {})>",
-                self.name, self.count
+                concat!(
+                    "<NewVacationType {}",
+                    " (Charge: {}",
+                    " | Color dark: {}",
+                    " | Color light: {})>"
+                ),
+                self.name, self.charge, self.color_dark, self.color_light
             )
         }
     }

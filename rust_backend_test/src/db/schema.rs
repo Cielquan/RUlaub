@@ -1,43 +1,23 @@
 table! {
     public_holidays (id) {
         id -> Integer,
-        state_id -> Integer,
         name -> Text,
-        date -> Date,
-    }
-}
-
-table! {
-    school_holiday_types (id) {
-        id -> Integer,
-        name -> Text,
+        year -> Nullable<Integer>,
+        yearless_date -> Nullable<Text>,
+        easter_sunday_offset -> Nullable<Integer>,
     }
 }
 
 table! {
     school_holidays (id) {
         id -> Integer,
-        state_id -> Integer,
-        type_id -> Integer,
+        name -> Text,
         start_date -> Date,
+        start_year_day -> Integer,
+        start_year -> Integer,
         end_date -> Date,
-        comment -> Nullable<Text>,
-    }
-}
-
-table! {
-    setups (id) {
-        id -> Integer,
-        year -> Integer,
-        state_id -> Integer,
-    }
-}
-
-table! {
-    states (id) {
-        id -> Integer,
-        state_abbr -> Text,
-        state_full -> Text,
+        end_year_day -> Integer,
+        end_year -> Integer,
     }
 }
 
@@ -45,10 +25,14 @@ table! {
     users (id) {
         id -> Integer,
         name -> Text,
-        abbr -> Text,
         vacation_days -> Integer,
-        hex_color -> Integer,
-        group_manager_id -> Nullable<Integer>,
+        monday -> Bool,
+        tuesday -> Bool,
+        wednesday -> Bool,
+        thursday -> Bool,
+        friday -> Bool,
+        saturday -> Bool,
+        sunday -> Bool,
     }
 }
 
@@ -56,7 +40,10 @@ table! {
     vacation_types (id) {
         id -> Integer,
         name -> Text,
-        count -> Bool,
+        charge -> Bool,
+        color_dark -> Text,
+        color_light -> Text,
+        active -> Bool,
     }
 }
 
@@ -64,27 +51,22 @@ table! {
     vacations (id) {
         id -> Integer,
         user_id -> Integer,
+        vacation_type_id -> Integer,
         start_date -> Date,
+        start_year_day -> Integer,
+        start_year -> Integer,
         end_date -> Date,
-        type_id -> Integer,
-        setup_id -> Integer,
+        end_year_day -> Integer,
+        end_year -> Integer,
     }
 }
 
-joinable!(public_holidays -> states (state_id));
-joinable!(school_holidays -> school_holiday_types (type_id));
-joinable!(school_holidays -> states (state_id));
-joinable!(setups -> states (state_id));
-joinable!(vacations -> setups (setup_id));
 joinable!(vacations -> users (user_id));
-joinable!(vacations -> vacation_types (type_id));
+joinable!(vacations -> vacation_types (vacation_type_id));
 
 allow_tables_to_appear_in_same_query!(
     public_holidays,
-    school_holiday_types,
     school_holidays,
-    setups,
-    states,
     users,
     vacation_types,
     vacations,

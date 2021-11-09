@@ -5,33 +5,29 @@ use chrono::NaiveDate;
 use diesel::prelude::*;
 use tracing::{debug, instrument, trace};
 
-use crate::db::schema::school_holidays;
-use crate::db::util::last_insert_rowid;
+use crate::db::{schema::school_holidays, util::last_insert_rowid};
 
 #[derive(Queryable, Debug)]
 pub struct SchoolHoliday {
     pub id: i32,
-    pub state_id: i32,
-    pub type_id: i32,
+    pub name: String,
     pub start_date: NaiveDate,
+    pub start_year_day: i32,
+    pub start_year: i32,
     pub end_date: NaiveDate,
-    pub comment: Option<String>,
+    pub end_year_day: i32,
+    pub end_year: i32,
 }
 
 impl Display for SchoolHoliday {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         if f.alternate() {
-            write!(f, "<SchoolHoliday {} in {}>", self.type_id, self.state_id)
+            write!(f, "<SchoolHoliday {}>", self.name)
         } else {
             write!(
                 f,
-                "<SchoolHoliday {} in {} (Start Date: {} | End Date: {} | Comment {:?} | ID: {})>",
-                self.type_id,
-                self.state_id,
-                self.start_date,
-                self.end_date,
-                self.comment,
-                self.id
+                "<SchoolHoliday {} (Start Date: {} | End Date: {} | ID: {})>",
+                self.name, self.start_date, self.end_date, self.id
             )
         }
     }
@@ -39,18 +35,22 @@ impl Display for SchoolHoliday {
 
 impl SchoolHoliday {
     pub fn new<'a>(
-        state_id: &'a i32,
-        type_id: &'a i32,
+        name: &'a str,
         start_date: &'a NaiveDate,
+        start_year_day: &'a i32,
+        start_year: &'a i32,
         end_date: &'a NaiveDate,
-        comment: Option<&'a str>,
+        end_year_day: &'a i32,
+        end_year: &'a i32,
     ) -> NewSchoolHoliday<'a> {
         NewSchoolHoliday {
-            state_id,
-            type_id,
+            name,
             start_date,
+            start_year_day,
+            start_year,
             end_date,
-            comment,
+            end_year_day,
+            end_year,
         }
     }
 }
@@ -58,22 +58,24 @@ impl SchoolHoliday {
 #[derive(Insertable, Debug)]
 #[table_name = "school_holidays"]
 pub struct NewSchoolHoliday<'a> {
-    pub state_id: &'a i32,
-    pub type_id: &'a i32,
+    pub name: &'a str,
     pub start_date: &'a NaiveDate,
+    pub start_year_day: &'a i32,
+    pub start_year: &'a i32,
     pub end_date: &'a NaiveDate,
-    pub comment: Option<&'a str>,
+    pub end_year_day: &'a i32,
+    pub end_year: &'a i32,
 }
 
 impl Display for NewSchoolHoliday<'_> {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         if f.alternate() {
-            write!(f, "<SchoolHoliday {} in {}>", self.type_id, self.state_id)
+            write!(f, "<SchoolHoliday {}>", self.name)
         } else {
             write!(
                 f,
-                "<SchoolHoliday {} in {} (Start Date: {} | End Date: {} | Comment {:?})>",
-                self.type_id, self.state_id, self.start_date, self.end_date, self.comment
+                "<SchoolHoliday {} (Start Date: {} | End Date: {})>",
+                self.name, self.start_date, self.end_date
             )
         }
     }
