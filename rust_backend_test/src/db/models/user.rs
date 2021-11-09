@@ -2,7 +2,7 @@ use std::fmt::{self, Display, Formatter};
 
 use anyhow::Result;
 use diesel::prelude::*;
-use tracing::{debug, instrument, trace};
+use tracing::{debug, trace};
 
 use crate::db::{schema::users, util::last_insert_rowid};
 
@@ -55,7 +55,8 @@ impl Display for User {
 }
 
 impl User {
-    #[instrument]
+    #[allow(clippy::new_ret_no_self, clippy::too_many_arguments)]
+    #[tracing::instrument]
     pub fn new<'a>(
         name: &'a str,
         vacation_days: &'a i32,
@@ -129,7 +130,7 @@ impl Display for NewUser<'_> {
 }
 
 impl NewUser<'_> {
-    #[instrument(skip(self, conn))]
+    #[tracing::instrument(skip(self, conn))]
     pub fn save_to_db(self, conn: &SqliteConnection) -> Result<i32> {
         debug!(target: "new_db_entry", "Adding to db: {:?}", &self);
         diesel::insert_into(users::table)

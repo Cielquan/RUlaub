@@ -37,6 +37,7 @@ impl Display for VacationType {
 }
 
 impl VacationType {
+    #[allow(clippy::new_ret_no_self)]
     pub fn new<'a>(
         name: &'a str,
         charge: &'a bool,

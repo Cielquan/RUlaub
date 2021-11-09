@@ -53,6 +53,7 @@ fn main() {
     tracing::trace!("App end");
 }
 
+#[allow(clippy::all, dead_code)]
 fn get_db_url() -> String {
     dotenv().ok();
 
@@ -60,7 +61,8 @@ fn get_db_url() -> String {
     database_url
 }
 
-fn create_new_user<'a>() -> anyhow::Result<i32> {
+#[allow(clippy::all, dead_code)]
+fn create_new_user() -> anyhow::Result<i32> {
     let add = 0; // CHANGE ME
 
     let db_url = get_db_url();

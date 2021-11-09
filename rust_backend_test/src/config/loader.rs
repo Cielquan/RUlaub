@@ -57,11 +57,11 @@ lazy_static! {
     pub static ref SETTINGS_FILE_FOUND: bool = check_path_is_file(&SETTINGS_FILE_PATH_STR);
     pub static ref SETTINGS: RwLock<Config> = RwLock::new({
         let mut settings = Config::default();
-        settings.merge(File::with_name(&SETTINGS_FILE_PATH_STR)).expect({
+        settings.merge(File::with_name(&SETTINGS_FILE_PATH_STR)).unwrap_or_else(|_| { panic!("{}", {
             let err = "Failed to merge config file into config struct.";
             error!(err);
             err
-        });
+        }.to_string()) });
         settings
     });
 }

@@ -34,6 +34,7 @@ impl Display for SchoolHoliday {
 }
 
 impl SchoolHoliday {
+    #[allow(clippy::new_ret_no_self)]
     pub fn new<'a>(
         name: &'a str,
         start_date: &'a NaiveDate,
