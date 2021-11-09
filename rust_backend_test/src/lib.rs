@@ -13,6 +13,6 @@ extern crate tracing;
 pub mod config;
 pub mod db;
 
-pub const NAME: &'static str = "RUlaub";
-pub const AUTHOR: &'static str = "Cielquan";
-pub const VERSION: &'static str = env!("CARGO_PKG_VERSION");
+pub const NAME: &str = "RUlaub";
+pub const AUTHOR: &str = "Cielquan";
+pub const VERSION: &str = env!("CARGO_PKG_VERSION");
