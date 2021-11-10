@@ -10,7 +10,8 @@ import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.s
 // eslint-disable-next-line max-len
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 
-export const defaultLocale: SupportedLocales = "en-US";
+// NOTE: Change defaults also in backend initial Config
+export const defaultLocale: SupportedLocales = "de-DE";
 export const defaultLogLevel: LogLevel = LogLevels.INFO;
 export const defaultScrollLeftOffset = 2;
 export const defaultScrollYearBegin = true;
