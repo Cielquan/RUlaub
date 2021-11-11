@@ -12,13 +12,13 @@ name = "rulaub_backend"
 anyhow = "1.0"
 thiserror = "1.0"
 tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 diesel = { version = "1.4", features = ["sqlite", "chrono"] }
 libsqlite3-sys = { version = "0.22", features = ["bundled"] }
 chrono = "0.4"
 
 # Bin dependencies
 dotenv = "0.15"
-tracing-subscriber = "0.3"
 tracing-appender = "0.2"
 
 # take a look at
