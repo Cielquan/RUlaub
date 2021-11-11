@@ -1,107 +1,124 @@
 use std::{
     collections::HashMap,
-    path::Path,
     sync::{mpsc::channel, RwLock},
     time::Duration,
 };
 
-use configlib::*;
-use directories::ProjectDirs;
+use configlib::File as ConfigFile;
 use notify::{DebouncedEvent, RecommendedWatcher, RecursiveMode, Watcher};
 use thiserror::Error;
 use tracing::{debug, error, info, trace};
 
-#[derive(Error, Debug)]
-pub enum ConfigError {
-    #[error("Could not find project dirs.")]
-    ProjectDirsNotFound,
-    #[error("Could not stringify config file path.")]
-    PathStringify,
+use super::{
+    create_default_config,
+    file::{check_path_is_file, create_config_file_with_defaults, CONFIG_FILE_PATH},
+};
+use crate::NL;
+
+lazy_static! {
+    #[derive(Debug)]
+    pub static ref CONFIG: RwLock<configlib::Config> = RwLock::new(create_default_config());
 }
 
-#[tracing::instrument]
-fn get_conf_file_path() -> Result<String, ConfigError> {
-    match ProjectDirs::from("", crate::AUTHOR, crate::NAME) {
-        None => {
-            error!("Could not find project directories for this OS.");
-            Err(ConfigError::ProjectDirsNotFound)
+#[derive(Error, Debug)]
+pub enum ConfigError {
+    // #[error("Could not stringify config file path.")]
+// PathStringify,
+}
+
+fn log_config() {
+    trace!("Log current config.");
+    match CONFIG.read() {
+        Err(_) => {
+            error!("Failed the read current config. Read access to RwLock failed.")
         }
-        Some(project_dirs) => {
-            match project_dirs.config_dir().join("settings.toml").to_str() {
-                None => {
-                    error!(concat!(
-                        "Failed to build conf file path. ",
-                        "Could not stringify the path."
-                    ));
-                    Err(ConfigError::PathStringify)
-                }
-                Some(path) => {
-                    trace!("Built conf file path: <{}>", path);
-                    Ok(String::from(path))
-                }
+
+        Ok(config_guard) => {
+            if let Ok(config) = config_guard
+                .clone()
+                .try_into::<HashMap<String, HashMap<String, String>>>()
+            {
+                debug!("Loaded config:{}{:?}", NL, config);
+                return;
             }
+
+            error!(
+                concat!(
+                    "Failed to load config into representable data type. ",
+                    "Most propably because of invalid config data:{}{:?}"
+                ),
+                NL, config_guard
+            );
         }
     }
 }
 
-fn check_path_is_file(path: &str) -> bool {
-    trace!("Check if path <{:?}> points to file.", path);
-    let is_file = Path::new(path).is_file();
-    debug!("Path <{:?}> points to file: {}", path, is_file);
-    is_file
-}
-
-lazy_static! {
-    #[derive(Debug)]
-    pub static ref SETTINGS_FILE_PATH_STR: String = get_conf_file_path().unwrap_or_default();
-    pub static ref SETTINGS_FILE_FOUND: bool = check_path_is_file(&SETTINGS_FILE_PATH_STR);
-    pub static ref SETTINGS: RwLock<Config> = RwLock::new({
-        let mut settings = Config::default();
-        settings.merge(File::with_name(&SETTINGS_FILE_PATH_STR)).unwrap_or_else(|_| { panic!("{}", {
-            let err = "Failed to merge config file into config struct.";
+fn load_config_file() {
+    debug!("Load config file.");
+    match CONFIG.write() {
+        Err(_) => {
+            let err = concat!(
+                "Failed the change current config. ",
+                "Write access to RwLock failed."
+            );
             error!(err);
-            err
-        }.to_string()) });
-        settings
-    });
-}
+            panic!("{}", err);
+        }
 
-fn log_settings() {
-    debug!(
-        "Loaded Settings:\n{:?}",
-        SETTINGS
-            .read()
-            .unwrap()
-            .clone()
-            .try_into::<HashMap<String, String>>()
-            .unwrap()
-    );
+        Ok(mut config_guard) => {
+            if let Err(_) = config_guard.merge(ConfigFile::with_name(&CONFIG_FILE_PATH))
+            {
+                error!(concat!(
+                    "Failed to merge config file into config struct. ",
+                    "Settings config struct back to default config."
+                ));
+                // TODO:#i# send msg to err frontend saying to fix config and restart
+                *config_guard = create_default_config();
+            };
+            log_config();
+        }
+    }
 }
 
 fn watch_file() {
+    trace!("Start watching config file.");
     let (tx, rx) = channel();
 
     let mut watcher: RecommendedWatcher =
-        Watcher::new(tx, Duration::from_secs(2)).unwrap();
+        Watcher::new(tx, Duration::from_secs(2)).unwrap(); // TODO: handle unwrap properly
 
     watcher
-        .watch(&SETTINGS_FILE_PATH_STR[..], RecursiveMode::NonRecursive)
-        .unwrap();
+        .watch(&CONFIG_FILE_PATH[..], RecursiveMode::NonRecursive)
+        .unwrap(); // TODO: handle unwrap properly
 
+    // This is a simple loop, but you may want to use more complex logic here,
+    // for example to handle I/O.
     loop {
         match rx.recv() {
             Ok(DebouncedEvent::Write(_)) => {
-                info!("Settings.toml updated. Refreshing configuration.");
-                SETTINGS.write().unwrap().refresh().unwrap();
-                log_settings();
+                info!("config.toml updated. Refreshing configuration.");
+                CONFIG.write().unwrap().refresh().unwrap(); // TODO: handle unwrap properly
+                log_config();
             }
-            Err(e) => error!("Error while watching settings file: {:?}", e),
+            Err(e) => error!("Error while watching config file: {:?}", e),
             _ => { /* Ignore other event */ }
         }
     }
 }
 
-pub fn watch_settings_file() {
-    log_settings();
+pub fn load_and_watch_config_file() {
+    log_config();
+
+    if !check_path_is_file(&CONFIG_FILE_PATH) {
+        if let Err(_) = create_config_file_with_defaults() {
+            error!("Failed to create new config file with default config.");
+            // TODO:#i# send msg to err frontend saying config could not created
+            // and prog will run on default conf
+        }
+    }
+
+    load_config_file();
+
+    // TODO: Outource watcher to 2nd thread
     watch_file();
 }
