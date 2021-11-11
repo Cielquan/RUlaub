@@ -546,7 +546,10 @@ dependencies = [
  "lazy_static",
  "libsqlite3-sys",
  "notify",
+ "serde 1.0.130",
+ "serde_derive",
  "thiserror",
+ "toml",
  "tracing",
  "tracing-appender",
  "tracing-subscriber",
@@ -595,6 +598,17 @@ dependencies = [
  "num-traits 0.1.43",
  "regex",
  "serde 0.8.23",
+]
+
+[[package]]
+name = "serde_derive"
+version = "1.0.130"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "d7bc1a1ab1961464eae040d96713baa5a724a8152c1222492465b54322ec508b"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
