@@ -72,9 +72,9 @@ fn load_config_file() {
                 // TODO:#i# send msg to err frontend saying to fix config and restart
                 *config_guard = create_default_config();
             };
-            log_config();
         }
     }
+    log_config();
 }
 
 #[derive(Error, Debug)]
