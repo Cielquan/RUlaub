@@ -1,11 +1,8 @@
-use std::{
-    collections::HashMap,
-    sync::{mpsc::channel, RwLock},
-    time::Duration,
-};
+use std::{collections::HashMap, sync::mpsc::channel, time::Duration};
 
 use configlib::File as ConfigFile;
 use notify::{DebouncedEvent, RecommendedWatcher, RecursiveMode, Watcher};
+use parking_lot::RwLock;
 use thiserror::Error;
 use tracing::{debug, error, info, trace};
 
@@ -24,56 +21,36 @@ lazy_static! {
 #[tracing::instrument]
 fn log_config() {
     trace!("Log current config.");
-    match CONFIG.read() {
-        Err(_) => {
-            error!("Failed the read current config. Read access to RwLock failed.")
-        }
-
-        Ok(config_guard) => {
-            if let Ok(config) = config_guard
-                .clone()
-                .try_into::<HashMap<String, HashMap<String, String>>>()
-            {
-                debug!("Loaded config:{}{:?}", NL, config);
-                return;
-            }
-
-            error!(
-                concat!(
-                    "Failed to load config into representable data type. ",
-                    "Most propably because of invalid config data:{}{:?}"
-                ),
-                NL, config_guard
-            );
-        }
+    let config_guard = CONFIG.read();
+    if let Ok(config) = config_guard
+        .clone()
+        .try_into::<HashMap<String, HashMap<String, String>>>()
+    {
+        debug!("Loaded config:{}{:?}", NL, config);
+        return;
     }
+
+    error!(
+        concat!(
+            "Failed to load config into representable data type. ",
+            "Most propably because of invalid config data:{}{:?}"
+        ),
+        NL, config_guard
+    );
 }
 
 #[tracing::instrument]
 fn load_config_file() {
     debug!("Load config file.");
-    match CONFIG.write() {
-        Err(_) => {
-            let err = concat!(
-                "Failed to change current config. ",
-                "Write access to RwLock failed."
-            );
-            error!(err);
-            panic!("{}", err);
-        }
-
-        Ok(mut config_guard) => {
-            if let Err(_) = config_guard.merge(ConfigFile::with_name(&CONFIG_FILE_PATH))
-            {
-                error!(concat!(
-                    "Failed to merge config file into config struct. ",
-                    "Settings config struct back to default config."
-                ));
-                // TODO:#i# send msg to err frontend saying to fix config and restart
-                *config_guard = create_default_config();
-            };
-        }
-    }
+    let mut config_guard = CONFIG.write();
+    if let Err(_) = config_guard.merge(ConfigFile::with_name(&CONFIG_FILE_PATH)) {
+        error!(concat!(
+            "Failed to merge config file into config struct. ",
+            "Settings config struct back to default config."
+        ),);
+        // TODO:#i# send msg to err frontend saying to fix config and restart
+        *config_guard = create_default_config();
+    };
     log_config();
 }
 
@@ -99,23 +76,13 @@ fn watch_file() -> Result<(), FileWatchError> {
         match rx.recv() {
             Ok(DebouncedEvent::Write(_)) => {
                 info!("config.toml updated. Refreshing configuration.");
-                match CONFIG.write() {
-                    Err(_) => {
-                        error!(concat!(
-                            "Failed to change current config. ",
-                            "Write access to RwLock failed."
-                        ));
-                        return Err(FileWatchError::WatcherRwLockError);
-                    }
-                    Ok(mut config_guard) => {
-                        if let Err(_) = config_guard.refresh() {
-                            error!(concat!(
-                                "Failed to update config. ",
-                                "Probably invalid config file content."
-                            ));
-                            return Err(FileWatchError::ConfigUpdateError);
-                        }
-                    }
+                let mut config_guard = CONFIG.write();
+                if let Err(_) = config_guard.refresh() {
+                    error!(concat!(
+                        "Failed to update config. ",
+                        "Probably invalid config file content."
+                    ));
+                    return Err(FileWatchError::ConfigUpdateError);
                 }
                 log_config();
             }

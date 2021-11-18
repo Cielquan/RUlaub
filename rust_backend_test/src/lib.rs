@@ -7,6 +7,7 @@ extern crate dotenv;
 #[macro_use]
 extern crate lazy_static;
 extern crate notify;
+extern crate parking_lot;
 #[macro_use]
 extern crate serde_derive;
 extern crate thiserror;

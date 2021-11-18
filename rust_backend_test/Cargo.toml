@@ -16,6 +16,8 @@ directories = "4.0"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
+parking_lot = { version = "0.11", features = ["nightly"] }
+
 config = { version = "0.11", features = ["toml"] }
 lazy_static = "1.4"
 notify = "4.0"
