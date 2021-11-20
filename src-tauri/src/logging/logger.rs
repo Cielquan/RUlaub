@@ -11,13 +11,12 @@ use tracing_subscriber::{
 
 use super::{file::get_logging_dir_path, util::create_env_filter};
 
-pub fn start_tracer() -> (
-    Handle<
-        EnvFilter,
-        Layered<Layer<Registry, DefaultFields, Format<Pretty>, NonBlocking>, Registry>,
-    >,
-    WorkerGuard,
-) {
+type TracerHandle = Handle<
+    EnvFilter,
+    Layered<Layer<Registry, DefaultFields, Format<Pretty>, NonBlocking>, Registry>,
+>;
+
+pub fn start_tracer() -> (TracerHandle, WorkerGuard) {
     let file_appender =
         tracing_appender::rolling::daily(get_logging_dir_path().unwrap(), "log");
     let (non_blocking, _guard) = tracing_appender::non_blocking(file_appender);
