@@ -1,5 +1,5 @@
 use std::{
-    fs::File,
+    fs::{create_dir_all, File},
     io::{Error as IOError, Write},
     path::Path,
 };
@@ -58,7 +58,14 @@ lazy_static! {
 #[tracing::instrument]
 pub fn write_to_config_file(content: &str) -> Result<(), ConfigFileError> {
     trace!("Write to config file.{}Path: {:?}", NL, *CONFIG_FILE_PATH);
-    let mut file = File::create(&*CONFIG_FILE_PATH)?;
+    let path = Path::new(&*CONFIG_FILE_PATH);
+    trace!("Create parent dirs if missing.");
+    if let Some(parent) = path.parent() {
+        create_dir_all(parent)?
+    }
+    trace!("Create file if missing and open.");
+    let mut file = File::create(path)?;
+    trace!("Write to file.");
     write!(file, "{}", content)?;
     Ok(())
 }
