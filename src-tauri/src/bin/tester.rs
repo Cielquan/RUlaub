@@ -1,17 +1,11 @@
-extern crate anyhow;
-// #[macro_use]
-extern crate diesel;
-extern crate dotenv;
+#[macro_use]
+extern crate lazy_static;
+#[macro_use]
 extern crate tracing;
-extern crate tracing_appender;
-extern crate tracing_subscriber;
-
-extern crate rulaub_backend;
 
 use std::env;
 
 use dotenv::dotenv;
-use tracing::{info, trace};
 
 use db::models::*;
 use rulaub_backend::{

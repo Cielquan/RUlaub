@@ -1,19 +1,12 @@
-extern crate anyhow;
 extern crate config as configlib;
 #[macro_use]
 extern crate diesel;
-extern crate directories;
-extern crate dotenv;
 #[macro_use]
 extern crate lazy_static;
-extern crate notify;
-extern crate parking_lot;
 #[macro_use]
 extern crate serde_derive;
-extern crate thiserror;
 #[macro_use]
 extern crate tracing;
-extern crate toml;
 
 pub mod config;
 pub mod db;
