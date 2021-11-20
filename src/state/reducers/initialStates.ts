@@ -11,7 +11,8 @@ import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.s
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 
 // NOTE: Change defaults also in backend initial Config
-export const defaultLocale: SupportedLocales = "de-DE";
+// FIXME:#i# unknown bug when setting to 'de-DE'
+export const defaultLocale: SupportedLocales = "en-US";
 export const defaultLogLevel: LogLevel = LogLevels.INFO;
 export const defaultScrollLeftOffset = 2;
 export const defaultScrollYearBegin = true;
