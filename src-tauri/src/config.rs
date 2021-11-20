@@ -36,7 +36,7 @@ settings.year_change_scroll_begin = true
 pub fn create_default_config() -> configlib::Config {
     trace!("Create default config.");
     let conf_vars = DEFAULT_CONFIG_TOML_STR
-        .split("\n")
+        .split('\n')
         .filter(|s| s != &"")
         .map(|s| s.split(" = ").collect::<Vec<&str>>());
     let mut config = configlib::Config::default();
