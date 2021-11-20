@@ -1,2 +1,2 @@
 [workspace]
-members = ["rust_backend_test"]
+members = ["src-tauri"]

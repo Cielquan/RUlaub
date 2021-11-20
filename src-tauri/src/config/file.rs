@@ -36,7 +36,7 @@ fn get_conf_file_path() -> Result<String, ConfigFileError> {
                     Err(ConfigFileError::PathStringify)
                 }
                 Some(path) => {
-                    trace!("Built conf file path:{}{}>", NL, path);
+                    trace!("Built conf file path:{}{}", NL, path);
                     Ok(String::from(path))
                 }
             }

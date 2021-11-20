@@ -116,7 +116,7 @@ pub fn load_and_watch_config_file() {
         }
     }
 
-    if !check_path_is_file(&CONFIG_FILE_PATH) {
+    if check_path_is_file(&CONFIG_FILE_PATH) {
         load_config_file();
 
         if let Err(err) = watch_file() {
