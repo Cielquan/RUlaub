@@ -52,11 +52,23 @@
     },
     "windows": [
       {
+        "label": "main",
         "title": "RUlaub",
         "width": 800,
         "height": 600,
         "resizable": true,
-        "fullscreen": false
+        "fullscreen": false,
+        "visible": false
+      },
+      {
+        "label": "loadingscreen",
+        "width": 400,
+        "height": 200,
+        "decorations": false,
+        "center": true,
+        "skipTaskbar": true,
+        "resizable": false,
+        "url": "loadingscreen.html"
       }
     ],
     "security": {
