@@ -7,7 +7,6 @@ authors = ["Christian Riedel <cielquan@protonmail.com>"]
 repository = ""
 default-run = "rulaub-backend"
 edition = "2021"
-build = "src/build.rs"
 
 [lib]
 name = "rulaub_backend"
