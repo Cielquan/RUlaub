@@ -10,7 +10,7 @@ use std::{thread::sleep, time::Duration};
 
 use tauri::{Event, Manager};
 
-use rulaub_backend::logging::logger::start_tracer;
+use rulaub_backend::{logging::logger::start_tracer, menu::get_menu};
 
 fn main() {
     let (_tracing_handle, _guard) = start_tracer();
@@ -23,6 +23,8 @@ fn main() {
             let loadingscreen_window = app.get_window("loadingscreen").unwrap();
             let main_window = app.get_window("main").unwrap();
 
+            loadingscreen_window.menu_handle().hide().unwrap();
+
             tauri::async_runtime::spawn(async move {
                 trace!("Start app init.");
                 sleep(Duration::from_secs(2));
@@ -31,8 +33,13 @@ fn main() {
                 loadingscreen_window.close().unwrap();
                 main_window.show().unwrap();
             });
+
             trace!("Finished app setup.");
             Ok(())
+        })
+        .menu(get_menu())
+        .on_menu_event(|event| {
+            println!("{:?}", event.menu_item_id());
         })
         .build(tauri::generate_context!())
         .expect("error while building tauri application");

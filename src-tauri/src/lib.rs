@@ -11,6 +11,7 @@ extern crate tracing;
 pub mod config;
 pub mod db;
 pub mod logging;
+pub mod menu;
 
 use directories::ProjectDirs;
 

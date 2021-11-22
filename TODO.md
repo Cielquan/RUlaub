@@ -1,5 +1,9 @@
 ## App
 
+## TODOs
+
+- rename "Info" to "About" in frontend
+
 ### Roadmap Frontend
 
 ##### Essentiel
