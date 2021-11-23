@@ -71,18 +71,20 @@ pub fn create_config_file_with_defaults() -> Result<(), ConfigFileError> {
 #[tracing::instrument]
 pub fn load_config_file() {
     debug!("Load config file.");
-    let mut config_guard = CONFIG.write();
-    if let Err(err) = config_guard.merge(ConfigFile::with_name(&CONFIG_FILE_PATH)) {
-        error!(
-            message = concat!(
-                "Failed to merge config file into config struct. ",
-                "Settings config struct back to default config."
-            ),
-            error = ?err
-        );
-        // TODO:#i# send msg to err frontend saying to fix config and restart
-        *config_guard = create_default_config();
-    };
+    {
+        let mut config_guard = CONFIG.write();
+        if let Err(err) = config_guard.merge(ConfigFile::with_name(&CONFIG_FILE_PATH)) {
+            error!(
+                message = concat!(
+                    "Failed to merge config file into config struct. ",
+                    "Settings config struct back to default config."
+                ),
+                error = ?err
+            );
+            // TODO:#i# send msg to err frontend saying to fix config and restart
+            *config_guard = create_default_config();
+        };
+    }
     log_config();
 }
 
