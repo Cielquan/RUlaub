@@ -38,9 +38,6 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
 
 ### Ideas
 
-- change ico to a (self made) less "complex" one?
-  https://github.com/aldeka/rustacean.net
-
 - rewrite the calender without react-window?
 
 - move calc of bigger things to backend for performance?

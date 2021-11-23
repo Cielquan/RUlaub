@@ -15,7 +15,7 @@ See the [TODO file](TODO.md) for the next planned steps.
 
 ## Credits
 
-Crab image by <a href="https://pixabay.com/users/davidrockdesign-2595351/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3424714">DavidRockDesign</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3424714">Pixabay</a>
+The app icon is based off of Ferris by Karen Rustad Tölva: https://github.com/aldeka/rustacean.net
 
 ## License
 
