@@ -46,7 +46,9 @@ fn main() {
                 sleep(Duration::from_secs(2));
                 trace!("Finish app init.");
 
+                trace!("Close loading screen.");
                 loadingscreen_window.close().unwrap();
+                trace!("Show main window.");
                 main_window_.show().unwrap();
             });
 
