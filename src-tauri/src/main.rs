@@ -8,9 +8,9 @@ extern crate tracing;
 
 use std::{thread::sleep, time::Duration};
 
-use tauri::{Event, Manager};
+use tauri::{Event, Manager, WindowBuilder};
 
-use rulaub_backend::{logging::logger::start_tracer, menu::get_menu};
+use rulaub_backend::{logging::logger::start_tracer, menu::get_menu, NAME};
 
 fn main() {
     let (_tracing_handle, _guard) = start_tracer();
@@ -18,12 +18,27 @@ fn main() {
     info!("Logging level: TRACE");
 
     let app = tauri::Builder::default()
+        // create window manually b/c of menu
+        .create_window(
+            "main",
+            tauri::WindowUrl::App("index.html".into()),
+            move |window_builder, webview_attributes| {
+                (
+                    window_builder
+                        .title(NAME)
+                        .menu(get_menu())
+                        .inner_size(800.into(), 600.into())
+                        .resizable(true)
+                        .fullscreen(false)
+                        .visible(false),
+                    webview_attributes,
+                )
+            },
+        )
         .setup(|app| {
             trace!("Start app setup.");
             let loadingscreen_window = app.get_window("loadingscreen").unwrap();
             let main_window = app.get_window("main").unwrap();
-
-            loadingscreen_window.menu_handle().hide().unwrap();
 
             tauri::async_runtime::spawn(async move {
                 trace!("Start app init.");
@@ -36,10 +51,6 @@ fn main() {
 
             trace!("Finished app setup.");
             Ok(())
-        })
-        .menu(get_menu())
-        .on_menu_event(|event| {
-            println!("{:?}", event.menu_item_id());
         })
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
