@@ -1,5 +1,9 @@
 ## App
 
+## TODOs
+
+- rename "Info" to "About" in frontend
+
 ### Roadmap Frontend
 
 ##### Essentiel
@@ -35,6 +39,8 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
 ### Ideas
 
 - change ico to a (self made) less "complex" one?
+  https://github.com/aldeka/rustacean.net
+
 - rewrite the calender without react-window?
 
 - move calc of bigger things to backend for performance?
@@ -43,9 +49,12 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
 - by default load data from DB only for current year.
   Add button to settings menu to load all data.
   ? Add range slider to select range of years to load.
+
   - on change of DB data / config:
     1. send update to DB
     2. after success load whole data from DB anew
+
+- Safe window size/position and restore on boot
 
 ### Misc
 
