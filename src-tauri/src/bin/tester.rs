@@ -1,6 +1,4 @@
 #[macro_use]
-extern crate lazy_static;
-#[macro_use]
 extern crate tracing;
 
 use std::env;
@@ -18,8 +16,6 @@ fn main() {
 
     trace!("App started.");
     info!("Logging level: TRACE");
-
-    rulaub_backend::config::utils::load_and_watch_config_file();
 
     tracing_handle.reload(create_env_filter("TRACE")).unwrap();
 

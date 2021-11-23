@@ -6,11 +6,11 @@
 #[macro_use]
 extern crate tracing;
 
-use std::{thread::sleep, time::Duration};
-
 use tauri::{Event, Manager, WindowBuilder};
 
-use rulaub_backend::{logging::logger::start_tracer, menu::get_menu, NAME};
+use rulaub_backend::{
+    config::setup_config, logging::logger::start_tracer, menu::get_menu, NAME,
+};
 
 fn main() {
     let (_tracing_handle, _guard) = start_tracer();
@@ -43,7 +43,7 @@ fn main() {
             let main_window_ = main_window.clone();
             tauri::async_runtime::spawn(async move {
                 trace!("Start app init.");
-                sleep(Duration::from_secs(2));
+                setup_config();
                 trace!("Finish app init.");
 
                 trace!("Close loading screen.");

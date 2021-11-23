@@ -4,17 +4,15 @@ use std::{
     path::Path,
 };
 
-use std::{sync::mpsc::channel, time::Duration};
-
 use configlib::File as ConfigFile;
-use notify::{DebouncedEvent, RecommendedWatcher, RecursiveMode, Watcher};
+use notify::{Event, EventKind, RecursiveMode, Watcher};
 
 use super::{
     create_default_config,
     utils::{log_config, ConfigFileError, FileWatchError},
     CONFIG, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR,
 };
-use crate::{NL, PROJECT_DIRS};
+use crate::{utils::async_utils::create_async_watcher, NL, PROJECT_DIRS};
 
 pub fn get_conf_file_path() -> Result<String, ConfigFileError> {
     match &*PROJECT_DIRS {
@@ -89,16 +87,22 @@ pub fn load_config_file() {
 }
 
 #[tracing::instrument]
-pub fn watch_config_file() -> Result<(), FileWatchError> {
+pub async fn watch_config_file() -> Result<(), FileWatchError> {
+    let (mut watcher, mut rx) = create_async_watcher()?;
+
+    trace!("Start config file watcher.");
+    watcher.watch(
+        Path::new(&CONFIG_FILE_PATH[..]),
+        RecursiveMode::NonRecursive,
+    )?;
+
     trace!("Start watching config file.");
-    let (tx, rx) = channel();
-
-    let mut watcher: RecommendedWatcher = Watcher::new(tx, Duration::from_secs(2))?;
-    watcher.watch(&CONFIG_FILE_PATH[..], RecursiveMode::NonRecursive)?;
-
-    loop {
-        match rx.recv() {
-            Ok(DebouncedEvent::Write(_)) => {
+    while let Some(res) = rx.recv().await {
+        match res {
+            Ok(Event {
+                kind: EventKind::Modify(_),
+                ..
+            }) => {
                 info!("config.toml updated. Refreshing configuration.");
                 let mut config_guard = CONFIG.write();
                 if let Err(err) = config_guard.refresh() {
@@ -120,4 +124,5 @@ pub fn watch_config_file() -> Result<(), FileWatchError> {
             _ => { /* Ignore other event */ }
         }
     }
+    Ok(())
 }
