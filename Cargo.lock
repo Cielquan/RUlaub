@@ -3128,7 +3128,7 @@ dependencies = [
  "tauri-macros",
  "tauri-runtime",
  "tauri-runtime-wry",
- "tauri-utils",
+ "tauri-utils 1.0.0-beta.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "tempfile",
  "thiserror",
  "tokio",
@@ -3140,14 +3140,11 @@ dependencies = [
 [[package]]
 name = "tauri-build"
 version = "1.0.0-beta.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3c9c9a9bea25b9d6f5845b8662e18447e17218f99860cab37e39e2b57a9fcd49"
+source = "git+https://github.com/tauri-apps/tauri?branch=next#7b81e5b82e665fe0562b91ac33b63a871af9e111"
 dependencies = [
  "anyhow",
- "proc-macro2",
- "quote",
  "serde_json",
- "tauri-utils",
+ "tauri-utils 1.0.0-beta.3 (git+https://github.com/tauri-apps/tauri?branch=next)",
  "winres",
 ]
 
@@ -3164,7 +3161,7 @@ dependencies = [
  "regex",
  "serde 1.0.130",
  "serde_json",
- "tauri-utils",
+ "tauri-utils 1.0.0-beta.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
  "walkdir",
  "zstd",
@@ -3194,7 +3191,7 @@ dependencies = [
  "infer",
  "serde 1.0.130",
  "serde_json",
- "tauri-utils",
+ "tauri-utils 1.0.0-beta.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "thiserror",
  "uuid",
  "winapi",
@@ -3211,7 +3208,7 @@ dependencies = [
  "infer",
  "png 0.16.8",
  "tauri-runtime",
- "tauri-utils",
+ "tauri-utils 1.0.0-beta.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "uuid",
  "winapi",
  "wry",
@@ -3223,6 +3220,24 @@ version = "1.0.0-beta.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fcb9b79594f22b6ed0cc8362e0dfde5b7969962de3cd8ca683de702e59e8221b"
 dependencies = [
+ "html5ever",
+ "kuchiki",
+ "phf 0.10.0",
+ "proc-macro2",
+ "quote",
+ "serde 1.0.130",
+ "serde_json",
+ "thiserror",
+ "url",
+ "zstd",
+]
+
+[[package]]
+name = "tauri-utils"
+version = "1.0.0-beta.3"
+source = "git+https://github.com/tauri-apps/tauri?branch=next#7b81e5b82e665fe0562b91ac33b63a871af9e111"
+dependencies = [
+ "heck",
  "html5ever",
  "kuchiki",
  "phf 0.10.0",
