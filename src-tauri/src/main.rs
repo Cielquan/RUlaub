@@ -26,7 +26,9 @@ fn main() {
                 (
                     window_builder
                         .title(NAME)
-                        .menu(get_menu())
+                        // TODO:#i# add menu here after fix
+                        // https://github.com/tauri-apps/tauri/issues/2962
+                        // .menu(get_menu())
                         .inner_size(800.into(), 600.into())
                         .resizable(true)
                         .fullscreen(false)
@@ -40,6 +42,10 @@ fn main() {
             let loadingscreen_window = app.get_window("loadingscreen").unwrap();
             let main_window = app.get_window("main").unwrap();
 
+            // TODO:#i# remove after fix
+            // // https://github.com/tauri-apps/tauri/issues/2962
+            loadingscreen_window.menu_handle().hide().unwrap();
+
             let main_window_ = main_window.clone();
             tauri::async_runtime::spawn(async move {
                 trace!("Start app init.");
@@ -52,6 +58,7 @@ fn main() {
                 main_window_.show().unwrap();
             });
 
+            trace!("Setup menu event listeners.");
             let main_window_ = main_window.clone();
             main_window.on_menu_event(move |event| match event.menu_item_id() {
                 "en_lang" => main_window_.emit("menu-clicked-lang-en", {}).unwrap(),
@@ -82,12 +89,16 @@ fn main() {
             trace!("Finished app setup.");
             Ok(())
         })
+        // TODO:#i# remove after fix
+        // // https://github.com/tauri-apps/tauri/issues/2962
+        .menu(get_menu())
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
 
-    app.run(|_app_handle, event| match event {
-        Event::Exit => info!("### App ending."),
-        _ => (),
+    app.run(|_app_handle, event| {
+        if let Event::Exit = event {
+            info!("### App ending.")
+        }
     });
 
     info!("App ended.");
