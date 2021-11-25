@@ -28,7 +28,7 @@ const setupEventListeners = async (dispatch: Dispatch): Promise<void> => {
   });
 
   await webview.listen("menu-clicked-about", () => {
-    bindActionCreators(actionCreators, dispatch).openInfoPage();
+    bindActionCreators(actionCreators, dispatch).openAboutPage();
   });
 
   await webview.listen("menu-clicked-db-new", () => {

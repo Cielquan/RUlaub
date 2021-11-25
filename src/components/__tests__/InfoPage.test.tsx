@@ -8,12 +8,12 @@ import { MockStoreEnhanced } from "redux-mock-store";
 
 import i18n from "../../i18n";
 import { initialState, State } from "../../state";
-import { closeInfoPageAction } from "../../state/action-creators";
+import { closeAboutPageAction } from "../../state/action-creators";
 import generateMockStore from "../../testUtils";
 
-import InfoPage from "../InfoPage";
+import AboutPage from "../AboutPage";
 
-describe("<InfoPage />", () => {
+describe("<AboutPage />", () => {
   let testState: State;
   let mockStore: MockStoreEnhanced<Partial<CombinedState<State>>>;
 
@@ -23,11 +23,11 @@ describe("<InfoPage />", () => {
   });
 
   it("renders invisible by default", () => {
-    expect(mockStore.getState().infoPage).toBe(false);
+    expect(mockStore.getState().aboutPage).toBe(false);
     render(
       <Provider store={mockStore}>
         <I18nProvider i18n={i18n}>
-          <InfoPage />
+          <AboutPage />
         </I18nProvider>
       </Provider>
     );
@@ -36,13 +36,13 @@ describe("<InfoPage />", () => {
   });
 
   it("renders correctly when open", () => {
-    testState.infoPage = true;
+    testState.aboutPage = true;
     const alteredMockStore = generateMockStore(testState);
-    expect(alteredMockStore.getState().infoPage).toBe(true);
+    expect(alteredMockStore.getState().aboutPage).toBe(true);
     render(
       <Provider store={mockStore}>
         <I18nProvider i18n={i18n}>
-          <InfoPage />
+          <AboutPage />
         </I18nProvider>
       </Provider>
     );
@@ -51,15 +51,15 @@ describe("<InfoPage />", () => {
   });
 
   it("closes when button is clicked", () => {
-    testState.infoPage = true;
+    testState.aboutPage = true;
     const alteredMockStore = generateMockStore(testState);
     const onClickMock = jest.fn();
 
-    expect(alteredMockStore.getState().infoPage).toBe(true);
+    expect(alteredMockStore.getState().aboutPage).toBe(true);
     render(
       <Provider store={alteredMockStore}>
         <I18nProvider i18n={i18n}>
-          <InfoPage onClick={onClickMock} />
+          <AboutPage onClick={onClickMock} />
         </I18nProvider>
       </Provider>
     );
@@ -67,7 +67,7 @@ describe("<InfoPage />", () => {
 
     userEvent.click(screen.getByTestId("info-page-btn"));
     expect(onClickMock).toHaveBeenCalledTimes(1);
-    const expectedActions = [closeInfoPageAction()];
+    const expectedActions = [closeAboutPageAction()];
     expect(alteredMockStore.getActions()).toEqual(expectedActions);
   });
 });

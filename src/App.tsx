@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import setupEventListeners from "./backendAPI/eventListener";
 
 import Calendar from "./components/Calendar";
-import InfoPage from "./components/InfoPage";
+import AboutPage from "./components/AboutPage";
 import Navbar from "./components/Navbar";
 import NewHolidayButton from "./components/NewHolidayButton";
 import PublicHolidaysDialog from "./components/PublicHolidaysDialog";
@@ -56,7 +56,7 @@ const App = (): ReactElement => {
           <NewHolidayButton />
         </StyledMain>
       </Box>
-      <InfoPage />
+      <AboutPage />
       <PublicHolidaysDialog />
       <SchoolHolidaysDialog />
       <SettingsDialog />

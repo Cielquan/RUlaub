@@ -1,14 +1,14 @@
+export enum AboutPageActionType {
+  OPEN = "open AboutPage",
+  CLOSE = "close AboutPage",
+}
+
 export enum CalendarRowUserMapActionType {
   UPDATE = "update calendar user order",
 }
 
 export enum ConfigActionType {
   UPDATE = "update config",
-}
-
-export enum InfoPageActionType {
-  OPEN = "open InfoPage",
-  CLOSE = "close InfoPage",
 }
 
 export enum PublicHolidaysDataActionType {

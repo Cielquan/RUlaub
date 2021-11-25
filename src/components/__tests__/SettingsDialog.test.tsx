@@ -26,7 +26,7 @@ describe("<SettingsDialog />", () => {
   });
 
   it("renders invisible by default", () => {
-    expect(mockStore.getState().infoPage).toBe(false);
+    expect(mockStore.getState().aboutPage).toBe(false);
     render(
       <Provider store={mockStore}>
         <I18nProvider i18n={i18n}>

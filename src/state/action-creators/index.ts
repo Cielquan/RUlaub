@@ -1,6 +1,6 @@
+export * from "./aboutPageActionCreators";
 export * from "./calendarRowUserMapActionCreators";
 export * from "./configActionCreators";
-export * from "./infoPageActionCreators";
 export * from "./publicHolidaysDataActionCreators";
 export * from "./publicHolidaysDialogActionCreators";
 export * from "./schoolHolidaysDataActionCreators";

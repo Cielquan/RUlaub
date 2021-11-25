@@ -1,7 +1,7 @@
 import {
+  AboutPageActionType,
   CalendarRowUserMapActionType,
   ConfigActionType,
-  InfoPageActionType,
   PublicHolidaysDataActionType,
   PublicHolidaysDialogActionType,
   SchoolHolidaysDataActionType,
@@ -23,6 +23,10 @@ import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.s
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 import { ConfigPayload } from "../utils/config";
 
+export type AboutPageAction = {
+  type: AboutPageActionType;
+};
+
 export type CalendarRowUserMapAction = {
   type: CalendarRowUserMapActionType;
   payload: UsersData;
@@ -31,10 +35,6 @@ export type CalendarRowUserMapAction = {
 export type ConfigAction = {
   type: ConfigActionType;
   payload: ConfigPayload;
-};
-
-export type InfoPageAction = {
-  type: InfoPageActionType;
 };
 
 export type PublicHolidaysDataAction = {

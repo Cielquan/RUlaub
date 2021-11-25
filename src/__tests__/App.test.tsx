@@ -8,7 +8,7 @@ import generateMockStore from "../testUtils";
 import App from "../App";
 
 jest.mock("../components/Calendar", () => () => "Calendar");
-jest.mock("../components/InfoPage", () => () => "InfoPage");
+jest.mock("../components/AboutPage", () => () => "AboutPage");
 jest.mock("../components/Navbar", () => () => "Navbar");
 jest.mock("../components/NewHolidayButton", () => () => "NewHolidayButton");
 jest.mock("../components/SettingsDialog", () => () => "SettingsDialog");

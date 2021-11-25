@@ -36,10 +36,10 @@ interface Props {
   onClick?(): void;
 }
 
-const InfoPage = ({ onClick }: Props): ReactElement => {
+const AboutPage = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { closeInfoPage } = bindActionCreators(actionCreators, dispatch);
-  const infoPageState = useSelector((state: State) => state.infoPage);
+  const { closeAboutPage } = bindActionCreators(actionCreators, dispatch);
+  const aboutPageState = useSelector((state: State) => state.aboutPage);
 
   const ghLink = (
     <Link href="https://github.com/Cielquan/RUlaub" target="_blank" rel="noreferrer">
@@ -53,10 +53,10 @@ const InfoPage = ({ onClick }: Props): ReactElement => {
     <Dialog
       aria-labelledby={id}
       data-testid={id}
-      open={infoPageState}
+      open={aboutPageState}
       TransitionComponent={Transition}
       keepMounted
-      onClose={closeInfoPage}
+      onClose={closeAboutPage}
     >
       <DialogTitle id={id} sx={{ display: "flex", alignItems: "center" }}>
         <Box sx={{ flexGrow: 1 }}>{`RUlaub v${pjson.version}`}</Box>
@@ -83,7 +83,7 @@ const InfoPage = ({ onClick }: Props): ReactElement => {
           data-testid={`${id}-btn`}
           onClick={() => {
             if (typeof onClick === "function") onClick();
-            closeInfoPage();
+            closeAboutPage();
           }}
           autoFocus
         >
@@ -93,8 +93,8 @@ const InfoPage = ({ onClick }: Props): ReactElement => {
     </Dialog>
   );
 };
-InfoPage.defaultProps = {
+AboutPage.defaultProps = {
   onClick: () => undefined,
 };
 
-export default InfoPage;
+export default AboutPage;

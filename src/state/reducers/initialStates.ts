@@ -24,6 +24,7 @@ export interface CalendarRowUserMap {
   [k: string]: number;
 }
 
+export const aboutPageInitState = false;
 export const calendarRowUserMapInitState: CalendarRowUserMap = {};
 export const configInitState: Config = {
   user: {
@@ -39,7 +40,6 @@ export const configInitState: Config = {
     yearChangeScrollBegin: defaultScrollYearBegin,
   },
 };
-export const infoPageInitState = false;
 export const publicHolidaysDataInitState: PublicHolidaysData = {};
 export const publicHolidaysDialogInitState = false;
 export const schoolHolidaysDataInitState: SchoolHolidaysData = {};

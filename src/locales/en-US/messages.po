@@ -13,6 +13,18 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#: src/components/AboutPage.tsx:68
+msgid "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
+msgstr "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
+
+#: src/components/AboutPage.tsx:74
+msgid "For the Source Code, Documentation and copies of the License files please see the github repository at: {ghLink}."
+msgstr "For the Source Code, Documentation and copies of the License files please see the github repository at: {ghLink}."
+
+#: src/components/AboutPage.tsx:90
+msgid "Close"
+msgstr "Close"
+
 #: src/components/CalendarStartPage.tsx:37
 msgid "No year to show selected. Please select one below:"
 msgstr "No year to show selected. Please select one below:"
@@ -28,18 +40,6 @@ msgstr "Activate Light Theme"
 #: src/components/DarkThemeSwitch.tsx:25
 msgid "Activate Dark Theme"
 msgstr "Activate Dark Theme"
-
-#: src/components/InfoPage.tsx:68
-msgid "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
-msgstr "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
-
-#: src/components/InfoPage.tsx:74
-msgid "For the Source Code, Documentation and copies of the License files please see the github repository at: {ghLink}."
-msgstr "For the Source Code, Documentation and copies of the License files please see the github repository at: {ghLink}."
-
-#: src/components/InfoPage.tsx:90
-msgid "Close"
-msgstr "Close"
 
 #: src/components/NewHolidayButton.tsx:15
 msgid "Add new Holiday"
@@ -286,8 +286,8 @@ msgid "Vacation"
 msgstr "Vacation"
 
 #: src/components/SideMenu.tsx:141
-msgid "Info"
-msgstr "Info"
+msgid "About"
+msgstr "About"
 
 #: src/components/UsersDialogEntry.tsx:69
 msgid "User must have a name."

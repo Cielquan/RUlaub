@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<InfoPage /> renders correctly when open 1`] = `
+exports[`<AboutPage /> renders correctly when open 1`] = `
 <div
   class="MuiModal-root MuiDialog-root css-zw3mfo-MuiModal-root-MuiDialog-root"
   data-testid="info-page"
@@ -107,7 +107,7 @@ exports[`<InfoPage /> renders correctly when open 1`] = `
 </div>
 `;
 
-exports[`<InfoPage /> renders invisible by default 1`] = `
+exports[`<AboutPage /> renders invisible by default 1`] = `
 <div
   aria-hidden="true"
   class="MuiModal-root MuiModal-hidden MuiDialog-root css-ew73zq-MuiModal-root-MuiDialog-root"

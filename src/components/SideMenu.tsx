@@ -42,7 +42,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
   const {
     closeSideMenu,
-    openInfoPage,
+    openAboutPage,
     openPublicHolidaysDialog,
     openSchoolHolidaysDialog,
     openSettingsDialog,
@@ -137,10 +137,10 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
         />
         <Divider />
         <SideMenuButton
-          key="Info"
-          text={t`Info`}
+          key="About"
+          text={t`About`}
           icon={<InfoIcon />}
-          onClick={wrapOnClick(openInfoPage)}
+          onClick={wrapOnClick(openAboutPage)}
         />
       </List>
     </Drawer>
