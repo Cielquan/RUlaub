@@ -26,9 +26,7 @@ fn main() {
                 (
                     window_builder
                         .title(NAME)
-                        // TODO:#i# add menu here after fix
-                        // https://github.com/tauri-apps/tauri/issues/2962
-                        // .menu(get_menu())
+                        .menu(get_menu())
                         .inner_size(800.into(), 600.into())
                         .resizable(true)
                         .fullscreen(false)
@@ -41,10 +39,6 @@ fn main() {
             trace!("Start app setup.");
             let loadingscreen_window = app.get_window("loadingscreen").unwrap();
             let main_window = app.get_window("main").unwrap();
-
-            // TODO:#i# remove after fix
-            // // https://github.com/tauri-apps/tauri/issues/2962
-            loadingscreen_window.menu_handle().hide().unwrap();
 
             let main_window_ = main_window.clone();
             tauri::async_runtime::spawn(async move {
@@ -89,9 +83,6 @@ fn main() {
             trace!("Finished app setup.");
             Ok(())
         })
-        // TODO:#i# remove after fix
-        // // https://github.com/tauri-apps/tauri/issues/2962
-        .menu(get_menu())
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
 
