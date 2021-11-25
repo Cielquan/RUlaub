@@ -2,6 +2,9 @@ import { CssBaseline } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
 import React, { ReactElement } from "react";
+import { useDispatch } from "react-redux";
+
+import setupEventListeners from "./backendAPI/eventListener";
 
 import Calendar from "./components/Calendar";
 import InfoPage from "./components/InfoPage";
@@ -29,35 +32,39 @@ const StyledMain = styled("main")(({ theme }) => ({
   },
 }));
 
-const App = (): ReactElement => (
-  <Box sx={{ boxSizing: "border-box" }}>
-    <CssBaseline />
-    <Box
-      data-testid="rulaub-root"
-      sx={{
-        display: "flex",
-        position: "absolute",
-        top: "0",
-        bottom: "0",
-        left: "0",
-        right: "0",
-      }}
-    >
-      <Navbar />
-      <SideMenu />
-      <StyledMain data-testid="rulaub-main">
-        <Calendar />
-        <NewHolidayButton />
-      </StyledMain>
+const App = (): ReactElement => {
+  setupEventListeners(useDispatch());
+
+  return (
+    <Box sx={{ boxSizing: "border-box" }}>
+      <CssBaseline />
+      <Box
+        data-testid="rulaub-root"
+        sx={{
+          display: "flex",
+          position: "absolute",
+          top: "0",
+          bottom: "0",
+          left: "0",
+          right: "0",
+        }}
+      >
+        <Navbar />
+        <SideMenu />
+        <StyledMain data-testid="rulaub-main">
+          <Calendar />
+          <NewHolidayButton />
+        </StyledMain>
+      </Box>
+      <InfoPage />
+      <PublicHolidaysDialog />
+      <SchoolHolidaysDialog />
+      <SettingsDialog />
+      <UsersDialog />
+      <VacationsDialog />
+      <VacationTypesDialog />
     </Box>
-    <InfoPage />
-    <PublicHolidaysDialog />
-    <SchoolHolidaysDialog />
-    <SettingsDialog />
-    <UsersDialog />
-    <VacationsDialog />
-    <VacationTypesDialog />
-  </Box>
-);
+  );
+};
 
 export default App;
