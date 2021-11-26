@@ -12,20 +12,22 @@ import { ButtonText, ButtonOnClick, ButtonIcon, ButtonSxStyle } from "./SideMenu
 
 type ButtonTooltip = string;
 type MainButton = [ButtonText, ButtonIcon, ButtonSxStyle?];
-type FirstButton = [ButtonIcon, ButtonOnClick, ButtonTooltip?];
-type SecondButton = [ButtonIcon, ButtonOnClick, ButtonTooltip?];
-export type DoubleButtonItemList = Array<[MainButton, SecondButton, FirstButton?]>;
+type LeftButton = [ButtonIcon, ButtonOnClick, ButtonTooltip?];
+type RightButton = [ButtonIcon, ButtonOnClick, ButtonTooltip?];
 
 interface Props {
   mainButton: MainButton;
-  secondButton: SecondButton;
-  firstButton?: FirstButton;
+  rightButton: RightButton;
+  leftButton?: LeftButton;
+  mainButtonOnClick?: () => void;
 }
+export type DoubleButtonItemList = Array<Props>;
 
 const SideMenuDoubleButton = ({
   mainButton,
-  secondButton,
-  firstButton,
+  rightButton,
+  leftButton,
+  mainButtonOnClick,
 }: Props): ReactElement => {
   const wrapInTooltip = (
     component: ReactElement,
@@ -42,27 +44,28 @@ const SideMenuDoubleButton = ({
 
   return (
     <ListItem sx={{ padding: 0, marginRight: 2, ...sxStyle }}>
-      <ListItemButton onClick={secondButton[1]}>
+      <ListItemButton onClick={mainButtonOnClick}>
         <ListItemIcon>{mainButton[1]}</ListItemIcon>
         <ListItemText primary={mainButton[0]} />
-        {firstButton ? (
+        {leftButton ? (
           wrapInTooltip(
-            <IconButton onClick={firstButton[1]}>{firstButton[0]}</IconButton>,
-            firstButton[2]
+            <IconButton onClick={leftButton[1]}>{leftButton[0]}</IconButton>,
+            leftButton[2]
           )
         ) : (
           <></>
         )}
         {wrapInTooltip(
-          <IconButton onClick={secondButton[1]}>{secondButton[0]}</IconButton>,
-          secondButton[2]
+          <IconButton onClick={rightButton[1]}>{rightButton[0]}</IconButton>,
+          rightButton[2]
         )}
       </ListItemButton>
     </ListItem>
   );
 };
 SideMenuDoubleButton.defaultProps = {
-  firstButton: undefined,
+  leftButton: undefined,
+  mainButtonOnClick: () => undefined,
 };
 
 export default SideMenuDoubleButton;

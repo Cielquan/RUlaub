@@ -62,12 +62,25 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
 
   const createDoubleButtons = (itemList: DoubleButtonItemList): ReactElement[] =>
     itemList.map((item) => (
-      <React.Fragment key={item[0][0]}>
+      <React.Fragment key={item.mainButton[0]}>
         <SideMenuDoubleButton
-          mainButton={item[0]}
-          secondButton={[item[1][0], wrapOnClick(item[1][1]), item[1][2]]}
-          firstButton={
-            item[2] ? [item[2][0], wrapOnClick(item[2][1]), item[2][2]] : undefined
+          mainButton={item.mainButton}
+          mainButtonOnClick={
+            item.mainButtonOnClick ? wrapOnClick(item.mainButtonOnClick) : undefined
+          }
+          rightButton={[
+            item.rightButton[0],
+            wrapOnClick(item.rightButton[1]),
+            item.rightButton[2],
+          ]}
+          leftButton={
+            item.leftButton
+              ? [
+                  item.leftButton[0],
+                  wrapOnClick(item.leftButton[1]),
+                  item.leftButton[2],
+                ]
+              : undefined
           }
         />
         <Divider />
@@ -75,32 +88,37 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     ));
 
   const doubleButtonItemList: DoubleButtonItemList = [
-    [
-      [t`Database`, <StorageIcon />],
-      [<FolderIcon />, () => undefined, t`Select`],
-      [<AddIcon />, () => undefined, t`Create`],
-    ],
-    [
-      [t`Users`, <GroupIcon />],
-      [<CreateIcon />, openUsersDialog, t`Edit`],
-    ],
-    [
-      [t`Public Holidays`, <EventBusyIcon />],
-      [<CreateIcon />, openPublicHolidaysDialog, t`Edit`],
-    ],
-    [
-      [t`School Holidays`, <DateRangeIcon />],
-      [<CreateIcon />, openSchoolHolidaysDialog, t`Edit`],
-    ],
-    [
-      [t`Vacation Types`, <EventNoteIcon />],
-      [<CreateIcon />, openVacationTypesDialog, t`Edit`],
-    ],
-    [
-      [t`Vacation`, <FlightIcon />],
-      [<CreateIcon />, openVacationsDialog, t`Edit`],
-      [<AddIcon />, () => undefined, t`Create`],
-    ],
+    {
+      mainButton: [t`Database`, <StorageIcon />],
+      rightButton: [<FolderIcon />, () => undefined, t`Select`],
+      leftButton: [<AddIcon />, () => undefined, t`Create`],
+    },
+    {
+      mainButton: [t`Users`, <GroupIcon />],
+      mainButtonOnClick: openUsersDialog,
+      rightButton: [<CreateIcon />, openUsersDialog, t`Edit`],
+    },
+    {
+      mainButton: [t`Public Holidays`, <EventBusyIcon />],
+      mainButtonOnClick: openPublicHolidaysDialog,
+      rightButton: [<CreateIcon />, openPublicHolidaysDialog, t`Edit`],
+    },
+    {
+      mainButton: [t`School Holidays`, <DateRangeIcon />],
+      mainButtonOnClick: openSchoolHolidaysDialog,
+      rightButton: [<CreateIcon />, openSchoolHolidaysDialog, t`Edit`],
+    },
+    {
+      mainButton: [t`Vacation Types`, <EventNoteIcon />],
+      mainButtonOnClick: openVacationTypesDialog,
+      rightButton: [<CreateIcon />, openVacationTypesDialog, t`Edit`],
+    },
+    {
+      mainButton: [t`Vacation`, <FlightIcon />],
+      mainButtonOnClick: openVacationsDialog,
+      rightButton: [<CreateIcon />, openVacationsDialog, t`Edit`],
+      leftButton: [<AddIcon />, () => undefined, t`Create`],
+    },
   ];
 
   return (
