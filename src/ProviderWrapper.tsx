@@ -13,6 +13,7 @@ import createTheme from "./theme";
 
 import App from "./App";
 import { useMountEffect } from "./hooks";
+import setupEventListeners from "./backendAPI/eventListener";
 
 const ProviderWrapper = (): ReactElement => {
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ const ProviderWrapper = (): ReactElement => {
     loadSchoolHolidaysData();
     loadUsersData();
     loadVacationTypesData();
+    setupEventListeners(dispatch);
   });
 
   return (
