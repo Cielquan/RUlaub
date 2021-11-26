@@ -1,3 +1,5 @@
+import { invoke } from "@tauri-apps/api";
+import { open, save } from "@tauri-apps/api/dialog";
 import { Dispatch } from "redux";
 
 import { ConfigActionType } from "../action-types";
@@ -39,6 +41,30 @@ export const activateLightTheme =
   () =>
   (dispatch: Dispatch<ConfigAction>): void => {
     dispatch(updateConfigAction({ settings: { theme: "light" } }));
+  };
+
+const FILTERS = [{ name: "Database", extensions: ["db"] }];
+
+export const createNewDB =
+  () =>
+  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+    const path = await save({ filters: FILTERS });
+    if (path === null) return;
+    invoke("create_db", { path }).then(() =>
+      dispatch(updateConfigAction({ settings: { databaseURI: path } }))
+    );
+  };
+
+export const selectDB =
+  () =>
+  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+    const path = (await open({
+      filters: FILTERS,
+      multiple: false,
+      directory: false,
+    })) as string;
+    if (path === null) return;
+    dispatch(updateConfigAction({ settings: { databaseURI: path } }));
   };
 
 export const loadConfig =

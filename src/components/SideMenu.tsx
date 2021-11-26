@@ -42,6 +42,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
   const {
     closeSideMenu,
+    createNewDB,
     openAboutPage,
     openPublicHolidaysDialog,
     openSchoolHolidaysDialog,
@@ -49,6 +50,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     openUsersDialog,
     openVacationsDialog,
     openVacationTypesDialog,
+    selectDB,
   } = bindActionCreators(actionCreators, dispatch);
   const sideMenuState = useSelector((state: State) => state.sideMenu);
 
@@ -90,8 +92,8 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
   const doubleButtonItemList: DoubleButtonItemList = [
     {
       mainButton: [t`Database`, <StorageIcon />],
-      rightButton: [<FolderIcon />, () => undefined, t`Select`],
-      leftButton: [<AddIcon />, () => undefined, t`Create`],
+      rightButton: [<FolderIcon />, selectDB, t`Select`],
+      leftButton: [<AddIcon />, createNewDB, t`Create`],
     },
     {
       mainButton: [t`Users`, <GroupIcon />],

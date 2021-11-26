@@ -32,11 +32,11 @@ const setupEventListeners = async (dispatch: Dispatch): Promise<void> => {
   });
 
   await webview.listen("menu-clicked-db-new", () => {
-    // TODO:#i# impl when new DB Dialog is finished
+    bindActionCreators(actionCreators, dispatch).createNewDB();
   });
 
   await webview.listen("menu-clicked-db-select", () => {
-    // TODO:#i# impl when select DB Dialog is finished
+    bindActionCreators(actionCreators, dispatch).selectDB();
   });
 
   await webview.listen("menu-clicked-vac-new", () => {
