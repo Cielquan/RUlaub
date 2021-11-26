@@ -1,10 +1,10 @@
 [package]
 name = "rulaub-backend"
 version = "1.0.0"
-description = "A Tauri App"
+description = "Backend for RUlaub a vacation calandar for teams"
 license = "Apache-2.0/MIT"
 authors = ["Christian Riedel <cielquan@protonmail.com>"]
-repository = ""
+repository = "https://github.com/Cielquan/RUlaub"
 default-run = "rulaub-backend"
 edition = "2021"
 
