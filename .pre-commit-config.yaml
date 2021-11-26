@@ -119,6 +119,7 @@ repos:
         name: cargo check
         description: Check rust package for errors.
         entry: cargo check
+        args: ["--all-targets"]
         language: system
         types: [rust]
         pass_filenames: false
