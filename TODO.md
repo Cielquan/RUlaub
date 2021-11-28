@@ -6,15 +6,18 @@
 
 Frontend:
 
-- Add DB dialog for creation
-- Add DB dialog for changing
+- Add Vac Add dialog
 
 Backend:
 
-- Add Tracing
-- Add config loading (file watcher)
+- Audit Tracing
+- Add Event to send data to FE:
+  - config
+- Add FE CMDs for:
+  - updating config
+  - creating DB
+  - updating various DB data
 - Add DB interaction (file watcher)
-- Add DB Data prep for Frontend
 - Add selfupdater
 
 ##### Minor
@@ -22,7 +25,6 @@ Backend:
 Frontend:
 
 - Add snackbars with Info of success/failures
-- Add add vac dialog for FAB
 - Tooltip on User for vac distribution
 - Tooltip on Day (top) for Info on Holiday if any
 - Tooltip on Day (body) for Info on vac + option to change it
@@ -51,7 +53,6 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
 
 ### Misc
 
-- self updater (**BEFORE 1.0**)
 - split current state & new/update for DB stuff
   - so on DB update the state can be updated w/o corrupting new/update data
   - the current payload is like the update state .. is enough?
