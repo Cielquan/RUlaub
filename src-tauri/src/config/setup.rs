@@ -1,25 +1,35 @@
+use std::path::Path;
+
 use super::{
-    file::{
-        check_path_is_file, create_config_file_with_defaults, load_config_file, watch_config_file,
-    },
-    util::{log_config, FileWatchError},
-    CONFIG, CONFIG_FILE_PATH,
+    file::{load_config_file, watch_config_file, write_to_config_file},
+    util::log_config,
+    CONFIG, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR,
 };
 
 #[tracing::instrument]
 pub fn setup_config() {
-    trace!("Init config.");
+    trace!(target = "config", "Init config.");
     let _ = &CONFIG;
 
-    trace!("Init config file path");
-    let _ = &CONFIG_FILE_PATH;
+    trace!(target = "config", "Init config file path.");
+    let conf_file_path = CONFIG_FILE_PATH.as_str();
+    trace!(
+        target = "config",
+        message = "Use config file path.",
+        path = conf_file_path
+    );
 
     log_config();
 
-    trace!("Check if config file exists or needs to be created.");
-    if !check_path_is_file(&CONFIG_FILE_PATH) {
-        if let Err(err) = create_config_file_with_defaults() {
+    trace!(
+        target = "config",
+        "Check if config file exists or needs to be created."
+    );
+    if !Path::new(conf_file_path).is_file() {
+        trace!(target = "config", "Create new config file with defaults.");
+        if let Err(err) = write_to_config_file(&DEFAULT_CONFIG_TOML_NICE_STR) {
             error!(
+                target = "config",
                 message = "Failed to create new config file with default config.",
                 error = ?err
             );
@@ -28,27 +38,16 @@ pub fn setup_config() {
         }
     }
 
-    trace!("Check if config file exists / was created.");
-    if check_path_is_file(&CONFIG_FILE_PATH) {
+    trace!(
+        target = "config",
+        "Check if config file exists (was created) for watching."
+    );
+    if Path::new(conf_file_path).is_file() {
         load_config_file();
 
-        trace!("Spawn task for async file watching.");
-        tauri::async_runtime::spawn(async {
-            if let Err(err) = watch_config_file().await {
-                match err {
-                    FileWatchError::WatcherInitError(_) => {
-                        // TODO:#i# send err msg to frontend saying config file not watched
-                        error!(
-                            message = "Failed to initialize config file watcher.",
-                            error = ?err
-                        );
-                    }
-                    _ => {
-                        // TODO:#i# send err msg to frontend with force close
-                        error!("Failed to update config. Config watcher is broken.");
-                    }
-                }
-            }
-        });
+        trace!(target = "config", "Spawn task for async file watching.");
+        tauri::async_runtime::spawn(async { watch_config_file().await });
+    } else {
+        error!(target = "config", "No conf file to watch.");
     }
 }

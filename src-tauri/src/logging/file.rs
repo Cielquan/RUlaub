@@ -1,28 +1,27 @@
 use std::env;
 
-use thiserror::Error;
-
 use crate::PROJECT_DIRS;
 
-#[derive(Error, Debug)]
-pub enum LoggingDirError {
-    #[error("Could not find valid logging dir path.")]
-    NoValidPath,
-    #[error("Could not stringify logging dir path.")]
-    PathStringify,
-}
-
-pub fn get_logging_dir_path() -> Result<String, LoggingDirError> {
+pub fn get_logging_dir_path() -> Option<String> {
+    trace!(target = "tracing", "Try building logging dir path.");
     if let Some(project_dirs) = &*PROJECT_DIRS {
         if let Some(path) = project_dirs.cache_dir().join("logs").to_str() {
-            return Ok(String::from(path));
+            return Some(String::from(path));
         }
     }
-    if let Ok(pwd) = env::current_dir() {
-        match pwd.join("logs").to_str() {
-            Some(path) => return Ok(String::from(path)),
-            None => return Err(LoggingDirError::PathStringify),
+    debug!(
+        target = "tracing",
+        "Could not build logging dir path. Try using current dir."
+    );
+    match env::current_dir() {
+        Err(err) => {
+            error!(
+                target = "tracing",
+                message = "Failed to get current dir.",
+                error = ?err
+            );
+            None
         }
+        Ok(current_dir) => Some(String::from(current_dir.join("logs").to_str()?)),
     }
-    Err(LoggingDirError::NoValidPath)
 }

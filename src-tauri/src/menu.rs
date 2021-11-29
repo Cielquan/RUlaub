@@ -1,6 +1,7 @@
 use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
 
 pub fn get_menu() -> Menu {
+    trace!(target = "tauri_setup", "Build window menu.");
     let en_lang_item = CustomMenuItem::new("en_lang", "English");
     let de_lang_item = CustomMenuItem::new("de_lang", "Deutsch");
     let dark_theme_item = CustomMenuItem::new("dark_theme", "Dark Theme");

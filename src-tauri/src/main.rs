@@ -14,9 +14,10 @@ use rulaub_backend::{
 
 fn main() {
     let (_tracing_handle, _guard) = start_tracer();
-    info!("App started.");
-    info!("Logging level: TRACE");
+    info!(target = "main", "Main started.");
+    info!(target = "tracing", "Tracing level: TRACE");
 
+    trace!(target = "tauri_setup", "Build tauri app.");
     let app = tauri::Builder::default()
         // create window manually b/c of menu
         .create_window(
@@ -36,23 +37,24 @@ fn main() {
             },
         )
         .setup(|app| {
-            trace!("Start app setup.");
+            trace!(target = "tauri_setup", "Start app setup.");
             let loadingscreen_window = app.get_window("loadingscreen").unwrap();
             let main_window = app.get_window("main").unwrap();
 
+            trace!(target = "tauri_setup", "Spawn task for app init.");
             let main_window_ = main_window.clone();
             tauri::async_runtime::spawn(async move {
-                trace!("Start app init.");
+                trace!(target = "tauri_setup", "Start app init.");
                 setup_config();
-                trace!("Finish app init.");
+                trace!(target = "tauri_setup", "Finish app init.");
 
-                trace!("Close loading screen.");
+                trace!(target = "tauri_setup", "Close loading screen.");
                 loadingscreen_window.close().unwrap();
-                trace!("Show main window.");
+                trace!(target = "tauri_setup", "Show main window.");
                 main_window_.show().unwrap();
             });
 
-            trace!("Setup menu event listeners.");
+            trace!(target = "tauri_setup", "Setup menu event listeners.");
             let main_window_ = main_window.clone();
             main_window.on_menu_event(move |event| match event.menu_item_id() {
                 "en_lang" => main_window_.emit("menu-clicked-lang-en", {}).unwrap(),
@@ -74,17 +76,18 @@ fn main() {
                 _ => {}
             });
 
-            trace!("Finished app setup.");
+            trace!(target = "tauri_setup", "Finished app setup.");
             Ok(())
         })
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
 
-    app.run(|_app_handle, event| {
-        if let Event::Exit = event {
-            info!("### App ending.")
-        }
+    trace!(target = "tauri_setup", "Run tauri app.");
+    app.run(|_app_handle, event| match event {
+        Event::Ready => info!(target = "app", "App running."),
+        Event::Exit => info!(target = "app", "App ending."),
+        _ => (),
     });
 
-    info!("App ended.");
+    info!(target = "main", "Main ended.");
 }

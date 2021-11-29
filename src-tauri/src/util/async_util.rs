@@ -2,16 +2,34 @@ use notify::{Event, RecommendedWatcher, Watcher};
 use tokio::sync::mpsc::{channel, Receiver};
 
 pub fn create_async_watcher(
-) -> notify::Result<(RecommendedWatcher, Receiver<notify::Result<Event>>)> {
-    trace!("Create channel for file watcher.");
+) -> anyhow::Result<(RecommendedWatcher, Receiver<notify::Result<Event>>)> {
+    trace!(
+        target = "file_watcher",
+        "Create async channel for file watcher."
+    );
     let (tx, rx) = channel(1);
 
-    trace!("Create file watcher.");
-    let watcher = RecommendedWatcher::new(move |res| {
+    trace!(target = "file_watcher", "Create async file watcher.");
+    match RecommendedWatcher::new(move |res| {
         tauri::async_runtime::block_on(async {
-            tx.send(res).await.unwrap();
+            if let Err(err) = tx.send(res).await {
+                error!(
+                    target = "file_watcher",
+                    message = "Failed to send event via channel. Receiver dropped or closed.",
+                    error = ?err
+                );
+                return;
+            }
         })
-    })?;
-
-    Ok((watcher, rx))
+    }) {
+        Ok(watcher) => Ok((watcher, rx)),
+        Err(err) => {
+            error!(
+                target = "file_watcher",
+                message = "Failed to create file watcher.",
+                error = ?err
+            );
+            Err(err.into())
+        }
+    }
 }

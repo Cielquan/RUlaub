@@ -2,6 +2,11 @@ use tracing::Level;
 use tracing_subscriber::EnvFilter;
 
 pub fn create_env_filter(level: &str) -> EnvFilter {
+    trace!(
+        target = "tracing",
+        message = "Create EnvFilter for given tracing level.",
+        level = level
+    );
     match &level.to_uppercase()[..] {
         "TRACE" => EnvFilter::new(Level::TRACE.as_str()),
         "DEBUG" => EnvFilter::new(Level::DEBUG.as_str()),

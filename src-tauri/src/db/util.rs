@@ -1,7 +1,14 @@
 use diesel::prelude::*;
 
-pub fn establish_connection_to(db_url: &str) -> SqliteConnection {
-    SqliteConnection::establish(db_url).unwrap_or_else(|_| panic!("Error connecting to {}", db_url))
+pub fn establish_connection_to(db_url: &str) -> anyhow::Result<SqliteConnection> {
+    trace!(target = "database", message = "Connect to database.", db_url = ?db_url);
+    match SqliteConnection::establish(db_url) {
+        Ok(conn) => Ok(conn),
+        Err(err) => {
+            error!(taget="database", message="Failed to connect to database.", error=?err);
+            Err(err.into())
+        }
+    }
 }
 
 no_arg_sql_function!(

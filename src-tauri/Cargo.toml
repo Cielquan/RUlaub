@@ -17,7 +17,6 @@ tauri-build = { git = "https://github.com/tauri-apps/tauri", rev = "411618f0def0
 [dependencies]
 tauri = { git = "https://github.com/tauri-apps/tauri", rev = "411618f0def040fc412a93e28bcd868180e2c29e", features = ["api-all"] }
 anyhow = "1.0"
-thiserror = "1.0"
 lazy_static = "1.4"
 parking_lot = { version = "0.11", features = ["nightly"] }
 serde = { version = "1.0", features = ["derive"] }
