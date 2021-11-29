@@ -7,6 +7,7 @@ use tracing::{debug, instrument, trace};
 
 use crate::db::{schema::school_holidays, util::last_insert_rowid};
 
+/// The database model for school holidays.
 #[derive(Queryable, Debug)]
 pub struct SchoolHoliday {
     pub id: i32,

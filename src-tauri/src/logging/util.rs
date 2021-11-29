@@ -1,6 +1,8 @@
 use tracing::Level;
 use tracing_subscriber::EnvFilter;
 
+/// Take a tracing level and transform it into an [`EnvFilter`]. The [`EnvFilter`] can be used to
+/// update the tracing level via the reload handle.
 pub fn create_env_filter(level: &str) -> EnvFilter {
     trace!(
         target = "tracing",

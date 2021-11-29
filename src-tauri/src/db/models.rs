@@ -1,3 +1,4 @@
+//! Database models used by the application.
 mod public_holiday;
 mod school_holiday;
 mod user;

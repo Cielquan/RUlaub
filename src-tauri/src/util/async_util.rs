@@ -1,6 +1,7 @@
 use notify::{Event, RecommendedWatcher, Watcher};
 use tokio::sync::mpsc::{channel, Receiver};
 
+/// Create an async file watcher and a corresponding channel.
 pub fn create_async_watcher(
 ) -> anyhow::Result<(RecommendedWatcher, Receiver<notify::Result<Event>>)> {
     trace!(

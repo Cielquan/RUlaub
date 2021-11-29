@@ -16,6 +16,14 @@ type TracerHandle = Handle<
     Layered<Layer<Registry, DefaultFields, Format<Pretty>, NonBlocking>, Registry>,
 >;
 
+/// Initialize and start a tracing subscriber.
+///
+/// The returned handle can be used to update the tracing level.
+/// If the returned [`WorkerGuard`] is dropped the subsriber will flush the remaining messages
+/// and subside.
+///
+/// # Panics
+/// If the logging directory path [`LOGGING_DIR_PATH`] is an empty string.
 #[tracing::instrument]
 pub fn start_tracer() -> (TracerHandle, WorkerGuard) {
     trace!(target = "tracing", "Setup tracer.");

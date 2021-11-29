@@ -24,6 +24,7 @@ pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 pub const NL: &str = "\n    ";
 
 lazy_static! {
+    /// Project directories for the RUlaub application to use.
     #[derive(Debug)]
     pub static ref PROJECT_DIRS: Option<ProjectDirs> = {
         ProjectDirs::from("", AUTHOR, NAME)

@@ -2,6 +2,10 @@ use std::env;
 
 use crate::PROJECT_DIRS;
 
+/// Try to create a logging directory path.
+///
+/// In the first attempt the [`static@crate::PROJECT_DIRS`] are used as a base.
+/// If this fails the current directory will be tried.
 pub fn get_logging_dir_path() -> Option<String> {
     trace!(target = "tracing", "Try building logging dir path.");
     if let Some(project_dirs) = &*PROJECT_DIRS {

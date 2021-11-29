@@ -6,6 +6,7 @@ use tracing::{debug, instrument, trace};
 
 use crate::db::{schema::vacation_types, util::last_insert_rowid};
 
+/// The database model for vacation types.
 #[derive(Queryable, Debug)]
 pub struct VacationType {
     pub id: i32,

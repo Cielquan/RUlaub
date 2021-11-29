@@ -6,6 +6,7 @@ use tracing::{debug, trace};
 
 use crate::db::{schema::users, util::last_insert_rowid};
 
+/// The database model for users.
 #[derive(Queryable, Debug)]
 pub struct User {
     pub id: i32,

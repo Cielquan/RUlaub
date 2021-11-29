@@ -6,6 +6,11 @@ use super::{
     CONFIG, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR,
 };
 
+/// Initialize and start the configuration loader.
+///
+/// Load an existing configuration file or create one (incl. parrent directories) with the
+/// default configuration if none is found.
+/// Afterwards start an async file watcher which updates [`CONFIG`] on modification.
 #[tracing::instrument]
 pub fn setup_config() {
     trace!(target = "config", "Init config.");

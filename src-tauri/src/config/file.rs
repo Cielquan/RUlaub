@@ -13,6 +13,9 @@ use super::{
 };
 use crate::{util::async_util::create_async_watcher, PROJECT_DIRS};
 
+/// Try to create a configuration file path.
+///
+/// The [`static@crate::PROJECT_DIRS`] are used as a base.
 pub fn get_conf_file_path() -> Option<String> {
     trace!(target = "config", "Build conf file path.");
     match &*PROJECT_DIRS {
@@ -39,6 +42,7 @@ pub fn get_conf_file_path() -> Option<String> {
     }
 }
 
+/// Write the given content to the configuration file.
 pub fn write_to_config_file(content: &str) -> anyhow::Result<()> {
     trace!(
         target = "config",
@@ -58,6 +62,9 @@ pub fn write_to_config_file(content: &str) -> anyhow::Result<()> {
     Ok(())
 }
 
+/// Load the content of the configuration file and merge it into [`CONFIG`].
+///
+/// On failure load the default configuration into [`CONFIG`].
 pub fn load_config_file() {
     trace!(target = "config", "Load config file.");
     {
@@ -78,6 +85,10 @@ pub fn load_config_file() {
     log_config();
 }
 
+/// Watch the configuration file.
+///
+/// Create an async [`notify::RecommendedWatcher`] file watcher and watch the configuration file.
+/// On modification of the file reload its contents into [`CONFIG`] and log the new configuration.
 #[tracing::instrument]
 pub async fn watch_config_file() -> anyhow::Result<()> {
     let (mut watcher, mut rx) = create_async_watcher()?;
