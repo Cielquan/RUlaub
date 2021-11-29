@@ -15,8 +15,7 @@ pub fn get_menu() -> Menu {
     let edit_vac_item = CustomMenuItem::new("edit_vacs", "Edit Vacations");
     let users_item = CustomMenuItem::new("users", "Users");
     let pub_holidays_item = CustomMenuItem::new("pub_holidays", "Public Holidays");
-    let school_holidays_item =
-        CustomMenuItem::new("school_holidays", "School Holidays");
+    let school_holidays_item = CustomMenuItem::new("school_holidays", "School Holidays");
     let vac_types_item = CustomMenuItem::new("vac_types", "Vacation Types");
 
     let language_menu = Menu::new().add_item(en_lang_item).add_item(de_lang_item);

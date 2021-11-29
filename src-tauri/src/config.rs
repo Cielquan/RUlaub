@@ -6,8 +6,8 @@ use parking_lot::RwLock;
 
 use self::{
     file::{
-        check_path_is_file, create_config_file_with_defaults, get_conf_file_path,
-        load_config_file, watch_config_file,
+        check_path_is_file, create_config_file_with_defaults, get_conf_file_path, load_config_file,
+        watch_config_file,
     },
     utils::{log_config, FileWatchError},
 };

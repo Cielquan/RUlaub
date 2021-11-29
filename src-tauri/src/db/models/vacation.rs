@@ -32,11 +32,7 @@ impl Display for Vacation {
             write!(
                 f,
                 "<Vacation {} for {} (Start Date: {} | End Date: {} | ID: {})>",
-                self.vacation_type_id,
-                self.user_id,
-                self.start_date,
-                self.end_date,
-                self.id
+                self.vacation_type_id, self.user_id, self.start_date, self.end_date, self.id
             )
         }
     }

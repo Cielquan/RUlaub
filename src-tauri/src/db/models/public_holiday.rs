@@ -29,11 +29,7 @@ impl Display for PublicHoliday {
                     " | Year: {:?}",
                     " | ID: {})>"
                 ),
-                self.name,
-                self.yearless_date,
-                self.easter_sunday_offset,
-                self.year,
-                self.id
+                self.name, self.yearless_date, self.easter_sunday_offset, self.year, self.id
             )
         }
     }

@@ -20,21 +20,19 @@ pub fn get_conf_file_path() -> Result<String, ConfigFileError> {
             error!("Could not find project directories for this OS.");
             Err(ConfigFileError::ProjectDirsNotFound)
         }
-        Some(project_dirs) => {
-            match project_dirs.config_dir().join("config.toml").to_str() {
-                None => {
-                    error!(concat!(
-                        "Failed to build conf file path. ",
-                        "Could not stringify the path."
-                    ));
-                    Err(ConfigFileError::PathStringify)
-                }
-                Some(path) => {
-                    trace!("Built conf file path:{}{}", NL, path);
-                    Ok(String::from(path))
-                }
+        Some(project_dirs) => match project_dirs.config_dir().join("config.toml").to_str() {
+            None => {
+                error!(concat!(
+                    "Failed to build conf file path. ",
+                    "Could not stringify the path."
+                ));
+                Err(ConfigFileError::PathStringify)
             }
-        }
+            Some(path) => {
+                trace!("Built conf file path:{}{}", NL, path);
+                Ok(String::from(path))
+            }
+        },
     }
 }
 
