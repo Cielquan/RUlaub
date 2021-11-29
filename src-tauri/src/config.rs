@@ -5,31 +5,31 @@ pub mod util;
 
 use parking_lot::RwLock;
 
-use self::{file::get_conf_file_path, util::create_default_config};
+use self::file::get_conf_file_path;
 
 /// The user specific part of the confiuration.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct User {
-    name: Option<String>,
+    pub name: Option<String>,
 }
 
 /// The application specific part of the confiuration.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Settings {
-    database_uri: Option<String>,
-    language: String,
-    log_level: String,
-    theme: String,
-    today_autoscroll_left_offset: i32,
-    year_change_scroll_begin: bool,
-    year_to_show: Option<i32>,
+    pub database_uri: Option<String>,
+    pub language: String,
+    pub log_level: String,
+    pub theme: String,
+    pub today_autoscroll_left_offset: i32,
+    pub year_change_scroll_begin: bool,
+    pub year_to_show: Option<i32>,
 }
 
 /// The configuration object.
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Config {
-    user: Option<User>,
-    settings: Settings,
+    pub user: Option<User>,
+    pub settings: Settings,
 }
 
 // NOTE: Change defaults also in frontend initial State
@@ -44,10 +44,12 @@ settings.year_change_scroll_begin = true
 
 // NOTE: `unwrap` shall never trigger as the string above is always the same
 lazy_static! {
+    /// The default configuration for RUlaub.
+    #[derive(Debug)]
+    pub static ref DEFAULT_CONFIG: Config = toml::from_str(DEFAULT_CONFIG_TOML_STR).unwrap();
+
     /// The default configuration for RUlaub as a nicer formatted TOML string.
-    pub static ref DEFAULT_CONFIG_TOML_NICE_STR: String =
-        toml::to_string::<Config>(&toml::from_str(DEFAULT_CONFIG_TOML_STR).unwrap())
-        .unwrap();
+    pub static ref DEFAULT_CONFIG_TOML_NICE_STR: String = toml::to_string::<Config>(&DEFAULT_CONFIG).unwrap();
 
     /// The stringifyed path to the configuration file.
     ///
@@ -56,6 +58,5 @@ lazy_static! {
 
     /// The guarded configuration object for RUlaub.
     #[derive(Debug)]
-    pub static ref CONFIG: RwLock<configlib::Config> =
-        RwLock::new(create_default_config());
+    pub static ref CONFIG: RwLock<Config> = RwLock::new(DEFAULT_CONFIG.clone());
 }

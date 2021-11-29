@@ -1,17 +1,18 @@
 use std::{
-    fs::{create_dir_all, File},
+    fs::{self, create_dir_all, File},
     io::Write,
     path::Path,
 };
 
-use configlib::File as ConfigFile;
-use notify::{Event, EventKind, RecursiveMode, Watcher};
-
-use super::{
-    util::{create_default_config, log_config},
-    CONFIG, CONFIG_FILE_PATH,
+use notify::{
+    event::{DataChange, ModifyKind},
+    Event, EventKind, RecursiveMode, Watcher,
 };
-use crate::{util::async_util::create_async_watcher, PROJECT_DIRS};
+
+use super::{util::log_config, Config, CONFIG, CONFIG_FILE_PATH};
+use crate::{
+    config::util::parse_toml_str_to_config, util::async_util::create_async_watcher, PROJECT_DIRS,
+};
 
 /// Try to create a configuration file path.
 ///
@@ -62,27 +63,21 @@ pub fn write_to_config_file(content: &str) -> anyhow::Result<()> {
     Ok(())
 }
 
-/// Load the content of the configuration file and merge it into [`CONFIG`].
-///
-/// On failure load the default configuration into [`CONFIG`].
-pub fn load_config_file() {
+/// Load and parse the content of the configuration file.
+pub fn load_config_file() -> anyhow::Result<Config> {
     trace!(target = "config", "Load config file.");
-    {
-        let mut config_guard = CONFIG.write();
-        if let Err(err) = config_guard.merge(ConfigFile::with_name(&CONFIG_FILE_PATH)) {
+
+    match fs::read_to_string(&*CONFIG_FILE_PATH) {
+        Ok(conf) => parse_toml_str_to_config(&conf),
+        Err(err) => {
             error!(
                 target = "config",
-                message = concat!(
-                    "Failed to merge config file into config struct. ",
-                    "Settings config struct back to default config."
-                ),
+                message = "Failed to read config file into string.",
                 error = ?err
             );
-            // TODO:#i# send msg to err frontend saying to fix config and restart
-            *config_guard = create_default_config();
-        };
+            return Err(err.into());
+        }
     }
-    log_config();
 }
 
 /// Watch the configuration file.
@@ -110,24 +105,26 @@ pub async fn watch_config_file() -> anyhow::Result<()> {
     while let Some(res) = rx.recv().await {
         match res {
             Ok(Event {
-                kind: EventKind::Modify(_),
+                kind: EventKind::Modify(ModifyKind::Data(DataChange::Content)),
                 ..
             }) => {
                 info!(
                     target = "config",
                     "config.toml updated. Refreshing configuration."
                 );
-                let mut config_guard = CONFIG.write();
-                if let Err(err) = config_guard.refresh() {
-                    error!(
-                        target = "config",
-                        message = concat!(
-                            "Failed to update config. Probably invalid config file content."
-                        ),
-                        error = ?err
-                    );
+                match load_config_file() {
+                    Ok(config) => {
+                        *CONFIG.write() = config;
+                        log_config();
+                    }
+                    Err(err) => {
+                        error!(
+                            target = "config",
+                            message = "Failed to refresh configuration.",
+                            error = ?err
+                        );
+                    }
                 }
-                log_config();
             }
             Err(err) => error!(
                 target = "config",

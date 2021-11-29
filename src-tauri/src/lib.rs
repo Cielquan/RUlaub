@@ -1,4 +1,3 @@
-extern crate config as configlib;
 #[macro_use]
 extern crate diesel;
 #[macro_use]

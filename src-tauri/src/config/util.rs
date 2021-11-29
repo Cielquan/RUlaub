@@ -1,23 +1,26 @@
-use super::{CONFIG, DEFAULT_CONFIG_TOML_STR};
+use super::{Config, CONFIG};
 
 /// Log the current [`CONFIG`].
 pub fn log_config() {
     trace!(target = "config", "Log current config.");
-    debug!(target = "config", message = "Loaded config.", config = ?CONFIG.read().clone());
+    debug!(target = "config", message = "Loaded config.", config = ?&CONFIG.read());
 }
 
-/// Create a default configuration object.
-///
-/// Parses [`DEFAULT_CONFIG_TOML_STR`].
-pub fn create_default_config() -> configlib::Config {
-    trace!(target = "config", "Create default config struct.");
-    let conf_vars = DEFAULT_CONFIG_TOML_STR
-        .split('\n')
-        .filter(|s| s != &"")
-        .map(|s| s.split(" = ").collect::<Vec<&str>>());
-    let mut config = configlib::Config::default();
-    for c in conf_vars {
-        config.set(c[0], c[1]).unwrap();
+/// Parse toml string into [`Config`] struct.
+pub fn parse_toml_str_to_config(toml_str: &str) -> anyhow::Result<Config> {
+    trace!(
+        target = "config",
+        "Try to parse toml string into Config struct."
+    );
+    match toml::from_str(toml_str) {
+        Err(err) => {
+            error!(
+                target = "config",
+                message = "Failed to parse toml string into Config struct.",
+                error = ?err
+            );
+            return Err(err.into());
+        }
+        Ok(conf) => Ok(conf),
     }
-    config
 }

@@ -45,14 +45,26 @@ pub fn setup_config() {
 
     trace!(
         target = "config",
-        "Check if config file exists (was created) for watching."
+        "Check if config file exists (was created) for loading and watching."
     );
     if Path::new(conf_file_path).is_file() {
-        load_config_file();
+        match load_config_file() {
+            Ok(config) => {
+                *CONFIG.write() = config;
+                log_config();
+            }
+            Err(err) => {
+                error!(
+                    target = "config",
+                    message = "Failed to load configuration from file.",
+                    error = ?err
+                );
+            }
+        }
 
         trace!(target = "config", "Spawn task for async file watching.");
         tauri::async_runtime::spawn(async { watch_config_file().await });
     } else {
-        error!(target = "config", "No conf file to watch.");
+        error!(target = "config", "No conf file to load and watch.");
     }
 }
