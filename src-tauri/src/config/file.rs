@@ -12,7 +12,7 @@ use super::{
     utils::{log_config, ConfigFileError, FileWatchError},
     CONFIG, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR,
 };
-use crate::{utils::async_utils::create_async_watcher, NL, PROJECT_DIRS};
+use crate::{util::async_util::create_async_watcher, NL, PROJECT_DIRS};
 
 pub fn get_conf_file_path() -> Result<String, ConfigFileError> {
     match &*PROJECT_DIRS {
