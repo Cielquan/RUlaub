@@ -1,5 +1,5 @@
 pub mod file;
-pub mod logger;
+pub mod tracer;
 pub mod util;
 
 use self::file::get_logging_dir_path;
