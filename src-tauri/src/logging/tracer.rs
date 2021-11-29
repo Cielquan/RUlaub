@@ -11,7 +11,7 @@ use tracing_subscriber::{
 
 use super::{util::create_env_filter, LOGGING_DIR_PATH};
 
-type TracerHandle = Handle<
+pub type TracerHandle = Handle<
     EnvFilter,
     Layered<Layer<Registry, DefaultFields, Format<Pretty>, NonBlocking>, Registry>,
 >;
@@ -24,8 +24,7 @@ type TracerHandle = Handle<
 ///
 /// # Panics
 /// If the logging directory path [`LOGGING_DIR_PATH`] is an empty string.
-#[tracing::instrument]
-pub fn start_tracer() -> (TracerHandle, WorkerGuard) {
+fn start_tracer() -> (TracerHandle, WorkerGuard) {
     trace!(target = "tracing", "Setup tracer.");
 
     trace!(target = "tracing", "Init logging dir path.");
@@ -43,7 +42,7 @@ pub fn start_tracer() -> (TracerHandle, WorkerGuard) {
     }
 
     let file_appender = tracing_appender::rolling::daily(logging_dir_path, "log");
-    let (non_blocking, _guard) = tracing_appender::non_blocking(file_appender);
+    let (non_blocking, guard) = tracing_appender::non_blocking(file_appender);
     let tracer = tracing_subscriber::fmt()
         .with_writer(non_blocking)
         .pretty()
@@ -59,7 +58,41 @@ pub fn start_tracer() -> (TracerHandle, WorkerGuard) {
         .with_env_filter(create_env_filter("TRACE"))
         .with_filter_reloading();
     let handle = tracer.reload_handle();
+
     trace!(target = "tracing", "Init tracer.");
     tracer.init();
-    (handle, _guard)
+    trace!(target = "tracing", "Running tracer.");
+    info!(target = "tracing", "Tracing level: TRACE");
+
+    (handle, guard)
+}
+
+/// Create a function which reloads the tracing level to the given one.
+fn create_tracing_level_reloader(handle: TracerHandle) -> impl Fn(&str) {
+    move |level| {
+        trace!(
+            target = "tracing",
+            message = "Reload tracing level.",
+            level = level
+        );
+        match handle.reload(create_env_filter(level)) {
+            Ok(_) => info!(
+                target = "tracing",
+                message = "Changed tracing level.",
+                level = level
+            ),
+            Err(err) => error!(
+                target = "tracing",
+                message = "Failed to reload tracing level",
+                error = ?err
+            ),
+        }
+    }
+}
+
+#[tracing::instrument]
+pub fn setup_tracer() -> (WorkerGuard, impl Fn(&str)) {
+    let (handle, guard) = start_tracer();
+    let reloader = create_tracing_level_reloader(handle);
+    (guard, reloader)
 }

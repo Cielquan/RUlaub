@@ -9,13 +9,12 @@ extern crate tracing;
 use tauri::{Event, Manager, WindowBuilder};
 
 use rulaub_backend::{
-    config::setup::setup_config, logging::tracer::start_tracer, menu::get_menu, NAME,
+    config::setup::setup_config, logging::tracer::setup_tracer, menu::get_menu, NAME,
 };
 
 fn main() {
-    let (_tracing_handle, _guard) = start_tracer();
+    let (_guard, _tracing_level_reloader) = setup_tracer();
     info!(target = "main", "Main started.");
-    info!(target = "tracing", "Tracing level: TRACE");
 
     trace!(target = "tauri_setup", "Build tauri app.");
     let app = tauri::Builder::default()
