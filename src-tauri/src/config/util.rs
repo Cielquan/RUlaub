@@ -2,7 +2,7 @@ use std::{collections::HashMap, io::Error as IOError};
 
 use thiserror::Error;
 
-use super::CONFIG;
+use super::{CONFIG, DEFAULT_CONFIG_TOML_STR};
 use crate::NL;
 
 #[tracing::instrument]
@@ -24,6 +24,19 @@ pub fn log_config() {
         ),
         NL, config_guard
     );
+}
+
+pub fn create_default_config() -> configlib::Config {
+    trace!("Create default config.");
+    let conf_vars = DEFAULT_CONFIG_TOML_STR
+        .split('\n')
+        .filter(|s| s != &"")
+        .map(|s| s.split(" = ").collect::<Vec<&str>>());
+    let mut config = configlib::Config::default();
+    for c in conf_vars {
+        config.set(c[0], c[1]).unwrap();
+    }
+    config
 }
 
 #[derive(Error, Debug)]

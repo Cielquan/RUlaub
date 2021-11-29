@@ -8,7 +8,9 @@ extern crate tracing;
 
 use tauri::{Event, Manager, WindowBuilder};
 
-use rulaub_backend::{config::setup_config, logging::logger::start_tracer, menu::get_menu, NAME};
+use rulaub_backend::{
+    config::setup::setup_config, logging::logger::start_tracer, menu::get_menu, NAME,
+};
 
 fn main() {
     let (_tracing_handle, _guard) = start_tracer();

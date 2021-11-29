@@ -8,8 +8,7 @@ use configlib::File as ConfigFile;
 use notify::{Event, EventKind, RecursiveMode, Watcher};
 
 use super::{
-    create_default_config,
-    util::{log_config, ConfigFileError, FileWatchError},
+    util::{create_default_config, log_config, ConfigFileError, FileWatchError},
     CONFIG, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR,
 };
 use crate::{util::async_util::create_async_watcher, NL, PROJECT_DIRS};

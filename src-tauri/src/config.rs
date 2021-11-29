@@ -1,16 +1,11 @@
 mod file;
+pub mod setup;
 
 pub mod util;
 
 use parking_lot::RwLock;
 
-use self::{
-    file::{
-        check_path_is_file, create_config_file_with_defaults, get_conf_file_path, load_config_file,
-        watch_config_file,
-    },
-    util::{log_config, FileWatchError},
-};
+use self::{file::get_conf_file_path, util::create_default_config};
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct User {
@@ -43,19 +38,6 @@ settings.today_autoscroll_left_offset = 2
 settings.year_change_scroll_begin = true
 "#;
 
-pub fn create_default_config() -> configlib::Config {
-    trace!("Create default config.");
-    let conf_vars = DEFAULT_CONFIG_TOML_STR
-        .split('\n')
-        .filter(|s| s != &"")
-        .map(|s| s.split(" = ").collect::<Vec<&str>>());
-    let mut config = configlib::Config::default();
-    for c in conf_vars {
-        config.set(c[0], c[1]).unwrap();
-    }
-    config
-}
-
 // NOTE: `unwrap` shall never trigger as the string above is always the same
 lazy_static! {
     pub static ref DEFAULT_CONFIG_TOML_NICE_STR: String =
@@ -67,51 +49,4 @@ lazy_static! {
     #[derive(Debug)]
     pub static ref CONFIG: RwLock<configlib::Config> =
         RwLock::new(create_default_config());
-}
-
-#[tracing::instrument]
-pub fn setup_config() {
-    trace!("Init config.");
-    let _ = &CONFIG;
-
-    trace!("Init config file path");
-    let _ = &CONFIG_FILE_PATH;
-
-    log_config();
-
-    trace!("Check if config file exists or needs to be created.");
-    if !check_path_is_file(&CONFIG_FILE_PATH) {
-        if let Err(err) = create_config_file_with_defaults() {
-            error!(
-                message = "Failed to create new config file with default config.",
-                error = ?err
-            );
-            // TODO:#i# send err msg to frontend saying config could not be created
-            // and prog will run on default conf
-        }
-    }
-
-    trace!("Check if config file exists / was created.");
-    if check_path_is_file(&CONFIG_FILE_PATH) {
-        load_config_file();
-
-        trace!("Spawn task for async file watching.");
-        tauri::async_runtime::spawn(async {
-            if let Err(err) = watch_config_file().await {
-                match err {
-                    FileWatchError::WatcherInitError(_) => {
-                        // TODO:#i# send err msg to frontend saying config file not watched
-                        error!(
-                            message = "Failed to initialize config file watcher.",
-                            error = ?err
-                        );
-                    }
-                    _ => {
-                        // TODO:#i# send err msg to frontend with force close
-                        error!("Failed to update config. Config watcher is broken.");
-                    }
-                }
-            }
-        });
-    }
 }
