@@ -69,6 +69,7 @@ fn start_tracer() -> (TracerHandle, WorkerGuard) {
 
 /// Create a function which reloads the tracing level to the given one.
 fn create_tracing_level_reloader(handle: TracerHandle) -> impl Fn(&str) {
+    trace!(target = "tracing", "Create reloader closure.");
     move |level| {
         trace!(
             target = "tracing",
@@ -86,13 +87,13 @@ fn create_tracing_level_reloader(handle: TracerHandle) -> impl Fn(&str) {
                 message = "Failed to reload tracing level",
                 error = ?err
             ),
-        }
+        };
     }
 }
 
 #[tracing::instrument]
-pub fn setup_tracer() -> (WorkerGuard, impl Fn(&str)) {
+pub fn setup_tracer() -> (impl Fn(&str), WorkerGuard) {
     let (handle, guard) = start_tracer();
     let reloader = create_tracing_level_reloader(handle);
-    (guard, reloader)
+    (reloader, guard)
 }

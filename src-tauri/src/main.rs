@@ -6,17 +6,24 @@
 #[macro_use]
 extern crate tracing;
 
+use std::sync::Arc;
+
 use tauri::{Event, Manager, WindowBuilder};
 
 use rulaub_backend::{
-    config::setup::setup_config, logging::tracer::setup_tracer, menu::get_menu, NAME,
+    config::{setup::setup_config, CONFIG},
+    logging::tracer::setup_tracer,
+    menu::get_menu,
+    NAME,
 };
 
 fn main() {
-    let (_guard, _tracing_level_reloader) = setup_tracer();
+    let (tracing_level_reloader_, _guard) = setup_tracer();
+    let reloader = Arc::new(tracing_level_reloader_);
     info!(target = "main", "Main started.");
 
     trace!(target = "tauri_setup", "Build tauri app.");
+    let reloader_ = reloader.clone();
     let app = tauri::Builder::default()
         // create window manually b/c of menu
         .create_window(
@@ -35,16 +42,20 @@ fn main() {
                 )
             },
         )
-        .setup(|app| {
+        .setup(move |app| {
             trace!(target = "tauri_setup", "Start app setup.");
             let loadingscreen_window = app.get_window("loadingscreen").unwrap();
             let main_window = app.get_window("main").unwrap();
 
             trace!(target = "tauri_setup", "Spawn task for app init.");
             let main_window_ = main_window.clone();
+            let reloader__ = reloader_.clone();
             tauri::async_runtime::spawn(async move {
                 trace!(target = "tauri_setup", "Start app init.");
+                trace!(target = "tauri_setup", "Setup config.");
                 setup_config();
+                trace!(target = "tauri_setup", "Reload tracer with level from config.");
+                reloader__(&CONFIG.read().settings.log_level);
                 trace!(target = "tauri_setup", "Finish app init.");
 
                 trace!(target = "tauri_setup", "Close loading screen.");
