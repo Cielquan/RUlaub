@@ -1,10 +1,8 @@
 use std::fmt::{self, Display, Formatter};
 
-use anyhow::Result;
 use chrono::NaiveDate;
-use diesel::prelude::*;
 
-use crate::db::{schema::school_holidays, util::last_insert_rowid};
+use crate::db::{schema::school_holidays, util::NewDBEntry};
 
 /// The database model for school holidays.
 #[derive(Queryable, Debug)]
@@ -56,7 +54,7 @@ impl SchoolHoliday {
     }
 }
 
-#[derive(Insertable, Debug)]
+#[derive(Insertable, Debug, Clone)]
 #[table_name = "school_holidays"]
 pub struct NewSchoolHoliday<'a> {
     pub name: &'a str,
@@ -82,17 +80,7 @@ impl Display for NewSchoolHoliday<'_> {
     }
 }
 
-impl NewSchoolHoliday<'_> {
-    #[tracing::instrument(skip(self, conn))]
-    pub fn save_to_db(self, conn: &SqliteConnection) -> Result<i32> {
-        debug!(target: "new_db_entry", message = "Adding to db", entry = ?&self);
-        diesel::insert_into(school_holidays::table)
-            .values(&self)
-            .execute(conn)?;
-
-            trace!(target: "new_db_entry", message = "Get `last_insert_rowid` for new entry", entry = ?&self);
-        let id = diesel::select(last_insert_rowid).get_result::<i32>(conn)?;
-        debug!(target: "new_db_entry", message = "Got ID for new entry", id = id, entry = ?&self);
-        Ok(id)
-    }
+type Table = school_holidays::table;
+impl NewDBEntry<Table> for NewSchoolHoliday<'_> {
+    const TABLE: Table = school_holidays::table;
 }

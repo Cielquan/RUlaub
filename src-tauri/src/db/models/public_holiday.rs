@@ -1,9 +1,6 @@
 use std::fmt::{self, Display, Formatter};
 
-use anyhow::Result;
-use diesel::prelude::*;
-
-use crate::db::{schema::public_holidays, util::last_insert_rowid};
+use crate::db::{schema::public_holidays, util::NewDBEntry};
 
 /// The database model for public holidays.
 #[derive(Queryable, Debug)]
@@ -52,7 +49,7 @@ impl PublicHoliday {
     }
 }
 
-#[derive(Insertable, Debug)]
+#[derive(Insertable, Debug, Clone)]
 #[table_name = "public_holidays"]
 pub struct NewPublicHoliday<'a> {
     pub name: &'a str,
@@ -80,17 +77,7 @@ impl Display for NewPublicHoliday<'_> {
     }
 }
 
-impl NewPublicHoliday<'_> {
-    #[tracing::instrument(skip(self, conn))]
-    pub fn save_to_db(self, conn: &SqliteConnection) -> Result<i32> {
-        debug!(target: "new_db_entry", message = "Adding to db", entry = ?&self);
-        diesel::insert_into(public_holidays::table)
-            .values(&self)
-            .execute(conn)?;
-
-        trace!(target: "new_db_entry", message = "Get `last_insert_rowid` for new entry", entry = ?&self);
-        let id = diesel::select(last_insert_rowid).get_result::<i32>(conn)?;
-        debug!(target: "new_db_entry", message = "Got ID for new entry", id = id, entry = ?&self);
-        Ok(id)
-    }
+type Table = public_holidays::table;
+impl NewDBEntry<Table> for NewPublicHoliday<'_> {
+    const TABLE: Table = public_holidays::table;
 }

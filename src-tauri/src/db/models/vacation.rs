@@ -1,10 +1,8 @@
 use std::fmt::{self, Display, Formatter};
 
-use anyhow::Result;
 use chrono::NaiveDate;
-use diesel::prelude::*;
 
-use crate::db::{schema::vacations, util::last_insert_rowid};
+use crate::db::{schema::vacations, util::NewDBEntry};
 
 /// The database model for vacations.
 #[derive(Queryable, Debug)]
@@ -63,7 +61,7 @@ impl Vacation {
     }
 }
 
-#[derive(Insertable, Debug)]
+#[derive(Insertable, Debug, Clone)]
 #[table_name = "vacations"]
 pub struct NewVacation<'a> {
     pub user_id: &'a i32,
@@ -94,17 +92,7 @@ impl Display for NewVacation<'_> {
     }
 }
 
-impl NewVacation<'_> {
-    #[tracing::instrument(skip(self, conn))]
-    pub fn save_to_db(self, conn: &SqliteConnection) -> Result<i32> {
-        debug!(target: "new_db_entry", message = "Adding to db", entry = ?&self);
-        diesel::insert_into(vacations::table)
-            .values(&self)
-            .execute(conn)?;
-
-        trace!(target: "new_db_entry", message = "Get `last_insert_rowid` for new entry", entry = ?&self);
-        let id = diesel::select(last_insert_rowid).get_result::<i32>(conn)?;
-        debug!(target: "new_db_entry", message = "Got ID for new entry", id = id, entry = ?&self);
-        Ok(id)
-    }
+type Table = vacations::table;
+impl NewDBEntry<Table> for NewVacation<'_> {
+    const TABLE: Table = vacations::table;
 }

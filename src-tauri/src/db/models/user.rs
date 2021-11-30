@@ -1,9 +1,6 @@
 use std::fmt::{self, Display, Formatter};
 
-use anyhow::Result;
-use diesel::prelude::*;
-
-use crate::db::{schema::users, util::last_insert_rowid};
+use crate::db::{schema::users, util::NewDBEntry};
 
 /// The database model for users.
 #[derive(Queryable, Debug)]
@@ -82,7 +79,7 @@ impl User {
     }
 }
 
-#[derive(Insertable, Debug)]
+#[derive(Insertable, Debug, Clone)]
 #[table_name = "users"]
 pub struct NewUser<'a> {
     pub name: &'a str,
@@ -128,17 +125,7 @@ impl Display for NewUser<'_> {
     }
 }
 
-impl NewUser<'_> {
-    #[tracing::instrument(skip(self, conn))]
-    pub fn save_to_db(self, conn: &SqliteConnection) -> Result<i32> {
-        debug!(target: "new_db_entry", message = "Adding to db", entry = ?&self);
-        diesel::insert_into(users::table)
-            .values(&self)
-            .execute(conn)?;
-
-        trace!(target: "new_db_entry", message = "Get `last_insert_rowid` for new entry", entry = ?&self);
-        let id = diesel::select(last_insert_rowid).get_result::<i32>(conn)?;
-        debug!(target: "new_db_entry", message = "Got ID for new entry", id = id, entry = ?&self);
-        Ok(id)
-    }
+type Table = users::table;
+impl NewDBEntry<Table> for NewUser<'_> {
+    const TABLE: Table = users::table;
 }
