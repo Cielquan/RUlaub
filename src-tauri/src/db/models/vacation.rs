@@ -3,7 +3,6 @@ use std::fmt::{self, Display, Formatter};
 use anyhow::Result;
 use chrono::NaiveDate;
 use diesel::prelude::*;
-use tracing::{debug, instrument, trace};
 
 use crate::db::{schema::vacations, util::last_insert_rowid};
 
@@ -96,16 +95,16 @@ impl Display for NewVacation<'_> {
 }
 
 impl NewVacation<'_> {
-    #[instrument(skip(self, conn))]
+    #[tracing::instrument(skip(self, conn))]
     pub fn save_to_db(self, conn: &SqliteConnection) -> Result<i32> {
-        debug!(target: "new_db_entry", "Adding to db: {:?}", &self);
+        debug!(target: "new_db_entry", message = "Adding to db", entry = ?&self);
         diesel::insert_into(vacations::table)
             .values(&self)
             .execute(conn)?;
 
-        trace!(target: "new_db_entry", "Get `last_insert_rowid` for id of: {:#}", &self);
+        trace!(target: "new_db_entry", message = "Get `last_insert_rowid` for new entry", entry = ?&self);
         let id = diesel::select(last_insert_rowid).get_result::<i32>(conn)?;
-        debug!(target: "new_db_entry", "Got ID: <{}> for {:#}", id, &self);
+        debug!(target: "new_db_entry", message = "Got ID for new entry", id = id, entry = ?&self);
         Ok(id)
     }
 }

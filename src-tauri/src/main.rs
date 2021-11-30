@@ -54,7 +54,10 @@ fn main() {
                 trace!(target = "tauri_setup", "Start app init");
                 trace!(target = "tauri_setup", "Setup config");
                 setup_config();
-                trace!(target = "tauri_setup", "Reload tracer with level from config");
+                trace!(
+                    target = "tauri_setup",
+                    "Reload tracer with level from config"
+                );
                 reloader__(&CONFIG.read().settings.log_level);
                 trace!(target = "tauri_setup", "Finish app init");
 
