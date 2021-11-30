@@ -2,7 +2,7 @@ use diesel::prelude::*;
 
 /// Try to establish a connection to the given database.
 pub fn establish_connection_to(db_url: &str) -> anyhow::Result<SqliteConnection> {
-    trace!(target = "database", message = "Connect to database.", db_url = ?db_url);
+    trace!(target = "database", message = "Connect to database", db_url = ?db_url);
     match SqliteConnection::establish(db_url) {
         Ok(conn) => Ok(conn),
         Err(err) => {

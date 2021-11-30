@@ -6,7 +6,7 @@ use tracing_subscriber::EnvFilter;
 pub fn create_env_filter(level: &str) -> EnvFilter {
     trace!(
         target = "tracing",
-        message = "Create EnvFilter for given tracing level.",
+        message = "Create EnvFilter for given tracing level",
         level = level
     );
     match &level.to_uppercase()[..] {

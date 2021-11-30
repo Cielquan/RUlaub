@@ -6,17 +6,17 @@ pub fn create_async_watcher(
 ) -> anyhow::Result<(RecommendedWatcher, Receiver<notify::Result<Event>>)> {
     trace!(
         target = "file_watcher",
-        "Create async channel for file watcher."
+        "Create async channel for file watcher"
     );
     let (tx, rx) = channel(1);
 
-    trace!(target = "file_watcher", "Create async file watcher.");
+    trace!(target = "file_watcher", "Create async file watcher");
     match RecommendedWatcher::new(move |res| {
         tauri::async_runtime::block_on(async {
             if let Err(err) = tx.send(res).await {
                 error!(
                     target = "file_watcher",
-                    message = "Failed to send event via channel. Receiver dropped or closed.",
+                    message = "Failed to send event via channel; Receiver dropped or closed",
                     error = ?err
                 );
                 return;
@@ -27,7 +27,7 @@ pub fn create_async_watcher(
         Err(err) => {
             error!(
                 target = "file_watcher",
-                message = "Failed to create file watcher.",
+                message = "Failed to create file watcher",
                 error = ?err
             );
             Err(err.into())

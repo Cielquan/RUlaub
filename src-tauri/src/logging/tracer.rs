@@ -25,18 +25,18 @@ pub type TracerHandle = Handle<
 /// # Panics
 /// If the logging directory path [`LOGGING_DIR_PATH`] is an empty string.
 fn start_tracer() -> (TracerHandle, WorkerGuard) {
-    trace!(target = "tracing", "Setup tracer.");
+    trace!(target = "tracing", "Setup tracer");
 
-    trace!(target = "tracing", "Init logging dir path.");
+    trace!(target = "tracing", "Init logging dir path");
     let logging_dir_path = LOGGING_DIR_PATH.as_str();
     trace!(
         target = "tracing",
-        message = "Use logging dir path.",
+        message = "Use logging dir path",
         path = logging_dir_path
     );
 
     if logging_dir_path == String::default().as_str() {
-        let msg = "Invalid logging dir path.";
+        let msg = "Invalid logging dir path";
         error!(target = "tracing", message = msg, path = logging_dir_path);
         panic!("{}", msg);
     }
@@ -59,9 +59,9 @@ fn start_tracer() -> (TracerHandle, WorkerGuard) {
         .with_filter_reloading();
     let handle = tracer.reload_handle();
 
-    trace!(target = "tracing", "Init tracer.");
+    trace!(target = "tracing", "Init tracer");
     tracer.init();
-    trace!(target = "tracing", "Running tracer.");
+    trace!(target = "tracing", "Running tracer");
     info!(target = "tracing", "Tracing level: TRACE");
 
     (handle, guard)
@@ -69,17 +69,17 @@ fn start_tracer() -> (TracerHandle, WorkerGuard) {
 
 /// Create a function which reloads the tracing level to the given one.
 fn create_tracing_level_reloader(handle: TracerHandle) -> impl Fn(&str) {
-    trace!(target = "tracing", "Create reloader closure.");
+    trace!(target = "tracing", "Create reloader closure");
     move |level| {
         trace!(
             target = "tracing",
-            message = "Reload tracing level.",
+            message = "Reload tracing level",
             level = level
         );
         match handle.reload(create_env_filter(level)) {
             Ok(_) => info!(
                 target = "tracing",
-                message = "Changed tracing level.",
+                message = "Changed tracing level",
                 level = level
             ),
             Err(err) => error!(

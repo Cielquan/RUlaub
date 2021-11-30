@@ -2,7 +2,7 @@ use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
 
 /// Create a menu which can be added to a window of a tauri app.
 pub fn get_menu() -> Menu {
-    trace!(target = "tauri_setup", "Build window menu.");
+    trace!(target = "tauri_setup", "Build window menu");
     let en_lang_item = CustomMenuItem::new("en_lang", "English");
     let de_lang_item = CustomMenuItem::new("de_lang", "Deutsch");
     let dark_theme_item = CustomMenuItem::new("dark_theme", "Dark Theme");
