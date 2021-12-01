@@ -19,9 +19,6 @@ pub const NAME: &str = "RUlaub";
 pub const AUTHOR: &str = "Cielquan";
 pub const VERSION: &str = env!("CARGO_PKG_VERSION");
 
-// NOTE: New line with spacing for tracing messages
-pub const NL: &str = "\n    ";
-
 lazy_static! {
     /// Project directories for the RUlaub application to use.
     #[derive(Debug)]
