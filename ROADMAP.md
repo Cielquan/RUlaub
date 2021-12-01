@@ -1,10 +1,11 @@
 ## Roadmap
 
-- BE | Remove file watcher for config
-  load on boot
-  on change in UI overwrite file & set current config back on CMD
+- Use tauri's state for data
+  Add commands to access state
+  Add commands to modify state
 
 - Add tauri command for config update
+  on change in UI overwrite file & set current config back on CMD
 
 - Add tauri events on errors
 
