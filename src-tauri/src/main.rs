@@ -11,11 +11,12 @@ extern crate rulaub_backend;
 
 use std::sync::Arc;
 
+use parking_lot::Mutex;
 use tauri::{Event, Manager, WindowBuilder};
 
 use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trace, log_warn};
 use rulaub_backend::config::setup::setup_config;
-use rulaub_backend::config::CONFIG;
+use rulaub_backend::config::{CONFIG, DEFAULT_CONFIG};
 use rulaub_backend::logging::tracer::setup_tracer;
 use rulaub_backend::menu::get_menu;
 use rulaub_backend::NAME;
@@ -45,6 +46,7 @@ fn main() {
                 )
             },
         )
+        .manage(Mutex::new(DEFAULT_CONFIG.clone()))
         .setup(move |app| {
             debug!(target = "tauri_setup", "Start app setup");
             let loadingscreen_window = app.get_window("loadingscreen").unwrap();
