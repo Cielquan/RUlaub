@@ -4,15 +4,8 @@ use std::{
     path::Path,
 };
 
-use notify::{
-    event::{DataChange, ModifyKind},
-    Event, EventKind, RecursiveMode, Watcher,
-};
-
-use super::{util::log_config, Config, CONFIG, CONFIG_FILE_PATH};
-use crate::{
-    config::util::parse_toml_str_to_config, util::async_util::create_async_watcher, PROJECT_DIRS,
-};
+use super::{Config, CONFIG_FILE_PATH};
+use crate::{config::util::parse_toml_str_to_config, PROJECT_DIRS};
 
 /// Try to create a configuration file path.
 ///
@@ -78,61 +71,4 @@ pub fn load_config_file() -> anyhow::Result<Config> {
             return Err(err.into());
         }
     }
-}
-
-/// Watch the configuration file.
-///
-/// Create an async [`notify::RecommendedWatcher`] file watcher and watch the configuration file.
-/// On modification of the file reload its contents into [`CONFIG`] and log the new configuration.
-#[tracing::instrument]
-pub async fn watch_config_file() -> anyhow::Result<()> {
-    let (mut watcher, mut rx) = create_async_watcher()?;
-
-    trace!(target = "config", "Start config file watcher");
-    if let Err(err) = watcher.watch(
-        Path::new(&CONFIG_FILE_PATH[..]),
-        RecursiveMode::NonRecursive,
-    ) {
-        error!(
-            target = "config",
-            message = "Failed to initialize config file watcher",
-            error = ?err
-        );
-        return Err(err.into());
-    };
-
-    trace!(target = "config", "Start watching config file");
-    while let Some(res) = rx.recv().await {
-        match res {
-            Ok(Event {
-                kind: EventKind::Modify(ModifyKind::Data(DataChange::Content)),
-                ..
-            }) => {
-                info!(
-                    target = "config",
-                    "config.toml updated; refreshing configuration"
-                );
-                match load_config_file() {
-                    Ok(config) => {
-                        *CONFIG.write() = config;
-                        log_config();
-                    }
-                    Err(err) => {
-                        error!(
-                            target = "config",
-                            message = "Failed to refresh configuration",
-                            error = ?err
-                        );
-                    }
-                }
-            }
-            Err(err) => error!(
-                target = "config",
-                message = "Error while watching config file",
-                err = ?err
-            ),
-            _ => { /* Ignore other event */ }
-        }
-    }
-    Ok(())
 }

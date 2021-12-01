@@ -1,7 +1,7 @@
 use std::path::Path;
 
 use super::{
-    file::{load_config_file, watch_config_file, write_to_config_file},
+    file::{load_config_file, write_to_config_file},
     util::log_config,
     CONFIG, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR,
 };
@@ -38,14 +38,12 @@ pub fn setup_config() {
                 message = "Failed to create new config file with default config",
                 error = ?err
             );
-            // TODO:#i# send err msg to frontend saying config could not be created
-            // and prog will run on default conf
         }
     }
 
     trace!(
         target = "config",
-        "Check if config file exists (was created) for loading and watching"
+        "Check if config file exists (was created) for loading"
     );
     if Path::new(conf_file_path).is_file() {
         match load_config_file() {
@@ -61,10 +59,7 @@ pub fn setup_config() {
                 );
             }
         }
-
-        trace!(target = "config", "Spawn task for async file watching");
-        tauri::async_runtime::spawn(async { watch_config_file().await });
     } else {
-        error!(target = "config", "No conf file to load and watch");
+        error!(target = "config", "No conf file to load");
     }
 }
