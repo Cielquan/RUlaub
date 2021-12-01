@@ -7,6 +7,7 @@ extern crate serde_derive;
 #[macro_use]
 extern crate tracing;
 
+pub mod commands;
 pub mod config;
 pub mod db;
 pub mod logging;

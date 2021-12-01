@@ -6,10 +6,14 @@
 #[macro_use]
 extern crate tracing;
 
+#[macro_use]
+extern crate rulaub_backend;
+
 use std::sync::Arc;
 
 use tauri::{Event, Manager, WindowBuilder};
 
+use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trace, log_warn};
 use rulaub_backend::config::setup::setup_config;
 use rulaub_backend::config::CONFIG;
 use rulaub_backend::logging::tracer::setup_tracer;
@@ -91,6 +95,9 @@ fn main() {
             debug!(target = "tauri_setup", "Finished app setup");
             Ok(())
         })
+        .invoke_handler(tauri::generate_handler![
+            log_debug, log_error, log_info, log_trace, log_warn
+        ])
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
 

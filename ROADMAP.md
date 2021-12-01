@@ -1,10 +1,9 @@
 ## Roadmap
 
-- Add tauri command for propagation of errors to BE for logging
-
 - Add tauri events on errors
- 
+
 - Use tauri's state for data
+
   - users + vacation
   - vacTypes
   - school holi
@@ -15,6 +14,7 @@
 - Add commands to access state
 
 - Add commands to modify state
+
   - change theme
   - change locale
   - DB selection / creation
@@ -103,7 +103,6 @@
 - Safe window size/position and restore on boot
 
 - ? rewrite the calender without react-window
-
 
 ### Links for help to do things (dev)
 
