@@ -10,12 +10,12 @@ use crate::PROJECT_DIRS;
 ///
 /// The [`static@crate::PROJECT_DIRS`] are used as a base.
 pub fn get_conf_file_path() -> Option<String> {
-    trace!(target = "config", "Build conf file path");
+    trace!(target = "config", message = "Build conf file path");
     match &*PROJECT_DIRS {
         None => {
             error!(
                 taregt = "config",
-                "Could not find project directories for this OS"
+                message = "Could not find project directories for this OS"
             );
             None
         }
@@ -44,20 +44,23 @@ pub fn write_to_config_file(content: &str) -> anyhow::Result<()> {
         content = ?content
     );
     let path = Path::new(&*CONFIG_FILE_PATH);
-    trace!(target = "config", "Create parent dirs if missing");
+    trace!(target = "config", message = "Create parent dirs if missing");
     if let Some(parent) = path.parent() {
         create_dir_all(parent)?
     }
-    trace!(target = "config", "Create file if missing and open");
+    trace!(
+        target = "config",
+        message = "Create file if missing and open"
+    );
     let mut file = File::create(path)?;
-    trace!(target = "config", "Write to file");
+    trace!(target = "config", message = "Write to file");
     write!(file, "{}", content)?;
     Ok(())
 }
 
 /// Load and parse the content of the configuration file.
 pub fn load_config_file() -> anyhow::Result<Config> {
-    debug!(target = "config", "Load config file");
+    debug!(target = "config", message = "Load config file");
 
     match fs::read_to_string(&*CONFIG_FILE_PATH) {
         Ok(conf) => parse_toml_str_to_config(&conf),

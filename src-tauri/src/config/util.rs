@@ -4,7 +4,7 @@ use super::Config;
 pub fn parse_toml_str_to_config(toml_str: &str) -> anyhow::Result<Config> {
     debug!(
         target = "config",
-        "Try to parse toml string into Config struct"
+        message = "Try to parse toml string into Config struct"
     );
     match toml::from_str(toml_str) {
         Err(err) => {

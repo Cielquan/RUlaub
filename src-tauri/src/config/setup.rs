@@ -9,7 +9,7 @@ use super::{Config, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR};
 /// default configuration if none is found.
 #[tracing::instrument]
 pub fn setup_config() -> Option<Config> {
-    trace!(target = "config", "Init config file path");
+    trace!(target = "config", message = "Init config file path");
     let conf_file_path = CONFIG_FILE_PATH.as_str();
     trace!(
         target = "config",
@@ -19,10 +19,13 @@ pub fn setup_config() -> Option<Config> {
 
     trace!(
         target = "config",
-        "Check if config file exists or needs to be created"
+        message = "Check if config file exists or needs to be created"
     );
     if !Path::new(conf_file_path).is_file() {
-        trace!(target = "config", "Create new config file with defaults");
+        trace!(
+            target = "config",
+            message = "Create new config file with defaults"
+        );
         if let Err(err) = write_to_config_file(&DEFAULT_CONFIG_TOML_NICE_STR) {
             error!(
                 target = "config",
@@ -34,7 +37,7 @@ pub fn setup_config() -> Option<Config> {
 
     trace!(
         target = "config",
-        "Check if config file exists (was created) for loading"
+        message = "Check if config file exists (was created) for loading"
     );
     if Path::new(conf_file_path).is_file() {
         match load_config_file() {
@@ -46,7 +49,7 @@ pub fn setup_config() -> Option<Config> {
             ),
         }
     } else {
-        error!(target = "config", "No conf file to load");
+        error!(target = "config", message = "No conf file to load");
     }
     None
 }

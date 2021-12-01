@@ -7,7 +7,10 @@ use crate::PROJECT_DIRS;
 /// In the first attempt the [`static@crate::PROJECT_DIRS`] are used as a base.
 /// If this fails the current directory will be tried.
 pub fn get_logging_dir_path() -> Option<String> {
-    trace!(target = "tracing", "Try building logging dir path");
+    trace!(
+        target = "tracing",
+        message = "Try building logging dir path"
+    );
     if let Some(project_dirs) = &*PROJECT_DIRS {
         if let Some(path) = project_dirs.cache_dir().join("logs").to_str() {
             return Some(String::from(path));
@@ -15,7 +18,7 @@ pub fn get_logging_dir_path() -> Option<String> {
     }
     debug!(
         target = "tracing",
-        "Could not build logging dir path; try using current dir"
+        message = "Could not build logging dir path; try using current dir"
     );
     match env::current_dir() {
         Err(err) => {
