@@ -16,9 +16,10 @@ use tauri::{Event, Manager, WindowBuilder};
 
 use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trace, log_warn};
 use rulaub_backend::config::setup::setup_config;
-use rulaub_backend::config::{CONFIG, DEFAULT_CONFIG};
+use rulaub_backend::config::DEFAULT_CONFIG;
 use rulaub_backend::logging::tracer::setup_tracer;
 use rulaub_backend::menu::get_menu;
+use rulaub_backend::state::{ConfigFileLoaded, ConfigFileLoadedState, ConfigState};
 use rulaub_backend::NAME;
 
 fn main() {
@@ -46,24 +47,39 @@ fn main() {
                 )
             },
         )
-        .manage(Mutex::new(DEFAULT_CONFIG.clone()))
+        .manage(ConfigFileLoadedState(Mutex::new(ConfigFileLoaded::FALSE)))
+        .manage(ConfigState(Mutex::new(DEFAULT_CONFIG.clone())))
         .setup(move |app| {
             debug!(target = "tauri_setup", "Start app setup");
             let loadingscreen_window = app.get_window("loadingscreen").unwrap();
             let main_window = app.get_window("main").unwrap();
 
             trace!(target = "tauri_setup", "Spawn task for app init");
+            let app_handle = app.handle();
             let main_window_ = main_window.clone();
             let reloader__ = reloader_.clone();
             tauri::async_runtime::spawn(async move {
                 debug!(target = "tauri_setup", "Start app init");
-                trace!(target = "tauri_setup", "Setup config");
-                setup_config();
-                trace!(
-                    target = "tauri_setup",
-                    "Reload tracer with level from config"
-                );
-                reloader__(&CONFIG.read().settings.log_level);
+
+                debug!(target = "tauri_setup", "Setup config");
+                if let Some(conf) = setup_config() {
+                    debug!(target = "tauri_setup", "Update config state from file");
+                    let config_state = app_handle.state::<ConfigState>();
+                    *config_state.0.lock() = conf;
+
+                    let log_level = &config_state.0.lock().settings.log_level;
+                    trace!(
+                        target = "tracing",
+                        message = "Reload tracer with level from config file",
+                        level = ?log_level
+                    );
+                    reloader__(log_level);
+
+                    trace!(target = "tauri_setup", "Set config file loaded: true");
+                    let config_file_state = app_handle.state::<ConfigFileLoadedState>();
+                    *config_file_state.0.lock() = ConfigFileLoaded::TRUE;
+                };
+
                 debug!(target = "tauri_setup", "Finish app init");
 
                 debug!(target = "tauri_setup", "Close loading screen");

@@ -1,9 +1,4 @@
-use super::{Config, CONFIG};
-
-/// Log the current [`CONFIG`].
-pub fn log_config() {
-    debug!(target = "config", message = "Log current config", config = ?&CONFIG.read());
-}
+use super::Config;
 
 /// Parse toml string into [`Config`] struct.
 pub fn parse_toml_str_to_config(toml_str: &str) -> anyhow::Result<Config> {

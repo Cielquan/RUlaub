@@ -1,19 +1,14 @@
 use std::path::Path;
 
 use super::file::{load_config_file, write_to_config_file};
-use super::util::log_config;
-use super::{CONFIG, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR};
+use super::{Config, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR};
 
-/// Initialize and start the configuration loader.
+/// Initialize and load a configuration file.
 ///
 /// Load an existing configuration file or create one (incl. parrent directories) with the
 /// default configuration if none is found.
-/// Afterwards start an async file watcher which updates [`CONFIG`] on modification.
 #[tracing::instrument]
-pub fn setup_config() {
-    debug!(target = "config", "Init config");
-    let _ = &CONFIG;
-
+pub fn setup_config() -> Option<Config> {
     trace!(target = "config", "Init config file path");
     let conf_file_path = CONFIG_FILE_PATH.as_str();
     trace!(
@@ -21,8 +16,6 @@ pub fn setup_config() {
         message = "Use config file path",
         path = conf_file_path
     );
-
-    log_config();
 
     trace!(
         target = "config",
@@ -45,20 +38,15 @@ pub fn setup_config() {
     );
     if Path::new(conf_file_path).is_file() {
         match load_config_file() {
-            Ok(config) => {
-                trace!(target = "config", "Write loaded config into CONFIG");
-                *CONFIG.write() = config;
-                log_config();
-            }
-            Err(err) => {
-                error!(
-                    target = "config",
-                    message = "Failed to load configuration from file",
-                    error = ?err
-                );
-            }
+            Ok(config) => return Some(config),
+            Err(err) => error!(
+                target = "config",
+                message = "Failed to load configuration from file",
+                error = ?err
+            ),
         }
     } else {
         error!(target = "config", "No conf file to load");
     }
+    None
 }

@@ -3,8 +3,6 @@ pub mod setup;
 
 pub mod util;
 
-use parking_lot::RwLock;
-
 use self::file::get_conf_file_path;
 
 /// The user specific part of the confiuration.
@@ -55,8 +53,4 @@ lazy_static! {
     ///
     /// Defaults to an empty string on error.
     pub static ref CONFIG_FILE_PATH: String = get_conf_file_path().unwrap_or_default();
-
-    /// The guarded configuration object for RUlaub.
-    #[derive(Debug)]
-    pub static ref CONFIG: RwLock<Config> = RwLock::new(DEFAULT_CONFIG.clone());
 }

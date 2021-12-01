@@ -12,6 +12,7 @@ pub mod config;
 pub mod db;
 pub mod logging;
 pub mod menu;
+pub mod state;
 pub mod util;
 
 use directories::ProjectDirs;
