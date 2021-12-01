@@ -1,15 +1,26 @@
 ## Roadmap
 
+- Add tauri command for propagation of errors to BE for logging
+
+- Add tauri events on errors
+ 
 - Use tauri's state for data
-  Add commands to access state
-  Add commands to modify state
+  - users + vacation
+  - vacTypes
+  - school holi
+  - pub holi
+  - calendar row user mapping
+  - config
+
+- Add commands to access state
+
+- Add commands to modify state
+  - change theme
+  - change locale
+  - DB selection / creation
 
 - Add tauri command for config update
   on change in UI overwrite file & set current config back on CMD
-
-- Add tauri events on errors
-
-- Add tauri command for propagation of errors to BE for logging
 
 - FE | Add Vac Add dialog
 
