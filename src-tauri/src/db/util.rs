@@ -1,9 +1,8 @@
-use diesel::{
-    prelude::{Connection, RunQueryDsl, SqliteConnection},
-    query_builder::InsertStatement,
-    query_dsl::{methods::ExecuteDsl, LoadQuery},
-    Insertable, Table,
-};
+use diesel::prelude::{Connection, RunQueryDsl, SqliteConnection};
+use diesel::query_builder::InsertStatement;
+use diesel::query_dsl::methods::ExecuteDsl;
+use diesel::query_dsl::LoadQuery;
+use diesel::{Insertable, Table};
 
 /// Try to establish a connection to the given database.
 pub fn establish_connection_to(db_url: &str) -> anyhow::Result<SqliteConnection> {

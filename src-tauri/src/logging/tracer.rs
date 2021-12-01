@@ -1,15 +1,12 @@
 use tracing_appender::non_blocking::{NonBlocking, WorkerGuard};
-use tracing_subscriber::{
-    fmt::{
-        format::{DefaultFields, FmtSpan, Format, Pretty},
-        Layer,
-    },
-    layer::Layered,
-    reload::Handle,
-    EnvFilter, Registry,
-};
+use tracing_subscriber::fmt::format::{DefaultFields, FmtSpan, Format, Pretty};
+use tracing_subscriber::fmt::Layer;
+use tracing_subscriber::layer::Layered;
+use tracing_subscriber::reload::Handle;
+use tracing_subscriber::{EnvFilter, Registry};
 
-use super::{util::create_env_filter, LOGGING_DIR_PATH};
+use super::util::create_env_filter;
+use super::LOGGING_DIR_PATH;
 
 pub type TracerHandle = Handle<
     EnvFilter,

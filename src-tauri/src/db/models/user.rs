@@ -1,6 +1,7 @@
 use std::fmt::{self, Display, Formatter};
 
-use crate::db::{schema::users, util::NewDBEntry};
+use crate::db::schema::users;
+use crate::db::util::NewDBEntry;
 
 /// The database model for users.
 #[derive(Queryable, Debug)]

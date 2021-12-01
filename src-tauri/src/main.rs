@@ -10,12 +10,11 @@ use std::sync::Arc;
 
 use tauri::{Event, Manager, WindowBuilder};
 
-use rulaub_backend::{
-    config::{setup::setup_config, CONFIG},
-    logging::tracer::setup_tracer,
-    menu::get_menu,
-    NAME,
-};
+use rulaub_backend::config::setup::setup_config;
+use rulaub_backend::config::CONFIG;
+use rulaub_backend::logging::tracer::setup_tracer;
+use rulaub_backend::menu::get_menu;
+use rulaub_backend::NAME;
 
 fn main() {
     let (tracing_level_reloader_, _guard) = setup_tracer();

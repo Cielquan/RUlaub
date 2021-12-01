@@ -1,11 +1,10 @@
-use std::{
-    fs::{self, create_dir_all, File},
-    io::Write,
-    path::Path,
-};
+use std::fs::{self, create_dir_all, File};
+use std::io::Write;
+use std::path::Path;
 
 use super::{Config, CONFIG_FILE_PATH};
-use crate::{config::util::parse_toml_str_to_config, PROJECT_DIRS};
+use crate::config::util::parse_toml_str_to_config;
+use crate::PROJECT_DIRS;
 
 /// Try to create a configuration file path.
 ///

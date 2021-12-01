@@ -1,10 +1,8 @@
 use std::path::Path;
 
-use super::{
-    file::{load_config_file, write_to_config_file},
-    util::log_config,
-    CONFIG, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR,
-};
+use super::file::{load_config_file, write_to_config_file};
+use super::util::log_config;
+use super::{CONFIG, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR};
 
 /// Initialize and start the configuration loader.
 ///
