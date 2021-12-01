@@ -28,8 +28,8 @@ fn main() {
     debug!(target = "tauri_setup", "Build tauri app");
     let reloader_ = reloader.clone();
     let app = tauri::Builder::default()
-        // create window manually b/c of menu
         .create_window(
+            // NOTE: create window manually because of window specific menu
             "main",
             tauri::WindowUrl::App("index.html".into()),
             move |window_builder, webview_attributes| {
