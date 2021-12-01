@@ -2,6 +2,9 @@
 
 - Add tauri events on errors
 
+- Impl event listeners on BE errors:
+  error-config-file-create
+
 - Use tauri's state for data
 
   - users + vacation
@@ -35,6 +38,9 @@
 - FE | Add field for link for SchoolHoli auto load
 
 - BE | Add selfupdater
+
+- BE | clear 'logs' dir of old files
+  add README in logs dir which warns about this behavior
 
 - **ALPHA**
 
@@ -118,16 +124,6 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
     - via Promise for calls
     - via events for automated and sending stuff
     - **"events" with config**
-      - file loaded successfully (init)
-        DO: -
-        LVL: success
-        INFO: -
-        VIA: -
-      - file not found
-        DO: create new with defaults
-        LVL: info
-        INFO: New config created + where?
-        VIA: snackbar
       - cannot create / change file (permission or others)
         DO: work with default settings, set "no config state"
         LVL: error
@@ -140,11 +136,6 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
         INFO: invalid data, using defaults, overwrote setting in file with default
         VIA: snackbar
     - **"events" with DB**
-      - file found and data fetched
-        DO: (work with data +) send data to frontend
-        LVL: success
-        INFO: -
-        VIA: -
       - file not found
         DO: -
         LVL: warning
@@ -171,14 +162,6 @@ https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
         LVL: error
         INFO: failed command, contact support
         VIA: dialog
-    - **"events" with 'log file'**
-      - cannot create / change file (permission or others)
-        DO: work with default settings, set "no config state"
-        LVL: warning
-        INFO: no logging (add reason and advice if applicable)
-        VIA: snackbar
-  - front to back to write to logfile (all with metadata)
-    - data validation for data from backend
 
 ---
 
