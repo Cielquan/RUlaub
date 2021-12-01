@@ -7,7 +7,7 @@ pub fn log_config() {
 
 /// Parse toml string into [`Config`] struct.
 pub fn parse_toml_str_to_config(toml_str: &str) -> anyhow::Result<Config> {
-    trace!(
+    debug!(
         target = "config",
         "Try to parse toml string into Config struct"
     );

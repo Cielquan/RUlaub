@@ -25,7 +25,7 @@ pub type TracerHandle = Handle<
 /// # Panics
 /// If the logging directory path [`LOGGING_DIR_PATH`] is an empty string.
 fn start_tracer() -> (TracerHandle, WorkerGuard) {
-    trace!(target = "tracing", "Setup tracer");
+    debug!(target = "tracing", "Setup tracer");
 
     trace!(target = "tracing", "Init logging dir path");
     let logging_dir_path = LOGGING_DIR_PATH.as_str();
@@ -71,7 +71,7 @@ fn start_tracer() -> (TracerHandle, WorkerGuard) {
 fn create_tracing_level_reloader(handle: TracerHandle) -> impl Fn(&str) {
     trace!(target = "tracing", "Create reloader closure");
     move |level| {
-        trace!(
+        debug!(
             target = "tracing",
             message = "Reload tracing level",
             level = level

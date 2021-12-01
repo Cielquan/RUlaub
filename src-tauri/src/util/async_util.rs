@@ -10,7 +10,7 @@ pub fn create_async_watcher(
     );
     let (tx, rx) = channel(1);
 
-    trace!(target = "file_watcher", "Create async file watcher");
+    debug!(target = "file_watcher", "Create async file watcher");
     match RecommendedWatcher::new(move |res| {
         tauri::async_runtime::block_on(async {
             if let Err(err) = tx.send(res).await {

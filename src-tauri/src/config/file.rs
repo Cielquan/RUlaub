@@ -38,7 +38,7 @@ pub fn get_conf_file_path() -> Option<String> {
 
 /// Write the given content to the configuration file.
 pub fn write_to_config_file(content: &str) -> anyhow::Result<()> {
-    trace!(
+    debug!(
         target = "config",
         message = "Write to config file",
         file_path = ?(*CONFIG_FILE_PATH),
@@ -58,7 +58,7 @@ pub fn write_to_config_file(content: &str) -> anyhow::Result<()> {
 
 /// Load and parse the content of the configuration file.
 pub fn load_config_file() -> anyhow::Result<Config> {
-    trace!(target = "config", "Load config file");
+    debug!(target = "config", "Load config file");
 
     match fs::read_to_string(&*CONFIG_FILE_PATH) {
         Ok(conf) => parse_toml_str_to_config(&conf),

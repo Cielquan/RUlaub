@@ -13,7 +13,7 @@ use super::{
 /// Afterwards start an async file watcher which updates [`CONFIG`] on modification.
 #[tracing::instrument]
 pub fn setup_config() {
-    trace!(target = "config", "Init config");
+    debug!(target = "config", "Init config");
     let _ = &CONFIG;
 
     trace!(target = "config", "Init config file path");
@@ -48,6 +48,7 @@ pub fn setup_config() {
     if Path::new(conf_file_path).is_file() {
         match load_config_file() {
             Ok(config) => {
+                trace!(target = "config", "Write loaded config into CONFIG");
                 *CONFIG.write() = config;
                 log_config();
             }

@@ -22,7 +22,7 @@ fn main() {
     let reloader = Arc::new(tracing_level_reloader_);
     info!(target = "main", "Main started.");
 
-    trace!(target = "tauri_setup", "Build tauri app");
+    debug!(target = "tauri_setup", "Build tauri app");
     let reloader_ = reloader.clone();
     let app = tauri::Builder::default()
         // create window manually b/c of menu
@@ -43,7 +43,7 @@ fn main() {
             },
         )
         .setup(move |app| {
-            trace!(target = "tauri_setup", "Start app setup");
+            debug!(target = "tauri_setup", "Start app setup");
             let loadingscreen_window = app.get_window("loadingscreen").unwrap();
             let main_window = app.get_window("main").unwrap();
 
@@ -51,7 +51,7 @@ fn main() {
             let main_window_ = main_window.clone();
             let reloader__ = reloader_.clone();
             tauri::async_runtime::spawn(async move {
-                trace!(target = "tauri_setup", "Start app init");
+                debug!(target = "tauri_setup", "Start app init");
                 trace!(target = "tauri_setup", "Setup config");
                 setup_config();
                 trace!(
@@ -59,11 +59,11 @@ fn main() {
                     "Reload tracer with level from config"
                 );
                 reloader__(&CONFIG.read().settings.log_level);
-                trace!(target = "tauri_setup", "Finish app init");
+                debug!(target = "tauri_setup", "Finish app init");
 
-                trace!(target = "tauri_setup", "Close loading screen");
+                debug!(target = "tauri_setup", "Close loading screen");
                 loadingscreen_window.close().unwrap();
-                trace!(target = "tauri_setup", "Show main window");
+                debug!(target = "tauri_setup", "Show main window");
                 main_window_.show().unwrap();
             });
 
@@ -89,13 +89,13 @@ fn main() {
                 _ => {}
             });
 
-            trace!(target = "tauri_setup", "Finished app setup");
+            debug!(target = "tauri_setup", "Finished app setup");
             Ok(())
         })
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
 
-    trace!(target = "tauri_setup", "Run tauri app");
+    debug!(target = "tauri_setup", "Run tauri app");
     app.run(|_app_handle, event| match event {
         Event::Ready => info!(target = "app", "App running"),
         Event::Exit => info!(target = "app", "App ending"),
