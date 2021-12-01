@@ -62,7 +62,7 @@ fn main() {
                 debug!(target = "tauri_setup", message = "Start app init");
 
                 debug!(target = "tauri_setup", message = "Setup config");
-                if let Some(conf) = setup_config() {
+                if let Some(conf) = setup_config(&main_window_) {
                     debug!(
                         target = "tauri_setup",
                         message = "Update config state from file"

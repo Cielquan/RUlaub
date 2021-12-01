@@ -1,5 +1,7 @@
 use std::path::Path;
 
+use tauri::Window;
+
 use super::file::{load_config_file, write_to_config_file};
 use super::{Config, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR};
 
@@ -7,8 +9,8 @@ use super::{Config, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR};
 ///
 /// Load an existing configuration file or create one (incl. parrent directories) with the
 /// default configuration if none is found.
-#[tracing::instrument]
-pub fn setup_config() -> Option<Config> {
+#[tracing::instrument(skip(main_window))]
+pub fn setup_config(main_window: &Window) -> Option<Config> {
     trace!(target = "config", message = "Init config file path");
     let conf_file_path = CONFIG_FILE_PATH.as_str();
     trace!(
@@ -32,6 +34,12 @@ pub fn setup_config() -> Option<Config> {
                 message = "Failed to create new config file with default config",
                 error = ?err
             );
+            trace!(
+                target = "emit_event",
+                message = "Emit event 'error-config-file-create'"
+            );
+            main_window.emit("error-config-file-create", {}).unwrap();
+            return None;
         }
     }
 
