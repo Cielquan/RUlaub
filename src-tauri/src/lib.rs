@@ -9,11 +9,11 @@ extern crate tracing;
 
 pub mod commands;
 pub mod config;
-pub mod db;
+mod db;
 pub mod logging;
 pub mod menu;
 pub mod state;
-pub mod util;
+mod util;
 
 use directories::ProjectDirs;
 

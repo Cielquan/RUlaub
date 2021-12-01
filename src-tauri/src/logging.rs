@@ -1,6 +1,6 @@
-pub mod file;
+mod file;
 pub mod tracer;
-pub mod util;
+mod util;
 
 use self::file::get_logging_dir_path;
 

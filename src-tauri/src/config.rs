@@ -1,7 +1,6 @@
 mod file;
 pub mod setup;
-
-pub mod util;
+mod util;
 
 use self::file::get_conf_file_path;
 

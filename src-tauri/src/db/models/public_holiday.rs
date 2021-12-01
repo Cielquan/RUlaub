@@ -35,6 +35,7 @@ impl Display for PublicHoliday {
 
 impl PublicHoliday {
     #[allow(clippy::new_ret_no_self)]
+    #[allow(dead_code)] // TODO:#i# remove after usage
     pub fn new<'a>(
         name: &'a str,
         year: Option<&'a i32>,

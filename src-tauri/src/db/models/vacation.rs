@@ -39,6 +39,7 @@ impl Display for Vacation {
 
 impl Vacation {
     #[allow(clippy::new_ret_no_self, clippy::too_many_arguments)]
+    #[allow(dead_code)] // TODO:#i# remove after usage
     pub fn new<'a>(
         user_id: &'a i32,
         vacation_type_id: &'a i32,

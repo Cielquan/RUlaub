@@ -8,7 +8,7 @@ use tracing_subscriber::{EnvFilter, Registry};
 use super::util::create_env_filter;
 use super::LOGGING_DIR_PATH;
 
-pub type TracerHandle = Handle<
+type TracerHandle = Handle<
     EnvFilter,
     Layered<Layer<Registry, DefaultFields, Format<Pretty>, NonBlocking>, Registry>,
 >;

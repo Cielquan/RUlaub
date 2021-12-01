@@ -36,6 +36,7 @@ impl Display for VacationType {
 
 impl VacationType {
     #[allow(clippy::new_ret_no_self)]
+    #[allow(dead_code)] // TODO:#i# remove after usage
     pub fn new<'a>(
         name: &'a str,
         charge: &'a bool,
