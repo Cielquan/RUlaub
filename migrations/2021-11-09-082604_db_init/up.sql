@@ -1,3 +1,4 @@
+-- users deletable; caskading delete vacations
 CREATE TABLE users (
     id INTEGER NOT NULL PRIMARY KEY,
     name VARCHAR(128) NOT NULL UNIQUE,
@@ -11,6 +12,7 @@ CREATE TABLE users (
     sunday BOOLEAN NOT NULL
 );
 
+-- not deleteable
 CREATE TABLE vacation_types (
     id INTEGER NOT NULL PRIMARY KEY,
     name VARCHAR(128) NOT NULL UNIQUE,
