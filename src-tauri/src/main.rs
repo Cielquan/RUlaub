@@ -60,43 +60,42 @@ fn main() {
             let loadingscreen_window = app.get_window("loadingscreen").unwrap();
             let main_window = app.get_window("main").unwrap();
 
+            debug!(target = "tauri_setup", message = "Setup config");
+            let mut setup_config_err = ConfigSetupErr::None;
+            match setup_config() {
+                Ok(conf) => {
+                    debug!(
+                        target = "tauri_setup",
+                        message = "Update config state from file"
+                    );
+                    let config_state = app.state::<ConfigState>();
+                    *config_state.0.lock() = conf;
+
+                    let log_level = &config_state.0.lock().settings.log_level;
+                    trace!(
+                        target = "tracing",
+                        message = "Reload tracer with level from config file",
+                        level = ?log_level
+                    );
+                    reloader_(log_level);
+
+                    trace!(
+                        target = "tauri_setup",
+                        message = "Set config file loaded: true"
+                    );
+                    let config_file_state = app.state::<ConfigFileLoadedState>();
+                    *config_file_state.0.lock() = ConfigFileLoaded::TRUE;
+                }
+                Err(err) => setup_config_err = err,
+            }
+
             trace!(target = "tauri_setup", message = "Spawn task for app init");
             let app_handle = app.handle();
             let main_window_ = main_window.clone();
-            let reloader__ = reloader_.clone();
             tauri::async_runtime::spawn(async move {
-                debug!(target = "tauri_setup", message = "Start app init");
+                // debug!(target = "tauri_setup", message = "Start app init");
 
-                debug!(target = "tauri_setup", message = "Setup config");
-                let mut setup_config_err = ConfigSetupErr::None;
-                match setup_config() {
-                    Ok(conf) => {
-                        debug!(
-                            target = "tauri_setup",
-                            message = "Update config state from file"
-                        );
-                        let config_state = app_handle.state::<ConfigState>();
-                        *config_state.0.lock() = conf;
-
-                        let log_level = &config_state.0.lock().settings.log_level;
-                        trace!(
-                            target = "tracing",
-                            message = "Reload tracer with level from config file",
-                            level = ?log_level
-                        );
-                        reloader__(log_level);
-
-                        trace!(
-                            target = "tauri_setup",
-                            message = "Set config file loaded: true"
-                        );
-                        let config_file_state = app_handle.state::<ConfigFileLoadedState>();
-                        *config_file_state.0.lock() = ConfigFileLoaded::TRUE;
-                    }
-                    Err(err) => setup_config_err = err,
-                }
-
-                debug!(target = "tauri_setup", message = "Finish app init");
+                // debug!(target = "tauri_setup", message = "Finish app init");
 
                 let page_init_state = app_handle.state::<PageInitState>();
                 let sleep_time = Duration::from_millis(1000);
