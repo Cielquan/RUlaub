@@ -3,7 +3,7 @@
 - Add tauri events on errors
 
 - Impl event listeners on BE errors:
-  error-config-file-create
+  error-config-file-write
 
 - Use tauri's state for data
 

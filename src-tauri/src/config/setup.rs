@@ -36,9 +36,9 @@ pub fn setup_config(main_window: &Window) -> Option<Config> {
             );
             trace!(
                 target = "emit_event",
-                message = "Emit event 'error-config-file-create'"
+                message = "Emit event 'error-config-file-write'"
             );
-            main_window.emit("error-config-file-create", {}).unwrap();
+            main_window.emit("error-config-file-write", {}).unwrap();
             return None;
         }
     }
