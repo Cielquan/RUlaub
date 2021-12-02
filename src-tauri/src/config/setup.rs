@@ -1,16 +1,22 @@
 use std::path::Path;
 
-use tauri::Window;
-
 use super::file::{load_config_file, write_to_config_file};
 use super::{Config, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR};
+
+#[derive(PartialEq)]
+pub enum ConfigSetupErr {
+    None,
+    WriteErr,
+    ReadErr,
+    NoFileErr,
+}
 
 /// Initialize and load a configuration file.
 ///
 /// Load an existing configuration file or create one (incl. parrent directories) with the
 /// default configuration if none is found.
-#[tracing::instrument(skip(main_window))]
-pub fn setup_config(main_window: &Window) -> Option<Config> {
+#[tracing::instrument]
+pub fn setup_config() -> Result<Config, ConfigSetupErr> {
     trace!(target = "config", message = "Init config file path");
     let conf_file_path = CONFIG_FILE_PATH.as_str();
     trace!(
@@ -34,12 +40,7 @@ pub fn setup_config(main_window: &Window) -> Option<Config> {
                 message = "Failed to create new config file with default config",
                 error = ?err
             );
-            trace!(
-                target = "emit_event",
-                message = "Emit event 'error-config-file-write'"
-            );
-            main_window.emit("error-config-file-write", {}).unwrap();
-            return None;
+            return Err(ConfigSetupErr::WriteErr);
         }
     }
 
@@ -49,22 +50,17 @@ pub fn setup_config(main_window: &Window) -> Option<Config> {
     );
     if Path::new(conf_file_path).is_file() {
         match load_config_file() {
-            Ok(config) => return Some(config),
+            Ok(config) => return Ok(config),
             Err(err) => {
                 error!(
                     target = "config",
                     message = "Failed to load configuration from file",
                     error = ?err
                 );
-                trace!(
-                    target = "emit_event",
-                    message = "Emit event 'error-config-file-read'"
-                );
-                main_window.emit("error-config-file-read", {}).unwrap();
+                return Err(ConfigSetupErr::ReadErr);
             }
         }
-    } else {
-        error!(target = "config", message = "No conf file to load");
     }
-    None
+    error!(target = "config", message = "No conf file to load");
+    Err(ConfigSetupErr::NoFileErr)
 }
