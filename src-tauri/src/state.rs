@@ -7,5 +7,11 @@ pub enum ConfigFileLoaded {
     FALSE,
 }
 
+pub enum PageInit {
+    LOADING,
+    DONE,
+}
+
 pub struct ConfigFileLoadedState(pub Mutex<ConfigFileLoaded>);
 pub struct ConfigState(pub Mutex<Config>);
+pub struct PageInitState(pub Mutex<PageInit>);

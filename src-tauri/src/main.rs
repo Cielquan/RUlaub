@@ -10,16 +10,21 @@ extern crate tracing;
 extern crate rulaub_backend;
 
 use std::sync::Arc;
+use std::thread::sleep;
+use std::time::Duration;
 
 use parking_lot::Mutex;
 use tauri::{Event, Manager, WindowBuilder};
 
+use rulaub_backend::commands::init::finished_init_load;
 use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trace, log_warn};
 use rulaub_backend::config::setup::setup_config;
 use rulaub_backend::config::DEFAULT_CONFIG;
 use rulaub_backend::logging::tracer::setup_tracer;
 use rulaub_backend::menu::get_menu;
-use rulaub_backend::state::{ConfigFileLoaded, ConfigFileLoadedState, ConfigState};
+use rulaub_backend::state::{
+    ConfigFileLoaded, ConfigFileLoadedState, ConfigState, PageInit, PageInitState,
+};
 use rulaub_backend::NAME;
 
 fn main() {
@@ -47,6 +52,7 @@ fn main() {
                 )
             },
         )
+        .manage(PageInitState(Mutex::new(PageInit::LOADING)))
         .manage(ConfigFileLoadedState(Mutex::new(ConfigFileLoaded::FALSE)))
         .manage(ConfigState(Mutex::new(DEFAULT_CONFIG.clone())))
         .setup(move |app| {
@@ -88,6 +94,19 @@ fn main() {
 
                 debug!(target = "tauri_setup", message = "Finish app init");
 
+                let page_init_state = app_handle.state::<PageInitState>();
+                let sleep_time = Duration::from_millis(1000);
+                loop {
+                    if let PageInit::DONE = *page_init_state.0.lock() {
+                        break;
+                    };
+                    debug!(
+                        target = "tauri_setup",
+                        message = "Waiting for page init load to finish"
+                    );
+                    sleep(sleep_time);
+                }
+
                 debug!(target = "tauri_setup", message = "Close loading screen");
                 loadingscreen_window.close().unwrap();
                 debug!(target = "tauri_setup", message = "Show main window");
@@ -123,7 +142,12 @@ fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
-            log_debug, log_error, log_info, log_trace, log_warn
+            finished_init_load,
+            log_debug,
+            log_error,
+            log_info,
+            log_trace,
+            log_warn
         ])
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
