@@ -1,6 +1,6 @@
 use std::env;
 
-use crate::PROJECT_DIRS;
+use crate::{NAME, PROJECT_DIRS};
 
 /// Try to create a logging directory path.
 ///
@@ -29,6 +29,8 @@ pub fn get_logging_dir_path() -> Option<String> {
             );
             None
         }
-        Ok(current_dir) => Some(String::from(current_dir.join("logs").to_str()?)),
+        Ok(current_dir) => Some(String::from(
+            current_dir.join(format!("{}_logs", NAME)).to_str()?,
+        )),
     }
 }
