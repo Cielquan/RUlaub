@@ -86,9 +86,9 @@ fn main() {
             let app_handle = app.handle();
             let main_window_ = main_window.clone();
             tauri::async_runtime::spawn(async move {
-                // debug!(target = "tauri_setup", message = "Start app init");
+                debug!(target = "tauri_setup", message = "Start app init");
 
-                // debug!(target = "tauri_setup", message = "Finish app init");
+                debug!(target = "tauri_setup", message = "Finish app init");
 
                 let page_init_state = app_handle.state::<PageInitState>();
                 let sleep_time = Duration::from_millis(1000);
@@ -108,6 +108,10 @@ fn main() {
                 debug!(target = "tauri_setup", message = "Show main window");
                 main_window_.show().unwrap();
 
+                trace!(
+                    target = "tauri_setup",
+                    message = "Emit config setup error event if any"
+                );
                 let setup_config_err_state = app_handle.state::<ConfigSetupErrState>();
                 match *setup_config_err_state.0.lock() {
                     ConfigSetupErr::None => {}
