@@ -22,9 +22,7 @@ use rulaub_backend::config::setup::{setup_config, ConfigSetupErr};
 use rulaub_backend::config::DEFAULT_CONFIG;
 use rulaub_backend::logging::tracer::setup_tracer;
 use rulaub_backend::menu::get_menu;
-use rulaub_backend::state::{
-    ConfigFileLoaded, ConfigFileLoadedState, ConfigState, PageInit, PageInitState,
-};
+use rulaub_backend::state::{ConfigSetupErrState, ConfigState, PageInit, PageInitState};
 use rulaub_backend::NAME;
 
 fn main() {
@@ -52,16 +50,15 @@ fn main() {
                 )
             },
         )
-        .manage(PageInitState(Mutex::new(PageInit::LOADING)))
-        .manage(ConfigFileLoadedState(Mutex::new(ConfigFileLoaded::FALSE)))
+        .manage(ConfigSetupErrState(Mutex::new(ConfigSetupErr::None)))
         .manage(ConfigState(Mutex::new(DEFAULT_CONFIG.clone())))
+        .manage(PageInitState(Mutex::new(PageInit::LOADING)))
         .setup(move |app| {
             debug!(target = "tauri_setup", message = "Start app setup");
             let loadingscreen_window = app.get_window("loadingscreen").unwrap();
             let main_window = app.get_window("main").unwrap();
 
             debug!(target = "tauri_setup", message = "Setup config");
-            let mut setup_config_err = ConfigSetupErr::None;
             match setup_config() {
                 Ok(conf) => {
                     debug!(
@@ -78,15 +75,11 @@ fn main() {
                         level = ?log_level
                     );
                     reloader_(log_level);
-
-                    trace!(
-                        target = "tauri_setup",
-                        message = "Set config file loaded: true"
-                    );
-                    let config_file_state = app.state::<ConfigFileLoadedState>();
-                    *config_file_state.0.lock() = ConfigFileLoaded::TRUE;
                 }
-                Err(err) => setup_config_err = err,
+                Err(err) => {
+                    let setup_config_err_state = app.state::<ConfigSetupErrState>();
+                    *setup_config_err_state.0.lock() = err;
+                }
             }
 
             trace!(target = "tauri_setup", message = "Spawn task for app init");
@@ -115,18 +108,29 @@ fn main() {
                 debug!(target = "tauri_setup", message = "Show main window");
                 main_window_.show().unwrap();
 
-                if setup_config_err != ConfigSetupErr::None {
-                    match setup_config_err {
-                        ConfigSetupErr::WriteErr => {
-                            main_window_.emit("error-config-file-write", {}).unwrap();
-                        }
-                        ConfigSetupErr::ReadErr => {
-                            main_window_.emit("error-config-file-read", {}).unwrap();
-                        }
-                        ConfigSetupErr::NoFileErr => {
-                            main_window_.emit("error-config-file-none", {}).unwrap();
-                        }
-                        _ => {}
+                let setup_config_err_state = app_handle.state::<ConfigSetupErrState>();
+                match *setup_config_err_state.0.lock() {
+                    ConfigSetupErr::None => {}
+                    ConfigSetupErr::WriteErr => {
+                        trace!(
+                            target = "emit_event",
+                            message = "Emit event 'error-config-file-write'"
+                        );
+                        main_window_.emit("error-config-file-write", {}).unwrap();
+                    }
+                    ConfigSetupErr::ReadErr => {
+                        trace!(
+                            target = "emit_event",
+                            message = "Emit event 'error-config-file-read'"
+                        );
+                        main_window_.emit("error-config-file-read", {}).unwrap();
+                    }
+                    ConfigSetupErr::NoFileErr => {
+                        trace!(
+                            target = "emit_event",
+                            message = "Emit event 'error-config-file-none'"
+                        );
+                        main_window_.emit("error-config-file-none", {}).unwrap();
                     }
                 };
             });
