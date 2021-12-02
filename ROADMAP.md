@@ -4,6 +4,7 @@
 
 - Impl event listeners on BE errors:
   error-config-file-write
+  error-config-file-read
 
 - Use tauri's state for data
 

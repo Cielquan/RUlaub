@@ -50,11 +50,18 @@ pub fn setup_config(main_window: &Window) -> Option<Config> {
     if Path::new(conf_file_path).is_file() {
         match load_config_file() {
             Ok(config) => return Some(config),
-            Err(err) => error!(
-                target = "config",
-                message = "Failed to load configuration from file",
-                error = ?err
-            ),
+            Err(err) => {
+                error!(
+                    target = "config",
+                    message = "Failed to load configuration from file",
+                    error = ?err
+                );
+                trace!(
+                    target = "emit_event",
+                    message = "Emit event 'error-config-file-read'"
+                );
+                main_window.emit("error-config-file-read", {}).unwrap();
+            }
         }
     } else {
         error!(target = "config", message = "No conf file to load");
