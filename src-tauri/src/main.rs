@@ -101,7 +101,7 @@ fn main() {
                 let page_init_state = app_handle.state::<PageInitState>();
                 let sleep_time = Duration::from_millis(1000);
                 loop {
-                    if let PageInit::DONE = *page_init_state.0.lock() {
+                    if *page_init_state.0.lock() == PageInit::DONE {
                         break;
                     };
                     debug!(
