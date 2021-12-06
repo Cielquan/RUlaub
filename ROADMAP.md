@@ -87,6 +87,8 @@
 
 - Add auto DL for SchoolHoli if link
 
+- Fix autoscroll to today if current year
+
 - **BETA**
 
 - FE | Add snackbars with Info of success/failures

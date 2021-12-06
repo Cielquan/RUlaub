@@ -4,11 +4,9 @@ import React, { ReactElement, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import AutoSizer from "react-virtualized-auto-sizer";
 
-import { useMountDelayOrUpdateEffect } from "../hooks";
 import { State } from "../state";
-import { STYLE_CONST } from "../styles";
 import createTheme from "../theme";
-import { getDaysForDate, isLeapYear } from "../utils/dateUtils";
+import { isLeapYear } from "../utils/dateUtils";
 
 import CalendarBody from "./CalendarBody";
 import CalendarColumnLabelsDay from "./CalendarColumnLabelsDay";
@@ -35,21 +33,22 @@ const Calendar = (): ReactElement => {
     setScrollY(e.scrollTop);
   }, []);
 
-  useMountDelayOrUpdateEffect(
-    () => {
-      if (today.getFullYear() !== year && configState.settings.yearChangeScrollBegin) {
-        setScrollX(0);
-      } else {
-        const days = getDaysForDate(today);
-        setScrollX(
-          (days - (configState.settings.todayAutoscrollLeftOffset + 1)) *
-            STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL
-        );
-      }
-    },
-    0,
-    [year]
-  );
+  // FIXME:#i# Fix bug "Max update deptch exceeded"
+  // useMountDelayOrUpdateEffect(
+  //   () => {
+  //     if (today.getFullYear() !== year && configState.settings.yearChangeScrollBegin) {
+  //       setScrollX(0);
+  //     } else {
+  //       const days = getDaysForDate(today);
+  //       setScrollX(
+  //         (days - (configState.settings.todayAutoscrollLeftOffset + 1)) *
+  //           STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL
+  //       );
+  //     }
+  //   },
+  //   0,
+  //   [year]
+  // );
 
   if (year === undefined) {
     return <CalendarStartPage />;
