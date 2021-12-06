@@ -19,6 +19,10 @@ use tauri::{Event, Manager, WindowBuilder};
 
 use rulaub_backend::commands::init::finished_init_load;
 use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trace, log_warn};
+use rulaub_backend::commands::state::{
+    get_config_state, get_public_holidays_state, get_school_holidays_state, get_user_row_map_state,
+    get_users_state, get_vacation_types_state,
+};
 use rulaub_backend::config::setup::{setup_config, ConfigSetupErr};
 use rulaub_backend::config::DEFAULT_CONFIG;
 use rulaub_backend::logging::tracer::setup_tracer;
@@ -185,6 +189,12 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             finished_init_load,
+            get_config_state,
+            get_public_holidays_state,
+            get_school_holidays_state,
+            get_user_row_map_state,
+            get_users_state,
+            get_vacation_types_state,
             log_debug,
             log_error,
             log_info,

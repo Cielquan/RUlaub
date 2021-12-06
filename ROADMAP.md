@@ -1,7 +1,5 @@
 ## Roadmap
 
-- Add commands to access state
-
 - Add commands to modify state
 
   - change theme
