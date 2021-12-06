@@ -1,3 +1,4 @@
+//! Commands to log messages from the frontend via the app's tracer
 #[tauri::command]
 pub fn log_error(target: String, message: String, location: String) {
     let frontend_target = format!("frontend__{}", target);

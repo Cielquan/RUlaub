@@ -1,3 +1,4 @@
+//! Commands used while the programm's init
 use crate::state::status_states::PageInit;
 use crate::state::PageInitState;
 

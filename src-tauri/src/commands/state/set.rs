@@ -1,3 +1,4 @@
+//! Commands to set data from the state managed by tauri from the frontend
 use crate::config::Config;
 use crate::state::public_holidays::PublicHolidays;
 use crate::state::school_holidays::SchoolHolidays;
