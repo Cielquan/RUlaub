@@ -13,15 +13,29 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/AboutPage.tsx:68
+#: src/backendAPI/eventListeners/errors.tsx:24
+msgid ""
+"Failed to create config file. Changes to config cannot be saved.\n"
+"Falling back to default config."
+msgstr "Fehler beim Erstellen der Config Datei. Änderungen können nicht gespeichert werden. Standard Config wird verwendet."
+
+#: src/backendAPI/eventListeners/errors.tsx:36
+msgid "Failed to read from config file. Falling back to default config."
+msgstr "Fehler beim Lesen der Config Datei. Standard Config wird verwendet."
+
+#: src/backendAPI/eventListeners/errors.tsx:46
+msgid "No config file found. Falling back to default config."
+msgstr "Keine Config Datei gefunden. Standard Config wird verwendet."
+
+#: src/components/AboutPage.tsx:69
 msgid "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
 msgstr "RUlaub ist frei wählbar unter der 'Apache License 2.0' oder 'MIT License' lizensiert."
 
-#: src/components/AboutPage.tsx:74
+#: src/components/AboutPage.tsx:75
 msgid "For the Source Code, Documentation and copies of the License files please see the github repository at: {ghLink}."
 msgstr "Quellcode, Dokumentation und Kopien der Lizenzen sind im Github Repository zu finden: {ghLink}."
 
-#: src/components/AboutPage.tsx:90
+#: src/components/AboutPage.tsx:92
 msgid "Close"
 msgstr "Schließen"
 
@@ -46,7 +60,7 @@ msgid "Add new Holiday"
 msgstr "Neuen Urlaub hinzufügen"
 
 #: src/components/PublicHolidaysDialog.tsx:154
-#: src/components/SideMenu.tsx:88
+#: src/components/SideMenu.tsx:104
 msgid "Public Holidays"
 msgstr "Feiertage"
 
@@ -179,7 +193,7 @@ msgid "Edit entry"
 msgstr "Eintrag ändern"
 
 #: src/components/SchoolHolidaysDialog.tsx:167
-#: src/components/SideMenu.tsx:92
+#: src/components/SideMenu.tsx:109
 msgid "School Holidays"
 msgstr "Ferien"
 
@@ -222,7 +236,7 @@ msgid "End Date"
 msgstr "Enddatum"
 
 #: src/components/SettingsDialog.tsx:91
-#: src/components/SideMenu.tsx:134
+#: src/components/SideMenu.tsx:154
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -250,42 +264,42 @@ msgstr "Nur positive Nummern sind erlaubt."
 msgid "On year switch, scroll to beginning of the year, if not current year."
 msgstr "Scoll zum Jahrsstart beim Jahreswechsel, wenn es nicht das aktuelle Jahr ist."
 
-#: src/components/SideMenu.tsx:79
+#: src/components/SideMenu.tsx:94
 msgid "Database"
 msgstr "Datenbank"
 
-#: src/components/SideMenu.tsx:80
+#: src/components/SideMenu.tsx:95
 msgid "Select"
 msgstr "Auswählen"
 
-#: src/components/SideMenu.tsx:81
-#: src/components/SideMenu.tsx:102
+#: src/components/SideMenu.tsx:96
+#: src/components/SideMenu.tsx:122
 msgid "Create"
 msgstr "Erstellen"
 
-#: src/components/SideMenu.tsx:84
+#: src/components/SideMenu.tsx:99
 #: src/components/UsersDialog.tsx:137
 msgid "Users"
 msgstr "Benutzer"
 
-#: src/components/SideMenu.tsx:85
-#: src/components/SideMenu.tsx:89
-#: src/components/SideMenu.tsx:93
-#: src/components/SideMenu.tsx:97
 #: src/components/SideMenu.tsx:101
+#: src/components/SideMenu.tsx:106
+#: src/components/SideMenu.tsx:111
+#: src/components/SideMenu.tsx:116
+#: src/components/SideMenu.tsx:121
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: src/components/SideMenu.tsx:96
+#: src/components/SideMenu.tsx:114
 #: src/components/VacationTypesDialog.tsx:134
 msgid "Vacation Types"
 msgstr "Urlaubsarten"
 
-#: src/components/SideMenu.tsx:100
+#: src/components/SideMenu.tsx:119
 msgid "Vacation"
 msgstr "Urlaub"
 
-#: src/components/SideMenu.tsx:141
+#: src/components/SideMenu.tsx:161
 msgid "About"
 msgstr "Über"
 
