@@ -1,10 +1,5 @@
 ## Roadmap
 
-- Use tauri's state for data
-
-  - users + vacation
-  - calendar row user mapping
-
 - Add commands to access state
 
 - Add commands to modify state
@@ -12,6 +7,8 @@
   - change theme
   - change locale
   - DB selection / creation
+
+- Add functions to fill state
 
 - Add tauri command for config update
   on change in UI overwrite file & set current config back on CMD
