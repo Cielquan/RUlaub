@@ -7,13 +7,13 @@ import React, { ReactElement, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import setupMenuEventListeners from "./backendAPI/eventListeners/menu";
 import i18n, { localeMap } from "./i18n";
+import { useMountEffect } from "./hooks";
 import { actionCreators, State } from "./state";
 import createTheme from "./theme";
 
 import App from "./App";
-import { useMountEffect } from "./hooks";
-import setupEventListeners from "./backendAPI/eventListener";
 
 const ProviderWrapper = (): ReactElement => {
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ const ProviderWrapper = (): ReactElement => {
     loadSchoolHolidaysData();
     loadUsersData();
     loadVacationTypesData();
-    setupEventListeners(dispatch);
+    setupMenuEventListeners(dispatch);
   });
 
   return (

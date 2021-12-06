@@ -2,9 +2,9 @@ import { WebviewWindow } from "@tauri-apps/api/window";
 
 import { bindActionCreators, Dispatch } from "redux";
 
-import { actionCreators } from "../state";
+import { actionCreators } from "../../state";
 
-const setupEventListeners = async (dispatch: Dispatch): Promise<void> => {
+const setupMenuEventListeners = async (dispatch: Dispatch): Promise<void> => {
   const webview = new WebviewWindow("main");
 
   await webview.listen("menu-clicked-lang-en", () => {
@@ -64,4 +64,4 @@ const setupEventListeners = async (dispatch: Dispatch): Promise<void> => {
   });
 };
 
-export default setupEventListeners;
+export default setupMenuEventListeners;
