@@ -21,7 +21,8 @@ use rulaub_backend::commands::init::finished_init_load;
 use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trace, log_warn};
 use rulaub_backend::commands::state::{
     get_config_state, get_public_holidays_state, get_school_holidays_state, get_user_row_map_state,
-    get_users_state, get_vacation_types_state,
+    get_users_state, get_vacation_types_state, set_config_state, set_public_holidays_state,
+    set_school_holidays_state, set_user_row_map_state, set_users_state, set_vacation_types_state,
 };
 use rulaub_backend::config::setup::{setup_config, ConfigSetupErr};
 use rulaub_backend::config::DEFAULT_CONFIG;
@@ -189,17 +190,30 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             finished_init_load,
-            get_config_state,
-            get_public_holidays_state,
-            get_school_holidays_state,
-            get_user_row_map_state,
-            get_users_state,
-            get_vacation_types_state,
+            //
             log_debug,
             log_error,
             log_info,
             log_trace,
-            log_warn
+            log_warn,
+            //
+            get_config_state,
+            set_config_state,
+            //
+            get_public_holidays_state,
+            set_public_holidays_state,
+            //
+            get_school_holidays_state,
+            set_school_holidays_state,
+            //
+            get_user_row_map_state,
+            set_user_row_map_state,
+            //
+            get_users_state,
+            set_users_state,
+            //
+            get_vacation_types_state,
+            set_vacation_types_state
         ])
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
