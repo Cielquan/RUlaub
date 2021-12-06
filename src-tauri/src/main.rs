@@ -26,7 +26,7 @@ use rulaub_backend::menu::get_menu;
 use rulaub_backend::state::status_states::PageInit;
 use rulaub_backend::state::{
     ConfigSetupErrState, ConfigState, PageInitState, PublicHolidaysState, SchoolHolidaysState,
-    UserRowMapState, VacationTypesState,
+    UserRowMapState, UsersState, VacationTypesState,
 };
 use rulaub_backend::NAME;
 
@@ -61,6 +61,7 @@ fn main() {
         .manage(PublicHolidaysState(Mutex::new(HashMap::new())))
         .manage(SchoolHolidaysState(Mutex::new(HashMap::new())))
         .manage(UserRowMapState(Mutex::new(HashMap::new())))
+        .manage(UsersState(Mutex::new(HashMap::new())))
         .manage(VacationTypesState(Mutex::new(HashMap::new())))
         .setup(move |app| {
             debug!(target = "tauri_setup", message = "Start app setup");
