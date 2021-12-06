@@ -4,46 +4,21 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import * as locales from "@mui/material/locale";
 import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
 import { SnackbarProvider } from "notistack";
-import React, { ReactElement, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
+import React, { ReactElement } from "react";
+import { useSelector } from "react-redux";
 
-import setupMenuEventListeners from "./backendAPI/eventListeners/menu";
 import i18n, { localeMap } from "./i18n";
-import { useMountEffect } from "./hooks";
-import { actionCreators, State } from "./state";
+import { State } from "./state";
 import createTheme from "./theme";
 
-import App from "./App";
+import SetupWrapper from "./SetupWrapper";
 
 const ProviderWrapper = (): ReactElement => {
-  const dispatch = useDispatch();
-  const {
-    loadConfig,
-    loadPublicHolidaysData,
-    loadSchoolHolidaysData,
-    loadUsersData,
-    loadVacationTypesData,
-  } = bindActionCreators(actionCreators, dispatch);
-
   const configState = useSelector((state: State) => state.config);
   const themeState = configState.settings.theme;
   const langState = configState.settings.language;
 
   const theme = createTheme(themeState, locales[langState.importName]);
-
-  useEffect(() => {
-    i18n.activate(langState.locale);
-  }, [langState.locale]);
-
-  useMountEffect(() => {
-    loadConfig();
-    loadPublicHolidaysData();
-    loadSchoolHolidaysData();
-    loadUsersData();
-    loadVacationTypesData();
-    setupMenuEventListeners(dispatch);
-  });
 
   return (
     <LocalizationProvider
@@ -53,8 +28,8 @@ const ProviderWrapper = (): ReactElement => {
       <I18nProvider i18n={i18n}>
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={theme}>
-            <SnackbarProvider maxSnack={3}>
-              <App />
+            <SnackbarProvider maxSnack={3} preventDuplicate>
+              <SetupWrapper />
             </SnackbarProvider>
           </ThemeProvider>
         </StyledEngineProvider>
