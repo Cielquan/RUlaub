@@ -2,6 +2,7 @@ use std::collections::HashMap;
 
 pub type VacationTypes = HashMap<i32, VacationType>;
 
+#[derive(Debug, Clone, Serialize)]
 pub struct VacationType {
     pub name: String,
     pub charge: bool,

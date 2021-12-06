@@ -4,6 +4,7 @@ use super::util::DateData;
 
 pub type Users = HashMap<i32, User>;
 
+#[derive(Debug, Clone, Serialize)]
 pub struct User {
     pub name: String,
     pub workdays: Workdays,
@@ -12,6 +13,7 @@ pub struct User {
     pub calc: Calc,
 }
 
+#[derive(Debug, Clone, Serialize)]
 pub struct Workdays {
     pub monday: bool,
     pub tuesday: bool,
@@ -24,17 +26,20 @@ pub struct Workdays {
 
 pub type Vacations = HashMap<i32, Vacation>;
 
+#[derive(Debug, Clone, Serialize)]
 pub struct Vacation {
     pub type_id: i32,
     pub start: DateData,
     pub end: DateData,
 }
 
+#[derive(Debug, Clone, Serialize)]
 pub struct Calc {
     pub taken_vacation_days: i32,
     pub vacation_stats: Vec<VacationStat>,
 }
 
+#[derive(Debug, Clone, Serialize)]
 pub struct VacationStat {
     pub type_id: i32,
     pub count: i32,
