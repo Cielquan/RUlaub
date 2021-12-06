@@ -118,23 +118,29 @@ fn main() {
                     ConfigSetupErr::WriteErr => {
                         trace!(
                             target = "emit_event",
-                            message = "Emit event 'error-config-file-write'"
+                            message = "Emit event 'error-config-file-init-write'"
                         );
-                        main_window_.emit("error-config-file-write", {}).unwrap();
+                        main_window_
+                            .emit("error-config-file-init-write", {})
+                            .unwrap();
                     }
                     ConfigSetupErr::ReadErr => {
                         trace!(
                             target = "emit_event",
-                            message = "Emit event 'error-config-file-read'"
+                            message = "Emit event 'error-config-file-init-read'"
                         );
-                        main_window_.emit("error-config-file-read", {}).unwrap();
+                        main_window_
+                            .emit("error-config-file-init-read", {})
+                            .unwrap();
                     }
                     ConfigSetupErr::NoFileErr => {
                         trace!(
                             target = "emit_event",
-                            message = "Emit event 'error-config-file-none'"
+                            message = "Emit event 'error-config-file-init-none'"
                         );
-                        main_window_.emit("error-config-file-none", {}).unwrap();
+                        main_window_
+                            .emit("error-config-file-init-none", {})
+                            .unwrap();
                     }
                 };
             });
