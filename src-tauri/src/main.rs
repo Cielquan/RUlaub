@@ -9,6 +9,7 @@ extern crate tracing;
 #[macro_use]
 extern crate rulaub_backend;
 
+use std::collections::HashMap;
 use std::sync::Arc;
 use std::thread::sleep;
 use std::time::Duration;
@@ -25,7 +26,7 @@ use rulaub_backend::menu::get_menu;
 use rulaub_backend::state::status_states::PageInit;
 use rulaub_backend::state::{
     ConfigSetupErrState, ConfigState, PageInitState, PublicHolidaysState, SchoolHolidaysState,
-    VacationTypesState,
+    UserRowMapState, VacationTypesState,
 };
 use rulaub_backend::NAME;
 
@@ -59,6 +60,7 @@ fn main() {
         .manage(PageInitState(Mutex::new(PageInit::LOADING)))
         .manage(PublicHolidaysState(Mutex::new(vec![])))
         .manage(SchoolHolidaysState(Mutex::new(vec![])))
+        .manage(UserRowMapState(Mutex::new(HashMap::new())))
         .manage(VacationTypesState(Mutex::new(vec![])))
         .setup(move |app| {
             debug!(target = "tauri_setup", message = "Start app setup");
