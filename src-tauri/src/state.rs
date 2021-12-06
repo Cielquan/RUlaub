@@ -1,19 +1,10 @@
+pub mod status_states;
+
 use parking_lot::Mutex;
 
 use crate::config::setup::ConfigSetupErr;
 use crate::config::Config;
-
-#[derive(PartialEq)]
-pub enum ConfigFileLoaded {
-    TRUE,
-    FALSE,
-}
-
-#[derive(PartialEq)]
-pub enum PageInit {
-    LOADING,
-    DONE,
-}
+use status_states::PageInit;
 
 pub struct ConfigSetupErrState(pub Mutex<ConfigSetupErr>);
 pub struct ConfigState(pub Mutex<Config>);

@@ -22,7 +22,8 @@ use rulaub_backend::config::setup::{setup_config, ConfigSetupErr};
 use rulaub_backend::config::DEFAULT_CONFIG;
 use rulaub_backend::logging::tracer::setup_tracer;
 use rulaub_backend::menu::get_menu;
-use rulaub_backend::state::{ConfigSetupErrState, ConfigState, PageInit, PageInitState};
+use rulaub_backend::state::status_states::PageInit;
+use rulaub_backend::state::{ConfigSetupErrState, ConfigState, PageInitState};
 use rulaub_backend::NAME;
 
 fn main() {

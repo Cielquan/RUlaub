@@ -1,4 +1,5 @@
-use crate::state::{PageInit, PageInitState};
+use crate::state::status_states::PageInit;
+use crate::state::PageInitState;
 
 #[tauri::command]
 pub fn finished_init_load(page_init_state: tauri::State<PageInitState>) {
