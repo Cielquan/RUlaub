@@ -3,11 +3,7 @@
 - Use tauri's state for data
 
   - users + vacation
-  - vacTypes
-  - school holi
-  - pub holi
   - calendar row user mapping
-  - config
 
 - Add commands to access state
 
