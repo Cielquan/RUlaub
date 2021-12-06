@@ -58,10 +58,10 @@ fn main() {
         .manage(ConfigSetupErrState(Mutex::new(ConfigSetupErr::None)))
         .manage(ConfigState(Mutex::new(DEFAULT_CONFIG.clone())))
         .manage(PageInitState(Mutex::new(PageInit::LOADING)))
-        .manage(PublicHolidaysState(Mutex::new(vec![])))
-        .manage(SchoolHolidaysState(Mutex::new(vec![])))
+        .manage(PublicHolidaysState(Mutex::new(HashMap::new())))
+        .manage(SchoolHolidaysState(Mutex::new(HashMap::new())))
         .manage(UserRowMapState(Mutex::new(HashMap::new())))
-        .manage(VacationTypesState(Mutex::new(vec![])))
+        .manage(VacationTypesState(Mutex::new(HashMap::new())))
         .setup(move |app| {
             debug!(target = "tauri_setup", message = "Start app setup");
             let loadingscreen_window = app.get_window("loadingscreen").unwrap();
