@@ -3,6 +3,7 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import * as locales from "@mui/material/locale";
 import { ThemeProvider, StyledEngineProvider } from "@mui/material/styles";
+import { SnackbarProvider } from "notistack";
 import React, { ReactElement, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -52,7 +53,9 @@ const ProviderWrapper = (): ReactElement => {
       <I18nProvider i18n={i18n}>
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={theme}>
-            <App />
+            <SnackbarProvider maxSnack={3}>
+              <App />
+            </SnackbarProvider>
           </ThemeProvider>
         </StyledEngineProvider>
       </I18nProvider>
