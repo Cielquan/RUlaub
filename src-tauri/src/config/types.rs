@@ -1,4 +1,4 @@
-use crate::util::enum_serde::EnumStringConverter;
+use crate::util::enum_serde::StringEnum;
 
 /// The user specific part of the confiuration.
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -31,7 +31,7 @@ pub enum Language {
     EN,
 }
 
-impl EnumStringConverter for Language {
+impl StringEnum for Language {
     fn new(value: &str) -> Self {
         match value {
             "de-DE" => Language::DE,
@@ -57,7 +57,7 @@ pub enum LogLevel {
     ERROR,
 }
 
-impl EnumStringConverter for LogLevel {
+impl StringEnum for LogLevel {
     fn new(value: &str) -> Self {
         match value {
             "trace" => LogLevel::TRACE,
@@ -86,7 +86,7 @@ pub enum Theme {
     LIGHT,
 }
 
-impl EnumStringConverter for Theme {
+impl StringEnum for Theme {
     fn new(value: &str) -> Self {
         match value {
             "dark" => Theme::DARK,
