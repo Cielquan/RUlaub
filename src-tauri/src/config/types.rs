@@ -51,6 +51,23 @@ pub struct ConfigFile {
     pub settings: SettingsConfigFile,
 }
 
+impl ConfigFile {
+    pub fn from_config(config: Config) -> Self {
+        ConfigFile {
+            user: config.user.clone(),
+            settings: SettingsConfigFile {
+                database_uri: config.settings.database_uri,
+                language: Language::from_languagedata(config.settings.language),
+                log_level: config.settings.log_level,
+                theme: config.settings.theme,
+                today_autoscroll_left_offset: config.settings.today_autoscroll_left_offset,
+                year_change_scroll_begin: config.settings.year_change_scroll_begin,
+                year_to_show: config.settings.year_to_show,
+            },
+        }
+    }
+}
+
 /// The application specific part of the confiuration from the file.
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct SettingsConfigFile {

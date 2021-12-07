@@ -38,6 +38,16 @@ pub enum Language {
     EN,
 }
 
+impl Language {
+    pub fn from_languagedata(language_data: LanguageData) -> Self {
+        match &language_data.locale[..] {
+            "de-DE" => Language::DE,
+            "en-US" => Language::EN,
+            _ => Language::DE,
+        }
+    }
+}
+
 impl StringEnum for Language {
     fn new(value: &str) -> Self {
         match value {
