@@ -33,7 +33,7 @@ pub trait StringEnum {
     fn to_string(&self) -> String;
 }
 
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub enum Language {
     DE,
     EN,
@@ -53,6 +53,12 @@ impl StringEnum for Language {
             Language::DE => "de-DE".to_string(),
             Language::EN => "en-US".to_string(),
         }
+    }
+}
+
+impl fmt::Debug for Language {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.to_string())
     }
 }
 
@@ -97,7 +103,7 @@ impl<'de> Visitor<'de> for LanguageStringVisitor
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub enum LogLevel {
     TRACE,
     DEBUG,
@@ -126,6 +132,12 @@ impl StringEnum for LogLevel {
             LogLevel::WARN => "warn".to_string(),
             LogLevel::ERROR => "error".to_string(),
         }
+    }
+}
+
+impl fmt::Debug for LogLevel {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.to_string())
     }
 }
 
@@ -170,7 +182,7 @@ impl<'de> Visitor<'de> for LogLevelStringVisitor
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Clone)]
 pub enum Theme {
     DARK,
     LIGHT,
@@ -190,6 +202,12 @@ impl StringEnum for Theme {
             Theme::DARK => "dark".to_string(),
             Theme::LIGHT => "light".to_string(),
         }
+    }
+}
+
+impl fmt::Debug for Theme {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.to_string())
     }
 }
 
