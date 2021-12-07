@@ -1,6 +1,6 @@
 use super::Config;
 
-/// Parse toml string into [`Config`] struct.
+/// Parse toml string into [`ConfigFile`] struct. Then transform it into [`Config`] struct.
 pub fn parse_toml_str_to_config(toml_str: &str) -> anyhow::Result<Config> {
     debug!(
         target = "config",
@@ -10,11 +10,11 @@ pub fn parse_toml_str_to_config(toml_str: &str) -> anyhow::Result<Config> {
         Err(err) => {
             error!(
                 target = "config",
-                message = "Failed to parse toml string into Config struct",
+                message = "Failed to parse toml string into ConfigFile struct",
                 error = ?err
             );
             return Err(err.into());
         }
-        Ok(conf) => Ok(conf),
+        Ok(conf) => Ok(Config::from_configfile(conf)),
     }
 }

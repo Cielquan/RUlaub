@@ -23,7 +23,9 @@ settings.year_change_scroll_begin = true
 lazy_static! {
     /// The default configuration for RUlaub.
     #[derive(Debug)]
-    pub static ref DEFAULT_CONFIG: Config = toml::from_str(DEFAULT_CONFIG_TOML_STR).unwrap();
+    pub static ref DEFAULT_CONFIG: Config = Config::from_configfile(
+        toml::from_str(DEFAULT_CONFIG_TOML_STR).unwrap()
+    );
 
     /// The default configuration for RUlaub as a nicer formatted TOML string.
     pub static ref DEFAULT_CONFIG_TOML_NICE_STR: String = toml::to_string::<Config>(&DEFAULT_CONFIG).unwrap();
