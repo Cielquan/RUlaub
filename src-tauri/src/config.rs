@@ -1,6 +1,6 @@
-mod file;
-mod language;
-mod log_level;
+pub mod file;
+pub mod language;
+pub mod log_level;
 pub mod setup;
 pub mod theme;
 pub mod types;
