@@ -1,4 +1,4 @@
 pub trait EnumStringConverter {
+    fn new(value: &str) -> Self;
     fn to_string(&self) -> String;
-    fn to_enum(value: &str) -> Self;
 }

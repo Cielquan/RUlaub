@@ -32,18 +32,18 @@ pub enum Language {
 }
 
 impl EnumStringConverter for Language {
-    fn to_string(&self) -> String {
-        match *self {
-            Language::DE => "de-DE".to_string(),
-            Language::EN => "en-US".to_string(),
-        }
-    }
-
-    fn to_enum(value: &str) -> Self {
+    fn new(value: &str) -> Self {
         match value {
             "de-DE" => Language::DE,
             "en-US" => Language::EN,
             _ => Language::DE,
+        }
+    }
+
+    fn to_string(&self) -> String {
+        match *self {
+            Language::DE => "de-DE".to_string(),
+            Language::EN => "en-US".to_string(),
         }
     }
 }
@@ -58,17 +58,7 @@ pub enum LogLevel {
 }
 
 impl EnumStringConverter for LogLevel {
-    fn to_string(&self) -> String {
-        match *self {
-            LogLevel::TRACE => "trace".to_string(),
-            LogLevel::DEBUG => "debug".to_string(),
-            LogLevel::INFO => "info".to_string(),
-            LogLevel::WARN => "warn".to_string(),
-            LogLevel::ERROR => "error".to_string(),
-        }
-    }
-
-    fn to_enum(value: &str) -> Self {
+    fn new(value: &str) -> Self {
         match value {
             "trace" => LogLevel::TRACE,
             "debug" => LogLevel::DEBUG,
@@ -76,6 +66,16 @@ impl EnumStringConverter for LogLevel {
             "warn" => LogLevel::WARN,
             "error" => LogLevel::ERROR,
             _ => LogLevel::INFO,
+        }
+    }
+
+    fn to_string(&self) -> String {
+        match *self {
+            LogLevel::TRACE => "trace".to_string(),
+            LogLevel::DEBUG => "debug".to_string(),
+            LogLevel::INFO => "info".to_string(),
+            LogLevel::WARN => "warn".to_string(),
+            LogLevel::ERROR => "error".to_string(),
         }
     }
 }
@@ -87,18 +87,18 @@ pub enum Theme {
 }
 
 impl EnumStringConverter for Theme {
-    fn to_string(&self) -> String {
-        match *self {
-            Theme::DARK => "dark".to_string(),
-            Theme::LIGHT => "light".to_string(),
-        }
-    }
-
-    fn to_enum(value: &str) -> Self {
+    fn new(value: &str) -> Self {
         match value {
             "dark" => Theme::DARK,
             "light" => Theme::LIGHT,
             _ => Theme::DARK,
+        }
+    }
+
+    fn to_string(&self) -> String {
+        match *self {
+            Theme::DARK => "dark".to_string(),
+            Theme::LIGHT => "light".to_string(),
         }
     }
 }
