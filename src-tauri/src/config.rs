@@ -8,6 +8,7 @@ mod util;
 
 use self::file::get_conf_file_path;
 pub use self::types::Config;
+use self::types::ConfigFile;
 
 // NOTE: Change defaults also in frontend initial State
 /// Default configuration of RUlaub as TOML string.
@@ -24,11 +25,13 @@ lazy_static! {
     /// The default configuration for RUlaub.
     #[derive(Debug)]
     pub static ref DEFAULT_CONFIG: Config = Config::from_configfile(
-        toml::from_str(DEFAULT_CONFIG_TOML_STR).unwrap()
+        toml::from_str::<ConfigFile>(DEFAULT_CONFIG_TOML_STR).unwrap()
     );
 
     /// The default configuration for RUlaub as a nicer formatted TOML string.
-    pub static ref DEFAULT_CONFIG_TOML_NICE_STR: String = toml::to_string::<Config>(&DEFAULT_CONFIG).unwrap();
+    pub static ref DEFAULT_CONFIG_TOML_NICE_STR: String = toml::to_string::<ConfigFile>(
+        &ConfigFile::from_config(DEFAULT_CONFIG.clone())
+    ).unwrap();
 
     /// The stringifyed path to the configuration file.
     ///
