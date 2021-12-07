@@ -1,4 +1,4 @@
-use super::language::Language;
+use super::language::{Language, LanguageData};
 use super::log_level::LogLevel;
 use super::theme::Theme;
 
@@ -15,7 +15,7 @@ impl Config {
             user: config_file.user.clone(),
             settings: Settings {
                 database_uri: config_file.settings.database_uri,
-                language: config_file.settings.language,
+                language: LanguageData::new(config_file.settings.language),
                 log_level: config_file.settings.log_level,
                 theme: config_file.settings.theme,
                 today_autoscroll_left_offset: config_file.settings.today_autoscroll_left_offset,
@@ -36,7 +36,7 @@ pub struct User {
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Settings {
     pub database_uri: Option<String>,
-    pub language: Language,
+    pub language: LanguageData,
     pub log_level: LogLevel,
     pub theme: Theme,
     pub today_autoscroll_left_offset: i32,

@@ -5,6 +5,33 @@ use serde::{Deserialize, Serialize};
 
 use super::types::StringEnum;
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct LanguageData {
+    pub name: String,
+    pub locale: String,
+    pub import_name: String,
+    pub date_mask: String,
+}
+
+impl LanguageData {
+    pub fn new(language: Language) -> Self {
+        match language {
+            Language::DE => LanguageData {
+                name: "Deutsch".to_string(),
+                locale: Language::DE.to_string(),
+                import_name: "deDE".to_string(),
+                date_mask: "__.__.____".to_string(),
+            },
+            Language::EN => LanguageData {
+                name: "English".to_string(),
+                locale: Language::EN.to_string(),
+                import_name: "enUS".to_string(),
+                date_mask: "__/__/____".to_string(),
+            },
+        }
+    }
+}
+
 #[derive(Clone)]
 pub enum Language {
     DE,
