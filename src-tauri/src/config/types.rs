@@ -1,7 +1,7 @@
 use std::fmt;
 
 use serde::de::{self, Visitor};
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 /// The user specific part of the confiuration.
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -65,7 +65,8 @@ impl fmt::Debug for Language {
 impl Serialize for Language {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
-            S: serde::Serializer {
+        S: serde::Serializer,
+    {
         serializer.serialize_str(&self.to_string())
     }
 }
@@ -73,15 +74,15 @@ impl Serialize for Language {
 impl<'de> Deserialize<'de> for Language {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
-            D: serde::Deserializer<'de> {
+        D: serde::Deserializer<'de>,
+    {
         deserializer.deserialize_string(LanguageStringVisitor {})
     }
 }
 
 struct LanguageStringVisitor {}
 
-impl<'de> Visitor<'de> for LanguageStringVisitor
-{
+impl<'de> Visitor<'de> for LanguageStringVisitor {
     type Value = Language;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -144,7 +145,8 @@ impl fmt::Debug for LogLevel {
 impl Serialize for LogLevel {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
-            S: serde::Serializer {
+        S: serde::Serializer,
+    {
         serializer.serialize_str(&self.to_string())
     }
 }
@@ -152,15 +154,15 @@ impl Serialize for LogLevel {
 impl<'de> Deserialize<'de> for LogLevel {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
-            D: serde::Deserializer<'de> {
+        D: serde::Deserializer<'de>,
+    {
         deserializer.deserialize_string(LogLevelStringVisitor {})
     }
 }
 
 struct LogLevelStringVisitor {}
 
-impl<'de> Visitor<'de> for LogLevelStringVisitor
-{
+impl<'de> Visitor<'de> for LogLevelStringVisitor {
     type Value = LogLevel;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -214,24 +216,24 @@ impl fmt::Debug for Theme {
 impl Serialize for Theme {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
-            S: serde::Serializer {
+        S: serde::Serializer,
+    {
         serializer.serialize_str(&self.to_string())
     }
 }
 
-
 impl<'de> Deserialize<'de> for Theme {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
-            D: serde::Deserializer<'de> {
+        D: serde::Deserializer<'de>,
+    {
         deserializer.deserialize_string(ThemeStringVisitor {})
     }
 }
 
 struct ThemeStringVisitor {}
 
-impl<'de> Visitor<'de> for ThemeStringVisitor
-{
+impl<'de> Visitor<'de> for ThemeStringVisitor {
     type Value = Theme;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
