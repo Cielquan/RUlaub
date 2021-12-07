@@ -3,8 +3,6 @@ use std::fmt;
 use serde::de::{self, Visitor};
 use serde::{Serialize, Deserialize};
 
-use crate::util::enum_trait::StringEnum;
-
 /// The user specific part of the confiuration.
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct User {
@@ -28,6 +26,11 @@ pub struct Settings {
 pub struct Config {
     pub user: Option<User>,
     pub settings: Settings,
+}
+
+pub trait StringEnum {
+    fn new(value: &str) -> Self;
+    fn to_string(&self) -> String;
 }
 
 #[derive(Debug, Clone)]

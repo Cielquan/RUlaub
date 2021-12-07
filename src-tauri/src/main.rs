@@ -28,6 +28,7 @@ use rulaub_backend::commands::state::set::{
     set_users_state, set_vacation_types_state,
 };
 use rulaub_backend::config::setup::{setup_config, ConfigSetupErr};
+use rulaub_backend::config::types::StringEnum;
 use rulaub_backend::config::DEFAULT_CONFIG;
 use rulaub_backend::logging::tracer::setup_tracer;
 use rulaub_backend::menu::get_menu;
@@ -36,7 +37,6 @@ use rulaub_backend::state::{
     ConfigSetupErrState, ConfigState, PageInitState, PublicHolidaysState, SchoolHolidaysState,
     UserRowMapState, UsersState, VacationTypesState,
 };
-use rulaub_backend::util::enum_trait::StringEnum;
 use rulaub_backend::NAME;
 
 fn main() {
