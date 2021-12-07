@@ -41,7 +41,7 @@ impl StringEnum for Language {
     }
 
     fn to_string(&self) -> String {
-        match *self {
+        match self {
             Language::DE => "de-DE".to_string(),
             Language::EN => "en-US".to_string(),
         }
@@ -70,7 +70,7 @@ impl StringEnum for LogLevel {
     }
 
     fn to_string(&self) -> String {
-        match *self {
+        match self {
             LogLevel::TRACE => "trace".to_string(),
             LogLevel::DEBUG => "debug".to_string(),
             LogLevel::INFO => "info".to_string(),
@@ -96,7 +96,7 @@ impl StringEnum for Theme {
     }
 
     fn to_string(&self) -> String {
-        match *self {
+        match self {
             Theme::DARK => "dark".to_string(),
             Theme::LIGHT => "light".to_string(),
         }
