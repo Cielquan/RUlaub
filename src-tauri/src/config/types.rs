@@ -3,7 +3,7 @@ use std::fmt;
 use serde::de::{self, Visitor};
 use serde::{Serialize, Deserialize};
 
-use crate::util::enum_serde::StringEnum;
+use crate::util::enum_trait::StringEnum;
 
 /// The user specific part of the confiuration.
 #[derive(Debug, Clone, Deserialize, Serialize)]
