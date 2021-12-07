@@ -82,7 +82,8 @@ fn main() {
                 Ok(conf) => {
                     debug!(
                         target = "tauri_setup",
-                        message = "Update config state from file"
+                        message = "Update config state from file",
+                        config = ?conf
                     );
                     let config_state = app.state::<ConfigState>();
                     *config_state.0.lock() = conf;
