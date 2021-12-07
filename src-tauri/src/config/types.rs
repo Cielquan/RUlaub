@@ -1,3 +1,5 @@
+use serde::Serialize;
+
 use crate::util::enum_serde::StringEnum;
 
 /// The user specific part of the confiuration.
@@ -25,7 +27,7 @@ pub struct Config {
     pub settings: Settings,
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, Deserialize)]
 pub enum Language {
     DE,
     EN,
@@ -48,7 +50,15 @@ impl StringEnum for Language {
     }
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+impl Serialize for Language {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+            S: serde::Serializer {
+        serializer.serialize_str(&self.to_string())
+    }
+}
+
+#[derive(Debug, Clone, Deserialize)]
 pub enum LogLevel {
     TRACE,
     DEBUG,
@@ -80,7 +90,15 @@ impl StringEnum for LogLevel {
     }
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+impl Serialize for LogLevel {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+            S: serde::Serializer {
+        serializer.serialize_str(&self.to_string())
+    }
+}
+
+#[derive(Debug, Clone, Deserialize)]
 pub enum Theme {
     DARK,
     LIGHT,
@@ -100,5 +118,13 @@ impl StringEnum for Theme {
             Theme::DARK => "dark".to_string(),
             Theme::LIGHT => "light".to_string(),
         }
+    }
+}
+
+impl Serialize for Theme {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+            S: serde::Serializer {
+        serializer.serialize_str(&self.to_string())
     }
 }
