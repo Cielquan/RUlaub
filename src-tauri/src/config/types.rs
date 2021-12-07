@@ -1,4 +1,7 @@
-use serde::Serialize;
+use std::fmt;
+
+use serde::de::{self, Visitor};
+use serde::{Serialize, Deserialize};
 
 use crate::util::enum_serde::StringEnum;
 
@@ -27,7 +30,7 @@ pub struct Config {
     pub settings: Settings,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone)]
 pub enum Language {
     DE,
     EN,
@@ -58,7 +61,40 @@ impl Serialize for Language {
     }
 }
 
-#[derive(Debug, Clone, Deserialize)]
+impl<'de> Deserialize<'de> for Language {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+            D: serde::Deserializer<'de> {
+        deserializer.deserialize_string(LanguageStringVisitor {})
+    }
+}
+
+struct LanguageStringVisitor {}
+
+impl<'de> Visitor<'de> for LanguageStringVisitor
+{
+    type Value = Language;
+
+    fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        formatter.write_str("an string matching the Language Enum's values")
+    }
+
+    fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(Language::new(value))
+    }
+
+    fn visit_string<E>(self, value: String) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(Language::new(&value))
+    }
+}
+
+#[derive(Debug, Clone)]
 pub enum LogLevel {
     TRACE,
     DEBUG,
@@ -98,7 +134,40 @@ impl Serialize for LogLevel {
     }
 }
 
-#[derive(Debug, Clone, Deserialize)]
+impl<'de> Deserialize<'de> for LogLevel {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+            D: serde::Deserializer<'de> {
+        deserializer.deserialize_string(LogLevelStringVisitor {})
+    }
+}
+
+struct LogLevelStringVisitor {}
+
+impl<'de> Visitor<'de> for LogLevelStringVisitor
+{
+    type Value = LogLevel;
+
+    fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        formatter.write_str("an string matching the LogLevel Enum's values")
+    }
+
+    fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(LogLevel::new(value))
+    }
+
+    fn visit_string<E>(self, value: String) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(LogLevel::new(&value))
+    }
+}
+
+#[derive(Debug, Clone)]
 pub enum Theme {
     DARK,
     LIGHT,
@@ -126,5 +195,39 @@ impl Serialize for Theme {
     where
             S: serde::Serializer {
         serializer.serialize_str(&self.to_string())
+    }
+}
+
+
+impl<'de> Deserialize<'de> for Theme {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+            D: serde::Deserializer<'de> {
+        deserializer.deserialize_string(ThemeStringVisitor {})
+    }
+}
+
+struct ThemeStringVisitor {}
+
+impl<'de> Visitor<'de> for ThemeStringVisitor
+{
+    type Value = Theme;
+
+    fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
+        formatter.write_str("an string matching the Theme Enum's values")
+    }
+
+    fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(Theme::new(value))
+    }
+
+    fn visit_string<E>(self, value: String) -> Result<Self::Value, E>
+    where
+        E: de::Error,
+    {
+        Ok(Theme::new(&value))
     }
 }
