@@ -1,13 +1,5 @@
 ## Roadmap
 
-- ? fully mirror config type incl. FE stuff
-
-- Make enums for union types
-
-  - language
-  - theme
-  - etc.
-
 - Add commands to modify state
 
   - change theme
