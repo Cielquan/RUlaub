@@ -13,7 +13,7 @@ mod db;
 pub mod logging;
 pub mod menu;
 pub mod state;
-mod util;
+pub mod util;
 
 use directories::ProjectDirs;
 

@@ -36,6 +36,7 @@ use rulaub_backend::state::{
     ConfigSetupErrState, ConfigState, PageInitState, PublicHolidaysState, SchoolHolidaysState,
     UserRowMapState, UsersState, VacationTypesState,
 };
+use rulaub_backend::util::enum_trait::StringEnum;
 use rulaub_backend::NAME;
 
 fn main() {
@@ -92,7 +93,7 @@ fn main() {
                         message = "Reload tracer with level from config file",
                         level = ?log_level
                     );
-                    reloader_(log_level);
+                    reloader_(&log_level.to_string());
                 }
                 Err(err) => {
                     let setup_config_err_state = app.state::<ConfigSetupErrState>();
