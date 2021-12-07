@@ -1,3 +1,5 @@
+use crate::util::enum_serde::EnumStringConverter;
+
 /// The user specific part of the confiuration.
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct User {
@@ -29,15 +31,15 @@ pub enum Language {
     EN,
 }
 
-impl Language {
-    pub fn to_string(&self) -> String {
+impl EnumStringConverter for Language {
+    fn to_string(&self) -> String {
         match *self {
             Language::DE => "de-DE".to_string(),
             Language::EN => "en-US".to_string(),
         }
     }
 
-    pub fn to_enum(value: &str) -> Self {
+    fn to_enum(value: &str) -> Self {
         match value {
             "de-DE" => Language::DE,
             "en-US" => Language::EN,
@@ -55,8 +57,8 @@ pub enum LogLevel {
     ERROR,
 }
 
-impl LogLevel {
-    pub fn to_string(&self) -> String {
+impl EnumStringConverter for LogLevel {
+    fn to_string(&self) -> String {
         match *self {
             LogLevel::TRACE => "trace".to_string(),
             LogLevel::DEBUG => "debug".to_string(),
@@ -66,7 +68,7 @@ impl LogLevel {
         }
     }
 
-    pub fn to_enum(value: &str) -> Self {
+    fn to_enum(value: &str) -> Self {
         match value {
             "trace" => LogLevel::TRACE,
             "debug" => LogLevel::DEBUG,
@@ -84,15 +86,15 @@ pub enum Theme {
     LIGHT,
 }
 
-impl Theme {
-    pub fn to_string(&self) -> String {
+impl EnumStringConverter for Theme {
+    fn to_string(&self) -> String {
         match *self {
             Theme::DARK => "dark".to_string(),
             Theme::LIGHT => "light".to_string(),
         }
     }
 
-    pub fn to_enum(value: &str) -> Self {
+    fn to_enum(value: &str) -> Self {
         match value {
             "dark" => Theme::DARK,
             "light" => Theme::LIGHT,
