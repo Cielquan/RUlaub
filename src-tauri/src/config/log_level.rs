@@ -6,6 +6,7 @@ use serde::{Deserialize, Serialize};
 use super::types::StringEnum;
 
 lazy_static! {
+    #[derive(Debug)]
     pub static ref AVAILABLE_LOG_LEVELS: [&'static str; 5] =
         ["TRACE", "DEBUG", "INFO", "WARN", "ERROR"];
 }
