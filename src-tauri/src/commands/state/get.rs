@@ -1,5 +1,6 @@
 //! Commands to get data from the state managed by tauri from the frontend
 use crate::config::language::LanguageData;
+use crate::config::log_level::LogLevel;
 use crate::config::theme::Theme;
 use crate::config::{Config, AVAILABLE_LANGUAGES, AVAILABLE_LOG_LEVELS, AVAILABLE_THEMES};
 use crate::state::public_holidays::PublicHolidays;
@@ -25,6 +26,11 @@ pub fn get_language(state: tauri::State<ConfigState>) -> LanguageData {
 #[tauri::command]
 pub fn get_available_languages() -> [&'static str; 2] {
     *AVAILABLE_LANGUAGES
+}
+
+#[tauri::command]
+pub fn get_log_level(state: tauri::State<ConfigState>) -> LogLevel {
+    state.0.lock().settings.log_level.clone()
 }
 
 #[tauri::command]
