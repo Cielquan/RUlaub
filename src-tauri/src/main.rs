@@ -27,7 +27,7 @@ use rulaub_backend::commands::state::get::{
 use rulaub_backend::commands::state::set::{
     set_config_state, set_langauge, set_log_level, set_public_holidays_state,
     set_school_holidays_state, set_theme, set_user_row_map_state, set_users_state,
-    set_vacation_types_state,
+    set_vacation_types_state,set_db_uri
 };
 use rulaub_backend::config::setup::{setup_config, ConfigSetupErr};
 use rulaub_backend::config::types::StringEnum;
@@ -206,6 +206,8 @@ fn main() {
             //
             get_config_state,
             set_config_state,
+            //
+            set_db_uri,
             //
             get_language,
             set_langauge,

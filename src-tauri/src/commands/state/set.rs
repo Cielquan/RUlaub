@@ -19,6 +19,11 @@ pub fn set_config_state(data: Config, state: tauri::State<ConfigState>) {
 }
 
 #[tauri::command]
+pub fn set_db_uri(data: String, state: tauri::State<ConfigState>) {
+    state.0.lock().settings.database_uri = Some(data);
+}
+
+#[tauri::command]
 pub fn set_langauge(data: Language, state: tauri::State<ConfigState>) {
     state.0.lock().settings.language = LanguageData::new(data);
 }
