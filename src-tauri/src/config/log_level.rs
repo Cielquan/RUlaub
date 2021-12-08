@@ -5,6 +5,11 @@ use serde::{Deserialize, Serialize};
 
 use super::types::StringEnum;
 
+lazy_static! {
+    pub static ref AVAILABLE_LOG_LEVELS: [&'static str; 5] =
+        ["TRACE", "DEBUG", "INFO", "WARN", "ERROR"];
+}
+
 #[derive(Clone)]
 pub enum LogLevel {
     TRACE,
@@ -16,23 +21,23 @@ pub enum LogLevel {
 
 impl StringEnum for LogLevel {
     fn new(value: &str) -> Self {
-        match value {
-            "trace" => LogLevel::TRACE,
-            "debug" => LogLevel::DEBUG,
-            "info" => LogLevel::INFO,
-            "warn" => LogLevel::WARN,
-            "error" => LogLevel::ERROR,
+        match &value.to_uppercase()[..] {
+            "TRACE" => LogLevel::TRACE,
+            "DEBUG" => LogLevel::DEBUG,
+            "INFO" => LogLevel::INFO,
+            "WARN" => LogLevel::WARN,
+            "ERROR" => LogLevel::ERROR,
             _ => LogLevel::INFO,
         }
     }
 
     fn to_string(&self) -> String {
         match self {
-            LogLevel::TRACE => "trace".to_string(),
-            LogLevel::DEBUG => "debug".to_string(),
-            LogLevel::INFO => "info".to_string(),
-            LogLevel::WARN => "warn".to_string(),
-            LogLevel::ERROR => "error".to_string(),
+            LogLevel::TRACE => "TRACE".to_string(),
+            LogLevel::DEBUG => "DEBUG".to_string(),
+            LogLevel::INFO => "INFO".to_string(),
+            LogLevel::WARN => "WARN".to_string(),
+            LogLevel::ERROR => "ERROR".to_string(),
         }
     }
 }
