@@ -1,9 +1,30 @@
+use std::collections::HashMap;
 use std::fmt;
 
 use serde::de::{self, Visitor};
 use serde::{Deserialize, Serialize};
 
 use super::types::StringEnum;
+
+lazy_static! {
+    #[derive(Debug)]
+    pub static ref AVAILABLE_LANGUAGES: HashMap<&'static str, LanguageData> = HashMap::from(
+        [
+            ("de-DE", LanguageData {
+                name: "Deutsch".to_string(),
+                locale: Language::DE.to_string(),
+                import_name: "deDE".to_string(),
+                date_mask: "__.__.____".to_string(),
+            }),
+            ("en-US", LanguageData {
+                name: "English".to_string(),
+                locale: Language::EN.to_string(),
+                import_name: "enUS".to_string(),
+                date_mask: "__/__/____".to_string(),
+            }),
+        ]
+    );
+}
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct LanguageData {
@@ -15,20 +36,10 @@ pub struct LanguageData {
 
 impl LanguageData {
     pub fn new(language: Language) -> Self {
-        match language {
-            Language::DE => LanguageData {
-                name: "Deutsch".to_string(),
-                locale: Language::DE.to_string(),
-                import_name: "deDE".to_string(),
-                date_mask: "__.__.____".to_string(),
-            },
-            Language::EN => LanguageData {
-                name: "English".to_string(),
-                locale: Language::EN.to_string(),
-                import_name: "enUS".to_string(),
-                date_mask: "__/__/____".to_string(),
-            },
+        if let Some(lang) = AVAILABLE_LANGUAGES.get(&language.to_string()[..]) {
+            return lang.clone()
         }
+        AVAILABLE_LANGUAGES.get("de-DE").unwrap().clone()
     }
 }
 
