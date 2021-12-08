@@ -40,10 +40,7 @@ const LanguageMenu = (): ReactElement => {
     setAnchorEl(null);
   };
 
-  const buttonStyle = {
-    color: themeState === "dark" ? "primary.main" : "action.active",
-    fill: themeState === "dark" ? "primary.main" : "action.active",
-  };
+  const buttonColor = themeState === "dark" ? "primary.main" : "action.active";
 
   return (
     <>
@@ -60,18 +57,18 @@ const LanguageMenu = (): ReactElement => {
           onClick={handleClick}
           sx={{
             border: "1px solid",
-            borderColor: themeState === "dark" ? "primary.main" : "action.active",
+            borderColor: buttonColor,
             borderRadius: 2,
           }}
         >
           <ListItemIcon>
-            <TranslateIcon sx={buttonStyle} />
+            <TranslateIcon sx={{ color: buttonColor }} />
           </ListItemIcon>
           <ListItemText
-            sx={{ ...buttonStyle, minWidth: 60 }}
+            sx={{ color: buttonColor, minWidth: 60 }}
             primary={langState.name}
           />
-          <KeyboardArrowDownIcon sx={buttonStyle} />
+          <KeyboardArrowDownIcon sx={{ color: buttonColor }} />
         </ListItemButton>
       </ListItem>
       <Menu
