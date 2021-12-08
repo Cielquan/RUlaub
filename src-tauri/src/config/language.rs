@@ -10,7 +10,7 @@ lazy_static! {
     #[derive(Debug)]
     pub static ref AVAILABLE_LANGUAGES: [&'static str; 2] = ["de-DE", "en-US"];
 
-    #[derive(Debug)]
+    #[derive(Debug, Clone, Serialize, Deserialize)]
     pub static ref AVAILABLE_LANGUAGE_DATA: HashMap<&'static str, LanguageData> = HashMap::from(
         [
             ("de-DE", LanguageData {

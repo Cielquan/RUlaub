@@ -39,12 +39,18 @@ pub fn set_theme(theme: Theme, state: tauri::State<ConfigState>) {
 }
 
 #[tauri::command]
-pub fn set_public_holidays_state(pub_holiday: PublicHolidays, state: tauri::State<PublicHolidaysState>) {
+pub fn set_public_holidays_state(
+    pub_holiday: PublicHolidays,
+    state: tauri::State<PublicHolidaysState>,
+) {
     *state.0.lock() = pub_holiday;
 }
 
 #[tauri::command]
-pub fn set_school_holidays_state(school_holiday: SchoolHolidays, state: tauri::State<SchoolHolidaysState>) {
+pub fn set_school_holidays_state(
+    school_holiday: SchoolHolidays,
+    state: tauri::State<SchoolHolidaysState>,
+) {
     *state.0.lock() = school_holiday;
 }
 
