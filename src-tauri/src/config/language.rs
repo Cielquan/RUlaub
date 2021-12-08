@@ -8,7 +8,10 @@ use super::types::StringEnum;
 
 lazy_static! {
     #[derive(Debug)]
-    pub static ref AVAILABLE_LANGUAGES: HashMap<&'static str, LanguageData> = HashMap::from(
+    pub static ref AVAILABLE_LANGUAGES: [&'static str; 2] = ["de-DE", "en-US"];
+
+    #[derive(Debug)]
+    pub static ref AVAILABLE_LANGUAGE_DATA: HashMap<&'static str, LanguageData> = HashMap::from(
         [
             ("de-DE", LanguageData {
                 name: "Deutsch".to_string(),
@@ -36,10 +39,10 @@ pub struct LanguageData {
 
 impl LanguageData {
     pub fn new(language: Language) -> Self {
-        if let Some(lang) = AVAILABLE_LANGUAGES.get(&language.to_string()[..]) {
-            return lang.clone()
+        if let Some(lang) = AVAILABLE_LANGUAGE_DATA.get(&language.to_string()[..]) {
+            return lang.clone();
         }
-        AVAILABLE_LANGUAGES.get("de-DE").unwrap().clone()
+        AVAILABLE_LANGUAGE_DATA.get("de-DE").unwrap().clone()
     }
 }
 
