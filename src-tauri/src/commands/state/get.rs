@@ -1,7 +1,7 @@
 //! Commands to get data from the state managed by tauri from the frontend
 use crate::config::language::LanguageData;
 use crate::config::theme::Theme;
-use crate::config::Config;
+use crate::config::{Config, AVAILABLE_LANGUAGES, AVAILABLE_LOG_LEVELS, AVAILABLE_THEMES};
 use crate::state::public_holidays::PublicHolidays;
 use crate::state::school_holidays::SchoolHolidays;
 use crate::state::user_row_map::UserRowMap;
@@ -23,8 +23,23 @@ pub fn get_language(state: tauri::State<ConfigState>) -> LanguageData {
 }
 
 #[tauri::command]
+pub fn get_available_languages() -> [&'static str; 2] {
+    *AVAILABLE_LANGUAGES
+}
+
+#[tauri::command]
+pub fn get_available_log_levels() -> [&'static str; 5] {
+    *AVAILABLE_LOG_LEVELS
+}
+
+#[tauri::command]
 pub fn get_theme(state: tauri::State<ConfigState>) -> Theme {
     state.0.lock().settings.theme.clone()
+}
+
+#[tauri::command]
+pub fn get_available_themes() -> [&'static str; 2] {
+    *AVAILABLE_THEMES
 }
 
 #[tauri::command]
