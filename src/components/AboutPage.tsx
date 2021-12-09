@@ -40,7 +40,6 @@ const AboutPage = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
   const { closeAboutPage } = bindActionCreators(actionCreators, dispatch);
   const aboutPageState = useSelector((state: State) => state.aboutPage);
-  const configState = useSelector((state: State) => state.config);
 
   const ghLink = (
     <Link href="https://github.com/Cielquan/RUlaub" target="_blank" rel="noreferrer">
@@ -77,7 +76,6 @@ const AboutPage = ({ onClick }: Props): ReactElement => {
               see the github repository at: {ghLink}.
             </Trans>
           </Typography>
-          {JSON.stringify(configState)}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
