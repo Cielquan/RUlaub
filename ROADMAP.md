@@ -1,12 +1,19 @@
 ## Roadmap
 
-- Add commands to modify state
+- Put double types which are governed by BE into backendAPI package
 
-  - change theme
-  - change locale
-  - DB selection / creation
+- Remove DB Data states from BE but keep types for loading DB data into correct form to transmit
 
-- Add functions to fill state
+- Review commands and delete now useless ones
+
+- Mirror config state to FE
+
+  - call "get_state" on boot
+  - on change action "invoke" change in BE which returns full new state
+
+- Add functions to fill BE state
+
+- Add functions to fill FE state
 
 - Add tauri command for config update
   on change in UI overwrite file & set current config back on CMD
