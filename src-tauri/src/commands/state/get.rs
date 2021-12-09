@@ -4,9 +4,7 @@ use std::collections::HashMap;
 use crate::config::language::LanguageData;
 use crate::config::log_level::LogLevel;
 use crate::config::theme::Theme;
-use crate::config::{
-    Config, AVAILABLE_LANGUAGES, AVAILABLE_LANGUAGE_DATA, AVAILABLE_LOG_LEVELS, AVAILABLE_THEMES,
-};
+use crate::config::{Config, AVAILABLE_LANGUAGE_DATA, AVAILABLE_LOG_LEVELS, AVAILABLE_THEMES};
 use crate::state::public_holidays::PublicHolidays;
 use crate::state::school_holidays::SchoolHolidays;
 use crate::state::user_row_map::UserRowMap;
@@ -25,11 +23,6 @@ pub fn get_config_state(state: tauri::State<ConfigState>) -> Config {
 #[tauri::command]
 pub fn get_language(state: tauri::State<ConfigState>) -> LanguageData {
     state.0.lock().settings.language.clone()
-}
-
-#[tauri::command]
-pub fn get_available_languages() -> [&'static str; 2] {
-    *AVAILABLE_LANGUAGES
 }
 
 #[tauri::command]

@@ -7,9 +7,6 @@ use serde::{Deserialize, Serialize};
 use super::types::StringEnum;
 
 lazy_static! {
-    #[derive(Debug)]
-    pub static ref AVAILABLE_LANGUAGES: [&'static str; 2] = ["de-DE", "en-US"];
-
     #[derive(Debug, Clone, Serialize, Deserialize)]
     pub static ref AVAILABLE_LANGUAGE_DATA: HashMap<&'static str, LanguageData> = HashMap::from(
         [
