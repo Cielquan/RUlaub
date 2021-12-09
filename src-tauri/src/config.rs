@@ -7,7 +7,7 @@ pub mod types;
 mod util;
 
 use self::file::get_conf_file_path;
-pub use self::language::AVAILABLE_LANGUAGE_DATA;
+pub use self::language::AVAILABLE_LANGUAGES;
 pub use self::log_level::AVAILABLE_LOG_LEVELS;
 pub use self::theme::AVAILABLE_THEMES;
 pub use self::types::Config;

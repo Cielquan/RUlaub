@@ -20,7 +20,7 @@ use tauri::{Event, Manager, WindowBuilder};
 use rulaub_backend::commands::init::finished_init_load;
 use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trace, log_warn};
 use rulaub_backend::commands::state::get::{
-    get_available_language_data, get_available_log_levels, get_available_themes, get_config_state,
+    get_available_languages, get_available_log_levels, get_available_themes, get_config_state,
     get_language, get_log_level, get_public_holidays_state, get_school_holidays_state, get_theme,
     get_user_row_map_state, get_users_state, get_vacation_types_state,
 };
@@ -211,7 +211,7 @@ fn main() {
             //
             get_language,
             set_langauge,
-            get_available_language_data,
+            get_available_languages,
             //
             get_log_level,
             set_log_level,
