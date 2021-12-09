@@ -33,8 +33,8 @@ pub fn get_available_languages() -> [&'static str; 2] {
 }
 
 #[tauri::command]
-pub fn get_available_language_data() -> AVAILABLE_LANGUAGE_DATA {
-    AVAILABLE_LANGUAGE_DATA.clone()
+pub fn get_available_language_data() -> HashMap<&'static str, LanguageData> {
+    (*AVAILABLE_LANGUAGE_DATA).clone()
 }
 
 #[tauri::command]
