@@ -1,7 +1,4 @@
-import {
-  LanguageData,
-  SupportedLanguages,
-} from "../../backendAPI/types/configFile.schema";
+import { LanguageData } from "../../backendAPI/types/configFile.schema";
 
 export const Languages: { [key: string]: LanguageData } = {
   german: {
@@ -17,8 +14,5 @@ export const Languages: { [key: string]: LanguageData } = {
     dateMask: "__/__/____",
   },
 };
-
-export const localeToLanguage = (locale: SupportedLanguages): LanguageData =>
-  Object.values(Languages).filter((lang) => lang.locale === locale)[0];
 
 export default Languages;

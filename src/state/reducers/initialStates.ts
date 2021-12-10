@@ -4,7 +4,7 @@ import {
   SupportedThemes,
 } from "../../backendAPI/types/configFile.schema";
 import { Config, LogLevels } from "../utils/config";
-import { localeToLanguage } from "../utils/i18n";
+import Languages from "../utils/i18n";
 // eslint-disable-next-line max-len
 import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
 // eslint-disable-next-line max-len
@@ -21,7 +21,9 @@ export const defaultScrollLeftOffset = 2;
 export const defaultScrollYearBegin = true;
 export const defaultTheme: SupportedThemes = "dark";
 
-export const defaultLanguage = localeToLanguage(defaultLocale);
+export const defaultLanguage = Object.values(Languages).filter(
+  (lang) => lang.locale === defaultLocale
+)[0];
 
 export interface CalendarRowUserMap {
   [k: string]: number;
