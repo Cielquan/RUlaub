@@ -4,6 +4,7 @@ use super::theme::Theme;
 
 /// The configuration object.
 #[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Config {
     pub user: Option<User>,
     pub settings: Settings,
@@ -28,12 +29,14 @@ impl Config {
 
 /// The user specific part of the confiuration.
 #[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct User {
     pub name: Option<String>,
 }
 
 /// The application specific part of the confiuration.
 #[derive(Debug, Clone, Deserialize, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Settings {
     pub database_uri: Option<String>,
     pub language: LanguageData,

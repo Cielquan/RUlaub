@@ -11,27 +11,28 @@ lazy_static! {
     pub static ref AVAILABLE_LANGUAGES: HashMap<&'static str, LanguageData> = HashMap::from(
         [
             ("de-DE", LanguageData {
-                name: "Deutsch".to_string(),
-                locale: Language::DE.to_string(),
-                import_name: "deDE".to_string(),
                 date_mask: "__.__.____".to_string(),
+                import_name: "deDE".to_string(),
+                locale: Language::DE.to_string(),
+                name: "Deutsch".to_string(),
             }),
             ("en-US", LanguageData {
-                name: "English".to_string(),
-                locale: Language::EN.to_string(),
-                import_name: "enUS".to_string(),
                 date_mask: "__/__/____".to_string(),
+                import_name: "enUS".to_string(),
+                locale: Language::EN.to_string(),
+                name: "English".to_string(),
             }),
         ]
     );
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct LanguageData {
-    pub name: String,
-    pub locale: String,
-    pub import_name: String,
     pub date_mask: String,
+    pub import_name: String,
+    pub locale: String,
+    pub name: String,
 }
 
 impl LanguageData {
