@@ -13,20 +13,28 @@
     "settings": {
       "type": "object",
       "properties": {
-        "databaseURI": { "type": "string" },
+        "databaseUri": { "type": "string" },
+        "language": { "$ref": "#/$defs/LanguageData" },
+        "logLevel": { "$ref": "#/$defs/LogLevel" },
+        "theme": { "$ref": "#/$defs/SupportedThemes" },
+        "todayAutoscrollLeftOffset": { "type": "number" },
+        "yearChangeScrollBegin": { "type": "boolean" },
         "yearToShow": {
           "type": "number",
           "minimum": 1900
-        },
-        "theme": { "$ref": "#/$defs/SupportedThemes" },
-        "language": { "$ref": "#/$defs/SupportedLanguages" },
-        "logLevel": { "$ref": "#/$defs/LogLevel" },
-        "todayAutoscrollLeftOffset": { "type": "number" },
-        "yearChangeScrollBegin": { "type": "boolean" }
+        }
       },
+      "required": [
+        "language",
+        "logLevel",
+        "theme",
+        "todayAutoscrollLeftOffset",
+        "yearChangeScrollBegin"
+      ],
       "additionalProperties": false
     }
   },
+  "required": ["settings"],
   "additionalProperties": false,
   "$defs": {
     "LogLevel": {
@@ -37,9 +45,24 @@
       "type": "string",
       "enum": ["de-DE", "en-US"]
     },
+    "SupportedLanguagesShort": {
+      "type": "string",
+      "enum": ["deDE", "enUS"]
+    },
     "SupportedThemes": {
       "type": "string",
       "enum": ["dark", "light"]
+    },
+    "LanguageData": {
+      "type": "object",
+      "properties": {
+        "dateMask": { "type": "string" },
+        "importName": { "$ref": "#/$defs/SupportedLanguagesShort" },
+        "locale": { "$ref": "#/$defs/SupportedLanguages" },
+        "name": { "type": "string" }
+      },
+      "required": ["dateMask", "importName", "locale", "name"],
+      "additionalProperties": false
     }
   }
 }

@@ -5,9 +5,10 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type SupportedThemes = "dark" | "light";
+export type SupportedLanguagesShort = "deDE" | "enUS";
 export type SupportedLanguages = "de-DE" | "en-US";
 export type LogLevel = "TRACE" | "DEBUG" | "INFO" | "WARNING" | "ERROR";
+export type SupportedThemes = "dark" | "light";
 
 /**
  * Schema for config file read by the backend
@@ -16,13 +17,19 @@ export interface ConfigFileSchema {
   user?: {
     name?: string;
   };
-  settings?: {
-    databaseURI?: string;
+  settings: {
+    databaseUri?: string;
+    language: LanguageData;
+    logLevel: LogLevel;
+    theme: SupportedThemes;
+    todayAutoscrollLeftOffset: number;
+    yearChangeScrollBegin: boolean;
     yearToShow?: number;
-    theme?: SupportedThemes;
-    language?: SupportedLanguages;
-    logLevel?: LogLevel;
-    todayAutoscrollLeftOffset?: number;
-    yearChangeScrollBegin?: boolean;
   };
+}
+export interface LanguageData {
+  dateMask: string;
+  importName: SupportedLanguagesShort;
+  locale: SupportedLanguages;
+  name: string;
 }
