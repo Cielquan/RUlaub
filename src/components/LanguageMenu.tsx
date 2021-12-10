@@ -9,12 +9,14 @@ import {
   ListItemText,
   Menu,
 } from "@mui/material";
+import { invoke } from "@tauri-apps/api/tauri";
 import React, { MouseEvent, ReactElement, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { LanguageData } from "../backendAPI/types/configFile.schema";
+import { useAsync } from "../hooks";
 import { actionCreators, State } from "../state";
-import Languages from "../state/utils/i18n";
 
 import LanguageMenuButton from "./LanguageMenuButton";
 
@@ -25,10 +27,19 @@ const LanguageMenu = (): ReactElement => {
   const themeState = configState.settings.theme;
   const langState = configState.settings.language;
 
-  const languages = [
-    { changeHandle: activateDE, lang: Languages.german },
-    { changeHandle: activateEN, lang: Languages.english },
-  ];
+  const { value: availableLanguages } = useAsync(
+    async (): Promise<{ [key: string]: LanguageData }> =>
+      invoke("get_available_languages")
+  );
+
+  const languages = availableLanguages
+    ? [
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        { changeHandle: activateDE, lang: availableLanguages!["de-DE"] },
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        { changeHandle: activateEN, lang: availableLanguages!["en-US"] },
+      ]
+    : [];
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
