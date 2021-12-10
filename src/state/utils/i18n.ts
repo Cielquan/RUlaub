@@ -1,15 +1,9 @@
-import { SupportedLanguages } from "../../backendAPI/types/configFile.schema";
+import {
+  LanguageData,
+  SupportedLanguages,
+} from "../../backendAPI/types/configFile.schema";
 
-export type SupportedLocalesShorted = "deDE" | "enUS";
-
-export interface Language {
-  name: string;
-  locale: SupportedLanguages;
-  importName: SupportedLocalesShorted;
-  dateMask: string;
-}
-
-export const Languages: { [key: string]: Language } = {
+export const Languages: { [key: string]: LanguageData } = {
   german: {
     name: "Deutsch",
     locale: "de-DE",
@@ -24,7 +18,7 @@ export const Languages: { [key: string]: Language } = {
   },
 };
 
-export const localeToLanguage = (locale: SupportedLanguages): Language =>
+export const localeToLanguage = (locale: SupportedLanguages): LanguageData =>
   Object.values(Languages).filter((lang) => lang.locale === locale)[0];
 
 export default Languages;

@@ -3,12 +3,12 @@ import React, { forwardRef, ReactElement } from "react";
 import { useSelector } from "react-redux";
 import { Dispatch } from "redux";
 
+import { LanguageData } from "../backendAPI/types/configFile.schema";
 import { State } from "../state";
 import { ConfigAction } from "../state/actions";
-import { Language } from "../state/utils/i18n";
 
 interface Props {
-  language: Language;
+  language: LanguageData;
   closeHandle(): void;
   changeHandle(): (dispatch: Dispatch<ConfigAction>) => void;
 }

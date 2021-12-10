@@ -1,5 +1,8 @@
-import { Language } from "./i18n";
-import { LogLevel, SupportedThemes } from "../../backendAPI/types/configFile.schema";
+import {
+  LanguageData,
+  LogLevel,
+  SupportedThemes,
+} from "../../backendAPI/types/configFile.schema";
 
 export enum LogLevels {
   TRACE = "TRACE",
@@ -17,7 +20,7 @@ export interface SettingsConfig {
   databaseURI: string | undefined;
   yearToShow: number | undefined;
   theme: SupportedThemes;
-  language: Language;
+  language: LanguageData;
   logLevel: LogLevel;
   todayAutoscrollLeftOffset: number;
   yearChangeScrollBegin: boolean;
