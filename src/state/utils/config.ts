@@ -1,6 +1,5 @@
 import { Language } from "./i18n";
-import { SupportedThemes } from "../../theme";
-import { LogLevel } from "../../backendAPI/types/configFile.schema";
+import { LogLevel, SupportedThemes } from "../../backendAPI/types/configFile.schema";
 
 export enum LogLevels {
   TRACE = "TRACE",

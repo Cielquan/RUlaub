@@ -3,7 +3,7 @@ import darkScrollbar from "@mui/material/darkScrollbar";
 import { Localization } from "@mui/material/locale";
 import { createTheme as createMuiTheme, Theme } from "@mui/material/styles";
 
-export type SupportedThemes = "dark" | "light";
+import { SupportedThemes } from "./backendAPI/types/configFile.schema";
 
 const createTheme = (themeState: SupportedThemes, language: Localization): Theme => {
   const palletType = themeState;

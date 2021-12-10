@@ -1,7 +1,10 @@
-import { LogLevel } from "../../backendAPI/types/configFile.schema";
-import { SupportedThemes } from "../../theme";
+import {
+  LogLevel,
+  SupportedLanguages,
+  SupportedThemes,
+} from "../../backendAPI/types/configFile.schema";
 import { Config, LogLevels } from "../utils/config";
-import { localeToLanguage, SupportedLocales } from "../utils/i18n";
+import { localeToLanguage } from "../utils/i18n";
 // eslint-disable-next-line max-len
 import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
 // eslint-disable-next-line max-len
@@ -12,7 +15,7 @@ import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/t
 
 // NOTE: Change defaults also in backend initial Config
 // FIXME:#i# unknown bug when setting to 'de-DE'
-export const defaultLocale: SupportedLocales = "en-US";
+export const defaultLocale: SupportedLanguages = "en-US";
 export const defaultLogLevel: LogLevel = LogLevels.INFO;
 export const defaultScrollLeftOffset = 2;
 export const defaultScrollYearBegin = true;

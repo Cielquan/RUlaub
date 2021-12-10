@@ -5,6 +5,8 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
+export type SupportedThemes = "dark" | "light";
+export type SupportedLanguages = "de-DE" | "en-US";
 export type LogLevel = "TRACE" | "DEBUG" | "INFO" | "WARNING" | "ERROR";
 
 /**
@@ -17,8 +19,8 @@ export interface ConfigFileSchema {
   settings?: {
     databaseURI?: string;
     yearToShow?: number;
-    theme?: "dark" | "light";
-    language?: "de-DE" | "en-US";
+    theme?: SupportedThemes;
+    language?: SupportedLanguages;
     logLevel?: LogLevel;
     todayAutoscrollLeftOffset?: number;
     yearChangeScrollBegin?: boolean;

@@ -1,9 +1,10 @@
-export type SupportedLocales = "de-DE" | "en-US";
+import { SupportedLanguages } from "../../backendAPI/types/configFile.schema";
+
 export type SupportedLocalesShorted = "deDE" | "enUS";
 
 export interface Language {
   name: string;
-  locale: SupportedLocales;
+  locale: SupportedLanguages;
   importName: SupportedLocalesShorted;
   dateMask: string;
 }
@@ -23,7 +24,7 @@ export const Languages: { [key: string]: Language } = {
   },
 };
 
-export const localeToLanguage = (locale: SupportedLocales): Language =>
+export const localeToLanguage = (locale: SupportedLanguages): Language =>
   Object.values(Languages).filter((lang) => lang.locale === locale)[0];
 
 export default Languages;

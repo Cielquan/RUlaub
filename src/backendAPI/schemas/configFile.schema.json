@@ -18,14 +18,8 @@
           "type": "number",
           "minimum": 1900
         },
-        "theme": {
-          "type": "string",
-          "enum": ["dark", "light"]
-        },
-        "language": {
-          "type": "string",
-          "enum": ["de-DE", "en-US"]
-        },
+        "theme": { "$ref": "#/$defs/SupportedThemes" },
+        "language": { "$ref": "#/$defs/SupportedLanguages" },
         "logLevel": { "$ref": "#/$defs/LogLevel" },
         "todayAutoscrollLeftOffset": { "type": "number" },
         "yearChangeScrollBegin": { "type": "boolean" }
@@ -38,6 +32,14 @@
     "LogLevel": {
       "type": "string",
       "enum": ["TRACE", "DEBUG", "INFO", "WARNING", "ERROR"]
+    },
+    "SupportedLanguages": {
+      "type": "string",
+      "enum": ["de-DE", "en-US"]
+    },
+    "SupportedThemes": {
+      "type": "string",
+      "enum": ["dark", "light"]
     }
   }
 }
