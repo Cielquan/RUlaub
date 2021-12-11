@@ -14,9 +14,9 @@ pub fn set_config_state(config: Config, state: tauri::State<ConfigState>) -> Con
 }
 
 #[tauri::command]
-pub fn set_db_uri(db_uri: String, state: tauri::State<ConfigState>) -> Config {
+pub fn set_db_uri(path: String, state: tauri::State<ConfigState>) -> Config {
     let mut state_guard = state.0.lock();
-    state_guard.settings.database_uri = Some(db_uri);
+    state_guard.settings.database_uri = Some(path);
     state_guard.clone()
 }
 
