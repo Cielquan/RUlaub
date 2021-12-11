@@ -8,19 +8,19 @@ const setupMenuEventListeners = async (dispatch: Dispatch): Promise<void> => {
   const webview = new WebviewWindow("main");
 
   await webview.listen("menu-clicked-lang-en", () => {
-    bindActionCreators(actionCreators, dispatch).activateEN();
+    bindActionCreators(actionCreators, dispatch).setLanguage("en-US");
   });
 
   await webview.listen("menu-clicked-lang-de", () => {
-    bindActionCreators(actionCreators, dispatch).activateDE();
+    bindActionCreators(actionCreators, dispatch).setLanguage("de-DE");
   });
 
   await webview.listen("menu-clicked-theme-dark", () => {
-    bindActionCreators(actionCreators, dispatch).activateDarkTheme();
+    bindActionCreators(actionCreators, dispatch).setTheme("dark");
   });
 
   await webview.listen("menu-clicked-theme-light", () => {
-    bindActionCreators(actionCreators, dispatch).activateLightTheme();
+    bindActionCreators(actionCreators, dispatch).setTheme("light");
   });
 
   await webview.listen("menu-clicked-settings", () => {
