@@ -4,10 +4,6 @@
   ? double schemas for input and output
   ? or derive types for output from input schema only
 
-- Remove DB Data states from BE but keep types for loading DB data into correct form to transmit
-
-- Review commands and delete now useless ones
-
 - Mirror config state to FE
 
   - state/utils/i18n mod becomes useless when "activateDE", "activateEN" and "defaultLanguage" (initialStates.test also?) become obsolete
