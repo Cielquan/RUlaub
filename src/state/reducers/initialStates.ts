@@ -12,7 +12,7 @@ export interface CalendarRowUserMap {
 
 export const aboutPageInitState = false;
 export const calendarRowUserMapInitState: CalendarRowUserMap = {};
-export const configInitState = undefined;
+export const configInitState = null;
 export const publicHolidaysDataInitState: PublicHolidaysData = {};
 export const publicHolidaysDialogInitState = false;
 export const schoolHolidaysDataInitState: SchoolHolidaysData = {};

@@ -5,9 +5,9 @@ import { ConfigFileSchema as ConfigFile } from "../../backendAPI/types/configFil
 import { configInitState as initState } from "./initialStates";
 
 const reducer = (
-  state: ConfigFile | undefined = initState,
+  state: ConfigFile | null = initState,
   action: ConfigAction
-): ConfigFile | undefined => {
+): ConfigFile | null => {
   switch (action.type) {
     case ConfigActionType.UPDATE:
       return action.payload;
