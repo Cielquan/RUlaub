@@ -4,37 +4,40 @@
   "type": "object",
   "properties": {
     "user": {
-      "type": "object",
+      "type": ["object", "null"],
       "properties": {
-        "name": { "type": "string" }
+        "name": { "type": ["string", "null"] }
       },
+      "required": ["name"],
       "additionalProperties": false
     },
     "settings": {
       "type": "object",
       "properties": {
-        "databaseUri": { "type": "string" },
+        "databaseUri": { "type": ["string", "null"] },
         "language": { "$ref": "#/$defs/LanguageData" },
         "logLevel": { "$ref": "#/$defs/LogLevel" },
         "theme": { "$ref": "#/$defs/SupportedThemes" },
         "todayAutoscrollLeftOffset": { "type": "number" },
         "yearChangeScrollBegin": { "type": "boolean" },
         "yearToShow": {
-          "type": "number",
+          "type": ["null", "number"],
           "minimum": 1900
         }
       },
       "required": [
+        "databaseUri",
         "language",
         "logLevel",
         "theme",
         "todayAutoscrollLeftOffset",
-        "yearChangeScrollBegin"
+        "yearChangeScrollBegin",
+        "yearToShow"
       ],
       "additionalProperties": false
     }
   },
-  "required": ["settings"],
+  "required": ["user", "settings"],
   "additionalProperties": false,
   "$defs": {
     "LogLevel": {

@@ -14,17 +14,17 @@ export type SupportedThemes = "dark" | "light";
  * Schema for config file read by the backend
  */
 export interface ConfigFileSchema {
-  user?: {
-    name?: string;
-  };
+  user: {
+    name: string | null;
+  } | null;
   settings: {
-    databaseUri?: string;
+    databaseUri: string | null;
     language: LanguageData;
     logLevel: LogLevel;
     theme: SupportedThemes;
     todayAutoscrollLeftOffset: number;
     yearChangeScrollBegin: boolean;
-    yearToShow?: number;
+    yearToShow: null | number;
   };
 }
 export interface LanguageData {
