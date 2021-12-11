@@ -3,7 +3,7 @@ import {
   SupportedLanguages,
   SupportedThemes,
 } from "../../backendAPI/types/configFile.schema";
-import { Config, LogLevels } from "../utils/config";
+import { LogLevels } from "../utils/config";
 import Languages from "../utils/i18n";
 // eslint-disable-next-line max-len
 import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
@@ -31,20 +31,7 @@ export interface CalendarRowUserMap {
 
 export const aboutPageInitState = false;
 export const calendarRowUserMapInitState: CalendarRowUserMap = {};
-export const configInitState: Config = {
-  user: {
-    name: undefined,
-  },
-  settings: {
-    databaseURI: undefined,
-    yearToShow: undefined,
-    theme: defaultTheme,
-    language: defaultLanguage,
-    logLevel: defaultLogLevel,
-    todayAutoscrollLeftOffset: defaultScrollLeftOffset,
-    yearChangeScrollBegin: defaultScrollYearBegin,
-  },
-};
+export const configInitState = undefined;
 export const publicHolidaysDataInitState: PublicHolidaysData = {};
 export const publicHolidaysDialogInitState = false;
 export const schoolHolidaysDataInitState: SchoolHolidaysData = {};

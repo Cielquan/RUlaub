@@ -15,13 +15,14 @@ import {
   VacationTypesDialogActionType,
 } from "../action-types";
 // eslint-disable-next-line max-len
+import { ConfigFileSchema as ConfigFile } from "../../backendAPI/types/configFile.schema";
+// eslint-disable-next-line max-len
 import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
 // eslint-disable-next-line max-len
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 // eslint-disable-next-line max-len
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
-import { ConfigPayload } from "../utils/config";
 
 export type AboutPageAction = {
   type: AboutPageActionType;
@@ -34,7 +35,7 @@ export type CalendarRowUserMapAction = {
 
 export type ConfigAction = {
   type: ConfigActionType;
-  payload: ConfigPayload;
+  payload: ConfigFile;
 };
 
 export type PublicHolidaysDataAction = {

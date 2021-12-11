@@ -4,43 +4,52 @@ import { Dispatch } from "redux";
 
 import { ConfigActionType } from "../action-types";
 import { ConfigAction } from "../actions";
-import { load } from "../../backendAPI/config";
-import { ConfigPayload } from "../utils/config";
-import Languages from "../utils/i18n";
+// eslint-disable-next-line max-len
+import { ConfigFileSchema as ConfigFile } from "../../backendAPI/types/configFile.schema";
 
-export const updateConfigAction = (payload: ConfigPayload): ConfigAction => ({
+export const updateConfigAction = (payload: ConfigFile): ConfigAction => ({
   type: ConfigActionType.UPDATE,
   payload,
 });
 
-export const updateConfig =
-  (payload: ConfigPayload) =>
-  (dispatch: Dispatch<ConfigAction>): void => {
-    dispatch(updateConfigAction(payload));
+export const loadConfig =
+  () =>
+  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+    const conf = await invoke<ConfigFile>("get_config_state");
+
+    dispatch(updateConfigAction(conf));
   };
 
 export const activateDE =
   () =>
-  (dispatch: Dispatch<ConfigAction>): void => {
-    dispatch(updateConfigAction({ settings: { language: Languages.german } }));
+  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+    const conf = await invoke<ConfigFile>("set_langauge", { lang: "de-DE" });
+
+    dispatch(updateConfigAction(conf));
   };
 
 export const activateEN =
   () =>
-  (dispatch: Dispatch<ConfigAction>): void => {
-    dispatch(updateConfigAction({ settings: { language: Languages.english } }));
+  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+    const conf = await invoke<ConfigFile>("set_langauge", { lang: "en-US" });
+
+    dispatch(updateConfigAction(conf));
   };
 
 export const activateDarkTheme =
   () =>
-  (dispatch: Dispatch<ConfigAction>): void => {
-    dispatch(updateConfigAction({ settings: { theme: "dark" } }));
+  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+    const conf = await invoke<ConfigFile>("set_langauge", { theme: "dark" });
+
+    dispatch(updateConfigAction(conf));
   };
 
 export const activateLightTheme =
   () =>
-  (dispatch: Dispatch<ConfigAction>): void => {
-    dispatch(updateConfigAction({ settings: { theme: "light" } }));
+  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+    const conf = await invoke<ConfigFile>("set_langauge", { theme: "light" });
+
+    dispatch(updateConfigAction(conf));
   };
 
 const FILTERS = [{ name: "Database", extensions: ["db"] }];
@@ -50,9 +59,11 @@ export const createNewDB =
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
     const path = await save({ filters: FILTERS });
     if (path === null) return;
-    invoke("create_db", { path }).then(() =>
-      dispatch(updateConfigAction({ settings: { databaseURI: path } }))
-    );
+
+    // TODO:#i# err handling
+    const conf = await invoke<ConfigFile>("create_db", { path });
+
+    dispatch(updateConfigAction(conf));
   };
 
 export const selectDB =
@@ -64,18 +75,8 @@ export const selectDB =
       directory: false,
     })) as string;
     if (path === null) return;
-    dispatch(updateConfigAction({ settings: { databaseURI: path } }));
-  };
 
-export const loadConfig =
-  () =>
-  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    try {
-      const conf = await load();
+    const conf = await invoke<ConfigFile>("set_db_uri", { path });
 
-      dispatch(updateConfigAction(conf as ConfigPayload));
-    } catch (error) {
-      // TODO:#i# add snackbar
-      console.error(error);
-    }
+    dispatch(updateConfigAction(conf));
   };
