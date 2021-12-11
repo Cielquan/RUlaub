@@ -4,8 +4,12 @@ import { Dispatch } from "redux";
 
 import { ConfigActionType } from "../action-types";
 import { ConfigAction } from "../actions";
-// eslint-disable-next-line max-len
-import { ConfigFileSchema as ConfigFile } from "../../backendAPI/types/configFile.schema";
+import {
+  ConfigFileSchema as ConfigFile,
+  LogLevel,
+  SupportedLanguages,
+  SupportedThemes,
+} from "../../backendAPI/types/configFile.schema";
 
 export const updateConfigAction = (payload: ConfigFile): ConfigAction => ({
   type: ConfigActionType.UPDATE,
@@ -20,34 +24,60 @@ export const loadConfig =
     dispatch(updateConfigAction(conf));
   };
 
-export const activateDE =
-  () =>
+export const setLanguage =
+  (lang: SupportedLanguages) =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    const conf = await invoke<ConfigFile>("set_langauge", { lang: "de-DE" });
+    const conf = await invoke<ConfigFile>("set_langauge", { lang });
 
     dispatch(updateConfigAction(conf));
   };
 
-export const activateEN =
-  () =>
+export const setLogLevel =
+  (level: LogLevel) =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    const conf = await invoke<ConfigFile>("set_langauge", { lang: "en-US" });
+    const conf = await invoke<ConfigFile>("set_log_level", { level });
 
     dispatch(updateConfigAction(conf));
   };
 
-export const activateDarkTheme =
-  () =>
+export const setTheme =
+  (theme: SupportedThemes) =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    const conf = await invoke<ConfigFile>("set_langauge", { theme: "dark" });
+    const conf = await invoke<ConfigFile>("set_theme", { theme });
 
     dispatch(updateConfigAction(conf));
   };
 
-export const activateLightTheme =
-  () =>
+export const setTodayAutoscrollLeftOffset =
+  (offset: number) =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    const conf = await invoke<ConfigFile>("set_langauge", { theme: "light" });
+    const conf = await invoke<ConfigFile>("set_today_autoscroll_left_offset", {
+      offset,
+    });
+
+    dispatch(updateConfigAction(conf));
+  };
+
+export const setUserName =
+  (name: string) =>
+  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+    const conf = await invoke<ConfigFile>("set_user_name", { name });
+
+    dispatch(updateConfigAction(conf));
+  };
+
+export const setYearChangeScrollBegin =
+  (doScroll: boolean) =>
+  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+    const conf = await invoke<ConfigFile>("set_year_change_scroll_begin", { doScroll });
+
+    dispatch(updateConfigAction(conf));
+  };
+
+export const setYearToShow =
+  (year: number) =>
+  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+    const conf = await invoke<ConfigFile>("set_year_to_show", { year });
 
     dispatch(updateConfigAction(conf));
   };
