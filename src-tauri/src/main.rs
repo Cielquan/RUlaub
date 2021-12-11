@@ -9,7 +9,6 @@ extern crate tracing;
 #[macro_use]
 extern crate rulaub_backend;
 
-use std::collections::HashMap;
 use std::sync::Arc;
 use std::thread::sleep;
 use std::time::Duration;
@@ -32,10 +31,7 @@ use rulaub_backend::config::DEFAULT_CONFIG;
 use rulaub_backend::logging::tracer::setup_tracer;
 use rulaub_backend::menu::get_menu;
 use rulaub_backend::state::status_states::PageInit;
-use rulaub_backend::state::{
-    ConfigSetupErrState, ConfigState, PageInitState, PublicHolidaysState, SchoolHolidaysState,
-    UserRowMapState, UsersState, VacationTypesState,
-};
+use rulaub_backend::state::{ConfigSetupErrState, ConfigState, PageInitState};
 use rulaub_backend::NAME;
 
 fn main() {
@@ -66,11 +62,6 @@ fn main() {
         .manage(ConfigSetupErrState(Mutex::new(ConfigSetupErr::None)))
         .manage(ConfigState(Mutex::new(DEFAULT_CONFIG.clone())))
         .manage(PageInitState(Mutex::new(PageInit::LOADING)))
-        .manage(PublicHolidaysState(Mutex::new(HashMap::new())))
-        .manage(SchoolHolidaysState(Mutex::new(HashMap::new())))
-        .manage(UserRowMapState(Mutex::new(HashMap::new())))
-        .manage(UsersState(Mutex::new(HashMap::new())))
-        .manage(VacationTypesState(Mutex::new(HashMap::new())))
         .setup(move |app| {
             debug!(target = "tauri_setup", message = "Start app setup");
             let loadingscreen_window = app.get_window("loadingscreen").unwrap();
