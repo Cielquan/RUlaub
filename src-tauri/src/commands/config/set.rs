@@ -6,26 +6,36 @@ use crate::config::Config;
 use crate::state::ConfigState;
 
 #[tauri::command]
-pub fn set_config_state(config: Config, state: tauri::State<ConfigState>) {
-    *state.0.lock() = config;
+pub fn set_config_state(config: Config, state: tauri::State<ConfigState>) -> Config {
+    let mut state_guard = state.0.lock();
+    *state_guard = config;
+    state_guard.clone()
 }
 
 #[tauri::command]
-pub fn set_db_uri(db_uri: String, state: tauri::State<ConfigState>) {
-    state.0.lock().settings.database_uri = Some(db_uri);
+pub fn set_db_uri(db_uri: String, state: tauri::State<ConfigState>) -> Config {
+    let mut state_guard = state.0.lock();
+    state_guard.settings.database_uri = Some(db_uri);
+    state_guard.clone()
 }
 
 #[tauri::command]
-pub fn set_langauge(lang: Language, state: tauri::State<ConfigState>) {
-    state.0.lock().settings.language = LanguageData::new(lang);
+pub fn set_langauge(lang: Language, state: tauri::State<ConfigState>) -> Config {
+    let mut state_guard = state.0.lock();
+    state_guard.settings.language = LanguageData::new(lang);
+    state_guard.clone()
 }
 
 #[tauri::command]
-pub fn set_log_level(level: LogLevel, state: tauri::State<ConfigState>) {
-    state.0.lock().settings.log_level = level;
+pub fn set_log_level(level: LogLevel, state: tauri::State<ConfigState>) -> Config {
+    let mut state_guard = state.0.lock();
+    state_guard.settings.log_level = level;
+    state_guard.clone()
 }
 
 #[tauri::command]
-pub fn set_theme(theme: Theme, state: tauri::State<ConfigState>) {
-    state.0.lock().settings.theme = theme;
+pub fn set_theme(theme: Theme, state: tauri::State<ConfigState>) -> Config {
+    let mut state_guard = state.0.lock();
+    state_guard.settings.theme = theme;
+    state_guard.clone()
 }
