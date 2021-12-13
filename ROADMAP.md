@@ -1,15 +1,5 @@
 ## Roadmap
 
-- Put double types which are governed by BE into backendAPI package
-  ? double schemas for input and output
-  ? or derive types for output from input schema only
-
-- Mirror config state to FE
-
-  - state/utils/i18n mod becomes useless when "activateDE", "activateEN" and "defaultLanguage" (initialStates.test also?) become obsolete
-  - call "get_state" on boot
-  - on change action "invoke" change in BE which returns full new state
-
 - Add functions to fill BE state
 
 - Add functions to fill FE state
