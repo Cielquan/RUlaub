@@ -98,6 +98,8 @@
 
 - **1.0**
 
+- Tests
+
 - FE | Add new view to show team overview with how many days taken etc.
 
 - Safe window size/position and restore on boot
