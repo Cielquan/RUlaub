@@ -1,5 +1,6 @@
+mod connection;
 pub mod models;
 mod schema;
-mod util;
+mod sql_functions;
 
-pub use util::establish_connection_to;
+pub use connection::establish_connection_to;

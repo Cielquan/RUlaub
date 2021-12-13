@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 
-use super::util::DateData;
+use super::types::DateData;
 
 pub type Users = HashMap<i32, User>;
 

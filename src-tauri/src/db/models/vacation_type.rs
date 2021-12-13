@@ -1,7 +1,7 @@
 use std::fmt::{self, Display, Formatter};
 
+use super::entry_traits::NewDBEntry;
 use crate::db::schema::vacation_types;
-use crate::db::util::NewDBEntry;
 
 /// The database model for vacation types.
 #[derive(Queryable, Debug)]

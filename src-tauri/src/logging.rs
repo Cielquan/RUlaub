@@ -1,6 +1,6 @@
 mod file;
+mod level;
 pub mod tracer;
-mod util;
 
 use self::file::get_logging_dir_path;
 

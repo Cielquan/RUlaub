@@ -1,9 +1,9 @@
 pub mod public_holidays;
 pub mod school_holidays;
 pub mod status_states;
+mod types;
 pub mod user_row_map;
 pub mod users;
-mod util;
 pub mod vacation_types;
 
 use parking_lot::Mutex;

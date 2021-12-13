@@ -1,10 +1,10 @@
 pub mod file;
 pub mod language;
 pub mod log_level;
+mod parser;
 pub mod setup;
 pub mod theme;
 pub mod types;
-mod util;
 
 use self::file::get_conf_file_path;
 pub use self::language::AVAILABLE_LANGUAGES;

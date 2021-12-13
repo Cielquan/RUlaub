@@ -2,8 +2,8 @@ use std::fmt::{self, Display, Formatter};
 
 use chrono::NaiveDate;
 
+use super::entry_traits::NewDBEntry;
 use crate::db::schema::vacations;
-use crate::db::util::NewDBEntry;
 
 /// The database model for vacations.
 #[derive(Queryable, Debug)]

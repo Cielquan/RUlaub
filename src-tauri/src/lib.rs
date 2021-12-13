@@ -10,10 +10,10 @@ extern crate tracing;
 pub mod commands;
 pub mod config;
 mod db;
+mod file_watcher;
 pub mod logging;
 pub mod menu;
 pub mod state;
-pub mod util;
 
 use directories::ProjectDirs;
 

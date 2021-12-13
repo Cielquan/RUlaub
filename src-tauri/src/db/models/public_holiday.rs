@@ -1,7 +1,7 @@
 use std::fmt::{self, Display, Formatter};
 
+use super::entry_traits::NewDBEntry;
 use crate::db::schema::public_holidays;
-use crate::db::util::NewDBEntry;
 
 /// The database model for public holidays.
 #[derive(Queryable, Debug)]

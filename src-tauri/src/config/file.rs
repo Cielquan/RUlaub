@@ -3,7 +3,7 @@ use std::io::Write;
 use std::path::Path;
 
 use super::{Config, CONFIG_FILE_PATH};
-use crate::config::util::parse_toml_str_to_config;
+use crate::config::parser::parse_toml_str_to_config;
 use crate::PROJECT_DIRS;
 
 /// Try to create a configuration file path.

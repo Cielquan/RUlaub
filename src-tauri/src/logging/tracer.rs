@@ -5,7 +5,7 @@ use tracing_subscriber::layer::Layered;
 use tracing_subscriber::reload::Handle;
 use tracing_subscriber::{EnvFilter, Registry};
 
-use super::util::create_env_filter;
+use super::level::create_env_filter;
 use super::LOGGING_DIR_PATH;
 
 type TracerHandle = Handle<

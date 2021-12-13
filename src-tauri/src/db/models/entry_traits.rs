@@ -1,27 +1,10 @@
-use diesel::prelude::{Connection, RunQueryDsl, SqliteConnection};
+use diesel::prelude::{RunQueryDsl, SqliteConnection};
 use diesel::query_builder::InsertStatement;
 use diesel::query_dsl::methods::ExecuteDsl;
 use diesel::query_dsl::LoadQuery;
 use diesel::{Insertable, Table};
 
-/// Try to establish a connection to the given database.
-#[allow(dead_code)] // TODO:#i# remove after usage
-pub fn establish_connection_to(db_url: &str) -> anyhow::Result<SqliteConnection> {
-    debug!(target = "database", message = "Connect to database", db_url = ?db_url);
-    match SqliteConnection::establish(db_url) {
-        Ok(conn) => Ok(conn),
-        Err(err) => {
-            error!(taget="database", message="Failed to connect to database.", error=?err);
-            Err(err.into())
-        }
-    }
-}
-
-no_arg_sql_function!(
-    last_insert_rowid,
-    diesel::sql_types::Integer,
-    "Represents the SQL last_insert_row() function"
-);
+use crate::db::sql_functions::last_insert_rowid;
 
 pub trait NewDBEntry<T>
 where
