@@ -1,35 +1,15 @@
+import { invoke } from "@tauri-apps/api/tauri";
 import { Dispatch } from "redux";
 
 import { PublicHolidaysDataActionType } from "../action-types";
 import { PublicHolidaysDataAction } from "../actions";
-import { logError } from "../../backendAPI";
-import { add, load, remove, update } from "../../backendAPI/publicHolidaysData";
 // eslint-disable-next-line max-len
 import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
 import {
   NewPublicHolidayData,
   PublicHolidayDataPayload,
 } from "../../backendAPI/types/helperTypes";
-
-export const addPublicHolidaysDataAction = (
-  payload: PublicHolidaysData
-): PublicHolidaysDataAction => ({
-  type: PublicHolidaysDataActionType.ADD,
-  payload,
-});
-
-export const addPublicHolidaysData =
-  (payload: NewPublicHolidayData[]) =>
-  async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
-    try {
-      const data = await add(payload);
-
-      dispatch(addPublicHolidaysDataAction(data));
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
-    }
-  };
+import { validatePublicHolidaysData } from "../../backendAPI/validation";
 
 export const loadPublicHolidaysDataAction = (
   payload: PublicHolidaysData
@@ -41,33 +21,30 @@ export const loadPublicHolidaysDataAction = (
 export const loadPublicHolidaysData =
   () =>
   async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
+    let data;
     try {
-      const data = await load();
-
-      dispatch(loadPublicHolidaysDataAction(data));
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
+      data = await invoke("load_public_holidays");
+    } catch (err) {
+      invoke("log_error", {
+        target: "public-holidays",
+        message: `Loading of PublicHolidays data from database failed: ${err}`,
+        location:
+          // eslint-disable-next-line max-len
+          "state/action-creators/publicHolidaysDataActionCreators.ts-loadPublicHolidaysData",
+      });
     }
-  };
 
-export const removePublicHolidaysDataAction = (
-  payload: PublicHolidaysData
-): PublicHolidaysDataAction => ({
-  type: PublicHolidaysDataActionType.REMOVE,
-  payload,
-});
-
-export const removePublicHolidaysData =
-  (payload: string[]) =>
-  async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
     try {
-      const data = await remove(payload);
-
-      dispatch(removePublicHolidaysDataAction(data));
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
+      const valData = await validatePublicHolidaysData(data);
+      dispatch(loadPublicHolidaysDataAction(valData));
+    } catch (err) {
+      invoke("log_error", {
+        target: "public-holidays",
+        message: `PublicHolidays data validation failed: ${err}`,
+        location:
+          // eslint-disable-next-line max-len
+          "state/action-creators/publicHolidaysDataActionCreators.ts-loadPublicHolidaysData",
+      });
     }
   };
 
@@ -79,14 +56,39 @@ export const updatePublicHolidaysDataAction = (
 });
 
 export const updatePublicHolidaysData =
-  (payload: PublicHolidayDataPayload[]) =>
+  (
+    newEntries: NewPublicHolidayData[],
+    updatedEntries: PublicHolidayDataPayload[],
+    removedEntries: string[]
+  ) =>
   async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
+    let data;
     try {
-      const data = await update(payload);
+      data = await invoke("update_public_holidays", {
+        newEntries,
+        updatedEntries,
+        removedEntries,
+      });
+    } catch (err) {
+      invoke("log_error", {
+        target: "public-holidays",
+        message: `Updating PublicHolidays data in database failed: ${err}`,
+        location:
+          // eslint-disable-next-line max-len
+          "state/action-creators/publicHolidaysDataActionCreators.ts-updatePublicHolidaysData",
+      });
+    }
 
-      dispatch(updatePublicHolidaysDataAction(data));
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
+    try {
+      const valData = await validatePublicHolidaysData(data);
+      dispatch(updatePublicHolidaysDataAction(valData));
+    } catch (err) {
+      invoke("log_error", {
+        target: "public-holidays",
+        message: `PublicHolidays data validation failed: ${err}`,
+        location:
+          // eslint-disable-next-line max-len
+          "state/action-creators/publicHolidaysDataActionCreators.ts-updatePublicHolidaysData",
+      });
     }
   };

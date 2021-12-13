@@ -1,35 +1,15 @@
+import { invoke } from "@tauri-apps/api/tauri";
 import { Dispatch } from "redux";
 
 import { SchoolHolidaysDataActionType } from "../action-types";
 import { SchoolHolidaysDataAction } from "../actions";
-import { logError } from "../../backendAPI";
-import { add, load, remove, update } from "../../backendAPI/schoolHolidaysData";
 // eslint-disable-next-line max-len
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import {
   NewSchoolHolidayData,
   SchoolHolidayDataPayload,
 } from "../../backendAPI/types/helperTypes";
-
-export const addSchoolHolidaysDataAction = (
-  payload: SchoolHolidaysData
-): SchoolHolidaysDataAction => ({
-  type: SchoolHolidaysDataActionType.ADD,
-  payload,
-});
-
-export const addSchoolHolidaysData =
-  (payload: NewSchoolHolidayData[]) =>
-  async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
-    try {
-      const data = await add(payload);
-
-      dispatch(addSchoolHolidaysDataAction(data));
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
-    }
-  };
+import { validateSchoolHolidaysData } from "../../backendAPI/validation";
 
 export const loadSchoolHolidaysDataAction = (
   payload: SchoolHolidaysData
@@ -41,33 +21,30 @@ export const loadSchoolHolidaysDataAction = (
 export const loadSchoolHolidaysData =
   () =>
   async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
+    let data;
     try {
-      const data = await load();
-
-      dispatch(loadSchoolHolidaysDataAction(data));
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
+      data = await invoke("load_school_holidays");
+    } catch (err) {
+      invoke("log_error", {
+        target: "school-holidays",
+        message: `Loading of SchoolHolidays data from database failed: ${err}`,
+        location:
+          // eslint-disable-next-line max-len
+          "state/action-creators/schoolHolidaysDataActionCreators.ts-loadSchoolHolidaysData",
+      });
     }
-  };
 
-export const removeSchoolHolidaysDataAction = (
-  payload: SchoolHolidaysData
-): SchoolHolidaysDataAction => ({
-  type: SchoolHolidaysDataActionType.REMOVE,
-  payload,
-});
-
-export const removeSchoolHolidaysData =
-  (payload: string[]) =>
-  async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
     try {
-      const data = await remove(payload);
-
-      dispatch(removeSchoolHolidaysDataAction(data));
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
+      const valData = await validateSchoolHolidaysData(data);
+      dispatch(loadSchoolHolidaysDataAction(valData));
+    } catch (err) {
+      invoke("log_error", {
+        target: "school-holidays",
+        message: `SchoolHolidays data validation failed: ${err}`,
+        location:
+          // eslint-disable-next-line max-len
+          "state/action-creators/schoolHolidaysDataActionCreators.ts-loadSchoolHolidaysData",
+      });
     }
   };
 
@@ -79,14 +56,39 @@ export const updateSchoolHolidaysDataAction = (
 });
 
 export const updateSchoolHolidaysData =
-  (payload: SchoolHolidayDataPayload[]) =>
+  (
+    newEntries: NewSchoolHolidayData[],
+    updatedEntries: SchoolHolidayDataPayload[],
+    removedEntries: string[]
+  ) =>
   async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
+    let data;
     try {
-      const data = await update(payload);
+      data = await invoke("update_school_holidays", {
+        newEntries,
+        updatedEntries,
+        removedEntries,
+      });
+    } catch (err) {
+      invoke("log_error", {
+        target: "school-holidays",
+        message: `Updating SchoolHolidays data in database failed: ${err}`,
+        location:
+          // eslint-disable-next-line max-len
+          "state/action-creators/schoolHolidaysDataActionCreators.ts-updateSchoolHolidaysData",
+      });
+    }
 
-      dispatch(updateSchoolHolidaysDataAction(data));
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
+    try {
+      const valData = await validateSchoolHolidaysData(data);
+      dispatch(updateSchoolHolidaysDataAction(valData));
+    } catch (err) {
+      invoke("log_error", {
+        target: "school-holidays",
+        message: `SchoolHolidays data validation failed: ${err}`,
+        location:
+          // eslint-disable-next-line max-len
+          "state/action-creators/schoolHolidaysDataActionCreators.ts-updateSchoolHolidaysData",
+      });
     }
   };
