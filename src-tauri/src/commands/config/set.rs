@@ -1,9 +1,9 @@
 //! Commands to set data from the config state managed by tauri from the frontend
 use crate::config::language::{Language, LanguageData};
-use crate::config::log_level::LogLevel;
 use crate::config::theme::Theme;
 use crate::config::types::User;
 use crate::config::Config;
+use crate::logging::log_level::LogLevel;
 use crate::state::ConfigState;
 
 #[tauri::command]

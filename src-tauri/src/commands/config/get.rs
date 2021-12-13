@@ -2,9 +2,10 @@
 use std::collections::HashMap;
 
 use crate::config::language::LanguageData;
-use crate::config::log_level::LogLevel;
 use crate::config::theme::Theme;
-use crate::config::{Config, AVAILABLE_LANGUAGES, AVAILABLE_LOG_LEVELS, AVAILABLE_THEMES};
+use crate::config::{Config, AVAILABLE_LANGUAGES, AVAILABLE_THEMES};
+use crate::logging::log_level::LogLevel;
+use crate::logging::AVAILABLE_LOG_LEVELS;
 use crate::state::ConfigState;
 
 #[tauri::command]
