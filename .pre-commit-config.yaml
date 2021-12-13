@@ -65,7 +65,7 @@ repos:
     # https://github.com/prettier/prettier
     # Config file: .prettierrc (JSON, YAML)
     # Ignore file: .prettierignore (file ignore pattern)
-    rev: a99a3fbe79a9d346cabd02a5e167ad0edafe616b # frozen: v2.3.0
+    rev: ea782651a7e32f40a3d13b76c79d5a2474ee8723 # frozen: v2.5.1
     hooks:
       - id: prettier
 
@@ -133,7 +133,7 @@ repos:
     # https://github.com/eslint/eslint
     # Config file: .eslintrc.json
     # Ignore file: .eslintignore (file ignore pattern)
-    rev: 35fae9e419403ae42821f7ff00f360dd109bdd18 # frozen: v7.27.0
+    rev: 88f5f0e0f63a1df0e1e3fade57c44af1e22211e0 # frozen: v8.4.1
     hooks:
       - id: eslint
         files: \.[jt]sx?$ # *.js, *.jsx, *.ts, *.tsx
@@ -195,7 +195,7 @@ repos:
 
   # yamllint - yaml linter
   - repo: https://github.com/adrienverge/yamllint
-    rev: 85ccd625a382423edd988fcb796c4dd5897886fb # frozen: v1.26.1
+    rev: 058fef75598d1a9d9250487d91549abf379878e0 # frozen: v1.26.3
     hooks:
       # Config file: .yamllint (yaml) [--config-file]
       # Inline skip: `# yamllint disable-line[ rule:<RULE>]`
