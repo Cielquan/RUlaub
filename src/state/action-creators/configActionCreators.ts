@@ -5,6 +5,7 @@ import { Dispatch } from "redux";
 
 import { ConfigActionType } from "../action-types";
 import { ConfigAction } from "../actions";
+import { validateConfig } from "../../backendAPI/validation";
 import {
   ConfigFileSchema as ConfigFile,
   LogLevel,
@@ -20,67 +21,149 @@ export const updateConfigAction = (payload: ConfigFile): ConfigAction => ({
 export const loadConfig =
   () =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    const conf = await invoke<ConfigFile>("get_config_state");
+    const data = await invoke("get_config_state");
 
-    dispatch(updateConfigAction(conf));
+    let conf;
+    try {
+      conf = await validateConfig(data);
+      dispatch(updateConfigAction(conf));
+    } catch (err) {
+      invoke("log_error", {
+        target: "config",
+        message: `Config data validation failed: ${err}`,
+        location: "state/action-creators/configActionCreators.ts-loadConfig",
+      });
+    }
   };
 
 export const setLanguage =
   (lang: SupportedLanguages) =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    const conf = await invoke<ConfigFile>("set_langauge", { lang });
+    const data = await invoke<ConfigFile>("set_langauge", { lang });
 
-    dispatch(updateConfigAction(conf));
+    let conf;
+    try {
+      conf = await validateConfig(data);
+      dispatch(updateConfigAction(conf));
+    } catch (err) {
+      invoke("log_error", {
+        target: "config",
+        message: `Config data validation failed: ${err}`,
+        location: "state/action-creators/configActionCreators.ts-setLanguage",
+      });
+    }
   };
 
 export const setLogLevel =
   (level: LogLevel) =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    const conf = await invoke<ConfigFile>("set_log_level", { level });
+    const data = await invoke<ConfigFile>("set_log_level", { level });
 
-    dispatch(updateConfigAction(conf));
+    let conf;
+    try {
+      conf = await validateConfig(data);
+      dispatch(updateConfigAction(conf));
+    } catch (err) {
+      invoke("log_error", {
+        target: "config",
+        message: `Config data validation failed: ${err}`,
+        location: "state/action-creators/configActionCreators.ts-setLogLevel",
+      });
+    }
   };
 
 export const setTheme =
   (theme: SupportedThemes) =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    const conf = await invoke<ConfigFile>("set_theme", { theme });
+    const data = await invoke<ConfigFile>("set_theme", { theme });
 
-    dispatch(updateConfigAction(conf));
+    let conf;
+    try {
+      conf = await validateConfig(data);
+      dispatch(updateConfigAction(conf));
+    } catch (err) {
+      invoke("log_error", {
+        target: "config",
+        message: `Config data validation failed: ${err}`,
+        location: "state/action-creators/configActionCreators.ts-setTheme",
+      });
+    }
   };
 
 export const setTodayAutoscrollLeftOffset =
   (offset: number) =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    const conf = await invoke<ConfigFile>("set_today_autoscroll_left_offset", {
+    const data = await invoke<ConfigFile>("set_today_autoscroll_left_offset", {
       offset,
     });
 
-    dispatch(updateConfigAction(conf));
+    let conf;
+    try {
+      conf = await validateConfig(data);
+      dispatch(updateConfigAction(conf));
+    } catch (err) {
+      invoke("log_error", {
+        target: "config",
+        message: `Config data validation failed: ${err}`,
+        location:
+          "state/action-creators/configActionCreators.ts-setTodayAutoscrollLeftOffset",
+      });
+    }
   };
 
 export const setUserName =
   (name: string) =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    const conf = await invoke<ConfigFile>("set_user_name", { name });
+    const data = await invoke<ConfigFile>("set_user_name", { name });
 
-    dispatch(updateConfigAction(conf));
+    let conf;
+    try {
+      conf = await validateConfig(data);
+      dispatch(updateConfigAction(conf));
+    } catch (err) {
+      invoke("log_error", {
+        target: "config",
+        message: `Config data validation failed: ${err}`,
+        location: "state/action-creators/configActionCreators.ts-setUserName",
+      });
+    }
   };
 
 export const setYearChangeScrollBegin =
   (doScroll: boolean) =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    const conf = await invoke<ConfigFile>("set_year_change_scroll_begin", { doScroll });
+    const data = await invoke<ConfigFile>("set_year_change_scroll_begin", { doScroll });
 
-    dispatch(updateConfigAction(conf));
+    let conf;
+    try {
+      conf = await validateConfig(data);
+      dispatch(updateConfigAction(conf));
+    } catch (err) {
+      invoke("log_error", {
+        target: "config",
+        message: `Config data validation failed: ${err}`,
+        location:
+          "state/action-creators/configActionCreators.ts-setYearChangeScrollBegin",
+      });
+    }
   };
 
 export const setYearToShow =
   (year: number) =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    const conf = await invoke<ConfigFile>("set_year_to_show", { year });
+    const data = await invoke<ConfigFile>("set_year_to_show", { year });
 
-    dispatch(updateConfigAction(conf));
+    let conf;
+    try {
+      conf = await validateConfig(data);
+      dispatch(updateConfigAction(conf));
+    } catch (err) {
+      invoke("log_error", {
+        target: "config",
+        message: `Config data validation failed: ${err}`,
+        location: "state/action-creators/configActionCreators.ts-setYearToShow",
+      });
+    }
   };
 
 const FILTERS = [{ name: "Database", extensions: ["db"] }];
@@ -92,9 +175,19 @@ export const createNewDB =
     if (path === null) return;
 
     // TODO:#i# err handling
-    const conf = await invoke<ConfigFile>("create_db", { path });
+    const data = await invoke<ConfigFile>("create_db", { path });
 
-    dispatch(updateConfigAction(conf));
+    let conf;
+    try {
+      conf = await validateConfig(data);
+      dispatch(updateConfigAction(conf));
+    } catch (err) {
+      invoke("log_error", {
+        target: "config",
+        message: `Config data validation failed: ${err}`,
+        location: "state/action-creators/configActionCreators.ts-createNewDB",
+      });
+    }
   };
 
 export const selectDB =
@@ -110,7 +203,17 @@ export const selectDB =
     })) as string;
     if (path === null) return;
 
-    const conf = await invoke<ConfigFile>("set_db_uri", { path });
+    const data = await invoke<ConfigFile>("set_db_uri", { path });
 
-    dispatch(updateConfigAction(conf));
+    let conf;
+    try {
+      conf = await validateConfig(data);
+      dispatch(updateConfigAction(conf));
+    } catch (err) {
+      invoke("log_error", {
+        target: "config",
+        message: `Config data validation failed: ${err}`,
+        location: "state/action-creators/configActionCreators.ts-selectDB",
+      });
+    }
   };
