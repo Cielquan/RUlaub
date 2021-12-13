@@ -19,11 +19,14 @@ const today = new Date();
 
 const Calendar = (): ReactElement => {
   const configState = useSelector((state: State) => state.config);
-  const themeState = configState.settings.theme;
-  const langState = configState.settings.language;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const themeState = configState!.settings.theme;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const langState = configState!.settings.language;
 
   const theme = createTheme(themeState, locales[langState.importName]);
-  const year = configState.settings.yearToShow;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const year = configState!.settings.yearToShow;
 
   const [scrollX, setScrollX] = useState(0);
   const [scrollY, setScrollY] = useState(0);
@@ -50,9 +53,7 @@ const Calendar = (): ReactElement => {
   //   [year]
   // );
 
-  if (year === undefined) {
-    return <CalendarStartPage />;
-  }
+  if (year === null) return <CalendarStartPage />;
 
   const daysInYear = 365 + (isLeapYear(year) ? 1 : 0);
 

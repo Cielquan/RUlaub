@@ -10,16 +10,13 @@ import { actionCreators } from "../state";
 
 const CalendarStartPage = (): ReactElement => {
   const dispatch = useDispatch();
-  const { updateConfig: updateLocalConfig } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { setYearToShow } = bindActionCreators(actionCreators, dispatch);
 
   const [date, setDate] = React.useState<Date>();
 
   const handleChange = (newDate: Date | null): void => {
     if (newDate !== null) {
-      updateLocalConfig({ settings: { yearToShow: newDate.getFullYear() } });
+      setYearToShow(newDate.getFullYear());
       setDate(newDate);
     }
   };

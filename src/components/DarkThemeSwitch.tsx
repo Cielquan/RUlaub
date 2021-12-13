@@ -12,12 +12,11 @@ import { actionCreators, State } from "../state";
 
 const DarkThemeSwitch = (): ReactElement => {
   const dispatch = useDispatch();
-  const { activateDarkTheme, activateLightTheme } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { setTheme } = bindActionCreators(actionCreators, dispatch);
+
   const configState = useSelector((state: State) => state.config);
-  const themeState = configState.settings.theme;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const themeState = configState!.settings.theme;
 
   return (
     <Tooltip
@@ -26,7 +25,9 @@ const DarkThemeSwitch = (): ReactElement => {
     >
       <IconButton
         data-testid="theme-switch"
-        onClick={themeState === "dark" ? activateLightTheme : activateDarkTheme}
+        onClick={
+          themeState === "dark" ? () => setTheme("light") : () => setTheme("dark")
+        }
         size="large"
       >
         {themeState === "dark" ? <BrightnessHighIcon /> : <BrightnessLowIcon />}

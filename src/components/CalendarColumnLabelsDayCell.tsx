@@ -20,7 +20,8 @@ const CalendarColumnLabelsDayCell = ({
   data,
   style,
 }: Props): ReactElement => {
-  const { locale } = useSelector((state: State) => state.config.settings.language);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { locale } = useSelector((state: State) => state.config!.settings.language);
   const publicHolidaysDataState = useSelector(
     (state: State) => state.publicHolidaysData
   );

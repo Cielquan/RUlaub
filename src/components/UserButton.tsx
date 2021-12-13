@@ -10,7 +10,8 @@ const UserButton = (): ReactElement => {
   const dispatch = useDispatch();
   const { openSettingsDialog } = bindActionCreators(actionCreators, dispatch);
   const configState = useSelector((state: State) => state.config);
-  const themeState = configState.settings.theme;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const themeState = configState!.settings.theme;
 
   return (
     <ListItem
@@ -32,7 +33,7 @@ const UserButton = (): ReactElement => {
           <AccountCircleIcon />
         </ListItemIcon>
         <ListItemText
-          primary={configState.user.name}
+          primary={configState?.user?.name}
           primaryTypographyProps={{ noWrap: true }}
         />
       </ListItemButton>

@@ -143,9 +143,9 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
 
   useEffect(() => {
     setCurrentUserID(
-      getUserIdByName(usersDataState, configState.user.name ?? "") ?? ""
+      getUserIdByName(usersDataState, configState?.user?.name ?? "") ?? ""
     );
-  }, [configState.user.name, usersDataState, vacationsDialogState]);
+  }, [configState?.user?.name, usersDataState, vacationsDialogState]);
 
   useEffect(() => {
     setUpdatedVacations({});

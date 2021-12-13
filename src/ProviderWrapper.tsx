@@ -15,8 +15,10 @@ import SetupWrapper from "./SetupWrapper";
 
 const ProviderWrapper = (): ReactElement => {
   const configState = useSelector((state: State) => state.config);
-  const themeState = configState.settings.theme;
-  const langState = configState.settings.language;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const themeState = configState!.settings.theme;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const langState = configState!.settings.language;
 
   const theme = createTheme(themeState, locales[langState.importName]);
 

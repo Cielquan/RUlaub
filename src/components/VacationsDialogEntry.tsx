@@ -50,7 +50,8 @@ const VacationsDialogEntry = ({
 }: Props): ReactElement => {
   const vacationsDialogState = useSelector((state: State) => state.vacationsDialog);
   const vacationTypesDataState = useSelector((state: State) => state.vacationTypesData);
-  const langState = useSelector((state: State) => state.config.settings.language);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const langState = useSelector((state: State) => state.config!.settings.language);
 
   const [newEntry] = useState(Number(id) < 0);
   const [editable, setEditable] = useState(newEntry);

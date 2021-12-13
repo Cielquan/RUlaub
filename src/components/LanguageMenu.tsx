@@ -14,7 +14,10 @@ import React, { MouseEvent, ReactElement, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { LanguageData } from "../backendAPI/types/configFile.schema";
+import {
+  LanguageData,
+  SupportedLanguages,
+} from "../backendAPI/types/configFile.schema";
 import { useAsync } from "../hooks";
 import { actionCreators, State } from "../state";
 
@@ -22,24 +25,23 @@ import LanguageMenuButton from "./LanguageMenuButton";
 
 const LanguageMenu = (): ReactElement => {
   const dispatch = useDispatch();
-  const { activateDE, activateEN } = bindActionCreators(actionCreators, dispatch);
+  const { setLanguage } = bindActionCreators(actionCreators, dispatch);
   const configState = useSelector((state: State) => state.config);
-  const themeState = configState.settings.theme;
-  const langState = configState.settings.language;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const themeState = configState!.settings.theme;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const langState = configState!.settings.language;
 
   const { value: availableLanguages } = useAsync(
     async (): Promise<{ [key: string]: LanguageData }> =>
       invoke("get_available_languages")
   );
 
-  const languages = availableLanguages
-    ? [
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        { changeHandle: activateDE, lang: availableLanguages!["de-DE"] },
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        { changeHandle: activateEN, lang: availableLanguages!["en-US"] },
-      ]
-    : [];
+  const languages = Object.keys(availableLanguages ?? {}).map((locale) => ({
+    changeHandle: () => setLanguage(locale as SupportedLanguages),
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    lang: availableLanguages![locale],
+  }));
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 

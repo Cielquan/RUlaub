@@ -18,9 +18,12 @@ const LanguageMenuButton = forwardRef(
     { language, closeHandle, changeHandle }: Props,
     ref: React.Ref<HTMLLIElement>
   ): ReactElement => {
-    const configState = useSelector((state: State) => state.config);
-    const langState = configState.settings.language;
-    const active = langState.locale === language.locale;
+    const locale = useSelector(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      (state: State) => state.config!.settings.language.locale
+    );
+
+    const active = locale === language.locale;
 
     return (
       <MenuItem

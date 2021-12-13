@@ -21,11 +21,13 @@ import {
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
+import { invoke } from "@tauri-apps/api";
 import React, { forwardRef, ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { LogLevel } from "../backendAPI/types/configFile.schema";
+import { useAsync } from "../hooks";
 import { actionCreators, State } from "../state";
 
 const Transition = forwardRef(
@@ -45,35 +47,43 @@ interface Props {
 
 const SettingsDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { closeSettingsDialog, updateConfig } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const {
+    closeSettingsDialog,
+    setLogLevel,
+    setTodayAutoscrollLeftOffset,
+    setUserName,
+    setYearChangeScrollBegin,
+  } = bindActionCreators(actionCreators, dispatch);
   const settingsDialogState = useSelector((state: State) => state.settingsDialog);
   const configState = useSelector((state: State) => state.config);
-  const [name, setName] = useState(configState.user.name);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { settings } = configState!;
+
+  const [name, setName] = useState(configState?.user?.name);
   const [showAdvanced, setShowAdvanced] = useState(false);
-  const [level, setLevel] = useState<LogLevel>(configState.settings.logLevel);
-  const [offset, setOffset] = useState(
-    configState.settings.todayAutoscrollLeftOffset.toString()
-  );
+  const [level, setLevel] = useState(settings.logLevel);
+  const [offset, setOffset] = useState(settings.todayAutoscrollLeftOffset.toString());
   const [offsetError, setOffsetError] = useState(false);
-  const [scroll, setScroll] = useState(configState.settings.yearChangeScrollBegin);
+  const [scroll, setScroll] = useState(settings.yearChangeScrollBegin);
 
   useEffect(() => {
-    setName(configState.user.name);
-    setLevel(configState.settings.logLevel);
+    setName(configState?.user?.name);
+    setLevel(settings.logLevel);
     setShowAdvanced(false);
-    setOffset(configState.settings.todayAutoscrollLeftOffset.toString());
+    setOffset(settings.todayAutoscrollLeftOffset.toString());
     setOffsetError(false);
-    setScroll(configState.settings.yearChangeScrollBegin);
+    setScroll(settings.yearChangeScrollBegin);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settingsDialogState]);
 
   const id = "settings-dialog";
 
-  const logLevels: LogLevel[] = ["ERROR", "WARNING", "INFO", "DEBUG", "TRACE"];
-  const marks = logLevels.map((lvl, index) => ({
+  const { value: availableLogLevels } = useAsync(
+    async (): Promise<LogLevel[]> => invoke("get_available_log_levels")
+  );
+  if (availableLogLevels === undefined) return <></>;
+
+  const marks = availableLogLevels.map((lvl, index) => ({
     value: index,
     label: lvl.charAt(0).toUpperCase() + lvl.slice(1).toLowerCase(),
   }));
@@ -150,13 +160,13 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
             </FormLabel>
             <Box sx={{ width: "90%", marginX: "5%" }}>
               <Slider
-                key={`log-level-slider-at-${logLevels.indexOf(level)}`}
+                key={`log-level-slider-at-${availableLogLevels.indexOf(level)}`}
                 marks={marks}
-                defaultValue={logLevels.indexOf(level)}
+                defaultValue={availableLogLevels.indexOf(level)}
                 min={0}
                 max={marks.length - 1}
                 onChangeCommitted={(event, newValue) => {
-                  setLevel(logLevels[newValue as number]);
+                  setLevel(availableLogLevels[newValue as number]);
                 }}
               />
             </Box>
@@ -216,16 +226,12 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           onClick={() => {
             if (typeof onClick === "function") onClick();
             closeSettingsDialog();
-            updateConfig({
-              user: { name },
-              settings: {
-                logLevel: level,
-                todayAutoscrollLeftOffset: offsetError
-                  ? configState.settings.todayAutoscrollLeftOffset
-                  : Number(offset),
-                yearChangeScrollBegin: scroll,
-              },
-            });
+            setLogLevel(level);
+            setTodayAutoscrollLeftOffset(
+              offsetError ? settings.todayAutoscrollLeftOffset : Number(offset)
+            );
+            if (name !== undefined && name !== null) setUserName(name);
+            setYearChangeScrollBegin(scroll);
           }}
           autoFocus
         >

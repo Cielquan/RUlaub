@@ -1,6 +1,7 @@
 import { CssBaseline } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
+import { invoke } from "@tauri-apps/api/tauri";
 import React, { ReactElement } from "react";
 
 import Calendar from "./components/Calendar";
@@ -14,6 +15,10 @@ import SideMenu from "./components/SideMenu";
 import UsersDialog from "./components/UsersDialog";
 import VacationsDialog from "./components/VacationsDialog";
 import VacationTypesDialog from "./components/VacationTypesDialog";
+
+document.addEventListener("DOMContentLoaded", () => {
+  invoke("finished_init_load");
+});
 
 const StyledMain = styled("main")(({ theme }) => ({
   flexGrow: 1,

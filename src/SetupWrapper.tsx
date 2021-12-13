@@ -14,7 +14,6 @@ import App from "./App";
 const SetupWrapper = (): ReactElement => {
   const dispatch = useDispatch();
   const {
-    loadConfig,
     loadPublicHolidaysData,
     loadSchoolHolidaysData,
     loadUsersData,
@@ -22,7 +21,8 @@ const SetupWrapper = (): ReactElement => {
   } = bindActionCreators(actionCreators, dispatch);
 
   const configState = useSelector((state: State) => state.config);
-  const langState = configState.settings.language;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const langState = configState!.settings.language;
 
   const snackbarHandles = useSnackbar();
 
@@ -31,7 +31,6 @@ const SetupWrapper = (): ReactElement => {
   }, [langState.locale]);
 
   useMountEffect(() => {
-    loadConfig();
     loadPublicHolidaysData();
     loadSchoolHolidaysData();
     loadUsersData();

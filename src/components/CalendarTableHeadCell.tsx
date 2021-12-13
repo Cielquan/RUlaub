@@ -16,10 +16,7 @@ interface Props {
 
 const CalendarTableHeadCell = ({ data, style }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { updateConfig: updateLocalConfig } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { setYearToShow } = bindActionCreators(actionCreators, dispatch);
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
@@ -33,7 +30,7 @@ const CalendarTableHeadCell = ({ data, style }: Props): ReactElement => {
 
   const handleChange = (newDate: Date | null): void => {
     if (newDate !== null) {
-      updateLocalConfig({ settings: { yearToShow: newDate.getFullYear() } });
+      setYearToShow(newDate.getFullYear());
       handleClose();
     }
   };

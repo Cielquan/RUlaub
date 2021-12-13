@@ -41,7 +41,8 @@ const SchoolHolidaysDialogEntry = ({
   const schoolHolidaysDialogState = useSelector(
     (state: State) => state.schoolHolidaysDialog
   );
-  const langState = useSelector((state: State) => state.config.settings.language);
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const langState = useSelector((state: State) => state.config!.settings.language);
 
   const [newEntry] = useState(Number(id) < 0);
   const [editable, setEditable] = useState(newEntry);
