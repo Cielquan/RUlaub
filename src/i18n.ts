@@ -5,8 +5,6 @@ import { de as dePlurals, en as enPlurals } from "make-plural/plurals";
 import { messages as deMessages } from "./locales/de-DE/messages";
 import { messages as enMessages } from "./locales/en-US/messages";
 
-const defaultLocale = "de-DE"; // TODO:#i# where to get from
-
 export const localeMap = {
   "en-US": enLocale,
   "de-DE": deLocale,
@@ -18,6 +16,6 @@ i18n.loadLocaleData({
 });
 i18n.load("de-DE", deMessages);
 i18n.load("en-US", enMessages);
-i18n.activate(defaultLocale);
+i18n.activate("en-US");
 
 export default i18n;
