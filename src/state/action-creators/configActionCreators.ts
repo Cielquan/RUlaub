@@ -1,3 +1,4 @@
+import { dirname } from "path";
 import { invoke } from "@tauri-apps/api";
 import { open, save } from "@tauri-apps/api/dialog";
 import { Dispatch } from "redux";
@@ -99,7 +100,10 @@ export const createNewDB =
 export const selectDB =
   () =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+    const dbUri = (await invoke<ConfigFile>("get_config_state")).settings.databaseUri;
+
     const path = (await open({
+      defaultPath: dbUri ? dirname(dbUri) : undefined,
       filters: FILTERS,
       multiple: false,
       directory: false,
