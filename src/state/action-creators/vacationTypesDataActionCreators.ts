@@ -6,7 +6,10 @@ import { logError } from "../../backendAPI";
 import { add, load, update } from "../../backendAPI/vacationTypesData";
 // eslint-disable-next-line max-len
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
-import { NewVacationTypeData, VacationTypeDataPayload } from "../utils/types";
+import {
+  NewVacationTypeData,
+  VacationTypeDataPayload,
+} from "../../backendAPI/types/helperTypes";
 
 export const addVacationTypesDataAction = (
   payload: VacationTypesData

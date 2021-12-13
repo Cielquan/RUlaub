@@ -28,7 +28,7 @@ import {
   NewVacationData,
   NewVacationDataPayload,
   VacationDataPayload,
-} from "../state/utils/types";
+} from "../backendAPI/types/helperTypes";
 import { getDaysForDate } from "../utils/dateUtils";
 
 import DialogDataEntry, { EntryStyle, getStyles } from "./DialogDataEntry";

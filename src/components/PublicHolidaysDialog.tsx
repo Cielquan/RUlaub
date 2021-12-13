@@ -20,7 +20,10 @@ import { bindActionCreators } from "redux";
 
 import { PublicHolidayData } from "../backendAPI/types/publicHolidaysData.schema";
 import { actionCreators, State } from "../state";
-import { NewPublicHolidayData, PublicHolidayDataPayload } from "../state/utils/types";
+import {
+  NewPublicHolidayData,
+  PublicHolidayDataPayload,
+} from "../backendAPI/types/helperTypes";
 
 import PublicHolidaysDialogEntry from "./PublicHolidaysDialogEntry";
 

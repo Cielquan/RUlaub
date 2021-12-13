@@ -21,7 +21,7 @@ import {
   NewVacationData,
   UserDataPayload,
   VacationDataPayload,
-} from "../utils/types";
+} from "../../backendAPI/types/helperTypes";
 
 export const addUsersDataAction = (payload: UsersData): UsersDataAction => ({
   type: UsersDataActionType.ADD,

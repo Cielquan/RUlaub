@@ -31,7 +31,7 @@ import {
   NewVacationTypeData,
   NewVacationTypeDataPayload,
   VacationTypeDataPayload,
-} from "../state/utils/types";
+} from "../backendAPI/types/helperTypes";
 
 import DialogDataEntry, { EntryStyle, getStyles } from "./DialogDataEntry";
 

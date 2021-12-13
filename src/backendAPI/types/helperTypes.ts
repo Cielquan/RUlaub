@@ -1,7 +1,7 @@
-import { PublicHolidayData } from "../../backendAPI/types/publicHolidaysData.schema";
-import { SchoolHolidayData } from "../../backendAPI/types/schoolHolidaysData.schema";
-import { UserData, VacationData } from "../../backendAPI/types/usersData.schema";
-import { VacationTypeData } from "../../backendAPI/types/vacationTypesData.schema";
+import { PublicHolidayData } from "./publicHolidaysData.schema";
+import { SchoolHolidayData } from "./schoolHolidaysData.schema";
+import { UserData, VacationData } from "./usersData.schema";
+import { VacationTypeData } from "./vacationTypesData.schema";
 
 export type PublicHolidayDataPayload = [string, PublicHolidayData];
 export type NewPublicHolidayData = Omit<PublicHolidayData, "calc">;

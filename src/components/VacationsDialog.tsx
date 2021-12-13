@@ -27,7 +27,7 @@ import { bindActionCreators } from "redux";
 
 import { VacationData } from "../backendAPI/types/usersData.schema";
 import { actionCreators, State } from "../state";
-import { NewVacationData, VacationDataPayload } from "../state/utils/types";
+import { NewVacationData, VacationDataPayload } from "../backendAPI/types/helperTypes";
 import { getDaysForDate } from "../utils/dateUtils";
 import { getUserIdByName } from "../utils/userUtils";
 

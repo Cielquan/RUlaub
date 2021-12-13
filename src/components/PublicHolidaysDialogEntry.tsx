@@ -29,7 +29,7 @@ import {
   NewPublicHolidayData,
   NewPublicHolidayDataPayload,
   PublicHolidayDataPayload,
-} from "../state/utils/types";
+} from "../backendAPI/types/helperTypes";
 
 import DialogDataEntry, { EntryStyle, getStyles } from "./DialogDataEntry";
 

@@ -5,7 +5,7 @@ import {
   NewVacationData,
   UserDataPayload,
   VacationDataPayload,
-} from "../state/utils/types";
+} from "./types/helperTypes";
 import { UsersDataSchema as UsersData } from "./types/usersData.schema";
 
 import usersDataJSON from "./dev_temp/test.usersData.json";

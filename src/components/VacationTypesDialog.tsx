@@ -20,7 +20,10 @@ import { bindActionCreators } from "redux";
 
 import { VacationTypeData } from "../backendAPI/types/vacationTypesData.schema";
 import { actionCreators, State } from "../state";
-import { NewVacationTypeData, VacationTypeDataPayload } from "../state/utils/types";
+import {
+  NewVacationTypeData,
+  VacationTypeDataPayload,
+} from "../backendAPI/types/helperTypes";
 
 import VacationTypesDialogEntry from "./VacationTypesDialogEntry";
 

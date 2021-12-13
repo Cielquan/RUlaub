@@ -20,7 +20,7 @@ import { bindActionCreators } from "redux";
 
 import { UserData } from "../backendAPI/types/usersData.schema";
 import { actionCreators, State } from "../state";
-import { NewUserData, UserDataPayload } from "../state/utils/types";
+import { NewUserData, UserDataPayload } from "../backendAPI/types/helperTypes";
 
 import UsersDialogEntry from "./UsersDialogEntry";
 

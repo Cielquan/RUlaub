@@ -6,7 +6,10 @@ import { logError } from "../../backendAPI";
 import { add, load, remove, update } from "../../backendAPI/schoolHolidaysData";
 // eslint-disable-next-line max-len
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
-import { NewSchoolHolidayData, SchoolHolidayDataPayload } from "../utils/types";
+import {
+  NewSchoolHolidayData,
+  SchoolHolidayDataPayload,
+} from "../../backendAPI/types/helperTypes";
 
 export const addSchoolHolidaysDataAction = (
   payload: SchoolHolidaysData

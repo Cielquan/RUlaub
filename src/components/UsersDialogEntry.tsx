@@ -24,7 +24,11 @@ import { useSelector } from "react-redux";
 
 import { UserData, Workdays } from "../backendAPI/types/usersData.schema";
 import { State } from "../state";
-import { NewUserData, NewUserDataPayload, UserDataPayload } from "../state/utils/types";
+import {
+  NewUserData,
+  NewUserDataPayload,
+  UserDataPayload,
+} from "../backendAPI/types/helperTypes";
 import { getWeekdayKeyList, getWeekdayNameDict } from "../utils/dateUtils";
 
 import DialogDataEntry, { EntryStyle, getStyles } from "./DialogDataEntry";
