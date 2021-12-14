@@ -60,9 +60,9 @@ export const updatePublicHolidaysDataAction = (
 
 export const updatePublicHolidaysData =
   (
-    newEntries: NewPublicHolidayData[],
-    updatedEntries: PublicHolidayDataPayload[],
-    removedEntries: string[]
+    newEntries: NewPublicHolidayData[] | null,
+    updatedEntries: PublicHolidayDataPayload[] | null,
+    removedEntries: string[] | null
   ) =>
   async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
     let data;

@@ -60,9 +60,9 @@ export const updateVacationTypesDataAction = (
 
 export const updateVacationTypesData =
   (
-    newEntries: NewVacationTypeData[],
-    updatedEntries: VacationTypeDataPayload[],
-    removedEntries: string[]
+    newEntries: NewVacationTypeData[] | null,
+    updatedEntries: VacationTypeDataPayload[] | null,
+    removedEntries: string[] | null
   ) =>
   async (dispatch: Dispatch<VacationTypesDataAction>): Promise<void> => {
     let data;
