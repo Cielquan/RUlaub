@@ -4,6 +4,7 @@ import ConfigFileSchema from "./schemas/configFile.schema.json";
 import PublicHolidaysDataSchema from "./schemas/publicHolidaysData.schema.json";
 import SchoolHolidaysDataSchema from "./schemas/schoolHolidaysData.schema.json";
 import UsersDataSchema from "./schemas/usersData.schema.json";
+import VacationsDataSchema from "./schemas/vacationsData.schema.json";
 import VacationTypesDataSchema from "./schemas/vacationTypesData.schema.json";
 import { ConfigFileSchema as ConfigFile } from "./types/configFile.schema";
 // eslint-disable-next-line max-len
@@ -11,6 +12,7 @@ import { PublicHolidaysDataSchema as PublicHolidaysData } from "./types/publicHo
 // eslint-disable-next-line max-len
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "./types/schoolHolidaysData.schema";
 import { UsersDataSchema as UsersData } from "./types/usersData.schema";
+import { VacationsDataSchema as VacationsData } from "./types/vacationsData.schema";
 // eslint-disable-next-line max-len
 import { VacationTypesDataSchema as VacationTypesData } from "./types/vacationTypesData.schema";
 
@@ -41,6 +43,9 @@ export const validateSchoolHolidaysData = (
 
 export const validateUsersData = (data: unknown): Promise<UsersData> =>
   createDataValidator<UsersData>(UsersDataSchema)(data);
+
+export const validateVacationsData = (data: unknown): Promise<VacationsData> =>
+  createDataValidator<VacationsData>(VacationsDataSchema)(data);
 
 export const validateVacationTypesData = (data: unknown): Promise<VacationTypesData> =>
   createDataValidator<VacationTypesData>(VacationTypesDataSchema)(data);

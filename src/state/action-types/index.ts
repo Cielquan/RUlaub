@@ -55,6 +55,11 @@ export enum UsersDialogActionType {
   CLOSE = "close UsersDialog",
 }
 
+export enum VacationsDataActionType {
+  LOAD = "load users data",
+  UPDATE = "update vacation data",
+}
+
 export enum VacationsDialogActionType {
   OPEN = "open VacationsDialog",
   CLOSE = "close VacationsDialog",
