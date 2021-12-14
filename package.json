@@ -40,7 +40,8 @@
     "fmt": "yarn format",
     "extract": "lingui extract --clean",
     "compile": "lingui compile",
-    "schemas": "json2ts -i 'src/backendAPI/schemas/*.json' -o src/backendAPI/types/"
+    "schemas": "json2ts -i 'src/backendAPI/schemas/*.json' -o src/backendAPI/types/",
+    "schemas:win": "json2ts -i src\\backendAPI\\schemas\\**\\*.json -o src\\backendAPI\\types\\"
   },
   "jest": {
     "transform": {
