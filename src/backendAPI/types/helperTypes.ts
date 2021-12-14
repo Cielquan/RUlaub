@@ -1,6 +1,7 @@
 import { PublicHolidayData } from "./publicHolidaysData.schema";
 import { SchoolHolidayData } from "./schoolHolidaysData.schema";
-import { UserData, VacationData } from "./usersData.schema";
+import { UserData } from "./usersData.schema";
+import { VacationData } from "./vacationsData.schema";
 import { VacationTypeData } from "./vacationTypesData.schema";
 
 export type PublicHolidayDataPayload = [string, PublicHolidayData];
