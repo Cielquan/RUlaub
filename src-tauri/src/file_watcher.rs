@@ -23,7 +23,6 @@ pub fn create_async_watcher(
                     message = "Failed to send event via channel; Receiver dropped or closed",
                     error = ?err
                 );
-                return;
             }
         })
     }) {

@@ -15,7 +15,7 @@ pub fn parse_toml_str_to_config(toml_str: &str) -> anyhow::Result<Config> {
                 message = "Failed to parse toml string into ConfigFile struct",
                 error = ?err
             );
-            return Err(err.into());
+            Err(err.into())
         }
         Ok(conf) => Ok(Config::from_configfile(conf)),
     }
@@ -36,7 +36,7 @@ pub fn serialize_config_to_toml_str(config: &Config) -> anyhow::Result<String> {
                 config_file = ?config_file,
                 error = ?err
             );
-            return Err(err.into());
+            Err(err.into())
         }
         Ok(conf) => Ok(conf),
     }

@@ -15,7 +15,7 @@ fn save_config_to_file(config: &Config) -> Result<(), String> {
             return Err("config-serialize".into());
         }
         Ok(config_str) => {
-            if let Err(_) = write_to_config_file(&config_str) {
+            if write_to_config_file(&config_str).is_err() {
                 return Err("config-file-write".into());
             }
         }

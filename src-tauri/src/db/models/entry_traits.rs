@@ -46,7 +46,7 @@ where
                     error = ?err,
                     entry = ?self
                 );
-                return Err(err.into());
+                Err(err.into())
             }
             Ok(id) => {
                 debug!(

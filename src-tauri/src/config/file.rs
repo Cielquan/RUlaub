@@ -87,7 +87,7 @@ pub fn load_config_file() -> anyhow::Result<Config> {
                 message = "Failed to read config file into string",
                 error = ?err
             );
-            return Err(err.into());
+            Err(err.into())
         }
     }
 }
