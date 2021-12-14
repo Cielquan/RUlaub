@@ -21,12 +21,12 @@ pub fn parse_toml_str_to_config(toml_str: &str) -> anyhow::Result<Config> {
     }
 }
 
-pub fn serialize_config_to_toml_str(conf: Config) -> anyhow::Result<String> {
+pub fn serialize_config_to_toml_str(config: &Config) -> anyhow::Result<String> {
     debug!(
         target = "config",
         message = "Try to serialize Config struct into toml string"
     );
-    match toml::to_string::<ConfigFile>(&ConfigFile::from_config(conf.clone())) {
+    match toml::to_string::<ConfigFile>(&ConfigFile::from_config(config.clone())) {
         Err(err) => {
             error!(
                 target = "config",

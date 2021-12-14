@@ -31,7 +31,7 @@ lazy_static! {
 
     /// The default configuration for RUlaub as a nicer formatted TOML string.
     pub static ref DEFAULT_CONFIG_TOML_NICE_STR: String = serialize_config_to_toml_str(
-        DEFAULT_CONFIG.clone()
+        &DEFAULT_CONFIG
     ).unwrap();
 
     /// The stringifyed path to the configuration file.
