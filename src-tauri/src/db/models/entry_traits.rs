@@ -20,13 +20,43 @@ where
             ExecuteDsl<SqliteConnection> + LoadQuery<SqliteConnection, Self>,
     {
         debug!(target: "new_db_entry", message = "Adding to db", entry = ?self);
-        diesel::insert_into(<Self>::TABLE)
+        if let Err(err) = diesel::insert_into(<Self>::TABLE)
             .values(self.clone())
-            .execute(conn)?;
+            .execute(conn)
+        {
+            error!(
+                target = "new_db_entry",
+                message = "Failed to add entry to db",
+                error = ?err,
+                entry = ?self
+            );
+            return Err(err.into());
+        }
 
-        trace!(target: "new_db_entry", message = "Get `last_insert_rowid` for new entry", entry = ?self);
-        let id = diesel::select(last_insert_rowid).get_result::<i32>(conn)?;
-        debug!(target: "new_db_entry", message = "Got ID for new entry", id = id, entry = ?self);
-        Ok(id)
+        trace!(
+            target: "new_db_entry",
+            message = "Get `last_insert_rowid` for new entry",
+            entry = ?self
+        );
+        match diesel::select(last_insert_rowid).get_result::<i32>(conn) {
+            Err(err) => {
+                error!(
+                    target = "new_db_entry",
+                    message = "Failed to get id for new entry",
+                    error = ?err,
+                    entry = ?self
+                );
+                return Err(err.into());
+            }
+            Ok(id) => {
+                debug!(
+                    target: "new_db_entry",
+                    message = "Got ID for new entry",
+                    id = id,
+                    entry = ?self
+                );
+                Ok(id)
+            }
+        }
     }
 }
