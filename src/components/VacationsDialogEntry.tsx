@@ -22,7 +22,7 @@ import { Box } from "@mui/system";
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { VacationData } from "../backendAPI/types/usersData.schema";
+import { VacationData } from "../backendAPI/types/vacationsData.schema";
 import { State } from "../state";
 import {
   NewVacationData,

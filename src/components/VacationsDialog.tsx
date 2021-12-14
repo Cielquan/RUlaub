@@ -25,7 +25,8 @@ import React, { forwardRef, ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { VacationData } from "../backendAPI/types/usersData.schema";
+// eslint-disable-next-line max-len
+import { VacationData } from "../backendAPI/types/vacationsData.schema";
 import { actionCreators, State } from "../state";
 import { NewVacationData, VacationDataPayload } from "../backendAPI/types/helperTypes";
 import { getDaysForDate } from "../utils/dateUtils";
@@ -52,14 +53,13 @@ interface Props {
 
 const VacationsDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const {
-    addVacationsData,
-    closeVacationsDialog,
-    removeVacationsData,
-    updateVacationsData,
-  } = bindActionCreators(actionCreators, dispatch);
+  const { closeVacationsDialog, updateVacationsData } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   const configState = useSelector((state: State) => state.config);
   const usersDataState = useSelector((state: State) => state.usersData);
+  const vacationsDataState = useSelector((state: State) => state.vacationsData);
   const vacationsDialogState = useSelector((state: State) => state.vacationsDialog);
 
   const [currentUserID, setCurrentUserID] = useState("");
@@ -121,24 +121,23 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
   };
 
   const saveChanges = (): void => {
-    if (Object.keys(updatedVacations).length > 0)
-      removeVacationsData(
-        Object.keys(updatedVacations).filter(
-          (vacationID) => updatedVacations[vacationID] === undefined
-        )
-      );
+    const newEntries =
+      Object.keys(newVacations).length > 0 ? Object.values(newVacations) : undefined;
 
-    if (Object.keys(updatedVacations).length > 0)
-      updateVacationsData(
-        Object.keys(updatedVacations)
-          .filter((vacationID) => updatedVacations[vacationID] !== undefined)
-          .map(
-            (vacationID) =>
-              [vacationID, updatedVacations[vacationID]] as VacationDataPayload
-          )
+    const entriesToUpdate = Object.keys(updatedVacations)
+      .filter((vacationID) => updatedVacations[vacationID] !== undefined)
+      .map(
+        (vacationID) =>
+          [vacationID, updatedVacations[vacationID]] as VacationDataPayload
       );
+    const updatedEntries = entriesToUpdate.length > 0 ? entriesToUpdate : undefined;
 
-    if (Object.keys(newVacations)) addVacationsData(Object.values(newVacations));
+    const entriesToRemove = Object.keys(updatedVacations).filter(
+      (vacationID) => updatedVacations[vacationID] === undefined
+    );
+    const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
+
+    updateVacationsData({ newEntries, updatedEntries, removedEntries });
   };
 
   useEffect(() => {
@@ -198,17 +197,17 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
           <>
             <Divider />
             <List sx={{ display: "flex", flexDirection: "column", paddingBottom: 0 }}>
-              {Object.keys(usersDataState[currentUserID].vacations)
+              {Object.keys(vacationsDataState[currentUserID])
                 .map((vacationId): [string, number] => [
                   vacationId,
-                  usersDataState[currentUserID].vacations[vacationId].start.yearDay,
+                  vacationsDataState[currentUserID][vacationId].start.yearDay,
                 ])
                 .sort((a, b) => a[1] - b[1])
                 .map(([vacationId]) => (
                   <VacationsDialogEntry
                     key={vacationId}
                     id={vacationId}
-                    vacation={usersDataState[currentUserID].vacations[vacationId]}
+                    vacation={vacationsDataState[currentUserID][vacationId]}
                     addVacationToQueue={addUpdatedVacation}
                     removeVacationFromQueue={removeUpdatedVacation}
                   />

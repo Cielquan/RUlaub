@@ -41,8 +41,10 @@ interface Props {
 
 const UsersDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { addUsersData, closeUsersDialog, removeUsersData, updateUsersData } =
-    bindActionCreators(actionCreators, dispatch);
+  const { closeUsersDialog, updateUsersData } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   const usersDialogState = useSelector((state: State) => state.usersDialog);
   const usersDataState = useSelector((state: State) => state.usersData);
 
@@ -103,17 +105,20 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
   };
 
   const saveChanges = (): void => {
-    const usersToRemove = Object.keys(updatedUsers).filter(
-      (userID) => updatedUsers[userID] === undefined
-    );
-    if (usersToRemove.length > 0) removeUsersData(usersToRemove);
+    const newEntries =
+      Object.keys(newUsers).length > 0 ? Object.values(newUsers) : undefined;
 
-    const usersToUpdate = Object.keys(updatedUsers)
+    const entriesToUpdate = Object.keys(updatedUsers)
       .filter((userID) => updatedUsers[userID] !== undefined)
       .map((userID) => [userID, updatedUsers[userID]] as UserDataPayload);
-    if (usersToUpdate.length > 0) updateUsersData(usersToUpdate);
+    const updatedEntries = entriesToUpdate.length > 0 ? entriesToUpdate : undefined;
 
-    if (Object.keys(newUsers).length > 0) addUsersData(Object.values(newUsers));
+    const entriesToRemove = Object.keys(updatedUsers).filter(
+      (userID) => updatedUsers[userID] === undefined
+    );
+    const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
+
+    updateUsersData({ newEntries, updatedEntries, removedEntries });
   };
 
   useEffect(() => {

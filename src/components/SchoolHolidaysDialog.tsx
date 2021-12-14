@@ -47,12 +47,10 @@ interface Props {
 
 const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const {
-    addSchoolHolidaysData,
-    closeSchoolHolidaysDialog,
-    removeSchoolHolidaysData,
-    updateSchoolHolidaysData,
-  } = bindActionCreators(actionCreators, dispatch);
+  const { closeSchoolHolidaysDialog, updateSchoolHolidaysData } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   const schoolHolidaysDialogState = useSelector(
     (state: State) => state.schoolHolidaysDialog
   );
@@ -123,30 +121,28 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
   };
 
   const saveChanges = (): void => {
-    if (Object.keys(updatedSchoolHolidays).length > 0)
-      removeSchoolHolidaysData(
-        Object.keys(updatedSchoolHolidays).filter(
-          (schoolHolidayID) => updatedSchoolHolidays[schoolHolidayID] === undefined
-        )
-      );
+    const newEntries =
+      Object.keys(newSchoolHolidays).length > 0
+        ? Object.values(newSchoolHolidays)
+        : undefined;
 
-    if (Object.keys(updatedSchoolHolidays).length > 0)
-      updateSchoolHolidaysData(
-        Object.keys(updatedSchoolHolidays)
-          .filter(
-            (schoolHolidayID) => updatedSchoolHolidays[schoolHolidayID] !== undefined
-          )
-          .map(
-            (schoolHolidayID) =>
-              [
-                schoolHolidayID,
-                updatedSchoolHolidays[schoolHolidayID],
-              ] as SchoolHolidayDataPayload
-          )
+    const entriesToUpdate = Object.keys(updatedSchoolHolidays)
+      .filter((schoolHolidayID) => updatedSchoolHolidays[schoolHolidayID] !== undefined)
+      .map(
+        (schoolHolidayID) =>
+          [
+            schoolHolidayID,
+            updatedSchoolHolidays[schoolHolidayID],
+          ] as SchoolHolidayDataPayload
       );
+    const updatedEntries = entriesToUpdate.length > 0 ? entriesToUpdate : undefined;
 
-    if (Object.keys(newSchoolHolidays))
-      addSchoolHolidaysData(Object.values(newSchoolHolidays));
+    const entriesToRemove = Object.keys(updatedSchoolHolidays).filter(
+      (schoolHolidayID) => updatedSchoolHolidays[schoolHolidayID] === undefined
+    );
+    const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
+
+    updateSchoolHolidaysData({ newEntries, updatedEntries, removedEntries });
   };
 
   useEffect(() => {

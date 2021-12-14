@@ -44,8 +44,10 @@ interface Props {
 
 const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { addVacationTypesData, closeVacationTypesDialog, updateVacationTypesData } =
-    bindActionCreators(actionCreators, dispatch);
+  const { closeVacationTypesDialog, updateVacationTypesData } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   const vacationTypesDialogState = useSelector(
     (state: State) => state.vacationTypesDialog
   );
@@ -102,18 +104,21 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
   };
 
   const saveChanges = (): void => {
-    if (Object.keys(updatedVacationTypes).length > 0)
-      updateVacationTypesData(
-        Object.keys(updatedVacationTypes).map(
-          (vacationTypeID) =>
-            [
-              vacationTypeID,
-              updatedVacationTypes[vacationTypeID],
-            ] as VacationTypeDataPayload
-        )
-      );
-    if (Object.values(newVacationTypes).length > 0)
-      addVacationTypesData(Object.values(newVacationTypes));
+    const newEntries =
+      Object.keys(newVacationTypes).length > 0
+        ? Object.values(newVacationTypes)
+        : undefined;
+
+    const entriesToUpdate = Object.keys(updatedVacationTypes).map(
+      (vacationTypeID) =>
+        [
+          vacationTypeID,
+          updatedVacationTypes[vacationTypeID],
+        ] as VacationTypeDataPayload
+    );
+    const updatedEntries = entriesToUpdate.length > 0 ? entriesToUpdate : undefined;
+
+    updateVacationTypesData({ newEntries, updatedEntries });
   };
 
   useEffect(() => {

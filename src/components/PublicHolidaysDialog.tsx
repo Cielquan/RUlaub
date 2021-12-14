@@ -44,12 +44,10 @@ interface Props {
 
 const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const {
-    addPublicHolidaysData,
-    closePublicHolidaysDialog,
-    removePublicHolidaysData,
-    updatePublicHolidaysData,
-  } = bindActionCreators(actionCreators, dispatch);
+  const { closePublicHolidaysDialog, updatePublicHolidaysData } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
   const publicHolidaysDialogState = useSelector(
     (state: State) => state.publicHolidaysDialog
   );
@@ -110,30 +108,28 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
   };
 
   const saveChanges = (): void => {
-    if (Object.keys(updatedPublicHolidays).length > 0)
-      removePublicHolidaysData(
-        Object.keys(updatedPublicHolidays).filter(
-          (publicHolidayID) => updatedPublicHolidays[publicHolidayID] === undefined
-        )
-      );
+    const newEntries =
+      Object.keys(newPublicHolidays).length > 0
+        ? Object.values(newPublicHolidays)
+        : undefined;
 
-    if (Object.keys(updatedPublicHolidays).length > 0)
-      updatePublicHolidaysData(
-        Object.keys(updatedPublicHolidays)
-          .filter(
-            (publicHolidayID) => updatedPublicHolidays[publicHolidayID] !== undefined
-          )
-          .map(
-            (publicHolidayID) =>
-              [
-                publicHolidayID,
-                updatedPublicHolidays[publicHolidayID],
-              ] as PublicHolidayDataPayload
-          )
+    const entriesToUpdate = Object.keys(updatedPublicHolidays)
+      .filter((publicHolidayID) => updatedPublicHolidays[publicHolidayID] !== undefined)
+      .map(
+        (publicHolidayID) =>
+          [
+            publicHolidayID,
+            updatedPublicHolidays[publicHolidayID],
+          ] as PublicHolidayDataPayload
       );
+    const updatedEntries = entriesToUpdate.length > 0 ? entriesToUpdate : undefined;
 
-    if (Object.keys(newPublicHolidays).length > 0)
-      addPublicHolidaysData(Object.values(newPublicHolidays));
+    const entriesToRemove = Object.keys(updatedPublicHolidays).filter(
+      (publicHolidayID) => updatedPublicHolidays[publicHolidayID] === undefined
+    );
+    const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
+
+    updatePublicHolidaysData({ newEntries, updatedEntries, removedEntries });
   };
 
   useEffect(() => {
