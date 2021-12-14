@@ -12,7 +12,7 @@ interface Props {
 }
 
 const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement => {
-  const usersDataState = useSelector((state: State) => state.usersData);
+  const vacationsDataState = useSelector((state: State) => state.vacationsData);
   const calendarRowUserMapState = useSelector(
     (state: State) => state.calendarRowUserMap
   );
@@ -26,7 +26,7 @@ const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement
 
   const isVacation = (): boolean => {
     if (userID === undefined) return false;
-    const vacations = usersDataState[userID]?.vacations;
+    const vacations = vacationsDataState[userID];
     if (!vacations) return false;
     return (
       Object.values(vacations).filter(
