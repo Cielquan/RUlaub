@@ -26,11 +26,14 @@ pub fn serialize_config_to_toml_str(config: &Config) -> anyhow::Result<String> {
         target = "config",
         message = "Try to serialize Config struct into toml string"
     );
-    match toml::to_string::<ConfigFile>(&ConfigFile::from_config(config.clone())) {
+    let config_file = ConfigFile::from_config(config.clone());
+    match toml::to_string::<ConfigFile>(&config_file) {
         Err(err) => {
             error!(
                 target = "config",
                 message = "Failed to serialize ConfigFile struct into toml string",
+                config = ?config,
+                config_file = ?config_file,
                 error = ?err
             );
             return Err(err.into());
