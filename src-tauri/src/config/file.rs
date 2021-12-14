@@ -44,17 +44,34 @@ pub fn write_to_config_file(content: &str) -> anyhow::Result<()> {
         content = ?content
     );
     let path = Path::new(&*CONFIG_FILE_PATH);
-    trace!(target = "config", message = "Create parent dirs if missing");
     if let Some(parent) = path.parent() {
-        create_dir_all(parent)?
+        trace!(target = "config", message = "Create parent dirs if missing");
+        if let Err(err) = create_dir_all(parent) {
+            error!(target = "config", message = "Failed to create parent dirs", error = ?err);
+            return Err(err.into());
+        }
     }
     trace!(
         target = "config",
         message = "Create file if missing and open"
     );
-    let mut file = File::create(path)?;
-    trace!(target = "config", message = "Write to file");
-    write!(file, "{}", content)?;
+    match File::create(path) {
+        Err(err) => {
+            error!(target = "config", message = "Failed to create/open config file", error = ?err);
+            return Err(err.into());
+        }
+        Ok(mut file) => {
+            trace!(target = "config", message = "Write to file");
+            if let Err(err) = write!(file, "{}", content) {
+                error!(
+                    target = "config",
+                    message = "Failed to write config to file",
+                    error = ?err
+                );
+                return Err(err.into());
+            }
+        }
+    }
     Ok(())
 }
 
