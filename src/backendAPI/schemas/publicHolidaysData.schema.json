@@ -1,6 +1,7 @@
 {
   "title": "Public Holidays Data Schema",
   "description": "Schema for public holiday data coming from the backend",
+  "$comment": "Pattern is Public Holiday ID",
   "type": "object",
   "patternProperties": {
     "^\\d+$": { "$ref": "#/$defs/publicHolidayData" }

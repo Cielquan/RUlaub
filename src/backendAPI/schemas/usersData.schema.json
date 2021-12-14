@@ -1,6 +1,7 @@
 {
   "title": "Users Data Schema",
   "description": "Schema for users data coming from the backend",
+  "$comment": "Pattern is User ID",
   "type": "object",
   "patternProperties": {
     "^\\d+$": { "$ref": "#/$defs/userData" }

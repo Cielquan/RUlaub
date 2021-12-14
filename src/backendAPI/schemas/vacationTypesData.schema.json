@@ -1,6 +1,7 @@
 {
   "title": "Vacation Types Data Schema",
   "description": "Schema for vacation types data coming from the backend",
+  "$comment": "Pattern is Vacation Type ID",
   "type": "object",
   "patternProperties": {
     "^\\d+$": { "$ref": "#/$defs/vacationTypeData" }

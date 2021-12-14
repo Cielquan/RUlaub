@@ -1,6 +1,7 @@
 {
   "title": "School Holidays Data Schema",
   "description": "Schema for school holiday data coming from the backend",
+  "$comment": "Pattern is School Holiday ID",
   "type": "object",
   "patternProperties": {
     "^\\d+$": { "$ref": "#/$defs/schoolHolidayData" }
