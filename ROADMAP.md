@@ -2,8 +2,6 @@
 
 - Add functions to fill BE state
 
-- Add functions to fill FE state
-
 - Add tauri command for config update
   on change in UI overwrite file & set current config back on CMD
 
