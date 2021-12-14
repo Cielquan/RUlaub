@@ -46,13 +46,8 @@ export enum SideMenuActionType {
 }
 
 export enum UsersDataActionType {
-  ADD = "add users data",
-  ADD_VAC = "add vacation data",
   LOAD = "load users data",
-  REMOVE = "remove users data",
-  REMOVE_VAC = "remove vacation data",
   UPDATE = "update users data",
-  UPDATE_VAC = "update vacation data",
 }
 
 export enum UsersDialogActionType {

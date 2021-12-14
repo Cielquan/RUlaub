@@ -1,69 +1,14 @@
+import { invoke } from "@tauri-apps/api";
 import { batch } from "react-redux";
 import { Dispatch } from "redux";
 
 import { updateCalendarRowUserMapAction } from ".";
-import { store } from "..";
 import { UsersDataActionType } from "../action-types";
 import { CalendarRowUserMapAction, UsersDataAction } from "../actions";
-import { logError } from "../../backendAPI";
-import {
-  addUsers,
-  addVacations,
-  loadUsers,
-  removeUsers,
-  removeVacations,
-  updateUsers,
-  updateVacations,
-} from "../../backendAPI/usersData";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
-import {
-  NewUserData,
-  NewVacationData,
-  UserDataPayload,
-  VacationDataPayload,
-} from "../../backendAPI/types/helperTypes";
-
-export const addUsersDataAction = (payload: UsersData): UsersDataAction => ({
-  type: UsersDataActionType.ADD,
-  payload,
-});
-
-export const addUsersData =
-  (payload: NewUserData[]) =>
-  async (
-    dispatch: Dispatch<UsersDataAction | CalendarRowUserMapAction>,
-    getState: typeof store.getState
-  ): Promise<void> => {
-    try {
-      const data = await addUsers(payload);
-
-      batch(() => {
-        dispatch(addUsersDataAction(data));
-        dispatch(updateCalendarRowUserMapAction(getState().usersData));
-      });
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
-    }
-  };
-
-export const addVacationsDataAction = (payload: UsersData): UsersDataAction => ({
-  type: UsersDataActionType.ADD_VAC,
-  payload,
-});
-
-export const addVacationsData =
-  (payload: NewVacationData[]) =>
-  async (dispatch: Dispatch<UsersDataAction>): Promise<void> => {
-    try {
-      const data = await addVacations(payload);
-
-      dispatch(addVacationsDataAction(data));
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
-    }
-  };
+import { NewUserData, UserDataPayload } from "../../backendAPI/types/helperTypes";
+import { validateUsersData } from "../../backendAPI/validation";
+import { store } from "..";
 
 export const loadUsersDataAction = (payload: UsersData): UsersDataAction => ({
   type: UsersDataActionType.LOAD,
@@ -76,58 +21,29 @@ export const loadUsersData =
     dispatch: Dispatch<UsersDataAction | CalendarRowUserMapAction>,
     getState: typeof store.getState
   ): Promise<void> => {
+    let data;
     try {
-      const data = await loadUsers();
+      data = await invoke("load_users");
+    } catch (err) {
+      invoke("log_error", {
+        target: "users",
+        message: `Loading of Users data from database failed: ${err}`,
+        location: "state/action-creators/usersDataActionCreators.ts-loadUsersData",
+      });
+    }
 
+    try {
+      const valData = await validateUsersData(data);
       batch(() => {
-        dispatch(loadUsersDataAction(data));
+        dispatch(loadUsersDataAction(valData));
         dispatch(updateCalendarRowUserMapAction(getState().usersData));
       });
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
-    }
-  };
-
-export const removeUsersDataAction = (payload: UsersData): UsersDataAction => ({
-  type: UsersDataActionType.REMOVE,
-  payload,
-});
-
-export const removeUsersData =
-  (payload: string[]) =>
-  async (
-    dispatch: Dispatch<UsersDataAction | CalendarRowUserMapAction>,
-    getState: typeof store.getState
-  ): Promise<void> => {
-    try {
-      const data = await removeUsers(payload);
-
-      batch(() => {
-        dispatch(removeUsersDataAction(data));
-        dispatch(updateCalendarRowUserMapAction(getState().usersData));
+    } catch (err) {
+      invoke("log_error", {
+        target: "users",
+        message: `Users data validation failed: ${err}`,
+        location: "state/action-creators/usersDataActionCreators.ts-loadUsersData",
       });
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
-    }
-  };
-
-export const removeVacationsDataAction = (payload: UsersData): UsersDataAction => ({
-  type: UsersDataActionType.REMOVE_VAC,
-  payload,
-});
-
-export const removeVacationsData =
-  (payload: string[]) =>
-  async (dispatch: Dispatch<UsersDataAction>): Promise<void> => {
-    try {
-      const data = await removeVacations(payload);
-
-      dispatch(removeVacationsDataAction(data));
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
     }
   };
 
@@ -137,38 +53,41 @@ export const updateUsersDataAction = (payload: UsersData): UsersDataAction => ({
 });
 
 export const updateUsersData =
-  (payload: UserDataPayload[]) =>
+  (
+    newEntries: NewUserData[] | null,
+    updatedEntries: UserDataPayload[] | null,
+    removedEntries: string[] | null
+  ) =>
   async (
     dispatch: Dispatch<UsersDataAction | CalendarRowUserMapAction>,
     getState: typeof store.getState
   ): Promise<void> => {
+    let data;
     try {
-      const data = await updateUsers(payload);
+      data = await invoke("update_users", {
+        newEntries,
+        updatedEntries,
+        removedEntries,
+      });
+    } catch (err) {
+      invoke("log_error", {
+        target: "users",
+        message: `Updating Users data in database failed: ${err}`,
+        location: "state/action-creators/usersDataActionCreators.ts-updateUsersData",
+      });
+    }
 
+    try {
+      const valData = await validateUsersData(data);
       batch(() => {
-        dispatch(updateUsersDataAction(data));
+        dispatch(updateUsersDataAction(valData));
         dispatch(updateCalendarRowUserMapAction(getState().usersData));
       });
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
-    }
-  };
-
-export const updateVacationsDataAction = (payload: UsersData): UsersDataAction => ({
-  type: UsersDataActionType.UPDATE_VAC,
-  payload,
-});
-
-export const updateVacationsData =
-  (payload: VacationDataPayload[]) =>
-  async (dispatch: Dispatch<UsersDataAction>): Promise<void> => {
-    try {
-      const data = await updateVacations(payload);
-
-      dispatch(updateVacationsDataAction(data));
-    } catch (error) {
-      // TODO:#i# add snackbar
-      logError(error as Error);
+    } catch (err) {
+      invoke("log_error", {
+        target: "users",
+        message: `Users data validation failed: ${err}`,
+        location: "state/action-creators/usersDataActionCreators.ts-updateUsersData",
+      });
     }
   };

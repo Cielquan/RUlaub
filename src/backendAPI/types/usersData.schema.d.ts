@@ -5,8 +5,6 @@
  * and run json-schema-to-typescript to regenerate this file.
  */
 
-export type ISODate = string;
-
 /**
  * Schema for users data coming from the backend
  */
@@ -21,7 +19,6 @@ export interface UserData {
   name: string;
   workdays: Workdays;
   availableVacationDays: number;
-  vacations: VacationsDataSchema;
   /**
    * gets calculated in backend on load from DB for current year
    */
@@ -38,23 +35,6 @@ export interface Workdays {
   friday: boolean;
   saturday: boolean;
   sunday: boolean;
-}
-export interface VacationsDataSchema {
-  [k: string]: VacationData;
-}
-/**
- * This interface was referenced by `VacationsDataSchema`'s JSON-Schema definition
- * via the `patternProperty` "^\d+$".
- */
-export interface VacationData {
-  typeId: number;
-  start: DateData;
-  end: DateData;
-}
-export interface DateData {
-  date: ISODate;
-  yearDay: number;
-  year: number;
 }
 /**
  * gets calculated in backend on load from DB for current year
