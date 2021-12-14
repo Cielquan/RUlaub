@@ -16,7 +16,7 @@ const SetupWrapper = (): ReactElement => {
   const {
     loadPublicHolidaysData,
     loadSchoolHolidaysData,
-    loadUsersData,
+    loadVacationsData,
     loadVacationTypesData,
   } = bindActionCreators(actionCreators, dispatch);
 
@@ -33,7 +33,7 @@ const SetupWrapper = (): ReactElement => {
   useMountEffect(() => {
     loadPublicHolidaysData();
     loadSchoolHolidaysData();
-    loadUsersData();
+    loadVacationsData(); // NOTE: also loads UsersData
     loadVacationTypesData();
     setupMenuEventListeners(dispatch);
     setupErrorEventListeners(snackbarHandles);
