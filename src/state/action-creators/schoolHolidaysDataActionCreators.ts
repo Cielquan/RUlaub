@@ -58,19 +58,21 @@ export const updateSchoolHolidaysDataAction = (
   payload,
 });
 
+interface UpdatePayload {
+  newEntries: NewSchoolHolidayData[] | undefined;
+  updatedEntries: SchoolHolidayDataPayload[] | undefined;
+  removedEntries: string[] | undefined;
+}
+
 export const updateSchoolHolidaysData =
-  (
-    newEntries: NewSchoolHolidayData[] | null,
-    updatedEntries: SchoolHolidayDataPayload[] | null,
-    removedEntries: string[] | null
-  ) =>
+  ({ newEntries, updatedEntries, removedEntries }: UpdatePayload) =>
   async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
     let data;
     try {
       data = await invoke("update_school_holidays", {
-        newEntries,
-        updatedEntries,
-        removedEntries,
+        newEntries: newEntries ?? null,
+        updatedEntries: updatedEntries ?? null,
+        removedEntries: removedEntries ?? null,
       });
     } catch (err) {
       invoke("log_error", {

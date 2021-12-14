@@ -91,12 +91,14 @@ export const updateVacationsDataAction = (
   payload,
 });
 
+interface UpdatePayload {
+  newEntries: NewVacationData[] | undefined;
+  updatedEntries: VacationDataPayload[] | undefined;
+  removedEntries: string[] | undefined;
+}
+
 export const updateVacationsData =
-  (
-    newEntries: NewVacationData[] | null,
-    updatedEntries: VacationDataPayload[] | null,
-    removedEntries: string[] | null
-  ) =>
+  ({ newEntries, updatedEntries, removedEntries }: UpdatePayload) =>
   async (
     dispatch: Dispatch<
       VacationsDataAction | UsersDataAction | CalendarRowUserMapAction
@@ -106,9 +108,9 @@ export const updateVacationsData =
     let data;
     try {
       data = await invoke("update_vacations", {
-        newEntries,
-        updatedEntries,
-        removedEntries,
+        newEntries: newEntries ?? null,
+        updatedEntries: updatedEntries ?? null,
+        removedEntries: removedEntries ?? null,
       });
     } catch (err) {
       invoke("log_error", {

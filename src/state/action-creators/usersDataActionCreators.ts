@@ -55,12 +55,14 @@ export const updateUsersDataAction = (payload: UsersData): UsersDataAction => ({
   payload,
 });
 
+interface UpdatePayload {
+  newEntries: NewUserData[] | undefined;
+  updatedEntries: UserDataPayload[] | undefined;
+  removedEntries: string[] | undefined;
+}
+
 export const updateUsersData =
-  (
-    newEntries: NewUserData[] | null,
-    updatedEntries: UserDataPayload[] | null,
-    removedEntries: string[] | null
-  ) =>
+  ({ newEntries, updatedEntries, removedEntries }: UpdatePayload) =>
   async (
     dispatch: Dispatch<UsersDataAction | CalendarRowUserMapAction>,
     getState: typeof store.getState
@@ -68,9 +70,9 @@ export const updateUsersData =
     let data;
     try {
       data = await invoke("update_users", {
-        newEntries,
-        updatedEntries,
-        removedEntries,
+        newEntries: newEntries ?? null,
+        updatedEntries: updatedEntries ?? null,
+        removedEntries: removedEntries ?? null,
       });
     } catch (err) {
       invoke("log_error", {
