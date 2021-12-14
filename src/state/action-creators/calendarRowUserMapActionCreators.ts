@@ -1,18 +1,18 @@
 import { Dispatch } from "redux";
-import { UsersDataSchema } from "../../backendAPI/types/usersData.schema";
+import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 
 import { CalendarRowUserMapActionType } from "../action-types";
 import { CalendarRowUserMapAction } from "../actions";
 
 export const updateCalendarRowUserMapAction = (
-  payload: UsersDataSchema
+  payload: UsersData
 ): CalendarRowUserMapAction => ({
   type: CalendarRowUserMapActionType.UPDATE,
   payload,
 });
 
 export const updateCalendarRowUserMap =
-  (payload: UsersDataSchema) =>
+  (payload: UsersData) =>
   (dispatch: Dispatch<CalendarRowUserMapAction>): void => {
     dispatch(updateCalendarRowUserMapAction(payload));
   };
