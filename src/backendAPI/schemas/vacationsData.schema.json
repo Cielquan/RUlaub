@@ -4,7 +4,14 @@
   "$comment": "Outer pattern is User ID and inner pattern is Vacation ID",
   "type": "object",
   "patternProperties": {
-    "^\\d+$": { "$ref": "#/$defs/vacationData" }
+    "^\\d+$": {
+      "type": "object",
+      "patternProperties": {
+        "^\\d+$": {
+          "$ref": "#/$defs/vacationData"
+        }
+      }
+    }
   },
   "additionalProperties": false,
   "$defs": {
