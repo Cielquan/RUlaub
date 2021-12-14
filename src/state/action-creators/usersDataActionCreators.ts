@@ -3,12 +3,12 @@ import { batch } from "react-redux";
 import { Dispatch } from "redux";
 
 import { updateCalendarRowUserMapAction } from ".";
+import { store } from "..";
 import { UsersDataActionType } from "../action-types";
 import { CalendarRowUserMapAction, UsersDataAction } from "../actions";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import { NewUserData, UserDataPayload } from "../../backendAPI/types/helperTypes";
 import { validateUsersData } from "../../backendAPI/validation";
-import { store } from "..";
 
 export const loadUsersDataAction = (payload: UsersData): UsersDataAction => ({
   type: UsersDataActionType.LOAD,
@@ -32,19 +32,22 @@ export const loadUsersData =
       });
     }
 
+    let validatedData: UsersData;
     try {
-      const valData = await validateUsersData(data);
-      batch(() => {
-        dispatch(loadUsersDataAction(valData));
-        dispatch(updateCalendarRowUserMapAction(getState().usersData));
-      });
+      validatedData = await validateUsersData(data);
     } catch (err) {
       invoke("log_error", {
         target: "users",
         message: `Users data validation failed: ${err}`,
         location: "state/action-creators/usersDataActionCreators.ts-loadUsersData",
       });
+      return;
     }
+
+    batch(() => {
+      dispatch(loadUsersDataAction(validatedData));
+      dispatch(updateCalendarRowUserMapAction(getState().usersData));
+    });
   };
 
 export const updateUsersDataAction = (payload: UsersData): UsersDataAction => ({
@@ -77,17 +80,20 @@ export const updateUsersData =
       });
     }
 
+    let valData: UsersData;
     try {
-      const valData = await validateUsersData(data);
-      batch(() => {
-        dispatch(updateUsersDataAction(valData));
-        dispatch(updateCalendarRowUserMapAction(getState().usersData));
-      });
+      valData = await validateUsersData(data);
     } catch (err) {
       invoke("log_error", {
         target: "users",
         message: `Users data validation failed: ${err}`,
         location: "state/action-creators/usersDataActionCreators.ts-updateUsersData",
       });
+      return;
     }
+
+    batch(() => {
+      dispatch(updateUsersDataAction(valData));
+      dispatch(updateCalendarRowUserMapAction(getState().usersData));
+    });
   };

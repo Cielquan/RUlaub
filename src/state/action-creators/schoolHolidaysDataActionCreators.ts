@@ -34,9 +34,9 @@ export const loadSchoolHolidaysData =
       });
     }
 
+    let validatedData: SchoolHolidaysData;
     try {
-      const valData = await validateSchoolHolidaysData(data);
-      dispatch(loadSchoolHolidaysDataAction(valData));
+      validatedData = await validateSchoolHolidaysData(data);
     } catch (err) {
       invoke("log_error", {
         target: "school-holidays",
@@ -45,7 +45,10 @@ export const loadSchoolHolidaysData =
           // eslint-disable-next-line max-len
           "state/action-creators/schoolHolidaysDataActionCreators.ts-loadSchoolHolidaysData",
       });
+      return;
     }
+
+    dispatch(loadSchoolHolidaysDataAction(validatedData));
   };
 
 export const updateSchoolHolidaysDataAction = (
@@ -79,9 +82,9 @@ export const updateSchoolHolidaysData =
       });
     }
 
+    let validatedData: SchoolHolidaysData;
     try {
-      const valData = await validateSchoolHolidaysData(data);
-      dispatch(updateSchoolHolidaysDataAction(valData));
+      validatedData = await validateSchoolHolidaysData(data);
     } catch (err) {
       invoke("log_error", {
         target: "school-holidays",
@@ -90,5 +93,8 @@ export const updateSchoolHolidaysData =
           // eslint-disable-next-line max-len
           "state/action-creators/schoolHolidaysDataActionCreators.ts-updateSchoolHolidaysData",
       });
+      return;
     }
+
+    dispatch(updateSchoolHolidaysDataAction(validatedData));
   };

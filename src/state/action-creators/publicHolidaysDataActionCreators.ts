@@ -34,9 +34,9 @@ export const loadPublicHolidaysData =
       });
     }
 
+    let validatedData: PublicHolidaysData;
     try {
-      const valData = await validatePublicHolidaysData(data);
-      dispatch(loadPublicHolidaysDataAction(valData));
+      validatedData = await validatePublicHolidaysData(data);
     } catch (err) {
       invoke("log_error", {
         target: "public-holidays",
@@ -45,7 +45,10 @@ export const loadPublicHolidaysData =
           // eslint-disable-next-line max-len
           "state/action-creators/publicHolidaysDataActionCreators.ts-loadPublicHolidaysData",
       });
+      return;
     }
+
+    dispatch(loadPublicHolidaysDataAction(validatedData));
   };
 
 export const updatePublicHolidaysDataAction = (
@@ -79,9 +82,9 @@ export const updatePublicHolidaysData =
       });
     }
 
+    let validatedData: PublicHolidaysData;
     try {
-      const valData = await validatePublicHolidaysData(data);
-      dispatch(updatePublicHolidaysDataAction(valData));
+      validatedData = await validatePublicHolidaysData(data);
     } catch (err) {
       invoke("log_error", {
         target: "public-holidays",
@@ -90,5 +93,8 @@ export const updatePublicHolidaysData =
           // eslint-disable-next-line max-len
           "state/action-creators/publicHolidaysDataActionCreators.ts-updatePublicHolidaysData",
       });
+      return;
     }
+
+    dispatch(updatePublicHolidaysDataAction(validatedData));
   };

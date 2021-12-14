@@ -34,9 +34,9 @@ export const loadVacationTypesData =
       });
     }
 
+    let validatedData: VacationTypesData;
     try {
-      const valData = await validateVacationTypesData(data);
-      dispatch(loadVacationTypesDataAction(valData));
+      validatedData = await validateVacationTypesData(data);
     } catch (err) {
       invoke("log_error", {
         target: "vacation-types",
@@ -45,7 +45,10 @@ export const loadVacationTypesData =
           // eslint-disable-next-line max-len
           "state/action-creators/vacationTypesDataActionCreators.ts-loadVacationTypesData",
       });
+      return;
     }
+
+    dispatch(loadVacationTypesDataAction(validatedData));
   };
 
 export const updateVacationTypesDataAction = (
@@ -79,9 +82,9 @@ export const updateVacationTypesData =
       });
     }
 
+    let validatedData: VacationTypesData;
     try {
-      const valData = await validateVacationTypesData(data);
-      dispatch(updateVacationTypesDataAction(valData));
+      validatedData = await validateVacationTypesData(data);
     } catch (err) {
       invoke("log_error", {
         target: "vacation-types",
@@ -90,5 +93,8 @@ export const updateVacationTypesData =
           // eslint-disable-next-line max-len
           "state/action-creators/vacationTypesDataActionCreators.ts-updateVacationTypesData",
       });
+      return;
     }
+
+    dispatch(updateVacationTypesDataAction(validatedData));
   };
