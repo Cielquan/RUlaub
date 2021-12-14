@@ -29,8 +29,15 @@ pub fn get_logging_dir_path() -> Option<String> {
             );
             None
         }
-        Ok(current_dir) => Some(String::from(
-            current_dir.join(format!("{}_logs", NAME)).to_str()?,
-        )),
+        Ok(current_dir) => match current_dir.join(format!("{}_logs", NAME)).to_str() {
+            None => {
+                error!(
+                    target = "tracing",
+                    message = "Failed to stringify log dir in current dir; invalid unicode",
+                );
+                None
+            }
+            Some(path_str) => Some(String::from(path_str)),
+        },
     }
 }
