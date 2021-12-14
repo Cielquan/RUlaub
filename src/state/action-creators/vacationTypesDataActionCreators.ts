@@ -61,18 +61,16 @@ export const updateVacationTypesDataAction = (
 interface UpdatePayload {
   newEntries: NewVacationTypeData[] | undefined;
   updatedEntries: VacationTypeDataPayload[] | undefined;
-  removedEntries: string[] | undefined;
 }
 
 export const updateVacationTypesData =
-  ({ newEntries, updatedEntries, removedEntries }: UpdatePayload) =>
+  ({ newEntries, updatedEntries }: UpdatePayload) =>
   async (dispatch: Dispatch<VacationTypesDataAction>): Promise<void> => {
     let data;
     try {
       data = await invoke("update_vacation_types", {
         newEntries: newEntries ?? null,
         updatedEntries: updatedEntries ?? null,
-        removedEntries: removedEntries ?? null,
       });
     } catch (err) {
       invoke("log_error", {
