@@ -7,7 +7,12 @@ pub fn establish_connection_to(db_url: &str) -> anyhow::Result<SqliteConnection>
     match SqliteConnection::establish(db_url) {
         Ok(conn) => Ok(conn),
         Err(err) => {
-            error!(taget="database", message="Failed to connect to database.", error=?err);
+            error!(
+                taget = "database",
+                message = "Failed to connect to database",
+                error = ?err,
+                db_url = ?db_url
+            );
             Err(err.into())
         }
     }
