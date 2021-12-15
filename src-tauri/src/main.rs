@@ -29,7 +29,7 @@ use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trac
 use rulaub_backend::config::setup::{setup_config, ConfigSetupErr};
 use rulaub_backend::config::types::StringEnum;
 use rulaub_backend::config::DEFAULT_CONFIG;
-use rulaub_backend::logging::tracer::{setup_tracer, reload_tracing_level};
+use rulaub_backend::logging::tracer::{reload_tracing_level, setup_tracer};
 use rulaub_backend::menu::get_menu;
 use rulaub_backend::state::status_states::PageInit;
 use rulaub_backend::state::{ConfigSetupErrState, ConfigState, PageInitState, TracerHandleState};
