@@ -29,10 +29,10 @@ use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trac
 use rulaub_backend::config::setup::{setup_config, ConfigSetupErr};
 use rulaub_backend::config::types::StringEnum;
 use rulaub_backend::config::DEFAULT_CONFIG;
-use rulaub_backend::logging::tracer::{reload_tracing_level, setup_tracer};
+use rulaub_backend::logging::tracer::{setup_tracer, reload_tracing_level};
 use rulaub_backend::menu::get_menu;
 use rulaub_backend::state::status_states::PageInit;
-use rulaub_backend::state::{ConfigSetupErrState, ConfigState, PageInitState};
+use rulaub_backend::state::{ConfigSetupErrState, ConfigState, PageInitState, TracerHandleState};
 use rulaub_backend::NAME;
 
 fn main() {
@@ -58,6 +58,7 @@ fn main() {
                 )
             },
         )
+        .manage(TracerHandleState(Mutex::new(tracer_handle)))
         .manage(ConfigSetupErrState(Mutex::new(ConfigSetupErr::None)))
         .manage(ConfigState(Mutex::new(DEFAULT_CONFIG.clone())))
         .manage(PageInitState(Mutex::new(PageInit::LOADING)))
@@ -83,7 +84,8 @@ fn main() {
                         message = "Reload tracer with level from config file",
                         level = ?log_level
                     );
-                    reload_tracing_level(&tracer_handle, &log_level.to_string());
+                    let tracer_handle = app.state::<TracerHandleState>();
+                    reload_tracing_level(&tracer_handle.0.lock(), &log_level.to_string());
                 }
                 Err(err) => {
                     let setup_config_err_state = app.state::<ConfigSetupErrState>();
