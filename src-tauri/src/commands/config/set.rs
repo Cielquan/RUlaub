@@ -4,10 +4,11 @@ use crate::config::language::{Language, LanguageData};
 use crate::config::parser::serialize_config_to_toml_str;
 use crate::config::setup::ConfigSetupErr;
 use crate::config::theme::Theme;
-use crate::config::types::User;
+use crate::config::types::{User, StringEnum};
 use crate::config::Config;
 use crate::logging::log_level::LogLevel;
-use crate::state::{ConfigSetupErrState, ConfigState};
+use crate::logging::tracer::reload_tracing_level;
+use crate::state::{ConfigSetupErrState, ConfigState, TracerHandleState};
 
 fn save_config_to_file(config: &Config) -> Result<(), String> {
     match serialize_config_to_toml_str(config) {
@@ -76,9 +77,12 @@ pub fn set_log_level(
     level: LogLevel,
     state: tauri::State<ConfigState>,
     config_setup_err_state: tauri::State<ConfigSetupErrState>,
+    tracer_handle: tauri::State<TracerHandleState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
-    state_guard.settings.log_level = level;
+    state_guard.settings.log_level = level.clone();
+
+    reload_tracing_level(&tracer_handle.0.lock(), &level.to_string());
 
     if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
         save_config_to_file(&state_guard)?
