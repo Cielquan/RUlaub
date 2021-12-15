@@ -9,7 +9,6 @@ extern crate tracing;
 #[macro_use]
 extern crate rulaub_backend;
 
-use std::sync::Arc;
 use std::thread::sleep;
 use std::time::Duration;
 
@@ -30,19 +29,17 @@ use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trac
 use rulaub_backend::config::setup::{setup_config, ConfigSetupErr};
 use rulaub_backend::config::types::StringEnum;
 use rulaub_backend::config::DEFAULT_CONFIG;
-use rulaub_backend::logging::tracer::setup_tracer;
+use rulaub_backend::logging::tracer::{reload_tracing_level, setup_tracer};
 use rulaub_backend::menu::get_menu;
 use rulaub_backend::state::status_states::PageInit;
 use rulaub_backend::state::{ConfigSetupErrState, ConfigState, PageInitState};
 use rulaub_backend::NAME;
 
 fn main() {
-    let (tracing_level_reloader_, _guard) = setup_tracer();
-    let reloader = Arc::new(tracing_level_reloader_);
+    let (tracer_handle, _guard) = setup_tracer();
     info!(target = "main", message = "Main started.");
 
     debug!(target = "tauri_setup", message = "Build tauri app");
-    let reloader_ = reloader.clone();
     let app = tauri::Builder::default()
         .create_window(
             // NOTE: create window manually because of window specific menu
@@ -86,7 +83,7 @@ fn main() {
                         message = "Reload tracer with level from config file",
                         level = ?log_level
                     );
-                    reloader_(&log_level.to_string());
+                    reload_tracing_level(&tracer_handle, &log_level.to_string());
                 }
                 Err(err) => {
                     let setup_config_err_state = app.state::<ConfigSetupErrState>();
