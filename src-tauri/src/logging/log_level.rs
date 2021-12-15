@@ -31,7 +31,7 @@ lazy_static! {
         ["TRACE", "DEBUG", "INFO", "WARN", "ERROR"];
 }
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub enum LogLevel {
     TRACE,
     DEBUG,

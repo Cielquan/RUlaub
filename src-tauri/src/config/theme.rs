@@ -10,7 +10,7 @@ lazy_static! {
     pub static ref AVAILABLE_THEMES: [&'static str; 2] = ["dark", "light"];
 }
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub enum Theme {
     DARK,
     LIGHT,

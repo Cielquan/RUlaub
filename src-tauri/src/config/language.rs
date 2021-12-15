@@ -44,7 +44,7 @@ impl LanguageData {
     }
 }
 
-#[derive(Clone)]
+#[derive(Clone, PartialEq)]
 pub enum Language {
     DE,
     EN,
