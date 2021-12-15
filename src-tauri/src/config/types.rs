@@ -3,7 +3,7 @@ use super::theme::Theme;
 use crate::logging::log_level::LogLevel;
 
 /// The configuration object.
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Config {
     pub user: Option<User>,
@@ -28,14 +28,14 @@ impl Config {
 }
 
 /// The user specific part of the confiuration.
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct User {
     pub name: Option<String>,
 }
 
 /// The application specific part of the confiuration.
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Settings {
     pub database_uri: Option<String>,
@@ -48,7 +48,7 @@ pub struct Settings {
 }
 
 /// The configuration object from the file.
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct ConfigFile {
     pub user: Option<User>,
     pub settings: SettingsConfigFile,
@@ -72,7 +72,7 @@ impl ConfigFile {
 }
 
 /// The application specific part of the confiuration from the file.
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct SettingsConfigFile {
     pub database_uri: Option<String>,
     pub language: Language,
