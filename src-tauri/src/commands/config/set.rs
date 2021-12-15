@@ -4,7 +4,7 @@ use crate::config::language::{Language, LanguageData};
 use crate::config::parser::serialize_config_to_toml_str;
 use crate::config::setup::ConfigSetupErr;
 use crate::config::theme::Theme;
-use crate::config::types::{User, StringEnum};
+use crate::config::types::{StringEnum, User};
 use crate::config::Config;
 use crate::logging::log_level::LogLevel;
 use crate::logging::tracer::reload_tracing_level;
@@ -31,11 +31,14 @@ pub fn set_config_state(
     config_setup_err_state: tauri::State<ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
-    *state_guard = config;
 
-    if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-        save_config_to_file(&state_guard)?
-    };
+    if *state_guard != config {
+        *state_guard = config;
+
+        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
+            save_config_to_file(&state_guard)?
+        };
+    }
 
     Ok(state_guard.clone())
 }
@@ -47,11 +50,15 @@ pub fn set_db_uri(
     config_setup_err_state: tauri::State<ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
-    state_guard.settings.database_uri = Some(path);
+    let path_ = Some(path);
 
-    if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-        save_config_to_file(&state_guard)?
-    };
+    if state_guard.settings.database_uri != path_ {
+        state_guard.settings.database_uri = path_;
+
+        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
+            save_config_to_file(&state_guard)?
+        };
+    }
 
     Ok(state_guard.clone())
 }
@@ -63,11 +70,15 @@ pub fn set_langauge(
     config_setup_err_state: tauri::State<ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
-    state_guard.settings.language = LanguageData::new(lang);
+    let lang_data = LanguageData::new(lang);
 
-    if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-        save_config_to_file(&state_guard)?
-    };
+    if state_guard.settings.language != lang_data {
+        state_guard.settings.language = lang_data;
+
+        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
+            save_config_to_file(&state_guard)?
+        };
+    }
 
     Ok(state_guard.clone())
 }
@@ -80,13 +91,16 @@ pub fn set_log_level(
     tracer_handle: tauri::State<TracerHandleState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
-    state_guard.settings.log_level = level.clone();
 
-    reload_tracing_level(&tracer_handle.0.lock(), &level.to_string());
+    if state_guard.settings.log_level != level {
+        state_guard.settings.log_level = level.clone();
 
-    if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-        save_config_to_file(&state_guard)?
-    };
+        reload_tracing_level(&tracer_handle.0.lock(), &level.to_string());
+
+        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
+            save_config_to_file(&state_guard)?
+        };
+    }
 
     Ok(state_guard.clone())
 }
@@ -98,11 +112,14 @@ pub fn set_theme(
     config_setup_err_state: tauri::State<ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
-    state_guard.settings.theme = theme;
 
-    if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-        save_config_to_file(&state_guard)?
-    };
+    if state_guard.settings.theme != theme {
+        state_guard.settings.theme = theme;
+
+        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
+            save_config_to_file(&state_guard)?
+        };
+    }
 
     Ok(state_guard.clone())
 }
@@ -114,11 +131,14 @@ pub fn set_today_autoscroll_left_offset(
     config_setup_err_state: tauri::State<ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
-    state_guard.settings.today_autoscroll_left_offset = offset;
 
-    if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-        save_config_to_file(&state_guard)?
-    };
+    if state_guard.settings.today_autoscroll_left_offset != offset {
+        state_guard.settings.today_autoscroll_left_offset = offset;
+
+        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
+            save_config_to_file(&state_guard)?
+        };
+    }
 
     Ok(state_guard.clone())
 }
@@ -130,11 +150,15 @@ pub fn set_user_name(
     config_setup_err_state: tauri::State<ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
-    state_guard.user = Some(User { name: Some(name) });
+    let user = Some(User { name: Some(name) });
 
-    if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-        save_config_to_file(&state_guard)?
-    };
+    if state_guard.user != user {
+        state_guard.user = user;
+
+        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
+            save_config_to_file(&state_guard)?
+        };
+    }
 
     Ok(state_guard.clone())
 }
@@ -146,11 +170,14 @@ pub fn set_year_change_scroll_begin(
     config_setup_err_state: tauri::State<ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
-    state_guard.settings.year_change_scroll_begin = do_scroll;
 
-    if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-        save_config_to_file(&state_guard)?
-    };
+    if state_guard.settings.year_change_scroll_begin != do_scroll {
+        state_guard.settings.year_change_scroll_begin = do_scroll;
+
+        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
+            save_config_to_file(&state_guard)?
+        };
+    }
 
     Ok(state_guard.clone())
 }
@@ -162,11 +189,14 @@ pub fn set_year_to_show(
     config_setup_err_state: tauri::State<ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
-    state_guard.settings.year_to_show = Some(year);
 
-    if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-        save_config_to_file(&state_guard)?
-    };
+    if state_guard.settings.year_to_show != Some(year) {
+        state_guard.settings.year_to_show = Some(year);
+
+        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
+            save_config_to_file(&state_guard)?
+        };
+    }
 
     Ok(state_guard.clone())
 }
