@@ -1,10 +1,5 @@
 ## Roadmap
 
-- Add functions to fill BE state
-
-- Add tauri command for config update
-  on change in UI overwrite file & set current config back on CMD
-
 - FE | Add Vac Add dialog
 
 - FE | Add logic to dis-/enable FAB if no year selected / no DB
