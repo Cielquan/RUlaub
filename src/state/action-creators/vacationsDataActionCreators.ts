@@ -92,9 +92,9 @@ export const updateVacationsDataAction = (
 });
 
 interface UpdatePayload {
-  newEntries: NewVacationData[] | undefined;
-  updatedEntries: VacationDataPayload[] | undefined;
-  removedEntries: string[] | undefined;
+  newEntries?: NewVacationData[];
+  updatedEntries?: VacationDataPayload[];
+  removedEntries?: string[];
 }
 
 export const updateVacationsData =
