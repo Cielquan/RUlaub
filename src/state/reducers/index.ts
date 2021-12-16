@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
 
 import aboutPageReducer from "./aboutPageReducer";
+import addVacationDialogReducer from "./addVacationDialogReducer";
 import calendarRowUserMapReducer from "./calendarRowUserMapReducer";
 import configReducer from "./configReducer";
 import {
   aboutPageInitState,
+  addVacationDialogInitState,
   calendarRowUserMapInitState,
   configInitState,
   publicHolidaysDataInitState,
@@ -35,6 +37,7 @@ import vacationTypesDialogReducer from "./vacationTypesDialogReducer";
 
 const rootReducer = combineReducers({
   aboutPage: aboutPageReducer,
+  addVacationDialog: addVacationDialogReducer,
   calendarRowUserMap: calendarRowUserMapReducer,
   config: configReducer,
   publicHolidaysData: publicHolidaysDataReducer,
@@ -55,6 +58,7 @@ export type State = ReturnType<typeof rootReducer>;
 
 export const initialState: State = {
   aboutPage: aboutPageInitState,
+  addVacationDialog: addVacationDialogInitState,
   calendarRowUserMap: calendarRowUserMapInitState,
   config: configInitState,
   publicHolidaysData: publicHolidaysDataInitState,

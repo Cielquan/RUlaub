@@ -3,6 +3,11 @@ export enum AboutPageActionType {
   CLOSE = "close AboutPage",
 }
 
+export enum AddVacationDialogActionType {
+  OPEN = "open AddVacationDialog",
+  CLOSE = "close AddVacationDialog",
+}
+
 export enum CalendarRowUserMapActionType {
   UPDATE = "update calendar user order",
 }

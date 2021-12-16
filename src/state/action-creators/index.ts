@@ -1,4 +1,5 @@
 export * from "./aboutPageActionCreators";
+export * from "./addVacationDialogActionCreators";
 export * from "./calendarRowUserMapActionCreators";
 export * from "./configActionCreators";
 export * from "./publicHolidaysDataActionCreators";

@@ -1,5 +1,6 @@
 import {
   AboutPageActionType,
+  AddVacationDialogActionType,
   CalendarRowUserMapActionType,
   ConfigActionType,
   PublicHolidaysDataActionType,
@@ -29,6 +30,10 @@ import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/t
 
 export type AboutPageAction = {
   type: AboutPageActionType;
+};
+
+export type AddVacationDialogAction = {
+  type: AddVacationDialogActionType;
 };
 
 export type CalendarRowUserMapAction = {

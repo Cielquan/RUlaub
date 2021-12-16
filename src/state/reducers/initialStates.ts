@@ -13,6 +13,7 @@ export interface CalendarRowUserMap {
 }
 
 export const aboutPageInitState = false;
+export const addVacationDialogInitState = false;
 export const calendarRowUserMapInitState: CalendarRowUserMap = {};
 export const configInitState = null;
 export const publicHolidaysDataInitState: PublicHolidaysData = {};
