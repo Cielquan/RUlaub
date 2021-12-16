@@ -20,6 +20,7 @@ interface Props {
   rightButton: RightButton;
   leftButton?: LeftButton;
   mainButtonOnClick?: () => void;
+  disabled?: boolean;
 }
 export type DoubleButtonItemList = Array<Props>;
 
@@ -28,6 +29,7 @@ const SideMenuDoubleButton = ({
   rightButton,
   leftButton,
   mainButtonOnClick,
+  disabled,
 }: Props): ReactElement => {
   const wrapInTooltip = (
     component: ReactElement,
@@ -44,7 +46,7 @@ const SideMenuDoubleButton = ({
 
   return (
     <ListItem sx={{ padding: 0, marginRight: 2, ...sxStyle }}>
-      <ListItemButton onClick={mainButtonOnClick}>
+      <ListItemButton disabled={disabled} onClick={mainButtonOnClick}>
         <ListItemIcon>{mainButton[1]}</ListItemIcon>
         <ListItemText primary={mainButton[0]} />
         {leftButton ? (
@@ -66,6 +68,7 @@ const SideMenuDoubleButton = ({
 SideMenuDoubleButton.defaultProps = {
   leftButton: undefined,
   mainButtonOnClick: () => undefined,
+  disabled: false,
 };
 
 export default SideMenuDoubleButton;
