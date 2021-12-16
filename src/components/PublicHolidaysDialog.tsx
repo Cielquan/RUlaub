@@ -192,6 +192,10 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
         <Tooltip arrow title={t`Save changes to database`}>
           <Button
             data-testid={`${id}-btn-save`}
+            disabled={
+              Object.keys(updatedPublicHolidays).length === 0 &&
+              Object.keys(newPublicHolidays).length === 0
+            }
             onClick={() => {
               if (typeof onClick === "function") onClick();
               saveChanges();

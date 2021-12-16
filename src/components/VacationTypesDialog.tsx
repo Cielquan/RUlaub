@@ -177,6 +177,10 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
         <Tooltip arrow title={t`Save changes to database`}>
           <Button
             data-testid={`${id}-btn-save`}
+            disabled={
+              Object.keys(updatedVacationTypes).length === 0 &&
+              Object.keys(newVacationTypes).length === 0
+            }
             onClick={() => {
               if (typeof onClick === "function") onClick();
               saveChanges();

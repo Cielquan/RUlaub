@@ -177,6 +177,10 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
         <Tooltip arrow title={t`Save changes to database`}>
           <Button
             data-testid={`${id}-btn-save`}
+            disabled={
+              Object.keys(updatedUsers).length === 0 &&
+              Object.keys(newUsers).length === 0
+            }
             onClick={() => {
               if (typeof onClick === "function") onClick();
               saveChanges();
