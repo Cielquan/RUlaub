@@ -1,5 +1,5 @@
 import { t } from "@lingui/macro";
-import { AddCircle as AddIcon, Group as GroupIcon } from "@mui/icons-material";
+import { AddCircle as AddIcon, EventNote as EventNoteIcon } from "@mui/icons-material";
 import {
   Button,
   Dialog,
@@ -140,7 +140,7 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
     >
       <DialogTitle id={id} sx={{ display: "flex", alignItems: "center" }}>
         <Box sx={{ flexGrow: 1 }}>{t`Vacation Types`}</Box>
-        <GroupIcon />
+        <EventNoteIcon />
       </DialogTitle>
       <DialogContent>
         <List sx={{ display: "flex", flexDirection: "column", paddingBottom: 0 }}>
