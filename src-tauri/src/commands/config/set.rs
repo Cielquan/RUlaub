@@ -11,6 +11,7 @@ use crate::logging::tracer::reload_tracing_level;
 use crate::state::{ConfigSetupErrState, ConfigState, TracerHandleState};
 
 fn save_config_to_file(config: &Config) -> Result<(), String> {
+    trace!(target = "command", message = "Save config to file", config = ?config);
     match serialize_config_to_toml_str(config) {
         Err(_) => {
             return Err("config-serialize".into());
@@ -23,13 +24,14 @@ fn save_config_to_file(config: &Config) -> Result<(), String> {
     }
     Ok(())
 }
-
+#[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
 pub fn set_config_state(
     config: Config,
     state: tauri::State<ConfigState>,
     config_setup_err_state: tauri::State<ConfigSetupErrState>,
 ) -> Result<Config, String> {
+    trace!(target = "command", message = "");
     let mut state_guard = state.0.lock();
 
     if *state_guard != config {
@@ -43,6 +45,7 @@ pub fn set_config_state(
     Ok(state_guard.clone())
 }
 
+#[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
 pub fn set_db_uri(
     path: String,
@@ -63,6 +66,7 @@ pub fn set_db_uri(
     Ok(state_guard.clone())
 }
 
+#[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
 pub fn set_langauge(
     lang: Language,
@@ -83,6 +87,7 @@ pub fn set_langauge(
     Ok(state_guard.clone())
 }
 
+#[tracing::instrument(skip(state, config_setup_err_state, tracer_handle))]
 #[tauri::command]
 pub fn set_log_level(
     level: LogLevel,
@@ -105,6 +110,7 @@ pub fn set_log_level(
     Ok(state_guard.clone())
 }
 
+#[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
 pub fn set_theme(
     theme: Theme,
@@ -124,6 +130,7 @@ pub fn set_theme(
     Ok(state_guard.clone())
 }
 
+#[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
 pub fn set_today_autoscroll_left_offset(
     offset: i32,
@@ -143,6 +150,7 @@ pub fn set_today_autoscroll_left_offset(
     Ok(state_guard.clone())
 }
 
+#[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
 pub fn set_user_name(
     name: String,
@@ -163,6 +171,7 @@ pub fn set_user_name(
     Ok(state_guard.clone())
 }
 
+#[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
 pub fn set_year_change_scroll_begin(
     do_scroll: bool,
@@ -182,6 +191,7 @@ pub fn set_year_change_scroll_begin(
     Ok(state_guard.clone())
 }
 
+#[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
 pub fn set_year_to_show(
     year: i32,

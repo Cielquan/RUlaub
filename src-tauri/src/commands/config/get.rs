@@ -8,36 +8,43 @@ use crate::logging::log_level::LogLevel;
 use crate::logging::AVAILABLE_LOG_LEVELS;
 use crate::state::ConfigState;
 
+#[tracing::instrument(skip(state))]
 #[tauri::command]
 pub fn get_config_state(state: tauri::State<ConfigState>) -> Config {
     state.0.lock().clone()
 }
 
+#[tracing::instrument(skip(state))]
 #[tauri::command]
 pub fn get_language(state: tauri::State<ConfigState>) -> LanguageData {
     state.0.lock().settings.language.clone()
 }
 
+#[tracing::instrument]
 #[tauri::command]
 pub fn get_available_languages() -> HashMap<&'static str, LanguageData> {
     (*AVAILABLE_LANGUAGES).clone()
 }
 
+#[tracing::instrument(skip(state))]
 #[tauri::command]
 pub fn get_log_level(state: tauri::State<ConfigState>) -> LogLevel {
     state.0.lock().settings.log_level.clone()
 }
 
+#[tracing::instrument]
 #[tauri::command]
 pub fn get_available_log_levels() -> [&'static str; 5] {
     *AVAILABLE_LOG_LEVELS
 }
 
+#[tracing::instrument(skip(state))]
 #[tauri::command]
 pub fn get_theme(state: tauri::State<ConfigState>) -> Theme {
     state.0.lock().settings.theme.clone()
 }
 
+#[tracing::instrument]
 #[tauri::command]
 pub fn get_available_themes() -> [&'static str; 2] {
     *AVAILABLE_THEMES
