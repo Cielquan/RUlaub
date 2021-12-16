@@ -19,6 +19,8 @@
 
 - **ALPHA**
 
+- Check for double/intersecting Vacation
+
 - ? split current state & new/update for DB stuff
   so on DB update the state can be updated w/o corrupting new/update data
   the current payload is like the update state .. is enough?
