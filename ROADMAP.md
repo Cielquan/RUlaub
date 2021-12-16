@@ -85,6 +85,8 @@
 
 - FE | Add new view to show team overview with how many days taken etc.
 
+- FE | Mark workdays in datepicker for vacations
+
 - Safe window size/position and restore on boot
 
 - ? rewrite the calender without react-window
