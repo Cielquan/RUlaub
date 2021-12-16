@@ -21,7 +21,7 @@ const NewHolidayButton = (): ReactElement => {
 
   const disabled: boolean =
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    configState!.settings.yearToShow === null && !configState!.settings.databaseUri;
+    configState!.settings.yearToShow === null || !configState!.settings.databaseUri;
 
   return (
     <StyledNewHolidayButton>
