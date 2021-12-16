@@ -1,5 +1,7 @@
 ## Roadmap
 
+- ?FE | add xForm states to Settings and save entries only on difference
+
 - FE | Add option to load current year or all for SchoolHoli Dialog
   current year is default
 
