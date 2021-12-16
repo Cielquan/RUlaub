@@ -4,8 +4,9 @@ import { Box } from "@mui/system";
 import { invoke } from "@tauri-apps/api/tauri";
 import React, { ReactElement } from "react";
 
-import Calendar from "./components/Calendar";
 import AboutPage from "./components/AboutPage";
+import AddVacationDialog from "./components/AddVacationDialog";
+import Calendar from "./components/Calendar";
 import Navbar from "./components/Navbar";
 import NewHolidayButton from "./components/NewHolidayButton";
 import PublicHolidaysDialog from "./components/PublicHolidaysDialog";
@@ -56,6 +57,7 @@ const App = (): ReactElement => (
       </StyledMain>
     </Box>
     <AboutPage />
+    <AddVacationDialog />
     <PublicHolidaysDialog />
     <SchoolHolidaysDialog />
     <SettingsDialog />

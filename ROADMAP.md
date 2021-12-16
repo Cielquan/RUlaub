@@ -1,7 +1,5 @@
 ## Roadmap
 
-- FE | Add Vac Add dialog
-
 - FE | Add option to load current year or all for SchoolHoli Dialog
   current year is default
 
