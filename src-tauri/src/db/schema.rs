@@ -22,6 +22,12 @@ table! {
 }
 
 table! {
+    school_holidays_link (link) {
+        link -> Text,
+    }
+}
+
+table! {
     users (id) {
         id -> Integer,
         name -> Text,
@@ -67,6 +73,7 @@ joinable!(vacations -> vacation_types (vacation_type_id));
 allow_tables_to_appear_in_same_query!(
     public_holidays,
     school_holidays,
+    school_holidays_link,
     users,
     vacation_types,
     vacations,

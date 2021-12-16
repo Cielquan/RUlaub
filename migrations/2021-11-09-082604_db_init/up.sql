@@ -47,6 +47,11 @@ CREATE TABLE school_holidays (
     end_year INTEGER(4) NOT NULL
 );
 
+-- should only have one entry
+CREATE TABLE school_holidays_link (
+    link VARCHAR(2000) NOT NULL PRIMARY KEY
+);
+
 CREATE TABLE public_holidays (
     id INTEGER NOT NULL PRIMARY KEY,
     name VARCHAR(128) NOT NULL,
