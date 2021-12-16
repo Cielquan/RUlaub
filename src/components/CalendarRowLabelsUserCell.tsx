@@ -14,6 +14,7 @@ interface Props {
 }
 
 const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElement => {
+  const configState = useSelector((state: State) => state.config);
   const usersDataState = useSelector((state: State) => state.usersData);
   const calendarRowUserMapState = useSelector(
     (state: State) => state.calendarRowUserMap
@@ -28,6 +29,9 @@ const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElem
   } catch {
     userID = undefined;
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const disabled = !configState!.settings.databaseUri;
 
   return (
     <Box
@@ -46,7 +50,7 @@ const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElem
     >
       {userID === undefined ? (
         <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
-          <IconButton onClick={openUsersDialog}>
+          <IconButton disabled={disabled} onClick={openUsersDialog}>
             <CreateIcon />
           </IconButton>
         </Box>
