@@ -301,8 +301,7 @@ const VacationsDialogEntry = ({
       !validateForm()
     )
       return;
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    setTypeID(Number(typeIDForm!));
+    setTypeID(Number(typeIDForm));
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     setStartDate(startDateForm!.toISOString().slice(0, 10));
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
