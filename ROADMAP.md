@@ -2,8 +2,6 @@
 
 - FE | Add Vac Add dialog
 
-- FE | Add logic to dis-/enable FAB if no year selected / no DB
-
 - FE | Add option to load current year or all for SchoolHoli Dialog
   current year is default
 
