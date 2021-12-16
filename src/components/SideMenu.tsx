@@ -53,6 +53,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     selectDB,
   } = bindActionCreators(actionCreators, dispatch);
   const sideMenuState = useSelector((state: State) => state.sideMenu);
+  const configState = useSelector((state: State) => state.config);
 
   const wrapOnClick =
     (fn: () => void): (() => void) =>
@@ -84,6 +85,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
                 ]
               : undefined
           }
+          disabled={item.disabled}
         />
         <Divider />
       </React.Fragment>
@@ -99,27 +101,37 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
       mainButton: [t`Users`, <GroupIcon />],
       mainButtonOnClick: openUsersDialog,
       rightButton: [<CreateIcon />, openUsersDialog, t`Edit`],
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      disabled: !configState!.settings.databaseUri,
     },
     {
       mainButton: [t`Public Holidays`, <EventBusyIcon />],
       mainButtonOnClick: openPublicHolidaysDialog,
       rightButton: [<CreateIcon />, openPublicHolidaysDialog, t`Edit`],
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      disabled: !configState!.settings.databaseUri,
     },
     {
       mainButton: [t`School Holidays`, <DateRangeIcon />],
       mainButtonOnClick: openSchoolHolidaysDialog,
       rightButton: [<CreateIcon />, openSchoolHolidaysDialog, t`Edit`],
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      disabled: !configState!.settings.databaseUri,
     },
     {
       mainButton: [t`Vacation Types`, <EventNoteIcon />],
       mainButtonOnClick: openVacationTypesDialog,
       rightButton: [<CreateIcon />, openVacationTypesDialog, t`Edit`],
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      disabled: !configState!.settings.databaseUri,
     },
     {
       mainButton: [t`Vacation`, <FlightIcon />],
       mainButtonOnClick: openVacationsDialog,
       rightButton: [<CreateIcon />, openVacationsDialog, t`Edit`],
       leftButton: [<AddIcon />, () => undefined, t`Create`],
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      disabled: !configState!.settings.databaseUri,
     },
   ];
 
