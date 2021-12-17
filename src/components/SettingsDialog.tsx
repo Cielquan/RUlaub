@@ -60,19 +60,57 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
   const { settings } = configState!;
 
   const [name, setName] = useState(configState?.user?.name ?? null);
+  const [nameForm, setNameForm] = useState(name);
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [level, setLevel] = useState(settings.logLevel);
+  const [levelForm, setLevelForm] = useState(level);
   const [offset, setOffset] = useState(settings.todayAutoscrollLeftOffset.toString());
-  const [offsetError, setOffsetError] = useState(false);
+  const [offsetForm, setOffsetForm] = useState(offset);
   const [scroll, setScroll] = useState(settings.yearChangeScrollBegin);
+  const [scrollForm, setScrollForm] = useState(scroll);
+
+  const [submittedOnce, setSubmittedOnce] = useState(false);
+
+  type OffsetFormError = typeof OffsetFormError[keyof typeof OffsetFormError];
+  const OffsetFormError = {
+    NONE: "",
+    EMPTY: t`An offset must be set.`,
+    NAN: t`Offset must be a number.`,
+    NEGATIV: t`Offset must be positiv.`,
+  } as const;
+  const [offsetFormError, setOffsetFormError] = useState<OffsetFormError>(
+    OffsetFormError.NONE
+  );
+
+  const validateOffset = (value: string): boolean => {
+    if (value === "") {
+      setOffsetFormError(OffsetFormError.EMPTY);
+      return false;
+    }
+    if (Number.isNaN(Number(value))) {
+      setOffsetFormError(OffsetFormError.NAN);
+      return false;
+    }
+    if (Number(value) < 0) {
+      setOffsetFormError(OffsetFormError.NEGATIV);
+      return false;
+    }
+    setOffsetFormError(OffsetFormError.NONE);
+    return true;
+  };
 
   useEffect(() => {
     setName(configState?.user?.name ?? "");
+    setNameForm(configState?.user?.name ?? "");
     setLevel(settings.logLevel);
+    setLevelForm(settings.logLevel);
     setShowAdvanced(false);
     setOffset(settings.todayAutoscrollLeftOffset.toString());
-    setOffsetError(false);
+    setOffsetForm(settings.todayAutoscrollLeftOffset.toString());
+    setOffsetFormError(OffsetFormError.NONE);
     setScroll(settings.yearChangeScrollBegin);
+    setScrollForm(settings.yearChangeScrollBegin);
+    setSubmittedOnce(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settingsDialogState]);
 
@@ -87,6 +125,27 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
     value: index,
     label: lvl.charAt(0).toUpperCase() + lvl.slice(1).toLowerCase(),
   }));
+
+  const saveChanges = (): boolean => {
+    if (offset !== offsetForm) {
+      if (offsetFormError || !validateOffset(offsetForm)) return false;
+      setOffset(offsetForm);
+      setTodayAutoscrollLeftOffset(Number(offsetForm));
+    }
+    if (level !== levelForm) {
+      setLevel(levelForm);
+      setLogLevel(levelForm);
+    }
+    if (scroll !== scrollForm) {
+      setScroll(scrollForm);
+      setYearChangeScrollBegin(scrollForm);
+    }
+    if (name !== nameForm && nameForm !== undefined && nameForm !== null) {
+      setName(nameForm);
+      setUserName(nameForm);
+    }
+    return true;
+  };
 
   return (
     <Dialog
@@ -110,11 +169,11 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           type="text"
           fullWidth
           variant="outlined"
-          value={name}
+          value={nameForm}
           // eslint-disable-next-line max-len
           helperText={t`Enter your name to have it be preselected when entering new vacation.`}
           onChange={(event): void => {
-            setName(event.target.value);
+            setNameForm(event.target.value);
           }}
           sx={{ marginY: 1 }}
         />
@@ -160,13 +219,13 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
             </FormLabel>
             <Box sx={{ width: "90%", marginX: "5%" }}>
               <Slider
-                key={`log-level-slider-at-${availableLogLevels.indexOf(level)}`}
+                key={`log-level-slider-at-${availableLogLevels.indexOf(levelForm)}`}
                 marks={marks}
-                defaultValue={availableLogLevels.indexOf(level)}
+                defaultValue={availableLogLevels.indexOf(levelForm)}
                 min={0}
                 max={marks.length - 1}
                 onChangeCommitted={(event, newValue) => {
-                  setLevel(availableLogLevels[newValue as number]);
+                  setLevelForm(availableLogLevels[newValue as number]);
                 }}
               />
             </Box>
@@ -179,17 +238,12 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
             inputProps={{ inputMode: "numeric", pattern: "[0-9]+" }}
             fullWidth
             variant="outlined"
-            value={offset}
-            error={offsetError}
-            helperText={offsetError ? t`Only positive numbers are permitted.` : ""}
+            value={offsetForm}
+            error={offsetFormError !== OffsetFormError.NONE}
+            helperText={OffsetFormError}
             onChange={(event) => {
-              const newValue = event.target.value;
-              setOffsetError(
-                newValue === "" ||
-                  Number.isNaN(Number(newValue)) ||
-                  Number(newValue) < 0
-              );
-              setOffset(newValue);
+              if (submittedOnce) validateOffset(event.target.value);
+              setOffsetForm(event.target.value);
             }}
             sx={{ marginY: 1 }}
           />
@@ -212,8 +266,8 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
               label={t`On year switch, scroll to beginning of the year, if not current year.`}
               control={
                 <Checkbox
-                  checked={scroll}
-                  onChange={(event) => setScroll(event.target.checked)}
+                  checked={scrollForm}
+                  onChange={(event) => setScrollForm(event.target.checked)}
                 />
               }
             />
@@ -225,13 +279,9 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           data-testid={`${id}-btn-save`}
           onClick={() => {
             if (typeof onClick === "function") onClick();
+            setSubmittedOnce(true);
+            if (!saveChanges()) return;
             closeSettingsDialog();
-            setLogLevel(level);
-            setTodayAutoscrollLeftOffset(
-              offsetError ? settings.todayAutoscrollLeftOffset : Number(offset)
-            );
-            if (name !== undefined && name !== null) setUserName(name);
-            setYearChangeScrollBegin(scroll);
           }}
           autoFocus
         >

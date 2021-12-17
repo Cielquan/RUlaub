@@ -113,7 +113,7 @@ msgstr "End Date"
 #: src/components/AddVacationDialog.tsx:355
 #: src/components/PublicHolidaysDialog.tsx:213
 #: src/components/SchoolHolidaysDialog.tsx:301
-#: src/components/SettingsDialog.tsx:238
+#: src/components/SettingsDialog.tsx:288
 #: src/components/UsersDialog.tsx:197
 #: src/components/VacationTypesDialog.tsx:198
 #: src/components/VacationsDialog.tsx:257
@@ -123,7 +123,7 @@ msgstr "Save"
 #: src/components/AddVacationDialog.tsx:366
 #: src/components/PublicHolidaysDialog.tsx:224
 #: src/components/SchoolHolidaysDialog.tsx:312
-#: src/components/SettingsDialog.tsx:248
+#: src/components/SettingsDialog.tsx:298
 #: src/components/UsersDialog.tsx:208
 #: src/components/VacationTypesDialog.tsx:209
 #: src/components/VacationsDialog.tsx:268
@@ -150,7 +150,7 @@ msgstr "Activate Light Theme"
 msgid "Activate Dark Theme"
 msgstr "Activate Dark Theme"
 
-#: src/components/NewHolidayButton.tsx:29
+#: src/components/NewHolidayButton.tsx:28
 msgid "Add new Holiday"
 msgstr "Add new Holiday"
 
@@ -197,7 +197,7 @@ msgstr "An offset must be entered."
 #: src/components/PublicHolidaysDialogEntry.tsx:282
 #: src/components/SchoolHolidaysDialogEntry.tsx:197
 #: src/components/SchoolHolidaysDialogEntry.tsx:223
-#: src/components/SettingsDialog.tsx:109
+#: src/components/SettingsDialog.tsx:168
 #: src/components/UsersDialogEntry.tsx:208
 #: src/components/UsersDialogEntry.tsx:241
 #: src/components/VacationTypesDialogEntry.tsx:169
@@ -290,32 +290,40 @@ msgstr "Link"
 msgid "School Holiday must have a name."
 msgstr "School Holiday must have a name."
 
-#: src/components/SettingsDialog.tsx:101
+#: src/components/SettingsDialog.tsx:77
+msgid "An offset must be set."
+msgstr "An offset must be set."
+
+#: src/components/SettingsDialog.tsx:78
+msgid "Offset must be a number."
+msgstr "Offset must be a number."
+
+#: src/components/SettingsDialog.tsx:79
+msgid "Offset must be positiv."
+msgstr "Offset must be positiv."
+
+#: src/components/SettingsDialog.tsx:160
 #: src/components/SideMenu.tsx:166
 msgid "Settings"
 msgstr "Settings"
 
-#: src/components/SettingsDialog.tsx:115
+#: src/components/SettingsDialog.tsx:174
 msgid "Enter your name to have it be preselected when entering new vacation."
 msgstr "Enter your name to have it be preselected when entering new vacation."
 
-#: src/components/SettingsDialog.tsx:140
+#: src/components/SettingsDialog.tsx:199
 msgid "Advanced Settings"
 msgstr "Advanced Settings"
 
-#: src/components/SettingsDialog.tsx:159
+#: src/components/SettingsDialog.tsx:218
 msgid "Logging Level"
 msgstr "Logging Level"
 
-#: src/components/SettingsDialog.tsx:177
+#: src/components/SettingsDialog.tsx:236
 msgid "Left side offset on auto scroll to today."
 msgstr "Left side offset on auto scroll to today."
 
-#: src/components/SettingsDialog.tsx:184
-msgid "Only positive numbers are permitted."
-msgstr "Only positive numbers are permitted."
-
-#: src/components/SettingsDialog.tsx:212
+#: src/components/SettingsDialog.tsx:266
 msgid "On year switch, scroll to beginning of the year, if not current year."
 msgstr "On year switch, scroll to beginning of the year, if not current year."
 
