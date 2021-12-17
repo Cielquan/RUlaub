@@ -25,10 +25,12 @@ const NewHolidayButton = (): ReactElement => {
 
   return (
     <StyledNewHolidayButton>
-      <Tooltip arrow title={t`Add new Holiday`}>
-        <Fab disabled={disabled} color="primary" onClick={openAddVacationDialog}>
-          <AddIcon />
-        </Fab>
+      <Tooltip arrow title={t`Add new Holiday`} disableHoverListener={disabled}>
+        <span>
+          <Fab disabled={disabled} color="primary" onClick={openAddVacationDialog}>
+            <AddIcon />
+          </Fab>
+        </span>
       </Tooltip>
     </StyledNewHolidayButton>
   );

@@ -207,6 +207,11 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
 
   const id = "schoolHolidays-dialog";
 
+  const saveDisabled =
+    Object.keys(updatedSchoolHolidays).length === 0 &&
+    Object.keys(newSchoolHolidays).length === 0 &&
+    link === linkForm;
+
   return (
     <Dialog
       aria-labelledby={id}
@@ -275,25 +280,27 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
         </List>
       </DialogContent>
       <DialogActions>
-        <Tooltip arrow title={t`Save changes to database`}>
-          <Button
-            data-testid={`${id}-btn-save`}
-            disabled={
-              Object.keys(updatedSchoolHolidays).length === 0 &&
-              Object.keys(newSchoolHolidays).length === 0 &&
-              link === linkForm
-            }
-            onClick={() => {
-              if (typeof onClick === "function") onClick();
-              setSubmittedOnce(true);
-              if (!saveChanges()) return;
-              setUpdatedSchoolHolidays({});
-              setNewSchoolHolidays({});
-              closeSchoolHolidaysDialog();
-            }}
-          >
-            {t`Save`}
-          </Button>
+        <Tooltip
+          arrow
+          title={t`Save changes to database`}
+          disableHoverListener={saveDisabled}
+        >
+          <span>
+            <Button
+              data-testid={`${id}-btn-save`}
+              disabled={saveDisabled}
+              onClick={() => {
+                if (typeof onClick === "function") onClick();
+                setSubmittedOnce(true);
+                if (!saveChanges()) return;
+                setUpdatedSchoolHolidays({});
+                setNewSchoolHolidays({});
+                closeSchoolHolidaysDialog();
+              }}
+            >
+              {t`Save`}
+            </Button>
+          </span>
         </Tooltip>
         <Button
           data-testid={`${id}-btn-cancel`}

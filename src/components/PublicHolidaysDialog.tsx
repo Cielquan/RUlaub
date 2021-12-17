@@ -139,6 +139,10 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
 
   const id = "publicHolidays-dialog";
 
+  const saveDisabled =
+    Object.keys(updatedPublicHolidays).length === 0 &&
+    Object.keys(newPublicHolidays).length === 0;
+
   return (
     <Dialog
       aria-labelledby={id}
@@ -189,23 +193,26 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
         </List>
       </DialogContent>
       <DialogActions>
-        <Tooltip arrow title={t`Save changes to database`}>
-          <Button
-            data-testid={`${id}-btn-save`}
-            disabled={
-              Object.keys(updatedPublicHolidays).length === 0 &&
-              Object.keys(newPublicHolidays).length === 0
-            }
-            onClick={() => {
-              if (typeof onClick === "function") onClick();
-              saveChanges();
-              setUpdatedPublicHolidays({});
-              setNewPublicHolidays({});
-              closePublicHolidaysDialog();
-            }}
-          >
-            {t`Save`}
-          </Button>
+        <Tooltip
+          arrow
+          title={t`Save changes to database`}
+          disableHoverListener={saveDisabled}
+        >
+          <span>
+            <Button
+              data-testid={`${id}-btn-save`}
+              disabled={saveDisabled}
+              onClick={() => {
+                if (typeof onClick === "function") onClick();
+                saveChanges();
+                setUpdatedPublicHolidays({});
+                setNewPublicHolidays({});
+                closePublicHolidaysDialog();
+              }}
+            >
+              {t`Save`}
+            </Button>
+          </span>
         </Tooltip>
         <Button
           data-testid={`${id}-btn-cancel`}

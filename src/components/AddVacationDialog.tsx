@@ -221,6 +221,8 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
 
   const id = "add-vacations-dialog";
 
+  const saveDisabled = currentUserID === "";
+
   return (
     <Dialog
       aria-labelledby={id}
@@ -340,17 +342,19 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
         )}
       </DialogContent>
       <DialogActions>
-        <Tooltip arrow title={t`Save`}>
-          <Button
-            data-testid={`${id}-btn-save`}
-            disabled={currentUserID === ""}
-            onClick={() => {
-              if (typeof onClick === "function") onClick();
-              onClickSave();
-            }}
-          >
-            {t`Save`}
-          </Button>
+        <Tooltip arrow title={t`Save`} disableHoverListener={saveDisabled}>
+          <span>
+            <Button
+              data-testid={`${id}-btn-save`}
+              disabled={saveDisabled}
+              onClick={() => {
+                if (typeof onClick === "function") onClick();
+                onClickSave();
+              }}
+            >
+              {t`Save`}
+            </Button>
+          </span>
         </Tooltip>
         <Button
           data-testid={`${id}-btn-cancel`}

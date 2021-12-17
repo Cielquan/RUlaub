@@ -128,6 +128,9 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
 
   const id = "users-dialog";
 
+  const saveDisabled =
+    Object.keys(updatedUsers).length === 0 && Object.keys(newUsers).length === 0;
+
   return (
     <Dialog
       aria-labelledby={id}
@@ -174,23 +177,26 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
         </List>
       </DialogContent>
       <DialogActions>
-        <Tooltip arrow title={t`Save changes to database`}>
-          <Button
-            data-testid={`${id}-btn-save`}
-            disabled={
-              Object.keys(updatedUsers).length === 0 &&
-              Object.keys(newUsers).length === 0
-            }
-            onClick={() => {
-              if (typeof onClick === "function") onClick();
-              saveChanges();
-              setUpdatedUsers({});
-              setNewUsers({});
-              closeUsersDialog();
-            }}
-          >
-            {t`Save`}
-          </Button>
+        <Tooltip
+          arrow
+          title={t`Save changes to database`}
+          disableHoverListener={saveDisabled}
+        >
+          <span>
+            <Button
+              data-testid={`${id}-btn-save`}
+              disabled={saveDisabled}
+              onClick={() => {
+                if (typeof onClick === "function") onClick();
+                saveChanges();
+                setUpdatedUsers({});
+                setNewUsers({});
+                closeUsersDialog();
+              }}
+            >
+              {t`Save`}
+            </Button>
+          </span>
         </Tooltip>
         <Button
           data-testid={`${id}-btn-cancel`}

@@ -128,6 +128,10 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
 
   const id = "vacationTypes-dialog";
 
+  const saveDisabled =
+    Object.keys(updatedVacationTypes).length === 0 &&
+    Object.keys(newVacationTypes).length === 0;
+
   return (
     <Dialog
       aria-labelledby={id}
@@ -174,23 +178,26 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
         </List>
       </DialogContent>
       <DialogActions>
-        <Tooltip arrow title={t`Save changes to database`}>
-          <Button
-            data-testid={`${id}-btn-save`}
-            disabled={
-              Object.keys(updatedVacationTypes).length === 0 &&
-              Object.keys(newVacationTypes).length === 0
-            }
-            onClick={() => {
-              if (typeof onClick === "function") onClick();
-              saveChanges();
-              setUpdatedVacationTypes({});
-              setNewVacationTypes({});
-              closeVacationTypesDialog();
-            }}
-          >
-            {t`Save`}
-          </Button>
+        <Tooltip
+          arrow
+          title={t`Save changes to database`}
+          disableHoverListener={saveDisabled}
+        >
+          <span>
+            <Button
+              data-testid={`${id}-btn-save`}
+              disabled={saveDisabled}
+              onClick={() => {
+                if (typeof onClick === "function") onClick();
+                saveChanges();
+                setUpdatedVacationTypes({});
+                setNewVacationTypes({});
+                closeVacationTypesDialog();
+              }}
+            >
+              {t`Save`}
+            </Button>
+          </span>
         </Tooltip>
         <Button
           data-testid={`${id}-btn-cancel`}

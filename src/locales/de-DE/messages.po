@@ -68,30 +68,30 @@ msgstr "Ein Enddatum muss aufgewählt werden."
 msgid "End date cannot be smaller than start date."
 msgstr "Enddatum kann nicht kleiner als das Startdatum sein."
 
-#: src/components/AddVacationDialog.tsx:235
+#: src/components/AddVacationDialog.tsx:237
 msgid "Add Vacation"
 msgstr "Urlaub hinzufügen"
 
-#: src/components/AddVacationDialog.tsx:240
+#: src/components/AddVacationDialog.tsx:242
 msgid "Please select the user to add a vacation to."
 msgstr "Bitte einen Nutzer auswählen, um Urlaub einzutragen"
 
-#: src/components/AddVacationDialog.tsx:244
-#: src/components/AddVacationDialog.tsx:249
+#: src/components/AddVacationDialog.tsx:246
+#: src/components/AddVacationDialog.tsx:251
 #: src/components/VacationsDialog.tsx:180
 #: src/components/VacationsDialog.tsx:185
 msgid "User"
 msgstr "Benutzer"
 
-#: src/components/AddVacationDialog.tsx:277
-#: src/components/AddVacationDialog.tsx:282
+#: src/components/AddVacationDialog.tsx:279
+#: src/components/AddVacationDialog.tsx:284
 #: src/components/VacationsDialogEntry.tsx:210
 #: src/components/VacationsDialogEntry.tsx:234
 #: src/components/VacationsDialogEntry.tsx:239
 msgid "Type"
 msgstr "Typ"
 
-#: src/components/AddVacationDialog.tsx:298
+#: src/components/AddVacationDialog.tsx:300
 #: src/components/SchoolHolidaysDialogEntry.tsx:200
 #: src/components/SchoolHolidaysDialogEntry.tsx:237
 #: src/components/VacationsDialogEntry.tsx:214
@@ -99,7 +99,7 @@ msgstr "Typ"
 msgid "Start Date"
 msgstr "Startdatum"
 
-#: src/components/AddVacationDialog.tsx:320
+#: src/components/AddVacationDialog.tsx:322
 #: src/components/SchoolHolidaysDialogEntry.tsx:203
 #: src/components/SchoolHolidaysDialogEntry.tsx:257
 #: src/components/VacationsDialogEntry.tsx:217
@@ -107,8 +107,8 @@ msgstr "Startdatum"
 msgid "End Date"
 msgstr "Enddatum"
 
-#: src/components/AddVacationDialog.tsx:343
-#: src/components/AddVacationDialog.tsx:352
+#: src/components/AddVacationDialog.tsx:345
+#: src/components/AddVacationDialog.tsx:355
 #: src/components/PublicHolidaysDialog.tsx:213
 #: src/components/SchoolHolidaysDialog.tsx:301
 #: src/components/SettingsDialog.tsx:238
@@ -118,7 +118,7 @@ msgstr "Enddatum"
 msgid "Save"
 msgstr "Speichern"
 
-#: src/components/AddVacationDialog.tsx:362
+#: src/components/AddVacationDialog.tsx:366
 #: src/components/PublicHolidaysDialog.tsx:224
 #: src/components/SchoolHolidaysDialog.tsx:312
 #: src/components/SettingsDialog.tsx:248
