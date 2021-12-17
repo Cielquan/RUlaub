@@ -6,6 +6,7 @@ export * from "./publicHolidaysDataActionCreators";
 export * from "./publicHolidaysDialogActionCreators";
 export * from "./schoolHolidaysDataActionCreators";
 export * from "./schoolHolidaysDialogActionCreators";
+export * from "./schoolHolidaysLinkActionCreators";
 export * from "./settingsDialogActionCreators";
 export * from "./sideMenuActionCreators";
 export * from "./usersDataActionCreators";

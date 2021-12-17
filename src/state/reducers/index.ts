@@ -21,11 +21,13 @@ import {
   vacationsDialogInitState,
   vacationTypesDataInitState,
   vacationTypesDialogInitState,
+  schoolHolidaysLinkInitState,
 } from "./initialStates";
 import publicHolidaysDataReducer from "./publicHolidaysDataReducer";
 import publicHolidaysDialogReducer from "./publicHolidaysDialogReducer";
 import schoolHolidaysDataReducer from "./schoolHolidaysDataReducer";
 import schoolHolidaysDialogReducer from "./schoolHolidaysDialogReducer";
+import schoolHolidaysLinkReducer from "./schoolHolidaysLinkReducer";
 import settingsDialogReducer from "./settingsDialogReducer";
 import sideMenuReducer from "./sideMenuReducer";
 import usersDataReducer from "./usersDataReducer";
@@ -44,6 +46,7 @@ const rootReducer = combineReducers({
   publicHolidaysDialog: publicHolidaysDialogReducer,
   schoolHolidaysData: schoolHolidaysDataReducer,
   schoolHolidaysDialog: schoolHolidaysDialogReducer,
+  schoolHolidaysLink: schoolHolidaysLinkReducer,
   settingsDialog: settingsDialogReducer,
   sideMenu: sideMenuReducer,
   usersData: usersDataReducer,
@@ -65,6 +68,7 @@ export const initialState: State = {
   publicHolidaysDialog: publicHolidaysDialogInitState,
   schoolHolidaysData: schoolHolidaysDataInitState,
   schoolHolidaysDialog: schoolHolidaysDialogInitState,
+  schoolHolidaysLink: schoolHolidaysLinkInitState,
   settingsDialog: settingsDialogInitState,
   sideMenu: sideMenuInitState,
   usersData: usersDataInitState,

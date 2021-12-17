@@ -40,6 +40,10 @@ export enum SchoolHolidaysDialogActionType {
   CLOSE = "close SchoolHolidays",
 }
 
+export enum SchoolHolidaysLinkActionType {
+  UPDATE = "update SchoolHolidaysLink",
+}
+
 export enum SettingsDialogActionType {
   OPEN = "open SettingsDialog",
   CLOSE = "close SettingsDialog",
