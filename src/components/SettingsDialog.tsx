@@ -240,7 +240,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
             variant="outlined"
             value={offsetForm}
             error={offsetFormError !== OffsetFormError.NONE}
-            helperText={OffsetFormError}
+            helperText={offsetFormError}
             onChange={(event) => {
               if (submittedOnce) validateOffset(event.target.value);
               setOffsetForm(event.target.value);
