@@ -1,14 +1,10 @@
 ## Roadmap
 
-- ?FE | add xForm states to Settings and save entries only on difference
-
 - FE | Add option to load current year or all for SchoolHoli Dialog
   current year is default
 
 - FE | Add option to load current year or all for Vac Dialog
   current year is default
-
-- FE | Add field for link for SchoolHoli auto load
 
 - BE | Add selfupdater
 
@@ -16,6 +12,10 @@
   add README in logs dir which warns about this behavior
 
 - **ALPHA**
+
+- BE | Impl SchoolHoli link
+
+- BE | Impl autoload of SchoolHoli
 
 - Check for double/intersecting Vacation
 
