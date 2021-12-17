@@ -6,10 +6,12 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Divider,
   IconButton,
   List,
   ListItem,
   Slide,
+  TextField,
   Tooltip,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
@@ -47,16 +49,51 @@ interface Props {
 
 const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { closeSchoolHolidaysDialog, updateSchoolHolidaysData } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const {
+    closeSchoolHolidaysDialog,
+    updateSchoolHolidaysData,
+    updateSchoolHolidaysLink,
+  } = bindActionCreators(actionCreators, dispatch);
   const schoolHolidaysDialogState = useSelector(
     (state: State) => state.schoolHolidaysDialog
   );
   const schoolHolidaysDataState = useSelector(
     (state: State) => state.schoolHolidaysData
   );
+  const schoolHolidaysLinkState = useSelector(
+    (state: State) => state.schoolHolidaysLink
+  );
+
+  const [link, setLink] = useState(schoolHolidaysLinkState);
+  const [linkForm, setLinkForm] = useState(link);
+
+  type SchoolHolidaysLinkCheckError =
+    typeof SchoolHolidaysLinkCheckError[keyof typeof SchoolHolidaysLinkCheckError];
+  const SchoolHolidaysLinkCheckError = {
+    NONE: "",
+    NO_HTTPS: t`The link must start with "https://".`,
+    NO_YEAR: t`The link must have a "'{{year}}'" placeholder.`,
+  } as const;
+  const [linkFormError, setlinkFormError] = useState<SchoolHolidaysLinkCheckError>(
+    SchoolHolidaysLinkCheckError.NONE
+  );
+
+  const validateLink = (value: string | null): boolean => {
+    if (value === null) {
+      setlinkFormError(SchoolHolidaysLinkCheckError.NONE);
+      return true;
+    }
+    if (!value.startsWith("https://")) {
+      setlinkFormError(SchoolHolidaysLinkCheckError.NO_HTTPS);
+      return false;
+    }
+    if (!value.includes("{{year}}")) {
+      setlinkFormError(SchoolHolidaysLinkCheckError.NO_YEAR);
+      return false;
+    }
+    setlinkFormError(SchoolHolidaysLinkCheckError.NONE);
+    return true;
+  };
 
   const [tmpID, setTmpID] = useState(-1);
   const getTmpID = (): string => {
@@ -121,6 +158,16 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
   };
 
   const saveChanges = (): void => {
+    if (link !== linkForm) {
+      if (
+        linkFormError !== SchoolHolidaysLinkCheckError.NONE ||
+        !validateLink(linkForm)
+      )
+        return;
+      setLink(linkForm);
+      updateSchoolHolidaysLink(linkForm);
+    }
+
     const newEntries =
       Object.keys(newSchoolHolidays).length > 0
         ? Object.values(newSchoolHolidays)
@@ -146,9 +193,19 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
   };
 
   useEffect(() => {
-    setUpdatedSchoolHolidays({});
-    setNewSchoolHolidays({});
-  }, [schoolHolidaysDialogState]);
+    if (!schoolHolidaysDialogState) {
+      setUpdatedSchoolHolidays({});
+      setNewSchoolHolidays({});
+      setLink(schoolHolidaysLinkState);
+      setLinkForm(schoolHolidaysLinkState);
+
+      setlinkFormError(SchoolHolidaysLinkCheckError.NONE);
+    }
+  }, [
+    SchoolHolidaysLinkCheckError.NONE,
+    schoolHolidaysDialogState,
+    schoolHolidaysLinkState,
+  ]);
 
   const id = "schoolHolidays-dialog";
 
@@ -167,6 +224,24 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
         <DateRangeIcon />
       </DialogTitle>
       <DialogContent>
+        <TextField
+          margin="dense"
+          id="name"
+          label={t`Link`}
+          type="text"
+          fullWidth
+          variant="outlined"
+          value={linkForm}
+          error={linkFormError !== SchoolHolidaysLinkCheckError.NONE}
+          // eslint-disable-next-line max-len
+          helperText={linkFormError}
+          onChange={(event): void => {
+            validateLink(event.target.value);
+            setLinkForm(event.target.value);
+          }}
+          sx={{ marginY: 1 }}
+        />
+        <Divider sx={{ marginY: 1 }} />
         <List sx={{ display: "flex", flexDirection: "column", paddingBottom: 0 }}>
           {Object.keys(schoolHolidaysDataState)
             .map((schoolHolidayId): [string, number] => [
@@ -207,7 +282,8 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
             data-testid={`${id}-btn-save`}
             disabled={
               Object.keys(updatedSchoolHolidays).length === 0 &&
-              Object.keys(newSchoolHolidays).length === 0
+              Object.keys(newSchoolHolidays).length === 0 &&
+              link === linkForm
             }
             onClick={() => {
               if (typeof onClick === "function") onClick();
