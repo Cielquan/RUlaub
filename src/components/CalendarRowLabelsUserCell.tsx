@@ -1,5 +1,6 @@
+import { t } from "@lingui/macro";
 import { Create as CreateIcon } from "@mui/icons-material";
-import { IconButton, Typography } from "@mui/material";
+import { IconButton, Tooltip, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { CSSProperties, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,9 +51,13 @@ const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElem
     >
       {userID === undefined ? (
         <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
-          <IconButton disabled={disabled} onClick={openUsersDialog}>
-            <CreateIcon />
-          </IconButton>
+          <Tooltip arrow title={t`Edit Users`} disableHoverListener={disabled}>
+            <span>
+              <IconButton disabled={disabled} onClick={openUsersDialog}>
+                <CreateIcon />
+              </IconButton>
+            </span>
+          </Tooltip>
         </Box>
       ) : (
         <Typography sx={{ padding: "0 0.3em" }} variant="body1" noWrap>
