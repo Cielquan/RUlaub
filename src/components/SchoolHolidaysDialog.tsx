@@ -193,19 +193,14 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
   };
 
   useEffect(() => {
-    if (!schoolHolidaysDialogState) {
-      setUpdatedSchoolHolidays({});
-      setNewSchoolHolidays({});
-      setLink(schoolHolidaysLinkState);
-      setLinkForm(schoolHolidaysLinkState);
+    setUpdatedSchoolHolidays({});
+    setNewSchoolHolidays({});
+    setLink(schoolHolidaysLinkState ?? "");
+    setLinkForm(schoolHolidaysLinkState ?? "");
 
-      setlinkFormError(SchoolHolidaysLinkCheckError.NONE);
-    }
-  }, [
-    SchoolHolidaysLinkCheckError.NONE,
-    schoolHolidaysDialogState,
-    schoolHolidaysLinkState,
-  ]);
+    setlinkFormError(SchoolHolidaysLinkCheckError.NONE);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [schoolHolidaysDialogState]);
 
   const id = "schoolHolidays-dialog";
 
