@@ -340,7 +340,7 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
         )}
       </DialogContent>
       <DialogActions>
-        <Tooltip arrow title={t`Save to database`}>
+        <Tooltip arrow title={t`Save`}>
           <Button
             data-testid={`${id}-btn-save`}
             disabled={currentUserID === ""}
