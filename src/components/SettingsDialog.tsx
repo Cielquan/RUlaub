@@ -59,7 +59,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { settings } = configState!;
 
-  const [name, setName] = useState(configState?.user?.name);
+  const [name, setName] = useState(configState?.user?.name ?? null);
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [level, setLevel] = useState(settings.logLevel);
   const [offset, setOffset] = useState(settings.todayAutoscrollLeftOffset.toString());
@@ -67,7 +67,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
   const [scroll, setScroll] = useState(settings.yearChangeScrollBegin);
 
   useEffect(() => {
-    setName(configState?.user?.name);
+    setName(configState?.user?.name ?? "");
     setLevel(settings.logLevel);
     setShowAdvanced(false);
     setOffset(settings.todayAutoscrollLeftOffset.toString());
