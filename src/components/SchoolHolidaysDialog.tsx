@@ -66,6 +66,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
 
   const [link, setLink] = useState(schoolHolidaysLinkState);
   const [linkForm, setLinkForm] = useState(link);
+  const [submittedOnce, setSubmittedOnce] = useState(false);
 
   type SchoolHolidaysLinkCheckError =
     typeof SchoolHolidaysLinkCheckError[keyof typeof SchoolHolidaysLinkCheckError];
@@ -157,13 +158,13 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
     setNewSchoolHolidays(rv);
   };
 
-  const saveChanges = (): void => {
+  const saveChanges = (): boolean => {
     if (link !== linkForm) {
       if (
         linkFormError !== SchoolHolidaysLinkCheckError.NONE ||
         !validateLink(linkForm)
       )
-        return;
+        return false;
       setLink(linkForm);
       updateSchoolHolidaysLink(linkForm);
     }
@@ -190,6 +191,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
     const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
 
     updateSchoolHolidaysData({ newEntries, updatedEntries, removedEntries });
+    return true;
   };
 
   useEffect(() => {
@@ -197,6 +199,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
     setNewSchoolHolidays({});
     setLink(schoolHolidaysLinkState ?? "");
     setLinkForm(schoolHolidaysLinkState ?? "");
+    setSubmittedOnce(false);
 
     setlinkFormError(SchoolHolidaysLinkCheckError.NONE);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -231,7 +234,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
           // eslint-disable-next-line max-len
           helperText={linkFormError}
           onChange={(event): void => {
-            validateLink(event.target.value);
+            if (submittedOnce) validateLink(event.target.value);
             setLinkForm(event.target.value);
           }}
           sx={{ marginY: 1 }}
@@ -282,7 +285,8 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
             }
             onClick={() => {
               if (typeof onClick === "function") onClick();
-              saveChanges();
+              setSubmittedOnce(true);
+              if (!saveChanges()) return;
               setUpdatedSchoolHolidays({});
               setNewSchoolHolidays({});
               closeSchoolHolidaysDialog();
