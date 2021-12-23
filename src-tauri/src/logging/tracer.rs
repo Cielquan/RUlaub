@@ -5,6 +5,7 @@ use tracing_subscriber::layer::Layered;
 use tracing_subscriber::reload::Handle;
 use tracing_subscriber::{EnvFilter, Registry};
 
+use super::file::{add_log_dir_readme, clean_log_dir};
 use super::log_level::create_env_filter;
 use super::LOGGING_DIR_PATH;
 
@@ -61,6 +62,10 @@ pub fn setup_tracer() -> (TracerHandle, WorkerGuard) {
     tracer.init();
     trace!(target = "tracing", message = "Running tracer");
     info!(target = "tracing", message = "Tracing level: TRACE");
+
+    add_log_dir_readme();
+
+    clean_log_dir();
 
     (handle, guard)
 }

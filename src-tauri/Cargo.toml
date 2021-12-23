@@ -23,6 +23,7 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 serde_derive = "1.0"
 directories = "4.0"
+glob = "0.3.0"
 notify = "5.0.0-pre.13"
 toml = "0.5"
 tracing = "0.1"

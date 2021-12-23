@@ -8,9 +8,6 @@
 
 - BE | Add selfupdater
 
-- BE | clear 'logs' dir of old files
-  add README in logs dir which warns about this behavior
-
 - **ALPHA**
 
 - BE | Impl SchoolHoli link
