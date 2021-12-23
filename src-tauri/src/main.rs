@@ -99,8 +99,6 @@ fn main() {
             tauri::async_runtime::spawn(async move {
                 debug!(target = "tauri_setup", message = "Start app init");
 
-                debug!(target = "tauri_setup", message = "Finish app init");
-
                 let page_init_state = app_handle.state::<PageInitState>();
                 let sleep_time = Duration::from_millis(1000);
                 loop {
@@ -114,7 +112,10 @@ fn main() {
                     sleep(sleep_time);
                 }
 
-                debug!(target = "tauri_setup", message = "Close loading screen");
+                debug!(
+                    target = "tauri_setup",
+                    message = "Finish app init; Close loading screen"
+                );
                 loadingscreen_window.close().unwrap();
                 debug!(target = "tauri_setup", message = "Show main window");
                 main_window_.show().unwrap();
