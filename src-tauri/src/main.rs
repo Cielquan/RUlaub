@@ -24,6 +24,15 @@ use rulaub_backend::commands::config::set::{
     set_today_autoscroll_left_offset, set_user_name, set_year_change_scroll_begin,
     set_year_to_show,
 };
+use rulaub_backend::commands::database::file::{check_db, create_db};
+use rulaub_backend::commands::database::get::{
+    get_school_holidays_link, load_public_holidays, load_school_holidays, load_users,
+    load_vacation_types, load_vacations,
+};
+use rulaub_backend::commands::database::set::{
+    update_public_holidays, update_school_holidays, update_school_holidays_link, update_users,
+    update_vacation_types, update_vacations,
+};
 use rulaub_backend::commands::init::finished_init_load;
 use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trace, log_warn};
 use rulaub_backend::config::setup::{setup_config, ConfigSetupErr};
@@ -215,6 +224,27 @@ fn main() {
             get_theme,
             set_theme,
             get_available_themes,
+            //
+            create_db,
+            check_db,
+            //
+            update_public_holidays,
+            load_public_holidays,
+            //
+            update_school_holidays,
+            load_school_holidays,
+            //
+            update_school_holidays_link,
+            get_school_holidays_link,
+            //
+            update_users,
+            load_users,
+            //
+            update_vacations,
+            load_vacations,
+            //
+            update_vacation_types,
+            load_vacation_types,
         ])
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
