@@ -31,8 +31,9 @@ use rulaub_backend::config::types::StringEnum;
 use rulaub_backend::config::DEFAULT_CONFIG;
 use rulaub_backend::logging::tracer::{reload_tracing_level, setup_tracer};
 use rulaub_backend::menu::get_menu;
-use rulaub_backend::state::status_states::PageInit;
-use rulaub_backend::state::{ConfigSetupErrState, ConfigState, PageInitState, TracerHandleState};
+use rulaub_backend::state::{
+    ConfigSetupErrState, ConfigState, PageInit, PageInitState, TracerHandleState,
+};
 use rulaub_backend::NAME;
 
 fn main() {

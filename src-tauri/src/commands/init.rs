@@ -1,7 +1,6 @@
 //! Commands used while the programm's init
 use super::CommandResult;
-use crate::state::status_states::PageInit;
-use crate::state::PageInitState;
+use crate::state::{PageInit, PageInitState};
 
 #[tracing::instrument(skip(page_init_state))]
 #[tauri::command]
