@@ -1,4 +1,5 @@
 //! Commands to set data from the config state managed by tauri from the frontend
+use crate::commands::CommandResult;
 use crate::config::file::write_to_config_file;
 use crate::config::language::{Language, LanguageData};
 use crate::config::parser::serialize_config_to_toml_str;
@@ -10,7 +11,7 @@ use crate::logging::log_level::LogLevel;
 use crate::logging::tracer::reload_tracing_level;
 use crate::state::{ConfigSetupErrState, ConfigState, TracerHandleState};
 
-fn save_config_to_file(config: &Config) -> Result<(), String> {
+fn save_config_to_file(config: &Config) -> CommandResult<()> {
     trace!(target = "command", message = "Save config to file", config = ?config);
     match serialize_config_to_toml_str(config) {
         Err(_) => {
@@ -24,13 +25,14 @@ fn save_config_to_file(config: &Config) -> Result<(), String> {
     }
     Ok(())
 }
+
 #[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
 pub async fn set_config_state(
     config: Config,
     state: tauri::State<'_, ConfigState>,
     config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
-) -> Result<Config, String> {
+) -> CommandResult<Config> {
     trace!(target = "command", message = "");
     let mut state_guard = state.0.lock();
 
@@ -51,7 +53,7 @@ pub async fn set_db_uri(
     path: String,
     state: tauri::State<'_, ConfigState>,
     config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
-) -> Result<Config, String> {
+) -> CommandResult<Config> {
     let mut state_guard = state.0.lock();
     let path_ = Some(path);
 
@@ -72,7 +74,7 @@ pub async fn set_langauge(
     lang: Language,
     state: tauri::State<'_, ConfigState>,
     config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
-) -> Result<Config, String> {
+) -> CommandResult<Config> {
     let mut state_guard = state.0.lock();
     let lang_data = LanguageData::new(lang);
 
@@ -94,7 +96,7 @@ pub async fn set_log_level(
     state: tauri::State<'_, ConfigState>,
     config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
     tracer_handle: tauri::State<'_, TracerHandleState>,
-) -> Result<Config, String> {
+) -> CommandResult<Config> {
     let mut state_guard = state.0.lock();
 
     if state_guard.settings.log_level != level {
@@ -116,7 +118,7 @@ pub async fn set_theme(
     theme: Theme,
     state: tauri::State<'_, ConfigState>,
     config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
-) -> Result<Config, String> {
+) -> CommandResult<Config> {
     let mut state_guard = state.0.lock();
 
     if state_guard.settings.theme != theme {
@@ -136,7 +138,7 @@ pub async fn set_today_autoscroll_left_offset(
     offset: i32,
     state: tauri::State<'_, ConfigState>,
     config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
-) -> Result<Config, String> {
+) -> CommandResult<Config> {
     let mut state_guard = state.0.lock();
 
     if state_guard.settings.today_autoscroll_left_offset != offset {
@@ -156,7 +158,7 @@ pub async fn set_user_name(
     name: String,
     state: tauri::State<'_, ConfigState>,
     config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
-) -> Result<Config, String> {
+) -> CommandResult<Config> {
     let mut state_guard = state.0.lock();
     let user = Some(User { name: Some(name) });
 
@@ -177,7 +179,7 @@ pub async fn set_year_change_scroll_begin(
     do_scroll: bool,
     state: tauri::State<'_, ConfigState>,
     config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
-) -> Result<Config, String> {
+) -> CommandResult<Config> {
     let mut state_guard = state.0.lock();
 
     if state_guard.settings.year_change_scroll_begin != do_scroll {
@@ -197,7 +199,7 @@ pub async fn set_year_to_show(
     year: i32,
     state: tauri::State<'_, ConfigState>,
     config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
-) -> Result<Config, String> {
+) -> CommandResult<Config> {
     let mut state_guard = state.0.lock();
 
     if state_guard.settings.year_to_show != Some(year) {
