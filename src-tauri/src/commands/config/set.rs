@@ -26,10 +26,10 @@ fn save_config_to_file(config: &Config) -> Result<(), String> {
 }
 #[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
-pub fn set_config_state(
+pub async fn set_config_state(
     config: Config,
-    state: tauri::State<ConfigState>,
-    config_setup_err_state: tauri::State<ConfigSetupErrState>,
+    state: tauri::State<'_, ConfigState>,
+    config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
 ) -> Result<Config, String> {
     trace!(target = "command", message = "");
     let mut state_guard = state.0.lock();
@@ -47,10 +47,10 @@ pub fn set_config_state(
 
 #[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
-pub fn set_db_uri(
+pub async fn set_db_uri(
     path: String,
-    state: tauri::State<ConfigState>,
-    config_setup_err_state: tauri::State<ConfigSetupErrState>,
+    state: tauri::State<'_, ConfigState>,
+    config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
     let path_ = Some(path);
@@ -68,10 +68,10 @@ pub fn set_db_uri(
 
 #[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
-pub fn set_langauge(
+pub async fn set_langauge(
     lang: Language,
-    state: tauri::State<ConfigState>,
-    config_setup_err_state: tauri::State<ConfigSetupErrState>,
+    state: tauri::State<'_, ConfigState>,
+    config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
     let lang_data = LanguageData::new(lang);
@@ -89,11 +89,11 @@ pub fn set_langauge(
 
 #[tracing::instrument(skip(state, config_setup_err_state, tracer_handle))]
 #[tauri::command]
-pub fn set_log_level(
+pub async fn set_log_level(
     level: LogLevel,
-    state: tauri::State<ConfigState>,
-    config_setup_err_state: tauri::State<ConfigSetupErrState>,
-    tracer_handle: tauri::State<TracerHandleState>,
+    state: tauri::State<'_, ConfigState>,
+    config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
+    tracer_handle: tauri::State<'_, TracerHandleState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
 
@@ -112,10 +112,10 @@ pub fn set_log_level(
 
 #[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
-pub fn set_theme(
+pub async fn set_theme(
     theme: Theme,
-    state: tauri::State<ConfigState>,
-    config_setup_err_state: tauri::State<ConfigSetupErrState>,
+    state: tauri::State<'_, ConfigState>,
+    config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
 
@@ -132,10 +132,10 @@ pub fn set_theme(
 
 #[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
-pub fn set_today_autoscroll_left_offset(
+pub async fn set_today_autoscroll_left_offset(
     offset: i32,
-    state: tauri::State<ConfigState>,
-    config_setup_err_state: tauri::State<ConfigSetupErrState>,
+    state: tauri::State<'_, ConfigState>,
+    config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
 
@@ -152,10 +152,10 @@ pub fn set_today_autoscroll_left_offset(
 
 #[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
-pub fn set_user_name(
+pub async fn set_user_name(
     name: String,
-    state: tauri::State<ConfigState>,
-    config_setup_err_state: tauri::State<ConfigSetupErrState>,
+    state: tauri::State<'_, ConfigState>,
+    config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
     let user = Some(User { name: Some(name) });
@@ -173,10 +173,10 @@ pub fn set_user_name(
 
 #[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
-pub fn set_year_change_scroll_begin(
+pub async fn set_year_change_scroll_begin(
     do_scroll: bool,
-    state: tauri::State<ConfigState>,
-    config_setup_err_state: tauri::State<ConfigSetupErrState>,
+    state: tauri::State<'_, ConfigState>,
+    config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
 
@@ -193,10 +193,10 @@ pub fn set_year_change_scroll_begin(
 
 #[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
-pub fn set_year_to_show(
+pub async fn set_year_to_show(
     year: i32,
-    state: tauri::State<ConfigState>,
-    config_setup_err_state: tauri::State<ConfigSetupErrState>,
+    state: tauri::State<'_, ConfigState>,
+    config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
 ) -> Result<Config, String> {
     let mut state_guard = state.0.lock();
 
