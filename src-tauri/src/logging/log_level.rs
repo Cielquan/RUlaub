@@ -26,11 +26,13 @@ pub fn create_env_filter(level: &str) -> EnvFilter {
 }
 
 lazy_static! {
+    /// An array with the available log levels supported by the application.
     #[derive(Debug)]
     pub static ref AVAILABLE_LOG_LEVELS: [&'static str; 5] =
         ["TRACE", "DEBUG", "INFO", "WARN", "ERROR"];
 }
 
+/// An enum holding the available log levels supported by the application.
 #[derive(Clone, PartialEq)]
 pub enum LogLevel {
     TRACE,

@@ -48,9 +48,11 @@ pub fn get_logging_dir_path() -> Option<String> {
     }
 }
 
+/// The threshold of log files to keep in the log directory.
 static LOG_FILE_THRESHOLD: usize = 10;
 
 lazy_static! {
+    /// The text written to the README file inside the log directory.
     pub static ref LOG_DIR_README_TEXT: String = format!(
         concat!(
             "ATTENTION!!!\n\n",
@@ -62,6 +64,7 @@ lazy_static! {
     );
 }
 
+/// Add/Overwrite the README file inside the log directory with [`LOG_DIR_README_TEXT`]
 #[tracing::instrument]
 pub fn add_log_dir_readme() {
     trace!(
@@ -104,6 +107,7 @@ pub fn add_log_dir_readme() {
     );
 }
 
+/// Remove log files exceeding the [`LOG_FILE_THRESHOLD`] starting with the oldest one.
 #[tracing::instrument]
 pub fn clean_log_dir() {
     debug!(
