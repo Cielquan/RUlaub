@@ -1,14 +1,12 @@
 ## Roadmap
 
+- BE | impl DB
+
 - FE | Add option to load current year or all for SchoolHoli Dialog
   current year is default
 
 - FE | Add option to load current year or all for Vac Dialog
   current year is default
-
-- BE | Add selfupdater
-
-- **ALPHA**
 
 - BE | Impl SchoolHoli link
 
@@ -19,8 +17,6 @@
 - ? split current state & new/update for DB stuff
   so on DB update the state can be updated w/o corrupting new/update data
   the current payload is like the update state .. is enough?
-
-- BE | impl DB
 
 - Add tauri command for DB creation
   add default `vacation_types`
@@ -58,6 +54,8 @@
 - Add auto DL for SchoolHoli if link
 
 - Fix autoscroll to today if current year
+
+- BE | Add selfupdater
 
 - **BETA**
 
