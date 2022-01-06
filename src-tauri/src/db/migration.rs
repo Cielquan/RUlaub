@@ -5,7 +5,7 @@ use diesel_migrations::run_pending_migrations;
 use super::establish_connection_to;
 
 /// Migrate the database to the latest state
-pub fn migrate_db_schema(db_url: &str, create: bool) {
+pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<()> {
     debug!(
         target = "database-migration",
         message = "Start database migration routine"
@@ -17,15 +17,19 @@ pub fn migrate_db_schema(db_url: &str, create: bool) {
                 message = "No database file found; creation not set; abort"
             );
         } else {
-            info!(target = "database-migration", message = "Create new database");
+            info!(
+                target = "database-migration",
+                message = "Create new database"
+            );
         }
     }
     match establish_connection_to(db_url) {
-        Err(_) => {
+        Err(err) => {
             error!(
                 target = "database-migration",
                 message = "Failed to create db connection for migration",
             );
+            return Err(err);
         }
         Ok(conn) => {
             if let Err(err) = run_pending_migrations(&conn) {
@@ -34,13 +38,18 @@ pub fn migrate_db_schema(db_url: &str, create: bool) {
                     message = "Failed to migrate the database",
                     error = ?err
                 );
+                return Err(err.into());
             } else {
-                info!(target = "database-migration", message = "Ran pending migrations");
+                info!(
+                    target = "database-migration",
+                    message = "Ran pending migrations"
+                );
             }
         }
-    }    
+    }
     debug!(
         target = "database-migration",
         message = "Finished database migration routine"
     );
+    Ok(())
 }

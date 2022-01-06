@@ -113,7 +113,9 @@ fn main() {
                         target = "tauri_setup",
                         message = "Database not set; skip update"
                     ),
-                    Some(db_uri) => migrate_db_schema(db_uri, false),
+                    Some(db_uri) => {
+                        let _ = migrate_db_schema(db_uri, false);
+                    }
                 }
             }
 
