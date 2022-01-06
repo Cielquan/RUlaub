@@ -52,14 +52,14 @@
     },
     "windows": [
       {
-        "label": "loadingscreen",
+        "label": "splashscreen",
         "width": 200,
         "height": 177,
         "decorations": false,
         "center": true,
         "skipTaskbar": true,
         "resizable": false,
-        "url": "loadingscreen.html"
+        "url": "splashscreen.html"
       }
     ],
     "security": {

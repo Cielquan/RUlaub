@@ -75,7 +75,7 @@ fn main() {
         .manage(PageInitState(Mutex::new(PageInit::LOADING)))
         .setup(move |app| {
             debug!(target = "tauri_setup", message = "Start app setup");
-            let loadingscreen_window = app.get_window("loadingscreen").unwrap();
+            let splashscreen_window = app.get_window("splashscreen").unwrap();
             let main_window = app.get_window("main").unwrap();
 
             debug!(target = "tauri_setup", message = "Setup config");
@@ -140,9 +140,9 @@ fn main() {
 
                 debug!(
                     target = "tauri_setup",
-                    message = "Finish app init; Close loading screen"
+                    message = "Finish app init; Close splash screen"
                 );
-                loadingscreen_window.close().unwrap();
+                splashscreen_window.close().unwrap();
                 debug!(target = "tauri_setup", message = "Show main window");
                 main_window_.show().unwrap();
 
