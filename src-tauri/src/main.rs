@@ -13,6 +13,7 @@ use std::thread::sleep;
 use std::time::Duration;
 
 use parking_lot::Mutex;
+use rulaub_backend::db::migrate_db_schema;
 use tauri::{Event, Manager, WindowBuilder};
 
 use rulaub_backend::commands::config::get::{
@@ -100,6 +101,19 @@ fn main() {
                 Err(err) => {
                     let setup_config_err_state = app.state::<ConfigSetupErrState>();
                     *setup_config_err_state.0.lock() = err;
+                }
+            }
+
+            {
+                debug!(target = "tauri_setup", message = "Check if database is set");
+                let config_state = app.state::<ConfigState>();
+                let database_uri = &config_state.0.lock().settings.database_uri;
+                match database_uri {
+                    None => info!(
+                        target = "tauri_setup",
+                        message = "Database not set; skip update"
+                    ),
+                    Some(db_uri) => migrate_db_schema(db_uri, false),
                 }
             }
 
