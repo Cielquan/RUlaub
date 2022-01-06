@@ -1,6 +1,8 @@
 #[macro_use]
 extern crate diesel;
 #[macro_use]
+extern crate diesel_migrations;
+#[macro_use]
 extern crate lazy_static;
 #[macro_use]
 extern crate serde_derive;
@@ -9,7 +11,7 @@ extern crate tracing;
 
 pub mod commands;
 pub mod config;
-mod db;
+pub mod db;
 mod file_watcher;
 pub mod logging;
 pub mod menu;

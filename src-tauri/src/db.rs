@@ -1,7 +1,11 @@
 mod connection;
+pub mod migration;
 pub mod models;
 mod schema;
 mod sql_functions;
 pub mod state_models;
 
 pub use connection::establish_connection_to;
+pub use migration::migrate_db_schema;
+
+embed_migrations!();
