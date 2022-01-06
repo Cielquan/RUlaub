@@ -12,10 +12,11 @@ pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<()> {
     );
     if !Path::new(db_url).exists() {
         if !create {
-            error!(
+            warn!(
                 target = "database-migration",
                 message = "No database file found; creation not set; abort"
             );
+            return Ok(())
         } else {
             info!(
                 target = "database-migration",
