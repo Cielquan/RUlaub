@@ -13,7 +13,6 @@ use std::thread::sleep;
 use std::time::Duration;
 
 use parking_lot::Mutex;
-use rulaub_backend::db::migrate_db_schema;
 use tauri::{Event, Manager, WindowBuilder};
 
 use rulaub_backend::commands::config::get::{
@@ -39,6 +38,7 @@ use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trac
 use rulaub_backend::config::setup::{setup_config, ConfigSetupErr};
 use rulaub_backend::config::types::StringEnum;
 use rulaub_backend::config::DEFAULT_CONFIG;
+use rulaub_backend::db::migrate_db_schema;
 use rulaub_backend::logging::tracer::{reload_tracing_level, setup_tracer};
 use rulaub_backend::menu::get_menu;
 use rulaub_backend::state::{
