@@ -16,7 +16,7 @@ pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<()> {
                 target = "database-migration",
                 message = "No database file found; creation not set; abort"
             );
-            return Ok(())
+            return Ok(());
         } else {
             info!(
                 target = "database-migration",
