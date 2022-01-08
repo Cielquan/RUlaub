@@ -14,11 +14,11 @@ pub fn naive_date_to_iso_date(naive_date: NaiveDate) -> ISODate {
 }
 
 pub fn iso_date_to_naive_date(iso_date: ISODate) -> Option<NaiveDate> {
-    trace!(target = "db", message = "Parse ISO date string", iso_date = ?iso_date);
+    trace!(target = "database", message = "Parse ISO date string", iso_date = ?iso_date);
     match NaiveDate::parse_from_str(&iso_date, "%Y-%m-%d") {
         Err(err) => {
             error!(
-                target = "db",
+                target = "database",
                 message = "Failed to parse ISO date string",
                 iso_date = ?iso_date,
                 error = ?err,
