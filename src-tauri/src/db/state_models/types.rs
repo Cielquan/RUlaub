@@ -13,7 +13,7 @@ pub fn naive_date_to_iso_date(naive_date: NaiveDate) -> ISODate {
     naive_date.format("%Y-%m-%d").to_string()
 }
 
-pub fn iso_date_to_naive_date(iso_date: ISODate) -> Option<NaiveDate> {
+pub fn iso_date_to_naive_date(iso_date: ISODate) -> anyhow::Result<NaiveDate> {
     trace!(target = "database", message = "Parse ISO date string", iso_date = ?iso_date);
     match NaiveDate::parse_from_str(&iso_date, "%Y-%m-%d") {
         Err(err) => {
@@ -23,8 +23,8 @@ pub fn iso_date_to_naive_date(iso_date: ISODate) -> Option<NaiveDate> {
                 iso_date = ?iso_date,
                 error = ?err,
             );
-            None
+            Err(err.into())
         }
-        Ok(date) => Some(date),
+        Ok(date) => Ok(date),
     }
 }
