@@ -16,11 +16,11 @@ fn save_config_to_file(config: &Config) -> CommandResult<()> {
     trace!(target = "command", message = "Save config to file", config = ?config);
     match serialize_config_to_toml_str(config) {
         Err(_) => {
-            return Err("config-serialize".into());
+            return Err("config-serialize-error".into());
         }
         Ok(config_str) => {
             if write_to_config_file(&config_str).is_err() {
-                return Err("config-file-write".into());
+                return Err("config-file-write-error".into());
             }
         }
     }
@@ -34,10 +34,15 @@ pub async fn set_config_state(
     state: tauri::State<'_, ConfigState>,
     config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
 ) -> CommandResult<Config> {
-    trace!(target = "command", message = "");
     let mut state_guard = state.0.lock();
 
     if *state_guard != config {
+        trace!(
+            target = "command",
+            message = "Update whole config state",
+            old = ?state_guard,
+            new = ?config,
+        );
         *state_guard = config;
 
         if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
@@ -57,6 +62,12 @@ fn _set_db_uri(
     let path_ = Some(path);
 
     if state_guard.settings.database_uri != path_ {
+        trace!(
+            target = "command",
+            message = "Update config state settings.database_uri",
+            old = ?state_guard.settings.database_uri,
+            new = ?path_,
+        );
         state_guard.settings.database_uri = path_;
 
         if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
@@ -103,6 +114,12 @@ pub async fn set_langauge(
     let lang_data = LanguageData::new(lang);
 
     if state_guard.settings.language != lang_data {
+        trace!(
+            target = "command",
+            message = "Update config state settings.language",
+            old = ?state_guard.settings.language,
+            new = ?lang_data,
+        );
         state_guard.settings.language = lang_data;
 
         if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
@@ -124,6 +141,12 @@ pub async fn set_log_level(
     let mut state_guard = state.0.lock();
 
     if state_guard.settings.log_level != level {
+        trace!(
+            target = "command",
+            message = "Update config state settings.log_level",
+            old = ?state_guard.settings.log_level,
+            new = ?level,
+        );
         state_guard.settings.log_level = level.clone();
 
         reload_tracing_level(&tracer_handle.0.lock(), &level.to_string());
@@ -146,6 +169,12 @@ pub async fn set_theme(
     let mut state_guard = state.0.lock();
 
     if state_guard.settings.theme != theme {
+        trace!(
+            target = "command",
+            message = "Update config state settings.theme",
+            old = ?state_guard.settings.theme,
+            new = ?theme,
+        );
         state_guard.settings.theme = theme;
 
         if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
@@ -166,6 +195,12 @@ pub async fn set_today_autoscroll_left_offset(
     let mut state_guard = state.0.lock();
 
     if state_guard.settings.today_autoscroll_left_offset != offset {
+        trace!(
+            target = "command",
+            message = "Update config state settings.today_autoscroll_left_offset",
+            old = ?state_guard.settings.today_autoscroll_left_offset,
+            new = ?offset,
+        );
         state_guard.settings.today_autoscroll_left_offset = offset;
 
         if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
@@ -187,6 +222,12 @@ pub async fn set_user_name(
     let user = Some(User { name: Some(name) });
 
     if state_guard.user != user {
+        trace!(
+            target = "command",
+            message = "Update config state user",
+            old = ?state_guard.user,
+            new = ?user,
+        );
         state_guard.user = user;
 
         if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
@@ -207,6 +248,12 @@ pub async fn set_year_change_scroll_begin(
     let mut state_guard = state.0.lock();
 
     if state_guard.settings.year_change_scroll_begin != do_scroll {
+        trace!(
+            target = "command",
+            message = "Update config state settings.year_change_scroll_begin",
+            old = ?state_guard.settings.year_change_scroll_begin,
+            new = ?do_scroll,
+        );
         state_guard.settings.year_change_scroll_begin = do_scroll;
 
         if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
@@ -225,9 +272,16 @@ pub async fn set_year_to_show(
     config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
 ) -> CommandResult<Config> {
     let mut state_guard = state.0.lock();
+    let year_ = Some(year);
 
-    if state_guard.settings.year_to_show != Some(year) {
-        state_guard.settings.year_to_show = Some(year);
+    if state_guard.settings.year_to_show != year_ {
+        trace!(
+            target = "command",
+            message = "Update config state settings.year_to_show",
+            old = ?state_guard.settings.year_to_show,
+            new = ?year_,
+        );
+        state_guard.settings.year_to_show = year_;
 
         if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
             save_config_to_file(&state_guard)?
