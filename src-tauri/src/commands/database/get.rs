@@ -3,7 +3,9 @@ use diesel::prelude::*;
 use crate::commands::database::get_db_conn;
 use crate::commands::CommandResult;
 use crate::db::conversion::{public_holiday, school_holiday, user, vacation, vacation_type};
-use crate::db::models::{PublicHoliday, SchoolHoliday, User, Vacation, VacationType};
+use crate::db::models::{
+    PublicHoliday, SchoolHoliday, SchoolHolidayLink, User, Vacation, VacationType,
+};
 use crate::db::state_models;
 use crate::state::ConfigState;
 
@@ -63,10 +65,32 @@ pub async fn load_school_holidays(
 }
 
 /// Get [`crate::db::models::SchoolHolidayLink`] from database.
-#[tracing::instrument]
+#[tracing::instrument(skip(config_state))]
 #[tauri::command]
-pub async fn get_school_holidays_link() -> CommandResult<Option<()>> {
-    Ok(Some(()))
+pub async fn get_school_holidays_link(
+    config_state: tauri::State<'_, ConfigState>,
+) -> CommandResult<Option<String>> {
+    use crate::db::schema::school_holidays_link::dsl::school_holidays_link;
+
+    let config_state_guard = config_state.0.lock();
+
+    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+
+    match school_holidays_link.load::<SchoolHolidayLink>(&conn) {
+        Err(err) => {
+            error!(
+                target = "database",
+                message = "Failed to load the SchoolHolidayLink from the database",
+                error = ?err
+            );
+            Err("database-load-error".into())
+        }
+        Ok(data) => match data.len() {
+            0 => Ok(None),
+            1 => Ok(Some(data.get(0).unwrap().link.clone())),
+            _ => Err("to-many-link-db-entries-error".into()),
+        },
+    }
 }
 
 /// Get [`crate::db::models::User`] from database.
