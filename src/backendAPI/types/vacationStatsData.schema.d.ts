@@ -8,11 +8,11 @@
 /**
  * Schema for vacation stat data coming from the backend
  */
-export interface VacationStatDataSchema {
+export interface VacationStatsDataSchema {
   [k: string]: StatsData;
 }
 /**
- * This interface was referenced by `VacationStatDataSchema`'s JSON-Schema definition
+ * This interface was referenced by `VacationStatsDataSchema`'s JSON-Schema definition
  * via the `patternProperty` "^\d+$".
  */
 export interface StatsData {

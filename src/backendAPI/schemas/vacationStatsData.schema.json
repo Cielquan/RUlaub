@@ -1,5 +1,5 @@
 {
-  "title": "Vacation Stat Data Schema",
+  "title": "Vacation Stats Data Schema",
   "description": "Schema for vacation stat data coming from the backend",
   "$comment": "Pattern is User ID",
   "type": "object",
