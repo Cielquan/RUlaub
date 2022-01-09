@@ -2,8 +2,8 @@ use diesel::prelude::*;
 
 use crate::commands::database::get_db_conn;
 use crate::commands::CommandResult;
-use crate::db::conversion::{public_holiday, school_holiday, user};
-use crate::db::models::{PublicHoliday, SchoolHoliday, User};
+use crate::db::conversion::{public_holiday, school_holiday, user, vacation};
+use crate::db::models::{PublicHoliday, SchoolHoliday, User, Vacation};
 use crate::db::state_models;
 use crate::state::ConfigState;
 
@@ -95,10 +95,28 @@ pub async fn load_users(
 }
 
 /// Get [`crate::db::models::Vacation`] from database.
-#[tracing::instrument]
+#[tracing::instrument(skip(config_state))]
 #[tauri::command]
-pub async fn load_vacations() -> CommandResult<Vec<()>> {
-    Ok(vec![()])
+pub async fn load_vacations(
+    config_state: tauri::State<'_, ConfigState>,
+) -> CommandResult<state_models::Vacations> {
+    use crate::db::schema::vacations::dsl::vacations;
+
+    let config_state_guard = config_state.0.lock();
+
+    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+
+    match vacations.load::<Vacation>(&conn) {
+        Err(err) => {
+            error!(
+                target = "database",
+                message = "Failed to load all Vacations from the database",
+                error = ?err
+            );
+            Err("database-load-error".into())
+        }
+        Ok(data) => Ok(vacation::to_state(data)),
+    }
 }
 
 /// Calc VacationStats from database.
