@@ -2,6 +2,8 @@
 
 - BE | impl DB
 
+- FE | block db most interaction without year_to_show
+
 - FE | Add option to load current year or all for SchoolHoli Dialog
   current year is default
 
