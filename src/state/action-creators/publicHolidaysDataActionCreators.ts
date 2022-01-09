@@ -22,8 +22,10 @@ export const loadPublicHolidaysData =
   () =>
   async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
     let data;
+    let errorCount;
     try {
-      data = await invoke("load_public_holidays");
+      // TODO:#i# snackbar with warning if error_count > 0
+      [data, errorCount] = await invoke("load_public_holidays");
     } catch (err) {
       invoke("log_error", {
         target: "public-holidays",

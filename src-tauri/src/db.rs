@@ -2,7 +2,7 @@ mod connection;
 pub mod conversion;
 pub mod migration;
 pub mod models;
-mod schema;
+pub mod schema;
 mod sql_functions;
 pub mod state_models;
 
