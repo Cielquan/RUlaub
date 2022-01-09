@@ -31,7 +31,7 @@ repos:
 
   # code unspecific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 38b88246ccc552bffaaf54259d064beeee434539 # frozen: v4.0.1
+    rev: 8fe62d14e0b4d7d845a7022c5c2c3ae41bdd3f26 # frozen: v4.1.0
     hooks:
       - id: end-of-file-fixer
         stages: [commit]
@@ -92,7 +92,7 @@ repos:
 
   # code unspecific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 38b88246ccc552bffaaf54259d064beeee434539 # frozen: v4.0.1
+    rev: 8fe62d14e0b4d7d845a7022c5c2c3ae41bdd3f26 # frozen: v4.1.0
     hooks:
       - id: check-case-conflict
       - id: check-shebang-scripts-are-executable
@@ -133,11 +133,20 @@ repos:
     # https://github.com/eslint/eslint
     # Config file: .eslintrc.json
     # Ignore file: .eslintignore (file ignore pattern)
-    rev: 88f5f0e0f63a1df0e1e3fade57c44af1e22211e0 # frozen: v8.4.1
+    rev: 534492d910ad4a4d484470b5aa0d51f1274eab1e # frozen: v8.6.0
     hooks:
       - id: eslint
         files: \.[jt]sx?$ # *.js, *.jsx, *.ts, *.tsx
         types: [file]
+        additional_dependencies:
+          - eslint-config-airbnb@18.2.1
+          - eslint-config-prettier@8.3.0
+          - eslint-import-resolver-typescript@2.4.0
+          - eslint-plugin-import@2.23.4
+          - eslint-plugin-jsx-a11y@6.4.1
+          - eslint-plugin-prettier@3.4.0
+          - eslint-plugin-react@7.24.0
+          - eslint-plugin-react-hooks@4.2.0
 
   # ----------------------------------------------
   # HTML
@@ -187,7 +196,7 @@ repos:
 
   # JSON specific out-of-the-box hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 38b88246ccc552bffaaf54259d064beeee434539 # frozen: v4.0.1
+    rev: 8fe62d14e0b4d7d845a7022c5c2c3ae41bdd3f26 # frozen: v4.1.0
     hooks:
       - id: check-json
       - id: check-toml
