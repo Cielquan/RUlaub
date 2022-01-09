@@ -65,6 +65,13 @@ pub async fn load_vacations() -> CommandResult<Vec<()>> {
     Ok(vec![()])
 }
 
+/// Calc VacationStats from database.
+#[tracing::instrument]
+#[tauri::command]
+pub async fn load_vacation_stats() -> CommandResult<Vec<()>> {
+    Ok(vec![()])
+}
+
 /// Get [`crate::db::models::VacationType`] from database.
 #[tracing::instrument]
 #[tauri::command]

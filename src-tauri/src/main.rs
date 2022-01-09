@@ -26,7 +26,7 @@ use rulaub_backend::commands::config::set::{
 };
 use rulaub_backend::commands::database::get::{
     get_school_holidays_link, load_public_holidays, load_school_holidays, load_users,
-    load_vacation_types, load_vacations,
+    load_vacation_stats, load_vacation_types, load_vacations,
 };
 use rulaub_backend::commands::database::set::{
     update_public_holidays, update_school_holidays, update_school_holidays_link, update_users,
@@ -256,6 +256,8 @@ fn main() {
             //
             update_vacations,
             load_vacations,
+            //
+            load_vacation_stats,
             //
             update_vacation_types,
             load_vacation_types,
