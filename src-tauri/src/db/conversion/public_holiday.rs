@@ -164,5 +164,6 @@ pub fn to_state(
         message = "Encounterd erros while loading all PublicHoliday db entries",
         error_count = error_count,
     );
+
     (map, error_count)
 }
