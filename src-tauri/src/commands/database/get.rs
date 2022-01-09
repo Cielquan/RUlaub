@@ -2,8 +2,8 @@ use diesel::prelude::*;
 
 use crate::commands::database::get_db_conn;
 use crate::commands::CommandResult;
-use crate::db::conversion::public_holiday;
-use crate::db::models::PublicHoliday;
+use crate::db::conversion::{public_holiday, school_holiday};
+use crate::db::models::{PublicHoliday, SchoolHoliday};
 use crate::db::state_models;
 use crate::state::ConfigState;
 
@@ -38,10 +38,28 @@ pub async fn load_public_holidays(
 }
 
 /// Get [`crate::db::models::SchoolHoliday`] from database.
-#[tracing::instrument]
+#[tracing::instrument(skip(config_state))]
 #[tauri::command]
-pub async fn load_school_holidays() -> CommandResult<Vec<()>> {
-    Ok(vec![()])
+pub async fn load_school_holidays(
+    config_state: tauri::State<'_, ConfigState>,
+) -> CommandResult<state_models::SchoolHolidays> {
+    use crate::db::schema::school_holidays::dsl::school_holidays;
+
+    let config_state_guard = config_state.0.lock();
+
+    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+
+    match school_holidays.load::<SchoolHoliday>(&conn) {
+        Err(err) => {
+            error!(
+                target = "database",
+                message = "Failed to load all SchoolHolidays from the database",
+                error = ?err
+            );
+            Err("database-load-error".into())
+        }
+        Ok(data) => Ok(school_holiday::to_state(data)),
+    }
 }
 
 /// Get [`crate::db::models::SchoolHolidayLink`] from database.
