@@ -2,6 +2,7 @@ use diesel::prelude::*;
 
 use crate::commands::database::get_db_conn;
 use crate::commands::CommandResult;
+use crate::config::Config;
 use crate::db::conversion::{public_holiday, school_holiday, user, vacation, vacation_type};
 use crate::db::models::{
     PublicHoliday, SchoolHoliday, SchoolHolidayLink, User, Vacation, VacationType,
@@ -9,24 +10,18 @@ use crate::db::models::{
 use crate::db::state_models;
 use crate::state::ConfigState;
 
-/// Get [`crate::db::models::PublicHoliday`] from database.
-#[tracing::instrument(skip(config_state))]
-#[tauri::command]
-pub async fn load_public_holidays(
-    config_state: tauri::State<'_, ConfigState>,
+fn _load_public_holidays(
+    config: &Config,
+    conn: &SqliteConnection,
 ) -> CommandResult<(state_models::PublicHolidays, u32)> {
     use crate::db::schema::public_holidays::dsl::public_holidays;
 
-    let config_state_guard = config_state.0.lock();
-
-    let display_year = match config_state_guard.settings.year_to_show.clone() {
+    let display_year = match config.settings.year_to_show.clone() {
         None => return Err("no-year-to-show-set-error".into()),
         Some(year) => year,
     };
 
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
-
-    match public_holidays.load::<PublicHoliday>(&conn) {
+    match public_holidays.load::<PublicHoliday>(conn) {
         Err(err) => {
             error!(
                 target = "database",
@@ -37,6 +32,19 @@ pub async fn load_public_holidays(
         }
         Ok(data) => Ok(public_holiday::to_state(data, display_year)),
     }
+}
+
+/// Get [`crate::db::models::PublicHoliday`] from database.
+#[tracing::instrument(skip(config_state))]
+#[tauri::command]
+pub async fn load_public_holidays(
+    config_state: tauri::State<'_, ConfigState>,
+) -> CommandResult<(state_models::PublicHolidays, u32)> {
+    let config_state_guard = config_state.0.lock();
+
+    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+
+    _load_public_holidays(&config_state_guard, &conn)
 }
 
 /// Get [`crate::db::models::SchoolHoliday`] from database.
