@@ -32,14 +32,11 @@ import { actionCreators, State } from "../state";
 
 const Transition = forwardRef(
   (
-    props: TransitionProps & { children?: ReactElement },
+    props: TransitionProps & { children: ReactElement },
     ref: React.Ref<unknown>
     // eslint-disable-next-line react/jsx-props-no-spreading
   ) => <Slide direction="up" ref={ref} {...props} />
 );
-Transition.defaultProps = {
-  children: <></>,
-};
 
 interface Props {
   onClick?(): void;
