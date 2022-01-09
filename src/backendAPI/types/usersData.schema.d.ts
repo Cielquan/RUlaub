@@ -19,13 +19,6 @@ export interface UserData {
   name: string;
   workdays: Workdays;
   availableVacationDays: number;
-  /**
-   * gets calculated in backend on load from DB for current year
-   */
-  calc: {
-    takenVacationDays: number;
-    vacationStats: VacationStat[];
-  };
 }
 export interface Workdays {
   monday: boolean;
@@ -35,11 +28,4 @@ export interface Workdays {
   friday: boolean;
   saturday: boolean;
   sunday: boolean;
-}
-/**
- * gets calculated in backend on load from DB for current year
- */
-export interface VacationStat {
-  typeId: number;
-  count: number;
 }

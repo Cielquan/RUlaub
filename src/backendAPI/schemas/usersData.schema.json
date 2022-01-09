@@ -13,22 +13,9 @@
       "properties": {
         "name": { "type": "string" },
         "workdays": { "$ref": "#/$defs/workdays" },
-        "availableVacationDays": { "type": "number" },
-        "calc": {
-          "type": "object",
-          "description": "gets calculated in backend on load from DB for current year",
-          "properties": {
-            "takenVacationDays": { "type": "number" },
-            "vacationStats": {
-              "type": "array",
-              "items": { "$ref": "#/$defs/vacationStat" }
-            }
-          },
-          "required": ["takenVacationDays", "vacationStats"],
-          "additionalProperties": false
-        }
+        "availableVacationDays": { "type": "number" }
       },
-      "required": ["name", "workdays", "availableVacationDays", "vacations", "calc"],
+      "required": ["name", "workdays", "availableVacationDays", "vacations"],
       "additionalProperties": false
     },
     "workdays": {
@@ -51,16 +38,6 @@
         "saturday",
         "sunday"
       ],
-      "additionalProperties": false
-    },
-    "vacationStat": {
-      "type": "object",
-      "description": "gets calculated in backend on load from DB for current year",
-      "properties": {
-        "typeId": { "type": "number" },
-        "count": { "type": "number" }
-      },
-      "required": ["typeId", "count"],
       "additionalProperties": false
     }
   }
