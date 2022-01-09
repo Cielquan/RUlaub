@@ -1,9 +1,10 @@
 use diesel::prelude::*;
 
+use crate::commands::database::get_db_conn;
 use crate::commands::CommandResult;
 use crate::db::conversion::public_holiday;
 use crate::db::models::PublicHoliday;
-use crate::db::{establish_connection_to, state_models};
+use crate::db::state_models;
 use crate::state::ConfigState;
 
 /// Get [`crate::db::models::PublicHoliday`] from database.
@@ -21,15 +22,7 @@ pub async fn load_public_holidays(
         Some(year) => year,
     };
 
-    let db_uri = match config_state_guard.settings.database_uri.clone() {
-        None => return Err("no-database-set-error".into()),
-        Some(db_uri) => db_uri,
-    };
-
-    let conn = match establish_connection_to(&db_uri) {
-        Err(_) => return Err("database-connection-error".into()),
-        Ok(connection) => connection,
-    };
+    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
 
     match public_holidays.load::<PublicHoliday>(&conn) {
         Err(err) => {
