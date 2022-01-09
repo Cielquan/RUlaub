@@ -1,4 +1,5 @@
 mod connection;
+pub mod conversion;
 pub mod migration;
 pub mod models;
 mod schema;
