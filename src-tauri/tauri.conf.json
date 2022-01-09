@@ -54,7 +54,7 @@
       {
         "label": "splashscreen",
         "width": 200,
-        "height": 177,
+        "height": 200,
         "decorations": false,
         "center": true,
         "skipTaskbar": true,
