@@ -4,6 +4,7 @@ pub mod school_holiday;
 pub mod types;
 pub mod user;
 pub mod vacation;
+pub mod vacation_stat;
 pub mod vacation_type;
 
 pub use public_holiday::{PublicHoliday, PublicHolidays};

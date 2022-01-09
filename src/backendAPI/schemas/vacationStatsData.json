@@ -1,0 +1,42 @@
+{
+  "title": "Vacation Stat Data Schema",
+  "description": "Schema for vacation stat data coming from the backend",
+  "$comment": "Pattern is User ID",
+  "type": "object",
+  "patternProperties": {
+    "^\\d+$": { "$ref": "#/$defs/statsData" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "statsData": {
+      "type": "object",
+      "properties": {
+        "calc": {
+          "type": "object",
+          "description": "gets calculated in backend on load from DB for current year",
+          "properties": {
+            "takenVacationDays": { "type": "number" },
+            "vacationStats": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/vacationStat" }
+            }
+          },
+          "required": ["takenVacationDays", "vacationStats"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["calc"],
+      "additionalProperties": false
+    },
+    "vacationStat": {
+      "type": "object",
+      "description": "gets calculated in backend on load from DB for current year",
+      "properties": {
+        "typeId": { "type": "number" },
+        "count": { "type": "number" }
+      },
+      "required": ["typeId", "count"],
+      "additionalProperties": false
+    }
+  }
+}
