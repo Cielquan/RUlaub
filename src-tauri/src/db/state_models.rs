@@ -1,7 +1,7 @@
 //! Database models used by the application.
 pub mod public_holiday;
 pub mod school_holiday;
-mod types;
+pub mod types;
 pub mod user;
 pub mod vacation;
 pub mod vacation_type;
