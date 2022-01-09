@@ -14,6 +14,7 @@ import {
   UsersDialogActionType,
   VacationsDataActionType,
   VacationsDialogActionType,
+  VacationStatsDataActionType,
   VacationTypesDataActionType,
   VacationTypesDialogActionType,
 } from "../action-types";
@@ -26,6 +27,8 @@ import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 // eslint-disable-next-line max-len
 import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
+// eslint-disable-next-line max-len
+import { VacationStatsDataSchema as VacationStatsData } from "../../backendAPI/types/vacationStatsData.schema";
 // eslint-disable-next-line max-len
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 
@@ -94,6 +97,11 @@ export type VacationsDataAction = {
 
 export type VacationsDialogAction = {
   type: VacationsDialogActionType;
+};
+
+export type VacationStatsDataAction = {
+  type: VacationStatsDataActionType;
+  payload: VacationStatsData;
 };
 
 export type VacationTypesDataAction = {

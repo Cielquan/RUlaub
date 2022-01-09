@@ -13,5 +13,6 @@ export * from "./usersDataActionCreators";
 export * from "./usersDialogActionCreators";
 export * from "./vacationsDataActionCreators";
 export * from "./vacationsDialogActionCreators";
+export * from "./vacationStatsDataActionCreators";
 export * from "./vacationTypesDataActionCreators";
 export * from "./vacationTypesDialogActionCreators";

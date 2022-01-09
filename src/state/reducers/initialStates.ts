@@ -6,6 +6,8 @@ import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.s
 // eslint-disable-next-line max-len
 import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
 // eslint-disable-next-line max-len
+import { VacationStatsDataSchema as VacationStatsData } from "../../backendAPI/types/vacationStatsData.schema";
+// eslint-disable-next-line max-len
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 
 export interface CalendarRowUserMap {
@@ -27,5 +29,6 @@ export const usersDataInitState: UsersData = {};
 export const usersDialogInitState = false;
 export const vacationsDataInitState: VacationsData = {};
 export const vacationsDialogInitState = false;
+export const vacationStatsDataInitState: VacationStatsData = {};
 export const vacationTypesDataInitState: VacationTypesData = {};
 export const vacationTypesDialogInitState = false;

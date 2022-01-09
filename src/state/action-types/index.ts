@@ -74,6 +74,10 @@ export enum VacationsDialogActionType {
   CLOSE = "close VacationsDialog",
 }
 
+export enum VacationStatsDataActionType {
+  LOAD = "load vacation types data",
+}
+
 export enum VacationTypesDataActionType {
   ADD = "add vacation types data",
   LOAD = "load vacation types data",
