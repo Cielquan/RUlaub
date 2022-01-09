@@ -364,6 +364,10 @@ msgstr "Urlaub"
 msgid "About"
 msgstr "Über"
 
+#: src/components/UserButton.tsx:37
+msgid "<Set Username>"
+msgstr "<Nutzername festlegen>"
+
 #: src/components/UsersDialogEntry.tsx:73
 msgid "User must have a name."
 msgstr "Nutzer muss einen Namen haben."

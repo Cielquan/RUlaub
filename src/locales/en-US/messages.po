@@ -366,6 +366,10 @@ msgstr "Vacation"
 msgid "About"
 msgstr "About"
 
+#: src/components/UserButton.tsx:37
+msgid "<Set Username>"
+msgstr "<Set Username>"
+
 #: src/components/UsersDialogEntry.tsx:73
 msgid "User must have a name."
 msgstr "User must have a name."

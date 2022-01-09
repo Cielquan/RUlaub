@@ -1,3 +1,4 @@
+import { t } from "@lingui/macro";
 import { AccountCircle as AccountCircleIcon } from "@mui/icons-material";
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import React, { ReactElement } from "react";
@@ -33,7 +34,7 @@ const UserButton = (): ReactElement => {
           <AccountCircleIcon />
         </ListItemIcon>
         <ListItemText
-          primary={configState?.user?.name}
+          primary={configState?.user?.name ?? t`<Set Username>`}
           primaryTypographyProps={{ noWrap: true }}
         />
       </ListItemButton>
