@@ -133,12 +133,13 @@ repos:
     # https://github.com/eslint/eslint
     # Config file: .eslintrc.json
     # Ignore file: .eslintignore (file ignore pattern)
-    rev: 534492d910ad4a4d484470b5aa0d51f1274eab1e # frozen: v8.6.0
+    rev: 455151c582ab2375999fa7d13c52f1f6a4dc23b3 # frozen: v7.32.0
     hooks:
       - id: eslint
         files: \.[jt]sx?$ # *.js, *.jsx, *.ts, *.tsx
         types: [file]
         additional_dependencies:
+          - eslint@7.32.0
           - eslint-config-airbnb@18.2.1
           - eslint-config-prettier@8.3.0
           - eslint-import-resolver-typescript@2.4.0
