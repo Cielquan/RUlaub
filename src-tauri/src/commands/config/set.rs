@@ -7,6 +7,7 @@ use crate::config::setup::ConfigSetupErr;
 use crate::config::theme::Theme;
 use crate::config::types::{StringEnum, User};
 use crate::config::Config;
+use crate::db::migrate_db_schema;
 use crate::logging::log_level::LogLevel;
 use crate::logging::tracer::reload_tracing_level;
 use crate::state::{ConfigSetupErrState, ConfigState, TracerHandleState};
@@ -47,9 +48,7 @@ pub async fn set_config_state(
     Ok(state_guard.clone())
 }
 
-#[tracing::instrument(skip(state, config_setup_err_state))]
-#[tauri::command]
-pub async fn set_db_uri(
+fn _set_db_uri(
     path: String,
     state: tauri::State<'_, ConfigState>,
     config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
@@ -66,6 +65,31 @@ pub async fn set_db_uri(
     }
 
     Ok(state_guard.clone())
+}
+
+#[tracing::instrument(skip(state, config_setup_err_state))]
+#[tauri::command]
+pub async fn set_db_uri(
+    path: String,
+    state: tauri::State<'_, ConfigState>,
+    config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
+) -> CommandResult<Config> {
+    _set_db_uri(path, state, config_setup_err_state)
+}
+
+/// Create a new SQLite database for RUlaub.
+#[tracing::instrument(skip(state, config_setup_err_state))]
+#[tauri::command]
+pub async fn create_db(
+    path: String,
+    state: tauri::State<'_, ConfigState>,
+    config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
+) -> CommandResult<Config> {
+    if migrate_db_schema(&path, true).is_err() {
+        return Err("database-creation-error".into());
+    }
+
+    _set_db_uri(path, state, config_setup_err_state)
 }
 
 #[tracing::instrument(skip(state, config_setup_err_state))]

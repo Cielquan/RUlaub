@@ -20,11 +20,10 @@ use rulaub_backend::commands::config::get::{
     get_language, get_log_level, get_theme,
 };
 use rulaub_backend::commands::config::set::{
-    set_config_state, set_db_uri, set_langauge, set_log_level, set_theme,
+    create_db, set_config_state, set_db_uri, set_langauge, set_log_level, set_theme,
     set_today_autoscroll_left_offset, set_user_name, set_year_change_scroll_begin,
     set_year_to_show,
 };
-use rulaub_backend::commands::database::file::create_db;
 use rulaub_backend::commands::database::get::{
     get_school_holidays_link, load_public_holidays, load_school_holidays, load_users,
     load_vacation_types, load_vacations,
