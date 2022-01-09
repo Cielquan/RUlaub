@@ -13,15 +13,23 @@ use crate::state::ConfigState;
 fn _load_public_holidays(
     config: &Config,
     conn: &SqliteConnection,
+    filter_current_year: Option<bool>,
 ) -> CommandResult<(state_models::PublicHolidays, u32)> {
-    use crate::db::schema::public_holidays::dsl::public_holidays;
+    use crate::db::schema::public_holidays::dsl::{public_holidays, year};
 
     let display_year = match config.settings.year_to_show.clone() {
         None => return Err("no-year-to-show-set-error".into()),
-        Some(year) => year,
+        Some(y) => y,
     };
 
-    match public_holidays.load::<PublicHoliday>(conn) {
+    let mut query = public_holidays.into_boxed();
+    if let Some(true) = filter_current_year {
+        query = query
+            .filter(year.eq(Some(display_year)))
+            .or_filter(year.eq::<Option<i32>>(None));
+    }
+
+    match query.load::<PublicHoliday>(conn) {
         Err(err) => {
             error!(
                 target = "database",
@@ -38,13 +46,14 @@ fn _load_public_holidays(
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn load_public_holidays(
+    filter_current_year: Option<bool>,
     config_state: tauri::State<'_, ConfigState>,
 ) -> CommandResult<(state_models::PublicHolidays, u32)> {
     let config_state_guard = config_state.0.lock();
 
     let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    _load_public_holidays(&config_state_guard, &conn)
+    _load_public_holidays(&config_state_guard, &conn, filter_current_year)
 }
 
 /// Get [`crate::db::models::SchoolHoliday`] from database.
