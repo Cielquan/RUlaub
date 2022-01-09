@@ -60,15 +60,28 @@ pub async fn load_public_holidays(
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn load_school_holidays(
+    filter_current_year: Option<bool>,
     config_state: tauri::State<'_, ConfigState>,
 ) -> CommandResult<state_models::SchoolHolidays> {
-    use crate::db::schema::school_holidays::dsl::school_holidays;
+    use crate::db::schema::school_holidays::dsl::{end_year, school_holidays, start_year};
 
     let config_state_guard = config_state.0.lock();
 
     let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    match school_holidays.load::<SchoolHoliday>(&conn) {
+    let mut query = school_holidays.into_boxed();
+    if let Some(true) = filter_current_year {
+        let display_year = match config_state_guard.settings.year_to_show.clone() {
+            None => return Err("no-year-to-show-set-error".into()),
+            Some(y) => y,
+        };
+
+        query = query
+            .filter(start_year.eq(display_year).or(end_year.eq(display_year)))
+            .or_filter(start_year.lt(display_year).and(end_year.gt(display_year)))
+    }
+
+    match query.load::<SchoolHoliday>(&conn) {
         Err(err) => {
             error!(
                 target = "database",
@@ -139,15 +152,28 @@ pub async fn load_users(
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn load_vacations(
+    filter_current_year: Option<bool>,
     config_state: tauri::State<'_, ConfigState>,
 ) -> CommandResult<state_models::Vacations> {
-    use crate::db::schema::vacations::dsl::vacations;
+    use crate::db::schema::vacations::dsl::{end_year, start_year, vacations};
 
     let config_state_guard = config_state.0.lock();
 
     let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    match vacations.load::<Vacation>(&conn) {
+    let mut query = vacations.into_boxed();
+    if let Some(true) = filter_current_year {
+        let display_year = match config_state_guard.settings.year_to_show.clone() {
+            None => return Err("no-year-to-show-set-error".into()),
+            Some(y) => y,
+        };
+
+        query = query
+            .filter(start_year.eq(display_year).or(end_year.eq(display_year)))
+            .or_filter(start_year.lt(display_year).and(end_year.gt(display_year)))
+    }
+
+    match query.load::<Vacation>(&conn) {
         Err(err) => {
             error!(
                 target = "database",
