@@ -12,7 +12,20 @@ use crate::logging::log_level::LogLevel;
 use crate::logging::tracer::reload_tracing_level;
 use crate::state::{ConfigSetupErrState, ConfigState, TracerHandleState};
 
-fn save_config_to_file(config: &Config) -> CommandResult<()> {
+fn save_config_to_file(
+    config: &Config,
+    config_setup_err_state: tauri::State<'_, ConfigSetupErrState>,
+) -> CommandResult<()> {
+    let config_setup_err_state_guard = config_setup_err_state.0.lock();
+    if *config_setup_err_state_guard != ConfigSetupErr::None {
+        trace!(
+            target = "command",
+            message = "Abort save config to file because of setup error",
+            error = ?*config_setup_err_state_guard,
+        );
+        return Err("config-not-saved-warn".into());
+    }
+
     trace!(target = "command", message = "Save config to file", config = ?config);
     match serialize_config_to_toml_str(config) {
         Err(_) => {
@@ -45,9 +58,7 @@ pub async fn set_config_state(
         );
         *state_guard = config;
 
-        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-            save_config_to_file(&state_guard)?
-        };
+        save_config_to_file(&state_guard, config_setup_err_state)?
     }
 
     Ok(state_guard.clone())
@@ -70,9 +81,7 @@ fn _set_db_uri(
         );
         state_guard.settings.database_uri = path_;
 
-        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-            save_config_to_file(&state_guard)?
-        };
+        save_config_to_file(&state_guard, config_setup_err_state)?
     }
 
     Ok(state_guard.clone())
@@ -122,9 +131,7 @@ pub async fn set_langauge(
         );
         state_guard.settings.language = lang_data;
 
-        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-            save_config_to_file(&state_guard)?
-        };
+        save_config_to_file(&state_guard, config_setup_err_state)?
     }
 
     Ok(state_guard.clone())
@@ -151,9 +158,7 @@ pub async fn set_log_level(
 
         reload_tracing_level(&tracer_handle.0.lock(), &level.to_string());
 
-        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-            save_config_to_file(&state_guard)?
-        };
+        save_config_to_file(&state_guard, config_setup_err_state)?
     }
 
     Ok(state_guard.clone())
@@ -177,9 +182,7 @@ pub async fn set_theme(
         );
         state_guard.settings.theme = theme;
 
-        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-            save_config_to_file(&state_guard)?
-        };
+        save_config_to_file(&state_guard, config_setup_err_state)?
     }
 
     Ok(state_guard.clone())
@@ -203,9 +206,7 @@ pub async fn set_today_autoscroll_left_offset(
         );
         state_guard.settings.today_autoscroll_left_offset = offset;
 
-        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-            save_config_to_file(&state_guard)?
-        };
+        save_config_to_file(&state_guard, config_setup_err_state)?
     }
 
     Ok(state_guard.clone())
@@ -230,9 +231,7 @@ pub async fn set_user_name(
         );
         state_guard.user = user;
 
-        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-            save_config_to_file(&state_guard)?
-        };
+        save_config_to_file(&state_guard, config_setup_err_state)?
     }
 
     Ok(state_guard.clone())
@@ -256,9 +255,7 @@ pub async fn set_year_change_scroll_begin(
         );
         state_guard.settings.year_change_scroll_begin = do_scroll;
 
-        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-            save_config_to_file(&state_guard)?
-        };
+        save_config_to_file(&state_guard, config_setup_err_state)?
     }
 
     Ok(state_guard.clone())
@@ -283,9 +280,7 @@ pub async fn set_year_to_show(
         );
         state_guard.settings.year_to_show = year_;
 
-        if *config_setup_err_state.0.lock() == ConfigSetupErr::None {
-            save_config_to_file(&state_guard)?
-        };
+        save_config_to_file(&state_guard, config_setup_err_state)?
     }
 
     Ok(state_guard.clone())

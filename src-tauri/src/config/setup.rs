@@ -3,7 +3,7 @@ use std::path::Path;
 use super::file::{load_config_file, write_to_config_file};
 use super::{Config, CONFIG_FILE_PATH, DEFAULT_CONFIG_TOML_NICE_STR};
 
-#[derive(PartialEq)]
+#[derive(Debug, PartialEq)]
 pub enum ConfigSetupErr {
     None,
     WriteErr,
