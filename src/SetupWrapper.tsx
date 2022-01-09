@@ -18,6 +18,7 @@ const SetupWrapper = (): ReactElement => {
     loadSchoolHolidaysData,
     loadSchoolHolidaysLink,
     loadVacationsData,
+    loadVacationStatsData,
     loadVacationTypesData,
   } = bindActionCreators(actionCreators, dispatch);
 
@@ -36,6 +37,7 @@ const SetupWrapper = (): ReactElement => {
     loadSchoolHolidaysData();
     loadSchoolHolidaysLink();
     loadVacationsData(); // NOTE: also loads UsersData
+    loadVacationStatsData();
     loadVacationTypesData();
     setupMenuEventListeners(dispatch);
     setupErrorEventListeners(snackbarHandles);
