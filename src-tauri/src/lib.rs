@@ -11,6 +11,7 @@ extern crate tracing;
 
 pub mod commands;
 pub mod config;
+mod date_calc;
 pub mod db;
 mod file_watcher;
 pub mod logging;
