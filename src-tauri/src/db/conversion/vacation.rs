@@ -1,7 +1,8 @@
 use std::collections::HashMap;
 
 use super::super::models;
-use crate::db::state_models::types::{naive_date_to_iso_date, DateData};
+use super::date_type::naive_date_to_iso_date;
+use crate::db::state_models::types::DateData;
 use crate::db::state_models::{self, Vacation};
 
 pub fn to_state(db_data: Vec<models::Vacation>) -> state_models::Vacations {
