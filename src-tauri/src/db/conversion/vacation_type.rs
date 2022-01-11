@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
 use super::super::models;
-use crate::db::state_models::{self, VacationType};
+use super::super::state_models::{self, VacationType};
 
 pub fn to_state(db_data: Vec<models::VacationType>) -> state_models::VacationTypes {
     trace!(

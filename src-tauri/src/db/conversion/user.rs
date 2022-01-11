@@ -1,8 +1,8 @@
 use std::collections::HashMap;
 
 use super::super::models;
-use crate::db::state_models::user::Workdays;
-use crate::db::state_models::{self, User};
+use super::super::state_models::user::Workdays;
+use super::super::state_models::{self, User};
 
 pub fn to_state(db_data: Vec<models::User>) -> state_models::Users {
     trace!(

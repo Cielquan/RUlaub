@@ -1,9 +1,9 @@
 use std::collections::HashMap;
 
 use super::super::models;
+use super::super::state_models::types::DateData;
+use super::super::state_models::{self, Vacation};
 use super::date_type::naive_date_to_iso_date;
-use crate::db::state_models::types::DateData;
-use crate::db::state_models::{self, Vacation};
 
 pub fn to_state(db_data: Vec<models::Vacation>) -> state_models::Vacations {
     trace!(
