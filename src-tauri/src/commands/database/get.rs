@@ -26,7 +26,7 @@ fn _load_public_holidays(
     if let Some(true) = filter_current_year {
         query = query
             .filter(year.eq(Some(display_year)))
-            .or_filter(year.eq::<Option<i32>>(None));
+            .or_filter(year.is_null());
     }
 
     match query.load::<PublicHoliday>(conn) {
