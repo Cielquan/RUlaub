@@ -76,7 +76,7 @@ pub fn sum_weekdays_between(
     Some(weekday_map)
 }
 
-pub fn sum_workdays(weekday_sum_map: WeekdaySumMap, workdays: Vec<Weekday>) -> u32 {
+pub fn sum_workdays(weekday_sum_map: &WeekdaySumMap, workdays: &Vec<Weekday>) -> u32 {
     trace!(
         target = "date_calc",
         message = "Sum weekdays if day is workday",
