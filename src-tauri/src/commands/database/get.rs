@@ -324,10 +324,6 @@ pub fn load_vacation_stats(
         );
     }
 
-    println!(
-        "{:?}",
-        (&vac_stats, pub_holiday_error_count, vacation_error_count)
-    );
     Ok((vac_stats, pub_holiday_error_count, vacation_error_count))
 }
 
