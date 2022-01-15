@@ -8,6 +8,7 @@ use crate::db::state_models::vacation_type::VacationTypeId;
 
 pub type VacationMap = HashMap<UserId, HashMap<VacationTypeId, Vec<VacationData>>>;
 
+#[derive(Debug)]
 pub struct VacationData {
     pub start_date: NaiveDate,
     pub end_date: NaiveDate,
