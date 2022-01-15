@@ -1,5 +1,3 @@
-use chrono::NaiveDate;
-
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DateData {
     pub date: ISODate,
