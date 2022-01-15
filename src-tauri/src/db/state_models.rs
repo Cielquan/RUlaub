@@ -11,5 +11,5 @@ pub use public_holiday::{PublicHoliday, PublicHolidays};
 pub use school_holiday::{SchoolHoliday, SchoolHolidays};
 pub use user::{User, Users};
 pub use vacation::{Vacation, Vacations};
-pub use vacation_stat::{VacationStat, VacationStats};
+pub use vacation_stat::{VacationStats, VacationStatsMap};
 pub use vacation_type::{VacationType, VacationTypes};

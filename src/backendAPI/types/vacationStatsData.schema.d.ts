@@ -21,13 +21,16 @@ export interface StatsData {
    */
   calc: {
     takenVacationDays: number;
-    vacationStats: VacationStat[];
+    vacationStats: VacationStats;
   };
 }
 /**
  * gets calculated in backend on load from DB for current year
  */
-export interface VacationStat {
-  typeId: number;
-  count: number;
+export interface VacationStats {
+  /**
+   * This interface was referenced by `VacationStats`'s JSON-Schema definition
+   * via the `patternProperty` "^\d+$".
+   */
+  [k: string]: number;
 }

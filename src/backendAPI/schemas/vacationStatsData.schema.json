@@ -16,10 +16,7 @@
           "description": "gets calculated in backend on load from DB for current year",
           "properties": {
             "takenVacationDays": { "type": "number" },
-            "vacationStats": {
-              "type": "array",
-              "items": { "$ref": "#/$defs/vacationStat" }
-            }
+            "vacationStats": { "$ref": "#/$defs/VacationStats" }
           },
           "required": ["takenVacationDays", "vacationStats"],
           "additionalProperties": false
@@ -28,14 +25,13 @@
       "required": ["calc"],
       "additionalProperties": false
     },
-    "vacationStat": {
+    "VacationStats": {
       "type": "object",
       "description": "gets calculated in backend on load from DB for current year",
-      "properties": {
-        "typeId": { "type": "number" },
-        "count": { "type": "number" }
+      "$comment": "Pattern is Vacation Type ID",
+      "patternProperties": {
+        "^\\d+$": { "type": "number" }
       },
-      "required": ["typeId", "count"],
       "additionalProperties": false
     }
   }
