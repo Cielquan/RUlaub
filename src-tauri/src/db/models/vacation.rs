@@ -5,8 +5,7 @@ use chrono::NaiveDate;
 use crate::db::schema::vacations;
 
 /// The database model for vacations.
-#[derive(Queryable, AsChangeset, Debug, Clone)]
-#[table_name = "vacations"]
+#[derive(Queryable, Debug, Clone)]
 pub struct Vacation {
     pub id: i32,
     pub user_id: i32,
@@ -62,7 +61,6 @@ impl Vacation {
 
     pub fn create_update_entry(
         id: i32,
-        user_id: i32,
         vacation_type_id: i32,
         start_date: NaiveDate,
         start_year_day: i32,
@@ -70,10 +68,9 @@ impl Vacation {
         end_date: NaiveDate,
         end_year_day: i32,
         end_year: i32,
-    ) -> Vacation {
-        Vacation {
+    ) -> UpdatedVacation {
+        UpdatedVacation {
             id,
-            user_id,
             vacation_type_id,
             start_date,
             start_year_day,
@@ -111,6 +108,36 @@ impl Display for NewVacation<'_> {
                 f,
                 "<NewVacation {} for {} (Start Date: {} | End Date: {}>",
                 self.vacation_type_id, self.user_id, self.start_date, self.end_date,
+            )
+        }
+    }
+}
+
+/// The update database model for vacations.
+///
+/// Missing: user_id
+#[derive(AsChangeset, Debug, Clone)]
+#[table_name = "vacations"]
+pub struct UpdatedVacation {
+    pub id: i32,
+    pub vacation_type_id: i32,
+    pub start_date: NaiveDate,
+    pub start_year_day: i32,
+    pub start_year: i32,
+    pub end_date: NaiveDate,
+    pub end_year_day: i32,
+    pub end_year: i32,
+}
+
+impl Display for UpdatedVacation {
+    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+        if f.alternate() {
+            write!(f, "<Vacation {}>", self.vacation_type_id)
+        } else {
+            write!(
+                f,
+                "<Vacation {} (Start Date: {} | End Date: {} | ID: {})>",
+                self.vacation_type_id, self.start_date, self.end_date, self.id
             )
         }
     }
