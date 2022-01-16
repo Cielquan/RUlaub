@@ -35,10 +35,10 @@ impl Display for SchoolHoliday {
 impl SchoolHoliday {
     pub fn create_new_entry<'a>(
         name: &'a str,
-        start_date: &'a NaiveDate,
+        start_date: NaiveDate,
         start_year_day: &'a i32,
         start_year: &'a i32,
-        end_date: &'a NaiveDate,
+        end_date: NaiveDate,
         end_year_day: &'a i32,
         end_year: &'a i32,
     ) -> NewSchoolHoliday<'a> {
@@ -80,10 +80,10 @@ impl SchoolHoliday {
 #[table_name = "school_holidays"]
 pub struct NewSchoolHoliday<'a> {
     pub name: &'a str,
-    pub start_date: &'a NaiveDate,
+    pub start_date: NaiveDate,
     pub start_year_day: &'a i32,
     pub start_year: &'a i32,
-    pub end_date: &'a NaiveDate,
+    pub end_date: NaiveDate,
     pub end_year_day: &'a i32,
     pub end_year: &'a i32,
 }
