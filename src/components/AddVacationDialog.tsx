@@ -186,25 +186,28 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
 
     updateVacationsData({
       newEntries: [
-        {
-          typeId: Number(typeIdForm),
-          start: {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            date: startDateForm!.toISOString().slice(0, 10),
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            yearDay: getDaysForDate(startDateForm!),
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            year: startDateForm!.getFullYear(),
+        currentUserID,
+        [
+          {
+            typeId: Number(typeIdForm),
+            start: {
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              date: startDateForm!.toISOString().slice(0, 10),
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              yearDay: getDaysForDate(startDateForm!),
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              year: startDateForm!.getFullYear(),
+            },
+            end: {
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              date: endDateForm!.toISOString().slice(0, 10),
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              yearDay: getDaysForDate(endDateForm!),
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              year: endDateForm!.getFullYear(),
+            },
           },
-          end: {
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            date: endDateForm!.toISOString().slice(0, 10),
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            yearDay: getDaysForDate(endDateForm!),
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            year: endDateForm!.getFullYear(),
-          },
-        },
+        ],
       ],
     });
     closeAddVacationDialog();

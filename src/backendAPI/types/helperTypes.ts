@@ -26,6 +26,9 @@ export type NewUserData = Omit<UserData, "calc">;
 export type NewUserDataPayload = [string, NewUserData];
 
 export type VacationDataPayload = [string, VacationData];
+export interface VacationDataMap {
+  [k: string]: VacationData;
+}
 export type NewVacationData = VacationData;
 export type NewVacationDataPayload = [string, NewVacationData];
 

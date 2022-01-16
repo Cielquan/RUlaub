@@ -159,7 +159,7 @@ pub async fn update_users(
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn update_vacations(
-    new_entries: Option<Vec<Vacation>>,
+    new_entries: Option<(i32, Vec<Vacation>)>,
     updated_entries: Option<Vacations>,
     removed_entries: Option<Vec<String>>,
     filter_current_year: Option<bool>,

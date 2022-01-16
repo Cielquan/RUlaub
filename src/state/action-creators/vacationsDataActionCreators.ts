@@ -2,12 +2,7 @@ import { invoke } from "@tauri-apps/api";
 import { batch } from "react-redux";
 import { Dispatch } from "redux";
 
-import {
-  loadUsersData,
-  loadUsersDataAction,
-  updateCalendarRowUserMapAction,
-  updateUsersDataAction,
-} from ".";
+import { loadUsersDataAction, updateCalendarRowUserMapAction } from ".";
 import { store } from "..";
 import { VacationsDataActionType } from "../action-types";
 import {
@@ -18,10 +13,7 @@ import {
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 // eslint-disable-next-line max-len
 import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
-import {
-  NewVacationData,
-  VacationDataPayload,
-} from "../../backendAPI/types/helperTypes";
+import { NewVacationData, VacationDataMap } from "../../backendAPI/types/helperTypes";
 import { validateUsersData, validateVacationsData } from "../../backendAPI/validation";
 
 export const loadVacationsDataAction = (
@@ -92,8 +84,8 @@ export const updateVacationsDataAction = (
 });
 
 interface UpdatePayload {
-  newEntries?: NewVacationData[];
-  updatedEntries?: VacationDataPayload[];
+  newEntries?: [string, NewVacationData[]];
+  updatedEntries?: VacationDataMap;
   removedEntries?: string[];
 }
 
