@@ -141,9 +141,9 @@ fn _get_school_holidays_link(conn: &SqliteConnection) -> CommandResult<Option<St
             );
             Err("database-load-error".into())
         }
-        Ok(data) => match data.len() {
+        Ok(mut data) => match data.len() {
             0 => Ok(None),
-            1 => Ok(Some(data.get(0).unwrap().link.clone())),
+            1 => Ok(Some(data.remove(0).link)),
             _ => Err("to-many-link-db-entries-error".into()),
         },
     }
