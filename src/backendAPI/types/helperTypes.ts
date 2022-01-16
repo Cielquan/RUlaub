@@ -13,7 +13,7 @@ export type NewSchoolHolidayData = SchoolHolidayData;
 export type NewSchoolHolidayDataPayload = [string, NewSchoolHolidayData];
 
 export type UserDataPayload = [string, UserData];
-export type NewUserData = Omit<UserData, "calc" | "vacations">;
+export type NewUserData = Omit<UserData, "calc">;
 export type NewUserDataPayload = [string, NewUserData];
 
 export type VacationDataPayload = [string, VacationData];
