@@ -22,6 +22,7 @@ import { VacationTypeData } from "../backendAPI/types/vacationTypesData.schema";
 import { actionCreators, State } from "../state";
 import {
   NewVacationTypeData,
+  VacationTypeDataMap,
   VacationTypeDataPayload,
 } from "../backendAPI/types/helperTypes";
 
@@ -106,14 +107,8 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
         ? Object.values(newVacationTypes)
         : undefined;
 
-    const entriesToUpdate = Object.keys(updatedVacationTypes).map(
-      (vacationTypeID) =>
-        [
-          vacationTypeID,
-          updatedVacationTypes[vacationTypeID],
-        ] as VacationTypeDataPayload
-    );
-    const updatedEntries = entriesToUpdate.length > 0 ? entriesToUpdate : undefined;
+    const updatedEntries =
+      Object.keys(updatedVacationTypes).length > 0 ? updatedVacationTypes : undefined;
 
     updateVacationTypesData({ newEntries, updatedEntries });
   };

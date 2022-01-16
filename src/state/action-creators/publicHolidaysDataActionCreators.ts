@@ -7,7 +7,7 @@ import { PublicHolidaysDataAction } from "../actions";
 import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
 import {
   NewPublicHolidayData,
-  PublicHolidayDataPayload,
+  PublicHolidayDataMap,
 } from "../../backendAPI/types/helperTypes";
 import { validatePublicHolidaysData } from "../../backendAPI/validation";
 
@@ -62,7 +62,7 @@ export const updatePublicHolidaysDataAction = (
 
 interface UpdatePayload {
   newEntries: NewPublicHolidayData[] | undefined;
-  updatedEntries: PublicHolidayDataPayload[] | undefined;
+  updatedEntries: PublicHolidayDataMap | undefined;
   removedEntries: string[] | undefined;
 }
 

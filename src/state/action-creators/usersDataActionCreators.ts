@@ -7,7 +7,7 @@ import { store } from "..";
 import { UsersDataActionType } from "../action-types";
 import { CalendarRowUserMapAction, UsersDataAction } from "../actions";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
-import { NewUserData, UserDataPayload } from "../../backendAPI/types/helperTypes";
+import { NewUserData, UserDataMap } from "../../backendAPI/types/helperTypes";
 import { validateUsersData } from "../../backendAPI/validation";
 
 export const loadUsersDataAction = (payload: UsersData): UsersDataAction => ({
@@ -57,7 +57,7 @@ export const updateUsersDataAction = (payload: UsersData): UsersDataAction => ({
 
 interface UpdatePayload {
   newEntries: NewUserData[] | undefined;
-  updatedEntries: UserDataPayload[] | undefined;
+  updatedEntries: UserDataMap | undefined;
   removedEntries: string[] | undefined;
 }
 

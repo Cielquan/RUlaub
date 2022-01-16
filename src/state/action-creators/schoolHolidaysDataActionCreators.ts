@@ -7,7 +7,7 @@ import { SchoolHolidaysDataAction } from "../actions";
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import {
   NewSchoolHolidayData,
-  SchoolHolidayDataPayload,
+  SchoolHolidayDataMap,
 } from "../../backendAPI/types/helperTypes";
 import { validateSchoolHolidaysData } from "../../backendAPI/validation";
 
@@ -60,7 +60,7 @@ export const updateSchoolHolidaysDataAction = (
 
 interface UpdatePayload {
   newEntries: NewSchoolHolidayData[] | undefined;
-  updatedEntries: SchoolHolidayDataPayload[] | undefined;
+  updatedEntries: SchoolHolidayDataMap | undefined;
   removedEntries: string[] | undefined;
 }
 

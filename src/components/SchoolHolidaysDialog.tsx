@@ -171,7 +171,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
         ? Object.values(newSchoolHolidays)
         : undefined;
 
-    const entriesToUpdate = Object.keys(updatedSchoolHolidays)
+    const filteredEntriesToUpdate = Object.keys(updatedSchoolHolidays)
       .filter((schoolHolidayID) => updatedSchoolHolidays[schoolHolidayID] !== undefined)
       .map(
         (schoolHolidayID) =>
@@ -180,7 +180,9 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
             updatedSchoolHolidays[schoolHolidayID],
           ] as SchoolHolidayDataPayload
       );
-    const updatedEntries = entriesToUpdate.length > 0 ? entriesToUpdate : undefined;
+    const entriesToUpdate = Object.fromEntries(filteredEntriesToUpdate);
+    const updatedEntries =
+      Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
 
     const entriesToRemove = Object.keys(updatedSchoolHolidays).filter(
       (schoolHolidayID) => updatedSchoolHolidays[schoolHolidayID] === undefined

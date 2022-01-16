@@ -7,7 +7,7 @@ import { VacationTypesDataAction } from "../actions";
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 import {
   NewVacationTypeData,
-  VacationTypeDataPayload,
+  VacationTypeDataMap,
 } from "../../backendAPI/types/helperTypes";
 import { validateVacationTypesData } from "../../backendAPI/validation";
 
@@ -60,7 +60,7 @@ export const updateVacationTypesDataAction = (
 
 interface UpdatePayload {
   newEntries: NewVacationTypeData[] | undefined;
-  updatedEntries: VacationTypeDataPayload[] | undefined;
+  updatedEntries: VacationTypeDataMap | undefined;
 }
 
 export const updateVacationTypesData =
