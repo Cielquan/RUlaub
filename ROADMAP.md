@@ -1,7 +1,5 @@
 ## Roadmap
 
-- BE | impl DB
-
 - FE | impl error cataloge for cmd error codes
 
 - FE | print cmd errors as snackbar
