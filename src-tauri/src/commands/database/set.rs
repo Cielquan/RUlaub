@@ -1,9 +1,15 @@
+use diesel::prelude::RunQueryDsl;
+
 use crate::commands::CommandResult;
+use crate::db::models::SchoolHolidayLink;
 use crate::db::state_models::{
     PublicHoliday, PublicHolidays, SchoolHoliday, SchoolHolidays, User, Users, Vacation,
     VacationType, VacationTypes, Vacations,
 };
 use crate::state::ConfigState;
+
+use super::get::_get_school_holidays_link;
+use super::{get_db_conn, DieselResultErrorWrapper};
 
 /// Update [`PublicHoliday`] in database.
 #[tracing::instrument(skip(config_state))]
@@ -35,8 +41,92 @@ pub async fn update_school_holidays(
 pub async fn update_school_holidays_link(
     link: Option<String>,
     config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<Option<()>> {
-    Ok(Some(()))
+) -> CommandResult<Option<String>> {
+    use crate::db::schema::school_holidays_link::dsl::school_holidays_link;
+
+    let config_state_guard = config_state.0.lock();
+    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+
+    match conn.exclusive_transaction::<Option<String>, DieselResultErrorWrapper, _>(|| {
+        let current_entry = match _get_school_holidays_link(&conn) {
+            Err(err) => {
+                return Err(DieselResultErrorWrapper::Msg(err.into()));
+            }
+            Ok(e) => e,
+        };
+
+        if current_entry.is_none() && link.is_none() {
+            return Ok(None);
+        }
+
+        if current_entry.is_none() {
+            let link = link.unwrap();
+            let insertable = SchoolHolidayLink::create_new_entry(&link);
+            if let Err(err) = diesel::insert_into(school_holidays_link)
+                .values(insertable.clone())
+                .execute(&conn)
+            {
+                error!(
+                    target = "database",
+                    message = "Failed to insert entry to school_holidays_link db table",
+                    error = ?err,
+                    entry = ?insertable
+                );
+                return Err(DieselResultErrorWrapper::Msg(
+                    "database-insert-error".into(),
+                ));
+            }
+            return Ok(Some(link));
+        } else if current_entry.is_some() && link.is_none() {
+            if let Err(err) = diesel::delete(school_holidays_link).execute(&conn) {
+                error!(
+                    target = "database",
+                    message = "Failed to delete all entries from school_holidays_link db table",
+                    error = ?err,
+                );
+                return Err(DieselResultErrorWrapper::Msg(
+                    "database-delete-error".into(),
+                ));
+            }
+            return Ok(None);
+        } else {
+            let link = link.unwrap();
+            let insertable = SchoolHolidayLink::create_update_entry(link.clone());
+            if let Err(err) = diesel::update(school_holidays_link)
+                .set(insertable.clone())
+                .execute(&conn)
+            {
+                error!(
+                    target = "database",
+                    message = "Failed to update entry in school_holidays_link db table",
+                    error = ?err,
+                    entry = ?insertable
+                );
+                return Err(DieselResultErrorWrapper::Msg(
+                    "database-update-error".into(),
+                ));
+            }
+            return Ok(Some(link));
+        }
+    }) {
+        Err(DieselResultErrorWrapper::Msg(err)) => Err(err),
+        Err(DieselResultErrorWrapper::DieselErrorDummy(err)) => {
+            error!(
+                target = "database-diesel-error",
+                message = "An diesel error slipped through",
+                error = ?err,
+            );
+            panic!("Unexpected error slipped through; see loggs for more info");
+        }
+        Ok(rv) => {
+            debug!(
+                target = "database",
+                message = "Set school holiday link in db",
+                value = ?rv,
+            );
+            Ok(rv)
+        }
+    }
 }
 
 /// Update [`User`] in database.

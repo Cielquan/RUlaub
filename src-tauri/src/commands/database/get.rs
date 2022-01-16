@@ -129,7 +129,7 @@ pub async fn get_school_holidays_link(
     _get_school_holidays_link(&conn)
 }
 
-fn _get_school_holidays_link(conn: &SqliteConnection) -> CommandResult<Option<String>> {
+pub fn _get_school_holidays_link(conn: &SqliteConnection) -> CommandResult<Option<String>> {
     use crate::db::schema::school_holidays_link::dsl::school_holidays_link;
 
     match school_holidays_link.load::<SchoolHolidayLink>(conn) {
