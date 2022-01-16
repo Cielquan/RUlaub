@@ -41,10 +41,10 @@ impl Vacation {
     pub fn create_new_entry<'a>(
         user_id: &'a i32,
         vacation_type_id: &'a i32,
-        start_date: &'a NaiveDate,
+        start_date: NaiveDate,
         start_year_day: &'a i32,
         start_year: &'a i32,
-        end_date: &'a NaiveDate,
+        end_date: NaiveDate,
         end_year_day: &'a i32,
         end_year: &'a i32,
     ) -> NewVacation<'a> {
@@ -90,10 +90,10 @@ impl Vacation {
 pub struct NewVacation<'a> {
     pub user_id: &'a i32,
     pub vacation_type_id: &'a i32,
-    pub start_date: &'a NaiveDate,
+    pub start_date: NaiveDate,
     pub start_year_day: &'a i32,
     pub start_year: &'a i32,
-    pub end_date: &'a NaiveDate,
+    pub end_date: NaiveDate,
     pub end_year_day: &'a i32,
     pub end_year: &'a i32,
 }
