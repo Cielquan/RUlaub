@@ -123,17 +123,14 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
 
     const filteredEntriesToUpdate = Object.keys(updatedVacations)
       .filter((vacationID) => updatedVacations[vacationID] !== undefined)
-      .map(
-        (vacationID) =>
-          [vacationID, updatedVacations[vacationID]] as VacationDataPayload
-      );
+      .map((vacationID) => [Number(vacationID), updatedVacations[vacationID]]);
     const entriesToUpdate = Object.fromEntries(filteredEntriesToUpdate);
     const updatedEntries =
       Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
 
-    const entriesToRemove = Object.keys(updatedVacations).filter(
-      (vacationID) => updatedVacations[vacationID] === undefined
-    );
+    const entriesToRemove = Object.keys(updatedVacations)
+      .filter((vacationID) => updatedVacations[vacationID] === undefined)
+      .map((id) => Number(id));
     const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
 
     updateVacationsData({

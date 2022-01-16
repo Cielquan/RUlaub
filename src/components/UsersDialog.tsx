@@ -107,14 +107,14 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
 
     const filteredEntriesToUpdate = Object.keys(updatedUsers)
       .filter((userID) => updatedUsers[userID] !== undefined)
-      .map((userID) => [userID, updatedUsers[userID]] as UserDataPayload);
+      .map((userID) => [Number(userID), updatedUsers[userID]]);
     const entriesToUpdate = Object.fromEntries(filteredEntriesToUpdate);
     const updatedEntries =
       Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
 
-    const entriesToRemove = Object.keys(updatedUsers).filter(
-      (userID) => updatedUsers[userID] === undefined
-    );
+    const entriesToRemove = Object.keys(updatedUsers)
+      .filter((userID) => updatedUsers[userID] === undefined)
+      .map((id) => Number(id));
     const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
 
     updateUsersData({ newEntries, updatedEntries, removedEntries });

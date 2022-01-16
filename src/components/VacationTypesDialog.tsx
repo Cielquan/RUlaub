@@ -107,8 +107,12 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
         ? Object.values(newVacationTypes)
         : undefined;
 
+    const filteredEntriesToUpdate = Object.keys(updatedVacationTypes).map(
+      (vacationTypeID) => [Number(vacationTypeID), updatedVacationTypes[vacationTypeID]]
+    );
+    const entriesToUpdate = Object.fromEntries(filteredEntriesToUpdate);
     const updatedEntries =
-      Object.keys(updatedVacationTypes).length > 0 ? updatedVacationTypes : undefined;
+      Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
 
     updateVacationTypesData({ newEntries, updatedEntries });
   };

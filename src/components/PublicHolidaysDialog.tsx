@@ -112,20 +112,17 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
 
     const filteredEntriesToUpdate = Object.keys(updatedPublicHolidays)
       .filter((publicHolidayID) => updatedPublicHolidays[publicHolidayID] !== undefined)
-      .map(
-        (publicHolidayID) =>
-          [
-            publicHolidayID,
-            updatedPublicHolidays[publicHolidayID],
-          ] as PublicHolidayDataPayload
-      );
+      .map((publicHolidayID) => [
+        Number(publicHolidayID),
+        updatedPublicHolidays[publicHolidayID],
+      ]);
     const entriesToUpdate = Object.fromEntries(filteredEntriesToUpdate);
     const updatedEntries =
       Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
 
-    const entriesToRemove = Object.keys(updatedPublicHolidays).filter(
-      (publicHolidayID) => updatedPublicHolidays[publicHolidayID] === undefined
-    );
+    const entriesToRemove = Object.keys(updatedPublicHolidays)
+      .filter((publicHolidayID) => updatedPublicHolidays[publicHolidayID] === undefined)
+      .map((id) => Number(id));
     const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
 
     updatePublicHolidaysData({ newEntries, updatedEntries, removedEntries });
