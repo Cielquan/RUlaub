@@ -4,8 +4,9 @@ pub mod set;
 
 use diesel::SqliteConnection;
 
-use super::CommandResult;
 use crate::db::establish_connection_to;
+
+use super::CommandResult;
 
 fn get_db_conn(database_uri: &Option<String>) -> CommandResult<SqliteConnection> {
     let db_uri = match database_uri.clone() {

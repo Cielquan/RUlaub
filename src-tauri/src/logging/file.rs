@@ -5,8 +5,9 @@ use std::{env, fs};
 
 use glob::{glob, GlobError};
 
-use super::LOGGING_DIR_PATH;
 use crate::{NAME, PROJECT_DIRS};
+
+use super::LOGGING_DIR_PATH;
 
 /// Try to create a logging directory path.
 ///

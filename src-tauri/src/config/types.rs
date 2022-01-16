@@ -1,6 +1,7 @@
+use crate::logging::log_level::LogLevel;
+
 use super::language::{Language, LanguageData};
 use super::theme::Theme;
-use crate::logging::log_level::LogLevel;
 
 /// The configuration object.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]

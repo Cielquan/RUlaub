@@ -1,7 +1,8 @@
 use std::fmt::{self, Display, Formatter};
 
-use super::entry_traits::NewDBEntry;
 use crate::db::schema::school_holidays_link;
+
+use super::entry_traits::NewDBEntry;
 
 /// The database model for school holidays link.
 #[derive(Queryable, Debug)]
