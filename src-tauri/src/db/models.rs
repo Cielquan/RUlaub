@@ -1,5 +1,4 @@
 //! Database models used by the application.
-mod entry_traits;
 mod public_holiday;
 mod school_holiday;
 mod school_holidays_link;

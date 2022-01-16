@@ -2,8 +2,6 @@ use std::fmt::{self, Display, Formatter};
 
 use crate::db::schema::school_holidays_link;
 
-use super::entry_traits::NewDBEntry;
-
 /// The database model for school holidays link.
 #[derive(Queryable, Debug)]
 pub struct SchoolHolidayLink {
@@ -34,9 +32,4 @@ impl Display for NewSchoolHolidayLink<'_> {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         write!(f, "<SchoolHolidayLink {}>", self.link)
     }
-}
-
-type Table = school_holidays_link::table;
-impl NewDBEntry<Table> for NewSchoolHolidayLink<'_> {
-    const TABLE: Table = school_holidays_link::table;
 }

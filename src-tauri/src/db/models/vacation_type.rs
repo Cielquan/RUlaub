@@ -2,8 +2,6 @@ use std::fmt::{self, Display, Formatter};
 
 use crate::db::schema::vacation_types;
 
-use super::entry_traits::NewDBEntry;
-
 /// The database model for vacation types.
 #[derive(Queryable, Debug)]
 pub struct VacationType {
@@ -82,9 +80,4 @@ impl Display for NewVacationType<'_> {
             )
         }
     }
-}
-
-type Table = vacation_types::table;
-impl NewDBEntry<Table> for NewVacationType<'_> {
-    const TABLE: Table = vacation_types::table;
 }

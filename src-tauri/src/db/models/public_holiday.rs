@@ -2,8 +2,6 @@ use std::fmt::{self, Display, Formatter};
 
 use crate::db::schema::public_holidays;
 
-use super::entry_traits::NewDBEntry;
-
 /// The database model for public holidays.
 #[derive(Queryable, Debug)]
 pub struct PublicHoliday {
@@ -78,9 +76,4 @@ impl Display for NewPublicHoliday<'_> {
             )
         }
     }
-}
-
-type Table = public_holidays::table;
-impl NewDBEntry<Table> for NewPublicHoliday<'_> {
-    const TABLE: Table = public_holidays::table;
 }

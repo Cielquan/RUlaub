@@ -4,8 +4,6 @@ use chrono::NaiveDate;
 
 use crate::db::schema::school_holidays;
 
-use super::entry_traits::NewDBEntry;
-
 /// The database model for school holidays.
 #[derive(Queryable, Debug)]
 pub struct SchoolHoliday {
@@ -81,9 +79,4 @@ impl Display for NewSchoolHoliday<'_> {
             )
         }
     }
-}
-
-type Table = school_holidays::table;
-impl NewDBEntry<Table> for NewSchoolHoliday<'_> {
-    const TABLE: Table = school_holidays::table;
 }

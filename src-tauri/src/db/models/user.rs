@@ -2,8 +2,6 @@ use std::fmt::{self, Display, Formatter};
 
 use crate::db::schema::users;
 
-use super::entry_traits::NewDBEntry;
-
 /// The database model for users.
 #[derive(Queryable, Debug)]
 pub struct User {
@@ -126,9 +124,4 @@ impl Display for NewUser<'_> {
             )
         }
     }
-}
-
-type Table = users::table;
-impl NewDBEntry<Table> for NewUser<'_> {
-    const TABLE: Table = users::table;
 }

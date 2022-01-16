@@ -4,8 +4,6 @@ use chrono::NaiveDate;
 
 use crate::db::schema::vacations;
 
-use super::entry_traits::NewDBEntry;
-
 /// The database model for vacations.
 #[derive(Queryable, Debug)]
 pub struct Vacation {
@@ -93,9 +91,4 @@ impl Display for NewVacation<'_> {
             )
         }
     }
-}
-
-type Table = vacations::table;
-impl NewDBEntry<Table> for NewVacation<'_> {
-    const TABLE: Table = vacations::table;
 }
