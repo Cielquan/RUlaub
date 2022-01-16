@@ -31,7 +31,7 @@ pub async fn load_public_holidays(
     _load_public_holidays(&config_state_guard, &conn, filter_current_year)
 }
 
-fn _load_public_holidays(
+pub fn _load_public_holidays(
     config: &Config,
     conn: &SqliteConnection,
     filter_current_year: Option<bool>,
@@ -82,7 +82,7 @@ pub async fn load_school_holidays(
     _load_school_holidays(&config_state_guard, &conn, filter_current_year)
 }
 
-fn _load_school_holidays(
+pub fn _load_school_holidays(
     config: &Config,
     conn: &SqliteConnection,
     filter_current_year: Option<bool>,
@@ -158,7 +158,7 @@ pub async fn load_users(
     _load_users(&conn)
 }
 
-fn _load_users(conn: &SqliteConnection) -> CommandResult<state_models::Users> {
+pub fn _load_users(conn: &SqliteConnection) -> CommandResult<state_models::Users> {
     use crate::db::schema::users::dsl::users;
 
     match users.load::<User>(conn) {
@@ -187,7 +187,7 @@ pub async fn load_vacations(
     _load_vacations(&config_state_guard, &conn, filter_current_year)
 }
 
-fn _load_vacations(
+pub fn _load_vacations(
     config: &Config,
     conn: &SqliteConnection,
     filter_current_year: Option<bool>,
@@ -411,7 +411,7 @@ pub async fn load_vacation_types(
     _load_vacation_types(&conn)
 }
 
-fn _load_vacation_types(conn: &SqliteConnection) -> CommandResult<state_models::VacationTypes> {
+pub fn _load_vacation_types(conn: &SqliteConnection) -> CommandResult<state_models::VacationTypes> {
     use crate::db::schema::vacation_types::dsl::vacation_types;
 
     match vacation_types.load::<VacationType>(conn) {

@@ -3,12 +3,15 @@ use diesel::prelude::RunQueryDsl;
 use crate::commands::CommandResult;
 use crate::db::models::SchoolHolidayLink;
 use crate::db::state_models::{
-    PublicHoliday, PublicHolidays, SchoolHoliday, SchoolHolidays, User, Users, Vacation,
+    self, PublicHoliday, PublicHolidays, SchoolHoliday, SchoolHolidays, User, Users, Vacation,
     VacationType, VacationTypes, Vacations,
 };
 use crate::state::ConfigState;
 
-use super::get::_get_school_holidays_link;
+use super::get::{
+    _get_school_holidays_link, _load_public_holidays, _load_school_holidays, _load_users,
+    _load_vacation_types, _load_vacations,
+};
 use super::{get_db_conn, DieselResultErrorWrapper};
 
 /// Update [`PublicHoliday`] in database.
@@ -18,9 +21,13 @@ pub async fn update_public_holidays(
     new_entries: Option<Vec<PublicHoliday>>,
     updated_entries: Option<PublicHolidays>,
     removed_entries: Option<Vec<String>>,
+    filter_current_year: Option<bool>,
     config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<Vec<()>> {
-    Ok(vec![()])
+) -> CommandResult<(state_models::PublicHolidays, u32)> {
+    let config_state_guard = config_state.0.lock();
+    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+
+    _load_public_holidays(&config_state_guard, &conn, filter_current_year)
 }
 
 /// Update [`SchoolHoliday`] in database.
@@ -30,9 +37,13 @@ pub async fn update_school_holidays(
     new_entries: Option<Vec<SchoolHoliday>>,
     updated_entries: Option<SchoolHolidays>,
     removed_entries: Option<Vec<String>>,
+    filter_current_year: Option<bool>,
     config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<Vec<()>> {
-    Ok(vec![()])
+) -> CommandResult<state_models::SchoolHolidays> {
+    let config_state_guard = config_state.0.lock();
+    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+
+    _load_school_holidays(&config_state_guard, &conn, filter_current_year)
 }
 
 /// Update [`SchoolHolidayLink`] in database.
@@ -137,8 +148,11 @@ pub async fn update_users(
     updated_entries: Option<Users>,
     removed_entries: Option<Vec<String>>,
     config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<Vec<()>> {
-    Ok(vec![()])
+) -> CommandResult<state_models::Users> {
+    let config_state_guard = config_state.0.lock();
+    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+
+    _load_users(&conn)
 }
 
 /// Update [`Vacation`] in database.
@@ -148,9 +162,13 @@ pub async fn update_vacations(
     new_entries: Option<Vec<Vacation>>,
     updated_entries: Option<Vacations>,
     removed_entries: Option<Vec<String>>,
+    filter_current_year: Option<bool>,
     config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<Vec<()>> {
-    Ok(vec![()])
+) -> CommandResult<state_models::Vacations> {
+    let config_state_guard = config_state.0.lock();
+    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+
+    _load_vacations(&config_state_guard, &conn, filter_current_year)
 }
 
 /// Update [`VacationType`] in database.
@@ -160,6 +178,9 @@ pub async fn update_vacation_types(
     new_entries: Option<Vec<VacationType>>,
     updated_entries: Option<VacationTypes>,
     config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<Vec<()>> {
-    Ok(vec![()])
+) -> CommandResult<state_models::VacationTypes> {
+    let config_state_guard = config_state.0.lock();
+    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+
+    _load_vacation_types(&conn)
 }
