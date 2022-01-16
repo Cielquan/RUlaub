@@ -3,7 +3,8 @@ use std::fmt::{self, Display, Formatter};
 use crate::db::schema::vacation_types;
 
 /// The database model for vacation types.
-#[derive(Queryable, Debug)]
+#[derive(Queryable, AsChangeset, Debug, Clone)]
+#[table_name = "vacation_types"]
 pub struct VacationType {
     pub id: i32,
     pub name: String,
@@ -34,9 +35,7 @@ impl Display for VacationType {
 }
 
 impl VacationType {
-    #[allow(clippy::new_ret_no_self)]
-    #[allow(dead_code)] // TODO:#i# remove after usage
-    pub fn new<'a>(
+    pub fn create_new_entry<'a>(
         name: &'a str,
         charge: &'a bool,
         color_dark: &'a str,
@@ -44,6 +43,24 @@ impl VacationType {
         active: &'a bool,
     ) -> NewVacationType<'a> {
         NewVacationType {
+            name,
+            charge,
+            color_dark,
+            color_light,
+            active,
+        }
+    }
+
+    pub fn create_update_entry(
+        id: i32,
+        name: String,
+        charge: bool,
+        color_dark: String,
+        color_light: String,
+        active: bool,
+    ) -> VacationType {
+        VacationType {
+            id,
             name,
             charge,
             color_dark,

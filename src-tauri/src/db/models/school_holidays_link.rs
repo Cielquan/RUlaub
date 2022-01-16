@@ -3,7 +3,8 @@ use std::fmt::{self, Display, Formatter};
 use crate::db::schema::school_holidays_link;
 
 /// The database model for school holidays link.
-#[derive(Queryable, Debug)]
+#[derive(Queryable, AsChangeset, Debug, Clone)]
+#[table_name = "school_holidays_link"]
 pub struct SchoolHolidayLink {
     pub link: String,
 }
@@ -15,10 +16,12 @@ impl Display for SchoolHolidayLink {
 }
 
 impl SchoolHolidayLink {
-    #[allow(clippy::new_ret_no_self)]
-    #[allow(dead_code)] // TODO:#i# remove after usage
-    pub fn new<'a>(link: &'a str) -> NewSchoolHolidayLink<'a> {
+    pub fn create_new_entry<'a>(link: &'a str) -> NewSchoolHolidayLink<'a> {
         NewSchoolHolidayLink { link }
+    }
+
+    pub fn create_update_entry(link: String) -> SchoolHolidayLink {
+        SchoolHolidayLink { link }
     }
 }
 

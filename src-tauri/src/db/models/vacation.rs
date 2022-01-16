@@ -5,7 +5,8 @@ use chrono::NaiveDate;
 use crate::db::schema::vacations;
 
 /// The database model for vacations.
-#[derive(Queryable, Debug)]
+#[derive(Queryable, AsChangeset, Debug, Clone)]
+#[table_name = "vacations"]
 pub struct Vacation {
     pub id: i32,
     pub user_id: i32,
@@ -37,9 +38,7 @@ impl Display for Vacation {
 }
 
 impl Vacation {
-    #[allow(clippy::new_ret_no_self, clippy::too_many_arguments)]
-    #[allow(dead_code)] // TODO:#i# remove after usage
-    pub fn new<'a>(
+    pub fn create_new_entry<'a>(
         user_id: &'a i32,
         vacation_type_id: &'a i32,
         start_date: &'a NaiveDate,
@@ -50,6 +49,30 @@ impl Vacation {
         end_year: &'a i32,
     ) -> NewVacation<'a> {
         NewVacation {
+            user_id,
+            vacation_type_id,
+            start_date,
+            start_year_day,
+            start_year,
+            end_date,
+            end_year_day,
+            end_year,
+        }
+    }
+
+    pub fn create_update_entry(
+        id: i32,
+        user_id: i32,
+        vacation_type_id: i32,
+        start_date: NaiveDate,
+        start_year_day: i32,
+        start_year: i32,
+        end_date: NaiveDate,
+        end_year_day: i32,
+        end_year: i32,
+    ) -> Vacation {
+        Vacation {
+            id,
             user_id,
             vacation_type_id,
             start_date,

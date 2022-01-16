@@ -5,7 +5,8 @@ use chrono::NaiveDate;
 use crate::db::schema::school_holidays;
 
 /// The database model for school holidays.
-#[derive(Queryable, Debug)]
+#[derive(Queryable, AsChangeset, Debug, Clone)]
+#[table_name = "school_holidays"]
 pub struct SchoolHoliday {
     pub id: i32,
     pub name: String,
@@ -32,9 +33,7 @@ impl Display for SchoolHoliday {
 }
 
 impl SchoolHoliday {
-    #[allow(clippy::new_ret_no_self)]
-    #[allow(dead_code)] // TODO:#i# remove after usage
-    pub fn new<'a>(
+    pub fn create_new_entry<'a>(
         name: &'a str,
         start_date: &'a NaiveDate,
         start_year_day: &'a i32,
@@ -44,6 +43,28 @@ impl SchoolHoliday {
         end_year: &'a i32,
     ) -> NewSchoolHoliday<'a> {
         NewSchoolHoliday {
+            name,
+            start_date,
+            start_year_day,
+            start_year,
+            end_date,
+            end_year_day,
+            end_year,
+        }
+    }
+
+    pub fn create_update_entry(
+        id: i32,
+        name: String,
+        start_date: NaiveDate,
+        start_year_day: i32,
+        start_year: i32,
+        end_date: NaiveDate,
+        end_year_day: i32,
+        end_year: i32,
+    ) -> SchoolHoliday {
+        SchoolHoliday {
+            id,
             name,
             start_date,
             start_year_day,

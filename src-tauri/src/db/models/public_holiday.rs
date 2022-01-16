@@ -3,7 +3,8 @@ use std::fmt::{self, Display, Formatter};
 use crate::db::schema::public_holidays;
 
 /// The database model for public holidays.
-#[derive(Queryable, Debug)]
+#[derive(Queryable, AsChangeset, Debug, Clone)]
+#[table_name = "public_holidays"]
 pub struct PublicHoliday {
     pub id: i32,
     pub name: String,
@@ -33,15 +34,29 @@ impl Display for PublicHoliday {
 }
 
 impl PublicHoliday {
-    #[allow(clippy::new_ret_no_self)]
-    #[allow(dead_code)] // TODO:#i# remove after usage
-    pub fn new<'a>(
+    pub fn create_new_entry<'a>(
         name: &'a str,
         year: Option<&'a i32>,
         yearless_date: Option<&'a str>,
         easter_sunday_offset: Option<&'a i32>,
     ) -> NewPublicHoliday<'a> {
         NewPublicHoliday {
+            name,
+            year,
+            yearless_date,
+            easter_sunday_offset,
+        }
+    }
+
+    pub fn create_update_entry(
+        id: i32,
+        name: String,
+        year: Option<i32>,
+        yearless_date: Option<String>,
+        easter_sunday_offset: Option<i32>,
+    ) -> PublicHoliday {
+        PublicHoliday {
+            id,
             name,
             year,
             yearless_date,

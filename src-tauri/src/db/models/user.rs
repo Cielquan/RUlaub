@@ -3,7 +3,8 @@ use std::fmt::{self, Display, Formatter};
 use crate::db::schema::users;
 
 /// The database model for users.
-#[derive(Queryable, Debug)]
+#[derive(Queryable, AsChangeset, Debug, Clone)]
+#[table_name = "users"]
 pub struct User {
     pub id: i32,
     pub name: String,
@@ -52,9 +53,7 @@ impl Display for User {
 }
 
 impl User {
-    #[allow(clippy::new_ret_no_self, clippy::too_many_arguments)]
-    #[allow(dead_code)] // TODO:#i# remove after usage
-    pub fn new<'a>(
+    pub fn create_new_entry<'a>(
         name: &'a str,
         vacation_days: &'a i32,
         monday: &'a bool,
@@ -67,6 +66,32 @@ impl User {
     ) -> NewUser<'a> {
         trace!("Create NewUser instance");
         NewUser {
+            name,
+            vacation_days,
+            monday,
+            tuesday,
+            wednesday,
+            thursday,
+            friday,
+            saturday,
+            sunday,
+        }
+    }
+
+    pub fn create_update_entry(
+        id: i32,
+        name: String,
+        vacation_days: i32,
+        monday: bool,
+        tuesday: bool,
+        wednesday: bool,
+        thursday: bool,
+        friday: bool,
+        saturday: bool,
+        sunday: bool,
+    ) -> User {
+        User {
+            id,
             name,
             vacation_days,
             monday,
