@@ -26,7 +26,6 @@ pub async fn load_public_holidays(
     config_state: tauri::State<'_, ConfigState>,
 ) -> CommandResult<(state_models::PublicHolidays, u32)> {
     let config_state_guard = config_state.0.lock();
-
     let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
 
     _load_public_holidays(&config_state_guard, &conn, filter_current_year)
@@ -78,7 +77,6 @@ pub async fn load_school_holidays(
     config_state: tauri::State<'_, ConfigState>,
 ) -> CommandResult<state_models::SchoolHolidays> {
     let config_state_guard = config_state.0.lock();
-
     let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
 
     _load_school_holidays(&config_state_guard, &conn, filter_current_year)
@@ -123,7 +121,6 @@ pub async fn get_school_holidays_link(
     config_state: tauri::State<'_, ConfigState>,
 ) -> CommandResult<Option<String>> {
     let config_state_guard = config_state.0.lock();
-
     let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
 
     _get_school_holidays_link(&conn)
@@ -156,7 +153,6 @@ pub async fn load_users(
     config_state: tauri::State<'_, ConfigState>,
 ) -> CommandResult<state_models::Users> {
     let config_state_guard = config_state.0.lock();
-
     let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
 
     _load_users(&conn)
@@ -186,7 +182,6 @@ pub async fn load_vacations(
     config_state: tauri::State<'_, ConfigState>,
 ) -> CommandResult<state_models::Vacations> {
     let config_state_guard = config_state.0.lock();
-
     let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
 
     _load_vacations(&config_state_guard, &conn, filter_current_year)
@@ -411,7 +406,6 @@ pub async fn load_vacation_types(
     config_state: tauri::State<'_, ConfigState>,
 ) -> CommandResult<state_models::VacationTypes> {
     let config_state_guard = config_state.0.lock();
-
     let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
 
     _load_vacation_types(&conn)
