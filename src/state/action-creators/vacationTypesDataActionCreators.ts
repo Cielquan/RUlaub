@@ -59,8 +59,8 @@ export const updateVacationTypesDataAction = (
 });
 
 interface UpdatePayload {
-  newEntries: NewVacationTypeData[] | undefined;
-  updatedEntries: VacationTypeDataMap | undefined;
+  newEntries?: NewVacationTypeData[];
+  updatedEntries?: VacationTypeDataMap;
 }
 
 export const updateVacationTypesData =

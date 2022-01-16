@@ -61,9 +61,9 @@ export const updatePublicHolidaysDataAction = (
 });
 
 interface UpdatePayload {
-  newEntries: NewPublicHolidayData[] | undefined;
-  updatedEntries: PublicHolidayDataMap | undefined;
-  removedEntries: string[] | undefined;
+  newEntries?: NewPublicHolidayData[];
+  updatedEntries?: PublicHolidayDataMap;
+  removedEntries?: string[];
 }
 
 export const updatePublicHolidaysData =

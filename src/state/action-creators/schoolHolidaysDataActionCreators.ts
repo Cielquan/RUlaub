@@ -59,9 +59,9 @@ export const updateSchoolHolidaysDataAction = (
 });
 
 interface UpdatePayload {
-  newEntries: NewSchoolHolidayData[] | undefined;
-  updatedEntries: SchoolHolidayDataMap | undefined;
-  removedEntries: string[] | undefined;
+  newEntries?: NewSchoolHolidayData[];
+  updatedEntries?: SchoolHolidayDataMap;
+  removedEntries?: string[];
 }
 
 export const updateSchoolHolidaysData =

@@ -56,9 +56,9 @@ export const updateUsersDataAction = (payload: UsersData): UsersDataAction => ({
 });
 
 interface UpdatePayload {
-  newEntries: NewUserData[] | undefined;
-  updatedEntries: UserDataMap | undefined;
-  removedEntries: string[] | undefined;
+  newEntries?: NewUserData[];
+  updatedEntries?: UserDataMap;
+  removedEntries?: string[];
 }
 
 export const updateUsersData =
