@@ -225,6 +225,10 @@ fn _load_vacations(
 }
 
 /// Calc VacationStats from database.
+///
+/// The function queries the database 3 times in a row with different queries. Those queries are
+/// not bundled by an explicit transaction and therefore a write by another client could result
+/// in data "not matching". This case will not result in an error by the data processing code.
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub fn load_vacation_stats(
