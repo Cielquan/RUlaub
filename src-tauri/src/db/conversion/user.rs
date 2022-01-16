@@ -33,3 +33,54 @@ pub fn to_state_model(db_data: Vec<models::User>) -> state_models::Users {
 
     map
 }
+
+pub fn to_new_db_model(new_entries: &Vec<state_models::User>) -> Vec<models::NewUser> {
+    trace!(
+        target = "database-data",
+        message = "Convert new state data to User db models",
+    );
+
+    let mut db_models = Vec::new();
+
+    for entry in new_entries {
+        db_models.push(models::User::create_new_entry(
+            &entry.name,
+            &entry.available_vacation_days,
+            &entry.workdays.monday,
+            &entry.workdays.tuesday,
+            &entry.workdays.wednesday,
+            &entry.workdays.thursday,
+            &entry.workdays.friday,
+            &entry.workdays.saturday,
+            &entry.workdays.sunday,
+        ))
+    }
+
+    db_models
+}
+
+pub fn to_update_db_model(updated_entries: state_models::Users) -> Vec<models::User> {
+    trace!(
+        target = "database-data",
+        message = "Convert updated state data to User db models",
+    );
+
+    let mut db_models = Vec::new();
+
+    for (id, entry) in updated_entries {
+        db_models.push(models::User::create_update_entry(
+            id,
+            entry.name,
+            entry.available_vacation_days,
+            entry.workdays.monday,
+            entry.workdays.tuesday,
+            entry.workdays.wednesday,
+            entry.workdays.thursday,
+            entry.workdays.friday,
+            entry.workdays.saturday,
+            entry.workdays.sunday,
+        ))
+    }
+
+    db_models
+}
