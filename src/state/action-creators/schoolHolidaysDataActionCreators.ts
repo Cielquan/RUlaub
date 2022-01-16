@@ -61,7 +61,7 @@ export const updateSchoolHolidaysDataAction = (
 interface UpdatePayload {
   newEntries?: NewSchoolHolidayData[];
   updatedEntries?: SchoolHolidayDataMap;
-  removedEntries?: string[];
+  removedEntries?: number[];
 }
 
 export const updateSchoolHolidaysData =

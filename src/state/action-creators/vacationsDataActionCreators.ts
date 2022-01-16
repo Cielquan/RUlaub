@@ -86,7 +86,7 @@ export const updateVacationsDataAction = (
 interface UpdatePayload {
   newEntries?: [string, NewVacationData[]];
   updatedEntries?: VacationDataMap;
-  removedEntries?: string[];
+  removedEntries?: number[];
 }
 
 export const updateVacationsData =
