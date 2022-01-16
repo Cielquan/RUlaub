@@ -3,8 +3,8 @@ use diesel::prelude::RunQueryDsl;
 use crate::commands::CommandResult;
 use crate::db::models::SchoolHolidayLink;
 use crate::db::state_models::{
-    self, PublicHoliday, PublicHolidays, SchoolHoliday, SchoolHolidays, User, Users, Vacation,
-    VacationType, VacationTypes, Vacations,
+    self, PublicHoliday, PublicHolidays, SchoolHoliday, SchoolHolidays, UpdatedVacations, User,
+    Users, Vacation, VacationType, VacationTypes,
 };
 use crate::state::ConfigState;
 
@@ -160,7 +160,7 @@ pub async fn update_users(
 #[tauri::command]
 pub async fn update_vacations(
     new_entries: Option<(i32, Vec<Vacation>)>,
-    updated_entries: Option<Vacations>,
+    updated_entries: Option<UpdatedVacations>,
     removed_entries: Option<Vec<String>>,
     filter_current_year: Option<bool>,
     config_state: tauri::State<'_, ConfigState>,

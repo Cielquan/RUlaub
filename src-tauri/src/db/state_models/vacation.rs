@@ -4,6 +4,7 @@ use super::types::DateData;
 use super::user::UserId;
 
 pub type Vacations = HashMap<UserId, HashMap<VacationId, Vacation>>;
+pub type UpdatedVacations = HashMap<VacationId, Vacation>;
 pub type VacationId = i32;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
