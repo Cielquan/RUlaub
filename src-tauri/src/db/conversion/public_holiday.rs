@@ -125,7 +125,7 @@ fn try_add_offset_based_holiday(
     }
 }
 
-pub fn to_state(
+pub fn to_state_model(
     db_data: Vec<models::PublicHoliday>,
     display_year: i32,
 ) -> (state_models::PublicHolidays, u32) {

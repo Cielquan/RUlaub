@@ -7,8 +7,8 @@ use crate::commands::database::get_db_conn;
 use crate::commands::CommandResult;
 use crate::config::Config;
 use crate::date_calc::{sum_weekdays_between, sum_workdays};
+use crate::db::conversion;
 use crate::db::conversion::vacation_stat::{group_vacations, map_user_workdays_list};
-use crate::db::conversion::{public_holiday, school_holiday, user, vacation, vacation_type};
 use crate::db::models::{
     PublicHoliday, SchoolHoliday, SchoolHolidayLink, User, Vacation, VacationType,
 };
@@ -65,7 +65,10 @@ pub fn _load_public_holidays(
             );
             Err("database-load-error".into())
         }
-        Ok(data) => Ok(public_holiday::to_state(data, display_year)),
+        Ok(data) => Ok(conversion::public_holiday::to_state_model(
+            data,
+            display_year,
+        )),
     }
 }
 
@@ -110,7 +113,7 @@ pub fn _load_school_holidays(
             );
             Err("database-load-error".into())
         }
-        Ok(data) => Ok(school_holiday::to_state(data)),
+        Ok(data) => Ok(conversion::school_holiday::to_state_model(data)),
     }
 }
 
@@ -170,7 +173,7 @@ pub fn _load_users(conn: &SqliteConnection) -> CommandResult<state_models::Users
             );
             Err("database-load-error".into())
         }
-        Ok(data) => Ok(user::to_state(data)),
+        Ok(data) => Ok(conversion::user::to_state_model(data)),
     }
 }
 
@@ -215,7 +218,7 @@ pub fn _load_vacations(
             );
             Err("database-load-error".into())
         }
-        Ok(data) => Ok(vacation::to_state(data)),
+        Ok(data) => Ok(conversion::vacation::to_state_model(data)),
     }
 }
 
@@ -423,6 +426,6 @@ pub fn _load_vacation_types(conn: &SqliteConnection) -> CommandResult<state_mode
             );
             Err("database-load-error".into())
         }
-        Ok(data) => Ok(vacation_type::to_state(data)),
+        Ok(data) => Ok(conversion::vacation_type::to_state_model(data)),
     }
 }

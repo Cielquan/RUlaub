@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use super::super::models;
 use super::super::state_models::{self, VacationType};
 
-pub fn to_state(db_data: Vec<models::VacationType>) -> state_models::VacationTypes {
+pub fn to_state_model(db_data: Vec<models::VacationType>) -> state_models::VacationTypes {
     trace!(
         target = "database-data",
         message = "Convert db entries for VacationType to state data",

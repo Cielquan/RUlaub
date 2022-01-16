@@ -4,7 +4,7 @@ use super::super::models;
 use super::super::state_models::user::Workdays;
 use super::super::state_models::{self, User};
 
-pub fn to_state(db_data: Vec<models::User>) -> state_models::Users {
+pub fn to_state_model(db_data: Vec<models::User>) -> state_models::Users {
     trace!(
         target = "database-data",
         message = "Convert db entries for User to state data",

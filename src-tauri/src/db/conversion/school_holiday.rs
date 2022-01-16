@@ -5,7 +5,7 @@ use super::super::state_models::types::DateData;
 use super::super::state_models::{self, SchoolHoliday};
 use super::date_type::naive_date_to_iso_date;
 
-pub fn to_state(db_data: Vec<models::SchoolHoliday>) -> state_models::SchoolHolidays {
+pub fn to_state_model(db_data: Vec<models::SchoolHoliday>) -> state_models::SchoolHolidays {
     trace!(
         target = "database-data",
         message = "Convert db entries for SchoolHoliday to state data",
