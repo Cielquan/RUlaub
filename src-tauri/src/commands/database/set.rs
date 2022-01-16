@@ -3,7 +3,7 @@ use diesel::prelude::*;
 use crate::commands::CommandResult;
 use crate::db::conversion;
 use crate::db::models::SchoolHolidayLink;
-use crate::db::state_models::{self, UpdatedVacations, Vacation, VacationType, VacationTypes};
+use crate::db::state_models::{self, UpdatedVacations, Vacation};
 use crate::state::ConfigState;
 
 use super::get::{
@@ -421,12 +421,75 @@ pub async fn update_vacations(
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn update_vacation_types(
-    new_entries: Option<Vec<VacationType>>,
-    updated_entries: Option<VacationTypes>,
+    new_entries: Option<Vec<state_models::VacationType>>,
+    updated_entries: Option<state_models::VacationTypes>,
     config_state: tauri::State<'_, ConfigState>,
 ) -> CommandResult<state_models::VacationTypes> {
+    use crate::db::schema::vacation_types::dsl::{id, vacation_types};
+
     let config_state_guard = config_state.0.lock();
     let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    _load_vacation_types(&conn)
+    match conn.exclusive_transaction::<state_models::VacationTypes, DieselResultErrorWrapper, _>(
+        || {
+            if new_entries.is_some() {
+                let new_entries = new_entries.unwrap();
+                let insertable = conversion::vacation_type::to_new_db_model(&new_entries);
+                if let Err(err) = diesel::insert_into(vacation_types)
+                    .values(insertable.clone())
+                    .execute(&conn)
+                {
+                    error!(
+                        target = "database",
+                        message = "Failed to insert entries to vacation_types db table",
+                        error = ?err,
+                        entry = ?insertable
+                    );
+                    return Err(DieselResultErrorWrapper::Msg(
+                        "database-insert-error".into(),
+                    ));
+                }
+            }
+
+            if updated_entries.is_some() {
+                let updated_entries = updated_entries.unwrap();
+                let insertables = conversion::vacation_type::to_update_db_model(updated_entries);
+                for insertable in insertables {
+                    if let Err(err) = diesel::update(vacation_types.filter(id.eq(insertable.id)))
+                        .set(insertable.clone())
+                        .execute(&conn)
+                    {
+                        error!(
+                            target = "database",
+                            message = "Failed to update entries in vacation_types db table",
+                            error = ?err,
+                            entry = ?insertable
+                        );
+                        return Err(DieselResultErrorWrapper::Msg(
+                            "database-update-error".into(),
+                        ));
+                    }
+                }
+            }
+
+            match _load_vacation_types(&conn) {
+                Err(err) => Err(DieselResultErrorWrapper::Msg(err)),
+                Ok(v) => Ok(v),
+            }
+        },
+    ) {
+        Err(DieselResultErrorWrapper::Msg(err)) => Err(err),
+        Err(DieselResultErrorWrapper::DieselErrorDummy(err)) => {
+            error!(
+                target = "database-diesel-error",
+                message = "An diesel error slipped through",
+                error = ?err,
+            );
+            panic!("Unexpected error slipped through; see loggs for more info");
+        }
+        Ok(rv) => {
+            debug!(target = "database", message = "Set vacation types in db");
+            Ok(rv)
+        }
+    }
 }
