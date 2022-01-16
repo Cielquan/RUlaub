@@ -167,3 +167,81 @@ pub fn to_state_model(
 
     (map, error_count)
 }
+
+pub fn to_new_db_model(
+    new_entries: &Vec<state_models::PublicHoliday>,
+) -> Vec<models::NewPublicHoliday> {
+    trace!(
+        target = "database-data",
+        message = "Convert new state data to PublicHoliday db models",
+    );
+
+    let mut db_models = Vec::new();
+
+    for entry_variant in new_entries {
+        match entry_variant {
+            PublicHolidayVariant::DateBasedHoliday(entry) => {
+                let year = match &entry.year {
+                    None => None,
+                    Some(y) => Some(y),
+                };
+                db_models.push(models::PublicHoliday::create_new_entry(
+                    &entry.name,
+                    year,
+                    Some(&entry.yearless_date),
+                    None,
+                ))
+            }
+            PublicHolidayVariant::EasterBasedHoliday(entry) => {
+                let year = match &entry.year {
+                    None => None,
+                    Some(y) => Some(y),
+                };
+                db_models.push(models::PublicHoliday::create_new_entry(
+                    &entry.name,
+                    year,
+                    None,
+                    Some(&entry.easter_sunday_offset),
+                ))
+            }
+        }
+    }
+
+    db_models
+}
+
+pub fn to_update_db_model(
+    updated_entries: state_models::PublicHolidays,
+) -> Vec<models::PublicHoliday> {
+    trace!(
+        target = "database-data",
+        message = "Convert updated state data to PublicHoliday db models",
+    );
+
+    let mut db_models = Vec::new();
+
+    for (id, entry_variant) in updated_entries {
+        match entry_variant {
+            PublicHolidayVariant::DateBasedHoliday(entry) => {
+                db_models.push(models::PublicHoliday::create_update_entry(
+                    id,
+                    entry.name,
+                    entry.year,
+                    Some(entry.yearless_date),
+                    None,
+                ))
+            }
+            PublicHolidayVariant::EasterBasedHoliday(entry) => {
+                db_models.push(models::PublicHoliday::create_update_entry(
+                    id,
+                    entry.name,
+                    entry.year,
+                    None,
+                    Some(entry.easter_sunday_offset),
+                ))
+            }
+        }
+    }
+
+    db_models
+}
