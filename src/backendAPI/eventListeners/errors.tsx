@@ -19,7 +19,7 @@ const setupErrorEventListeners = async ({
     </>
   );
 
-  await webview.listen("error-config-file-init-write", () => {
+  await webview.listen("config-file-init-write-error", () => {
     enqueueSnackbar(
       t`Failed to create config file. Changes to config cannot be saved.
       Falling back to default config.`,
@@ -31,7 +31,7 @@ const setupErrorEventListeners = async ({
     );
   });
 
-  await webview.listen("error-config-file-init-read", () => {
+  await webview.listen("config-file-init-read-error", () => {
     enqueueSnackbar(
       t`Failed to read from config file. Falling back to default config.`,
       {
@@ -42,7 +42,7 @@ const setupErrorEventListeners = async ({
     );
   });
 
-  await webview.listen("error-config-file-init-none", () => {
+  await webview.listen("config-file-init-none-error", () => {
     enqueueSnackbar(t`No config file found. Falling back to default config.`, {
       variant: "error",
       persist: true,
