@@ -130,7 +130,9 @@ pub async fn update_school_holidays(
                 let (insertable, errors) =
                     conversion::school_holiday::to_new_db_model(&new_entries);
                 if errors > 0 {
-                    return Err(DieselResultErrorWrapper::Msg("invaild-data-error".into()));
+                    return Err(DieselResultErrorWrapper::Msg(
+                        "database-update-invaild-data-error".into(),
+                    ));
                 }
                 if let Err(err) = diesel::insert_into(school_holidays)
                     .values(insertable.clone())
@@ -153,7 +155,9 @@ pub async fn update_school_holidays(
                 let (insertables, errors) =
                     conversion::school_holiday::to_update_db_model(updated_entries);
                 if errors > 0 {
-                    return Err(DieselResultErrorWrapper::Msg("invaild-data-error".into()));
+                    return Err(DieselResultErrorWrapper::Msg(
+                        "database-update-invaild-data-error".into(),
+                    ));
                 }
                 for insertable in insertables {
                     if let Err(err) = diesel::update(school_holidays.filter(id.eq(insertable.id)))
@@ -420,7 +424,9 @@ pub async fn update_vacations(
             let new_entries = new_entries.unwrap();
             let (insertable, errors) = conversion::vacation::to_new_db_model(&new_entries);
             if errors > 0 {
-                return Err(DieselResultErrorWrapper::Msg("invaild-data-error".into()));
+                return Err(DieselResultErrorWrapper::Msg(
+                    "database-update-invaild-data-error".into(),
+                ));
             }
             if let Err(err) = diesel::insert_into(vacations)
                 .values(insertable.clone())
@@ -442,7 +448,9 @@ pub async fn update_vacations(
             let updated_entries = updated_entries.unwrap();
             let (insertables, errors) = conversion::vacation::to_update_db_model(updated_entries);
             if errors > 0 {
-                return Err(DieselResultErrorWrapper::Msg("invaild-data-error".into()));
+                return Err(DieselResultErrorWrapper::Msg(
+                    "database-update-invaild-data-error".into(),
+                ));
             }
             for insertable in insertables {
                 if let Err(err) = diesel::update(vacations.filter(id.eq(insertable.id)))

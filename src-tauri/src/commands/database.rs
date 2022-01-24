@@ -11,7 +11,7 @@ use super::CommandResult;
 
 fn get_db_conn(database_uri: &Option<String>) -> CommandResult<SqliteConnection> {
     let db_uri = match database_uri.clone() {
-        None => return Err("no-database-set-error".into()),
+        None => return Err("database-not-set-error".into()),
         Some(db_uri) => db_uri,
     };
 
