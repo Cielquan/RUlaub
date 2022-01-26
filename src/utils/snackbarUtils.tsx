@@ -1,6 +1,6 @@
 import { Close as CloseIcon } from "@mui/icons-material";
 import { Button } from "@mui/material";
-import { SnackbarKey } from "notistack";
+import { ProviderContext, SnackbarKey } from "notistack";
 import { ReactElement } from "react";
 
 type closeSnackbarFn = (key?: SnackbarKey | undefined) => void;
@@ -20,4 +20,13 @@ export const createSnackbarCloseAction = (
   };
 };
 
-export default createSnackbarCloseAction;
+export const enqueuePersistendErrSnackbar = (
+  errMsg: string,
+  { enqueueSnackbar, closeSnackbar }: ProviderContext
+): void => {
+  enqueueSnackbar(errMsg, {
+    variant: "error",
+    persist: true,
+    action: createSnackbarCloseAction(closeSnackbar),
+  });
+};
