@@ -5,11 +5,6 @@ use serde::{Deserialize, Serialize};
 
 use super::types::StringEnum;
 
-lazy_static! {
-    #[derive(Debug)]
-    pub static ref AVAILABLE_THEMES: [&'static str; 2] = ["dark", "light"];
-}
-
 #[derive(Clone, PartialEq)]
 pub enum Theme {
     DARK,

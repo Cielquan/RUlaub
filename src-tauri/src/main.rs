@@ -16,8 +16,7 @@ use parking_lot::Mutex;
 use tauri::{Event, Manager, WindowBuilder};
 
 use rulaub_backend::commands::config::get::{
-    get_available_languages, get_available_log_levels, get_available_themes, get_config_state,
-    get_language, get_log_level, get_theme,
+    get_available_languages, get_available_log_levels, get_config_state,
 };
 use rulaub_backend::commands::config::set::{
     create_db, set_config_state, set_db_uri, set_langauge, set_log_level, set_theme,
@@ -228,17 +227,13 @@ fn main() {
             set_year_change_scroll_begin,
             set_year_to_show,
             //
-            get_language,
             set_langauge,
             get_available_languages,
             //
-            get_log_level,
             set_log_level,
             get_available_log_levels,
             //
-            get_theme,
             set_theme,
-            get_available_themes,
             //
             create_db,
             //
