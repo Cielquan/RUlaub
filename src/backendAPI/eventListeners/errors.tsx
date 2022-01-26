@@ -1,9 +1,8 @@
 import { t } from "@lingui/macro";
-import { Close as CloseIcon } from "@mui/icons-material";
-import { Button } from "@mui/material";
 import { WebviewWindow } from "@tauri-apps/api/window";
-import { ProviderContext, SnackbarKey } from "notistack";
-import React, { ReactElement } from "react";
+import { ProviderContext } from "notistack";
+
+import createSnackbarCloseAction from "../../utils/snackbarUtils";
 
 const setupErrorEventListeners = async ({
   enqueueSnackbar,
@@ -11,13 +10,7 @@ const setupErrorEventListeners = async ({
 }: ProviderContext): Promise<void> => {
   const webview = new WebviewWindow("main");
 
-  const action = (key: SnackbarKey): ReactElement => (
-    <>
-      <Button onClick={(): void => closeSnackbar(key)} sx={{ minWidth: 24 }}>
-        <CloseIcon />
-      </Button>
-    </>
-  );
+  const action = createSnackbarCloseAction(closeSnackbar);
 
   await webview.listen("config-file-init-write-error", () => {
     enqueueSnackbar(
