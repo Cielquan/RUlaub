@@ -22,6 +22,7 @@ import {
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
 import { invoke } from "@tauri-apps/api";
+import { useSnackbar } from "notistack";
 import React, { forwardRef, ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -113,6 +114,8 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
 
   const id = "settings-dialog";
 
+  const snackbarHandles = useSnackbar();
+
   const { value: availableLogLevels } = useAsync(
     async (): Promise<LogLevel[]> => invoke("get_available_log_levels")
   );
@@ -127,19 +130,19 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
     if (offset !== offsetForm) {
       if (offsetFormError || !validateOffset(offsetForm)) return false;
       setOffset(offsetForm);
-      setTodayAutoscrollLeftOffset(Number(offsetForm));
+      setTodayAutoscrollLeftOffset(Number(offsetForm), snackbarHandles);
     }
     if (level !== levelForm) {
       setLevel(levelForm);
-      setLogLevel(levelForm);
+      setLogLevel(levelForm, snackbarHandles);
     }
     if (scroll !== scrollForm) {
       setScroll(scrollForm);
-      setYearChangeScrollBegin(scrollForm);
+      setYearChangeScrollBegin(scrollForm, snackbarHandles);
     }
     if (name !== nameForm && nameForm !== undefined && nameForm !== null) {
       setName(nameForm);
-      setUserName(nameForm);
+      setUserName(nameForm, snackbarHandles);
     }
     return true;
   };

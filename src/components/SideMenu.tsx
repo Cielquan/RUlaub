@@ -15,6 +15,7 @@ import {
 } from "@mui/icons-material";
 import { Divider, Drawer, IconButton, List } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useSnackbar } from "notistack";
 import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -91,11 +92,13 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
       </React.Fragment>
     ));
 
+  const snackbarHandles = useSnackbar();
+
   const doubleButtonItemList: DoubleButtonItemList = [
     {
       mainButton: [t`Database`, <StorageIcon />],
-      rightButton: [<FolderIcon />, selectDB, t`Select`],
-      leftButton: [<AddIcon />, createNewDB, t`Create`],
+      rightButton: [<FolderIcon />, () => selectDB(snackbarHandles), t`Select`],
+      leftButton: [<AddIcon />, () => createNewDB(snackbarHandles), t`Create`],
     },
     {
       mainButton: [t`Users`, <GroupIcon />],

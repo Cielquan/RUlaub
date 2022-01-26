@@ -39,7 +39,7 @@ const SetupWrapper = (): ReactElement => {
     loadVacationsData(); // NOTE: also loads UsersData
     loadVacationStatsData();
     loadVacationTypesData();
-    setupMenuEventListeners(dispatch);
+    setupMenuEventListeners(dispatch, snackbarHandles);
     setupErrorEventListeners(snackbarHandles);
   });
 

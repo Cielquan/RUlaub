@@ -2,6 +2,7 @@ import { t } from "@lingui/macro";
 import { StaticDatePicker } from "@mui/lab";
 import { TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+import { useSnackbar } from "notistack";
 import React, { ReactElement } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -14,9 +15,11 @@ const CalendarStartPage = (): ReactElement => {
 
   const [date, setDate] = React.useState<Date>();
 
+  const snackbarHandles = useSnackbar();
+
   const handleChange = (newDate: Date | null): void => {
     if (newDate !== null) {
-      setYearToShow(newDate.getFullYear());
+      setYearToShow(newDate.getFullYear(), snackbarHandles);
       setDate(newDate);
     }
   };

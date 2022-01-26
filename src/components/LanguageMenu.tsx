@@ -10,6 +10,7 @@ import {
   Menu,
 } from "@mui/material";
 import { invoke } from "@tauri-apps/api/tauri";
+import { useSnackbar } from "notistack";
 import React, { MouseEvent, ReactElement, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -37,8 +38,10 @@ const LanguageMenu = (): ReactElement => {
       invoke("get_available_languages")
   );
 
+  const snackbarHandles = useSnackbar();
+
   const languages = Object.keys(availableLanguages ?? {}).map((locale) => ({
-    changeHandle: () => setLanguage(locale as SupportedLanguages),
+    changeHandle: () => setLanguage(locale as SupportedLanguages, snackbarHandles),
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     lang: availableLanguages![locale],
   }));

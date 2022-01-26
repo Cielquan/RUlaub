@@ -1,26 +1,29 @@
 import { WebviewWindow } from "@tauri-apps/api/window";
-
+import { ProviderContext } from "notistack";
 import { bindActionCreators, Dispatch } from "redux";
 
 import { actionCreators } from "../../state";
 
-const setupMenuEventListeners = async (dispatch: Dispatch): Promise<void> => {
+const setupMenuEventListeners = async (
+  dispatch: Dispatch,
+  snackbarHandles: ProviderContext
+): Promise<void> => {
   const webview = new WebviewWindow("main");
 
   await webview.listen("menu-clicked-lang-en", () => {
-    bindActionCreators(actionCreators, dispatch).setLanguage("en-US");
+    bindActionCreators(actionCreators, dispatch).setLanguage("en-US", snackbarHandles);
   });
 
   await webview.listen("menu-clicked-lang-de", () => {
-    bindActionCreators(actionCreators, dispatch).setLanguage("de-DE");
+    bindActionCreators(actionCreators, dispatch).setLanguage("de-DE", snackbarHandles);
   });
 
   await webview.listen("menu-clicked-theme-dark", () => {
-    bindActionCreators(actionCreators, dispatch).setTheme("dark");
+    bindActionCreators(actionCreators, dispatch).setTheme("dark", snackbarHandles);
   });
 
   await webview.listen("menu-clicked-theme-light", () => {
-    bindActionCreators(actionCreators, dispatch).setTheme("light");
+    bindActionCreators(actionCreators, dispatch).setTheme("light", snackbarHandles);
   });
 
   await webview.listen("menu-clicked-settings", () => {
@@ -32,11 +35,11 @@ const setupMenuEventListeners = async (dispatch: Dispatch): Promise<void> => {
   });
 
   await webview.listen("menu-clicked-db-new", () => {
-    bindActionCreators(actionCreators, dispatch).createNewDB();
+    bindActionCreators(actionCreators, dispatch).createNewDB(snackbarHandles);
   });
 
   await webview.listen("menu-clicked-db-select", () => {
-    bindActionCreators(actionCreators, dispatch).selectDB();
+    bindActionCreators(actionCreators, dispatch).selectDB(snackbarHandles);
   });
 
   await webview.listen("menu-clicked-vac-new", () => {

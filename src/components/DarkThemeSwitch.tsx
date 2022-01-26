@@ -4,6 +4,7 @@ import {
   BrightnessLow as BrightnessLowIcon,
 } from "@mui/icons-material";
 import { IconButton, Tooltip } from "@mui/material";
+import { useSnackbar } from "notistack";
 import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -18,6 +19,8 @@ const DarkThemeSwitch = (): ReactElement => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const themeState = configState!.settings.theme;
 
+  const snackbarHandles = useSnackbar();
+
   return (
     <Tooltip
       arrow
@@ -26,7 +29,9 @@ const DarkThemeSwitch = (): ReactElement => {
       <IconButton
         data-testid="theme-switch"
         onClick={
-          themeState === "dark" ? () => setTheme("light") : () => setTheme("dark")
+          themeState === "dark"
+            ? () => setTheme("light", snackbarHandles)
+            : () => setTheme("dark", snackbarHandles)
         }
         size="large"
       >
