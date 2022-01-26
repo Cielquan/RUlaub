@@ -167,8 +167,8 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           fullWidth
           variant="outlined"
           value={nameForm}
-          // eslint-disable-next-line max-len
-          helperText={t`Enter your name to have it be preselected when entering new vacation.`}
+          helperText={t`Enter your name to have it be
+          preselected when entering new vacation.`}
           onChange={(event): void => {
             setNameForm(event.target.value);
           }}
@@ -259,8 +259,8 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
             }}
           >
             <FormControlLabel
-              // eslint-disable-next-line max-len
-              label={t`On year switch, scroll to beginning of the year, if not current year.`}
+              label={t`On year switch, scroll to beginning
+              of the year, if not current year.`}
               control={
                 <Checkbox
                   checked={scrollForm}

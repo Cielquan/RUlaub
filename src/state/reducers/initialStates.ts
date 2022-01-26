@@ -1,13 +1,8 @@
-// eslint-disable-next-line max-len
 import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
-// eslint-disable-next-line max-len
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
-// eslint-disable-next-line max-len
 import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
-// eslint-disable-next-line max-len
 import { VacationStatsDataSchema as VacationStatsData } from "../../backendAPI/types/vacationStatsData.schema";
-// eslint-disable-next-line max-len
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 
 export interface CalendarRowUserMap {

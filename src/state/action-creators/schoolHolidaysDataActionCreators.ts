@@ -3,7 +3,6 @@ import { Dispatch } from "redux";
 
 import { SchoolHolidaysDataActionType } from "../action-types";
 import { SchoolHolidaysDataAction } from "../actions";
-// eslint-disable-next-line max-len
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import {
   NewSchoolHolidayData,

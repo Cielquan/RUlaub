@@ -25,7 +25,6 @@ import React, { forwardRef, ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-// eslint-disable-next-line max-len
 import { VacationData } from "../backendAPI/types/vacationsData.schema";
 import { actionCreators, State } from "../state";
 import { NewVacationData, VacationDataPayload } from "../backendAPI/types/helperTypes";

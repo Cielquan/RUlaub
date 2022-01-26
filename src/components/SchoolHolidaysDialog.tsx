@@ -232,7 +232,6 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
           variant="outlined"
           value={linkForm}
           error={linkFormError !== SchoolHolidaysLinkCheckError.NONE}
-          // eslint-disable-next-line max-len
           helperText={linkFormError}
           onChange={(event): void => {
             if (submittedOnce) validateLink(event.target.value);

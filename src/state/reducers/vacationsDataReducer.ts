@@ -1,6 +1,5 @@
 import { VacationsDataActionType } from "../action-types";
 import { VacationsDataAction } from "../actions";
-// eslint-disable-next-line max-len
 import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
 import { vacationsDataInitState as initState } from "./initialStates";
 

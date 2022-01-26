@@ -11,7 +11,6 @@ import {
   VacationsDataAction,
 } from "../actions";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
-// eslint-disable-next-line max-len
 import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
 import { NewVacationData, VacationDataMap } from "../../backendAPI/types/helperTypes";
 import { validateUsersData, validateVacationsData } from "../../backendAPI/validation";

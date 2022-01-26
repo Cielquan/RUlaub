@@ -3,7 +3,6 @@ import { Dispatch } from "redux";
 
 import { VacationStatsDataActionType } from "../action-types";
 import { VacationStatsDataAction } from "../actions";
-// eslint-disable-next-line max-len
 import { VacationStatsDataSchema as VacationStatsData } from "../../backendAPI/types/vacationStatsData.schema";
 import { validateVacationStatsData } from "../../backendAPI/validation";
 

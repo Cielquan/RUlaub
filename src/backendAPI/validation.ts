@@ -8,15 +8,11 @@ import VacationsDataSchema from "./schemas/vacationsData.schema.json";
 import VacationStatsDataSchema from "./schemas/vacationStatsData.schema.json";
 import VacationTypesDataSchema from "./schemas/vacationTypesData.schema.json";
 import { ConfigFileSchema as ConfigFile } from "./types/configFile.schema";
-// eslint-disable-next-line max-len
 import { PublicHolidaysDataSchema as PublicHolidaysData } from "./types/publicHolidaysData.schema";
-// eslint-disable-next-line max-len
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "./types/schoolHolidaysData.schema";
 import { UsersDataSchema as UsersData } from "./types/usersData.schema";
 import { VacationsDataSchema as VacationsData } from "./types/vacationsData.schema";
-// eslint-disable-next-line max-len
 import { VacationStatsDataSchema as VacationStatsData } from "./types/vacationStatsData.schema";
-// eslint-disable-next-line max-len
 import { VacationTypesDataSchema as VacationTypesData } from "./types/vacationTypesData.schema";
 
 export const createDataValidator =
