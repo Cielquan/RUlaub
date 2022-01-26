@@ -1,6 +1,6 @@
 import { t } from "@lingui/macro";
 
-export const errorMsgCatalogue = {
+const errorMsgCatalogue: Record<string, string> = {
   "config-file-write-error": t`Error: Failed to write to config file.`,
   "config-not-saved-warn": t`Warning: Config could not be saved.`,
   "config-serialize-error": t`Error: Could not serialize config.`,
@@ -17,4 +17,10 @@ export const errorMsgCatalogue = {
   "to-many-link-db-entries-error": t`Error: Got to many links from the database.`,
 };
 
-export default errorMsgCatalogue;
+const defaultErrorMsg = t`Error: Some unknown error happend.
+Please the the logs for more information.`;
+
+export const getErrorCatalogueMsg = (errCode: string): string =>
+  errorMsgCatalogue[errCode] ?? `${defaultErrorMsg} - (${errCode})`;
+
+export default getErrorCatalogueMsg;
