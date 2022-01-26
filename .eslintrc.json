@@ -47,6 +47,8 @@
         "allowExpressions": true
       }
     ],
+    "arrow-body-style": "off",
+    "react/react-in-jsx-scope": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/static-property-placement": "off"
