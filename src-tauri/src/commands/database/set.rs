@@ -130,8 +130,13 @@ pub async fn update_school_holidays(
                 let (insertable, errors) =
                     conversion::school_holiday::to_new_db_model(&new_entries);
                 if errors > 0 {
+                    error!(
+                        target = "database",
+                        message = "Got invalid data to insert into school_holidays db table",
+                        entries = ?new_entries
+                    );
                     return Err(DieselResultErrorWrapper::Msg(
-                        "database-update-invaild-data-error".into(),
+                        "database-invaild-data-error".into(),
                     ));
                 }
                 if let Err(err) = diesel::insert_into(school_holidays)
@@ -153,10 +158,15 @@ pub async fn update_school_holidays(
             if updated_entries.is_some() {
                 let updated_entries = updated_entries.unwrap();
                 let (insertables, errors) =
-                    conversion::school_holiday::to_update_db_model(updated_entries);
+                    conversion::school_holiday::to_update_db_model(updated_entries.clone());
                 if errors > 0 {
+                    error!(
+                        target = "database",
+                        message = "Got invalid data to update entries in school_holidays db table",
+                        entries = ?updated_entries
+                    );
                     return Err(DieselResultErrorWrapper::Msg(
-                        "database-update-invaild-data-error".into(),
+                        "database-invaild-data-error".into(),
                     ));
                 }
                 for insertable in insertables {
@@ -424,8 +434,13 @@ pub async fn update_vacations(
             let new_entries = new_entries.unwrap();
             let (insertable, errors) = conversion::vacation::to_new_db_model(&new_entries);
             if errors > 0 {
+                error!(
+                    target = "database",
+                    message = "Got invalid data to insert into school_holidays db table",
+                    entries = ?new_entries
+                );
                 return Err(DieselResultErrorWrapper::Msg(
-                    "database-update-invaild-data-error".into(),
+                    "database-invaild-data-error".into(),
                 ));
             }
             if let Err(err) = diesel::insert_into(vacations)
@@ -446,10 +461,16 @@ pub async fn update_vacations(
 
         if updated_entries.is_some() {
             let updated_entries = updated_entries.unwrap();
-            let (insertables, errors) = conversion::vacation::to_update_db_model(updated_entries);
+            let (insertables, errors) =
+                conversion::vacation::to_update_db_model(updated_entries.clone());
             if errors > 0 {
+                error!(
+                    target = "database",
+                    message = "Got invalid data to update entries in vacations db table",
+                    entries = ?updated_entries
+                );
                 return Err(DieselResultErrorWrapper::Msg(
-                    "database-update-invaild-data-error".into(),
+                    "database-invaild-data-error".into(),
                 ));
             }
             for insertable in insertables {

@@ -45,7 +45,10 @@ pub fn _load_public_holidays(
     );
 
     let display_year = match config.settings.year_to_show.clone() {
-        None => return Err("no-year-to-show-set-error".into()),
+        None => {
+            error!(target = "database", message = "No year to show set");
+            return Err("no-year-to-show-set-error".into());
+        }
         Some(y) => y,
     };
 
@@ -95,7 +98,10 @@ pub fn _load_school_holidays(
     let mut query = school_holidays.into_boxed();
     if let Some(true) = filter_current_year {
         let display_year = match config.settings.year_to_show.clone() {
-            None => return Err("no-year-to-show-set-error".into()),
+            None => {
+                error!(target = "database", message = "No year to show set");
+                return Err("no-year-to-show-set-error".into());
+            }
             Some(y) => y,
         };
 
@@ -144,7 +150,14 @@ pub fn _get_school_holidays_link(conn: &SqliteConnection) -> CommandResult<Optio
         Ok(mut data) => match data.len() {
             0 => Ok(None),
             1 => Ok(Some(data.remove(0).link)),
-            _ => Err("to-many-link-db-entries-error".into()),
+            _ => {
+                error!(
+                    target = "database",
+                    message = "Got too many entry for SchoolHolidayLink from the database",
+                    count = ?data.len()
+                );
+                Err("to-many-link-db-entries-error".into())
+            }
         },
     }
 }
@@ -200,7 +213,10 @@ pub fn _load_vacations(
     let mut query = vacations.into_boxed();
     if let Some(true) = filter_current_year {
         let display_year = match config.settings.year_to_show.clone() {
-            None => return Err("no-year-to-show-set-error".into()),
+            None => {
+                error!(target = "database", message = "No year to show set");
+                return Err("no-year-to-show-set-error".into());
+            }
             Some(y) => y,
         };
 
@@ -236,7 +252,10 @@ pub fn load_vacation_stats(
     let config_state_guard = config_state.0.lock();
 
     let display_year = match config_state_guard.settings.year_to_show.clone() {
-        None => return Err("no-year-to-show-set-error".into()),
+        None => {
+            error!(target = "database", message = "No year to show set");
+            return Err("no-year-to-show-set-error".into());
+        }
         Some(y) => y,
     };
     let first_day = NaiveDate::from_ymd(display_year, 1, 1);
