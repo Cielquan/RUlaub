@@ -22,6 +22,7 @@ import {
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
+import { useSnackbar } from "notistack";
 import React, {
   forwardRef,
   ReactElement,
@@ -174,6 +175,8 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
     }
   }, [addVacationDialogState, resetErrorStates, resetFieldStates]);
 
+  const snackbarHandles = useSnackbar();
+
   const onClickSave = (): void => {
     if (
       typeIDFormError !== TypeIDFormError.NONE ||
@@ -184,32 +187,35 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
       return;
     resetErrorStates();
 
-    updateVacationsData({
-      newEntries: [
-        currentUserID,
-        [
-          {
-            typeId: Number(typeIdForm),
-            start: {
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              date: startDateForm!.toISOString().slice(0, 10),
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              yearDay: getDaysForDate(startDateForm!),
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              year: startDateForm!.getFullYear(),
+    updateVacationsData(
+      {
+        newEntries: [
+          currentUserID,
+          [
+            {
+              typeId: Number(typeIdForm),
+              start: {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                date: startDateForm!.toISOString().slice(0, 10),
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                yearDay: getDaysForDate(startDateForm!),
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                year: startDateForm!.getFullYear(),
+              },
+              end: {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                date: endDateForm!.toISOString().slice(0, 10),
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                yearDay: getDaysForDate(endDateForm!),
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                year: endDateForm!.getFullYear(),
+              },
             },
-            end: {
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              date: endDateForm!.toISOString().slice(0, 10),
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              yearDay: getDaysForDate(endDateForm!),
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              year: endDateForm!.getFullYear(),
-            },
-          },
+          ],
         ],
-      ],
-    });
+      },
+      snackbarHandles
+    );
     closeAddVacationDialog();
   };
 

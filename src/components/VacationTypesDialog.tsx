@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
+import { useSnackbar } from "notistack";
 import React, { forwardRef, ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -22,7 +23,6 @@ import { VacationTypeData } from "../backendAPI/types/vacationTypesData.schema";
 import { actionCreators, State } from "../state";
 import {
   NewVacationTypeData,
-  VacationTypeDataMap,
   VacationTypeDataPayload,
 } from "../backendAPI/types/helperTypes";
 
@@ -101,6 +101,8 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
     setNewVacationTypes(rv);
   };
 
+  const snackbarHandles = useSnackbar();
+
   const saveChanges = (): void => {
     const newEntries =
       Object.keys(newVacationTypes).length > 0
@@ -114,7 +116,7 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
     const updatedEntries =
       Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
 
-    updateVacationTypesData({ newEntries, updatedEntries });
+    updateVacationTypesData({ newEntries, updatedEntries }, snackbarHandles);
   };
 
   useEffect(() => {

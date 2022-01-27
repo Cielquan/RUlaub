@@ -21,6 +21,7 @@ import {
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
+import { useSnackbar } from "notistack";
 import React, { forwardRef, ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -116,6 +117,8 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
     setNewVacations(rv);
   };
 
+  const snackbarHandles = useSnackbar();
+
   const saveChanges = (): void => {
     const newEntries =
       Object.keys(newVacations).length > 0 ? Object.values(newVacations) : undefined;
@@ -132,11 +135,14 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
       .map((id) => Number(id));
     const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
 
-    updateVacationsData({
-      newEntries: newEntries ? [currentUserID, newEntries] : undefined,
-      updatedEntries,
-      removedEntries,
-    });
+    updateVacationsData(
+      {
+        newEntries: newEntries ? [currentUserID, newEntries] : undefined,
+        updatedEntries,
+        removedEntries,
+      },
+      snackbarHandles
+    );
   };
 
   useEffect(() => {

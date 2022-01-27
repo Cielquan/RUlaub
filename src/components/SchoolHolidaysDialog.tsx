@@ -189,7 +189,10 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
       .map((id) => Number(id));
     const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
 
-    updateSchoolHolidaysData({ newEntries, updatedEntries, removedEntries });
+    updateSchoolHolidaysData(
+      { newEntries, updatedEntries, removedEntries },
+      snackbarHandles
+    );
     return true;
   };
 
