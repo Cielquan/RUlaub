@@ -1,14 +1,18 @@
+import { t } from "@lingui/macro";
 import { invoke } from "@tauri-apps/api/tauri";
+import { ProviderContext } from "notistack";
 import { Dispatch } from "redux";
 
 import { PublicHolidaysDataActionType } from "../action-types";
 import { PublicHolidaysDataAction } from "../actions";
-import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
+import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
 import {
   NewPublicHolidayData,
   PublicHolidayDataMap,
 } from "../../backendAPI/types/helperTypes";
+import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
 import { validatePublicHolidaysData } from "../../backendAPI/validation";
+import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
 
 export const loadPublicHolidaysDataAction = (
   payload: PublicHolidaysData
@@ -18,22 +22,25 @@ export const loadPublicHolidaysDataAction = (
 });
 
 export const loadPublicHolidaysData =
-  () =>
+  (snackbarHandles: ProviderContext) =>
   async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
-    let data;
-    let errorCount;
+    let data: unknown;
+    let errorCount: number;
     try {
-      // TODO:#i# snackbar with warning if error_count > 0
       [data, errorCount] = await invoke("load_public_holidays");
     } catch (err) {
-      invoke("log_error", {
-        target: "public-holidays",
-        message: `Loading of PublicHolidays data from database failed: ${err}`,
-        location:
-          // eslint-disable-next-line max-len
-          "state/action-creators/publicHolidaysDataActionCreators.ts-loadPublicHolidaysData",
-      });
+      enqueuePersistendErrSnackbar(
+        getErrorCatalogueMsg(err as string),
+        snackbarHandles
+      );
+      return;
     }
+
+    if (errorCount > 0)
+      snackbarHandles.enqueueSnackbar(
+        t`Got ${errorCount} errors while loading public holiday data.`,
+        { variant: "warning" }
+      );
 
     let validatedData: PublicHolidaysData;
     try {
@@ -66,24 +73,32 @@ interface UpdatePayload {
 }
 
 export const updatePublicHolidaysData =
-  ({ newEntries, updatedEntries, removedEntries }: UpdatePayload) =>
+  (
+    { newEntries, updatedEntries, removedEntries }: UpdatePayload,
+    snackbarHandles: ProviderContext
+  ) =>
   async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
-    let data;
+    let data: unknown;
+    let errorCount: number;
     try {
-      data = await invoke("update_public_holidays", {
+      [data, errorCount] = await invoke("update_public_holidays", {
         newEntries: newEntries ?? null,
         updatedEntries: updatedEntries ?? null,
         removedEntries: removedEntries ?? null,
       });
     } catch (err) {
-      invoke("log_error", {
-        target: "public-holidays",
-        message: `Updating PublicHolidays data in database failed: ${err}`,
-        location:
-          // eslint-disable-next-line max-len
-          "state/action-creators/publicHolidaysDataActionCreators.ts-updatePublicHolidaysData",
-      });
+      enqueuePersistendErrSnackbar(
+        getErrorCatalogueMsg(err as string),
+        snackbarHandles
+      );
+      return;
     }
+
+    if (errorCount > 0)
+      snackbarHandles.enqueueSnackbar(
+        t`Got ${errorCount} errors while loading public holiday data.`,
+        { variant: "warning" }
+      );
 
     let validatedData: PublicHolidaysData;
     try {

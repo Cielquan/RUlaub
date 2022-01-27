@@ -1,4 +1,5 @@
 import { invoke } from "@tauri-apps/api";
+import { ProviderContext } from "notistack";
 import { batch } from "react-redux";
 import { Dispatch } from "redux";
 
@@ -10,10 +11,12 @@ import {
   UsersDataAction,
   VacationsDataAction,
 } from "../actions";
+import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
 import { NewVacationData, VacationDataMap } from "../../backendAPI/types/helperTypes";
 import { validateUsersData, validateVacationsData } from "../../backendAPI/validation";
+import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
 
 export const loadVacationsDataAction = (
   payload: VacationsData
@@ -23,7 +26,7 @@ export const loadVacationsDataAction = (
 });
 
 export const loadVacationsData =
-  () =>
+  (snackbarHandles: ProviderContext) =>
   async (
     dispatch: Dispatch<
       VacationsDataAction | UsersDataAction | CalendarRowUserMapAction
@@ -34,12 +37,11 @@ export const loadVacationsData =
     try {
       data = await invoke("load_vacations");
     } catch (err) {
-      invoke("log_error", {
-        target: "vacations",
-        message: `Loading of Vacations data from database failed: ${err}`,
-        location:
-          "state/action-creators/vacationsDataActionCreators.ts-loadVacationsData",
-      });
+      enqueuePersistendErrSnackbar(
+        getErrorCatalogueMsg(err as string),
+        snackbarHandles
+      );
+      return;
     }
 
     let validatedVacData: VacationsData;
@@ -52,6 +54,16 @@ export const loadVacationsData =
         location:
           "state/action-creators/vacationsDataActionCreators.ts-loadVacationsData",
       });
+      return;
+    }
+
+    try {
+      data = await invoke("load_users");
+    } catch (err) {
+      enqueuePersistendErrSnackbar(
+        getErrorCatalogueMsg(err as string),
+        snackbarHandles
+      );
       return;
     }
 
@@ -89,13 +101,11 @@ interface UpdatePayload {
 }
 
 export const updateVacationsData =
-  ({ newEntries, updatedEntries, removedEntries }: UpdatePayload) =>
-  async (
-    dispatch: Dispatch<
-      VacationsDataAction | UsersDataAction | CalendarRowUserMapAction
-    >,
-    getState: typeof store.getState
-  ): Promise<void> => {
+  (
+    { newEntries, updatedEntries, removedEntries }: UpdatePayload,
+    snackbarHandles: ProviderContext
+  ) =>
+  async (dispatch: Dispatch<VacationsDataAction>): Promise<void> => {
     let data;
     try {
       data = await invoke("update_vacations", {
@@ -104,12 +114,11 @@ export const updateVacationsData =
         removedEntries: removedEntries ?? null,
       });
     } catch (err) {
-      invoke("log_error", {
-        target: "vacations",
-        message: `Updating Vacations data in database failed: ${err}`,
-        location:
-          "state/action-creators/vacationsDataActionCreators.ts-updateVacationsData",
-      });
+      enqueuePersistendErrSnackbar(
+        getErrorCatalogueMsg(err as string),
+        snackbarHandles
+      );
+      return;
     }
 
     let validatedVacData: VacationsData;
@@ -125,22 +134,5 @@ export const updateVacationsData =
       return;
     }
 
-    let validatedUsersData: UsersData;
-    try {
-      validatedUsersData = await validateUsersData(data);
-    } catch (err) {
-      invoke("log_error", {
-        target: "vacations",
-        message: `Users data validation failed: ${err}`,
-        location:
-          "state/action-creators/vacationsDataActionCreators.ts-updateVacationsData",
-      });
-      return;
-    }
-
-    batch(() => {
-      dispatch(updateVacationsDataAction(validatedVacData));
-      dispatch(loadUsersDataAction(validatedUsersData));
-      dispatch(updateCalendarRowUserMapAction(getState().usersData));
-    });
+    dispatch(updateVacationsDataAction(validatedVacData));
   };

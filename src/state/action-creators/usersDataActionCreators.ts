@@ -1,4 +1,5 @@
 import { invoke } from "@tauri-apps/api";
+import { ProviderContext } from "notistack";
 import { batch } from "react-redux";
 import { Dispatch } from "redux";
 
@@ -6,9 +7,11 @@ import { updateCalendarRowUserMapAction } from ".";
 import { store } from "..";
 import { UsersDataActionType } from "../action-types";
 import { CalendarRowUserMapAction, UsersDataAction } from "../actions";
+import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import { NewUserData, UserDataMap } from "../../backendAPI/types/helperTypes";
 import { validateUsersData } from "../../backendAPI/validation";
+import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
 
 export const loadUsersDataAction = (payload: UsersData): UsersDataAction => ({
   type: UsersDataActionType.LOAD,
@@ -16,7 +19,7 @@ export const loadUsersDataAction = (payload: UsersData): UsersDataAction => ({
 });
 
 export const loadUsersData =
-  () =>
+  (snackbarHandles: ProviderContext) =>
   async (
     dispatch: Dispatch<UsersDataAction | CalendarRowUserMapAction>,
     getState: typeof store.getState
@@ -25,11 +28,11 @@ export const loadUsersData =
     try {
       data = await invoke("load_users");
     } catch (err) {
-      invoke("log_error", {
-        target: "users",
-        message: `Loading of Users data from database failed: ${err}`,
-        location: "state/action-creators/usersDataActionCreators.ts-loadUsersData",
-      });
+      enqueuePersistendErrSnackbar(
+        getErrorCatalogueMsg(err as string),
+        snackbarHandles
+      );
+      return;
     }
 
     let validatedData: UsersData;
@@ -62,7 +65,10 @@ interface UpdatePayload {
 }
 
 export const updateUsersData =
-  ({ newEntries, updatedEntries, removedEntries }: UpdatePayload) =>
+  (
+    { newEntries, updatedEntries, removedEntries }: UpdatePayload,
+    snackbarHandles: ProviderContext
+  ) =>
   async (
     dispatch: Dispatch<UsersDataAction | CalendarRowUserMapAction>,
     getState: typeof store.getState
@@ -75,11 +81,11 @@ export const updateUsersData =
         removedEntries: removedEntries ?? null,
       });
     } catch (err) {
-      invoke("log_error", {
-        target: "users",
-        message: `Updating Users data in database failed: ${err}`,
-        location: "state/action-creators/usersDataActionCreators.ts-updateUsersData",
-      });
+      enqueuePersistendErrSnackbar(
+        getErrorCatalogueMsg(err as string),
+        snackbarHandles
+      );
+      return;
     }
 
     let valData: UsersData;

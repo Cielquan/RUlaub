@@ -1,14 +1,17 @@
 import { invoke } from "@tauri-apps/api/tauri";
+import { ProviderContext } from "notistack";
 import { Dispatch } from "redux";
 
 import { VacationTypesDataActionType } from "../action-types";
 import { VacationTypesDataAction } from "../actions";
+import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 import {
   NewVacationTypeData,
   VacationTypeDataMap,
 } from "../../backendAPI/types/helperTypes";
 import { validateVacationTypesData } from "../../backendAPI/validation";
+import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
 
 export const loadVacationTypesDataAction = (
   payload: VacationTypesData
@@ -18,19 +21,17 @@ export const loadVacationTypesDataAction = (
 });
 
 export const loadVacationTypesData =
-  () =>
+  (snackbarHandles: ProviderContext) =>
   async (dispatch: Dispatch<VacationTypesDataAction>): Promise<void> => {
     let data;
     try {
       data = await invoke("load_vacation_types");
     } catch (err) {
-      invoke("log_error", {
-        target: "vacation-types",
-        message: `Loading of VacationTypes data from database failed: ${err}`,
-        location:
-          // eslint-disable-next-line max-len
-          "state/action-creators/vacationTypesDataActionCreators.ts-loadVacationTypesData",
-      });
+      enqueuePersistendErrSnackbar(
+        getErrorCatalogueMsg(err as string),
+        snackbarHandles
+      );
+      return;
     }
 
     let validatedData: VacationTypesData;
@@ -63,7 +64,7 @@ interface UpdatePayload {
 }
 
 export const updateVacationTypesData =
-  ({ newEntries, updatedEntries }: UpdatePayload) =>
+  ({ newEntries, updatedEntries }: UpdatePayload, snackbarHandles: ProviderContext) =>
   async (dispatch: Dispatch<VacationTypesDataAction>): Promise<void> => {
     let data;
     try {
@@ -72,13 +73,11 @@ export const updateVacationTypesData =
         updatedEntries: updatedEntries ?? null,
       });
     } catch (err) {
-      invoke("log_error", {
-        target: "vacation-types",
-        message: `Updating VacationTypes data in database failed: ${err}`,
-        location:
-          // eslint-disable-next-line max-len
-          "state/action-creators/vacationTypesDataActionCreators.ts-updateVacationTypesData",
-      });
+      enqueuePersistendErrSnackbar(
+        getErrorCatalogueMsg(err as string),
+        snackbarHandles
+      );
+      return;
     }
 
     let validatedData: VacationTypesData;

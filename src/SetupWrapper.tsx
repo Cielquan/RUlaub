@@ -33,12 +33,12 @@ const SetupWrapper = (): ReactElement => {
   }, [langState.locale]);
 
   useMountEffect(() => {
-    loadPublicHolidaysData();
-    loadSchoolHolidaysData();
+    loadPublicHolidaysData(snackbarHandles);
+    loadSchoolHolidaysData(snackbarHandles);
     loadSchoolHolidaysLink(snackbarHandles);
-    loadVacationsData(); // NOTE: also loads UsersData
-    loadVacationStatsData();
-    loadVacationTypesData();
+    loadVacationsData(snackbarHandles); // NOTE: also loads UsersData
+    loadVacationStatsData(snackbarHandles);
+    loadVacationTypesData(snackbarHandles);
     setupMenuEventListeners(dispatch, snackbarHandles);
     setupErrorEventListeners(snackbarHandles);
   });

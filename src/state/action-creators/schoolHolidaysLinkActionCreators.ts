@@ -21,13 +21,6 @@ export const loadSchoolHolidaysLink =
     try {
       data = await invoke<string | null>("get_school_holidays_link");
     } catch (err) {
-      invoke("log_error", {
-        target: "school-holidays-link",
-        message: `Loading of SchoolHolidaysLink from database failed: ${err}`,
-        location:
-          // eslint-disable-next-line max-len
-          "state/action-creators/schoolHolidaysLinkActionCreators.ts-loadSchoolHolidaysLink",
-      });
       enqueuePersistendErrSnackbar(
         getErrorCatalogueMsg(err as string),
         snackbarHandles
@@ -45,13 +38,6 @@ export const updateSchoolHolidaysLink =
     try {
       data = await invoke<string | null>("update_school_holidays_link", { link });
     } catch (err) {
-      invoke("log_error", {
-        target: "school-holidays-link",
-        message: `Updating SchoolHolidaysLink in database failed: ${err}`,
-        location:
-          // eslint-disable-next-line max-len
-          "state/action-creators/schoolHolidaysLinkActionCreators.ts-updateSchoolHolidaysLink",
-      });
       enqueuePersistendErrSnackbar(
         getErrorCatalogueMsg(err as string),
         snackbarHandles

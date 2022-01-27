@@ -46,20 +46,20 @@ msgid "Error: Failed to insert new entry in database."
 msgstr "Error: Failed to insert new entry in database."
 
 #: src/backendAPI/errorMsgCatalogue.ts:12
+msgid "Error: Got invalid data for databse update."
+msgstr "Error: Got invalid data for databse update."
+
+#: src/backendAPI/errorMsgCatalogue.ts:13
 msgid "Error: Failed to load entry in database."
 msgstr "Error: Failed to load entry in database."
 
-#: src/backendAPI/errorMsgCatalogue.ts:13
+#: src/backendAPI/errorMsgCatalogue.ts:14
 msgid "Error: No database set."
 msgstr "Error: No database set."
 
-#: src/backendAPI/errorMsgCatalogue.ts:14
+#: src/backendAPI/errorMsgCatalogue.ts:15
 msgid "Error: Failed to update entry in database."
 msgstr "Error: Failed to update entry in database."
-
-#: src/backendAPI/errorMsgCatalogue.ts:15
-msgid "Error: Got invalid data for databse update."
-msgstr "Error: Got invalid data for databse update."
 
 #: src/backendAPI/errorMsgCatalogue.ts:16
 msgid "Error: No \"year to show\" selected."
@@ -510,6 +510,23 @@ msgstr "Please select a user to show their vacations."
 #: src/components/VacationsDialogEntry.tsx:209
 msgid "Error"
 msgstr "Error"
+
+#: src/state/action-creators/publicHolidaysDataActionCreators.ts:41
+#: src/state/action-creators/publicHolidaysDataActionCreators.ts:99
+msgid "Got {errorCount} errors while loading public holiday data."
+msgstr "Got {errorCount} errors while loading public holiday data."
+
+#: src/state/action-creators/vacationStatsDataActionCreators.ts:38
+msgid ""
+"Got {pubHoliErrorCount} errors while loading\n"
+"public holiday data for vacation stats."
+msgstr ""
+"Got {pubHoliErrorCount} errors while loading\n"
+"public holiday data for vacation stats."
+
+#: src/state/action-creators/vacationStatsDataActionCreators.ts:45
+msgid "Got {vacErrorCount} errors while loading vacation data for vacation stats."
+msgstr "Got {vacErrorCount} errors while loading vacation data for vacation stats."
 
 #: src/utils/dateUtils.ts:19
 msgid "January"

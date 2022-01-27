@@ -1,14 +1,17 @@
 import { invoke } from "@tauri-apps/api/tauri";
+import { ProviderContext } from "notistack";
 import { Dispatch } from "redux";
 
 import { SchoolHolidaysDataActionType } from "../action-types";
 import { SchoolHolidaysDataAction } from "../actions";
+import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import {
   NewSchoolHolidayData,
   SchoolHolidayDataMap,
 } from "../../backendAPI/types/helperTypes";
 import { validateSchoolHolidaysData } from "../../backendAPI/validation";
+import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
 
 export const loadSchoolHolidaysDataAction = (
   payload: SchoolHolidaysData
@@ -18,19 +21,17 @@ export const loadSchoolHolidaysDataAction = (
 });
 
 export const loadSchoolHolidaysData =
-  () =>
+  (snackbarHandles: ProviderContext) =>
   async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
     let data;
     try {
       data = await invoke("load_school_holidays");
     } catch (err) {
-      invoke("log_error", {
-        target: "school-holidays",
-        message: `Loading of SchoolHolidays data from database failed: ${err}`,
-        location:
-          // eslint-disable-next-line max-len
-          "state/action-creators/schoolHolidaysDataActionCreators.ts-loadSchoolHolidaysData",
-      });
+      enqueuePersistendErrSnackbar(
+        getErrorCatalogueMsg(err as string),
+        snackbarHandles
+      );
+      return;
     }
 
     let validatedData: SchoolHolidaysData;
@@ -64,7 +65,10 @@ interface UpdatePayload {
 }
 
 export const updateSchoolHolidaysData =
-  ({ newEntries, updatedEntries, removedEntries }: UpdatePayload) =>
+  (
+    { newEntries, updatedEntries, removedEntries }: UpdatePayload,
+    snackbarHandles: ProviderContext
+  ) =>
   async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
     let data;
     try {
@@ -74,13 +78,11 @@ export const updateSchoolHolidaysData =
         removedEntries: removedEntries ?? null,
       });
     } catch (err) {
-      invoke("log_error", {
-        target: "school-holidays",
-        message: `Updating SchoolHolidays data in database failed: ${err}`,
-        location:
-          // eslint-disable-next-line max-len
-          "state/action-creators/schoolHolidaysDataActionCreators.ts-updateSchoolHolidaysData",
-      });
+      enqueuePersistendErrSnackbar(
+        getErrorCatalogueMsg(err as string),
+        snackbarHandles
+      );
+      return;
     }
 
     let validatedData: SchoolHolidaysData;
