@@ -1,9 +1,5 @@
 ## Roadmap
 
-- FE | impl error cataloge for cmd error codes
-
-- FE | print cmd errors as snackbar
-
 - FE | block db most interaction without year_to_show
 
 - FE | Add option to load current year or all for SchoolHoli Dialog
