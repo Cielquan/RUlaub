@@ -35,7 +35,7 @@ const SetupWrapper = (): ReactElement => {
   useMountEffect(() => {
     loadPublicHolidaysData();
     loadSchoolHolidaysData();
-    loadSchoolHolidaysLink();
+    loadSchoolHolidaysLink(snackbarHandles);
     loadVacationsData(); // NOTE: also loads UsersData
     loadVacationStatsData();
     loadVacationTypesData();

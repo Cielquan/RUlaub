@@ -1,8 +1,11 @@
 import { invoke } from "@tauri-apps/api/tauri";
+import { ProviderContext } from "notistack";
 import { Dispatch } from "redux";
 
 import { SchoolHolidaysLinkActionType } from "../action-types";
 import { SchoolHolidaysLinkAction } from "../actions";
+import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
+import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
 
 export const updateSchoolHolidaysLinkAction = (
   payload: string | null
@@ -12,7 +15,7 @@ export const updateSchoolHolidaysLinkAction = (
 });
 
 export const loadSchoolHolidaysLink =
-  () =>
+  (snackbarHandles: ProviderContext) =>
   async (dispatch: Dispatch<SchoolHolidaysLinkAction>): Promise<void> => {
     let data;
     try {
@@ -25,6 +28,10 @@ export const loadSchoolHolidaysLink =
           // eslint-disable-next-line max-len
           "state/action-creators/schoolHolidaysLinkActionCreators.ts-loadSchoolHolidaysLink",
       });
+      enqueuePersistendErrSnackbar(
+        getErrorCatalogueMsg(err as string),
+        snackbarHandles
+      );
       return;
     }
 
@@ -32,7 +39,7 @@ export const loadSchoolHolidaysLink =
   };
 
 export const updateSchoolHolidaysLink =
-  (link: string | null) =>
+  (link: string | null, snackbarHandles: ProviderContext) =>
   async (dispatch: Dispatch<SchoolHolidaysLinkAction>): Promise<void> => {
     let data;
     try {
@@ -45,6 +52,10 @@ export const updateSchoolHolidaysLink =
           // eslint-disable-next-line max-len
           "state/action-creators/schoolHolidaysLinkActionCreators.ts-updateSchoolHolidaysLink",
       });
+      enqueuePersistendErrSnackbar(
+        getErrorCatalogueMsg(err as string),
+        snackbarHandles
+      );
       return;
     }
 

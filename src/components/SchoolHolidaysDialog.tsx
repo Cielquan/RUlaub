@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
+import { useSnackbar } from "notistack";
 import React, { forwardRef, ReactElement, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -155,6 +156,8 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
     setNewSchoolHolidays(rv);
   };
 
+  const snackbarHandles = useSnackbar();
+
   const saveChanges = (): boolean => {
     if (link !== linkForm) {
       if (
@@ -163,7 +166,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
       )
         return false;
       setLink(linkForm);
-      updateSchoolHolidaysLink(linkForm);
+      updateSchoolHolidaysLink(linkForm, snackbarHandles);
     }
 
     const newEntries =
