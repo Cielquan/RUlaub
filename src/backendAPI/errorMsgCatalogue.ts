@@ -9,10 +9,10 @@ const errorMsgCatalogue: Record<string, string> = {
   "database-delete-error": t`Error: Failed to delete entry in database.`,
   "database-diesel-error": t`Error: Unknown error with the database.`,
   "database-insert-error": t`Error: Failed to insert new entry in database.`,
+  "database-invaild-data-error": t`Error: Got invalid data for databse update.`,
   "database-load-error": t`Error: Failed to load entry in database.`,
   "database-not-set-error": t`Error: No database set.`,
   "database-update-error": t`Error: Failed to update entry in database.`,
-  "database-update-invaild-data-error": t`Error: Got invalid data for databse update.`,
   "no-year-to-show-set-error": t`Error: No "year to show" selected.`,
   "to-many-link-db-entries-error": t`Error: Got to many links from the database.`,
 };
