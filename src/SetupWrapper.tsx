@@ -1,3 +1,4 @@
+import { invoke } from "@tauri-apps/api/tauri";
 import { useSnackbar } from "notistack";
 import React, { ReactElement, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,6 +18,7 @@ const SetupWrapper = (): ReactElement => {
     loadPublicHolidaysData,
     loadSchoolHolidaysData,
     loadSchoolHolidaysLink,
+    loadUsersData,
     loadVacationsData,
     loadVacationStatsData,
     loadVacationTypesData,
@@ -33,12 +35,30 @@ const SetupWrapper = (): ReactElement => {
   }, [langState.locale]);
 
   useMountEffect(() => {
-    loadPublicHolidaysData(snackbarHandles);
-    loadSchoolHolidaysData(snackbarHandles);
     loadSchoolHolidaysLink(snackbarHandles);
-    loadVacationsData(snackbarHandles); // NOTE: also loads UsersData
-    loadVacationStatsData(snackbarHandles);
     loadVacationTypesData(snackbarHandles);
+
+    if (typeof configState?.settings.yearToShow === "number") {
+      invoke("log_info", {
+        target: "SetupWrapper",
+        message:
+          "Year to show set; loading vacations and stats, public and school holidays",
+        location: "SetupWrapper.ts-SetupWrapper",
+      });
+      loadPublicHolidaysData(snackbarHandles);
+      loadSchoolHolidaysData(snackbarHandles);
+      loadVacationsData(snackbarHandles); // NOTE: also loads UsersData
+      loadVacationStatsData(snackbarHandles);
+    } else {
+      invoke("log_info", {
+        target: "SetupWrapper",
+        message:
+          "year to show not set; only loading users and skip stats and marker data",
+        location: "SetupWrapper.ts-SetupWrapper",
+      });
+      loadUsersData(snackbarHandles);
+    }
+
     setupMenuEventListeners(dispatch, snackbarHandles);
     setupErrorEventListeners(snackbarHandles);
   });
