@@ -35,10 +35,25 @@ const SetupWrapper = (): ReactElement => {
   }, [langState.locale]);
 
   useMountEffect(() => {
+    setupMenuEventListeners(dispatch, snackbarHandles);
+    setupErrorEventListeners(snackbarHandles);
+
+    if (typeof configState?.settings.databaseUri !== "string") {
+      return;
+    }
+
     loadSchoolHolidaysLink(snackbarHandles);
     loadVacationTypesData(snackbarHandles);
 
-    if (typeof configState?.settings.yearToShow === "number") {
+    if (typeof configState?.settings.yearToShow !== "number") {
+      invoke("log_info", {
+        target: "SetupWrapper",
+        message:
+          "year to show not set; only loading users and skip stats and marker data",
+        location: "SetupWrapper.ts-SetupWrapper",
+      });
+      loadUsersData(snackbarHandles);
+    } else {
       invoke("log_info", {
         target: "SetupWrapper",
         message:
@@ -49,18 +64,7 @@ const SetupWrapper = (): ReactElement => {
       loadSchoolHolidaysData(snackbarHandles);
       loadVacationsData(snackbarHandles); // NOTE: also loads UsersData
       loadVacationStatsData(snackbarHandles);
-    } else {
-      invoke("log_info", {
-        target: "SetupWrapper",
-        message:
-          "year to show not set; only loading users and skip stats and marker data",
-        location: "SetupWrapper.ts-SetupWrapper",
-      });
-      loadUsersData(snackbarHandles);
     }
-
-    setupMenuEventListeners(dispatch, snackbarHandles);
-    setupErrorEventListeners(snackbarHandles);
   });
 
   return <App />;
