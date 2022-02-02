@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/tauri";
 import { useSnackbar } from "notistack";
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
@@ -28,11 +28,17 @@ const SetupWrapper = (): ReactElement => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const langState = configState!.settings.language;
 
-  const snackbarHandles = useSnackbar();
+  const firstRenderRef = useRef(true);
+  if (firstRenderRef.current) {
+    firstRenderRef.current = false;
+    i18n.activate(langState.locale);
+  }
 
   useEffect(() => {
     i18n.activate(langState.locale);
   }, [langState.locale]);
+
+  const snackbarHandles = useSnackbar();
 
   useMountEffect(() => {
     setupMenuEventListeners(dispatch, snackbarHandles);
