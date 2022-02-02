@@ -112,14 +112,14 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
       mainButtonOnClick: openPublicHolidaysDialog,
       rightButton: [<CreateIcon />, openPublicHolidaysDialog, t`Edit`],
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      disabled: !configState!.settings.databaseUri,
+      disabled: !configState!.settings.databaseUri || !configState!.settings.yearToShow,
     },
     {
       mainButton: [t`School Holidays`, <DateRangeIcon />],
       mainButtonOnClick: openSchoolHolidaysDialog,
       rightButton: [<CreateIcon />, openSchoolHolidaysDialog, t`Edit`],
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      disabled: !configState!.settings.databaseUri,
+      disabled: !configState!.settings.databaseUri || !configState!.settings.yearToShow,
     },
     {
       mainButton: [t`Vacation Types`, <EventNoteIcon />],
@@ -134,7 +134,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
       rightButton: [<CreateIcon />, openVacationsDialog, t`Edit`],
       leftButton: [<AddIcon />, () => undefined, t`Create`],
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      disabled: !configState!.settings.databaseUri,
+      disabled: !configState!.settings.databaseUri || !configState!.settings.yearToShow,
     },
   ];
 
