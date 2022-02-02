@@ -338,8 +338,8 @@ msgid "The link must start with \"https://\"."
 msgstr "The link must start with \"https://\"."
 
 #: src/components/SchoolHolidaysDialog.tsx:74
-msgid "The link must have a \"'{{year}}'\" placeholder."
-msgstr "The link must have a \"'{{year}}'\" placeholder."
+msgid "The link must have a \"'&year%'\" placeholder."
+msgstr "The link must have a \"'&year%'\" placeholder."
 
 #: src/components/SchoolHolidaysDialog.tsx:225
 #: src/components/SideMenu.tsx:118
