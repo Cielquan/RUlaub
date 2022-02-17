@@ -31,7 +31,7 @@ use rulaub_backend::commands::database::set::{
     update_public_holidays, update_school_holidays, update_school_holidays_link, update_users,
     update_vacation_types, update_vacations,
 };
-use rulaub_backend::commands::init::finished_init_load;
+use rulaub_backend::commands::init::{aborted_init_load, finished_init_load};
 use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trace, log_warn};
 use rulaub_backend::config::setup::{setup_config, ConfigSetupErr};
 use rulaub_backend::config::types::StringEnum;
@@ -210,6 +210,7 @@ fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
+            aborted_init_load,
             finished_init_load,
             //
             log_debug,

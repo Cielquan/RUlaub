@@ -8,6 +8,7 @@ use crate::logging::tracer::TracerHandle;
 pub enum PageInit {
     LOADING,
     DONE,
+    ABORTED,
 }
 
 pub struct ConfigSetupErrState(pub Mutex<ConfigSetupErr>);
