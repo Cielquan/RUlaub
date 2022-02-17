@@ -126,8 +126,19 @@ fn main() {
                 let page_init_state = app_handle.state::<PageInitState>();
                 let sleep_time = Duration::from_millis(1000);
                 loop {
-                    if *page_init_state.0.lock() == PageInit::DONE {
-                        break;
+                    match *page_init_state.0.lock() {
+                        PageInit::DONE => break,
+                        PageInit::ABORTED => {
+                            error!(
+                                target = "tauri_setup",
+                                message = concat!(
+                                    "Frontend page init load was aborted. ",
+                                    "Error while fetching config."
+                                )
+                            );
+                            app_handle.exit(1);
+                        }
+                        _ => {}
                     };
                     debug!(
                         target = "tauri_setup",

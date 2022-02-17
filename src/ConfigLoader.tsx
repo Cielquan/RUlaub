@@ -1,3 +1,4 @@
+import { invoke } from "@tauri-apps/api";
 import React, { ReactElement } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -11,8 +12,9 @@ const ConfigLoader = (): ReactElement => {
   const dispatch = useDispatch();
   const { loadConfig } = bindActionCreators(actionCreators, dispatch);
 
-  const { loading } = useAsync(async () => loadConfig());
+  const { loading, error } = useAsync(async () => loadConfig());
   if (loading) return <>Loading</>;
+  if (error) invoke("aborted_init_load");
 
   return <ProviderWrapper />;
 };
