@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/tauri";
 import { useSnackbar } from "notistack";
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, { ReactElement, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
