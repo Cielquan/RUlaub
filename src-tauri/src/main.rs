@@ -13,7 +13,7 @@ use std::thread::sleep;
 use std::time::Duration;
 
 use parking_lot::Mutex;
-use tauri::{Event, Manager, WindowBuilder};
+use tauri::{Manager, RunEvent, WindowBuilder};
 
 use rulaub_backend::commands::config::get::{
     get_available_languages, get_available_log_levels, get_config_state,
@@ -262,8 +262,8 @@ fn main() {
 
     debug!(target = "tauri_setup", message = "Run tauri app");
     app.run(|_app_handle, event| match event {
-        Event::Ready => info!(target = "app", message = "App running"),
-        Event::Exit => info!(target = "app", message = "App ending"),
+        RunEvent::Ready => info!(target = "app", message = "App running"),
+        RunEvent::Exit => info!(target = "app", message = "App ending"),
         _ => (),
     });
 
