@@ -6,7 +6,8 @@ pub mod theme;
 pub mod types;
 
 use self::file::get_conf_file_path;
-pub use self::language::AVAILABLE_LANGUAGES;
+pub use self::language::{Language, LanguageData, AVAILABLE_LANGUAGES};
+pub use self::theme::Theme;
 pub use self::types::Config;
 use crate::config::parser::{parse_toml_str_to_config, serialize_config_to_toml_str};
 

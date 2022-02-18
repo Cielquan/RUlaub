@@ -1,4 +1,4 @@
-use std::fmt::{self, Display, Formatter};
+use std::fmt;
 
 use crate::db::schema::vacation_types;
 
@@ -14,8 +14,8 @@ pub struct VacationType {
     pub active: bool,
 }
 
-impl Display for VacationType {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+impl fmt::Display for VacationType {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if f.alternate() {
             write!(f, "<VacationType {}>", self.name)
         } else {
@@ -80,8 +80,8 @@ pub struct NewVacationType<'a> {
     pub active: &'a bool,
 }
 
-impl Display for NewVacationType<'_> {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+impl fmt::Display for NewVacationType<'_> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if f.alternate() {
             write!(f, "<NewVacationType {}>", self.name)
         } else {

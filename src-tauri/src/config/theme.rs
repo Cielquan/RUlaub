@@ -1,9 +1,7 @@
 use std::fmt;
 
-use serde::de::{self, Visitor};
-use serde::{Deserialize, Serialize};
-
-use super::types::StringEnum;
+use crate::config;
+use crate::config::types::StringEnum;
 
 #[derive(Clone, PartialEq)]
 pub enum Theme {
@@ -11,7 +9,7 @@ pub enum Theme {
     LIGHT,
 }
 
-impl StringEnum for Theme {
+impl config::types::StringEnum for Theme {
     fn new(value: &str) -> Self {
         match value {
             "dark" => Theme::DARK,
@@ -34,7 +32,7 @@ impl fmt::Debug for Theme {
     }
 }
 
-impl Serialize for Theme {
+impl serde::Serialize for Theme {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
@@ -43,7 +41,7 @@ impl Serialize for Theme {
     }
 }
 
-impl<'de> Deserialize<'de> for Theme {
+impl<'de> serde::Deserialize<'de> for Theme {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
@@ -54,7 +52,7 @@ impl<'de> Deserialize<'de> for Theme {
 
 struct ThemeStringVisitor {}
 
-impl<'de> Visitor<'de> for ThemeStringVisitor {
+impl<'de> serde::de::Visitor<'de> for ThemeStringVisitor {
     type Value = Theme;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -63,14 +61,14 @@ impl<'de> Visitor<'de> for ThemeStringVisitor {
 
     fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
     where
-        E: de::Error,
+        E: serde::de::Error,
     {
         Ok(Theme::new(value))
     }
 
     fn visit_string<E>(self, value: String) -> Result<Self::Value, E>
     where
-        E: de::Error,
+        E: serde::de::Error,
     {
         Ok(Theme::new(&value))
     }

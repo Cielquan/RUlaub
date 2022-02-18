@@ -1,13 +1,7 @@
-use std::fs::File;
 use std::io::Write;
-use std::path::{self, Path, PathBuf};
-use std::{env, fs};
+use std::{env, fs, path};
 
-use glob::{glob, GlobError};
-
-use crate::{NAME, PROJECT_DIRS};
-
-use super::LOGGING_DIR_PATH;
+use crate::logging;
 
 /// Try to create a logging directory path.
 ///
@@ -18,7 +12,7 @@ pub fn get_logging_dir_path() -> Option<String> {
         target = "tracing",
         message = "Try building logging dir path"
     );
-    if let Some(project_dirs) = &*PROJECT_DIRS {
+    if let Some(project_dirs) = &*crate::PROJECT_DIRS {
         if let Some(path) = project_dirs.cache_dir().join("logs").to_str() {
             return Some(String::from(path));
         }
@@ -36,7 +30,7 @@ pub fn get_logging_dir_path() -> Option<String> {
             );
             None
         }
-        Ok(current_dir) => match current_dir.join(format!("{}_logs", NAME)).to_str() {
+        Ok(current_dir) => match current_dir.join(format!("{}_logs", crate::NAME)).to_str() {
             None => {
                 error!(
                     target = "tracing",
@@ -75,13 +69,13 @@ pub fn add_log_dir_readme() {
 
     let file = format!(
         "{}{}{}",
-        *LOGGING_DIR_PATH,
+        *logging::LOGGING_DIR_PATH,
         path::MAIN_SEPARATOR,
         "README.txt"
     );
-    let path = Path::new(&file);
+    let path = path::Path::new(&file);
 
-    match File::create(path) {
+    match fs::File::create(path) {
         Err(err) => {
             error!(
                 target = "tracing-cleanup",
@@ -116,13 +110,18 @@ pub fn clean_log_dir() {
         message = "Start log dir clean up routine"
     );
 
-    let pattern = format!("{}{}{}", *LOGGING_DIR_PATH, path::MAIN_SEPARATOR, "log.*");
+    let pattern = format!(
+        "{}{}{}",
+        *logging::LOGGING_DIR_PATH,
+        path::MAIN_SEPARATOR,
+        "log.*"
+    );
 
     trace!(
         target = "tracing-cleanup",
         message = "Get log files in log dir"
     );
-    match glob(&pattern) {
+    match glob::glob(&pattern) {
         Err(err) => {
             error!(
                 target = "tracing-cleanup",
@@ -133,7 +132,7 @@ pub fn clean_log_dir() {
             return;
         }
         Ok(paths_iter) => {
-            let path_results: Vec<Result<PathBuf, GlobError>> = paths_iter.collect();
+            let path_results: Vec<Result<path::PathBuf, glob::GlobError>> = paths_iter.collect();
             let files_amount = path_results.len();
 
             if files_amount <= LOG_FILE_THRESHOLD {
@@ -153,7 +152,7 @@ pub fn clean_log_dir() {
                 log_files = ?path_results
             );
 
-            let mut paths: Vec<&PathBuf> = path_results
+            let mut paths: Vec<&path::PathBuf> = path_results
                 .iter()
                 .filter(|res| !res.is_err())
                 .map(move |res| res.as_ref().unwrap())

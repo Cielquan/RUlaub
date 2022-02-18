@@ -1,7 +1,4 @@
-use crate::logging::log_level::LogLevel;
-
-use super::language::{Language, LanguageData};
-use super::theme::Theme;
+use crate::{config, logging};
 
 /// The configuration object.
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
@@ -17,7 +14,7 @@ impl Config {
             user: config_file.user.clone(),
             settings: Settings {
                 database_uri: config_file.settings.database_uri,
-                language: LanguageData::new(config_file.settings.language),
+                language: config::LanguageData::new(config_file.settings.language),
                 log_level: config_file.settings.log_level,
                 theme: config_file.settings.theme,
                 today_autoscroll_left_offset: config_file.settings.today_autoscroll_left_offset,
@@ -40,9 +37,9 @@ pub struct User {
 #[serde(rename_all = "camelCase")]
 pub struct Settings {
     pub database_uri: Option<String>,
-    pub language: LanguageData,
-    pub log_level: LogLevel,
-    pub theme: Theme,
+    pub language: config::LanguageData,
+    pub log_level: logging::log_level::LogLevel,
+    pub theme: config::Theme,
     pub today_autoscroll_left_offset: i32,
     pub year_change_scroll_begin: bool,
     pub year_to_show: Option<i32>,
@@ -61,7 +58,7 @@ impl ConfigFile {
             user: config.user.clone(),
             settings: SettingsConfigFile {
                 database_uri: config.settings.database_uri,
-                language: Language::from_languagedata(config.settings.language),
+                language: config::Language::from_languagedata(config.settings.language),
                 log_level: config.settings.log_level,
                 theme: config.settings.theme,
                 today_autoscroll_left_offset: config.settings.today_autoscroll_left_offset,
@@ -76,9 +73,9 @@ impl ConfigFile {
 #[derive(Debug, Clone, PartialEq, Deserialize, Serialize)]
 pub struct SettingsConfigFile {
     pub database_uri: Option<String>,
-    pub language: Language,
-    pub log_level: LogLevel,
-    pub theme: Theme,
+    pub language: config::Language,
+    pub log_level: logging::log_level::LogLevel,
+    pub theme: config::Theme,
     pub today_autoscroll_left_offset: i32,
     pub year_change_scroll_begin: bool,
     pub year_to_show: Option<i32>,

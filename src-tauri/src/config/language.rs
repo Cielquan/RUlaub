@@ -1,10 +1,8 @@
 use std::collections::HashMap;
 use std::fmt;
 
-use serde::de::{self, Visitor};
-use serde::{Deserialize, Serialize};
-
-use super::types::StringEnum;
+use crate::config;
+use crate::config::types::StringEnum;
 
 lazy_static! {
     #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -60,7 +58,7 @@ impl Language {
     }
 }
 
-impl StringEnum for Language {
+impl config::types::StringEnum for Language {
     fn new(value: &str) -> Self {
         match value {
             "de-DE" => Language::DE,
@@ -83,7 +81,7 @@ impl fmt::Debug for Language {
     }
 }
 
-impl Serialize for Language {
+impl serde::Serialize for Language {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: serde::Serializer,
@@ -92,7 +90,7 @@ impl Serialize for Language {
     }
 }
 
-impl<'de> Deserialize<'de> for Language {
+impl<'de> serde::Deserialize<'de> for Language {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
     where
         D: serde::Deserializer<'de>,
@@ -103,7 +101,7 @@ impl<'de> Deserialize<'de> for Language {
 
 struct LanguageStringVisitor {}
 
-impl<'de> Visitor<'de> for LanguageStringVisitor {
+impl<'de> serde::de::Visitor<'de> for LanguageStringVisitor {
     type Value = Language;
 
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
@@ -112,14 +110,14 @@ impl<'de> Visitor<'de> for LanguageStringVisitor {
 
     fn visit_str<E>(self, value: &str) -> Result<Self::Value, E>
     where
-        E: de::Error,
+        E: serde::de::Error,
     {
         Ok(Language::new(value))
     }
 
     fn visit_string<E>(self, value: String) -> Result<Self::Value, E>
     where
-        E: de::Error,
+        E: serde::de::Error,
     {
         Ok(Language::new(&value))
     }

@@ -6,46 +6,19 @@
 #[macro_use]
 extern crate tracing;
 
-#[macro_use]
 extern crate rulaub_backend;
 
 use std::thread::sleep;
 use std::time::Duration;
 
 use parking_lot::Mutex;
-use tauri::{Manager, RunEvent, WindowBuilder};
+use tauri::{Manager, WindowBuilder};
 
-use rulaub_backend::commands::config::get::{
-    get_available_languages, get_available_log_levels, get_config_state,
-};
-use rulaub_backend::commands::config::set::{
-    create_db, set_config_state, set_db_uri, set_langauge, set_log_level, set_theme,
-    set_today_autoscroll_left_offset, set_user_name, set_year_change_scroll_begin,
-    set_year_to_show,
-};
-use rulaub_backend::commands::database::get::{
-    get_school_holidays_link, load_public_holidays, load_school_holidays, load_users,
-    load_vacation_stats, load_vacation_types, load_vacations,
-};
-use rulaub_backend::commands::database::set::{
-    update_public_holidays, update_school_holidays, update_school_holidays_link, update_users,
-    update_vacation_types, update_vacations,
-};
-use rulaub_backend::commands::init::{aborted_init_load, finished_init_load};
-use rulaub_backend::commands::logging::{log_debug, log_error, log_info, log_trace, log_warn};
-use rulaub_backend::config::setup::{setup_config, ConfigSetupErr};
 use rulaub_backend::config::types::StringEnum;
-use rulaub_backend::config::DEFAULT_CONFIG;
-use rulaub_backend::db::migrate_db_schema;
-use rulaub_backend::logging::tracer::{reload_tracing_level, setup_tracer};
-use rulaub_backend::menu::get_menu;
-use rulaub_backend::state::{
-    ConfigSetupErrState, ConfigState, PageInit, PageInitState, TracerHandleState,
-};
-use rulaub_backend::NAME;
+use rulaub_backend::{commands, config, db, logging, menu, state};
 
 fn main() {
-    let (tracer_handle, _guard) = setup_tracer();
+    let (tracer_handle, _guard) = logging::tracer::setup_tracer();
     info!(target = "main", message = "Main started.");
 
     debug!(target = "tauri_setup", message = "Build tauri app");
@@ -57,8 +30,8 @@ fn main() {
             move |window_builder, webview_attributes| {
                 (
                     window_builder
-                        .title(NAME)
-                        .menu(get_menu())
+                        .title(rulaub_backend::NAME)
+                        .menu(menu::get_menu())
                         .inner_size(800.into(), 600.into())
                         .resizable(true)
                         .fullscreen(false)
@@ -67,24 +40,28 @@ fn main() {
                 )
             },
         )
-        .manage(TracerHandleState(Mutex::new(tracer_handle)))
-        .manage(ConfigSetupErrState(Mutex::new(ConfigSetupErr::None)))
-        .manage(ConfigState(Mutex::new(DEFAULT_CONFIG.clone())))
-        .manage(PageInitState(Mutex::new(PageInit::LOADING)))
+        .manage(state::TracerHandleState(Mutex::new(tracer_handle)))
+        .manage(state::ConfigSetupErrState(Mutex::new(
+            config::setup::ConfigSetupErr::None,
+        )))
+        .manage(state::ConfigState(Mutex::new(
+            config::DEFAULT_CONFIG.clone(),
+        )))
+        .manage(state::PageInitState(Mutex::new(state::PageInit::LOADING)))
         .setup(move |app| {
             debug!(target = "tauri_setup", message = "Start app setup");
             let splashscreen_window = app.get_window("splashscreen").unwrap();
             let main_window = app.get_window("main").unwrap();
 
             debug!(target = "tauri_setup", message = "Setup config");
-            match setup_config() {
+            match config::setup::setup_config() {
                 Ok(conf) => {
                     debug!(
                         target = "tauri_setup",
                         message = "Update config state from file",
                         config = ?conf
                     );
-                    let config_state = app.state::<ConfigState>();
+                    let config_state = app.state::<state::ConfigState>();
                     *config_state.0.lock() = conf;
 
                     let log_level = &config_state.0.lock().settings.log_level;
@@ -93,18 +70,21 @@ fn main() {
                         message = "Reload tracer with level from config file",
                         level = ?log_level
                     );
-                    let tracer_handle = app.state::<TracerHandleState>();
-                    reload_tracing_level(&tracer_handle.0.lock(), &log_level.to_string());
+                    let tracer_handle = app.state::<state::TracerHandleState>();
+                    logging::tracer::reload_tracing_level(
+                        &tracer_handle.0.lock(),
+                        &log_level.to_string(),
+                    );
                 }
                 Err(err) => {
-                    let setup_config_err_state = app.state::<ConfigSetupErrState>();
+                    let setup_config_err_state = app.state::<state::ConfigSetupErrState>();
                     *setup_config_err_state.0.lock() = err;
                 }
             }
 
             {
                 debug!(target = "tauri_setup", message = "Check if database is set");
-                let config_state = app.state::<ConfigState>();
+                let config_state = app.state::<state::ConfigState>();
                 let database_uri = &config_state.0.lock().settings.database_uri;
                 match database_uri {
                     None => info!(
@@ -112,7 +92,7 @@ fn main() {
                         message = "Database not set; skip update"
                     ),
                     Some(db_uri) => {
-                        let _ = migrate_db_schema(db_uri, false);
+                        let _ = db::migrate_db_schema(db_uri, false);
                     }
                 }
             }
@@ -123,12 +103,12 @@ fn main() {
             tauri::async_runtime::spawn(async move {
                 debug!(target = "tauri_setup", message = "Start app init");
 
-                let page_init_state = app_handle.state::<PageInitState>();
+                let page_init_state = app_handle.state::<state::PageInitState>();
                 let sleep_time = Duration::from_millis(1000);
                 loop {
                     match *page_init_state.0.lock() {
-                        PageInit::DONE => break,
-                        PageInit::ABORTED => {
+                        state::PageInit::DONE => break,
+                        state::PageInit::ABORTED => {
                             error!(
                                 target = "tauri_setup",
                                 message = concat!(
@@ -159,10 +139,10 @@ fn main() {
                     target = "tauri_setup",
                     message = "Emit config setup error event if any"
                 );
-                let setup_config_err_state = app_handle.state::<ConfigSetupErrState>();
+                let setup_config_err_state = app_handle.state::<state::ConfigSetupErrState>();
                 match *setup_config_err_state.0.lock() {
-                    ConfigSetupErr::None => {}
-                    ConfigSetupErr::WriteErr => {
+                    config::setup::ConfigSetupErr::None => {}
+                    config::setup::ConfigSetupErr::WriteErr => {
                         trace!(
                             target = "emit_event",
                             message = "Emit event 'config-file-init-write-error'"
@@ -171,7 +151,7 @@ fn main() {
                             .emit("config-file-init-write-error", ())
                             .unwrap();
                     }
-                    ConfigSetupErr::ReadErr => {
+                    config::setup::ConfigSetupErr::ReadErr => {
                         trace!(
                             target = "emit_event",
                             message = "Emit event 'config-file-init-read-error'"
@@ -180,7 +160,7 @@ fn main() {
                             .emit("config-file-init-read-error", ())
                             .unwrap();
                     }
-                    ConfigSetupErr::NoFileErr => {
+                    config::setup::ConfigSetupErr::NoFileErr => {
                         trace!(
                             target = "emit_event",
                             message = "Emit event 'config-file-init-none-error'"
@@ -221,61 +201,61 @@ fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
-            aborted_init_load,
-            finished_init_load,
+            commands::init::aborted_init_load,
+            commands::init::finished_init_load,
             //
-            log_debug,
-            log_error,
-            log_info,
-            log_trace,
-            log_warn,
+            commands::logging::log_debug,
+            commands::logging::log_error,
+            commands::logging::log_info,
+            commands::logging::log_trace,
+            commands::logging::log_warn,
             //
-            get_config_state,
-            set_config_state,
+            commands::config::set::set_config_state,
+            commands::config::get::get_config_state,
             //
-            set_db_uri,
-            set_today_autoscroll_left_offset,
-            set_user_name,
-            set_year_change_scroll_begin,
-            set_year_to_show,
+            commands::config::set::set_db_uri,
+            commands::config::set::set_today_autoscroll_left_offset,
+            commands::config::set::set_user_name,
+            commands::config::set::set_year_change_scroll_begin,
+            commands::config::set::set_year_to_show,
             //
-            set_langauge,
-            get_available_languages,
+            commands::config::set::set_langauge,
+            commands::config::get::get_available_languages,
             //
-            set_log_level,
-            get_available_log_levels,
+            commands::config::set::set_log_level,
+            commands::config::get::get_available_log_levels,
             //
-            set_theme,
+            commands::config::set::set_theme,
             //
-            create_db,
+            commands::config::set::create_db,
             //
-            update_public_holidays,
-            load_public_holidays,
+            commands::database::set::update_public_holidays,
+            commands::database::get::load_public_holidays,
             //
-            update_school_holidays,
-            load_school_holidays,
+            commands::database::set::update_school_holidays,
+            commands::database::get::load_school_holidays,
             //
-            update_school_holidays_link,
-            get_school_holidays_link,
+            commands::database::set::update_school_holidays_link,
+            commands::database::get::get_school_holidays_link,
             //
-            update_users,
-            load_users,
+            commands::database::set::update_users,
+            commands::database::get::load_users,
             //
-            update_vacations,
-            load_vacations,
+            commands::database::set::update_vacations,
+            commands::database::get::load_vacations,
             //
-            load_vacation_stats,
+            commands::database::get::load_vacation_stats,
             //
-            update_vacation_types,
-            load_vacation_types,
+            commands::database::set::update_vacation_types,
+            commands::database::get::load_vacation_types,
         ])
         .build(tauri::generate_context!())
         .expect("error while building tauri application");
 
     debug!(target = "tauri_setup", message = "Run tauri app");
     app.run(|_app_handle, event| match event {
-        RunEvent::Ready => info!(target = "app", message = "App running"),
-        RunEvent::Exit => info!(target = "app", message = "App ending"),
+        tauri::RunEvent::Ready => info!(target = "app", message = "App running"),
+        tauri::RunEvent::Exit => info!(target = "app", message = "App ending"),
         _ => (),
     });
 

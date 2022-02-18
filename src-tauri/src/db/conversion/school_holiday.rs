@@ -1,9 +1,7 @@
 use std::collections::HashMap;
 
-use super::super::models;
-use super::super::state_models::types::DateData;
-use super::super::state_models::{self, SchoolHoliday};
 use super::date_type::{iso_date_to_naive_date, naive_date_to_iso_date};
+use crate::db::{models, state_models};
 
 pub fn to_state_model(db_data: Vec<models::SchoolHoliday>) -> state_models::SchoolHolidays {
     trace!(
@@ -16,14 +14,14 @@ pub fn to_state_model(db_data: Vec<models::SchoolHoliday>) -> state_models::Scho
     for entry in db_data.iter() {
         map.insert(
             entry.id,
-            SchoolHoliday {
+            state_models::SchoolHoliday {
                 name: entry.name.clone(),
-                start: DateData {
+                start: state_models::types::DateData {
                     date: naive_date_to_iso_date(entry.start_date),
                     year_day: entry.start_year_day,
                     year: entry.start_year,
                 },
-                end: DateData {
+                end: state_models::types::DateData {
                     date: naive_date_to_iso_date(entry.end_date),
                     year_day: entry.end_year_day,
                     year: entry.end_year,

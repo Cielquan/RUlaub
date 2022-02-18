@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
-pub type VacationTypes = HashMap<VacationTypeId, VacationType>;
 pub type VacationTypeId = i32;
+pub type VacationTypes = HashMap<VacationTypeId, VacationType>;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct VacationType {

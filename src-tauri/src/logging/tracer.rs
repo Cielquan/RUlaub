@@ -1,17 +1,18 @@
-use tracing_appender::non_blocking::{NonBlocking, WorkerGuard};
-use tracing_subscriber::fmt::format::{DefaultFields, FmtSpan, Format, Pretty};
-use tracing_subscriber::fmt::Layer;
-use tracing_subscriber::layer::Layered;
-use tracing_subscriber::reload::Handle;
-use tracing_subscriber::{EnvFilter, Registry};
+use tracing_subscriber::{fmt, layer, reload, EnvFilter, Registry};
 
-use super::file::{add_log_dir_readme, clean_log_dir};
-use super::log_level::create_env_filter;
-use super::LOGGING_DIR_PATH;
+use crate::logging;
 
-pub type TracerHandle = Handle<
+pub type TracerHandle = reload::Handle<
     EnvFilter,
-    Layered<Layer<Registry, DefaultFields, Format<Pretty>, NonBlocking>, Registry>,
+    layer::Layered<
+        fmt::Layer<
+            Registry,
+            fmt::format::DefaultFields,
+            fmt::format::Format<fmt::format::Pretty>,
+            tracing_appender::non_blocking::NonBlocking,
+        >,
+        Registry,
+    >,
 >;
 
 /// Initialize and start a tracing subscriber.
@@ -21,13 +22,13 @@ pub type TracerHandle = Handle<
 /// and subside.
 ///
 /// # Panics
-/// If the logging directory path [`LOGGING_DIR_PATH`] is an empty string.
+/// If the logging directory path [`logging::LOGGING_DIR_PATH`] is an empty string.
 #[tracing::instrument]
-pub fn setup_tracer() -> (TracerHandle, WorkerGuard) {
+pub fn setup_tracer() -> (TracerHandle, tracing_appender::non_blocking::WorkerGuard) {
     debug!(target = "tracing", message = "Setup tracer");
 
     trace!(target = "tracing", message = "Init logging dir path");
-    let logging_dir_path = LOGGING_DIR_PATH.as_str();
+    let logging_dir_path = logging::LOGGING_DIR_PATH.as_str();
     trace!(
         target = "tracing",
         message = "Use logging dir path",
@@ -47,14 +48,14 @@ pub fn setup_tracer() -> (TracerHandle, WorkerGuard) {
         .pretty()
         .with_ansi(false)
         // https://github.com/tokio-rs/tracing/issues/1310
-        .fmt_fields(DefaultFields::new())
+        .fmt_fields(tracing_subscriber::fmt::format::DefaultFields::new())
         .with_level(true)
         .with_target(true)
         .with_thread_names(true)
         .with_thread_ids(true)
-        .with_span_events(FmtSpan::FULL)
+        .with_span_events(tracing_subscriber::fmt::format::FmtSpan::FULL)
         // .with_max_level(Level::TRACE)
-        .with_env_filter(create_env_filter("TRACE"))
+        .with_env_filter(logging::log_level::create_env_filter("TRACE"))
         .with_filter_reloading();
     let handle = tracer.reload_handle();
 
@@ -63,9 +64,9 @@ pub fn setup_tracer() -> (TracerHandle, WorkerGuard) {
     trace!(target = "tracing", message = "Running tracer");
     info!(target = "tracing", message = "Tracing level: TRACE");
 
-    add_log_dir_readme();
+    logging::file::add_log_dir_readme();
 
-    clean_log_dir();
+    logging::file::clean_log_dir();
 
     (handle, guard)
 }
@@ -77,7 +78,7 @@ pub fn reload_tracing_level(handle: &TracerHandle, level: &str) {
         message = "Reload tracing level",
         level = level
     );
-    match handle.reload(create_env_filter(level)) {
+    match handle.reload(logging::log_level::create_env_filter(level)) {
         Ok(_) => info!(
             target = "tracing",
             message = "Changed tracing level",

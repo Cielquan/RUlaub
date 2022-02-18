@@ -1,4 +1,4 @@
-use std::fmt::{self, Display, Formatter};
+use std::fmt;
 
 use chrono::NaiveDate;
 
@@ -18,8 +18,8 @@ pub struct SchoolHoliday {
     pub end_year: i32,
 }
 
-impl Display for SchoolHoliday {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+impl fmt::Display for SchoolHoliday {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if f.alternate() {
             write!(f, "<SchoolHoliday {}>", self.name)
         } else {
@@ -88,8 +88,8 @@ pub struct NewSchoolHoliday<'a> {
     pub end_year: &'a i32,
 }
 
-impl Display for NewSchoolHoliday<'_> {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+impl fmt::Display for NewSchoolHoliday<'_> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if f.alternate() {
             write!(f, "<SchoolHoliday {}>", self.name)
         } else {

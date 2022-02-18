@@ -1,9 +1,7 @@
-use crate::config::types::ConfigFile;
-
-use super::Config;
+use crate::config;
 
 /// Parse toml string into [`ConfigFile`] struct. Then transform it into [`Config`] struct.
-pub fn parse_toml_str_to_config(toml_str: &str) -> anyhow::Result<Config> {
+pub fn parse_toml_str_to_config(toml_str: &str) -> anyhow::Result<config::Config> {
     debug!(
         target = "config",
         message = "Try to parse toml string into Config struct"
@@ -17,17 +15,17 @@ pub fn parse_toml_str_to_config(toml_str: &str) -> anyhow::Result<Config> {
             );
             Err(err.into())
         }
-        Ok(conf) => Ok(Config::from_configfile(conf)),
+        Ok(conf) => Ok(config::Config::from_configfile(conf)),
     }
 }
 
-pub fn serialize_config_to_toml_str(config: &Config) -> anyhow::Result<String> {
+pub fn serialize_config_to_toml_str(config: &config::Config) -> anyhow::Result<String> {
     debug!(
         target = "config",
         message = "Try to serialize Config struct into toml string"
     );
-    let config_file = ConfigFile::from_config(config.clone());
-    match toml::to_string::<ConfigFile>(&config_file) {
+    let config_file = config::types::ConfigFile::from_config(config.clone());
+    match toml::to_string::<config::types::ConfigFile>(&config_file) {
         Err(err) => {
             error!(
                 target = "config",

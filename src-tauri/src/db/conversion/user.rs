@@ -1,8 +1,6 @@
 use std::collections::HashMap;
 
-use super::super::models;
-use super::super::state_models::user::Workdays;
-use super::super::state_models::{self, User};
+use crate::db::{models, state_models};
 
 pub fn to_state_model(db_data: Vec<models::User>) -> state_models::Users {
     trace!(
@@ -15,9 +13,9 @@ pub fn to_state_model(db_data: Vec<models::User>) -> state_models::Users {
     for entry in db_data.iter() {
         map.insert(
             entry.id,
-            User {
+            state_models::user::User {
                 name: entry.name.clone(),
-                workdays: Workdays {
+                workdays: state_models::user::Workdays {
                     monday: entry.monday,
                     tuesday: entry.tuesday,
                     wednesday: entry.wednesday,

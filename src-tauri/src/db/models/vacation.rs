@@ -1,4 +1,4 @@
-use std::fmt::{self, Display, Formatter};
+use std::fmt;
 
 use chrono::NaiveDate;
 
@@ -18,8 +18,8 @@ pub struct Vacation {
     pub end_year: i32,
 }
 
-impl Display for Vacation {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+impl fmt::Display for Vacation {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if f.alternate() {
             write!(
                 f,
@@ -95,8 +95,8 @@ pub struct NewVacation<'a> {
     pub end_year: &'a i32,
 }
 
-impl Display for NewVacation<'_> {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+impl fmt::Display for NewVacation<'_> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if f.alternate() {
             write!(
                 f,
@@ -129,8 +129,8 @@ pub struct UpdatedVacation {
     pub end_year: i32,
 }
 
-impl Display for UpdatedVacation {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+impl fmt::Display for UpdatedVacation {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if f.alternate() {
             write!(f, "<Vacation {}>", self.vacation_type_id)
         } else {

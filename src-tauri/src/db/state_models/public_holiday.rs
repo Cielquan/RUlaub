@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 
-pub type PublicHolidays = HashMap<PublicHolidayId, PublicHolidayVariant>;
 pub type PublicHolidayId = i32;
+pub type PublicHolidays = HashMap<PublicHolidayId, PublicHolidayVariant>;
 
 pub type PublicHoliday = PublicHolidayVariant;
 

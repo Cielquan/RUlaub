@@ -1,4 +1,4 @@
-use std::fmt::{self, Display, Formatter};
+use std::fmt;
 
 use crate::db::schema::public_holidays;
 
@@ -13,8 +13,8 @@ pub struct PublicHoliday {
     pub easter_sunday_offset: Option<i32>,
 }
 
-impl Display for PublicHoliday {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+impl fmt::Display for PublicHoliday {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if f.alternate() {
             write!(f, "<PublicHoliday {}>", self.name)
         } else {
@@ -74,8 +74,8 @@ pub struct NewPublicHoliday<'a> {
     pub easter_sunday_offset: Option<&'a i32>,
 }
 
-impl Display for NewPublicHoliday<'_> {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+impl fmt::Display for NewPublicHoliday<'_> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if f.alternate() {
             write!(f, "<NewPublicHoliday {}>", self.name)
         } else {

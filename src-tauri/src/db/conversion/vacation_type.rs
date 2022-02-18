@@ -1,7 +1,6 @@
 use std::collections::HashMap;
 
-use super::super::models;
-use super::super::state_models::{self, VacationType};
+use crate::db::{models, state_models};
 
 pub fn to_state_model(db_data: Vec<models::VacationType>) -> state_models::VacationTypes {
     trace!(
@@ -14,7 +13,7 @@ pub fn to_state_model(db_data: Vec<models::VacationType>) -> state_models::Vacat
     for entry in db_data.iter() {
         map.insert(
             entry.id,
-            VacationType {
+            state_models::VacationType {
                 name: entry.name.clone(),
                 charge: entry.charge,
                 color_dark: entry.color_dark.clone(),

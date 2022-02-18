@@ -2,20 +2,16 @@ use std::collections::HashMap;
 
 use chrono::{Datelike, NaiveDate};
 
+use super::date_type;
 use crate::date_calc;
-
-use super::super::state_models::public_holiday::{
-    Calc, DateBasedHoliday, EasterBasedHoliday, PublicHolidayVariant, YearlessISODate,
-};
-use super::super::{models, state_models};
-use super::date_type::iso_date_to_naive_date;
+use crate::db::{models, state_models};
 
 pub fn yearless_date_to_year_day(
-    yearless_date: &YearlessISODate,
+    yearless_date: &state_models::public_holiday::YearlessISODate,
     year: i32,
 ) -> anyhow::Result<i32> {
     let iso_date = format!("{}-{}", year, yearless_date);
-    Ok(iso_date_to_naive_date(iso_date)?
+    Ok(date_type::iso_date_to_naive_date(iso_date)?
         .ordinal()
         .try_into()
         .unwrap())
@@ -79,12 +75,14 @@ fn try_add_date_based_holiday(
     if let Ok(year_day) = yearless_date_to_year_day(&yearless_date, calc_year) {
         map.insert(
             entry.id,
-            PublicHolidayVariant::DateBasedHoliday(DateBasedHoliday {
-                name: entry.name.clone(),
-                yearless_date,
-                year: entry.year,
-                calc: Calc { year_day },
-            }),
+            state_models::PublicHolidayVariant::DateBasedHoliday(
+                state_models::public_holiday::DateBasedHoliday {
+                    name: entry.name.clone(),
+                    yearless_date,
+                    year: entry.year,
+                    calc: state_models::public_holiday::Calc { year_day },
+                },
+            ),
         );
     } else {
         *error_count = *error_count + 1;
@@ -107,12 +105,14 @@ fn try_add_offset_based_holiday(
     if let Some(year_day) = easter_sunday_offset_to_year_day(easter_sunday_offset, calc_year) {
         map.insert(
             entry.id,
-            PublicHolidayVariant::EasterBasedHoliday(EasterBasedHoliday {
-                name: entry.name.clone(),
-                easter_sunday_offset,
-                year: entry.year,
-                calc: Calc { year_day },
-            }),
+            state_models::PublicHolidayVariant::EasterBasedHoliday(
+                state_models::public_holiday::EasterBasedHoliday {
+                    name: entry.name.clone(),
+                    easter_sunday_offset,
+                    year: entry.year,
+                    calc: state_models::public_holiday::Calc { year_day },
+                },
+            ),
         );
     } else {
         *error_count = *error_count + 1;
@@ -180,7 +180,7 @@ pub fn to_new_db_model(
 
     for entry_variant in new_entries {
         match entry_variant {
-            PublicHolidayVariant::DateBasedHoliday(entry) => {
+            state_models::PublicHolidayVariant::DateBasedHoliday(entry) => {
                 let year = match &entry.year {
                     None => None,
                     Some(y) => Some(y),
@@ -192,7 +192,7 @@ pub fn to_new_db_model(
                     None,
                 ))
             }
-            PublicHolidayVariant::EasterBasedHoliday(entry) => {
+            state_models::PublicHolidayVariant::EasterBasedHoliday(entry) => {
                 let year = match &entry.year {
                     None => None,
                     Some(y) => Some(y),
@@ -222,7 +222,7 @@ pub fn to_update_db_model(
 
     for (id, entry_variant) in updated_entries {
         match entry_variant {
-            PublicHolidayVariant::DateBasedHoliday(entry) => {
+            state_models::PublicHolidayVariant::DateBasedHoliday(entry) => {
                 db_models.push(models::PublicHoliday::create_update_entry(
                     id,
                     entry.name,
@@ -231,7 +231,7 @@ pub fn to_update_db_model(
                     None,
                 ))
             }
-            PublicHolidayVariant::EasterBasedHoliday(entry) => {
+            state_models::PublicHolidayVariant::EasterBasedHoliday(entry) => {
                 db_models.push(models::PublicHoliday::create_update_entry(
                     id,
                     entry.name,

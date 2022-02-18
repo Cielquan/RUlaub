@@ -1,4 +1,4 @@
-use std::fmt::{self, Display, Formatter};
+use std::fmt;
 
 use crate::db::schema::school_holidays_link;
 
@@ -9,8 +9,8 @@ pub struct SchoolHolidayLink {
     pub link: String,
 }
 
-impl Display for SchoolHolidayLink {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+impl fmt::Display for SchoolHolidayLink {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "<SchoolHolidayLink {}>", self.link)
     }
 }
@@ -31,8 +31,8 @@ pub struct NewSchoolHolidayLink<'a> {
     pub link: &'a str,
 }
 
-impl Display for NewSchoolHolidayLink<'_> {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+impl fmt::Display for NewSchoolHolidayLink<'_> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "<SchoolHolidayLink {}>", self.link)
     }
 }

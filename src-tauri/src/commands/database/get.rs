@@ -3,39 +3,27 @@ use std::collections::HashMap;
 use chrono::NaiveDate;
 use diesel::prelude::*;
 
-use crate::commands::database::get_db_conn;
-use crate::commands::CommandResult;
-use crate::config::Config;
-use crate::date_calc::{sum_weekdays_between, sum_workdays};
-use crate::db::conversion;
-use crate::db::conversion::vacation_stat::{group_vacations, map_user_workdays_list};
-use crate::db::models::{
-    PublicHoliday, SchoolHoliday, SchoolHolidayLink, User, Vacation, VacationType,
-};
-use crate::db::query_only_models::{self, UserWorkdays, VacationWithType};
-use crate::db::state_models::public_holiday::PublicHolidayVariant;
-use crate::db::state_models::vacation_stat::{Calc, Stats};
-use crate::db::state_models::{self, VacationStatsMap};
-use crate::state::ConfigState;
+use crate::db::{conversion, models, query_only_models, state_models};
+use crate::{commands, config, date_calc, db, state};
 
 /// Get [`crate::db::models::PublicHoliday`] from database.
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn load_public_holidays(
     filter_current_year: Option<bool>,
-    config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<(state_models::PublicHolidays, u32)> {
+    config_state: tauri::State<'_, state::ConfigState>,
+) -> commands::CommandResult<(state_models::PublicHolidays, u32)> {
     let config_state_guard = config_state.0.lock();
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+    let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
     _load_public_holidays(&config_state_guard, &conn, filter_current_year)
 }
 
 pub fn _load_public_holidays(
-    config: &Config,
+    config: &config::Config,
     conn: &SqliteConnection,
     filter_current_year: Option<bool>,
-) -> CommandResult<(state_models::PublicHolidays, u32)> {
+) -> commands::CommandResult<(state_models::PublicHolidays, u32)> {
     use crate::db::schema::public_holidays::dsl::{public_holidays, year};
 
     trace!(
@@ -59,7 +47,7 @@ pub fn _load_public_holidays(
             .or_filter(year.is_null());
     }
 
-    match query.load::<PublicHoliday>(conn) {
+    match query.load::<models::PublicHoliday>(conn) {
         Err(err) => {
             error!(
                 target = "database",
@@ -68,7 +56,7 @@ pub fn _load_public_holidays(
             );
             Err("database-load-error".into())
         }
-        Ok(data) => Ok(conversion::public_holiday::to_state_model(
+        Ok(data) => Ok(db::conversion::public_holiday::to_state_model(
             data,
             display_year,
         )),
@@ -80,19 +68,19 @@ pub fn _load_public_holidays(
 #[tauri::command]
 pub async fn load_school_holidays(
     filter_current_year: Option<bool>,
-    config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<state_models::SchoolHolidays> {
+    config_state: tauri::State<'_, state::ConfigState>,
+) -> commands::CommandResult<state_models::SchoolHolidays> {
     let config_state_guard = config_state.0.lock();
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+    let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
     _load_school_holidays(&config_state_guard, &conn, filter_current_year)
 }
 
 pub fn _load_school_holidays(
-    config: &Config,
+    config: &config::Config,
     conn: &SqliteConnection,
     filter_current_year: Option<bool>,
-) -> CommandResult<state_models::SchoolHolidays> {
+) -> commands::CommandResult<state_models::SchoolHolidays> {
     use crate::db::schema::school_holidays::dsl::{end_year, school_holidays, start_year};
 
     let mut query = school_holidays.into_boxed();
@@ -110,7 +98,7 @@ pub fn _load_school_holidays(
             .or_filter(start_year.lt(display_year).and(end_year.gt(display_year)))
     }
 
-    match query.load::<SchoolHoliday>(conn) {
+    match query.load::<models::SchoolHoliday>(conn) {
         Err(err) => {
             error!(
                 target = "database",
@@ -119,7 +107,7 @@ pub fn _load_school_holidays(
             );
             Err("database-load-error".into())
         }
-        Ok(data) => Ok(conversion::school_holiday::to_state_model(data)),
+        Ok(data) => Ok(db::conversion::school_holiday::to_state_model(data)),
     }
 }
 
@@ -127,18 +115,20 @@ pub fn _load_school_holidays(
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn get_school_holidays_link(
-    config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<Option<String>> {
+    config_state: tauri::State<'_, state::ConfigState>,
+) -> commands::CommandResult<Option<String>> {
     let config_state_guard = config_state.0.lock();
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+    let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
     _get_school_holidays_link(&conn)
 }
 
-pub fn _get_school_holidays_link(conn: &SqliteConnection) -> CommandResult<Option<String>> {
+pub fn _get_school_holidays_link(
+    conn: &SqliteConnection,
+) -> commands::CommandResult<Option<String>> {
     use crate::db::schema::school_holidays_link::dsl::school_holidays_link;
 
-    match school_holidays_link.load::<SchoolHolidayLink>(conn) {
+    match school_holidays_link.load::<models::SchoolHolidayLink>(conn) {
         Err(err) => {
             error!(
                 target = "database",
@@ -166,18 +156,18 @@ pub fn _get_school_holidays_link(conn: &SqliteConnection) -> CommandResult<Optio
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn load_users(
-    config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<state_models::Users> {
+    config_state: tauri::State<'_, state::ConfigState>,
+) -> commands::CommandResult<state_models::Users> {
     let config_state_guard = config_state.0.lock();
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+    let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
     _load_users(&conn)
 }
 
-pub fn _load_users(conn: &SqliteConnection) -> CommandResult<state_models::Users> {
+pub fn _load_users(conn: &SqliteConnection) -> commands::CommandResult<state_models::Users> {
     use crate::db::schema::users::dsl::users;
 
-    match users.load::<User>(conn) {
+    match users.load::<models::User>(conn) {
         Err(err) => {
             error!(
                 target = "database",
@@ -186,7 +176,7 @@ pub fn _load_users(conn: &SqliteConnection) -> CommandResult<state_models::Users
             );
             Err("database-load-error".into())
         }
-        Ok(data) => Ok(conversion::user::to_state_model(data)),
+        Ok(data) => Ok(db::conversion::user::to_state_model(data)),
     }
 }
 
@@ -195,19 +185,19 @@ pub fn _load_users(conn: &SqliteConnection) -> CommandResult<state_models::Users
 #[tauri::command]
 pub async fn load_vacations(
     filter_current_year: Option<bool>,
-    config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<state_models::Vacations> {
+    config_state: tauri::State<'_, state::ConfigState>,
+) -> commands::CommandResult<state_models::Vacations> {
     let config_state_guard = config_state.0.lock();
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+    let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
     _load_vacations(&config_state_guard, &conn, filter_current_year)
 }
 
 pub fn _load_vacations(
-    config: &Config,
+    config: &config::Config,
     conn: &SqliteConnection,
     filter_current_year: Option<bool>,
-) -> CommandResult<state_models::Vacations> {
+) -> commands::CommandResult<state_models::Vacations> {
     use crate::db::schema::vacations::dsl::{end_year, start_year, vacations};
 
     let mut query = vacations.into_boxed();
@@ -225,7 +215,7 @@ pub fn _load_vacations(
             .or_filter(start_year.lt(display_year).and(end_year.gt(display_year)))
     }
 
-    match query.load::<Vacation>(conn) {
+    match query.load::<models::Vacation>(conn) {
         Err(err) => {
             error!(
                 target = "database",
@@ -234,7 +224,7 @@ pub fn _load_vacations(
             );
             Err("database-load-error".into())
         }
-        Ok(data) => Ok(conversion::vacation::to_state_model(data)),
+        Ok(data) => Ok(db::conversion::vacation::to_state_model(data)),
     }
 }
 
@@ -247,8 +237,8 @@ pub fn _load_vacations(
 #[tauri::command]
 pub fn load_vacation_stats(
     filter_current_year: Option<bool>,
-    config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<(state_models::VacationStatsMap, u32, u32)> {
+    config_state: tauri::State<'_, state::ConfigState>,
+) -> commands::CommandResult<(state_models::VacationStatsMap, u32, u32)> {
     let config_state_guard = config_state.0.lock();
 
     let display_year = match config_state_guard.settings.year_to_show.clone() {
@@ -261,7 +251,7 @@ pub fn load_vacation_stats(
     let first_day = NaiveDate::from_ymd(display_year, 1, 1);
     let last_day = NaiveDate::from_ymd(display_year, 12, 31);
 
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+    let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
     let (pub_holidays, pub_holiday_error_count) =
         _load_public_holidays(&config_state_guard, &conn, Some(true))?;
@@ -274,8 +264,8 @@ pub fn load_vacation_stats(
         .into_values()
         .map(|pub_holiday| {
             let year_day = match pub_holiday {
-                PublicHolidayVariant::DateBasedHoliday(ph) => ph.calc.year_day,
-                PublicHolidayVariant::EasterBasedHoliday(ph) => ph.calc.year_day,
+                state_models::PublicHolidayVariant::DateBasedHoliday(ph) => ph.calc.year_day,
+                state_models::PublicHolidayVariant::EasterBasedHoliday(ph) => ph.calc.year_day,
             };
             NaiveDate::from_yo(display_year, year_day.try_into().unwrap())
         })
@@ -283,12 +273,12 @@ pub fn load_vacation_stats(
     pub_holiday_dates.sort();
 
     let user_list = _load_user_workdays(&conn)?;
-    let mut user_workdays = map_user_workdays_list(&user_list);
+    let mut user_workdays = conversion::vacation_stat::map_user_workdays_list(&user_list);
 
     let vacation_list = _load_vacations_with_types(&conn, display_year)?;
-    let mut vacation_map = group_vacations(vacation_list);
+    let mut vacation_map = conversion::vacation_stat::group_vacations(vacation_list);
 
-    let mut vac_stats: VacationStatsMap = HashMap::new();
+    let mut vac_stats: state_models::VacationStatsMap = HashMap::new();
     let mut vacation_error_count = 0;
 
     trace!(target = "database", message = "Calc user vacation stats");
@@ -318,12 +308,16 @@ pub fn load_vacation_stats(
                     last_day.clone()
                 };
 
-                match sum_weekdays_between(start_date, end_date, Some(pub_holiday_dates.clone())) {
+                match date_calc::sum_weekdays_between(
+                    start_date,
+                    end_date,
+                    Some(pub_holiday_dates.clone()),
+                ) {
                     None => {
                         vacation_error_count += 1;
                     }
                     Some(weekday_sum_map) => {
-                        type_count += sum_workdays(&weekday_sum_map, &workdays);
+                        type_count += date_calc::sum_workdays(&weekday_sum_map, &workdays);
                     }
                 }
             }
@@ -336,8 +330,8 @@ pub fn load_vacation_stats(
 
         vac_stats.insert(
             user.id,
-            Stats {
-                calc: Calc {
+            state_models::vacation_stat::Stats {
+                calc: state_models::vacation_stat::Calc {
                     taken_vacation_days,
                     vacation_stats,
                 },
@@ -350,7 +344,7 @@ pub fn load_vacation_stats(
 
 fn _load_user_workdays(
     conn: &SqliteConnection,
-) -> CommandResult<Vec<query_only_models::UserWorkdays>> {
+) -> commands::CommandResult<Vec<query_only_models::UserWorkdays>> {
     use crate::db::schema::users::dsl::{
         friday, id, monday, saturday, sunday, thursday, tuesday, users, wednesday,
     };
@@ -364,7 +358,7 @@ fn _load_user_workdays(
         .select((
             id, monday, tuesday, wednesday, thursday, friday, saturday, sunday,
         ))
-        .load::<UserWorkdays>(conn)
+        .load::<query_only_models::UserWorkdays>(conn)
     {
         Err(err) => {
             error!(
@@ -381,7 +375,7 @@ fn _load_user_workdays(
 fn _load_vacations_with_types(
     conn: &SqliteConnection,
     display_year: i32,
-) -> CommandResult<Vec<VacationWithType>> {
+) -> commands::CommandResult<Vec<query_only_models::VacationWithType>> {
     use crate::db::schema::vacations::dsl::{end_year, start_year};
     use crate::db::schema::{vacation_types, vacations};
 
@@ -407,7 +401,7 @@ fn _load_vacations_with_types(
         ))
         .filter(start_year.eq(display_year).or(end_year.eq(display_year)))
         .or_filter(start_year.lt(display_year).and(end_year.gt(display_year)))
-        .load::<VacationWithType>(conn)
+        .load::<query_only_models::VacationWithType>(conn)
     {
         Err(err) => {
             error!(
@@ -425,18 +419,20 @@ fn _load_vacations_with_types(
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn load_vacation_types(
-    config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<state_models::VacationTypes> {
+    config_state: tauri::State<'_, state::ConfigState>,
+) -> commands::CommandResult<state_models::VacationTypes> {
     let config_state_guard = config_state.0.lock();
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+    let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
     _load_vacation_types(&conn)
 }
 
-pub fn _load_vacation_types(conn: &SqliteConnection) -> CommandResult<state_models::VacationTypes> {
+pub fn _load_vacation_types(
+    conn: &SqliteConnection,
+) -> commands::CommandResult<state_models::VacationTypes> {
     use crate::db::schema::vacation_types::dsl::vacation_types;
 
-    match vacation_types.load::<VacationType>(conn) {
+    match vacation_types.load::<models::VacationType>(conn) {
         Err(err) => {
             error!(
                 target = "database",
@@ -445,6 +441,6 @@ pub fn _load_vacation_types(conn: &SqliteConnection) -> CommandResult<state_mode
             );
             Err("database-load-error".into())
         }
-        Ok(data) => Ok(conversion::vacation_type::to_state_model(data)),
+        Ok(data) => Ok(db::conversion::vacation_type::to_state_model(data)),
     }
 }

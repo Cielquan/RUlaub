@@ -1,16 +1,8 @@
 use diesel::prelude::*;
 
-use crate::commands::CommandResult;
-use crate::db::models::SchoolHolidayLink;
-use crate::db::{conversion, state_models};
-use crate::state::ConfigState;
-
-use super::get::{
-    _get_school_holidays_link, _load_public_holidays, _load_school_holidays, _load_users,
-    _load_vacation_types, _load_vacations,
-};
-use super::{get_db_conn, DieselResultErrorWrapper};
-
+use crate::commands::database::get as cmd_db_get;
+use crate::db::{conversion, models, state_models};
+use crate::{commands, state};
 /// Update [`PublicHoliday`] in database.
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
@@ -19,15 +11,15 @@ pub async fn update_public_holidays(
     updated_entries: Option<state_models::PublicHolidays>,
     removed_entries: Option<Vec<i32>>,
     filter_current_year: Option<bool>,
-    config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<(state_models::PublicHolidays, u32)> {
+    config_state: tauri::State<'_, state::ConfigState>,
+) -> commands::CommandResult<(state_models::PublicHolidays, u32)> {
     use crate::db::schema::public_holidays::dsl::{id, public_holidays};
 
     let config_state_guard = config_state.0.lock();
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+    let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
     match conn
-        .exclusive_transaction::<(state_models::PublicHolidays, u32), DieselResultErrorWrapper, _>(
+        .exclusive_transaction::<(state_models::PublicHolidays, u32), super::DieselResultErrorWrapper, _>(
             || {
                 if new_entries.is_some() {
                     let new_entries = new_entries.unwrap();
@@ -42,7 +34,7 @@ pub async fn update_public_holidays(
                             error = ?err,
                             entry = ?insertable
                         );
-                        return Err(DieselResultErrorWrapper::Msg(
+                        return Err(super::DieselResultErrorWrapper::Msg(
                             "database-insert-error".into(),
                         ));
                     }
@@ -63,7 +55,7 @@ pub async fn update_public_holidays(
                                 error = ?err,
                                 entry = ?insertable
                             );
-                            return Err(DieselResultErrorWrapper::Msg(
+                            return Err(super::DieselResultErrorWrapper::Msg(
                                 "database-update-error".into(),
                             ));
                         }
@@ -79,21 +71,21 @@ pub async fn update_public_holidays(
                                 message = "Failed to delete all entries from public_holidays db table",
                                 error = ?err,
                             );
-                            return Err(DieselResultErrorWrapper::Msg(
+                            return Err(super::DieselResultErrorWrapper::Msg(
                                 "database-delete-error".into(),
                             ));
                         }
                     }
                 }
 
-                match _load_public_holidays(&config_state_guard, &conn, filter_current_year) {
-                    Err(err) => Err(DieselResultErrorWrapper::Msg(err)),
+                match cmd_db_get::_load_public_holidays(&config_state_guard, &conn, filter_current_year) {
+                    Err(err) => Err(super::DieselResultErrorWrapper::Msg(err)),
                     Ok(v) => Ok(v),
                 }
             },
         ) {
-        Err(DieselResultErrorWrapper::Msg(err)) => Err(err),
-        Err(DieselResultErrorWrapper::DieselErrorDummy(err)) => {
+        Err(super::DieselResultErrorWrapper::Msg(err)) => Err(err),
+        Err(super::DieselResultErrorWrapper::DieselErrorDummy(err)) => {
             error!(
                 target = "database-diesel-error",
                 message = "An diesel error slipped through",
@@ -116,14 +108,14 @@ pub async fn update_school_holidays(
     updated_entries: Option<state_models::SchoolHolidays>,
     removed_entries: Option<Vec<i32>>,
     filter_current_year: Option<bool>,
-    config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<state_models::SchoolHolidays> {
+    config_state: tauri::State<'_, state::ConfigState>,
+) -> commands::CommandResult<state_models::SchoolHolidays> {
     use crate::db::schema::school_holidays::dsl::{id, school_holidays};
 
     let config_state_guard = config_state.0.lock();
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+    let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    match conn.exclusive_transaction::<state_models::SchoolHolidays, DieselResultErrorWrapper, _>(
+    match conn.exclusive_transaction::<state_models::SchoolHolidays, super::DieselResultErrorWrapper, _>(
         || {
             if new_entries.is_some() {
                 let new_entries = new_entries.unwrap();
@@ -135,7 +127,7 @@ pub async fn update_school_holidays(
                         message = "Got invalid data to insert into school_holidays db table",
                         entries = ?new_entries
                     );
-                    return Err(DieselResultErrorWrapper::Msg(
+                    return Err(super::DieselResultErrorWrapper::Msg(
                         "database-invaild-data-error".into(),
                     ));
                 }
@@ -149,7 +141,7 @@ pub async fn update_school_holidays(
                         error = ?err,
                         entry = ?insertable
                     );
-                    return Err(DieselResultErrorWrapper::Msg(
+                    return Err(super::DieselResultErrorWrapper::Msg(
                         "database-insert-error".into(),
                     ));
                 }
@@ -165,7 +157,7 @@ pub async fn update_school_holidays(
                         message = "Got invalid data to update entries in school_holidays db table",
                         entries = ?updated_entries
                     );
-                    return Err(DieselResultErrorWrapper::Msg(
+                    return Err(super::DieselResultErrorWrapper::Msg(
                         "database-invaild-data-error".into(),
                     ));
                 }
@@ -180,7 +172,7 @@ pub async fn update_school_holidays(
                             error = ?err,
                             entry = ?insertable
                         );
-                        return Err(DieselResultErrorWrapper::Msg(
+                        return Err(super::DieselResultErrorWrapper::Msg(
                             "database-update-error".into(),
                         ));
                     }
@@ -198,21 +190,21 @@ pub async fn update_school_holidays(
                             message = "Failed to delete all entries from school_holidays db table",
                             error = ?err,
                         );
-                        return Err(DieselResultErrorWrapper::Msg(
+                        return Err(super::DieselResultErrorWrapper::Msg(
                             "database-delete-error".into(),
                         ));
                     }
                 }
             }
 
-            match _load_school_holidays(&config_state_guard, &conn, filter_current_year) {
-                Err(err) => Err(DieselResultErrorWrapper::Msg(err)),
+            match cmd_db_get::_load_school_holidays(&config_state_guard, &conn, filter_current_year) {
+                Err(err) => Err(super::DieselResultErrorWrapper::Msg(err)),
                 Ok(v) => Ok(v),
             }
         },
     ) {
-        Err(DieselResultErrorWrapper::Msg(err)) => Err(err),
-        Err(DieselResultErrorWrapper::DieselErrorDummy(err)) => {
+        Err(super::DieselResultErrorWrapper::Msg(err)) => Err(err),
+        Err(super::DieselResultErrorWrapper::DieselErrorDummy(err)) => {
             error!(
                 target = "database-diesel-error",
                 message = "An diesel error slipped through",
@@ -227,22 +219,22 @@ pub async fn update_school_holidays(
     }
 }
 
-/// Update [`SchoolHolidayLink`] in database.
+/// Update [`models::SchoolHolidayLink`] in database.
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn update_school_holidays_link(
     link: Option<String>,
-    config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<Option<String>> {
+    config_state: tauri::State<'_, state::ConfigState>,
+) -> commands::CommandResult<Option<String>> {
     use crate::db::schema::school_holidays_link::dsl::school_holidays_link;
 
     let config_state_guard = config_state.0.lock();
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+    let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    match conn.exclusive_transaction::<Option<String>, DieselResultErrorWrapper, _>(|| {
-        let current_entry = match _get_school_holidays_link(&conn) {
+    match conn.exclusive_transaction::<Option<String>, super::DieselResultErrorWrapper, _>(|| {
+        let current_entry = match cmd_db_get::_get_school_holidays_link(&conn) {
             Err(err) => {
-                return Err(DieselResultErrorWrapper::Msg(err.into()));
+                return Err(super::DieselResultErrorWrapper::Msg(err.into()));
             }
             Ok(e) => e,
         };
@@ -253,7 +245,7 @@ pub async fn update_school_holidays_link(
 
         if current_entry.is_none() {
             let link = link.unwrap();
-            let insertable = SchoolHolidayLink::create_new_entry(&link);
+            let insertable = models::SchoolHolidayLink::create_new_entry(&link);
             if let Err(err) = diesel::insert_into(school_holidays_link)
                 .values(insertable.clone())
                 .execute(&conn)
@@ -264,7 +256,7 @@ pub async fn update_school_holidays_link(
                     error = ?err,
                     entry = ?insertable
                 );
-                return Err(DieselResultErrorWrapper::Msg(
+                return Err(super::DieselResultErrorWrapper::Msg(
                     "database-insert-error".into(),
                 ));
             }
@@ -276,14 +268,14 @@ pub async fn update_school_holidays_link(
                     message = "Failed to delete all entries from school_holidays_link db table",
                     error = ?err,
                 );
-                return Err(DieselResultErrorWrapper::Msg(
+                return Err(super::DieselResultErrorWrapper::Msg(
                     "database-delete-error".into(),
                 ));
             }
             return Ok(None);
         } else {
             let link = link.unwrap();
-            let insertable = SchoolHolidayLink::create_update_entry(link.clone());
+            let insertable = models::SchoolHolidayLink::create_update_entry(link.clone());
             if let Err(err) = diesel::update(school_holidays_link)
                 .set(insertable.clone())
                 .execute(&conn)
@@ -294,15 +286,15 @@ pub async fn update_school_holidays_link(
                     error = ?err,
                     entry = ?insertable
                 );
-                return Err(DieselResultErrorWrapper::Msg(
+                return Err(super::DieselResultErrorWrapper::Msg(
                     "database-update-error".into(),
                 ));
             }
             return Ok(Some(link));
         }
     }) {
-        Err(DieselResultErrorWrapper::Msg(err)) => Err(err),
-        Err(DieselResultErrorWrapper::DieselErrorDummy(err)) => {
+        Err(super::DieselResultErrorWrapper::Msg(err)) => Err(err),
+        Err(super::DieselResultErrorWrapper::DieselErrorDummy(err)) => {
             error!(
                 target = "database-diesel-error",
                 message = "An diesel error slipped through",
@@ -328,78 +320,81 @@ pub async fn update_users(
     new_entries: Option<Vec<state_models::User>>,
     updated_entries: Option<state_models::Users>,
     removed_entries: Option<Vec<i32>>,
-    config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<state_models::Users> {
+    config_state: tauri::State<'_, state::ConfigState>,
+) -> commands::CommandResult<state_models::Users> {
     use crate::db::schema::users::dsl::{id, users};
 
     let config_state_guard = config_state.0.lock();
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+    let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    match conn.exclusive_transaction::<state_models::Users, DieselResultErrorWrapper, _>(|| {
-        if new_entries.is_some() {
-            let new_entries = new_entries.unwrap();
-            let insertable = conversion::user::to_new_db_model(&new_entries);
-            if let Err(err) = diesel::insert_into(users)
-                .values(insertable.clone())
-                .execute(&conn)
-            {
-                error!(
-                    target = "database",
-                    message = "Failed to insert entries to users db table",
-                    error = ?err,
-                    entry = ?insertable
-                );
-                return Err(DieselResultErrorWrapper::Msg(
-                    "database-insert-error".into(),
-                ));
-            }
-        }
-
-        if updated_entries.is_some() {
-            let updated_entries = updated_entries.unwrap();
-            let insertables = conversion::user::to_update_db_model(updated_entries);
-            for insertable in insertables {
-                if let Err(err) = diesel::update(users.filter(id.eq(insertable.id)))
-                    .set(insertable.clone())
+    match conn.exclusive_transaction::<state_models::Users, super::DieselResultErrorWrapper, _>(
+        || {
+            if new_entries.is_some() {
+                let new_entries = new_entries.unwrap();
+                let insertable = conversion::user::to_new_db_model(&new_entries);
+                if let Err(err) = diesel::insert_into(users)
+                    .values(insertable.clone())
                     .execute(&conn)
                 {
                     error!(
                         target = "database",
-                        message = "Failed to update entries in users db table",
+                        message = "Failed to insert entries to users db table",
                         error = ?err,
                         entry = ?insertable
                     );
-                    return Err(DieselResultErrorWrapper::Msg(
-                        "database-update-error".into(),
+                    return Err(super::DieselResultErrorWrapper::Msg(
+                        "database-insert-error".into(),
                     ));
                 }
             }
-        }
 
-        if removed_entries.is_some() {
-            let removed_entries = removed_entries.unwrap();
-            for removed_entry in removed_entries {
-                if let Err(err) = diesel::delete(users.filter(id.eq(removed_entry))).execute(&conn)
-                {
-                    error!(
-                        target = "database",
-                        message = "Failed to delete all entries from users db table",
-                        error = ?err,
-                    );
-                    return Err(DieselResultErrorWrapper::Msg(
-                        "database-delete-error".into(),
-                    ));
+            if updated_entries.is_some() {
+                let updated_entries = updated_entries.unwrap();
+                let insertables = conversion::user::to_update_db_model(updated_entries);
+                for insertable in insertables {
+                    if let Err(err) = diesel::update(users.filter(id.eq(insertable.id)))
+                        .set(insertable.clone())
+                        .execute(&conn)
+                    {
+                        error!(
+                            target = "database",
+                            message = "Failed to update entries in users db table",
+                            error = ?err,
+                            entry = ?insertable
+                        );
+                        return Err(super::DieselResultErrorWrapper::Msg(
+                            "database-update-error".into(),
+                        ));
+                    }
                 }
             }
-        }
 
-        match _load_users(&conn) {
-            Err(err) => Err(DieselResultErrorWrapper::Msg(err)),
-            Ok(v) => Ok(v),
-        }
-    }) {
-        Err(DieselResultErrorWrapper::Msg(err)) => Err(err),
-        Err(DieselResultErrorWrapper::DieselErrorDummy(err)) => {
+            if removed_entries.is_some() {
+                let removed_entries = removed_entries.unwrap();
+                for removed_entry in removed_entries {
+                    if let Err(err) =
+                        diesel::delete(users.filter(id.eq(removed_entry))).execute(&conn)
+                    {
+                        error!(
+                            target = "database",
+                            message = "Failed to delete all entries from users db table",
+                            error = ?err,
+                        );
+                        return Err(super::DieselResultErrorWrapper::Msg(
+                            "database-delete-error".into(),
+                        ));
+                    }
+                }
+            }
+
+            match cmd_db_get::_load_users(&conn) {
+                Err(err) => Err(super::DieselResultErrorWrapper::Msg(err)),
+                Ok(v) => Ok(v),
+            }
+        },
+    ) {
+        Err(super::DieselResultErrorWrapper::Msg(err)) => Err(err),
+        Err(super::DieselResultErrorWrapper::DieselErrorDummy(err)) => {
             error!(
                 target = "database-diesel-error",
                 message = "An diesel error slipped through",
@@ -422,100 +417,102 @@ pub async fn update_vacations(
     updated_entries: Option<state_models::UpdatedVacations>,
     removed_entries: Option<Vec<i32>>,
     filter_current_year: Option<bool>,
-    config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<state_models::Vacations> {
+    config_state: tauri::State<'_, state::ConfigState>,
+) -> commands::CommandResult<state_models::Vacations> {
     use crate::db::schema::vacations::dsl::{id, vacations};
 
     let config_state_guard = config_state.0.lock();
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+    let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    match conn.exclusive_transaction::<state_models::Vacations, DieselResultErrorWrapper, _>(|| {
-        if new_entries.is_some() {
-            let new_entries = new_entries.unwrap();
-            let (insertable, errors) = conversion::vacation::to_new_db_model(&new_entries);
-            if errors > 0 {
-                error!(
-                    target = "database",
-                    message = "Got invalid data to insert into school_holidays db table",
-                    entries = ?new_entries
-                );
-                return Err(DieselResultErrorWrapper::Msg(
-                    "database-invaild-data-error".into(),
-                ));
-            }
-            if let Err(err) = diesel::insert_into(vacations)
-                .values(insertable.clone())
-                .execute(&conn)
-            {
-                error!(
-                    target = "database",
-                    message = "Failed to insert entries to vacations db table",
-                    error = ?err,
-                    entry = ?insertable
-                );
-                return Err(DieselResultErrorWrapper::Msg(
-                    "database-insert-error".into(),
-                ));
-            }
-        }
-
-        if updated_entries.is_some() {
-            let updated_entries = updated_entries.unwrap();
-            let (insertables, errors) =
-                conversion::vacation::to_update_db_model(updated_entries.clone());
-            if errors > 0 {
-                error!(
-                    target = "database",
-                    message = "Got invalid data to update entries in vacations db table",
-                    entries = ?updated_entries
-                );
-                return Err(DieselResultErrorWrapper::Msg(
-                    "database-invaild-data-error".into(),
-                ));
-            }
-            for insertable in insertables {
-                if let Err(err) = diesel::update(vacations.filter(id.eq(insertable.id)))
-                    .set(insertable.clone())
+    match conn.exclusive_transaction::<state_models::Vacations, super::DieselResultErrorWrapper, _>(
+        || {
+            if new_entries.is_some() {
+                let new_entries = new_entries.unwrap();
+                let (insertable, errors) = conversion::vacation::to_new_db_model(&new_entries);
+                if errors > 0 {
+                    error!(
+                        target = "database",
+                        message = "Got invalid data to insert into school_holidays db table",
+                        entries = ?new_entries
+                    );
+                    return Err(super::DieselResultErrorWrapper::Msg(
+                        "database-invaild-data-error".into(),
+                    ));
+                }
+                if let Err(err) = diesel::insert_into(vacations)
+                    .values(insertable.clone())
                     .execute(&conn)
                 {
                     error!(
                         target = "database",
-                        message = "Failed to update entries in vacations db table",
+                        message = "Failed to insert entries to vacations db table",
                         error = ?err,
                         entry = ?insertable
                     );
-                    return Err(DieselResultErrorWrapper::Msg(
-                        "database-update-error".into(),
+                    return Err(super::DieselResultErrorWrapper::Msg(
+                        "database-insert-error".into(),
                     ));
                 }
             }
-        }
 
-        if removed_entries.is_some() {
-            let removed_entries = removed_entries.unwrap();
-            for removed_entry in removed_entries {
-                if let Err(err) =
-                    diesel::delete(vacations.filter(id.eq(removed_entry))).execute(&conn)
-                {
+            if updated_entries.is_some() {
+                let updated_entries = updated_entries.unwrap();
+                let (insertables, errors) =
+                    conversion::vacation::to_update_db_model(updated_entries.clone());
+                if errors > 0 {
                     error!(
                         target = "database",
-                        message = "Failed to delete all entries from vacations db table",
-                        error = ?err,
+                        message = "Got invalid data to update entries in vacations db table",
+                        entries = ?updated_entries
                     );
-                    return Err(DieselResultErrorWrapper::Msg(
-                        "database-delete-error".into(),
+                    return Err(super::DieselResultErrorWrapper::Msg(
+                        "database-invaild-data-error".into(),
                     ));
                 }
+                for insertable in insertables {
+                    if let Err(err) = diesel::update(vacations.filter(id.eq(insertable.id)))
+                        .set(insertable.clone())
+                        .execute(&conn)
+                    {
+                        error!(
+                            target = "database",
+                            message = "Failed to update entries in vacations db table",
+                            error = ?err,
+                            entry = ?insertable
+                        );
+                        return Err(super::DieselResultErrorWrapper::Msg(
+                            "database-update-error".into(),
+                        ));
+                    }
+                }
             }
-        }
 
-        match _load_vacations(&config_state_guard, &conn, filter_current_year) {
-            Err(err) => Err(DieselResultErrorWrapper::Msg(err)),
-            Ok(v) => Ok(v),
-        }
-    }) {
-        Err(DieselResultErrorWrapper::Msg(err)) => Err(err),
-        Err(DieselResultErrorWrapper::DieselErrorDummy(err)) => {
+            if removed_entries.is_some() {
+                let removed_entries = removed_entries.unwrap();
+                for removed_entry in removed_entries {
+                    if let Err(err) =
+                        diesel::delete(vacations.filter(id.eq(removed_entry))).execute(&conn)
+                    {
+                        error!(
+                            target = "database",
+                            message = "Failed to delete all entries from vacations db table",
+                            error = ?err,
+                        );
+                        return Err(super::DieselResultErrorWrapper::Msg(
+                            "database-delete-error".into(),
+                        ));
+                    }
+                }
+            }
+
+            match cmd_db_get::_load_vacations(&config_state_guard, &conn, filter_current_year) {
+                Err(err) => Err(super::DieselResultErrorWrapper::Msg(err)),
+                Ok(v) => Ok(v),
+            }
+        },
+    ) {
+        Err(super::DieselResultErrorWrapper::Msg(err)) => Err(err),
+        Err(super::DieselResultErrorWrapper::DieselErrorDummy(err)) => {
             error!(
                 target = "database-diesel-error",
                 message = "An diesel error slipped through",
@@ -536,63 +533,66 @@ pub async fn update_vacations(
 pub async fn update_vacation_types(
     new_entries: Option<Vec<state_models::VacationType>>,
     updated_entries: Option<state_models::VacationTypes>,
-    config_state: tauri::State<'_, ConfigState>,
-) -> CommandResult<state_models::VacationTypes> {
+    config_state: tauri::State<'_, state::ConfigState>,
+) -> commands::CommandResult<state_models::VacationTypes> {
     use crate::db::schema::vacation_types::dsl::{id, vacation_types};
 
     let config_state_guard = config_state.0.lock();
-    let conn = get_db_conn(&config_state_guard.settings.database_uri)?;
+    let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    match conn.exclusive_transaction::<state_models::VacationTypes, DieselResultErrorWrapper, _>(
-        || {
-            if new_entries.is_some() {
-                let new_entries = new_entries.unwrap();
-                let insertable = conversion::vacation_type::to_new_db_model(&new_entries);
-                if let Err(err) = diesel::insert_into(vacation_types)
-                    .values(insertable.clone())
-                    .execute(&conn)
-                {
-                    error!(
-                        target = "database",
-                        message = "Failed to insert entries to vacation_types db table",
-                        error = ?err,
-                        entry = ?insertable
-                    );
-                    return Err(DieselResultErrorWrapper::Msg(
-                        "database-insert-error".into(),
-                    ));
-                }
-            }
-
-            if updated_entries.is_some() {
-                let updated_entries = updated_entries.unwrap();
-                let insertables = conversion::vacation_type::to_update_db_model(updated_entries);
-                for insertable in insertables {
-                    if let Err(err) = diesel::update(vacation_types.filter(id.eq(insertable.id)))
-                        .set(insertable.clone())
+    match conn
+        .exclusive_transaction::<state_models::VacationTypes, super::DieselResultErrorWrapper, _>(
+            || {
+                if new_entries.is_some() {
+                    let new_entries = new_entries.unwrap();
+                    let insertable = conversion::vacation_type::to_new_db_model(&new_entries);
+                    if let Err(err) = diesel::insert_into(vacation_types)
+                        .values(insertable.clone())
                         .execute(&conn)
                     {
                         error!(
                             target = "database",
-                            message = "Failed to update entries in vacation_types db table",
+                            message = "Failed to insert entries to vacation_types db table",
                             error = ?err,
                             entry = ?insertable
                         );
-                        return Err(DieselResultErrorWrapper::Msg(
-                            "database-update-error".into(),
+                        return Err(super::DieselResultErrorWrapper::Msg(
+                            "database-insert-error".into(),
                         ));
                     }
                 }
-            }
 
-            match _load_vacation_types(&conn) {
-                Err(err) => Err(DieselResultErrorWrapper::Msg(err)),
-                Ok(v) => Ok(v),
-            }
-        },
-    ) {
-        Err(DieselResultErrorWrapper::Msg(err)) => Err(err),
-        Err(DieselResultErrorWrapper::DieselErrorDummy(err)) => {
+                if updated_entries.is_some() {
+                    let updated_entries = updated_entries.unwrap();
+                    let insertables =
+                        conversion::vacation_type::to_update_db_model(updated_entries);
+                    for insertable in insertables {
+                        if let Err(err) =
+                            diesel::update(vacation_types.filter(id.eq(insertable.id)))
+                                .set(insertable.clone())
+                                .execute(&conn)
+                        {
+                            error!(
+                                target = "database",
+                                message = "Failed to update entries in vacation_types db table",
+                                error = ?err,
+                                entry = ?insertable
+                            );
+                            return Err(super::DieselResultErrorWrapper::Msg(
+                                "database-update-error".into(),
+                            ));
+                        }
+                    }
+                }
+
+                match cmd_db_get::_load_vacation_types(&conn) {
+                    Err(err) => Err(super::DieselResultErrorWrapper::Msg(err)),
+                    Ok(v) => Ok(v),
+                }
+            },
+        ) {
+        Err(super::DieselResultErrorWrapper::Msg(err)) => Err(err),
+        Err(super::DieselResultErrorWrapper::DieselErrorDummy(err)) => {
             error!(
                 target = "database-diesel-error",
                 message = "An diesel error slipped through",

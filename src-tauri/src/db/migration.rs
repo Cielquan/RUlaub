@@ -1,8 +1,6 @@
-use std::path::Path;
+use std::path;
 
-use diesel_migrations::run_pending_migrations;
-
-use super::establish_connection_to;
+use crate::db;
 
 /// Migrate the database to the latest state
 pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<()> {
@@ -10,7 +8,7 @@ pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<()> {
         target = "database-migration",
         message = "Start database migration routine"
     );
-    if !Path::new(db_url).exists() {
+    if !path::Path::new(db_url).exists() {
         if !create {
             warn!(
                 target = "database-migration",
@@ -24,7 +22,7 @@ pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<()> {
             );
         }
     }
-    match establish_connection_to(db_url) {
+    match db::establish_connection_to(db_url) {
         Err(err) => {
             error!(
                 target = "database-migration",
@@ -33,7 +31,7 @@ pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<()> {
             return Err(err);
         }
         Ok(conn) => {
-            if let Err(err) = run_pending_migrations(&conn) {
+            if let Err(err) = diesel_migrations::run_pending_migrations(&conn) {
                 error!(
                     target = "database-migration",
                     message = "Failed to migrate the database",

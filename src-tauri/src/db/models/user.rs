@@ -1,4 +1,4 @@
-use std::fmt::{self, Display, Formatter};
+use std::fmt;
 
 use crate::db::schema::users;
 
@@ -18,8 +18,8 @@ pub struct User {
     pub sunday: bool,
 }
 
-impl Display for User {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+impl fmt::Display for User {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if f.alternate() {
             write!(f, "<User {}>", self.name)
         } else {
@@ -119,8 +119,8 @@ pub struct NewUser<'a> {
     pub sunday: &'a bool,
 }
 
-impl Display for NewUser<'_> {
-    fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
+impl fmt::Display for NewUser<'_> {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         if f.alternate() {
             write!(f, "<NewUser {}>", self.name)
         } else {

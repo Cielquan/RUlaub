@@ -2,11 +2,12 @@ use std::collections::HashMap;
 
 use chrono::{NaiveDate, Weekday};
 
-use crate::db::query_only_models::{self, VacationWithType};
-use crate::db::state_models::user::UserId;
-use crate::db::state_models::vacation_type::VacationTypeId;
+use crate::db::{query_only_models, state_models};
 
-pub type VacationMap = HashMap<UserId, HashMap<VacationTypeId, Vec<VacationData>>>;
+pub type VacationMap = HashMap<
+    state_models::user::UserId,
+    HashMap<state_models::vacation_type::VacationTypeId, Vec<VacationData>>,
+>;
 
 #[derive(Debug)]
 pub struct VacationData {
@@ -15,7 +16,7 @@ pub struct VacationData {
     pub charge: bool,
 }
 
-pub fn group_vacations(vacation_list: Vec<VacationWithType>) -> VacationMap {
+pub fn group_vacations(vacation_list: Vec<query_only_models::VacationWithType>) -> VacationMap {
     trace!(
         target = "database-data",
         message = "Sort vacation data by user and type id"

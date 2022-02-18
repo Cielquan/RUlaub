@@ -1,9 +1,6 @@
 use std::collections::HashMap;
 
-use super::user::UserId;
-use super::vacation_type::VacationTypeId;
-
-pub type VacationStatsMap = HashMap<UserId, Stats>;
+pub type VacationStatsMap = HashMap<super::user::UserId, Stats>;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Stats {
@@ -16,4 +13,4 @@ pub struct Calc {
     pub vacation_stats: VacationStats,
 }
 
-pub type VacationStats = HashMap<VacationTypeId, u32>;
+pub type VacationStats = HashMap<super::vacation_type::VacationTypeId, u32>;

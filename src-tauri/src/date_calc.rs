@@ -1,7 +1,7 @@
 use std::collections::HashMap;
 use std::mem;
 
-use chrono::{Datelike, Duration, NaiveDate, Weekday};
+use chrono::{Datelike, NaiveDate, Weekday};
 
 struct DateRange(NaiveDate, NaiveDate);
 
@@ -9,7 +9,7 @@ impl Iterator for DateRange {
     type Item = NaiveDate;
     fn next(&mut self) -> Option<Self::Item> {
         if self.0 <= self.1 {
-            let next = self.0 + Duration::days(1);
+            let next = self.0 + chrono::Duration::days(1);
             Some(mem::replace(&mut self.0, next))
         } else {
             None
