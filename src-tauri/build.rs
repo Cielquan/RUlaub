@@ -7,7 +7,7 @@ use tauri_build::{try_build, Attributes, WindowsAttributes};
 #[cfg(target_os = "windows")]
 fn main() {
     let mut win_sdk_path = env::var("CARGO_FEATURE_WIN_SDK_PATH")
-        .unwrap_or_else(|_| "C:/Program Files (x86)/Windows Kits/10/bin/10.0.18362.0/x64/".into());
+        .unwrap_or_else(|_| "C:/Program Files (x86)/Windows Kits/10/bin/10.0.20348.0/x64/".into());
 
     if let Ok(v) = env::var("CARGO_FEATURE_WIN_SDK_VER") {
         win_sdk_path = format!("C:/Program Files (x86)/Windows Kits/10/bin/{}/x64/", v)
