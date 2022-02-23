@@ -19,6 +19,21 @@ repos:
       - id: check-useless-excludes
         stages: [manual]
 
+  # ----------------------------------------------
+  # File hooks
+  # ----------------------------------------------
+
+  # file checking out-of-the-box hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 8fe62d14e0b4d7d845a7022c5c2c3ae41bdd3f26 # frozen: v4.1.0
+    hooks:
+      - id: check-case-conflict
+      - id: check-shebang-scripts-are-executable
+        exclude: '^.*\.rs$'
+      - id: check-symlinks
+      - id: destroyed-symlinks
+      - id: forbid-new-submodules
+
   # ####################################################################################
   #
   #       FORMATTING
@@ -28,16 +43,6 @@ repos:
   # ----------------------------------------------
   # General (code unspecific)
   # ----------------------------------------------
-
-  # code unspecific out-of-the-box hooks
-  - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: 8fe62d14e0b4d7d845a7022c5c2c3ae41bdd3f26 # frozen: v4.1.0
-    hooks:
-      - id: end-of-file-fixer
-        stages: [commit]
-      - id: trailing-whitespace
-        stages: [commit]
-        exclude: ".*\\.test\\.tsx\\.snap$"
 
   # ----------------------------------------------
   # Rust
@@ -68,6 +73,19 @@ repos:
     rev: ea782651a7e32f40a3d13b76c79d5a2474ee8723 # frozen: v2.5.1
     hooks:
       - id: prettier
+        additional_dependencies:
+          - "prettier@^2.5.1"
+          - "@trivago/prettier-plugin-sort-imports@^3.2.0"
+
+  # code unspecific out-of-the-box hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 8fe62d14e0b4d7d845a7022c5c2c3ae41bdd3f26 # frozen: v4.1.0
+    hooks:
+      - id: end-of-file-fixer
+        stages: [commit]
+      - id: trailing-whitespace
+        stages: [commit]
+        exclude: ".*\\.test\\.tsx\\.snap$"
 
   # ####################################################################################
   #
@@ -94,9 +112,7 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: 8fe62d14e0b4d7d845a7022c5c2c3ae41bdd3f26 # frozen: v4.1.0
     hooks:
-      - id: check-case-conflict
-      - id: check-shebang-scripts-are-executable
-        exclude: '^.*\.rs$'
+      - id: check-merge-conflict
       - id: detect-private-key
 
   # ----------------------------------------------
@@ -133,7 +149,7 @@ repos:
     # https://github.com/eslint/eslint
     # Config file: .eslintrc.json
     # Ignore file: .eslintignore (file ignore pattern)
-    rev: 455151c582ab2375999fa7d13c52f1f6a4dc23b3 # frozen: v7.32.0
+    rev: 1e8a56ba809208a3d18f9ae88fd1459b5ed5c4b5  # frozen: v8.9.0
     hooks:
       - id: eslint
         files: \.[jt]sx?$ # *.js, *.jsx, *.ts, *.tsx
@@ -162,11 +178,6 @@ repos:
       # Ignore file: .htmlhintignore (file ignore pattern) [--ignore/-i]
       # Inline config e.g.: `<!-- htmlhint tag-pair,id-class-value:underline -->`
       - id: htmlhint
-
-  # htmllint - HTML linter
-  - repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
-    rev: b234899b5db911d0e5482deffcf4e6364ad349d0 # frozen: v1.1.1
-    hooks:
       # https://github.com/htmllint/htmllint/wiki/Options
       # Config file: .htmllintrc (json) [--rc]
       # Inline config: `<!-- htmllint [key]="[value]" -->`
@@ -176,20 +187,42 @@ repos:
   # CSS
   # ----------------------------------------------
 
-  # csslint - CSS linter
-  - repo: https://github.com/pre-commit/mirrors-csslint
-    # https://github.com/CSSLint/csslint
-    # Config file: .csslintrc [--config]
-    rev: 818b64c6bf19ca1e089b4dabc8dc74059b405814 # frozen: v1.0.5
+  - repo: https://github.com/cielquan/mirrors-stylelint
+    # Config file: .stylelintrc.json
+    rev: 765d365d9e49e2c4af3c7c94fc55176af32daaf4 # frozen: v14.3.0
     hooks:
-      - id: csslint
+      - id: stylelint
+        additional_dependencies:
+          - "stylelint"
+          - "stylelint-config-standard"
+          - "stylelint-config-prettier"
+          - "stylelint-config-tailwindcss"
 
-  # scss-lint - SCSS linter
-  - repo: https://github.com/pre-commit/mirrors-scss-lint
-    # https://github.com/sds/scss-lint
-    rev: a1648868c160f1ca0acedef6dc51541c91ee04c6 # frozen: v0.59.0
+  # ----------------------------------------------
+  # Markdown
+  # ----------------------------------------------
+
+  # markdownlint - md file checker
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: 79c5e552066e7ad28aca449e7f2eed692a603abf # frozen: v0.4.0
+    # Config files:
+    # - .markdownlint-cli2.jsonc
+    # - .markdownlint-cli2.yaml
+    # - .markdownlint-cli2.cjs
+    # - .markdownlint.jsonc or .markdownlint.json
+    # - .markdownlint.yaml or .markdownlint.yml
+    # - .markdownlint.cjs
+    # Inline config:
+    # Disable all rules: <!-- markdownlint-disable -->
+    # Enable all rules: <!-- markdownlint-enable -->
+    # Disable all rules for the next line only: <!-- markdownlint-disable-next-line -->
+    # Disable rules by name: <!-- markdownlint-disable MD001 MD005 -->
+    # Enable rules by name: <!-- markdownlint-enable MD001 MD005 -->
+    # Disable rules by name for next line only: <!-- markdownlint-disable-next-line MD001 MD005 -->
+    # Capture the current rule configuration: <!-- markdownlint-capture -->
+    # Restore the captured rule configuration: <!-- markdownlint-restore -->
     hooks:
-      - id: scss-lint
+      - id: markdownlint-cli2
 
   # ----------------------------------------------
   # JSON / TOML / YAML
