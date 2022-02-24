@@ -58,7 +58,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
   const SchoolHolidaysLinkCheckError = {
     NONE: "",
     NO_HTTPS: t`The link must start with "https://".`,
-    NO_YEAR: t`The link must have a "'&year%'" placeholder.`,
+    NO_YEAR: t`The link must have a "'%year%'" placeholder.`,
   } as const;
   const [linkFormError, setlinkFormError] = useState<SchoolHolidaysLinkCheckError>(
     SchoolHolidaysLinkCheckError.NONE
@@ -73,7 +73,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
       setlinkFormError(SchoolHolidaysLinkCheckError.NO_HTTPS);
       return false;
     }
-    if (!value.includes("&year%")) {
+    if (!value.includes("%year%")) {
       setlinkFormError(SchoolHolidaysLinkCheckError.NO_YEAR);
       return false;
     }
