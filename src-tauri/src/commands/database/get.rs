@@ -10,26 +10,26 @@ use crate::{commands, config, date_calc, db, state};
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn load_public_holidays(
-    filter_current_year: Option<bool>,
+    load_all_data: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
 ) -> commands::CommandResult<(state_models::PublicHolidays, u32)> {
     let config_state_guard = config_state.0.lock();
     let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    _load_public_holidays(&config_state_guard, &conn, filter_current_year)
+    _load_public_holidays(&config_state_guard, &conn, load_all_data)
 }
 
 pub fn _load_public_holidays(
     config: &config::Config,
     conn: &SqliteConnection,
-    filter_current_year: Option<bool>,
+    load_all_data: Option<bool>,
 ) -> commands::CommandResult<(state_models::PublicHolidays, u32)> {
     use crate::db::schema::public_holidays::dsl::{public_holidays, year};
 
     trace!(
         target = "database",
         message = "Catch public holiday data from the database",
-        filter_current_year = ?filter_current_year,
+        load_all_data = ?load_all_data,
     );
 
     let display_year = match config.settings.year_to_show.clone() {
@@ -41,7 +41,7 @@ pub fn _load_public_holidays(
     };
 
     let mut query = public_holidays.into_boxed();
-    if let Some(true) = filter_current_year {
+    if load_all_data != Some(true) {
         query = query
             .filter(year.eq(Some(display_year)))
             .or_filter(year.is_null());
@@ -67,24 +67,24 @@ pub fn _load_public_holidays(
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn load_school_holidays(
-    filter_current_year: Option<bool>,
+    load_all_data: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
 ) -> commands::CommandResult<state_models::SchoolHolidays> {
     let config_state_guard = config_state.0.lock();
     let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    _load_school_holidays(&config_state_guard, &conn, filter_current_year)
+    _load_school_holidays(&config_state_guard, &conn, load_all_data)
 }
 
 pub fn _load_school_holidays(
     config: &config::Config,
     conn: &SqliteConnection,
-    filter_current_year: Option<bool>,
+    load_all_data: Option<bool>,
 ) -> commands::CommandResult<state_models::SchoolHolidays> {
     use crate::db::schema::school_holidays::dsl::{end_year, school_holidays, start_year};
 
     let mut query = school_holidays.into_boxed();
-    if let Some(true) = filter_current_year {
+    if load_all_data != Some(true) {
         let display_year = match config.settings.year_to_show.clone() {
             None => {
                 error!(target = "database", message = "No year to show set");
@@ -184,24 +184,24 @@ pub fn _load_users(conn: &SqliteConnection) -> commands::CommandResult<state_mod
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn load_vacations(
-    filter_current_year: Option<bool>,
+    load_all_data: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
 ) -> commands::CommandResult<state_models::Vacations> {
     let config_state_guard = config_state.0.lock();
     let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    _load_vacations(&config_state_guard, &conn, filter_current_year)
+    _load_vacations(&config_state_guard, &conn, load_all_data)
 }
 
 pub fn _load_vacations(
     config: &config::Config,
     conn: &SqliteConnection,
-    filter_current_year: Option<bool>,
+    load_all_data: Option<bool>,
 ) -> commands::CommandResult<state_models::Vacations> {
     use crate::db::schema::vacations::dsl::{end_year, start_year, vacations};
 
     let mut query = vacations.into_boxed();
-    if let Some(true) = filter_current_year {
+    if load_all_data != Some(true) {
         let display_year = match config.settings.year_to_show.clone() {
             None => {
                 error!(target = "database", message = "No year to show set");
@@ -236,7 +236,7 @@ pub fn _load_vacations(
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub fn load_vacation_stats(
-    filter_current_year: Option<bool>,
+    load_all_data: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
 ) -> commands::CommandResult<(state_models::VacationStatsMap, u32, u32)> {
     let config_state_guard = config_state.0.lock();
