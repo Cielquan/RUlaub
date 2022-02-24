@@ -2,16 +2,13 @@ import { invoke } from "@tauri-apps/api/tauri";
 import { ProviderContext } from "notistack";
 import { Dispatch } from "redux";
 
-import { VacationTypesDataActionType } from "../action-types";
-import { VacationTypesDataAction } from "../actions";
 import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
+import { NewVacationTypeData, VacationTypeDataMap } from "../../backendAPI/types/helperTypes";
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
-import {
-  NewVacationTypeData,
-  VacationTypeDataMap,
-} from "../../backendAPI/types/helperTypes";
 import { validateVacationTypesData } from "../../backendAPI/validation";
 import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
+import { VacationTypesDataActionType } from "../action-types";
+import { VacationTypesDataAction } from "../actions";
 
 export const loadVacationTypesDataAction = (
   payload: VacationTypesData
@@ -27,10 +24,7 @@ export const loadVacationTypesData =
     try {
       data = await invoke("load_vacation_types");
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -73,10 +67,7 @@ export const updateVacationTypesData =
         updatedEntries: updatedEntries ?? null,
       });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 

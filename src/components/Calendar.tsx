@@ -7,12 +7,11 @@ import AutoSizer from "react-virtualized-auto-sizer";
 import { State } from "../state";
 import createTheme from "../theme";
 import { isLeapYear } from "../utils/dateUtils";
-
 import CalendarBody from "./CalendarBody";
 import CalendarColumnLabelsDay from "./CalendarColumnLabelsDay";
 import CalendarColumnLabelsMonth from "./CalendarColumnLabelsMonth";
-import CalendarStartPage from "./CalendarStartPage";
 import CalendarRowLabelsUser from "./CalendarRowLabelsUser";
+import CalendarStartPage from "./CalendarStartPage";
 import CalendarTableHead from "./CalendarTableHead";
 
 const today = new Date();

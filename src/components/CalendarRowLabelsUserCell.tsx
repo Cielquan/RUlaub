@@ -6,7 +6,7 @@ import React, { CSSProperties, ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { actionCreators, State } from "../state";
+import { State, actionCreators } from "../state";
 import { STYLE_CONST } from "../styles";
 
 interface Props {
@@ -17,9 +17,7 @@ interface Props {
 const CalendarRowLabelsUserCell = ({ index: rowIndex, style }: Props): ReactElement => {
   const configState = useSelector((state: State) => state.config);
   const usersDataState = useSelector((state: State) => state.usersData);
-  const calendarRowUserMapState = useSelector(
-    (state: State) => state.calendarRowUserMap
-  );
+  const calendarRowUserMapState = useSelector((state: State) => state.calendarRowUserMap);
 
   const dispatch = useDispatch();
   const { openUsersDialog } = bindActionCreators(actionCreators, dispatch);

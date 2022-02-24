@@ -5,7 +5,6 @@ import { Provider } from "react-redux";
 
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
-
 import LanguageMenu from "../LanguageMenu";
 
 describe("<LanguageMenu />", () => {

@@ -4,9 +4,9 @@ import {
   Circle as CircleIcon,
   Create as CreateIcon,
   Delete as DeleteIcon,
+  Save as SaveIcon,
   Visibility as VisibilityIcon,
   VisibilityOff as VisibilityOffIcon,
-  Save as SaveIcon,
 } from "@mui/icons-material";
 import {
   Button,
@@ -25,14 +25,13 @@ import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { HexColorInput, HexColorPicker } from "react-colorful";
 import { useSelector } from "react-redux";
 
-import { VacationTypeData } from "../backendAPI/types/vacationTypesData.schema";
-import { State } from "../state";
 import {
   NewVacationTypeData,
   NewVacationTypeDataPayload,
   VacationTypeDataPayload,
 } from "../backendAPI/types/helperTypes";
-
+import { VacationTypeData } from "../backendAPI/types/vacationTypesData.schema";
+import { State } from "../state";
 import DialogDataEntry, { EntryStyle, getStyles } from "./DialogDataEntry";
 
 const StyledHexColorInput = styled(HexColorInput)(() => ({
@@ -55,9 +54,7 @@ const VacationTypesDialogEntry = ({
   addVacationTypeToQueue,
   removeVacationTypeFromQueue,
 }: Props): ReactElement => {
-  const vacationTypesDialogState = useSelector(
-    (state: State) => state.vacationTypesDialog
-  );
+  const vacationTypesDialogState = useSelector((state: State) => state.vacationTypesDialog);
 
   const [newEntry] = useState(Number(id) < 0);
   const [editable, setEditable] = useState(newEntry);
@@ -74,12 +71,8 @@ const VacationTypesDialogEntry = ({
   const [colorDarkForm, setColorDarkForm] = useState(colorDark);
   const [colorLightForm, setColorLightForm] = useState(colorLight);
 
-  const [anchorElDark, setAnchorElDark] = React.useState<HTMLButtonElement | null>(
-    null
-  );
-  const [anchorElLight, setAnchorElLight] = React.useState<HTMLButtonElement | null>(
-    null
-  );
+  const [anchorElDark, setAnchorElDark] = React.useState<HTMLButtonElement | null>(null);
+  const [anchorElLight, setAnchorElLight] = React.useState<HTMLButtonElement | null>(null);
 
   type NameFormError = typeof NameFormError[keyof typeof NameFormError];
   const NameFormError = {
@@ -169,10 +162,7 @@ const VacationTypesDialogEntry = ({
           <ListItemText primary={name} secondary={t`Name`} />
         </ListItem>
         <ListItem key={`${id}-view-charge`} sx={{ gridArea: "charge" }}>
-          <ListItemText
-            primary={charge ? t`Yes` : t`No`}
-            secondary={t`Charge to annual leave`}
-          />
+          <ListItemText primary={charge ? t`Yes` : t`No`} secondary={t`Charge to annual leave`} />
         </ListItem>
         <ListItem key={`${id}-view-color-dark`} sx={{ gridArea: "colorDark" }}>
           <CircleIcon sx={{ color: colorDark, marginRight: 1 }} />

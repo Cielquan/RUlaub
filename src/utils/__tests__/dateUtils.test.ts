@@ -1,10 +1,4 @@
-import {
-  datePlusDays,
-  getDaysForDate,
-  getDaysInMonth,
-  isLeapYear,
-  sameDay,
-} from "../dateUtils";
+import { datePlusDays, getDaysForDate, getDaysInMonth, isLeapYear, sameDay } from "../dateUtils";
 
 describe("isLeapYear", () => {
   it("is 'true' when divisable by 4 and not 100", () => {

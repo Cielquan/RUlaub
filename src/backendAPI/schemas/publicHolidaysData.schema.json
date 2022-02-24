@@ -10,10 +10,7 @@
   "$defs": {
     "publicHolidayData": {
       "type": "object",
-      "oneOf": [
-        { "$ref": "#/$defs/DateBasedHoliday" },
-        { "$ref": "#/$defs/EasterBasedHoliday" }
-      ]
+      "oneOf": [{ "$ref": "#/$defs/DateBasedHoliday" }, { "$ref": "#/$defs/EasterBasedHoliday" }]
     },
     "DateBasedHoliday": {
       "type": "object",

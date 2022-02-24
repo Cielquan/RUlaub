@@ -1,5 +1,5 @@
 import { styled } from "@mui/material/styles";
-import React, { CSSProperties, forwardRef, LegacyRef, ReactElement } from "react";
+import React, { CSSProperties, LegacyRef, ReactElement, forwardRef } from "react";
 
 import { STYLE_CONST } from "../styles";
 
@@ -14,10 +14,7 @@ interface Props {
 }
 
 const innerElementType = forwardRef(
-  (
-    { style, ...rest }: Props,
-    ref: LegacyRef<HTMLDivElement> | undefined
-  ): ReactElement => (
+  ({ style, ...rest }: Props, ref: LegacyRef<HTMLDivElement> | undefined): ReactElement => (
     <StyledElement
       ref={ref}
       style={{

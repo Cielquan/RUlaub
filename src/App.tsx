@@ -14,8 +14,8 @@ import SchoolHolidaysDialog from "./components/SchoolHolidaysDialog";
 import SettingsDialog from "./components/SettingsDialog";
 import SideMenu from "./components/SideMenu";
 import UsersDialog from "./components/UsersDialog";
-import VacationsDialog from "./components/VacationsDialog";
 import VacationTypesDialog from "./components/VacationTypesDialog";
+import VacationsDialog from "./components/VacationsDialog";
 
 document.addEventListener("DOMContentLoaded", () => {
   invoke("finished_init_load");

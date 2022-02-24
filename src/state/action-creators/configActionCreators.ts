@@ -1,11 +1,9 @@
-import { dirname } from "path";
 import { invoke } from "@tauri-apps/api";
 import { open, save } from "@tauri-apps/api/dialog";
 import { ProviderContext } from "notistack";
+import { dirname } from "path";
 import { Dispatch } from "redux";
 
-import { ConfigActionType } from "../action-types";
-import { ConfigAction } from "../actions";
 import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
 import {
   ConfigFileSchema as ConfigFile,
@@ -15,6 +13,8 @@ import {
 } from "../../backendAPI/types/configFile.schema";
 import { validateConfig } from "../../backendAPI/validation";
 import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
+import { ConfigActionType } from "../action-types";
+import { ConfigAction } from "../actions";
 
 export const updateConfigAction = (payload: ConfigFile): ConfigAction => ({
   type: ConfigActionType.UPDATE,
@@ -47,10 +47,7 @@ export const setLanguage =
     try {
       data = await invoke<ConfigFile>("set_langauge", { lang });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -75,10 +72,7 @@ export const setLogLevel =
     try {
       data = await invoke<ConfigFile>("set_log_level", { level });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -103,10 +97,7 @@ export const setTheme =
     try {
       data = await invoke<ConfigFile>("set_theme", { theme });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -133,10 +124,7 @@ export const setTodayAutoscrollLeftOffset =
         offset,
       });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -147,8 +135,7 @@ export const setTodayAutoscrollLeftOffset =
       invoke("log_error", {
         target: "config",
         message: `Config data validation failed: ${err}`,
-        location:
-          "state/action-creators/configActionCreators.ts-setTodayAutoscrollLeftOffset",
+        location: "state/action-creators/configActionCreators.ts-setTodayAutoscrollLeftOffset",
       });
       return;
     }
@@ -162,10 +149,7 @@ export const setUserName =
     try {
       data = await invoke<ConfigFile>("set_user_name", { name });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -190,10 +174,7 @@ export const setYearChangeScrollBegin =
     try {
       data = await invoke<ConfigFile>("set_year_change_scroll_begin", { doScroll });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -204,8 +185,7 @@ export const setYearChangeScrollBegin =
       invoke("log_error", {
         target: "config",
         message: `Config data validation failed: ${err}`,
-        location:
-          "state/action-creators/configActionCreators.ts-setYearChangeScrollBegin",
+        location: "state/action-creators/configActionCreators.ts-setYearChangeScrollBegin",
       });
       return;
     }
@@ -219,10 +199,7 @@ export const setYearToShow =
     try {
       data = await invoke<ConfigFile>("set_year_to_show", { year });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -252,10 +229,7 @@ export const createNewDB =
     try {
       data = await invoke<ConfigFile>("create_db", { path });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -290,10 +264,7 @@ export const selectDB =
     try {
       data = await invoke<ConfigFile>("set_db_uri", { path });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 

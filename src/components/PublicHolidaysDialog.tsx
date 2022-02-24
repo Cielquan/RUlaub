@@ -15,17 +15,13 @@ import {
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
 import { useSnackbar } from "notistack";
-import React, { forwardRef, ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, forwardRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { NewPublicHolidayData, PublicHolidayDataPayload } from "../backendAPI/types/helperTypes";
 import { PublicHolidayData } from "../backendAPI/types/publicHolidaysData.schema";
-import { actionCreators, State } from "../state";
-import {
-  NewPublicHolidayData,
-  PublicHolidayDataPayload,
-} from "../backendAPI/types/helperTypes";
-
+import { State, actionCreators } from "../state";
 import PublicHolidaysDialogEntry from "./PublicHolidaysDialogEntry";
 
 const Transition = forwardRef(
@@ -46,12 +42,8 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
     actionCreators,
     dispatch
   );
-  const publicHolidaysDialogState = useSelector(
-    (state: State) => state.publicHolidaysDialog
-  );
-  const publicHolidaysDataState = useSelector(
-    (state: State) => state.publicHolidaysData
-  );
+  const publicHolidaysDialogState = useSelector((state: State) => state.publicHolidaysDialog);
+  const publicHolidaysDataState = useSelector((state: State) => state.publicHolidaysData);
 
   const [tmpID, setTmpID] = useState(-1);
   const getTmpID = (): string => {
@@ -62,14 +54,13 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
   interface updatedPublicHolidaysQueue {
     [k: string]: PublicHolidayData | undefined;
   }
-  const [updatedPublicHolidays, setUpdatedPublicHolidays] =
-    useState<updatedPublicHolidaysQueue>({});
+  const [updatedPublicHolidays, setUpdatedPublicHolidays] = useState<updatedPublicHolidaysQueue>(
+    {}
+  );
   interface newPublicHolidaysQueue {
     [k: string]: NewPublicHolidayData;
   }
-  const [newPublicHolidays, setNewPublicHolidays] = useState<newPublicHolidaysQueue>(
-    {}
-  );
+  const [newPublicHolidays, setNewPublicHolidays] = useState<newPublicHolidaysQueue>({});
 
   const addUpdatedPublicHoliday = ([id, publicHolidayData]:
     | PublicHolidayDataPayload
@@ -91,10 +82,7 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
     };
     setNewPublicHolidays(rv);
   };
-  const updateNewPublicHoliday = ([
-    id,
-    publicHolidayData,
-  ]: PublicHolidayDataPayload): void => {
+  const updateNewPublicHoliday = ([id, publicHolidayData]: PublicHolidayDataPayload): void => {
     const rv = { ...newPublicHolidays };
     rv[id] = publicHolidayData;
     setNewPublicHolidays(rv);
@@ -109,29 +97,20 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
 
   const saveChanges = (): void => {
     const newEntries =
-      Object.keys(newPublicHolidays).length > 0
-        ? Object.values(newPublicHolidays)
-        : undefined;
+      Object.keys(newPublicHolidays).length > 0 ? Object.values(newPublicHolidays) : undefined;
 
     const filteredEntriesToUpdate = Object.keys(updatedPublicHolidays)
       .filter((publicHolidayID) => updatedPublicHolidays[publicHolidayID] !== undefined)
-      .map((publicHolidayID) => [
-        Number(publicHolidayID),
-        updatedPublicHolidays[publicHolidayID],
-      ]);
+      .map((publicHolidayID) => [Number(publicHolidayID), updatedPublicHolidays[publicHolidayID]]);
     const entriesToUpdate = Object.fromEntries(filteredEntriesToUpdate);
-    const updatedEntries =
-      Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
+    const updatedEntries = Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
 
     const entriesToRemove = Object.keys(updatedPublicHolidays)
       .filter((publicHolidayID) => updatedPublicHolidays[publicHolidayID] === undefined)
       .map((id) => Number(id));
     const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
 
-    updatePublicHolidaysData(
-      { newEntries, updatedEntries, removedEntries },
-      snackbarHandles
-    );
+    updatePublicHolidaysData({ newEntries, updatedEntries, removedEntries }, snackbarHandles);
   };
 
   useEffect(() => {
@@ -142,8 +121,7 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
   const id = "publicHolidays-dialog";
 
   const saveDisabled =
-    Object.keys(updatedPublicHolidays).length === 0 &&
-    Object.keys(newPublicHolidays).length === 0;
+    Object.keys(updatedPublicHolidays).length === 0 && Object.keys(newPublicHolidays).length === 0;
 
   return (
     <Dialog
@@ -195,11 +173,7 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
         </List>
       </DialogContent>
       <DialogActions>
-        <Tooltip
-          arrow
-          title={t`Save changes to database`}
-          disableHoverListener={saveDisabled}
-        >
+        <Tooltip arrow title={t`Save changes to database`} disableHoverListener={saveDisabled}>
           <span>
             <Button
               data-testid={`${id}-btn-save`}

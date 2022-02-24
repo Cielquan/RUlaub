@@ -23,13 +23,13 @@ import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
 import { invoke } from "@tauri-apps/api";
 import { useSnackbar } from "notistack";
-import React, { forwardRef, ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, forwardRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { LogLevel } from "../backendAPI/types/configFile.schema";
 import { useAsync } from "../hooks";
-import { actionCreators, State } from "../state";
+import { State, actionCreators } from "../state";
 
 const Transition = forwardRef(
   (
@@ -76,9 +76,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
     NAN: t`Offset must be a number.`,
     NEGATIV: t`Offset must be positiv.`,
   } as const;
-  const [offsetFormError, setOffsetFormError] = useState<OffsetFormError>(
-    OffsetFormError.NONE
-  );
+  const [offsetFormError, setOffsetFormError] = useState<OffsetFormError>(OffsetFormError.NONE);
 
   const validateOffset = (value: string): boolean => {
     if (value === "") {

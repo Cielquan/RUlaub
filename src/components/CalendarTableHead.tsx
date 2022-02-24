@@ -3,7 +3,6 @@ import React, { ReactElement } from "react";
 import { FixedSizeList as List } from "react-window";
 
 import { STYLE_CONST } from "../styles";
-
 import CalendarTableHeadCell from "./CalendarTableHeadCell";
 import innerElementType from "./multigridInnerElementType";
 
@@ -22,9 +21,7 @@ const CalendarTableHead = ({ year }: Props): ReactElement => (
   <StyledList>
     <List
       layout="horizontal"
-      height={
-        STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL * 2
-      }
+      height={STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL * 2}
       width={STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
       innerElementType={innerElementType}
       itemCount={1}

@@ -15,17 +15,13 @@ import {
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
 import { useSnackbar } from "notistack";
-import React, { forwardRef, ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, forwardRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { NewVacationTypeData, VacationTypeDataPayload } from "../backendAPI/types/helperTypes";
 import { VacationTypeData } from "../backendAPI/types/vacationTypesData.schema";
-import { actionCreators, State } from "../state";
-import {
-  NewVacationTypeData,
-  VacationTypeDataPayload,
-} from "../backendAPI/types/helperTypes";
-
+import { State, actionCreators } from "../state";
 import VacationTypesDialogEntry from "./VacationTypesDialogEntry";
 
 const Transition = forwardRef(
@@ -46,9 +42,7 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
     actionCreators,
     dispatch
   );
-  const vacationTypesDialogState = useSelector(
-    (state: State) => state.vacationTypesDialog
-  );
+  const vacationTypesDialogState = useSelector((state: State) => state.vacationTypesDialog);
   const vacationTypesDataState = useSelector((state: State) => state.vacationTypesData);
 
   const [tmpID, setTmpID] = useState(-1);
@@ -60,17 +54,13 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
   interface updatedVacationTypesQueue {
     [k: string]: VacationTypeData;
   }
-  const [updatedVacationTypes, setUpdatedVacationTypes] =
-    useState<updatedVacationTypesQueue>({});
+  const [updatedVacationTypes, setUpdatedVacationTypes] = useState<updatedVacationTypesQueue>({});
   interface newVacationTypesQueue {
     [k: string]: NewVacationTypeData;
   }
   const [newVacationTypes, setNewVacationTypes] = useState<newVacationTypesQueue>({});
 
-  const addUpdatedVacationType = ([
-    id,
-    vacationTypeData,
-  ]: VacationTypeDataPayload): void => {
+  const addUpdatedVacationType = ([id, vacationTypeData]: VacationTypeDataPayload): void => {
     const rv = { ...updatedVacationTypes };
     rv[id] = vacationTypeData;
     setUpdatedVacationTypes(rv);
@@ -87,10 +77,7 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
     };
     setNewVacationTypes(rv);
   };
-  const updateNewVacationType = ([
-    id,
-    vacationTypeData,
-  ]: VacationTypeDataPayload): void => {
+  const updateNewVacationType = ([id, vacationTypeData]: VacationTypeDataPayload): void => {
     const rv = { ...newVacationTypes };
     rv[id] = vacationTypeData;
     setNewVacationTypes(rv);
@@ -105,16 +92,14 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
 
   const saveChanges = (): void => {
     const newEntries =
-      Object.keys(newVacationTypes).length > 0
-        ? Object.values(newVacationTypes)
-        : undefined;
+      Object.keys(newVacationTypes).length > 0 ? Object.values(newVacationTypes) : undefined;
 
-    const filteredEntriesToUpdate = Object.keys(updatedVacationTypes).map(
-      (vacationTypeID) => [Number(vacationTypeID), updatedVacationTypes[vacationTypeID]]
-    );
+    const filteredEntriesToUpdate = Object.keys(updatedVacationTypes).map((vacationTypeID) => [
+      Number(vacationTypeID),
+      updatedVacationTypes[vacationTypeID],
+    ]);
     const entriesToUpdate = Object.fromEntries(filteredEntriesToUpdate);
-    const updatedEntries =
-      Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
+    const updatedEntries = Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
 
     updateVacationTypesData({ newEntries, updatedEntries }, snackbarHandles);
   };
@@ -127,8 +112,7 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
   const id = "vacationTypes-dialog";
 
   const saveDisabled =
-    Object.keys(updatedVacationTypes).length === 0 &&
-    Object.keys(newVacationTypes).length === 0;
+    Object.keys(updatedVacationTypes).length === 0 && Object.keys(newVacationTypes).length === 0;
 
   return (
     <Dialog
@@ -176,11 +160,7 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
         </List>
       </DialogContent>
       <DialogActions>
-        <Tooltip
-          arrow
-          title={t`Save changes to database`}
-          disableHoverListener={saveDisabled}
-        >
+        <Tooltip arrow title={t`Save changes to database`} disableHoverListener={saveDisabled}>
           <span>
             <Button
               data-testid={`${id}-btn-save`}

@@ -23,17 +23,11 @@ import {
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
 import { useSnackbar } from "notistack";
-import React, {
-  forwardRef,
-  ReactElement,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { ReactElement, forwardRef, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { actionCreators, State } from "../state";
+import { State, actionCreators } from "../state";
 import { getDaysForDate } from "../utils/dateUtils";
 import { getUserIdByName } from "../utils/userUtils";
 
@@ -70,9 +64,7 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
     getUserIdByName(usersDataState, configState?.user?.name ?? "") ?? ""
   );
   useEffect(() => {
-    setCurrentUserID(
-      getUserIdByName(usersDataState, configState?.user?.name ?? "") ?? ""
-    );
+    setCurrentUserID(getUserIdByName(usersDataState, configState?.user?.name ?? "") ?? "");
   }, [configState?.user?.name, usersDataState, addVacationDialogState]);
 
   const [typeIdForm, setTypeIdForm] = useState<string>("");
@@ -90,9 +82,7 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
     NONE: "",
     EMPTY: t`Vacation must have a type.`,
   } as const;
-  const [typeIDFormError, setTypeIDFormError] = useState<TypeIDFormError>(
-    TypeIDFormError.NONE
-  );
+  const [typeIDFormError, setTypeIDFormError] = useState<TypeIDFormError>(TypeIDFormError.NONE);
 
   type StartDateFormError = typeof StartDateFormError[keyof typeof StartDateFormError];
   const StartDateFormError = {
@@ -110,9 +100,7 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
     EMPTY: t`An end date must be selected.`,
     SMALLER: t`End date cannot be smaller than start date.`,
   } as const;
-  const [endDateFormError, setEndDateFormError] = useState<EndDateFormError>(
-    EndDateFormError.NONE
-  );
+  const [endDateFormError, setEndDateFormError] = useState<EndDateFormError>(EndDateFormError.NONE);
 
   const resetErrorStates = useCallback((): void => {
     setTypeIDFormError(TypeIDFormError.NONE);
@@ -128,10 +116,7 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
     setTypeIDFormError(TypeIDFormError.NONE);
     return true;
   };
-  const validateStartDate = (
-    value: Date | null,
-    endDateToCompare = endDateForm
-  ): boolean => {
+  const validateStartDate = (value: Date | null, endDateToCompare = endDateForm): boolean => {
     if (value === null) {
       setStartDateFormError(StartDateFormError.EMPTY);
       return false;
@@ -143,10 +128,7 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
     setStartDateFormError(StartDateFormError.NONE);
     return true;
   };
-  const validateEndDate = (
-    value: Date | null,
-    startDateToCompare = startDateForm
-  ): boolean => {
+  const validateEndDate = (value: Date | null, startDateToCompare = startDateForm): boolean => {
     if (value === null) {
       setEndDateFormError(EndDateFormError.EMPTY);
       return false;
@@ -244,9 +226,7 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
         <FlightIcon />
       </DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          {t`Please select the user to add a vacation to.`}
-        </DialogContentText>
+        <DialogContentText>{t`Please select the user to add a vacation to.`}</DialogContentText>
         <Box sx={{ paddingY: 1 }}>
           <FormControl fullWidth>
             <InputLabel id="user-select-label">{t`User`}</InputLabel>
@@ -315,9 +295,7 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
                     <TextField
                       // eslint-disable-next-line react/jsx-props-no-spreading
                       {...params}
-                      error={
-                        params.error || startDateFormError !== StartDateFormError.NONE
-                      }
+                      error={params.error || startDateFormError !== StartDateFormError.NONE}
                       helperText={params.helperText || startDateFormError}
                     />
                   )}

@@ -1,5 +1,5 @@
-import { defaultLanguage, defaultLocale } from "../initialStates";
 import Languages from "../../utils/i18n";
+import { defaultLanguage, defaultLocale } from "../initialStates";
 
 test("default i18n locale is en-US", () => {
   expect(defaultLocale).toEqual("en-US");

@@ -3,10 +3,9 @@ import React, { ReactElement } from "react";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import ProviderWrapper from "./ProviderWrapper";
 import { useAsync } from "./hooks";
 import { actionCreators } from "./state";
-
-import ProviderWrapper from "./ProviderWrapper";
 
 const ConfigLoader = (): ReactElement => {
   const dispatch = useDispatch();

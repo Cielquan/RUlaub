@@ -5,13 +5,13 @@ import { Dispatch } from "redux";
 
 import { updateCalendarRowUserMapAction } from ".";
 import { store } from "..";
-import { UsersDataActionType } from "../action-types";
-import { CalendarRowUserMapAction, UsersDataAction } from "../actions";
 import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
-import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import { NewUserData, UserDataMap } from "../../backendAPI/types/helperTypes";
+import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import { validateUsersData } from "../../backendAPI/validation";
 import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
+import { UsersDataActionType } from "../action-types";
+import { CalendarRowUserMapAction, UsersDataAction } from "../actions";
 
 export const loadUsersDataAction = (payload: UsersData): UsersDataAction => ({
   type: UsersDataActionType.LOAD,
@@ -28,10 +28,7 @@ export const loadUsersData =
     try {
       data = await invoke("load_users");
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -81,10 +78,7 @@ export const updateUsersData =
         removedEntries: removedEntries ?? null,
       });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 

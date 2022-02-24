@@ -10,10 +10,7 @@ interface Props {
   style: CSSProperties;
 }
 
-const CalendarColumnLabelsMonthCell = ({
-  index: columnIndex,
-  style,
-}: Props): ReactElement => {
+const CalendarColumnLabelsMonthCell = ({ index: columnIndex, style }: Props): ReactElement => {
   const monthNameList = getMonthNameList();
 
   return (

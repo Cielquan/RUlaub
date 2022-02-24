@@ -7,10 +7,9 @@ import { CombinedState } from "redux";
 import { MockStoreEnhanced } from "redux-mock-store";
 
 import i18n from "../../i18n";
-import { initialState, State } from "../../state";
+import { State, initialState } from "../../state";
 import { closeAboutPageAction } from "../../state/action-creators";
 import generateMockStore from "../../testUtils";
-
 import AboutPage from "../AboutPage";
 
 describe("<AboutPage />", () => {

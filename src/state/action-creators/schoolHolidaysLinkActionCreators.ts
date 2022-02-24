@@ -2,10 +2,10 @@ import { invoke } from "@tauri-apps/api/tauri";
 import { ProviderContext } from "notistack";
 import { Dispatch } from "redux";
 
-import { SchoolHolidaysLinkActionType } from "../action-types";
-import { SchoolHolidaysLinkAction } from "../actions";
 import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
 import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
+import { SchoolHolidaysLinkActionType } from "../action-types";
+import { SchoolHolidaysLinkAction } from "../actions";
 
 export const updateSchoolHolidaysLinkAction = (
   payload: string | null
@@ -21,10 +21,7 @@ export const loadSchoolHolidaysLink =
     try {
       data = await invoke<string | null>("get_school_holidays_link");
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -38,10 +35,7 @@ export const updateSchoolHolidaysLink =
     try {
       data = await invoke<string | null>("update_school_holidays_link", { link });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 

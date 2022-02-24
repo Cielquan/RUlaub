@@ -2,8 +2,8 @@ import { t } from "@lingui/macro";
 import {
   Cancel as CancelIcon,
   Create as CreateIcon,
-  Delete as DeleteIcon,
   DeleteForever as DeleteForeverIcon,
+  Delete as DeleteIcon,
   Save as SaveIcon,
 } from "@mui/icons-material";
 import {
@@ -22,15 +22,10 @@ import { Box } from "@mui/system";
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
+import { NewUserData, NewUserDataPayload, UserDataPayload } from "../backendAPI/types/helperTypes";
 import { UserData, Workdays } from "../backendAPI/types/usersData.schema";
 import { State } from "../state";
-import {
-  NewUserData,
-  NewUserDataPayload,
-  UserDataPayload,
-} from "../backendAPI/types/helperTypes";
 import { getWeekdayKeyList, getWeekdayNameDict } from "../utils/dateUtils";
-
 import DialogDataEntry, { EntryStyle, getStyles } from "./DialogDataEntry";
 
 interface Props {
@@ -80,9 +75,7 @@ const UsersDialogEntry = ({
     EMPTY: t`User must a number of Vacation days.`,
     INVALID: t`Only positive whole numbers are permitted.`,
   } as const;
-  const [vacDaysFormError, setVacDaysFormError] = useState<VacDaysFormError>(
-    VacDaysFormError.NONE
-  );
+  const [vacDaysFormError, setVacDaysFormError] = useState<VacDaysFormError>(VacDaysFormError.NONE);
 
   type WorkdaysFormError = typeof WorkdaysFormError[keyof typeof WorkdaysFormError];
   const WorkdaysFormError = {
@@ -126,8 +119,7 @@ const UsersDialogEntry = ({
   const validateWorkdays = (param?: validateWorkdaysParam): boolean => {
     if (
       Object.keys(workdaysForm).filter((workday) => {
-        if (param !== undefined && (workday as keyof Workdays) === param.day)
-          return param.value;
+        if (param !== undefined && (workday as keyof Workdays) === param.day) return param.value;
         return workdaysForm[workday as keyof Workdays];
       }).length === 0
     ) {
@@ -277,14 +269,10 @@ const UsersDialogEntry = ({
             border: 1,
             borderRadius: 1,
             borderColor:
-              workdaysFormError !== WorkdaysFormError.NONE
-                ? "error.main"
-                : "action.disabled",
+              workdaysFormError !== WorkdaysFormError.NONE ? "error.main" : "action.disabled",
             "&:hover": {
               borderColor:
-                workdaysFormError !== WorkdaysFormError.NONE
-                  ? "error.main"
-                  : "action.active",
+                workdaysFormError !== WorkdaysFormError.NONE ? "error.main" : "action.active",
             },
           }}
         >

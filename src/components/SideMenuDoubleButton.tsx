@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import React, { ReactElement } from "react";
 
-import { ButtonText, ButtonOnClick, ButtonIcon, ButtonSxStyle } from "./SideMenuButton";
+import { ButtonIcon, ButtonOnClick, ButtonSxStyle, ButtonText } from "./SideMenuButton";
 
 type ButtonTooltip = string;
 type MainButton = [ButtonText, ButtonIcon, ButtonSxStyle?];
@@ -31,10 +31,7 @@ const SideMenuDoubleButton = ({
   mainButtonOnClick,
   disabled,
 }: Props): ReactElement => {
-  const wrapInTooltip = (
-    component: ReactElement,
-    tooltip: string | undefined
-  ): ReactElement => {
+  const wrapInTooltip = (component: ReactElement, tooltip: string | undefined): ReactElement => {
     if (!tooltip) return component;
     return (
       <Tooltip arrow title={tooltip}>

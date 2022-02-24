@@ -16,13 +16,7 @@ interface Props {
   foldIcon?: ReactElement;
 }
 
-const SideMenuButton = ({
-  text,
-  onClick,
-  icon,
-  sxStyle,
-  foldIcon,
-}: Props): ReactElement => (
+const SideMenuButton = ({ text, onClick, icon, sxStyle, foldIcon }: Props): ReactElement => (
   <ListItem button onClick={onClick} sx={{ ...sxStyle }}>
     <ListItemIcon sx={{ paddingY: "8px" }}>{icon}</ListItemIcon>
     <ListItemText primary={text} />

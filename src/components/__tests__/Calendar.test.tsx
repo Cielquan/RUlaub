@@ -4,9 +4,8 @@ import renderer from "react-test-renderer";
 import { CombinedState } from "redux";
 import { MockStoreEnhanced } from "redux-mock-store";
 
-import { initialState, State } from "../../state";
+import { State, initialState } from "../../state";
 import generateMockStore from "../../testUtils";
-
 import Calendar from "../Calendar";
 
 jest.mock("../CalendarBody", () => () => "CalendarBody");

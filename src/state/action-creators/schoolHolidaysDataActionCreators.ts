@@ -2,16 +2,13 @@ import { invoke } from "@tauri-apps/api/tauri";
 import { ProviderContext } from "notistack";
 import { Dispatch } from "redux";
 
-import { SchoolHolidaysDataActionType } from "../action-types";
-import { SchoolHolidaysDataAction } from "../actions";
 import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
+import { NewSchoolHolidayData, SchoolHolidayDataMap } from "../../backendAPI/types/helperTypes";
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
-import {
-  NewSchoolHolidayData,
-  SchoolHolidayDataMap,
-} from "../../backendAPI/types/helperTypes";
 import { validateSchoolHolidaysData } from "../../backendAPI/validation";
 import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
+import { SchoolHolidaysDataActionType } from "../action-types";
+import { SchoolHolidaysDataAction } from "../actions";
 
 export const loadSchoolHolidaysDataAction = (
   payload: SchoolHolidaysData
@@ -27,10 +24,7 @@ export const loadSchoolHolidaysData =
     try {
       data = await invoke("load_school_holidays");
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -78,10 +72,7 @@ export const updateSchoolHolidaysData =
         removedEntries: removedEntries ?? null,
       });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 

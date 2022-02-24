@@ -13,9 +13,7 @@ interface Props {
 
 const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement => {
   const vacationsDataState = useSelector((state: State) => state.vacationsData);
-  const calendarRowUserMapState = useSelector(
-    (state: State) => state.calendarRowUserMap
-  );
+  const calendarRowUserMapState = useSelector((state: State) => state.calendarRowUserMap);
 
   let userID: string | undefined;
   try {
@@ -31,8 +29,7 @@ const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement
     return (
       Object.values(vacations).filter(
         (vacation) =>
-          vacation.start.yearDay <= columnIndex + 1 &&
-          vacation.end.yearDay >= columnIndex + 1
+          vacation.start.yearDay <= columnIndex + 1 && vacation.end.yearDay >= columnIndex + 1
       ).length > 0
     );
   };

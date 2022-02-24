@@ -22,16 +22,15 @@ import {
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
 import { useSnackbar } from "notistack";
-import React, { forwardRef, ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, forwardRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { VacationData } from "../backendAPI/types/vacationsData.schema";
-import { actionCreators, State } from "../state";
 import { NewVacationData, VacationDataPayload } from "../backendAPI/types/helperTypes";
+import { VacationData } from "../backendAPI/types/vacationsData.schema";
+import { State, actionCreators } from "../state";
 import { getDaysForDate } from "../utils/dateUtils";
 import { getUserIdByName } from "../utils/userUtils";
-
 import VacationsDialogEntry from "./VacationsDialogEntry";
 
 const today = new Date();
@@ -127,8 +126,7 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
       .filter((vacationID) => updatedVacations[vacationID] !== undefined)
       .map((vacationID) => [Number(vacationID), updatedVacations[vacationID]]);
     const entriesToUpdate = Object.fromEntries(filteredEntriesToUpdate);
-    const updatedEntries =
-      Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
+    const updatedEntries = Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
 
     const entriesToRemove = Object.keys(updatedVacations)
       .filter((vacationID) => updatedVacations[vacationID] === undefined)
@@ -146,9 +144,7 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
   };
 
   useEffect(() => {
-    setCurrentUserID(
-      getUserIdByName(usersDataState, configState?.user?.name ?? "") ?? ""
-    );
+    setCurrentUserID(getUserIdByName(usersDataState, configState?.user?.name ?? "") ?? "");
   }, [configState?.user?.name, usersDataState, vacationsDialogState]);
 
   useEffect(() => {
@@ -159,8 +155,7 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
   const id = "vacations-dialog";
 
   const saveDisabled =
-    Object.keys(updatedVacations).length === 0 &&
-    Object.keys(newVacations).length === 0;
+    Object.keys(updatedVacations).length === 0 && Object.keys(newVacations).length === 0;
 
   return (
     <Dialog
@@ -177,9 +172,7 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
         <FlightIcon />
       </DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          {t`Please select a user to show their vacations.`}
-        </DialogContentText>
+        <DialogContentText>{t`Please select a user to show their vacations.`}</DialogContentText>
         <Box sx={{ paddingY: 1 }}>
           <FormControl fullWidth>
             <InputLabel id="user-select-label">{t`User`}</InputLabel>
@@ -242,11 +235,7 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
         )}
       </DialogContent>
       <DialogActions>
-        <Tooltip
-          arrow
-          title={t`Save changes to database`}
-          disableHoverListener={saveDisabled}
-        >
+        <Tooltip arrow title={t`Save changes to database`} disableHoverListener={saveDisabled}>
           <span>
             <Button
               data-testid={`${id}-btn-save`}

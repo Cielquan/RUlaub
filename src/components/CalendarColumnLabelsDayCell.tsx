@@ -22,12 +22,8 @@ const CalendarColumnLabelsDayCell = ({
 }: Props): ReactElement => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const { locale } = useSelector((state: State) => state.config!.settings.language);
-  const publicHolidaysDataState = useSelector(
-    (state: State) => state.publicHolidaysData
-  );
-  const schoolHolidaysDataState = useSelector(
-    (state: State) => state.schoolHolidaysData
-  );
+  const publicHolidaysDataState = useSelector((state: State) => state.publicHolidaysData);
+  const schoolHolidaysDataState = useSelector((state: State) => state.schoolHolidaysData);
 
   const isPublicHoliday = (): boolean =>
     Object.values(publicHolidaysDataState).filter(
@@ -37,8 +33,7 @@ const CalendarColumnLabelsDayCell = ({
   const isSchoolHoliday = (): boolean =>
     Object.values(schoolHolidaysDataState).filter(
       (holiday) =>
-        holiday.start.yearDay <= columnIndex + 1 &&
-        holiday.end.yearDay >= columnIndex + 1
+        holiday.start.yearDay <= columnIndex + 1 && holiday.end.yearDay >= columnIndex + 1
     ).length > 0;
 
   const date = datePlusDays(data[0], columnIndex);
@@ -80,11 +75,7 @@ const CalendarColumnLabelsDayCell = ({
         height: Number(style.height) - STYLE_CONST.CALENDAR_GUTTER_SIZE,
       }}
     >
-      <Typography
-        sx={{ flexGrow: 1 }}
-        variant={rowIndex % 2 ? "body2" : "body1"}
-        align="center"
-      >
+      <Typography sx={{ flexGrow: 1 }} variant={rowIndex % 2 ? "body2" : "body1"} align="center">
         {rowIndex % 2
           ? date.toLocaleString(locale, { weekday: "short" }).slice(0, 2)
           : date.getDate()}

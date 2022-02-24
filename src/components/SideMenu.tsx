@@ -20,8 +20,7 @@ import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { actionCreators, State } from "../state";
-
+import { State, actionCreators } from "../state";
 import SideMenuButton from "./SideMenuButton";
 import SideMenuDoubleButton, { DoubleButtonItemList } from "./SideMenuDoubleButton";
 
@@ -72,18 +71,10 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
           mainButtonOnClick={
             item.mainButtonOnClick ? wrapOnClick(item.mainButtonOnClick) : undefined
           }
-          rightButton={[
-            item.rightButton[0],
-            wrapOnClick(item.rightButton[1]),
-            item.rightButton[2],
-          ]}
+          rightButton={[item.rightButton[0], wrapOnClick(item.rightButton[1]), item.rightButton[2]]}
           leftButton={
             item.leftButton
-              ? [
-                  item.leftButton[0],
-                  wrapOnClick(item.leftButton[1]),
-                  item.leftButton[2],
-                ]
+              ? [item.leftButton[0], wrapOnClick(item.leftButton[1]), item.leftButton[2]]
               : undefined
           }
           disabled={item.disabled}
@@ -139,12 +130,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
   ];
 
   return (
-    <Drawer
-      data-testid="side-menu"
-      anchor="left"
-      open={sideMenuState}
-      onClose={closeSideMenu}
-    >
+    <Drawer data-testid="side-menu" anchor="left" open={sideMenuState} onClose={closeSideMenu}>
       <SideMenuHeader>
         <IconButton
           onClick={() => {

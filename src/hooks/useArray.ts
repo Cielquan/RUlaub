@@ -22,11 +22,7 @@ const useArray = <T>(
   };
 
   const update = (index: number, newElement: T): void => {
-    setArray((a) => [
-      ...a.slice(0, index),
-      newElement,
-      ...a.slice(index + 1, a.length - 1),
-    ]);
+    setArray((a) => [...a.slice(0, index), newElement, ...a.slice(index + 1, a.length - 1)]);
   };
 
   const remove = (index: number): void => {

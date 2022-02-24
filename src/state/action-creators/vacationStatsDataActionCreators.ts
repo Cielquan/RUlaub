@@ -3,12 +3,12 @@ import { invoke } from "@tauri-apps/api/tauri";
 import { ProviderContext } from "notistack";
 import { Dispatch } from "redux";
 
-import { VacationStatsDataActionType } from "../action-types";
-import { VacationStatsDataAction } from "../actions";
 import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
 import { VacationStatsDataSchema as VacationStatsData } from "../../backendAPI/types/vacationStatsData.schema";
 import { validateVacationStatsData } from "../../backendAPI/validation";
 import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
+import { VacationStatsDataActionType } from "../action-types";
+import { VacationStatsDataAction } from "../actions";
 
 export const loadVacationStatsDataAction = (
   payload: VacationStatsData
@@ -26,10 +26,7 @@ export const loadVacationStatsData =
     try {
       [data, pubHoliErrorCount, vacErrorCount] = await invoke("load_vacation_stats");
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 

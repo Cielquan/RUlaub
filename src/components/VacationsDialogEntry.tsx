@@ -2,8 +2,8 @@ import { t } from "@lingui/macro";
 import {
   Cancel as CancelIcon,
   Create as CreateIcon,
-  Delete as DeleteIcon,
   DeleteForever as DeleteForeverIcon,
+  Delete as DeleteIcon,
   Save as SaveIcon,
 } from "@mui/icons-material";
 import { DatePicker } from "@mui/lab";
@@ -22,23 +22,20 @@ import { Box } from "@mui/system";
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { VacationData } from "../backendAPI/types/vacationsData.schema";
-import { State } from "../state";
 import {
   NewVacationData,
   NewVacationDataPayload,
   VacationDataPayload,
 } from "../backendAPI/types/helperTypes";
+import { VacationData } from "../backendAPI/types/vacationsData.schema";
+import { State } from "../state";
 import { getDaysForDate } from "../utils/dateUtils";
-
 import DialogDataEntry, { EntryStyle, getStyles } from "./DialogDataEntry";
 
 interface Props {
   id: string;
   vacation: VacationData | NewVacationData;
-  addVacationToQueue(
-    e: VacationDataPayload | [string, undefined] | NewVacationDataPayload
-  ): void;
+  addVacationToQueue(e: VacationDataPayload | [string, undefined] | NewVacationDataPayload): void;
   removeVacationFromQueue(e: string): void;
 }
 
@@ -71,9 +68,7 @@ const VacationsDialogEntry = ({
     NONE: "",
     EMPTY: t`Vacation must have a type.`,
   } as const;
-  const [typeIDFormError, setTypeIDFormError] = useState<TypeIDFormError>(
-    TypeIDFormError.NONE
-  );
+  const [typeIDFormError, setTypeIDFormError] = useState<TypeIDFormError>(TypeIDFormError.NONE);
 
   type StartDateFormError = typeof StartDateFormError[keyof typeof StartDateFormError];
   const StartDateFormError = {
@@ -91,9 +86,7 @@ const VacationsDialogEntry = ({
     EMPTY: t`An end date must be selected.`,
     SMALLER: t`End date cannot be smaller than start date.`,
   } as const;
-  const [endDateFormError, setEndDateFormError] = useState<EndDateFormError>(
-    EndDateFormError.NONE
-  );
+  const [endDateFormError, setEndDateFormError] = useState<EndDateFormError>(EndDateFormError.NONE);
 
   const resetErrorStates = useCallback((): void => {
     setTypeIDFormError(TypeIDFormError.NONE);
@@ -109,10 +102,7 @@ const VacationsDialogEntry = ({
     setTypeIDFormError(TypeIDFormError.NONE);
     return true;
   };
-  const validateStartDate = (
-    value: Date | null,
-    endDateToCompare = endDateForm
-  ): boolean => {
+  const validateStartDate = (value: Date | null, endDateToCompare = endDateForm): boolean => {
     if (value === null) {
       setStartDateFormError(StartDateFormError.EMPTY);
       return false;
@@ -124,10 +114,7 @@ const VacationsDialogEntry = ({
     setStartDateFormError(StartDateFormError.NONE);
     return true;
   };
-  const validateEndDate = (
-    value: Date | null,
-    startDateToCompare = startDateForm
-  ): boolean => {
+  const validateEndDate = (value: Date | null, startDateToCompare = startDateForm): boolean => {
     if (value === null) {
       setEndDateFormError(EndDateFormError.EMPTY);
       return false;

@@ -1,9 +1,6 @@
 import { CalendarRowUserMapActionType } from "../action-types";
 import { CalendarRowUserMapAction } from "../actions";
-import {
-  CalendarRowUserMap,
-  calendarRowUserMapInitState as initState,
-} from "./initialStates";
+import { CalendarRowUserMap, calendarRowUserMapInitState as initState } from "./initialStates";
 
 const reducer = (
   state: CalendarRowUserMap = initState,

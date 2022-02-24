@@ -1,5 +1,5 @@
 import { MenuItem } from "@mui/material";
-import React, { forwardRef, ReactElement } from "react";
+import React, { ReactElement, forwardRef } from "react";
 import { useSelector } from "react-redux";
 import { Dispatch } from "redux";
 
@@ -14,10 +14,7 @@ interface Props {
 }
 
 const LanguageMenuButton = forwardRef(
-  (
-    { language, closeHandle, changeHandle }: Props,
-    ref: React.Ref<HTMLLIElement>
-  ): ReactElement => {
+  ({ language, closeHandle, changeHandle }: Props, ref: React.Ref<HTMLLIElement>): ReactElement => {
     const locale = useSelector(
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       (state: State) => state.config!.settings.language.locale
@@ -26,11 +23,7 @@ const LanguageMenuButton = forwardRef(
     const active = locale === language.locale;
 
     return (
-      <MenuItem
-        ref={ref}
-        selected={active}
-        onClick={active ? closeHandle : changeHandle}
-      >
+      <MenuItem ref={ref} selected={active} onClick={active ? closeHandle : changeHandle}>
         {language.name}
       </MenuItem>
     );

@@ -4,9 +4,7 @@ import { ProviderContext } from "notistack";
 
 import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
 
-const setupErrorEventListeners = async (
-  snackbarHandles: ProviderContext
-): Promise<void> => {
+const setupErrorEventListeners = async (snackbarHandles: ProviderContext): Promise<void> => {
   const webview = new WebviewWindow("main");
 
   await webview.listen("config-file-init-write-error", () => {

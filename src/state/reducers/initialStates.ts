@@ -1,9 +1,9 @@
 import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
-import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
 import { VacationStatsDataSchema as VacationStatsData } from "../../backendAPI/types/vacationStatsData.schema";
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
+import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
 
 export interface CalendarRowUserMap {
   [k: string]: number;

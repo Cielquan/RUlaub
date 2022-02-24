@@ -4,7 +4,6 @@ import renderer from "react-test-renderer";
 
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
-
 import CalendarTableHeadCell from "../CalendarTableHeadCell";
 
 describe("<CalendarTableHeadCell />", () => {
@@ -18,10 +17,7 @@ describe("<CalendarTableHeadCell />", () => {
     const tree = renderer
       .create(
         <Provider store={mockStore}>
-          <CalendarTableHeadCell
-            data={1}
-            style={{ height: 1, left: 2, top: 3, width: 4 }}
-          />
+          <CalendarTableHeadCell data={1} style={{ height: 1, left: 2, top: 3, width: 4 }} />
         </Provider>
       )
       .toJSON();

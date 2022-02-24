@@ -2,8 +2,8 @@ import { t } from "@lingui/macro";
 import {
   Cancel as CancelIcon,
   Create as CreateIcon,
-  Delete as DeleteIcon,
   DeleteForever as DeleteForeverIcon,
+  Delete as DeleteIcon,
   Save as SaveIcon,
 } from "@mui/icons-material";
 import { DatePicker } from "@mui/lab";
@@ -12,15 +12,14 @@ import { Box } from "@mui/system";
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { SchoolHolidayData } from "../backendAPI/types/schoolHolidaysData.schema";
-import { State } from "../state";
 import {
   NewSchoolHolidayData,
   NewSchoolHolidayDataPayload,
   SchoolHolidayDataPayload,
 } from "../backendAPI/types/helperTypes";
+import { SchoolHolidayData } from "../backendAPI/types/schoolHolidaysData.schema";
+import { State } from "../state";
 import { getDaysForDate } from "../utils/dateUtils";
-
 import DialogDataEntry, { EntryStyle, getStyles } from "./DialogDataEntry";
 
 interface Props {
@@ -38,9 +37,7 @@ const SchoolHolidaysDialogEntry = ({
   addSchoolHolidayToQueue,
   removeSchoolHolidayFromQueue,
 }: Props): ReactElement => {
-  const schoolHolidaysDialogState = useSelector(
-    (state: State) => state.schoolHolidaysDialog
-  );
+  const schoolHolidaysDialogState = useSelector((state: State) => state.schoolHolidaysDialog);
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const langState = useSelector((state: State) => state.config!.settings.language);
 
@@ -80,9 +77,7 @@ const SchoolHolidaysDialogEntry = ({
     EMPTY: t`An end date must be selected.`,
     SMALLER: t`End date cannot be smaller than start date.`,
   } as const;
-  const [endDateFormError, setEndDateFormError] = useState<EndDateFormError>(
-    EndDateFormError.NONE
-  );
+  const [endDateFormError, setEndDateFormError] = useState<EndDateFormError>(EndDateFormError.NONE);
 
   const resetErrorStates = useCallback((): void => {
     setNameFormError(NameFormError.NONE);
@@ -98,10 +93,7 @@ const SchoolHolidaysDialogEntry = ({
     setNameFormError(NameFormError.NONE);
     return true;
   };
-  const validateStartDate = (
-    value: Date | null,
-    endDateToCompare = endDateForm
-  ): boolean => {
+  const validateStartDate = (value: Date | null, endDateToCompare = endDateForm): boolean => {
     if (value === null) {
       setStartDateFormError(StartDateFormError.EMPTY);
       return false;
@@ -113,10 +105,7 @@ const SchoolHolidaysDialogEntry = ({
     setStartDateFormError(StartDateFormError.NONE);
     return true;
   };
-  const validateEndDate = (
-    value: Date | null,
-    startDateToCompare = startDateForm
-  ): boolean => {
+  const validateEndDate = (value: Date | null, startDateToCompare = startDateForm): boolean => {
     if (value === null) {
       setEndDateFormError(EndDateFormError.EMPTY);
       return false;

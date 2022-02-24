@@ -1,4 +1,5 @@
 import { DependencyList } from "react";
+
 import useAsync from "./useAsync";
 
 const DEFAULT_OPTIONS = {

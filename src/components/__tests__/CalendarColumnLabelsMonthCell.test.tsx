@@ -5,7 +5,6 @@ import renderer from "react-test-renderer";
 import i18n from "../../i18n";
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
-
 import CalendarColumnLabelsMonthCell from "../CalendarColumnLabelsMonthCell";
 
 describe("<CalendarColumnLabelsMonthCell />", () => {

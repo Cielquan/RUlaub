@@ -1,6 +1,6 @@
+import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import { UsersDataActionType } from "../action-types";
 import { UsersDataAction } from "../actions";
-import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import { usersDataInitState as initState } from "./initialStates";
 
 const reducer = (state: UsersData = initState, action: UsersDataAction): UsersData => {

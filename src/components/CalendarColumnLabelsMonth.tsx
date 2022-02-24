@@ -4,7 +4,6 @@ import { VariableSizeList as List } from "react-window";
 
 import { STYLE_CONST } from "../styles";
 import { getDaysInMonth } from "../utils/dateUtils";
-
 import CalendarColumnLabelsMonthCell from "./CalendarColumnLabelsMonthCell";
 import innerElementType from "./multigridInnerElementType";
 

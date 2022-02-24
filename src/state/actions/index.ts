@@ -1,3 +1,10 @@
+import { ConfigFileSchema as ConfigFile } from "../../backendAPI/types/configFile.schema";
+import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
+import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
+import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
+import { VacationStatsDataSchema as VacationStatsData } from "../../backendAPI/types/vacationStatsData.schema";
+import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
+import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
 import {
   AboutPageActionType,
   AddVacationDialogActionType,
@@ -12,19 +19,12 @@ import {
   SideMenuActionType,
   UsersDataActionType,
   UsersDialogActionType,
-  VacationsDataActionType,
-  VacationsDialogActionType,
   VacationStatsDataActionType,
   VacationTypesDataActionType,
   VacationTypesDialogActionType,
+  VacationsDataActionType,
+  VacationsDialogActionType,
 } from "../action-types";
-import { ConfigFileSchema as ConfigFile } from "../../backendAPI/types/configFile.schema";
-import { PublicHolidaysDataSchema as PublicHolidaysData } from "../../backendAPI/types/publicHolidaysData.schema";
-import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
-import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
-import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
-import { VacationStatsDataSchema as VacationStatsData } from "../../backendAPI/types/vacationStatsData.schema";
-import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 
 export type AboutPageAction = {
   type: AboutPageActionType;

@@ -15,14 +15,13 @@ import {
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
 import { useSnackbar } from "notistack";
-import React, { forwardRef, ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, forwardRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { UserData } from "../backendAPI/types/usersData.schema";
-import { actionCreators, State } from "../state";
 import { NewUserData, UserDataPayload } from "../backendAPI/types/helperTypes";
-
+import { UserData } from "../backendAPI/types/usersData.schema";
+import { State, actionCreators } from "../state";
 import UsersDialogEntry from "./UsersDialogEntry";
 
 const Transition = forwardRef(
@@ -39,10 +38,7 @@ interface Props {
 
 const UsersDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { closeUsersDialog, updateUsersData } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { closeUsersDialog, updateUsersData } = bindActionCreators(actionCreators, dispatch);
   const usersDialogState = useSelector((state: State) => state.usersDialog);
   const usersDataState = useSelector((state: State) => state.usersData);
 
@@ -61,9 +57,7 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
   }
   const [newUsers, setNewUsers] = useState<newUsersQueue>({});
 
-  const addUpdatedUser = ([id, userData]:
-    | UserDataPayload
-    | [string, undefined]): void => {
+  const addUpdatedUser = ([id, userData]: UserDataPayload | [string, undefined]): void => {
     const rv = { ...updatedUsers };
     rv[id] = userData;
     setUpdatedUsers(rv);
@@ -105,15 +99,13 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
   const snackbarHandles = useSnackbar();
 
   const saveChanges = (): void => {
-    const newEntries =
-      Object.keys(newUsers).length > 0 ? Object.values(newUsers) : undefined;
+    const newEntries = Object.keys(newUsers).length > 0 ? Object.values(newUsers) : undefined;
 
     const filteredEntriesToUpdate = Object.keys(updatedUsers)
       .filter((userID) => updatedUsers[userID] !== undefined)
       .map((userID) => [Number(userID), updatedUsers[userID]]);
     const entriesToUpdate = Object.fromEntries(filteredEntriesToUpdate);
-    const updatedEntries =
-      Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
+    const updatedEntries = Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
 
     const entriesToRemove = Object.keys(updatedUsers)
       .filter((userID) => updatedUsers[userID] === undefined)
@@ -130,8 +122,7 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
 
   const id = "users-dialog";
 
-  const saveDisabled =
-    Object.keys(updatedUsers).length === 0 && Object.keys(newUsers).length === 0;
+  const saveDisabled = Object.keys(updatedUsers).length === 0 && Object.keys(newUsers).length === 0;
 
   return (
     <Dialog
@@ -179,11 +170,7 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
         </List>
       </DialogContent>
       <DialogActions>
-        <Tooltip
-          arrow
-          title={t`Save changes to database`}
-          disableHoverListener={saveDisabled}
-        >
+        <Tooltip arrow title={t`Save changes to database`} disableHoverListener={saveDisabled}>
           <span>
             <Button
               data-testid={`${id}-btn-save`}

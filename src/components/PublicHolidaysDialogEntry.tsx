@@ -2,8 +2,8 @@ import { t } from "@lingui/macro";
 import {
   Cancel as CancelIcon,
   Create as CreateIcon,
-  Delete as DeleteIcon,
   DeleteForever as DeleteForeverIcon,
+  Delete as DeleteIcon,
   Save as SaveIcon,
 } from "@mui/icons-material";
 import {
@@ -23,14 +23,13 @@ import { Box } from "@mui/system";
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-import { PublicHolidayData } from "../backendAPI/types/publicHolidaysData.schema";
-import { State } from "../state";
 import {
   NewPublicHolidayData,
   NewPublicHolidayDataPayload,
   PublicHolidayDataPayload,
 } from "../backendAPI/types/helperTypes";
-
+import { PublicHolidayData } from "../backendAPI/types/publicHolidaysData.schema";
+import { State } from "../state";
 import DialogDataEntry, { EntryStyle, getStyles } from "./DialogDataEntry";
 
 interface Props {
@@ -48,9 +47,7 @@ const PublicHolidaysDialogEntry = ({
   addPublicHolidayToQueue,
   removePublicHolidayFromQueue,
 }: Props): ReactElement => {
-  const publicHolidaysDialogState = useSelector(
-    (state: State) => state.publicHolidaysDialog
-  );
+  const publicHolidaysDialogState = useSelector((state: State) => state.publicHolidaysDialog);
 
   const [newEntry] = useState(Number(id) < 0);
   const [editable, setEditable] = useState(newEntry);
@@ -60,9 +57,7 @@ const PublicHolidaysDialogEntry = ({
   const [name, setName] = useState(publicHoliday.name);
   const [year, setYear] = useState(publicHoliday.year);
   const [yearlessDate, setYearlessDate] = useState(publicHoliday.yearlessDate);
-  const [easterSundayOffset, setEasterSundayOffset] = useState(
-    publicHoliday.easterSundayOffset
-  );
+  const [easterSundayOffset, setEasterSundayOffset] = useState(publicHoliday.easterSundayOffset);
 
   const [nameForm, setNameForm] = useState(name);
   const [yearForm, setYearForm] = useState((year ?? "").toString());
@@ -90,16 +85,16 @@ const PublicHolidaysDialogEntry = ({
   } as const;
   const [yearFormError, setYearFormError] = useState<YearFormError>(YearFormError.NONE);
 
-  type YearlessDateFormError =
-    typeof YearlessDateFormError[keyof typeof YearlessDateFormError];
+  type YearlessDateFormError = typeof YearlessDateFormError[keyof typeof YearlessDateFormError];
   const YearlessDateFormError = {
     NONE: "",
     EMPTY: t`A date must be entered.`,
     FORMAT: t`Invalid Format. Please use format: Day-Month e.g. 31-01`,
     INVALID: t`Invalid Date. Please enter date in format: Day-Month e.g. 31-01`,
   } as const;
-  const [yearlessDateFormError, setYearlessDateFormError] =
-    useState<YearlessDateFormError>(YearlessDateFormError.NONE);
+  const [yearlessDateFormError, setYearlessDateFormError] = useState<YearlessDateFormError>(
+    YearlessDateFormError.NONE
+  );
 
   type EasterSundayOffsetFormError =
     typeof EasterSundayOffsetFormError[keyof typeof EasterSundayOffsetFormError];
@@ -437,8 +432,7 @@ const PublicHolidaysDialogEntry = ({
         ...publicHoliday,
         name: nameForm,
         year: yearForm ? Number(yearForm) : undefined,
-        yearlessDate:
-          dateTypeForm === DateType.YEARLESSDATE ? yearlessDateForm : undefined,
+        yearlessDate: dateTypeForm === DateType.YEARLESSDATE ? yearlessDateForm : undefined,
         easterSundayOffset:
           dateTypeForm === DateType.OFFSET ? Number(easterSundayOffsetForm) : undefined,
       },

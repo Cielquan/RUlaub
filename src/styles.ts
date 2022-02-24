@@ -16,7 +16,4 @@ STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL =
 STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL =
   STYLE_CONST.CALENDAR_ROW_HEIGHT + STYLE_CONST.CALENDAR_GUTTER_SIZE;
 
-export type SxStyle =
-  | SxProps<Theme>
-  | CSSSelectorObject<Theme>
-  | SystemStyleObject<Theme>;
+export type SxStyle = SxProps<Theme> | CSSSelectorObject<Theme> | SystemStyleObject<Theme>;

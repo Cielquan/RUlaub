@@ -9,7 +9,7 @@ import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { actionCreators, State } from "../state";
+import { State, actionCreators } from "../state";
 
 const DarkThemeSwitch = (): ReactElement => {
   const dispatch = useDispatch();
@@ -22,10 +22,7 @@ const DarkThemeSwitch = (): ReactElement => {
   const snackbarHandles = useSnackbar();
 
   return (
-    <Tooltip
-      arrow
-      title={themeState === "dark" ? t`Activate Light Theme` : t`Activate Dark Theme`}
-    >
+    <Tooltip arrow title={themeState === "dark" ? t`Activate Light Theme` : t`Activate Dark Theme`}>
       <IconButton
         data-testid="theme-switch"
         onClick={

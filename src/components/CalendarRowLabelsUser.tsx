@@ -5,7 +5,6 @@ import { FixedSizeList as List } from "react-window";
 
 import { State } from "../state";
 import { STYLE_CONST } from "../styles";
-
 import CalendarRowLabelsUserCell from "./CalendarRowLabelsUserCell";
 import innerElementType from "./multigridInnerElementType";
 
@@ -33,11 +32,7 @@ const CalendarRowLabelsUser = ({ height, positionY }: Props): ReactElement => {
   return (
     <StyledList>
       <List
-        height={
-          height -
-          STYLE_CONST.CALENDAR_ROW_HEIGHT -
-          STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL * 2
-        }
+        height={height - STYLE_CONST.CALENDAR_ROW_HEIGHT - STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL * 2}
         width={STYLE_CONST.CALENDAR_ROW_LABEL_WIDTH}
         innerElementType={innerElementType}
         itemCount={Object.keys(usersDataState).length + 1}

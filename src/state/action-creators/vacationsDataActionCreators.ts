@@ -5,22 +5,16 @@ import { Dispatch } from "redux";
 
 import { loadUsersDataAction, updateCalendarRowUserMapAction } from ".";
 import { store } from "..";
-import { VacationsDataActionType } from "../action-types";
-import {
-  CalendarRowUserMapAction,
-  UsersDataAction,
-  VacationsDataAction,
-} from "../actions";
 import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
+import { NewVacationData, VacationDataMap } from "../../backendAPI/types/helperTypes";
 import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.schema";
 import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
-import { NewVacationData, VacationDataMap } from "../../backendAPI/types/helperTypes";
 import { validateUsersData, validateVacationsData } from "../../backendAPI/validation";
 import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
+import { VacationsDataActionType } from "../action-types";
+import { CalendarRowUserMapAction, UsersDataAction, VacationsDataAction } from "../actions";
 
-export const loadVacationsDataAction = (
-  payload: VacationsData
-): VacationsDataAction => ({
+export const loadVacationsDataAction = (payload: VacationsData): VacationsDataAction => ({
   type: VacationsDataActionType.LOAD,
   payload,
 });
@@ -28,19 +22,14 @@ export const loadVacationsDataAction = (
 export const loadVacationsData =
   (snackbarHandles: ProviderContext) =>
   async (
-    dispatch: Dispatch<
-      VacationsDataAction | UsersDataAction | CalendarRowUserMapAction
-    >,
+    dispatch: Dispatch<VacationsDataAction | UsersDataAction | CalendarRowUserMapAction>,
     getState: typeof store.getState
   ): Promise<void> => {
     let data;
     try {
       data = await invoke("load_vacations");
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -51,8 +40,7 @@ export const loadVacationsData =
       invoke("log_error", {
         target: "vacations",
         message: `Vacations data validation failed: ${err}`,
-        location:
-          "state/action-creators/vacationsDataActionCreators.ts-loadVacationsData",
+        location: "state/action-creators/vacationsDataActionCreators.ts-loadVacationsData",
       });
       return;
     }
@@ -60,10 +48,7 @@ export const loadVacationsData =
     try {
       data = await invoke("load_users");
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -74,8 +59,7 @@ export const loadVacationsData =
       invoke("log_error", {
         target: "vacations",
         message: `Users data validation failed: ${err}`,
-        location:
-          "state/action-creators/vacationsDataActionCreators.ts-updateVacationsData",
+        location: "state/action-creators/vacationsDataActionCreators.ts-updateVacationsData",
       });
       return;
     }
@@ -87,9 +71,7 @@ export const loadVacationsData =
     });
   };
 
-export const updateVacationsDataAction = (
-  payload: VacationsData
-): VacationsDataAction => ({
+export const updateVacationsDataAction = (payload: VacationsData): VacationsDataAction => ({
   type: VacationsDataActionType.UPDATE,
   payload,
 });
@@ -114,10 +96,7 @@ export const updateVacationsData =
         removedEntries: removedEntries ?? null,
       });
     } catch (err) {
-      enqueuePersistendErrSnackbar(
-        getErrorCatalogueMsg(err as string),
-        snackbarHandles
-      );
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
@@ -128,8 +107,7 @@ export const updateVacationsData =
       invoke("log_error", {
         target: "vacations",
         message: `Vacations data validation failed: ${err}`,
-        location:
-          "state/action-creators/vacationsDataActionCreators.ts-updateVacationsData",
+        location: "state/action-creators/vacationsDataActionCreators.ts-updateVacationsData",
       });
       return;
     }

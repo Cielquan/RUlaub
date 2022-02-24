@@ -2,26 +2,16 @@ import {
   KeyboardArrowDown as KeyboardArrowDownIcon,
   Translate as TranslateIcon,
 } from "@mui/icons-material";
-import {
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Menu,
-} from "@mui/material";
+import { ListItem, ListItemButton, ListItemIcon, ListItemText, Menu } from "@mui/material";
 import { invoke } from "@tauri-apps/api/tauri";
 import { useSnackbar } from "notistack";
 import React, { MouseEvent, ReactElement, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import {
-  LanguageData,
-  SupportedLanguages,
-} from "../backendAPI/types/configFile.schema";
+import { LanguageData, SupportedLanguages } from "../backendAPI/types/configFile.schema";
 import { useAsync } from "../hooks";
-import { actionCreators, State } from "../state";
-
+import { State, actionCreators } from "../state";
 import LanguageMenuButton from "./LanguageMenuButton";
 
 const LanguageMenu = (): ReactElement => {
@@ -34,8 +24,7 @@ const LanguageMenu = (): ReactElement => {
   const langState = configState!.settings.language;
 
   const { value: availableLanguages } = useAsync(
-    async (): Promise<{ [key: string]: LanguageData }> =>
-      invoke("get_available_languages")
+    async (): Promise<{ [key: string]: LanguageData }> => invoke("get_available_languages")
   );
 
   const snackbarHandles = useSnackbar();
@@ -80,10 +69,7 @@ const LanguageMenu = (): ReactElement => {
           <ListItemIcon>
             <TranslateIcon sx={{ color: buttonColor }} />
           </ListItemIcon>
-          <ListItemText
-            sx={{ color: buttonColor, minWidth: 60 }}
-            primary={langState.name}
-          />
+          <ListItemText sx={{ color: buttonColor, minWidth: 60 }} primary={langState.name} />
           <KeyboardArrowDownIcon sx={{ color: buttonColor }} />
         </ListItemButton>
       </ListItem>

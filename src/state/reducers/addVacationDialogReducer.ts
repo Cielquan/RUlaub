@@ -2,10 +2,7 @@ import { AddVacationDialogActionType } from "../action-types";
 import { AddVacationDialogAction } from "../actions";
 import { vacationsDialogInitState as initState } from "./initialStates";
 
-const reducer = (
-  state: boolean = initState,
-  action: AddVacationDialogAction
-): boolean => {
+const reducer = (state: boolean = initState, action: AddVacationDialogAction): boolean => {
   switch (action.type) {
     case AddVacationDialogActionType.OPEN:
       return true;

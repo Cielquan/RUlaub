@@ -4,7 +4,6 @@ import renderer from "react-test-renderer";
 
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
-
 import CalendarRowLabelsUser from "../CalendarRowLabelsUser";
 
 jest.mock("../CalendarRowLabelsUserCell", () => () => "CalendarRowLabelsUserCell");

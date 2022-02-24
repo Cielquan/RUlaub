@@ -2,10 +2,7 @@ import { PublicHolidaysDialogActionType } from "../action-types";
 import { PublicHolidaysDialogAction } from "../actions";
 import { publicHolidaysDialogInitState as initState } from "./initialStates";
 
-const reducer = (
-  state: boolean = initState,
-  action: PublicHolidaysDialogAction
-): boolean => {
+const reducer = (state: boolean = initState, action: PublicHolidaysDialogAction): boolean => {
   switch (action.type) {
     case PublicHolidaysDialogActionType.OPEN:
       return true;

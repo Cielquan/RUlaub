@@ -5,7 +5,7 @@ import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { actionCreators, State } from "../state";
+import { State, actionCreators } from "../state";
 
 const UserButton = (): ReactElement => {
   const dispatch = useDispatch();

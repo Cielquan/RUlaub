@@ -3,13 +3,9 @@ import renderer from "react-test-renderer";
 
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
-
 import CalendarColumnLabelsMonth from "../CalendarColumnLabelsMonth";
 
-jest.mock(
-  "../CalendarColumnLabelsMonthCell",
-  () => () => "CalendarColumnLabelsMonthCell"
-);
+jest.mock("../CalendarColumnLabelsMonthCell", () => () => "CalendarColumnLabelsMonthCell");
 jest.mock("../multigridInnerElementType", () => () => "multigridInnerElementType");
 
 describe("<CalendarColumnLabelsMonth />", () => {

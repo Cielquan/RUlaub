@@ -1,4 +1,4 @@
-import { t, Trans } from "@lingui/macro";
+import { Trans, t } from "@lingui/macro";
 import { Info as InfoIcon } from "@mui/icons-material";
 import {
   Button,
@@ -13,13 +13,12 @@ import {
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
-import React, { forwardRef, ReactElement } from "react";
+import React, { ReactElement, forwardRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { actionCreators, State } from "../state";
-
 import * as pjson from "../../package.json";
+import { State, actionCreators } from "../state";
 
 const Transition = forwardRef(
   (
@@ -63,14 +62,14 @@ const AboutPage = ({ onClick }: Props): ReactElement => {
         <DialogContentText sx={{ whiteSpace: "pre-wrap" }}>
           <Typography gutterBottom component="span">
             <Trans>
-              RUlaub is licensed under either &apos;Apache License 2.0&apos; or
-              &apos;MIT License&apos; at your option.
+              RUlaub is licensed under either &apos;Apache License 2.0&apos; or &apos;MIT
+              License&apos; at your option.
             </Trans>
           </Typography>
           <Typography component="span">
             <Trans>
-              For the Source Code, Documentation and copies of the License files please
-              see the github repository at: {ghLink}.
+              For the Source Code, Documentation and copies of the License files please see the
+              github repository at: {ghLink}.
             </Trans>
           </Typography>
         </DialogContentText>

@@ -3,7 +3,6 @@ import React, { ReactElement, useEffect, useRef } from "react";
 import { FixedSizeGrid as Grid } from "react-window";
 
 import { STYLE_CONST } from "../styles";
-
 import CalendarColumnLabelsDayCell from "./CalendarColumnLabelsDayCell";
 import innerElementType from "./multigridInnerElementType";
 

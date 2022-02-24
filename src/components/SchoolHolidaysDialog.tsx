@@ -17,18 +17,14 @@ import {
 import { TransitionProps } from "@mui/material/transitions";
 import { Box } from "@mui/system";
 import { useSnackbar } from "notistack";
-import React, { forwardRef, ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, forwardRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import { NewSchoolHolidayData, SchoolHolidayDataPayload } from "../backendAPI/types/helperTypes";
 import { SchoolHolidayData } from "../backendAPI/types/schoolHolidaysData.schema";
-import { actionCreators, State } from "../state";
-import {
-  NewSchoolHolidayData,
-  SchoolHolidayDataPayload,
-} from "../backendAPI/types/helperTypes";
+import { State, actionCreators } from "../state";
 import { getDaysForDate } from "../utils/dateUtils";
-
 import SchoolHolidaysDialogEntry from "./SchoolHolidaysDialogEntry";
 
 const today = new Date();
@@ -47,20 +43,11 @@ interface Props {
 
 const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const {
-    closeSchoolHolidaysDialog,
-    updateSchoolHolidaysData,
-    updateSchoolHolidaysLink,
-  } = bindActionCreators(actionCreators, dispatch);
-  const schoolHolidaysDialogState = useSelector(
-    (state: State) => state.schoolHolidaysDialog
-  );
-  const schoolHolidaysDataState = useSelector(
-    (state: State) => state.schoolHolidaysData
-  );
-  const schoolHolidaysLinkState = useSelector(
-    (state: State) => state.schoolHolidaysLink
-  );
+  const { closeSchoolHolidaysDialog, updateSchoolHolidaysData, updateSchoolHolidaysLink } =
+    bindActionCreators(actionCreators, dispatch);
+  const schoolHolidaysDialogState = useSelector((state: State) => state.schoolHolidaysDialog);
+  const schoolHolidaysDataState = useSelector((state: State) => state.schoolHolidaysData);
+  const schoolHolidaysLinkState = useSelector((state: State) => state.schoolHolidaysLink);
 
   const [link, setLink] = useState(schoolHolidaysLinkState);
   const [linkForm, setLinkForm] = useState(link);
@@ -103,14 +90,13 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
   interface updatedSchoolHolidaysQueue {
     [k: string]: SchoolHolidayData | undefined;
   }
-  const [updatedSchoolHolidays, setUpdatedSchoolHolidays] =
-    useState<updatedSchoolHolidaysQueue>({});
+  const [updatedSchoolHolidays, setUpdatedSchoolHolidays] = useState<updatedSchoolHolidaysQueue>(
+    {}
+  );
   interface newSchoolHolidaysQueue {
     [k: string]: NewSchoolHolidayData;
   }
-  const [newSchoolHolidays, setNewSchoolHolidays] = useState<newSchoolHolidaysQueue>(
-    {}
-  );
+  const [newSchoolHolidays, setNewSchoolHolidays] = useState<newSchoolHolidaysQueue>({});
 
   const addUpdatedSchoolHoliday = ([id, schoolHolidayData]:
     | SchoolHolidayDataPayload
@@ -142,10 +128,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
     };
     setNewSchoolHolidays(rv);
   };
-  const updateNewSchoolHoliday = ([
-    id,
-    schoolHolidayData,
-  ]: SchoolHolidayDataPayload): void => {
+  const updateNewSchoolHoliday = ([id, schoolHolidayData]: SchoolHolidayDataPayload): void => {
     const rv = { ...newSchoolHolidays };
     rv[id] = schoolHolidayData;
     setNewSchoolHolidays(rv);
@@ -160,39 +143,27 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
 
   const saveChanges = (): boolean => {
     if (link !== linkForm) {
-      if (
-        linkFormError !== SchoolHolidaysLinkCheckError.NONE ||
-        !validateLink(linkForm)
-      )
+      if (linkFormError !== SchoolHolidaysLinkCheckError.NONE || !validateLink(linkForm))
         return false;
       setLink(linkForm);
       updateSchoolHolidaysLink(linkForm, snackbarHandles);
     }
 
     const newEntries =
-      Object.keys(newSchoolHolidays).length > 0
-        ? Object.values(newSchoolHolidays)
-        : undefined;
+      Object.keys(newSchoolHolidays).length > 0 ? Object.values(newSchoolHolidays) : undefined;
 
     const filteredEntriesToUpdate = Object.keys(updatedSchoolHolidays)
       .filter((schoolHolidayID) => updatedSchoolHolidays[schoolHolidayID] !== undefined)
-      .map((schoolHolidayID) => [
-        Number(schoolHolidayID),
-        updatedSchoolHolidays[schoolHolidayID],
-      ]);
+      .map((schoolHolidayID) => [Number(schoolHolidayID), updatedSchoolHolidays[schoolHolidayID]]);
     const entriesToUpdate = Object.fromEntries(filteredEntriesToUpdate);
-    const updatedEntries =
-      Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
+    const updatedEntries = Object.keys(entriesToUpdate).length > 0 ? entriesToUpdate : undefined;
 
     const entriesToRemove = Object.keys(updatedSchoolHolidays)
       .filter((schoolHolidayID) => updatedSchoolHolidays[schoolHolidayID] === undefined)
       .map((id) => Number(id));
     const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
 
-    updateSchoolHolidaysData(
-      { newEntries, updatedEntries, removedEntries },
-      snackbarHandles
-    );
+    updateSchoolHolidaysData({ newEntries, updatedEntries, removedEntries }, snackbarHandles);
     return true;
   };
 
@@ -281,11 +252,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
         </List>
       </DialogContent>
       <DialogActions>
-        <Tooltip
-          arrow
-          title={t`Save changes to database`}
-          disableHoverListener={saveDisabled}
-        >
+        <Tooltip arrow title={t`Save changes to database`} disableHoverListener={saveDisabled}>
           <span>
             <Button
               data-testid={`${id}-btn-save`}

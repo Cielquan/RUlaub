@@ -3,7 +3,6 @@ import renderer from "react-test-renderer";
 
 import { initialState } from "../../state";
 import generateMockStore from "../../testUtils";
-
 // Import innerElementType as InnerElementType b/c TS complains
 import InnerElementType from "../multigridInnerElementType";
 

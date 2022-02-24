@@ -4,13 +4,12 @@ import React, { ReactElement, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
+import App from "./App";
 import setupErrorEventListeners from "./backendAPI/eventListeners/errors";
 import setupMenuEventListeners from "./backendAPI/eventListeners/menu";
-import i18n from "./i18n";
 import { useMountEffect } from "./hooks";
-import { actionCreators, State } from "./state";
-
-import App from "./App";
+import i18n from "./i18n";
+import { State, actionCreators } from "./state";
 
 const SetupWrapper = (): ReactElement => {
   const dispatch = useDispatch();
@@ -54,16 +53,14 @@ const SetupWrapper = (): ReactElement => {
     if (typeof configState?.settings.yearToShow !== "number") {
       invoke("log_info", {
         target: "SetupWrapper",
-        message:
-          "year to show not set; only loading users and skip stats and marker data",
+        message: "year to show not set; only loading users and skip stats and marker data",
         location: "SetupWrapper.ts-SetupWrapper",
       });
       loadUsersData(snackbarHandles);
     } else {
       invoke("log_info", {
         target: "SetupWrapper",
-        message:
-          "Year to show set; loading vacations and stats, public and school holidays",
+        message: "Year to show set; loading vacations and stats, public and school holidays",
         location: "SetupWrapper.ts-SetupWrapper",
       });
       loadPublicHolidaysData(snackbarHandles);

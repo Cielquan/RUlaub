@@ -29,15 +29,7 @@
         "saturday": { "type": "boolean" },
         "sunday": { "type": "boolean" }
       },
-      "required": [
-        "monday",
-        "tuesday",
-        "wednesday",
-        "thursday",
-        "friday",
-        "saturday",
-        "sunday"
-      ],
+      "required": ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"],
       "additionalProperties": false
     }
   }

@@ -13,16 +13,16 @@ import {
   publicHolidaysDialogInitState,
   schoolHolidaysDataInitState,
   schoolHolidaysDialogInitState,
+  schoolHolidaysLinkInitState,
   settingsDialogInitState,
   sideMenuInitState,
-  usersDialogInitState,
   usersDataInitState,
-  vacationsDataInitState,
-  vacationsDialogInitState,
+  usersDialogInitState,
   vacationStatsDataInitState,
   vacationTypesDataInitState,
   vacationTypesDialogInitState,
-  schoolHolidaysLinkInitState,
+  vacationsDataInitState,
+  vacationsDialogInitState,
 } from "./initialStates";
 import publicHolidaysDataReducer from "./publicHolidaysDataReducer";
 import publicHolidaysDialogReducer from "./publicHolidaysDialogReducer";
@@ -33,11 +33,11 @@ import settingsDialogReducer from "./settingsDialogReducer";
 import sideMenuReducer from "./sideMenuReducer";
 import usersDataReducer from "./usersDataReducer";
 import usersDialogReducer from "./usersDialogReducer";
-import vacationsDataReducer from "./vacationsDataReducer";
-import vacationsDialogReducer from "./vacationsDialogReducer";
 import vacationStatsDataReducer from "./vacationStatsDataReducer";
 import vacationTypesDataReducer from "./vacationTypesDataReducer";
 import vacationTypesDialogReducer from "./vacationTypesDialogReducer";
+import vacationsDataReducer from "./vacationsDataReducer";
+import vacationsDialogReducer from "./vacationsDialogReducer";
 
 const rootReducer = combineReducers({
   aboutPage: aboutPageReducer,

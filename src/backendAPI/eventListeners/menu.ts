@@ -1,6 +1,6 @@
 import { WebviewWindow } from "@tauri-apps/api/window";
 import { ProviderContext } from "notistack";
-import { bindActionCreators, Dispatch } from "redux";
+import { Dispatch, bindActionCreators } from "redux";
 
 import { actionCreators } from "../../state";
 

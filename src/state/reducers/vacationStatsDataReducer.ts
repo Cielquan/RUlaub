@@ -1,6 +1,6 @@
+import { VacationStatsDataSchema as VacationStatsData } from "../../backendAPI/types/vacationStatsData.schema";
 import { VacationStatsDataActionType } from "../action-types";
 import { VacationStatsDataAction } from "../actions";
-import { VacationStatsDataSchema as VacationStatsData } from "../../backendAPI/types/vacationStatsData.schema";
 import { vacationStatsDataInitState as initState } from "./initialStates";
 
 const reducer = (
