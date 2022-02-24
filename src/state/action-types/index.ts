@@ -74,6 +74,11 @@ export enum VacationsDataActionType {
   UPDATE = "update vacation data",
 }
 
+export enum VacationsDataLoadingDepthActionType {
+  CURRENT_YEAR = "only load current year",
+  FULL = "load all data",
+}
+
 export enum VacationsDialogActionType {
   OPEN = "open VacationsDialog",
   CLOSE = "close VacationsDialog",

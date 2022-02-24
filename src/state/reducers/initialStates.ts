@@ -26,6 +26,7 @@ export const sideMenuInitState = false;
 export const usersDataInitState: UsersData = {};
 export const usersDialogInitState = false;
 export const vacationsDataInitState: VacationsData = {};
+export const vacationsDataLoadingDepthInitState: LoadingDepth = "CurrentYear";
 export const vacationsDialogInitState = false;
 export const vacationStatsDataInitState: VacationStatsData = {};
 export const vacationTypesDataInitState: VacationTypesData = {};

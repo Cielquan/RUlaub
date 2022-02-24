@@ -24,6 +24,7 @@ import {
   VacationTypesDataActionType,
   VacationTypesDialogActionType,
   VacationsDataActionType,
+  VacationsDataLoadingDepthActionType,
   VacationsDialogActionType,
 } from "../action-types";
 
@@ -92,6 +93,10 @@ export type UsersDialogAction = {
 export type VacationsDataAction = {
   type: VacationsDataActionType;
   payload: VacationsData;
+};
+
+export type VacationsDataLoadingDepthAction = {
+  type: VacationsDataLoadingDepthActionType;
 };
 
 export type VacationsDialogAction = {
