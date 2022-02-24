@@ -62,7 +62,8 @@ interface UpdatePayload {
 export const updateSchoolHolidaysData =
   (
     { newEntries, updatedEntries, removedEntries }: UpdatePayload,
-    snackbarHandles: ProviderContext
+    snackbarHandles: ProviderContext,
+    loadingDepth: LoadingDepth = "CurrentYear"
   ) =>
   async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
     let data;
@@ -71,6 +72,7 @@ export const updateSchoolHolidaysData =
         newEntries: newEntries ?? null,
         updatedEntries: updatedEntries ?? null,
         removedEntries: removedEntries ?? null,
+        load_all_data: loadingDepth === "Full",
       });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
