@@ -39,6 +39,14 @@ const SetupWrapper = (): ReactElement => {
 
   const snackbarHandles = useSnackbar();
 
+  const publicHolidaysDataLoadingDepth = useSelector(
+    (state: State) => state.publicHolidaysDataLoadingDepth
+  );
+  const schoolHolidaysDataLoadingDepth = useSelector(
+    (state: State) => state.schoolHolidaysDataLoadingDepth
+  );
+  const vacationsDataLoadingDepth = useSelector((state: State) => state.vacationsDataLoadingDepth);
+
   useMountEffect(() => {
     setupMenuEventListeners(dispatch, snackbarHandles);
     setupErrorEventListeners(snackbarHandles);
@@ -63,9 +71,9 @@ const SetupWrapper = (): ReactElement => {
         message: "Year to show set; loading vacations and stats, public and school holidays",
         location: "SetupWrapper.ts-SetupWrapper",
       });
-      loadPublicHolidaysData(snackbarHandles);
-      loadSchoolHolidaysData(snackbarHandles);
-      loadVacationsData(snackbarHandles); // NOTE: also loads UsersData
+      loadPublicHolidaysData(snackbarHandles, publicHolidaysDataLoadingDepth);
+      loadSchoolHolidaysData(snackbarHandles, schoolHolidaysDataLoadingDepth);
+      loadVacationsData(snackbarHandles, vacationsDataLoadingDepth); // NOTE: also loads UsersData
       loadVacationStatsData(snackbarHandles);
     }
   });
