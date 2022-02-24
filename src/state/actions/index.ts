@@ -13,6 +13,7 @@ import {
   PublicHolidaysDataActionType,
   PublicHolidaysDialogActionType,
   SchoolHolidaysDataActionType,
+  SchoolHolidaysDataLoadingDepthActionType,
   SchoolHolidaysDialogActionType,
   SchoolHolidaysLinkActionType,
   SettingsDialogActionType,
@@ -56,6 +57,10 @@ export type PublicHolidaysDialogAction = {
 export type SchoolHolidaysDataAction = {
   type: SchoolHolidaysDataActionType;
   payload: SchoolHolidaysData;
+};
+
+export type SchoolHolidaysDataLoadingDepthAction = {
+  type: SchoolHolidaysDataLoadingDepthActionType;
 };
 
 export type SchoolHolidaysDialogAction = {

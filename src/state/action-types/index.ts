@@ -35,6 +35,11 @@ export enum SchoolHolidaysDataActionType {
   UPDATE = "update school holidays data",
 }
 
+export enum SchoolHolidaysDataLoadingDepthActionType {
+  CURRENT_YEAR = "only load current year",
+  FULL = "load all data",
+}
+
 export enum SchoolHolidaysDialogActionType {
   OPEN = "open SchoolHolidays",
   CLOSE = "close SchoolHolidays",

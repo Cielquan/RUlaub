@@ -9,6 +9,8 @@ export interface CalendarRowUserMap {
   [k: string]: number;
 }
 
+export type LoadingDepth = "CurrentYear" | "Full";
+
 export const aboutPageInitState = false;
 export const addVacationDialogInitState = false;
 export const calendarRowUserMapInitState: CalendarRowUserMap = {};
@@ -16,6 +18,7 @@ export const configInitState = null;
 export const publicHolidaysDataInitState: PublicHolidaysData = {};
 export const publicHolidaysDialogInitState = false;
 export const schoolHolidaysDataInitState: SchoolHolidaysData = {};
+export const schoolHolidaysDataLoadingDepthInitState: LoadingDepth = "CurrentYear";
 export const schoolHolidaysDialogInitState = false;
 export const schoolHolidaysLinkInitState = null;
 export const settingsDialogInitState = false;
