@@ -149,7 +149,7 @@ repos:
     # https://github.com/eslint/eslint
     # Config file: .eslintrc.json
     # Ignore file: .eslintignore (file ignore pattern)
-    rev: 1e8a56ba809208a3d18f9ae88fd1459b5ed5c4b5  # frozen: v8.9.0
+    rev: 1e8a56ba809208a3d18f9ae88fd1459b5ed5c4b5 # frozen: v8.9.0
     hooks:
       - id: eslint
         files: \.[jt]sx?$ # *.js, *.jsx, *.ts, *.tsx
