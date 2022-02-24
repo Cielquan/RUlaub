@@ -22,6 +22,7 @@ import { bindActionCreators } from "redux";
 import { NewPublicHolidayData, PublicHolidayDataPayload } from "../backendAPI/types/helperTypes";
 import { PublicHolidayData } from "../backendAPI/types/publicHolidaysData.schema";
 import { State, actionCreators } from "../state";
+import LoadingDepthSwitch from "./LoadingDepthSwitch";
 import PublicHolidaysDialogEntry from "./PublicHolidaysDialogEntry";
 
 const Transition = forwardRef(
@@ -38,10 +39,8 @@ interface Props {
 
 const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { closePublicHolidaysDialog, updatePublicHolidaysData } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { closePublicHolidaysDialog, setPublicHolidaysDataLoadingDepth, updatePublicHolidaysData } =
+    bindActionCreators(actionCreators, dispatch);
   const publicHolidaysDialogState = useSelector((state: State) => state.publicHolidaysDialog);
   const publicHolidaysDataState = useSelector((state: State) => state.publicHolidaysData);
 
@@ -146,6 +145,10 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
         <EventBusyIcon />
       </DialogTitle>
       <DialogContent>
+        <LoadingDepthSwitch
+          depthState={publicHolidaysDataLoadingDepth}
+          setDepthSate={setPublicHolidaysDataLoadingDepth}
+        />
         <List sx={{ display: "flex", flexDirection: "column", paddingBottom: 0 }}>
           {Object.keys(publicHolidaysDataState)
             .map((publicHolidayId): [string, number] => [

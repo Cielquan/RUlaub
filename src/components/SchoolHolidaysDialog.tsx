@@ -25,6 +25,7 @@ import { NewSchoolHolidayData, SchoolHolidayDataPayload } from "../backendAPI/ty
 import { SchoolHolidayData } from "../backendAPI/types/schoolHolidaysData.schema";
 import { State, actionCreators } from "../state";
 import { getDaysForDate } from "../utils/dateUtils";
+import LoadingDepthSwitch from "./LoadingDepthSwitch";
 import SchoolHolidaysDialogEntry from "./SchoolHolidaysDialogEntry";
 
 const today = new Date();
@@ -43,8 +44,12 @@ interface Props {
 
 const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { closeSchoolHolidaysDialog, updateSchoolHolidaysData, updateSchoolHolidaysLink } =
-    bindActionCreators(actionCreators, dispatch);
+  const {
+    closeSchoolHolidaysDialog,
+    setSchoolHolidaysDataLoadingDepth,
+    updateSchoolHolidaysData,
+    updateSchoolHolidaysLink,
+  } = bindActionCreators(actionCreators, dispatch);
   const schoolHolidaysDialogState = useSelector((state: State) => state.schoolHolidaysDialog);
   const schoolHolidaysDataState = useSelector((state: State) => state.schoolHolidaysData);
   const schoolHolidaysLinkState = useSelector((state: State) => state.schoolHolidaysLink);
@@ -225,6 +230,10 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
           sx={{ marginY: 1 }}
         />
         <Divider sx={{ marginY: 1 }} />
+        <LoadingDepthSwitch
+          depthState={schoolHolidaysDataLoadingDepth}
+          setDepthSate={setSchoolHolidaysDataLoadingDepth}
+        />
         <List sx={{ display: "flex", flexDirection: "column", paddingBottom: 0 }}>
           {Object.keys(schoolHolidaysDataState)
             .map((schoolHolidayId): [string, number] => [

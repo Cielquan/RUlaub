@@ -31,6 +31,7 @@ import { VacationData } from "../backendAPI/types/vacationsData.schema";
 import { State, actionCreators } from "../state";
 import { getDaysForDate } from "../utils/dateUtils";
 import { getUserIdByName } from "../utils/userUtils";
+import LoadingDepthSwitch from "./LoadingDepthSwitch";
 import VacationsDialogEntry from "./VacationsDialogEntry";
 
 const today = new Date();
@@ -49,10 +50,8 @@ interface Props {
 
 const VacationsDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { closeVacationsDialog, updateVacationsData } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { closeVacationsDialog, setVacationsDataLoadingDepth, updateVacationsData } =
+    bindActionCreators(actionCreators, dispatch);
   const configState = useSelector((state: State) => state.config);
   const usersDataState = useSelector((state: State) => state.usersData);
   const vacationsDataState = useSelector((state: State) => state.vacationsData);
@@ -201,6 +200,10 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
         ) : (
           <>
             <Divider />
+            <LoadingDepthSwitch
+              depthState={vacationsDataLoadingDepth}
+              setDepthSate={setVacationsDataLoadingDepth}
+            />
             <List sx={{ display: "flex", flexDirection: "column", paddingBottom: 0 }}>
               {Object.keys(vacationsDataState[currentUserID])
                 .map((vacationId): [string, number] => [
