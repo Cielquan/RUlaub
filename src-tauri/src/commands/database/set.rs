@@ -10,7 +10,7 @@ pub async fn update_public_holidays(
     new_entries: Option<Vec<state_models::PublicHoliday>>,
     updated_entries: Option<state_models::PublicHolidays>,
     removed_entries: Option<Vec<i32>>,
-    filter_current_year: Option<bool>,
+    load_all_data: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
 ) -> commands::CommandResult<(state_models::PublicHolidays, u32)> {
     use crate::db::schema::public_holidays::dsl::{id, public_holidays};
@@ -78,7 +78,7 @@ pub async fn update_public_holidays(
                     }
                 }
 
-                match cmd_db_get::_load_public_holidays(&config_state_guard, &conn, filter_current_year) {
+                match cmd_db_get::_load_public_holidays(&config_state_guard, &conn, load_all_data) {
                     Err(err) => Err(super::DieselResultErrorWrapper::Msg(err)),
                     Ok(v) => Ok(v),
                 }
@@ -107,7 +107,7 @@ pub async fn update_school_holidays(
     new_entries: Option<Vec<state_models::SchoolHoliday>>,
     updated_entries: Option<state_models::SchoolHolidays>,
     removed_entries: Option<Vec<i32>>,
-    filter_current_year: Option<bool>,
+    load_all_data: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
 ) -> commands::CommandResult<state_models::SchoolHolidays> {
     use crate::db::schema::school_holidays::dsl::{id, school_holidays};
@@ -197,7 +197,7 @@ pub async fn update_school_holidays(
                 }
             }
 
-            match cmd_db_get::_load_school_holidays(&config_state_guard, &conn, filter_current_year) {
+            match cmd_db_get::_load_school_holidays(&config_state_guard, &conn, load_all_data) {
                 Err(err) => Err(super::DieselResultErrorWrapper::Msg(err)),
                 Ok(v) => Ok(v),
             }
@@ -416,7 +416,7 @@ pub async fn update_vacations(
     new_entries: Option<(i32, Vec<state_models::Vacation>)>,
     updated_entries: Option<state_models::UpdatedVacations>,
     removed_entries: Option<Vec<i32>>,
-    filter_current_year: Option<bool>,
+    load_all_data: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
 ) -> commands::CommandResult<state_models::Vacations> {
     use crate::db::schema::vacations::dsl::{id, vacations};
@@ -505,7 +505,7 @@ pub async fn update_vacations(
                 }
             }
 
-            match cmd_db_get::_load_vacations(&config_state_guard, &conn, filter_current_year) {
+            match cmd_db_get::_load_vacations(&config_state_guard, &conn, load_all_data) {
                 Err(err) => Err(super::DieselResultErrorWrapper::Msg(err)),
                 Ok(v) => Ok(v),
             }
