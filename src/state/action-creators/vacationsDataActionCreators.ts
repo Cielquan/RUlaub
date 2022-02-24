@@ -13,6 +13,7 @@ import { validateUsersData, validateVacationsData } from "../../backendAPI/valid
 import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
 import { VacationsDataActionType } from "../action-types";
 import { CalendarRowUserMapAction, UsersDataAction, VacationsDataAction } from "../actions";
+import { LoadingDepth } from "../reducers/initialStates";
 
 export const loadVacationsDataAction = (payload: VacationsData): VacationsDataAction => ({
   type: VacationsDataActionType.LOAD,
@@ -20,14 +21,14 @@ export const loadVacationsDataAction = (payload: VacationsData): VacationsDataAc
 });
 
 export const loadVacationsData =
-  (snackbarHandles: ProviderContext) =>
+  (snackbarHandles: ProviderContext, loadingDepth: LoadingDepth = "CurrentYear") =>
   async (
     dispatch: Dispatch<VacationsDataAction | UsersDataAction | CalendarRowUserMapAction>,
     getState: typeof store.getState
   ): Promise<void> => {
     let data;
     try {
-      data = await invoke("load_vacations");
+      data = await invoke("load_vacations", { load_all_data: loadingDepth === "Full" });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;

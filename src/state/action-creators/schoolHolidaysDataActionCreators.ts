@@ -9,6 +9,7 @@ import { validateSchoolHolidaysData } from "../../backendAPI/validation";
 import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
 import { SchoolHolidaysDataActionType } from "../action-types";
 import { SchoolHolidaysDataAction } from "../actions";
+import { LoadingDepth } from "../reducers/initialStates";
 
 export const loadSchoolHolidaysDataAction = (
   payload: SchoolHolidaysData
@@ -18,11 +19,11 @@ export const loadSchoolHolidaysDataAction = (
 });
 
 export const loadSchoolHolidaysData =
-  (snackbarHandles: ProviderContext) =>
+  (snackbarHandles: ProviderContext, loadingDepth: LoadingDepth = "CurrentYear") =>
   async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
     let data;
     try {
-      data = await invoke("load_school_holidays");
+      data = await invoke("load_school_holidays", { load_all_data: loadingDepth === "Full" });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
