@@ -52,6 +52,15 @@
     },
     "windows": [
       {
+        "label": "main",
+        "width": 1600,
+        "height": 900,
+        "decorations": true,
+        "resizable": true,
+        "visible": false,
+        "url": "index.html"
+      },
+      {
         "label": "splashscreen",
         "width": 200,
         "height": 200,

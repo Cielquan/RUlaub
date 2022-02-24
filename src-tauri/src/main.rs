@@ -12,7 +12,7 @@ use std::thread::sleep;
 use std::time::Duration;
 
 use parking_lot::Mutex;
-use tauri::{Manager, WindowBuilder};
+use tauri::Manager;
 
 use rulaub_backend::config::types::StringEnum;
 use rulaub_backend::{commands, config, db, logging, state};
@@ -23,22 +23,6 @@ fn main() {
 
     debug!(target = "tauri_setup", message = "Build tauri app");
     let app = tauri::Builder::default()
-        .create_window(
-            // NOTE: create window manually because of window specific menu
-            "main",
-            tauri::WindowUrl::App("index.html".into()),
-            move |window_builder, webview_attributes| {
-                (
-                    window_builder
-                        .title(rulaub_backend::NAME)
-                        .inner_size(800.into(), 600.into())
-                        .resizable(true)
-                        .fullscreen(false)
-                        .visible(false),
-                    webview_attributes,
-                )
-            },
-        )
         .manage(state::TracerHandleState(Mutex::new(tracer_handle)))
         .manage(state::ConfigSetupErrState(Mutex::new(
             config::setup::ConfigSetupErr::None,
