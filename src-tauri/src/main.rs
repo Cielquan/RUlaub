@@ -15,7 +15,7 @@ use parking_lot::Mutex;
 use tauri::{Manager, WindowBuilder};
 
 use rulaub_backend::config::types::StringEnum;
-use rulaub_backend::{commands, config, db, logging, menu, state};
+use rulaub_backend::{commands, config, db, logging, state};
 
 fn main() {
     let (tracer_handle, _guard) = logging::tracer::setup_tracer();
@@ -31,7 +31,6 @@ fn main() {
                 (
                     window_builder
                         .title(rulaub_backend::NAME)
-                        .menu(menu::get_menu())
                         .inner_size(800.into(), 600.into())
                         .resizable(true)
                         .fullscreen(false)

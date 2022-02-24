@@ -15,7 +15,6 @@ mod date_calc;
 pub mod db;
 mod file_watcher;
 pub mod logging;
-pub mod menu;
 pub mod state;
 
 use directories::ProjectDirs;
