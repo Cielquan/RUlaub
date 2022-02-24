@@ -16,6 +16,7 @@ export const addVacationDialogInitState = false;
 export const calendarRowUserMapInitState: CalendarRowUserMap = {};
 export const configInitState = null;
 export const publicHolidaysDataInitState: PublicHolidaysData = {};
+export const publicHolidaysDataLoadingDepthInitState: LoadingDepth = "CurrentYear";
 export const publicHolidaysDialogInitState = false;
 export const schoolHolidaysDataInitState: SchoolHolidaysData = {};
 export const schoolHolidaysDataLoadingDepthInitState: LoadingDepth = "CurrentYear";

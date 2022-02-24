@@ -23,6 +23,11 @@ export enum PublicHolidaysDataActionType {
   UPDATE = "update public holidays data",
 }
 
+export enum PublicHolidaysDataLoadingDepthActionType {
+  CURRENT_YEAR = "only load current year",
+  FULL = "load all data",
+}
+
 export enum PublicHolidaysDialogActionType {
   OPEN = "open PublicHolidays",
   CLOSE = "close PublicHolidays",

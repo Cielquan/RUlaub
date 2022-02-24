@@ -11,6 +11,7 @@ import {
   CalendarRowUserMapActionType,
   ConfigActionType,
   PublicHolidaysDataActionType,
+  PublicHolidaysDataLoadingDepthActionType,
   PublicHolidaysDialogActionType,
   SchoolHolidaysDataActionType,
   SchoolHolidaysDataLoadingDepthActionType,
@@ -49,6 +50,10 @@ export type ConfigAction = {
 export type PublicHolidaysDataAction = {
   type: PublicHolidaysDataActionType;
   payload: PublicHolidaysData;
+};
+
+export type PublicHolidaysDataLoadingDepthAction = {
+  type: PublicHolidaysDataLoadingDepthActionType;
 };
 
 export type PublicHolidaysDialogAction = {
