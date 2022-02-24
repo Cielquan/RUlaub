@@ -2,25 +2,17 @@ import { Dispatch } from "redux";
 
 import { SchoolHolidaysDataLoadingDepthActionType } from "../action-types";
 import { SchoolHolidaysDataLoadingDepthAction } from "../actions";
+import { LoadingDepth } from "../reducers/initialStates";
 
-export const currentYearSchoolHolidaysDataLoadingDepthAction =
-  (): SchoolHolidaysDataLoadingDepthAction => ({
-    type: SchoolHolidaysDataLoadingDepthActionType.CURRENT_YEAR,
-  });
+export const setSchoolHolidaysDataLoadingDepthAction = (
+  payload: LoadingDepth
+): SchoolHolidaysDataLoadingDepthAction => ({
+  type: SchoolHolidaysDataLoadingDepthActionType.UPDATE,
+  payload,
+});
 
-export const loadOnlyCurrentYearSchoolHolidaysData =
-  () =>
+export const setSchoolHolidaysDataLoadingDepth =
+  (loadingDepth: LoadingDepth) =>
   (dispatch: Dispatch<SchoolHolidaysDataLoadingDepthAction>): void => {
-    dispatch(currentYearSchoolHolidaysDataLoadingDepthAction());
-  };
-
-export const fullSchoolHolidaysDataLoadingDepthAction =
-  (): SchoolHolidaysDataLoadingDepthAction => ({
-    type: SchoolHolidaysDataLoadingDepthActionType.FULL,
-  });
-
-export const loadAllSchoolHolidaysData =
-  () =>
-  (dispatch: Dispatch<SchoolHolidaysDataLoadingDepthAction>): void => {
-    dispatch(fullSchoolHolidaysDataLoadingDepthAction());
+    dispatch(setSchoolHolidaysDataLoadingDepthAction(loadingDepth));
   };

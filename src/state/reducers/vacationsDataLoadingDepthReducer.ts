@@ -7,10 +7,8 @@ const reducer = (
   action: VacationsDataLoadingDepthAction
 ): LoadingDepth => {
   switch (action.type) {
-    case VacationsDataLoadingDepthActionType.CURRENT_YEAR:
-      return "CurrentYear";
-    case VacationsDataLoadingDepthActionType.FULL:
-      return "Full";
+    case VacationsDataLoadingDepthActionType.UPDATE:
+      return action.payload;
     default:
       return state;
   }

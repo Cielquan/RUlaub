@@ -10,10 +10,8 @@ const reducer = (
   action: SchoolHolidaysDataLoadingDepthAction
 ): LoadingDepth => {
   switch (action.type) {
-    case SchoolHolidaysDataLoadingDepthActionType.CURRENT_YEAR:
-      return "CurrentYear";
-    case SchoolHolidaysDataLoadingDepthActionType.FULL:
-      return "Full";
+    case SchoolHolidaysDataLoadingDepthActionType.UPDATE:
+      return action.payload;
     default:
       return state;
   }

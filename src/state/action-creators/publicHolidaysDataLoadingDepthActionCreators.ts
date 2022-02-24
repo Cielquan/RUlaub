@@ -2,25 +2,17 @@ import { Dispatch } from "redux";
 
 import { PublicHolidaysDataLoadingDepthActionType } from "../action-types";
 import { PublicHolidaysDataLoadingDepthAction } from "../actions";
+import { LoadingDepth } from "../reducers/initialStates";
 
-export const currentYearPublicHolidaysDataLoadingDepthAction =
-  (): PublicHolidaysDataLoadingDepthAction => ({
-    type: PublicHolidaysDataLoadingDepthActionType.CURRENT_YEAR,
-  });
+export const setPublicHolidaysDataLoadingDepthAction = (
+  payload: LoadingDepth
+): PublicHolidaysDataLoadingDepthAction => ({
+  type: PublicHolidaysDataLoadingDepthActionType.UPDATE,
+  payload,
+});
 
-export const loadOnlyCurrentYearPublicHolidaysData =
-  () =>
+export const setPublicHolidaysDataLoadingDepth =
+  (loadingDepth: LoadingDepth) =>
   (dispatch: Dispatch<PublicHolidaysDataLoadingDepthAction>): void => {
-    dispatch(currentYearPublicHolidaysDataLoadingDepthAction());
-  };
-
-export const fullPublicHolidaysDataLoadingDepthAction =
-  (): PublicHolidaysDataLoadingDepthAction => ({
-    type: PublicHolidaysDataLoadingDepthActionType.FULL,
-  });
-
-export const loadAllPublicHolidaysData =
-  () =>
-  (dispatch: Dispatch<PublicHolidaysDataLoadingDepthAction>): void => {
-    dispatch(fullPublicHolidaysDataLoadingDepthAction());
+    dispatch(setPublicHolidaysDataLoadingDepthAction(loadingDepth));
   };

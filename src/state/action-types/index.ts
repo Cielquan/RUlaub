@@ -24,8 +24,7 @@ export enum PublicHolidaysDataActionType {
 }
 
 export enum PublicHolidaysDataLoadingDepthActionType {
-  CURRENT_YEAR = "only load current year",
-  FULL = "load all data",
+  UPDATE = "update loading depth",
 }
 
 export enum PublicHolidaysDialogActionType {
@@ -41,8 +40,7 @@ export enum SchoolHolidaysDataActionType {
 }
 
 export enum SchoolHolidaysDataLoadingDepthActionType {
-  CURRENT_YEAR = "only load current year",
-  FULL = "load all data",
+  UPDATE = "update loading depth",
 }
 
 export enum SchoolHolidaysDialogActionType {
@@ -80,8 +78,7 @@ export enum VacationsDataActionType {
 }
 
 export enum VacationsDataLoadingDepthActionType {
-  CURRENT_YEAR = "only load current year",
-  FULL = "load all data",
+  UPDATE = "update loading depth",
 }
 
 export enum VacationsDialogActionType {

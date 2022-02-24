@@ -28,6 +28,7 @@ import {
   VacationsDataLoadingDepthActionType,
   VacationsDialogActionType,
 } from "../action-types";
+import { LoadingDepth } from "../reducers/initialStates";
 
 export type AboutPageAction = {
   type: AboutPageActionType;
@@ -54,6 +55,7 @@ export type PublicHolidaysDataAction = {
 
 export type PublicHolidaysDataLoadingDepthAction = {
   type: PublicHolidaysDataLoadingDepthActionType;
+  payload: LoadingDepth;
 };
 
 export type PublicHolidaysDialogAction = {
@@ -67,6 +69,7 @@ export type SchoolHolidaysDataAction = {
 
 export type SchoolHolidaysDataLoadingDepthAction = {
   type: SchoolHolidaysDataLoadingDepthActionType;
+  payload: LoadingDepth;
 };
 
 export type SchoolHolidaysDialogAction = {
@@ -102,6 +105,7 @@ export type VacationsDataAction = {
 
 export type VacationsDataLoadingDepthAction = {
   type: VacationsDataLoadingDepthActionType;
+  payload: LoadingDepth;
 };
 
 export type VacationsDialogAction = {

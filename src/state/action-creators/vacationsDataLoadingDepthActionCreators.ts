@@ -2,23 +2,17 @@ import { Dispatch } from "redux";
 
 import { VacationsDataLoadingDepthActionType } from "../action-types";
 import { VacationsDataLoadingDepthAction } from "../actions";
+import { LoadingDepth } from "../reducers/initialStates";
 
-export const currentYearVacationsDataLoadingDepthAction = (): VacationsDataLoadingDepthAction => ({
-  type: VacationsDataLoadingDepthActionType.CURRENT_YEAR,
+export const setVacationsDataLoadingDepthAction = (
+  payload: LoadingDepth
+): VacationsDataLoadingDepthAction => ({
+  type: VacationsDataLoadingDepthActionType.UPDATE,
+  payload,
 });
 
-export const loadOnlyCurrentYearVacationsData =
-  () =>
+export const setVacationsDataLoadingDepth =
+  (loadingDepth: LoadingDepth) =>
   (dispatch: Dispatch<VacationsDataLoadingDepthAction>): void => {
-    dispatch(currentYearVacationsDataLoadingDepthAction());
-  };
-
-export const fullVacationsDataLoadingDepthAction = (): VacationsDataLoadingDepthAction => ({
-  type: VacationsDataLoadingDepthActionType.FULL,
-});
-
-export const loadAllVacationsData =
-  () =>
-  (dispatch: Dispatch<VacationsDataLoadingDepthAction>): void => {
-    dispatch(fullVacationsDataLoadingDepthAction());
+    dispatch(setVacationsDataLoadingDepthAction(loadingDepth));
   };
