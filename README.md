@@ -15,14 +15,14 @@ See the [ROADMAP file](ROADMAP.md) for the next planned steps.
 
 ## Credits
 
-The app icon is based off of Ferris by Karen Rustad Tölva: https://github.com/aldeka/rustacean.net
+The app icon is based off of Ferris by Karen Rustad Tölva: [link](https://github.com/aldeka/rustacean.net)
 
 ## License
 
 Licensed under either of
 
 - Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or
-  http://www.apache.org/licenses/LICENSE-2.0)
-- MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+  [link](http://www.apache.org/licenses/LICENSE-2.0))
+- MIT license ([LICENSE-MIT](LICENSE-MIT) or [link](http://opensource.org/licenses/MIT))
 
 at your option.

@@ -1,4 +1,4 @@
-## Roadmap
+# Roadmap
 
 - FE | Add option to load current year or all for SchoolHoli Dialog
   current year is default
@@ -84,11 +84,11 @@
 
 - ? rewrite the calender without react-window
 
-### Links for help to do things (dev)
+## Links for help to do things (dev)
 
-https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/
+[css-tricks.com](https://css-tricks.com/switch-font-color-for-different-backgrounds-with-css/)
 
-### Error handling
+## Error handling
 
 - add "no config state" (error with file access/creation) to
   - show warning in settings and DB link/creation menus
