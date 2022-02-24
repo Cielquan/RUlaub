@@ -118,6 +118,8 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
 
   const snackbarHandles = useSnackbar();
 
+  const vacationsDataLoadingDepth = useSelector((state: State) => state.vacationsDataLoadingDepth);
+
   const saveChanges = (): void => {
     const newEntries =
       Object.keys(newVacations).length > 0 ? Object.values(newVacations) : undefined;
@@ -139,7 +141,8 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
         updatedEntries,
         removedEntries,
       },
-      snackbarHandles
+      snackbarHandles,
+      vacationsDataLoadingDepth
     );
   };
 

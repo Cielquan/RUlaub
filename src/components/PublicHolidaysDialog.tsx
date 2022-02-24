@@ -95,6 +95,10 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
 
   const snackbarHandles = useSnackbar();
 
+  const publicHolidaysDataLoadingDepth = useSelector(
+    (state: State) => state.publicHolidaysDataLoadingDepth
+  );
+
   const saveChanges = (): void => {
     const newEntries =
       Object.keys(newPublicHolidays).length > 0 ? Object.values(newPublicHolidays) : undefined;
@@ -110,7 +114,11 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
       .map((id) => Number(id));
     const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
 
-    updatePublicHolidaysData({ newEntries, updatedEntries, removedEntries }, snackbarHandles);
+    updatePublicHolidaysData(
+      { newEntries, updatedEntries, removedEntries },
+      snackbarHandles,
+      publicHolidaysDataLoadingDepth
+    );
   };
 
   useEffect(() => {

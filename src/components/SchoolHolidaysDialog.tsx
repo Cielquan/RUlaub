@@ -141,6 +141,10 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
 
   const snackbarHandles = useSnackbar();
 
+  const schoolHolidaysDataLoadingDepth = useSelector(
+    (state: State) => state.schoolHolidaysDataLoadingDepth
+  );
+
   const saveChanges = (): boolean => {
     if (link !== linkForm) {
       if (linkFormError !== SchoolHolidaysLinkCheckError.NONE || !validateLink(linkForm))
@@ -163,7 +167,11 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
       .map((id) => Number(id));
     const removedEntries = entriesToRemove.length > 0 ? entriesToRemove : undefined;
 
-    updateSchoolHolidaysData({ newEntries, updatedEntries, removedEntries }, snackbarHandles);
+    updateSchoolHolidaysData(
+      { newEntries, updatedEntries, removedEntries },
+      snackbarHandles,
+      schoolHolidaysDataLoadingDepth
+    );
     return true;
   };
 

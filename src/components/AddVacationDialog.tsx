@@ -159,6 +159,8 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
 
   const snackbarHandles = useSnackbar();
 
+  const vacationsDataLoadingDepth = useSelector((state: State) => state.vacationsDataLoadingDepth);
+
   const onClickSave = (): void => {
     if (
       typeIDFormError !== TypeIDFormError.NONE ||
@@ -196,7 +198,8 @@ const AddVacationDialog = ({ onClick }: Props): ReactElement => {
           ],
         ],
       },
-      snackbarHandles
+      snackbarHandles,
+      vacationsDataLoadingDepth
     );
     closeAddVacationDialog();
   };
