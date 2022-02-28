@@ -4,6 +4,7 @@ pub type VacationTypeId = i32;
 pub type VacationTypes = HashMap<VacationTypeId, VacationType>;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct VacationType {
     pub name: String,
     pub charge: bool,

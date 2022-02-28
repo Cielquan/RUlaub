@@ -4,6 +4,7 @@ pub type UserId = i32;
 pub type Users = HashMap<UserId, User>;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct User {
     pub name: String,
     pub workdays: Workdays,
@@ -11,6 +12,7 @@ pub struct User {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Workdays {
     pub monday: bool,
     pub tuesday: bool,

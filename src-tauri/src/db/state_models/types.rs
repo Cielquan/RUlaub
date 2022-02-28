@@ -1,4 +1,5 @@
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct DateData {
     pub date: ISODate,
     pub year_day: i32,
