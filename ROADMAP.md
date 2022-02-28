@@ -1,7 +1,6 @@
 # Roadmap
 
 - FE | check load of all/currYear data on switch flip
-- FE | reload vac data on year change
 
 - BE | on missing db: migration only happens on secound start and data load on third
 

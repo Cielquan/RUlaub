@@ -4,10 +4,10 @@ import { Button, Popover, TextField, Tooltip, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useSnackbar } from "notistack";
 import React, { CSSProperties, ReactElement } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { actionCreators } from "../state";
+import { State, actionCreators } from "../state";
 import { STYLE_CONST } from "../styles";
 
 interface Props {
@@ -17,7 +17,21 @@ interface Props {
 
 const CalendarTableHeadCell = ({ data, style }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const { setYearToShow } = bindActionCreators(actionCreators, dispatch);
+  const {
+    loadPublicHolidaysData,
+    loadSchoolHolidaysData,
+    loadVacationStatsData,
+    loadVacationsData,
+    setYearToShow,
+  } = bindActionCreators(actionCreators, dispatch);
+
+  const publicHolidaysDataLoadingDepth = useSelector(
+    (state: State) => state.publicHolidaysDataLoadingDepth
+  );
+  const schoolHolidaysDataLoadingDepth = useSelector(
+    (state: State) => state.schoolHolidaysDataLoadingDepth
+  );
+  const vacationsDataLoadingDepth = useSelector((state: State) => state.vacationsDataLoadingDepth);
 
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
@@ -34,6 +48,14 @@ const CalendarTableHeadCell = ({ data, style }: Props): ReactElement => {
   const handleChange = (newDate: Date | null): void => {
     if (newDate !== null) {
       setYearToShow(newDate.getFullYear(), snackbarHandles);
+
+      if (publicHolidaysDataLoadingDepth !== "Full")
+        loadPublicHolidaysData(snackbarHandles, publicHolidaysDataLoadingDepth);
+      if (schoolHolidaysDataLoadingDepth !== "Full")
+        loadSchoolHolidaysData(snackbarHandles, schoolHolidaysDataLoadingDepth);
+      if (vacationsDataLoadingDepth !== "Full")
+        loadVacationsData(snackbarHandles, vacationsDataLoadingDepth);
+      loadVacationStatsData(snackbarHandles);
       handleClose();
     }
   };
