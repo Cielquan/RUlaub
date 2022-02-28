@@ -15,7 +15,7 @@
         "workdays": { "$ref": "#/$defs/workdays" },
         "availableVacationDays": { "type": "number" }
       },
-      "required": ["name", "workdays", "availableVacationDays", "vacations"],
+      "required": ["name", "workdays", "availableVacationDays"],
       "additionalProperties": false
     },
     "workdays": {
