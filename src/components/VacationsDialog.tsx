@@ -1,4 +1,4 @@
-import { t } from "@lingui/macro";
+import { Trans, t } from "@lingui/macro";
 import { AddCircle as AddIcon, Flight as FlightIcon } from "@mui/icons-material";
 import {
   Button,
@@ -159,7 +159,6 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
   const saveDisabled =
     Object.keys(updatedVacations).length === 0 && Object.keys(newVacations).length === 0;
 
-  console.log("vacationsDataState", vacationsDataState);
   const currentUserVacationData = vacationsDataState[currentUserID];
 
   return (
@@ -199,7 +198,13 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
           </FormControl>
         </Box>
         {currentUserID === "" || currentUserVacationData === undefined ? (
-          <></>
+          <>
+            {currentUserID === "" ? (
+              <></>
+            ) : (
+              <Trans>No data for user: {usersDataState[currentUserID].name}</Trans>
+            )}
+          </>
         ) : (
           <>
             <Divider />
