@@ -147,7 +147,7 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
       <DialogContent>
         <LoadingDepthSwitch
           depthState={publicHolidaysDataLoadingDepth}
-          setDepthSate={setPublicHolidaysDataLoadingDepth}
+          setDepthState={setPublicHolidaysDataLoadingDepth}
         />
         <List sx={{ display: "flex", flexDirection: "column", paddingBottom: 0 }}>
           {Object.keys(publicHolidaysDataState)

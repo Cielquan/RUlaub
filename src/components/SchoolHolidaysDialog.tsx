@@ -232,7 +232,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
         <Divider sx={{ marginY: 1 }} />
         <LoadingDepthSwitch
           depthState={schoolHolidaysDataLoadingDepth}
-          setDepthSate={setSchoolHolidaysDataLoadingDepth}
+          setDepthState={setSchoolHolidaysDataLoadingDepth}
         />
         <List sx={{ display: "flex", flexDirection: "column", paddingBottom: 0 }}>
           {Object.keys(schoolHolidaysDataState)

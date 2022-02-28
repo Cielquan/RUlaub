@@ -5,12 +5,12 @@ import { LoadingDepth } from "../state/reducers/initialStates";
 
 interface Props {
   depthState: LoadingDepth;
-  setDepthSate(newDepth: LoadingDepth): void;
+  setDepthState(newDepth: LoadingDepth): void;
 }
 
-const LoadingDepthSwitch = ({ depthState, setDepthSate }: Props): React.ReactElement => {
+const LoadingDepthSwitch = ({ depthState, setDepthState }: Props): React.ReactElement => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setDepthSate(event.target.checked ? "Full" : "CurrentYear");
+    setDepthState(event.target.checked ? "Full" : "CurrentYear");
   };
 
   return (

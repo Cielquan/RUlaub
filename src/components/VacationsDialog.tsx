@@ -202,7 +202,7 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
             <Divider />
             <LoadingDepthSwitch
               depthState={vacationsDataLoadingDepth}
-              setDepthSate={setVacationsDataLoadingDepth}
+              setDepthState={setVacationsDataLoadingDepth}
             />
             <List sx={{ display: "flex", flexDirection: "column", paddingBottom: 0 }}>
               {Object.keys(vacationsDataState[currentUserID])
