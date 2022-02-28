@@ -1,10 +1,10 @@
 # Roadmap
 
-- FE | Add option to load current year or all for SchoolHoli Dialog
-  current year is default
+- BE/FE | switch back to load all timed data by default in BE but set falg for currentYear in FE
+- FE | check load of all/currYear data on switch flip
+- FE | reload vac data on year change
 
-- FE | Add option to load current year or all for Vac Dialog
-  current year is default
+- BE | on missing db: migration only happens on secound start and data load on third
 
 - BE | Impl SchoolHoli link
 
