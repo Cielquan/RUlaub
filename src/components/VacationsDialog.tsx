@@ -159,6 +159,9 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
   const saveDisabled =
     Object.keys(updatedVacations).length === 0 && Object.keys(newVacations).length === 0;
 
+  console.log("vacationsDataState", vacationsDataState);
+  const currentUserVacationData = vacationsDataState[currentUserID];
+
   return (
     <Dialog
       aria-labelledby={id}
@@ -195,7 +198,7 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
             </Select>
           </FormControl>
         </Box>
-        {currentUserID === "" ? (
+        {currentUserID === "" || currentUserVacationData === undefined ? (
           <></>
         ) : (
           <>
@@ -205,7 +208,7 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
               setDepthState={setVacationsDataLoadingDepth}
             />
             <List sx={{ display: "flex", flexDirection: "column", paddingBottom: 0 }}>
-              {Object.keys(vacationsDataState[currentUserID])
+              {Object.keys(currentUserVacationData)
                 .map((vacationId): [string, number] => [
                   vacationId,
                   vacationsDataState[currentUserID][vacationId].start.yearDay,
