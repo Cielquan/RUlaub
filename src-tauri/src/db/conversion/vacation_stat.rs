@@ -33,6 +33,7 @@ pub fn group_vacations(vacation_list: Vec<query_only_models::VacationWithType>) 
             charge: vac.charge,
         })
     }
+
     user_vac_map
 }
 

@@ -159,11 +159,14 @@ pub fn to_state_model(
             );
         }
     }
-    debug!(
-        target = "database-data",
-        message = "Encounterd erros while loading all PublicHoliday db entries",
-        error_count = error_count,
-    );
+
+    if error_count > 0 {
+        debug!(
+            target = "database-data",
+            message = "Encounterd erros while loading PublicHoliday db entries",
+            error_count = error_count,
+        );
+    }
 
     (map, error_count)
 }

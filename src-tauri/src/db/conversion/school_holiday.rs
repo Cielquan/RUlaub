@@ -71,6 +71,14 @@ pub fn to_new_db_model(
         ))
     }
 
+    if error_count > 0 {
+        debug!(
+            target = "database-data",
+            message = "Encounterd erros while converting new state data to SchoolHoliday db models",
+            error_count = error_count,
+        );
+    }
+
     (db_models, error_count)
 }
 
@@ -111,6 +119,15 @@ pub fn to_update_db_model(
             entry.end.year_day,
             entry.end.year,
         ))
+    }
+
+    if error_count > 0 {
+        debug!(
+            target = "database-data",
+            message =
+                "Encounterd erros while converting updated state data to SchoolHoliday db models",
+            error_count = error_count,
+        );
     }
 
     (db_models, error_count)
