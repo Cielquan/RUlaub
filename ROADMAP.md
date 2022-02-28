@@ -1,6 +1,5 @@
 # Roadmap
 
-- BE/FE | switch back to load all timed data by default in BE but set falg for currentYear in FE
 - FE | check load of all/currYear data on switch flip
 - FE | reload vac data on year change
 

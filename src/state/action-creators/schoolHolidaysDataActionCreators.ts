@@ -23,7 +23,9 @@ export const loadSchoolHolidaysData =
   async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
     let data;
     try {
-      data = await invoke("load_school_holidays", { load_all_data: loadingDepth === "Full" });
+      data = await invoke("load_school_holidays", {
+        filter_current_year: loadingDepth === "CurrentYear",
+      });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
@@ -73,7 +75,7 @@ export const updateSchoolHolidaysData =
         newEntries: newEntries ?? null,
         updatedEntries: updatedEntries ?? null,
         removedEntries: removedEntries ?? null,
-        load_all_data: loadingDepth === "Full",
+        filter_current_year: loadingDepth === "CurrentYear",
       });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);

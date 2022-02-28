@@ -21,7 +21,9 @@ export const loadVacationsData =
   async (dispatch: Dispatch<VacationsDataAction>): Promise<void> => {
     let data;
     try {
-      data = await invoke("load_vacations", { load_all_data: loadingDepth === "Full" });
+      data = await invoke("load_vacations", {
+        filter_current_year: loadingDepth === "CurrentYear",
+      });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
@@ -67,7 +69,7 @@ export const updateVacationsData =
         newEntries: newEntries ?? null,
         updatedEntries: updatedEntries ?? null,
         removedEntries: removedEntries ?? null,
-        load_all_data: loadingDepth === "Full",
+        filter_current_year: loadingDepth === "CurrentYear",
       });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
