@@ -23,6 +23,7 @@ interface Props {
   positionX: number;
   positionY: number;
   scrollHandle(e: GridOnScrollProps): void;
+  year: number;
   daysInYear: number;
 }
 
@@ -32,6 +33,7 @@ const CalendarBody = ({
   positionX,
   positionY,
   scrollHandle,
+  year,
   daysInYear,
 }: Props): ReactElement => {
   const usersDataState = useSelector((state: State) => state.usersData);
@@ -55,6 +57,7 @@ const CalendarBody = ({
         columnWidth={STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL}
         rowCount={Object.keys(usersDataState).length + 1}
         rowHeight={STYLE_CONST.CALENDAR_ROW_HEIGHT_FULL}
+        itemData={year}
         ref={gridRef}
         onScroll={scrollHandle}
       >

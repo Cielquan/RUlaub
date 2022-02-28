@@ -83,6 +83,7 @@ const Calendar = (): ReactElement => {
               positionX={scrollX}
               positionY={scrollY}
               scrollHandle={handleGridScroll}
+              year={year}
               daysInYear={daysInYear}
             />
           </Box>

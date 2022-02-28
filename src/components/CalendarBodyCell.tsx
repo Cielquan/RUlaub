@@ -8,12 +8,14 @@ import { STYLE_CONST } from "../styles";
 interface Props {
   columnIndex: number;
   rowIndex: number;
+  data: number;
   style: CSSProperties;
 }
 
-const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement => {
+const CalendarBodyCell = ({ columnIndex, rowIndex, data: year, style }: Props): ReactElement => {
   const vacationsDataState = useSelector((state: State) => state.vacationsData);
   const calendarRowUserMapState = useSelector((state: State) => state.calendarRowUserMap);
+  const yearDay = columnIndex + 1;
 
   let userID: string | undefined;
   try {
@@ -27,10 +29,27 @@ const CalendarBodyCell = ({ columnIndex, rowIndex, style }: Props): ReactElement
     const vacations = vacationsDataState[userID];
     if (!vacations) return false;
     return (
-      Object.values(vacations).filter(
-        (vacation) =>
-          vacation.start.yearDay <= columnIndex + 1 && vacation.end.yearDay >= columnIndex + 1
-      ).length > 0
+      Object.values(vacations).filter((vacation) => {
+        if (vacation.start.year > year) {
+          return false;
+        }
+        if (vacation.start.year === year) {
+          if (vacation.end.year > year) {
+            return vacation.start.yearDay <= yearDay;
+          }
+          if (vacation.end.year === year) {
+            return vacation.start.yearDay <= yearDay && vacation.end.yearDay >= yearDay;
+          }
+          return false; // end year before current year -> invlaid data
+        }
+        if (vacation.end.year > year) {
+          return true;
+        }
+        if (vacation.end.year === year) {
+          return vacation.end.yearDay >= yearDay;
+        }
+        return false;
+      }).length > 0
     );
   };
 
