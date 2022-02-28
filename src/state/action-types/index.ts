@@ -1,6 +1,6 @@
 export enum AboutPageActionType {
-  OPEN = "open AboutPage",
-  CLOSE = "close AboutPage",
+  OPEN = "open AboutPage dialog",
+  CLOSE = "close AboutPage dialog",
 }
 
 export enum AddVacationDialogActionType {
@@ -13,39 +13,39 @@ export enum CalendarRowUserMapActionType {
 }
 
 export enum ConfigActionType {
-  UPDATE = "update config",
+  UPDATE = "update Config",
 }
 
 export enum PublicHolidaysDataActionType {
-  ADD = "add public holidays data",
-  LOAD = "load public holidays data",
-  REMOVE = "remove public holidays data",
-  UPDATE = "update public holidays data",
+  ADD = "add PublicHolidays data",
+  LOAD = "load PublicHolidays data",
+  REMOVE = "remove PublicHolidays data",
+  UPDATE = "update PublicHolidays data",
 }
 
 export enum PublicHolidaysDataLoadingDepthActionType {
-  UPDATE = "update loading depth",
+  UPDATE = "update PublicHolidaysData loading depth",
 }
 
 export enum PublicHolidaysDialogActionType {
-  OPEN = "open PublicHolidays",
-  CLOSE = "close PublicHolidays",
+  OPEN = "open PublicHolidaysDialog",
+  CLOSE = "close PublicHolidaysDialog",
 }
 
 export enum SchoolHolidaysDataActionType {
-  ADD = "add school holidays data",
-  LOAD = "load school holidays data",
-  REMOVE = "remove school holidays data",
-  UPDATE = "update school holidays data",
+  ADD = "add SchoolHolidays data",
+  LOAD = "load SchoolHolidays data",
+  REMOVE = "remove SchoolHolidays data",
+  UPDATE = "update SchoolHolidays data",
 }
 
 export enum SchoolHolidaysDataLoadingDepthActionType {
-  UPDATE = "update loading depth",
+  UPDATE = "update SchoolHolidays data loading depth",
 }
 
 export enum SchoolHolidaysDialogActionType {
-  OPEN = "open SchoolHolidays",
-  CLOSE = "close SchoolHolidays",
+  OPEN = "open SchoolHolidaysDialog",
+  CLOSE = "close SchoolHolidaysDialog",
 }
 
 export enum SchoolHolidaysLinkActionType {
@@ -63,8 +63,8 @@ export enum SideMenuActionType {
 }
 
 export enum UsersDataActionType {
-  LOAD = "load users data",
-  UPDATE = "update users data",
+  LOAD = "load Users data",
+  UPDATE = "update Users data",
 }
 
 export enum UsersDialogActionType {
@@ -73,12 +73,12 @@ export enum UsersDialogActionType {
 }
 
 export enum VacationsDataActionType {
-  LOAD = "load users data",
-  UPDATE = "update vacation data",
+  LOAD = "load Vacations data",
+  UPDATE = "update Vacations data",
 }
 
 export enum VacationsDataLoadingDepthActionType {
-  UPDATE = "update loading depth",
+  UPDATE = "update VacationsData loading depth",
 }
 
 export enum VacationsDialogActionType {
@@ -87,13 +87,13 @@ export enum VacationsDialogActionType {
 }
 
 export enum VacationStatsDataActionType {
-  LOAD = "load vacation types data",
+  LOAD = "load VacationStats data",
 }
 
 export enum VacationTypesDataActionType {
-  ADD = "add vacation types data",
-  LOAD = "load vacation types data",
-  UPDATE = "update vacation types data",
+  ADD = "add VacationTypes data",
+  LOAD = "load VacationTypes data",
+  UPDATE = "update VacationTypes data",
 }
 
 export enum VacationTypesDialogActionType {
