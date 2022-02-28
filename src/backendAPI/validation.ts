@@ -21,9 +21,9 @@ export const createDataValidator =
     const ajv = new Ajv();
     const validate = ajv.compile<T>(schema);
 
-    return new Promise((resolve, reject) => {
-      if (validate(data)) resolve(data);
-      reject(validate.errors);
+    return new Promise((resolve, reject): void => {
+      if (validate(data)) return resolve(data);
+      return reject(validate.errors);
     });
   };
 
