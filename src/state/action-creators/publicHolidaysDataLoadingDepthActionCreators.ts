@@ -1,5 +1,8 @@
-import { Dispatch } from "redux";
+import { ProviderContext } from "notistack";
+import { batch } from "react-redux";
+import { Dispatch, bindActionCreators } from "redux";
 
+import { actionCreators, store } from "..";
 import { PublicHolidaysDataLoadingDepthActionType } from "../action-types";
 import { PublicHolidaysDataLoadingDepthAction } from "../actions";
 import { LoadingDepth } from "../reducers/initialStates";
@@ -12,7 +15,15 @@ export const setPublicHolidaysDataLoadingDepthAction = (
 });
 
 export const setPublicHolidaysDataLoadingDepth =
-  (loadingDepth: LoadingDepth) =>
-  (dispatch: Dispatch<PublicHolidaysDataLoadingDepthAction>): void => {
-    dispatch(setPublicHolidaysDataLoadingDepthAction(loadingDepth));
+  (snackbarHandles: ProviderContext, loadingDepth: LoadingDepth) =>
+  async (dispatch: Dispatch, getState: typeof store.getState): Promise<void> => {
+    const loadPublicHolidaysData = bindActionCreators(
+      actionCreators.loadPublicHolidaysData,
+      dispatch
+    );
+
+    batch(() => {
+      dispatch(setPublicHolidaysDataLoadingDepthAction(loadingDepth));
+      loadPublicHolidaysData(snackbarHandles, getState().schoolHolidaysDataLoadingDepth);
+    });
   };

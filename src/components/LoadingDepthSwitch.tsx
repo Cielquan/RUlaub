@@ -1,16 +1,19 @@
 import { Trans } from "@lingui/macro";
 import { Stack, Switch, Typography } from "@mui/material";
+import { ProviderContext, useSnackbar } from "notistack";
 
 import { LoadingDepth } from "../state/reducers/initialStates";
 
 interface Props {
   depthState: LoadingDepth;
-  setDepthState(newDepth: LoadingDepth): void;
+  setDepthState(snackbarHandles: ProviderContext, newDepth: LoadingDepth): void;
 }
 
 const LoadingDepthSwitch = ({ depthState, setDepthState }: Props): React.ReactElement => {
+  const snackbarHandles = useSnackbar();
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setDepthState(event.target.checked ? "Full" : "CurrentYear");
+    setDepthState(snackbarHandles, event.target.checked ? "Full" : "CurrentYear");
   };
 
   return (
