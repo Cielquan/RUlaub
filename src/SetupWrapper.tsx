@@ -73,7 +73,8 @@ const SetupWrapper = (): ReactElement => {
       });
       loadPublicHolidaysData(snackbarHandles, publicHolidaysDataLoadingDepth);
       loadSchoolHolidaysData(snackbarHandles, schoolHolidaysDataLoadingDepth);
-      loadVacationsData(snackbarHandles, vacationsDataLoadingDepth); // NOTE: also loads UsersData
+      loadUsersData(snackbarHandles);
+      loadVacationsData(snackbarHandles, vacationsDataLoadingDepth);
       loadVacationStatsData(snackbarHandles);
     }
   });
