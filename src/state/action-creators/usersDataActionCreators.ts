@@ -38,8 +38,9 @@ export const loadUsersData =
     } catch (err) {
       invoke("log_error", {
         target: "users",
-        message: `Users data validation failed: ${err}`,
+        message: "Users data validation failed",
         location: "state/action-creators/usersDataActionCreators.ts-loadUsersData",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -88,8 +89,9 @@ export const updateUsersData =
     } catch (err) {
       invoke("log_error", {
         target: "users",
-        message: `Users data validation failed: ${err}`,
+        message: "Users data validation failed",
         location: "state/action-creators/usersDataActionCreators.ts-updateUsersData",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }

@@ -49,10 +49,11 @@ export const loadVacationStatsData =
     } catch (err) {
       invoke("log_error", {
         target: "vacation-stats",
-        message: `VacationStats data validation failed: ${err}`,
+        message: "VacationStats data validation failed",
         location:
           // eslint-disable-next-line max-len
           "state/action-creators/vacationStatsDataActionCreators.ts-loadVacationStatsData",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }

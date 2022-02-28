@@ -40,8 +40,9 @@ export const loadVacationsData =
     } catch (err) {
       invoke("log_error", {
         target: "vacations",
-        message: `Vacations data validation failed: ${err}`,
+        message: "Vacations data validation failed",
         location: "state/action-creators/vacationsDataActionCreators.ts-loadVacationsData",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -59,8 +60,9 @@ export const loadVacationsData =
     } catch (err) {
       invoke("log_error", {
         target: "vacations",
-        message: `Users data validation failed: ${err}`,
+        message: "Users data validation failed",
         location: "state/action-creators/vacationsDataActionCreators.ts-updateVacationsData",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -109,8 +111,9 @@ export const updateVacationsData =
     } catch (err) {
       invoke("log_error", {
         target: "vacations",
-        message: `Vacations data validation failed: ${err}`,
+        message: "Vacations data validation failed",
         location: "state/action-creators/vacationsDataActionCreators.ts-updateVacationsData",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }

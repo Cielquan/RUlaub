@@ -32,8 +32,9 @@ export const loadConfig =
     } catch (err) {
       invoke("log_error", {
         target: "config",
-        message: `Config data validation failed: ${err}`,
+        message: "Config data validation failed",
         location: "state/action-creators/configActionCreators.ts-loadConfig",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -57,8 +58,9 @@ export const setLanguage =
     } catch (err) {
       invoke("log_error", {
         target: "config",
-        message: `Config data validation failed: ${err}`,
+        message: "Config data validation failed",
         location: "state/action-creators/configActionCreators.ts-setLanguage",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -82,8 +84,9 @@ export const setLogLevel =
     } catch (err) {
       invoke("log_error", {
         target: "config",
-        message: `Config data validation failed: ${err}`,
+        message: "Config data validation failed",
         location: "state/action-creators/configActionCreators.ts-setLogLevel",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -107,8 +110,9 @@ export const setTheme =
     } catch (err) {
       invoke("log_error", {
         target: "config",
-        message: `Config data validation failed: ${err}`,
+        message: "Config data validation failed",
         location: "state/action-creators/configActionCreators.ts-setTheme",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -134,8 +138,9 @@ export const setTodayAutoscrollLeftOffset =
     } catch (err) {
       invoke("log_error", {
         target: "config",
-        message: `Config data validation failed: ${err}`,
+        message: "Config data validation failed",
         location: "state/action-creators/configActionCreators.ts-setTodayAutoscrollLeftOffset",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -159,8 +164,9 @@ export const setUserName =
     } catch (err) {
       invoke("log_error", {
         target: "config",
-        message: `Config data validation failed: ${err}`,
+        message: "Config data validation failed",
         location: "state/action-creators/configActionCreators.ts-setUserName",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -184,8 +190,9 @@ export const setYearChangeScrollBegin =
     } catch (err) {
       invoke("log_error", {
         target: "config",
-        message: `Config data validation failed: ${err}`,
+        message: "Config data validation failed",
         location: "state/action-creators/configActionCreators.ts-setYearChangeScrollBegin",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -209,8 +216,9 @@ export const setYearToShow =
     } catch (err) {
       invoke("log_error", {
         target: "config",
-        message: `Config data validation failed: ${err}`,
+        message: "Config data validation failed",
         location: "state/action-creators/configActionCreators.ts-setYearToShow",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -239,8 +247,9 @@ export const createNewDB =
     } catch (err) {
       invoke("log_error", {
         target: "config",
-        message: `Config data validation failed: ${err}`,
+        message: "Config data validation failed",
         location: "state/action-creators/configActionCreators.ts-createNewDB",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -274,8 +283,9 @@ export const selectDB =
     } catch (err) {
       invoke("log_error", {
         target: "config",
-        message: `Config data validation failed: ${err}`,
+        message: "Config data validation failed",
         location: "state/action-creators/configActionCreators.ts-selectDB",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }

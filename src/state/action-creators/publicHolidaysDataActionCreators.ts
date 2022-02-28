@@ -45,10 +45,11 @@ export const loadPublicHolidaysData =
     } catch (err) {
       invoke("log_error", {
         target: "public-holidays",
-        message: `PublicHolidays data validation failed: ${err}`,
+        message: "PublicHolidays data validation failed",
         location:
           // eslint-disable-next-line max-len
           "state/action-creators/publicHolidaysDataActionCreators.ts-loadPublicHolidaysData",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -102,10 +103,11 @@ export const updatePublicHolidaysData =
     } catch (err) {
       invoke("log_error", {
         target: "public-holidays",
-        message: `PublicHolidays data validation failed: ${err}`,
+        message: "PublicHolidays data validation failed",
         location:
           // eslint-disable-next-line max-len
           "state/action-creators/publicHolidaysDataActionCreators.ts-updatePublicHolidaysData",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }

@@ -34,10 +34,11 @@ export const loadVacationTypesData =
     } catch (err) {
       invoke("log_error", {
         target: "vacation-types",
-        message: `VacationTypes data validation failed: ${err}`,
+        message: "VacationTypes data validation failed",
         location:
           // eslint-disable-next-line max-len
           "state/action-creators/vacationTypesDataActionCreators.ts-loadVacationTypesData",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -77,10 +78,11 @@ export const updateVacationTypesData =
     } catch (err) {
       invoke("log_error", {
         target: "vacation-types",
-        message: `VacationTypes data validation failed: ${err}`,
+        message: "VacationTypes data validation failed",
         location:
           // eslint-disable-next-line max-len
           "state/action-creators/vacationTypesDataActionCreators.ts-updateVacationTypesData",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }

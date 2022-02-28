@@ -35,10 +35,11 @@ export const loadSchoolHolidaysData =
     } catch (err) {
       invoke("log_error", {
         target: "school-holidays",
-        message: `SchoolHolidays data validation failed: ${err}`,
+        message: "SchoolHolidays data validation failed",
         location:
           // eslint-disable-next-line max-len
           "state/action-creators/schoolHolidaysDataActionCreators.ts-loadSchoolHolidaysData",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
@@ -85,10 +86,11 @@ export const updateSchoolHolidaysData =
     } catch (err) {
       invoke("log_error", {
         target: "school-holidays",
-        message: `SchoolHolidays data validation failed: ${err}`,
+        message: "SchoolHolidays data validation failed",
         location:
           // eslint-disable-next-line max-len
           "state/action-creators/schoolHolidaysDataActionCreators.ts-updateSchoolHolidaysData",
+        errObjectString: JSON.stringify(err),
       });
       return;
     }
