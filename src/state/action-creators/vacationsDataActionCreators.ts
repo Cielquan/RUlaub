@@ -22,7 +22,7 @@ export const loadVacationsData =
     let data;
     try {
       data = await invoke("load_vacations", {
-        filter_current_year: loadingDepth === "CurrentYear",
+        filterCurrentYear: loadingDepth === "CurrentYear",
       });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
@@ -69,7 +69,7 @@ export const updateVacationsData =
         newEntries: newEntries ?? null,
         updatedEntries: updatedEntries ?? null,
         removedEntries: removedEntries ?? null,
-        filter_current_year: loadingDepth === "CurrentYear",
+        filterCurrentYear: loadingDepth === "CurrentYear",
       });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);

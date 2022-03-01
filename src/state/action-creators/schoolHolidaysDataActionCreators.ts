@@ -24,7 +24,7 @@ export const loadSchoolHolidaysData =
     let data;
     try {
       data = await invoke("load_school_holidays", {
-        filter_current_year: loadingDepth === "CurrentYear",
+        filterCurrentYear: loadingDepth === "CurrentYear",
       });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
@@ -75,7 +75,7 @@ export const updateSchoolHolidaysData =
         newEntries: newEntries ?? null,
         updatedEntries: updatedEntries ?? null,
         removedEntries: removedEntries ?? null,
-        filter_current_year: loadingDepth === "CurrentYear",
+        filterCurrentYear: loadingDepth === "CurrentYear",
       });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);

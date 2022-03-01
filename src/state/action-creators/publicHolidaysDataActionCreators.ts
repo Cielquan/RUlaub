@@ -26,7 +26,7 @@ export const loadPublicHolidaysData =
     let errorCount: number;
     try {
       [data, errorCount] = await invoke("load_public_holidays", {
-        filter_current_year: loadingDepth === "CurrentYear",
+        filterCurrentYear: loadingDepth === "CurrentYear",
       });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
@@ -84,7 +84,7 @@ export const updatePublicHolidaysData =
         newEntries: newEntries ?? null,
         updatedEntries: updatedEntries ?? null,
         removedEntries: removedEntries ?? null,
-        filter_current_year: loadingDepth === "CurrentYear",
+        filterCurrentYear: loadingDepth === "CurrentYear",
       });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
