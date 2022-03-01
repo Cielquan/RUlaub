@@ -1,7 +1,5 @@
 # Roadmap
 
-- FE | check load of all/currYear data on switch flip
-
 - BE | on missing db: migration only happens on secound start and data load on third
 
 - BE | Impl SchoolHoli link
