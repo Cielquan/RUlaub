@@ -164,6 +164,30 @@ fn main() {
                             .unwrap();
                     }
                 };
+
+                trace!(
+                    target = "tauri_setup",
+                    message = "Emit db setup error event if any"
+                );
+                let db_setup_err_state = app_handle.state::<state::DBSetupErrState>();
+                match *db_setup_err_state.0.lock() {
+                    None => {}
+                    Some(db::setup::DBSetupErr::None) => {}
+                    Some(db::setup::DBSetupErr::NoFileErr) => {
+                        trace!(
+                            target = "emit_event",
+                            message = "Emit event 'db-init-no-file-error'"
+                        );
+                        main_window_.emit("db-init-no-file-error", ()).unwrap();
+                    }
+                    Some(db::setup::DBSetupErr::DBErr) => {
+                        trace!(
+                            target = "emit_event",
+                            message = "Emit event 'db-init-connection-error'"
+                        );
+                        main_window_.emit("db-init-connection-error", ()).unwrap();
+                    }
+                };
             });
 
             debug!(target = "tauri_setup", message = "Finished app setup");
