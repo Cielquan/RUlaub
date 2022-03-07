@@ -30,7 +30,7 @@ fn main() {
         .manage(state::ConfigState(Mutex::new(
             config::DEFAULT_CONFIG.clone(),
         )))
-        .manage(state::DBSetupErrState(Mutex::new(None)))
+        .manage(state::DBSetupState(Mutex::new(state::DBSetup::Loading)))
         .manage(state::PageInitState(Mutex::new(state::PageInit::LOADING)))
         .setup(move |app| {
             debug!(target = "tauri_setup", message = "Start app setup");
@@ -70,23 +70,30 @@ fn main() {
             let config_state = app.state::<state::ConfigState>();
             let database_uri = &config_state.0.lock().settings.database_uri;
 
-            let db_setup_err_state = app.state::<state::DBSetupErrState>();
+            let db_setup_state = app.state::<state::DBSetupState>();
             if database_uri.is_none() {
                 info!(
                     target = "tauri_setup",
                     message = "Database not set; skip update"
                 );
-                *db_setup_err_state.0.lock() = Some(db::setup::DBSetupErr::None);
+                *db_setup_state.0.lock() = state::DBSetup::NoUriSet;
             } else if let Some(db_url) = database_uri {
                 debug!(target = "tauri_setup", message = "Setup db");
-                match db::setup::setup_db(db_url) {
+                match db::establish_connection_to(db_url, false) {
                     Ok(_) => {
                         debug!(target = "tauri_setup", message = "DB migration successful");
-                        *db_setup_err_state.0.lock() = Some(db::setup::DBSetupErr::None);
+                        *db_setup_state.0.lock() = state::DBSetup::OK;
                     }
-                    Err(err) => {
+                    Err(db::DBConnectionError::NoDBFileError) => {
+                        error!(
+                            target = "tauri_setup",
+                            message = "DB migration aborted, no db file"
+                        );
+                        *db_setup_state.0.lock() = state::DBSetup::NoFileFound;
+                    }
+                    Err(db::DBConnectionError::ConnectionError(err)) => {
                         error!(target = "tauri_setup", message = "DB migration failed", err = ?err);
-                        *db_setup_err_state.0.lock() = Some(err);
+                        *db_setup_state.0.lock() = state::DBSetup::DBError;
                     }
                 }
             }
@@ -169,24 +176,23 @@ fn main() {
                     target = "tauri_setup",
                     message = "Emit db setup error event if any"
                 );
-                let db_setup_err_state = app_handle.state::<state::DBSetupErrState>();
-                match *db_setup_err_state.0.lock() {
-                    None => {}
-                    Some(db::setup::DBSetupErr::None) => {}
-                    Some(db::setup::DBSetupErr::NoFileErr) => {
+                let db_setup_state = app_handle.state::<state::DBSetupState>();
+                match *db_setup_state.0.lock() {
+                    state::DBSetup::NoFileFound => {
                         trace!(
                             target = "emit_event",
                             message = "Emit event 'db-init-no-file-error'"
                         );
                         main_window_.emit("db-init-no-file-error", ()).unwrap();
                     }
-                    Some(db::setup::DBSetupErr::DBErr) => {
+                    state::DBSetup::DBError => {
                         trace!(
                             target = "emit_event",
                             message = "Emit event 'db-init-connection-error'"
                         );
                         main_window_.emit("db-init-connection-error", ()).unwrap();
                     }
+                    _ => {}
                 };
             });
 
