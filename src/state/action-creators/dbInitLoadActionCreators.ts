@@ -10,10 +10,10 @@ export const setDBInitLoadStateAction = (payload: DBInitLoadState): DBInitLoadAc
   payload,
 });
 
-export const setDBInitLoadState =
-  (payload: DBInitLoadState) =>
+export const setDBInitLoadStateOK =
+  () =>
   (dispatch: Dispatch<DBInitLoadAction>): void => {
-    dispatch(setDBInitLoadStateAction(payload));
+    dispatch(setDBInitLoadStateAction(DBInitLoadState.OK));
   };
 
 const DBInitLoadStateMap: { [name: string]: DBInitLoadState } = {
