@@ -1,7 +1,5 @@
 # Roadmap
 
-- BE | on missing db: migration only happens on secound start and data load on third
-
 - BE | Impl SchoolHoli link
 
 - BE | Impl autoload of SchoolHoli
