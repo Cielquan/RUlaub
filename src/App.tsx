@@ -16,10 +16,7 @@ import SideMenu from "./components/SideMenu";
 import UsersDialog from "./components/UsersDialog";
 import VacationTypesDialog from "./components/VacationTypesDialog";
 import VacationsDialog from "./components/VacationsDialog";
-
-document.addEventListener("DOMContentLoaded", () => {
-  invoke("finished_init_load");
-});
+import { useMountEffect } from "./hooks";
 
 const StyledMain = styled("main")(({ theme }) => ({
   flexGrow: 1,
@@ -35,36 +32,42 @@ const StyledMain = styled("main")(({ theme }) => ({
   },
 }));
 
-const App = (): ReactElement => (
-  <Box sx={{ boxSizing: "border-box" }}>
-    <CssBaseline />
-    <Box
-      data-testid="rulaub-root"
-      sx={{
-        display: "flex",
-        position: "absolute",
-        top: "0",
-        bottom: "0",
-        left: "0",
-        right: "0",
-      }}
-    >
-      <Navbar />
-      <SideMenu />
-      <StyledMain data-testid="rulaub-main">
-        <Calendar />
-        <NewHolidayButton />
-      </StyledMain>
+const App = (): ReactElement => {
+  useMountEffect(() => {
+    invoke("finished_init_load");
+  });
+
+  return (
+    <Box sx={{ boxSizing: "border-box" }}>
+      <CssBaseline />
+      <Box
+        data-testid="rulaub-root"
+        sx={{
+          display: "flex",
+          position: "absolute",
+          top: "0",
+          bottom: "0",
+          left: "0",
+          right: "0",
+        }}
+      >
+        <Navbar />
+        <SideMenu />
+        <StyledMain data-testid="rulaub-main">
+          <Calendar />
+          <NewHolidayButton />
+        </StyledMain>
+      </Box>
+      <AboutPage />
+      <AddVacationDialog />
+      <PublicHolidaysDialog />
+      <SchoolHolidaysDialog />
+      <SettingsDialog />
+      <UsersDialog />
+      <VacationsDialog />
+      <VacationTypesDialog />
     </Box>
-    <AboutPage />
-    <AddVacationDialog />
-    <PublicHolidaysDialog />
-    <SchoolHolidaysDialog />
-    <SettingsDialog />
-    <UsersDialog />
-    <VacationsDialog />
-    <VacationTypesDialog />
-  </Box>
-);
+  );
+};
 
 export default App;
