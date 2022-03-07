@@ -13,6 +13,7 @@ import { State, actionCreators } from "./state";
 const SetupWrapper = (): ReactElement => {
   const dispatch = useDispatch();
   const {
+    getDBInitLoadState,
     loadPublicHolidaysData,
     loadSchoolHolidaysData,
     loadSchoolHolidaysLink,
@@ -71,7 +72,7 @@ const SetupWrapper = (): ReactElement => {
 
   const firstRenderRef = useRef(true);
 
-  const { loading, error } = useAsync(async () => invoke("get_db_init_state"));
+  const { loading, error } = useAsync(async () => getDBInitLoadState());
   if (loading) return <>Init database ...</>;
 
   if (firstRenderRef.current) {

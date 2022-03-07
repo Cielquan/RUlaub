@@ -4,6 +4,7 @@ import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.s
 import { VacationStatsDataSchema as VacationStatsData } from "../../backendAPI/types/vacationStatsData.schema";
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
+import { DBInitLoadState } from "./dbInitLoadReducer";
 
 export interface CalendarRowUserMap {
   [k: string]: number;
@@ -15,6 +16,7 @@ export const aboutPageInitState = false;
 export const addVacationDialogInitState = false;
 export const calendarRowUserMapInitState: CalendarRowUserMap = {};
 export const configInitState = null;
+export const dbInitLoadInitState = DBInitLoadState.NOT_LOADED;
 export const publicHolidaysDataInitState: PublicHolidaysData = {};
 export const publicHolidaysDataLoadingDepthInitState: LoadingDepth = "CurrentYear";
 export const publicHolidaysDialogInitState = false;
