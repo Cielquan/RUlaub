@@ -1,12 +1,6 @@
 import { DBInitLoadActionType } from "../action-types";
 import { DBInitLoadAction } from "../actions";
-import { dbInitLoadInitState as initState } from "./initialStates";
-
-export enum DBInitLoadState {
-  NOT_LOADED,
-  OK,
-  ERR,
-}
+import { DBInitLoadState, dbInitLoadInitState as initState } from "./initialStates";
 
 const reducer = (state: DBInitLoadState = initState, action: DBInitLoadAction): DBInitLoadState => {
   switch (action.type) {

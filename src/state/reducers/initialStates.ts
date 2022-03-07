@@ -4,10 +4,15 @@ import { UsersDataSchema as UsersData } from "../../backendAPI/types/usersData.s
 import { VacationStatsDataSchema as VacationStatsData } from "../../backendAPI/types/vacationStatsData.schema";
 import { VacationTypesDataSchema as VacationTypesData } from "../../backendAPI/types/vacationTypesData.schema";
 import { VacationsDataSchema as VacationsData } from "../../backendAPI/types/vacationsData.schema";
-import { DBInitLoadState } from "./dbInitLoadReducer";
 
 export interface CalendarRowUserMap {
   [k: string]: number;
+}
+
+export enum DBInitLoadState {
+  NOT_LOADED,
+  OK,
+  ERR,
 }
 
 export type LoadingDepth = "CurrentYear" | "Full";
