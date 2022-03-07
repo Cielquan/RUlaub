@@ -17,8 +17,7 @@ export enum ConfigActionType {
 }
 
 export enum DBInitLoadActionType {
-  SET_OK = "set DBInitLoad to ok",
-  SET_ERR = "set DBInitLoad to error",
+  UPDATE = "update DBInitLoad to status",
 }
 
 export enum PublicHolidaysDataActionType {

@@ -4,10 +4,8 @@ import { DBInitLoadState, dbInitLoadInitState as initState } from "./initialStat
 
 const reducer = (state: DBInitLoadState = initState, action: DBInitLoadAction): DBInitLoadState => {
   switch (action.type) {
-    case DBInitLoadActionType.SET_OK:
-      return DBInitLoadState.OK;
-    case DBInitLoadActionType.SET_ERR:
-      return DBInitLoadState.ERR;
+    case DBInitLoadActionType.UPDATE:
+      return action.payload;
     default:
       return state;
   }

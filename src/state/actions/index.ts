@@ -29,7 +29,7 @@ import {
   VacationsDataLoadingDepthActionType,
   VacationsDialogActionType,
 } from "../action-types";
-import { LoadingDepth } from "../reducers/initialStates";
+import { DBInitLoadState, LoadingDepth } from "../reducers/initialStates";
 
 export type AboutPageAction = {
   type: AboutPageActionType;
@@ -51,6 +51,7 @@ export type ConfigAction = {
 
 export type DBInitLoadAction = {
   type: DBInitLoadActionType;
+  payload: DBInitLoadState;
 };
 
 export type PublicHolidaysDataAction = {

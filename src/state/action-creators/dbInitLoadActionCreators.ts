@@ -3,25 +3,17 @@ import { Dispatch } from "redux";
 
 import { DBInitLoadActionType } from "../action-types";
 import { DBInitLoadAction } from "../actions";
+import { DBInitLoadState } from "../reducers/initialStates";
 
-export const setDBInitLoadERRAction = (): DBInitLoadAction => ({
-  type: DBInitLoadActionType.SET_OK,
+export const setDBInitLoadStateAction = (payload: DBInitLoadState): DBInitLoadAction => ({
+  type: DBInitLoadActionType.UPDATE,
+  payload,
 });
 
-export const setDBInitLoadERR =
-  () =>
+export const setDBInitLoadState =
+  (payload: DBInitLoadState) =>
   (dispatch: Dispatch<DBInitLoadAction>): void => {
-    dispatch(setDBInitLoadERRAction());
-  };
-
-export const setDBInitLoadOKAction = (): DBInitLoadAction => ({
-  type: DBInitLoadActionType.SET_OK,
-});
-
-export const setDBInitLoadOK =
-  () =>
-  (dispatch: Dispatch<DBInitLoadAction>): void => {
-    dispatch(setDBInitLoadOKAction());
+    dispatch(setDBInitLoadStateAction(payload));
   };
 
 export const getDBInitLoadState =
@@ -30,9 +22,9 @@ export const getDBInitLoadState =
     try {
       await invoke("get_db_init_state");
     } catch (err) {
-      dispatch(setDBInitLoadERRAction());
+      dispatch(setDBInitLoadStateAction(DBInitLoadState.ERR));
       return Promise.reject(err);
     }
-    dispatch(setDBInitLoadOKAction());
+    dispatch(setDBInitLoadStateAction(DBInitLoadState.OK));
     return Promise.resolve();
   };
