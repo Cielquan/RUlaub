@@ -36,9 +36,10 @@ export const loadConfig =
         location: "state/action-creators/configActionCreators.ts-loadConfig",
         errObjectString: JSON.stringify(err),
       });
-      return;
+      return Promise.reject(err);
     }
     dispatch(updateConfigAction(conf));
+    return Promise.resolve();
   };
 
 export const setLanguage =
