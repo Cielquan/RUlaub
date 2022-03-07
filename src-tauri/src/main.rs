@@ -155,31 +155,6 @@ fn main() {
                 };
             });
 
-            trace!(
-                target = "tauri_setup",
-                message = "Setup menu event listeners"
-            );
-            let main_window_ = main_window.clone();
-            main_window.on_menu_event(move |event| match event.menu_item_id() {
-                "en_lang" => main_window_.emit("menu-clicked-lang-en", ()).unwrap(),
-                "de_lang" => main_window_.emit("menu-clicked-lang-de", ()).unwrap(),
-                "dark_theme" => main_window_.emit("menu-clicked-theme-dark", ()).unwrap(),
-                "light_theme" => main_window_.emit("menu-clicked-theme-light", ()).unwrap(),
-                "settings" => main_window_.emit("menu-clicked-settings", ()).unwrap(),
-                "about" => main_window_.emit("menu-clicked-about", ()).unwrap(),
-                "new_db" => main_window_.emit("menu-clicked-db-new", ()).unwrap(),
-                "select_db" => main_window_.emit("menu-clicked-db-select", ()).unwrap(),
-                "new_vac" => main_window_.emit("menu-clicked-vac-new", ()).unwrap(),
-                "edit_vacs" => main_window_.emit("menu-clicked-vac-edit", ()).unwrap(),
-                "users" => main_window_.emit("menu-clicked-users", ()).unwrap(),
-                "pub_holidays" => main_window_.emit("menu-clicked-pub_holidays", ()).unwrap(),
-                "school_holidays" => main_window_
-                    .emit("menu-clicked-school_holidays", ())
-                    .unwrap(),
-                "vac_types" => main_window_.emit("menu-clicked-vac_types", ()).unwrap(),
-                _ => {}
-            });
-
             debug!(target = "tauri_setup", message = "Finished app setup");
             Ok(())
         })
