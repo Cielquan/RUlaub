@@ -40,7 +40,7 @@ pub async fn get_db_init_state(
             }
             state::DBSetup::OK => return Ok(state::DBSetup::OK),
             state::DBSetup::NoUriSet => return Ok(state::DBSetup::NoUriSet),
-            state::DBSetup::NoFileFound => return Ok(state::DBSetup::NoFileFound),
+            state::DBSetup::NoFileFound => return Err(state::DBSetup::NoFileFound),
             state::DBSetup::DBError => return Err(state::DBSetup::DBError),
         };
     }
