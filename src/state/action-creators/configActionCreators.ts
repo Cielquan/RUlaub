@@ -2,8 +2,10 @@ import { invoke } from "@tauri-apps/api";
 import { open, save } from "@tauri-apps/api/dialog";
 import { ProviderContext } from "notistack";
 import { dirname } from "path";
-import { Dispatch } from "redux";
+import { batch } from "react-redux";
+import { Dispatch, bindActionCreators } from "redux";
 
+import { actionCreators } from "..";
 import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
 import {
   ConfigFileSchema as ConfigFile,
@@ -230,7 +232,7 @@ const FILTERS = [{ name: "Database", extensions: ["db"] }];
 
 export const createNewDB =
   (snackbarHandles: ProviderContext) =>
-  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+  async (dispatch: Dispatch): Promise<void> => {
     const path = await save({ filters: FILTERS });
     if (path === null) return;
 
@@ -242,7 +244,7 @@ export const createNewDB =
       return;
     }
 
-    let conf;
+    let conf: ConfigFile;
     try {
       conf = await validateConfig(data);
     } catch (err) {
@@ -254,12 +256,18 @@ export const createNewDB =
       });
       return;
     }
-    dispatch(updateConfigAction(conf));
+
+    const setDBInitLoadStateOK = bindActionCreators(actionCreators.setDBInitLoadStateOK, dispatch);
+
+    batch(() => {
+      dispatch(updateConfigAction(conf));
+      setDBInitLoadStateOK();
+    });
   };
 
 export const selectDB =
   (snackbarHandles: ProviderContext) =>
-  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
+  async (dispatch: Dispatch): Promise<void> => {
     const dbUri = (await invoke<ConfigFile>("get_config_state")).settings.databaseUri;
 
     const path = (await open({
@@ -278,7 +286,7 @@ export const selectDB =
       return;
     }
 
-    let conf;
+    let conf: ConfigFile;
     try {
       conf = await validateConfig(data);
     } catch (err) {
@@ -290,5 +298,11 @@ export const selectDB =
       });
       return;
     }
-    dispatch(updateConfigAction(conf));
+
+    const setDBInitLoadStateOK = bindActionCreators(actionCreators.setDBInitLoadStateOK, dispatch);
+
+    batch(() => {
+      dispatch(updateConfigAction(conf));
+      setDBInitLoadStateOK();
+    });
   };
