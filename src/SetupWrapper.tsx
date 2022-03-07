@@ -6,7 +6,6 @@ import { bindActionCreators } from "redux";
 
 import App from "./App";
 import setupErrorEventListeners from "./backendAPI/eventListeners/errors";
-import setupMenuEventListeners from "./backendAPI/eventListeners/menu";
 import { useMountEffect } from "./hooks";
 import i18n from "./i18n";
 import { State, actionCreators } from "./state";
@@ -48,7 +47,6 @@ const SetupWrapper = (): ReactElement => {
   const vacationsDataLoadingDepth = useSelector((state: State) => state.vacationsDataLoadingDepth);
 
   useMountEffect(() => {
-    setupMenuEventListeners(dispatch, snackbarHandles);
     setupErrorEventListeners(snackbarHandles);
 
     if (typeof configState?.settings.databaseUri !== "string") {
