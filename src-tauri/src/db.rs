@@ -4,6 +4,7 @@ pub mod migration;
 pub mod models;
 pub mod query_only_models;
 pub mod schema;
+pub mod setup;
 mod sql_functions;
 pub mod state_models;
 

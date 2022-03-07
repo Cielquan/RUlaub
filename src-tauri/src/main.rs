@@ -30,6 +30,9 @@ fn main() {
         .manage(state::ConfigState(Mutex::new(
             config::DEFAULT_CONFIG.clone(),
         )))
+        .manage(state::DBSetupErrState(Mutex::new(
+            db::setup::DBSetupErr::None,
+        )))
         .manage(state::PageInitState(Mutex::new(state::PageInit::LOADING)))
         .setup(move |app| {
             debug!(target = "tauri_setup", message = "Start app setup");
@@ -65,17 +68,25 @@ fn main() {
                 }
             }
 
-            {
-                debug!(target = "tauri_setup", message = "Check if database is set");
-                let config_state = app.state::<state::ConfigState>();
-                let database_uri = &config_state.0.lock().settings.database_uri;
-                match database_uri {
-                    None => info!(
-                        target = "tauri_setup",
-                        message = "Database not set; skip update"
-                    ),
-                    Some(db_uri) => {
-                        let _ = db::migrate_db_schema(db_uri, true);
+            debug!(target = "tauri_setup", message = "Check if database is set");
+            let config_state = app.state::<state::ConfigState>();
+            let database_uri = &config_state.0.lock().settings.database_uri;
+
+            if database_uri.is_none() {
+                info!(
+                    target = "tauri_setup",
+                    message = "Database not set; skip update"
+                );
+            } else if let Some(db_url) = database_uri {
+                debug!(target = "tauri_setup", message = "Setup db");
+                match db::setup::setup_db(db_url) {
+                    Ok(_) => {
+                        debug!(target = "tauri_setup", message = "DB migration successful");
+                    }
+                    Err(err) => {
+                        error!(target = "tauri_setup", message = "DB migration failed", err = ?err);
+                        let db_setup_err_state = app.state::<state::DBSetupErrState>();
+                        *db_setup_err_state.0.lock() = err;
                     }
                 }
             }
