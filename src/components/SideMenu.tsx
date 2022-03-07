@@ -21,6 +21,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { State, actionCreators } from "../state";
+import { DBInitLoadState } from "../state/reducers/initialStates";
 import SideMenuButton from "./SideMenuButton";
 import SideMenuDoubleButton, { DoubleButtonItemList } from "./SideMenuDoubleButton";
 
@@ -54,6 +55,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
   } = bindActionCreators(actionCreators, dispatch);
   const sideMenuState = useSelector((state: State) => state.sideMenu);
   const configState = useSelector((state: State) => state.config);
+  const dbInitLoadState = useSelector((state: State) => state.dbInitLoad);
 
   const wrapOnClick =
     (fn: () => void): (() => void) =>
@@ -85,6 +87,10 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
 
   const snackbarHandles = useSnackbar();
 
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { databaseUri, yearToShow } = configState!.settings;
+  const dbInitLoadOk = dbInitLoadState === DBInitLoadState.OK;
+
   const doubleButtonItemList: DoubleButtonItemList = [
     {
       mainButton: [t`Database`, <StorageIcon />],
@@ -95,37 +101,32 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
       mainButton: [t`Users`, <GroupIcon />],
       mainButtonOnClick: openUsersDialog,
       rightButton: [<CreateIcon />, openUsersDialog, t`Edit`],
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      disabled: !configState!.settings.databaseUri,
+      disabled: !databaseUri || !dbInitLoadOk,
     },
     {
       mainButton: [t`Public Holidays`, <EventBusyIcon />],
       mainButtonOnClick: openPublicHolidaysDialog,
       rightButton: [<CreateIcon />, openPublicHolidaysDialog, t`Edit`],
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      disabled: !configState!.settings.databaseUri || !configState!.settings.yearToShow,
+      disabled: !databaseUri || !dbInitLoadOk || !yearToShow,
     },
     {
       mainButton: [t`School Holidays`, <DateRangeIcon />],
       mainButtonOnClick: openSchoolHolidaysDialog,
       rightButton: [<CreateIcon />, openSchoolHolidaysDialog, t`Edit`],
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      disabled: !configState!.settings.databaseUri || !configState!.settings.yearToShow,
+      disabled: !databaseUri || !dbInitLoadOk || !yearToShow,
     },
     {
       mainButton: [t`Vacation Types`, <EventNoteIcon />],
       mainButtonOnClick: openVacationTypesDialog,
       rightButton: [<CreateIcon />, openVacationTypesDialog, t`Edit`],
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      disabled: !configState!.settings.databaseUri,
+      disabled: !databaseUri || !dbInitLoadOk,
     },
     {
       mainButton: [t`Vacation`, <FlightIcon />],
       mainButtonOnClick: openVacationsDialog,
       rightButton: [<CreateIcon />, openVacationsDialog, t`Edit`],
       leftButton: [<AddIcon />, () => undefined, t`Create`],
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      disabled: !configState!.settings.databaseUri || !configState!.settings.yearToShow,
+      disabled: !databaseUri || !dbInitLoadOk || !yearToShow,
     },
   ];
 
