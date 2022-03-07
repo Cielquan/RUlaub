@@ -14,6 +14,6 @@ pub enum PageInit {
 
 pub struct ConfigSetupErrState(pub Mutex<ConfigSetupErr>);
 pub struct ConfigState(pub Mutex<Config>);
-pub struct DBSetupErrState(pub Mutex<DBSetupErr>);
+pub struct DBSetupErrState(pub Mutex<Option<DBSetupErr>>);
 pub struct PageInitState(pub Mutex<PageInit>);
 pub struct TracerHandleState(pub Mutex<TracerHandle>);

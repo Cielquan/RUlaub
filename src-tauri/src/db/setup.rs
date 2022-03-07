@@ -1,6 +1,6 @@
 use crate::db;
 
-#[derive(Debug, PartialEq)]
+#[derive(Debug, Clone, Copy, PartialEq, Serialize)]
 pub enum DBSetupErr {
     None,
     DBErr,

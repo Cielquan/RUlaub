@@ -30,9 +30,7 @@ fn main() {
         .manage(state::ConfigState(Mutex::new(
             config::DEFAULT_CONFIG.clone(),
         )))
-        .manage(state::DBSetupErrState(Mutex::new(
-            db::setup::DBSetupErr::None,
-        )))
+        .manage(state::DBSetupErrState(Mutex::new(None)))
         .manage(state::PageInitState(Mutex::new(state::PageInit::LOADING)))
         .setup(move |app| {
             debug!(target = "tauri_setup", message = "Start app setup");
@@ -82,11 +80,13 @@ fn main() {
                 match db::setup::setup_db(db_url) {
                     Ok(_) => {
                         debug!(target = "tauri_setup", message = "DB migration successful");
+                        let db_setup_err_state = app.state::<state::DBSetupErrState>();
+                        *db_setup_err_state.0.lock() = Some(db::setup::DBSetupErr::None);
                     }
                     Err(err) => {
                         error!(target = "tauri_setup", message = "DB migration failed", err = ?err);
                         let db_setup_err_state = app.state::<state::DBSetupErrState>();
-                        *db_setup_err_state.0.lock() = err;
+                        *db_setup_err_state.0.lock() = Some(err);
                     }
                 }
             }
