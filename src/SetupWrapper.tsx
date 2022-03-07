@@ -6,14 +6,13 @@ import { bindActionCreators } from "redux";
 
 import App from "./App";
 import setupErrorEventListeners from "./backendAPI/eventListeners/errors";
-import { useAsync } from "./hooks";
 import i18n from "./i18n";
 import { State, actionCreators } from "./state";
+import { DBInitLoadState } from "./state/reducers/initialStates";
 
 const SetupWrapper = (): ReactElement => {
   const dispatch = useDispatch();
   const {
-    getDBInitLoadState,
     loadPublicHolidaysData,
     loadSchoolHolidaysData,
     loadSchoolHolidaysLink,
@@ -72,14 +71,17 @@ const SetupWrapper = (): ReactElement => {
 
   const firstRenderRef = useRef(true);
 
-  const { loading, error } = useAsync(async () => getDBInitLoadState());
-  if (loading) return <>Init database ...</>;
+  const dbInitLoadState = useSelector((state: State) => state.dbInitLoad);
 
   if (firstRenderRef.current) {
     firstRenderRef.current = false;
     i18n.activate(langState.locale);
     setupErrorEventListeners(snackbarHandles);
-    if (!error) loadDBData();
+    if (
+      dbInitLoadState !== DBInitLoadState.ERR &&
+      dbInitLoadState !== DBInitLoadState.NO_FILE_FOUND
+    )
+      loadDBData();
   }
 
   return <App />;
