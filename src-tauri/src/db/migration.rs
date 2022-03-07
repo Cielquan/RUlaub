@@ -1,13 +1,13 @@
 use crate::db;
 
 /// Migrate the database to the latest state
-pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<()> {
+pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<bool> {
     debug!(
         target = "database-migration",
         message = "Start database migration routine"
     );
 
-    match db::establish_connection_to(db_url, create) {
+    let is_new = match db::establish_connection_to(db_url, create) {
         Err(err) => {
             error!(
                 target = "database-migration",
@@ -15,7 +15,7 @@ pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<()> {
             );
             return Err(err);
         }
-        Ok(conn) => {
+        Ok((conn, new)) => {
             if let Err(err) = diesel_migrations::run_pending_migrations(&conn) {
                 error!(
                     target = "database-migration",
@@ -28,12 +28,13 @@ pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<()> {
                     target = "database-migration",
                     message = "Ran pending migrations"
                 );
+                new
             }
         }
-    }
+    };
     debug!(
         target = "database-migration",
         message = "Finished database migration routine"
     );
-    Ok(())
+    Ok(is_new)
 }

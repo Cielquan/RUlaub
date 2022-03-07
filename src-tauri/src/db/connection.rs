@@ -15,8 +15,9 @@ pub enum NoDBFileError {
 pub fn establish_connection_to(
     db_url: &str,
     create: bool,
-) -> anyhow::Result<diesel::SqliteConnection> {
+) -> anyhow::Result<(diesel::SqliteConnection, bool)> {
     debug!(target = "database-connection", message = "Connect to database", db_url = ?db_url);
+    let mut is_new = false;
 
     if !path::Path::new(db_url).exists() {
         if !create {
@@ -32,11 +33,12 @@ pub fn establish_connection_to(
                 message = "No database file found; create new database",
                 db_url = ?db_url
             );
+            is_new = true;
         }
     }
 
     match diesel::SqliteConnection::establish(db_url) {
-        Ok(conn) => Ok(conn),
+        Ok(conn) => Ok((conn, is_new)),
         Err(err) => {
             error!(
                 taget = "database-connection",
