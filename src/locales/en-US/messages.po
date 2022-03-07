@@ -93,6 +93,18 @@ msgstr "Failed to read from config file. Falling back to default config."
 msgid "No config file found. Falling back to default config."
 msgstr "No config file found. Falling back to default config."
 
+#: src/backendAPI/eventListeners/errors.tsx:34
+msgid "No database file found. Please select or create a new database file via the sidemenu."
+msgstr "No database file found. Please select or create a new database file via the sidemenu."
+
+#: src/backendAPI/eventListeners/errors.tsx:41
+msgid ""
+"Failed to connect to or update the database.\n"
+"Please check the database file and restart the programm."
+msgstr ""
+"Failed to connect to or update the database.\n"
+"Please check the database file and restart the programm."
+
 #: src/components/AboutPage.tsx:64
 msgid "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
 msgstr "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
@@ -202,7 +214,7 @@ msgstr "Edit Users"
 msgid "No year to show selected. Please select one below:"
 msgstr "No year to show selected. Please select one below:"
 
-#: src/components/CalendarTableHeadCell.tsx:59
+#: src/components/CalendarTableHeadCell.tsx:81
 msgid "Change displayed year."
 msgstr "Change displayed year."
 

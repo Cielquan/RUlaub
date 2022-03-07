@@ -91,6 +91,18 @@ msgstr "Fehler beim Lesen der Config Datei. Standard Config wird verwendet."
 msgid "No config file found. Falling back to default config."
 msgstr "Keine Config Datei gefunden. Standard Config wird verwendet."
 
+#: src/backendAPI/eventListeners/errors.tsx:34
+msgid "No database file found. Please select or create a new database file via the sidemenu."
+msgstr "Keine Datenbankdatei gefunden. Bitte eine neue Datenbank über das Seitenmenu auswählen oder erstellen."
+
+#: src/backendAPI/eventListeners/errors.tsx:41
+msgid ""
+"Failed to connect to or update the database.\n"
+"Please check the database file and restart the programm."
+msgstr ""
+"Update oder Verbindung zu der Datenbank fehlgeschlagen.\n"
+"Bitte die Datenbankdatei prüfen und das Programm neu starten."
+
 #: src/components/AboutPage.tsx:64
 msgid "RUlaub is licensed under either 'Apache License 2.0' or 'MIT License' at your option."
 msgstr "RUlaub ist frei wählbar unter der 'Apache License 2.0' oder 'MIT License' lizensiert."
@@ -200,7 +212,7 @@ msgstr "Nutzer bearbeiten"
 msgid "No year to show selected. Please select one below:"
 msgstr "Kein Jahr zum Anzeigen ausgewählt. Bitte unten auswählen:"
 
-#: src/components/CalendarTableHeadCell.tsx:59
+#: src/components/CalendarTableHeadCell.tsx:81
 msgid "Change displayed year."
 msgstr "Angezeigtes Jahr ändern."
 

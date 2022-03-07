@@ -28,6 +28,21 @@ const setupErrorEventListeners = async (snackbarHandles: ProviderContext): Promi
       snackbarHandles
     );
   });
+
+  await webview.listen("db-init-no-file-error", () => {
+    enqueuePersistendErrSnackbar(
+      t`No database file found. Please select or create a new database file via the sidemenu.`,
+      snackbarHandles
+    );
+  });
+
+  await webview.listen("db-init-connection-error", () => {
+    enqueuePersistendErrSnackbar(
+      t`Failed to connect to or update the database.
+      Please check the database file and restart the programm.`,
+      snackbarHandles
+    );
+  });
 };
 
 export default setupErrorEventListeners;
