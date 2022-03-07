@@ -3,6 +3,10 @@
 RUlaub is a vacation calandar for teams.
 RUlaub is a wordplay on the german word for vacation (Urlaub) and Rust.
 
+## Behavior
+
+Invalid settings for language, log-level and theme in the config file are replaced by the default values.
+
 ## Development
 
 The programm uses [tauri](https://tauri.studio/) as its foundation.
