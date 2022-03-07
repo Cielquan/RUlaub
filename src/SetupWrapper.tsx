@@ -6,7 +6,7 @@ import { bindActionCreators } from "redux";
 
 import App from "./App";
 import setupErrorEventListeners from "./backendAPI/eventListeners/errors";
-import { useMountEffect } from "./hooks";
+import { useAsync } from "./hooks";
 import i18n from "./i18n";
 import { State, actionCreators } from "./state";
 
@@ -26,12 +26,6 @@ const SetupWrapper = (): ReactElement => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const langState = configState!.settings.language;
 
-  const firstRenderRef = useRef(true);
-  if (firstRenderRef.current) {
-    firstRenderRef.current = false;
-    i18n.activate(langState.locale);
-  }
-
   useEffect(() => {
     i18n.activate(langState.locale);
   }, [langState.locale]);
@@ -46,9 +40,7 @@ const SetupWrapper = (): ReactElement => {
   );
   const vacationsDataLoadingDepth = useSelector((state: State) => state.vacationsDataLoadingDepth);
 
-  useMountEffect(() => {
-    setupErrorEventListeners(snackbarHandles);
-
+  const loadDBData = (): void => {
     if (typeof configState?.settings.databaseUri !== "string") {
       return;
     }
@@ -75,7 +67,19 @@ const SetupWrapper = (): ReactElement => {
       loadVacationsData(snackbarHandles, vacationsDataLoadingDepth);
       loadVacationStatsData(snackbarHandles);
     }
-  });
+  };
+
+  const firstRenderRef = useRef(true);
+
+  const { loading, error } = useAsync(async () => invoke("get_db_init_state"));
+  if (loading) return <>Init database ...</>;
+
+  if (firstRenderRef.current) {
+    firstRenderRef.current = false;
+    i18n.activate(langState.locale);
+    setupErrorEventListeners(snackbarHandles);
+    if (!error) loadDBData();
+  }
 
   return <App />;
 };

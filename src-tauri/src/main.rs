@@ -172,6 +172,7 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             commands::init::aborted_init_load,
             commands::init::finished_init_load,
+            commands::init::get_db_init_state,
             //
             commands::logging::log_debug,
             commands::logging::log_error,
