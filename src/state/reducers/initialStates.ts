@@ -12,6 +12,8 @@ export interface CalendarRowUserMap {
 export enum DBInitLoadState {
   NOT_LOADED,
   OK,
+  NO_URI_SET,
+  NO_FILE_FOUND,
   ERR,
 }
 

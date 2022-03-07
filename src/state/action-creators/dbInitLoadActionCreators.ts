@@ -16,11 +16,20 @@ export const setDBInitLoadState =
     dispatch(setDBInitLoadStateAction(payload));
   };
 
+const DBInitLoadStateMap: { [name: string]: DBInitLoadState } = {
+  Loading: DBInitLoadState.NOT_LOADED,
+  OK: DBInitLoadState.OK,
+  NoUriSet: DBInitLoadState.NO_URI_SET,
+  NoFileFound: DBInitLoadState.NO_FILE_FOUND,
+  DBError: DBInitLoadState.ERR,
+};
+
 export const getDBInitLoadState =
   () =>
   async (dispatch: Dispatch<DBInitLoadAction>): Promise<void> => {
+    let state;
     try {
-      await invoke("get_db_init_state");
+      state = await invoke("get_db_init_state");
     } catch (err) {
       invoke("log_error", {
         target: "dbInitLoad",
@@ -29,7 +38,9 @@ export const getDBInitLoadState =
         errObjectString: JSON.stringify(err),
       });
 
-      dispatch(setDBInitLoadStateAction(DBInitLoadState.ERR));
+      let payload: DBInitLoadState | undefined = DBInitLoadStateMap[err as string];
+      if (payload === undefined) payload = DBInitLoadState.ERR;
+      dispatch(setDBInitLoadStateAction(payload));
       return Promise.reject(err);
     }
 
@@ -39,6 +50,6 @@ export const getDBInitLoadState =
       location: "state/action-creators/dbInitLoadActionCreators.ts-getDBInitLoadState",
     });
 
-    dispatch(setDBInitLoadStateAction(DBInitLoadState.OK));
+    dispatch(setDBInitLoadStateAction(DBInitLoadStateMap[state as string]));
     return Promise.resolve();
   };
