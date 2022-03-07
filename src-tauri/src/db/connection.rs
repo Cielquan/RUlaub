@@ -4,9 +4,11 @@ use diesel::Connection;
 use thiserror::Error;
 
 #[derive(Error, Debug)]
-pub enum NoDBFileError {
+pub enum DBConnectionError {
     #[error("Database file not found")]
-    Msg,
+    NoDBFileError,
+    #[error("Database connection failed")]
+    ConnectionError(#[from] diesel::ConnectionError),
 }
 
 /// Try to establish a connection to the given database.
@@ -15,7 +17,7 @@ pub enum NoDBFileError {
 pub fn establish_connection_to(
     db_url: &str,
     create: bool,
-) -> anyhow::Result<(diesel::SqliteConnection, bool)> {
+) -> Result<(diesel::SqliteConnection, bool), DBConnectionError> {
     debug!(target = "database-connection", message = "Connect to database", db_url = ?db_url);
     let mut is_new = false;
 
@@ -26,7 +28,7 @@ pub fn establish_connection_to(
                 message = "No database file found; creation set to false; abort",
                 db_url = ?db_url
             );
-            return Err(NoDBFileError::Msg.into());
+            return Err(DBConnectionError::NoDBFileError);
         } else {
             info!(
                 target = "database-connection",
@@ -46,7 +48,7 @@ pub fn establish_connection_to(
                 error = ?err,
                 db_url = ?db_url
             );
-            Err(err.into())
+            Err(DBConnectionError::ConnectionError(err))
         }
     }
 }

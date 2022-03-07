@@ -13,7 +13,7 @@ pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<bool> {
                 target = "database-migration",
                 message = "Failed to create db connection for migration",
             );
-            return Err(err);
+            return Err(err.into());
         }
         Ok((conn, new)) => {
             if let Err(err) = diesel_migrations::run_pending_migrations(&conn) {
