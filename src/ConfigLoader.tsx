@@ -12,7 +12,7 @@ const ConfigLoader = (): ReactElement => {
   const { loadConfig } = bindActionCreators(actionCreators, dispatch);
 
   const { loading, error } = useAsync(async () => loadConfig());
-  if (loading) return <>Loading</>;
+  if (loading) return <>Loading config file ...</>;
   if (error) invoke("aborted_init_load");
 
   return <ProviderWrapper />;
