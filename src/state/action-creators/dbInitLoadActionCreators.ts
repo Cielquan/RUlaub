@@ -22,9 +22,23 @@ export const getDBInitLoadState =
     try {
       await invoke("get_db_init_state");
     } catch (err) {
+      invoke("log_error", {
+        target: "dbInitLoad",
+        message: "Database init load failed",
+        location: "state/action-creators/dbInitLoadActionCreators.ts-getDBInitLoadState",
+        errObjectString: JSON.stringify(err),
+      });
+
       dispatch(setDBInitLoadStateAction(DBInitLoadState.ERR));
       return Promise.reject(err);
     }
+
+    invoke("log_debug", {
+      target: "dbInitLoad",
+      message: "Database init load succeeded",
+      location: "state/action-creators/dbInitLoadActionCreators.ts-getDBInitLoadState",
+    });
+
     dispatch(setDBInitLoadStateAction(DBInitLoadState.OK));
     return Promise.resolve();
   };
