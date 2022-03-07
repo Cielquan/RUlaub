@@ -75,7 +75,7 @@ fn main() {
                         message = "Database not set; skip update"
                     ),
                     Some(db_uri) => {
-                        let _ = db::migrate_db_schema(db_uri, false);
+                        let _ = db::migrate_db_schema(db_uri, true);
                     }
                 }
             }

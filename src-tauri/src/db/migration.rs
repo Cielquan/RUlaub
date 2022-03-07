@@ -1,5 +1,3 @@
-use std::path;
-
 use crate::db;
 
 /// Migrate the database to the latest state
@@ -8,21 +6,8 @@ pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<()> {
         target = "database-migration",
         message = "Start database migration routine"
     );
-    if !path::Path::new(db_url).exists() {
-        if !create {
-            warn!(
-                target = "database-migration",
-                message = "No database file found; creation not set; abort"
-            );
-            return Ok(());
-        } else {
-            info!(
-                target = "database-migration",
-                message = "Create new database"
-            );
-        }
-    }
-    match db::establish_connection_to(db_url) {
+
+    match db::establish_connection_to(db_url, create) {
         Err(err) => {
             error!(
                 target = "database-migration",
