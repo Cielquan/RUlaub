@@ -28,7 +28,8 @@ export const getDBInitLoadState =
   () =>
   async (dispatch: Dispatch<DBInitLoadAction>): Promise<void> => {
     try {
-      await invoke("get_db_init_state");
+      const x = await invoke("get_db_init_state");
+      invoke("print", { string: x });
     } catch (err) {
       dispatch(setDBInitLoadERRAction());
       return Promise.reject(err);

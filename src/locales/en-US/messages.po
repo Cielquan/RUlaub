@@ -26,8 +26,8 @@ msgid "Error: Could not serialize config."
 msgstr "Error: Could not serialize config."
 
 #: src/backendAPI/errorMsgCatalogue.ts:7
-msgid "Error: Failed to connect to databse."
-msgstr "Error: Failed to connect to databse."
+msgid "Error: Failed to connect to database."
+msgstr "Error: Failed to connect to database."
 
 #: src/backendAPI/errorMsgCatalogue.ts:8
 msgid "Error: Failed to create new database."
@@ -46,8 +46,8 @@ msgid "Error: Failed to insert new entry in database."
 msgstr "Error: Failed to insert new entry in database."
 
 #: src/backendAPI/errorMsgCatalogue.ts:12
-msgid "Error: Got invalid data for databse update."
-msgstr "Error: Got invalid data for databse update."
+msgid "Error: Got invalid data for database update."
+msgstr "Error: Got invalid data for database update."
 
 #: src/backendAPI/errorMsgCatalogue.ts:13
 msgid "Error: Failed to load entry in database."
