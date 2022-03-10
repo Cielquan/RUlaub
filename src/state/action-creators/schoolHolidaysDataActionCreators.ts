@@ -1,3 +1,4 @@
+import { t } from "@lingui/macro";
 import { invoke } from "@tauri-apps/api/tauri";
 import { ProviderContext } from "notistack";
 import { Dispatch } from "redux";
@@ -6,7 +7,7 @@ import getErrorCatalogueMsg from "../../backendAPI/errorMsgCatalogue";
 import { NewSchoolHolidayData, SchoolHolidayDataMap } from "../../backendAPI/types/helperTypes";
 import { SchoolHolidaysDataSchema as SchoolHolidaysData } from "../../backendAPI/types/schoolHolidaysData.schema";
 import { validateSchoolHolidaysData } from "../../backendAPI/validation";
-import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
+import { createSnackbarCloseAction, enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
 import { SchoolHolidaysDataActionType } from "../action-types";
 import { SchoolHolidaysDataAction } from "../actions";
 import { LoadingDepth } from "../reducers/initialStates";
@@ -45,6 +46,42 @@ export const loadSchoolHolidaysData =
       });
       return;
     }
+
+    dispatch(loadSchoolHolidaysDataAction(validatedData));
+  };
+
+export const downloadSchoolHolidaysDataFromLink =
+  (snackbarHandles: ProviderContext, year: number) =>
+  async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
+    let data;
+    try {
+      data = await invoke("download_school_holidays_from_link", { year });
+    } catch (err) {
+      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
+      return;
+    }
+
+    let validatedData: SchoolHolidaysData;
+    try {
+      validatedData = await validateSchoolHolidaysData(data);
+    } catch (err) {
+      invoke("log_error", {
+        target: "school-holidays",
+        message: "SchoolHolidays data validation failed",
+        location:
+          // eslint-disable-next-line max-len
+          "state/action-creators/schoolHolidaysDataActionCreators.ts-loadSchoolHolidaysData",
+        errObjectString: JSON.stringify(err),
+      });
+      return;
+    }
+
+    const msg = t`Successfully downloaded school holidays for year: ${year}`;
+    snackbarHandles.enqueueSnackbar(msg, {
+      variant: "success",
+      persist: false,
+      action: createSnackbarCloseAction(snackbarHandles.closeSnackbar),
+    });
 
     dispatch(loadSchoolHolidaysDataAction(validatedData));
   };
