@@ -11,6 +11,7 @@ import Navbar from "./components/Navbar";
 import NewHolidayButton from "./components/NewHolidayButton";
 import PublicHolidaysDialog from "./components/PublicHolidaysDialog";
 import SchoolHolidaysDialog from "./components/SchoolHolidaysDialog";
+import SchoolHolidaysDownloadButton from "./components/SchoolHolidaysDownloadButton";
 import SettingsDialog from "./components/SettingsDialog";
 import SideMenu from "./components/SideMenu";
 import UsersDialog from "./components/UsersDialog";
@@ -56,6 +57,7 @@ const App = (): ReactElement => {
         <StyledMain data-testid="rulaub-main">
           <Calendar />
           <NewHolidayButton />
+          <SchoolHolidaysDownloadButton />
         </StyledMain>
       </Box>
       <AboutPage />
