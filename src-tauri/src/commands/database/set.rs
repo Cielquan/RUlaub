@@ -2,7 +2,7 @@ use diesel::prelude::*;
 
 use crate::commands::database::get as cmd_db_get;
 use crate::db::{conversion, models, state_models};
-use crate::{commands, state};
+use crate::{commands, config, state};
 /// Update [`PublicHoliday`] in database.
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
@@ -110,10 +110,28 @@ pub async fn update_school_holidays(
     filter_current_year: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
 ) -> commands::CommandResult<state_models::SchoolHolidays> {
-    use crate::db::schema::school_holidays::dsl::{id, school_holidays};
-
     let config_state_guard = config_state.0.lock();
     let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
+
+    _update_school_holidays(
+        &config_state_guard,
+        &conn,
+        new_entries,
+        updated_entries,
+        removed_entries,
+        filter_current_year,
+    )
+}
+
+pub fn _update_school_holidays(
+    config: &config::Config,
+    conn: &SqliteConnection,
+    new_entries: Option<Vec<state_models::SchoolHoliday>>,
+    updated_entries: Option<state_models::SchoolHolidays>,
+    removed_entries: Option<Vec<i32>>,
+    filter_current_year: Option<bool>,
+) -> commands::CommandResult<state_models::SchoolHolidays> {
+    use crate::db::schema::school_holidays::dsl::{id, school_holidays};
 
     match conn.exclusive_transaction::<state_models::SchoolHolidays, super::DieselResultErrorWrapper, _>(
         || {
@@ -133,7 +151,7 @@ pub async fn update_school_holidays(
                 }
                 if let Err(err) = diesel::insert_into(school_holidays)
                     .values(insertable.clone())
-                    .execute(&conn)
+                    .execute(conn)
                 {
                     error!(
                         target = "database",
@@ -164,7 +182,7 @@ pub async fn update_school_holidays(
                 for insertable in insertables {
                     if let Err(err) = diesel::update(school_holidays.filter(id.eq(insertable.id)))
                         .set(insertable.clone())
-                        .execute(&conn)
+                        .execute(conn)
                     {
                         error!(
                             target = "database",
@@ -183,7 +201,7 @@ pub async fn update_school_holidays(
                 let removed_entries = removed_entries.unwrap();
                 for removed_entry in removed_entries {
                     if let Err(err) =
-                        diesel::delete(school_holidays.filter(id.eq(removed_entry))).execute(&conn)
+                        diesel::delete(school_holidays.filter(id.eq(removed_entry))).execute(conn)
                     {
                         error!(
                             target = "database",
@@ -197,7 +215,7 @@ pub async fn update_school_holidays(
                 }
             }
 
-            match cmd_db_get::_load_school_holidays(&config_state_guard, &conn, filter_current_year) {
+            match cmd_db_get::_load_school_holidays(config, conn, filter_current_year) {
                 Err(err) => Err(super::DieselResultErrorWrapper::Msg(err)),
                 Ok(v) => Ok(v),
             }
