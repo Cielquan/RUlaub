@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import { State, actionCreators } from "../state";
+import { DBInitLoadState } from "../state/reducers/initialStates";
 
 const StyledNewHolidayButton = styled("div")(({ theme }) => ({
   position: "absolute",
@@ -18,10 +19,13 @@ const NewHolidayButton = (): ReactElement => {
   const dispatch = useDispatch();
   const { openAddVacationDialog } = bindActionCreators(actionCreators, dispatch);
   const configState = useSelector((state: State) => state.config);
+  const dbInitLoadState = useSelector((state: State) => state.dbInitLoad);
 
-  const disabled: boolean =
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    configState!.settings.yearToShow === null || !configState!.settings.databaseUri;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const { databaseUri, yearToShow } = configState!.settings;
+  const dbInitLoadOk = dbInitLoadState === DBInitLoadState.OK;
+
+  const disabled: boolean = yearToShow === null || !databaseUri || !dbInitLoadOk;
 
   return (
     <StyledNewHolidayButton>
