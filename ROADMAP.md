@@ -2,6 +2,14 @@
 
 - BE | Impl SchoolHoli link
 
+  - Check loaded holidays on year change
+    - If non -> Msgbox to ask if Holidays should be loaded
+      - Warn msg if no Holidays found
+      - Success msg on load
+  - Add button to manuelly load holidays
+    - Place btn besides link textbox
+    - Place btn on calender
+
 - BE | Impl autoload of SchoolHoli
 
 - Check for double/intersecting Vacation
