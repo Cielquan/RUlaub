@@ -232,6 +232,7 @@ fn main() {
             commands::database::set::update_public_holidays,
             commands::database::get::load_public_holidays,
             //
+            commands::database::external::download_school_holidays_from_link,
             commands::database::set::update_school_holidays,
             commands::database::get::load_school_holidays,
             //

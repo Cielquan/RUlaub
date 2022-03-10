@@ -1,4 +1,5 @@
 //! Commands for working with the database
+pub mod external;
 pub mod get;
 pub mod set;
 
