@@ -70,18 +70,22 @@ msgid "Error: No \"year to show\" selected."
 msgstr "Error: Kein \"Jahr zum Anzeigen\" ausgewählt."
 
 #: src/backendAPI/errorMsgCatalogue.ts:20
-msgid "Error: Got to many links from the database."
-msgstr "Error: Zu viele Links von der Datenbank erhalten."
-
-#: src/backendAPI/errorMsgCatalogue.ts:21
 msgid "Error: No school holidays link is set."
 msgstr "Error: Kein Schulferienlink gesetzt."
 
+#: src/backendAPI/errorMsgCatalogue.ts:21
+msgid "Error: Got non ok response from school holiday link."
+msgstr "Error: Schulferienlink gab eine nicht-ok Antwort."
+
 #: src/backendAPI/errorMsgCatalogue.ts:22
+msgid "Error: Got to many links from the database."
+msgstr "Error: Zu viele Links von der Datenbank erhalten."
+
+#: src/backendAPI/errorMsgCatalogue.ts:23
 msgid "Error: Failed to request data from school holiday link."
 msgstr "Error: Datenanfrage vom Schulferienlink fehlgeschlagen."
 
-#: src/backendAPI/errorMsgCatalogue.ts:25
+#: src/backendAPI/errorMsgCatalogue.ts:26
 msgid ""
 "Error: Some unknown error happend.\n"
 "Please the the logs for more information."

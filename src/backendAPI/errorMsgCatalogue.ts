@@ -17,8 +17,9 @@ export const getErrorCatalogueMsg = (errCode: string): string => {
     "database-update-error": t`Error: Failed to update entry in database.`,
     "load-school-holidays-link-json-error": t`Error: Failed to load data from school holiday link into JSON schema.`,
     "no-year-to-show-set-error": t`Error: No "year to show" selected.`,
-    "to-many-link-db-entries-error": t`Error: Got to many links from the database.`,
     "no-school-holidays-link-set-error": t`Error: No school holidays link is set.`,
+    "non-ok-status-school-holidays-link-error": t`Error: Got non ok response from school holiday link.`,
+    "to-many-link-db-entries-error": t`Error: Got to many links from the database.`,
     "request-on-school-holidays-link-error": t`Error: Failed to request data from school holiday link.`,
   };
 

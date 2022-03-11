@@ -29,7 +29,7 @@ pub async fn download_school_holidays_from_link(
         Ok(response) => response,
         Err(err) => {
             error!(
-                target = "database-data",
+                target = "download-database-data",
                 message = "Error while trying to request data from school holiday link",
                 link = ?link,
                 err = ?err,
@@ -39,11 +39,21 @@ pub async fn download_school_holidays_from_link(
         }
     };
 
+    if !response.status().is_success() {
+        error!(
+            target = "download-database-data",
+            message = "Got non ok status code from request to school holiday link",
+            status = ?response.status(),
+            link = ?link,
+        );
+        return Err("non-ok-status-school-holidays-link-error".into());
+    }
+
     let data: Vec<SchoolHolidayAPIJSONModel> = match handle.block_on(response.json()) {
         Ok(data) => data,
         Err(err) => {
             error!(
-                target = "database-data",
+                target = "download-database-data",
                 message = "Error while loading data from school holiday link into struct",
                 err = ?err,
             );
@@ -77,7 +87,7 @@ fn convert_data_to_state_model(
     downloaded_data: Vec<SchoolHolidayAPIJSONModel>,
 ) -> (Vec<state_models::SchoolHoliday>, u32) {
     trace!(
-        target = "database-data",
+        target = "download-database-data",
         message = "Convert downloaded SchoolHolidays data to state data",
     );
 
@@ -89,7 +99,7 @@ fn convert_data_to_state_model(
             Ok(date) => date,
             Err(err) => {
                 error!(
-                    target = "database-data",
+                    target = "download-database-data",
                     message = "Downloaded school holiday data entry has invalid start date",
                     entry = ?entry,
                     err = ?err,
@@ -102,7 +112,7 @@ fn convert_data_to_state_model(
             Ok(date) => date,
             Err(err) => {
                 error!(
-                    target = "database-data",
+                    target = "download-database-data",
                     message = "Downloaded school holiday data entry has invalid end date",
                     entry = ?entry,
                     err = ?err,
@@ -129,7 +139,7 @@ fn convert_data_to_state_model(
 
     if error_count > 0 {
         debug!(
-            target = "database-data",
+            target = "download-database-data",
             message = "Encounterd erros while parsing downloaded school holiday data",
             error_count = error_count,
         );
