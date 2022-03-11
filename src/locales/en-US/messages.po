@@ -13,63 +13,75 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/backendAPI/errorMsgCatalogue.ts:4
+#: src/backendAPI/errorMsgCatalogue.ts:6
 msgid "Error: Failed to write to config file."
 msgstr "Error: Failed to write to config file."
 
-#: src/backendAPI/errorMsgCatalogue.ts:5
+#: src/backendAPI/errorMsgCatalogue.ts:7
 msgid "Warning: Config could not be saved."
 msgstr "Warning: Config could not be saved."
 
-#: src/backendAPI/errorMsgCatalogue.ts:6
+#: src/backendAPI/errorMsgCatalogue.ts:8
 msgid "Error: Could not serialize config."
 msgstr "Error: Could not serialize config."
 
-#: src/backendAPI/errorMsgCatalogue.ts:7
+#: src/backendAPI/errorMsgCatalogue.ts:9
 msgid "Error: Failed to connect to database."
 msgstr "Error: Failed to connect to database."
 
-#: src/backendAPI/errorMsgCatalogue.ts:8
+#: src/backendAPI/errorMsgCatalogue.ts:10
 msgid "Error: Failed to create new database."
 msgstr "Error: Failed to create new database."
 
-#: src/backendAPI/errorMsgCatalogue.ts:9
+#: src/backendAPI/errorMsgCatalogue.ts:11
 msgid "Error: Failed to delete entry in database."
 msgstr "Error: Failed to delete entry in database."
 
-#: src/backendAPI/errorMsgCatalogue.ts:10
+#: src/backendAPI/errorMsgCatalogue.ts:12
 msgid "Error: Unknown error with the database."
 msgstr "Error: Unknown error with the database."
 
-#: src/backendAPI/errorMsgCatalogue.ts:11
+#: src/backendAPI/errorMsgCatalogue.ts:13
 msgid "Error: Failed to insert new entry in database."
 msgstr "Error: Failed to insert new entry in database."
 
-#: src/backendAPI/errorMsgCatalogue.ts:12
+#: src/backendAPI/errorMsgCatalogue.ts:14
 msgid "Error: Got invalid data for database update."
 msgstr "Error: Got invalid data for database update."
 
-#: src/backendAPI/errorMsgCatalogue.ts:13
+#: src/backendAPI/errorMsgCatalogue.ts:15
 msgid "Error: Failed to load entry in database."
 msgstr "Error: Failed to load entry in database."
 
-#: src/backendAPI/errorMsgCatalogue.ts:14
+#: src/backendAPI/errorMsgCatalogue.ts:16
 msgid "Error: No database set."
 msgstr "Error: No database set."
 
-#: src/backendAPI/errorMsgCatalogue.ts:15
+#: src/backendAPI/errorMsgCatalogue.ts:17
 msgid "Error: Failed to update entry in database."
 msgstr "Error: Failed to update entry in database."
 
-#: src/backendAPI/errorMsgCatalogue.ts:16
+#: src/backendAPI/errorMsgCatalogue.ts:18
+msgid "Error: Failed to load data from school holiday link into JSON schema."
+msgstr "Error: Failed to load data from school holiday link into JSON schema."
+
+#: src/backendAPI/errorMsgCatalogue.ts:19
 msgid "Error: No \"year to show\" selected."
 msgstr "Error: No \"year to show\" selected."
 
-#: src/backendAPI/errorMsgCatalogue.ts:17
+#: src/backendAPI/errorMsgCatalogue.ts:20
 msgid "Error: Got to many links from the database."
 msgstr "Error: Got to many links from the database."
 
-#: src/backendAPI/errorMsgCatalogue.ts:20
+#: src/backendAPI/errorMsgCatalogue.ts:21
+msgid "Error: No school holidays link is set."
+msgstr "Error: No school holidays link is set."
+
+#: src/backendAPI/errorMsgCatalogue.ts:22
+msgid "Error: Failed to request data from school holiday link."
+msgstr "Error: Failed to request data from school holiday link."
+
+#: src/backendAPI/errorMsgCatalogue.ts:25
 msgid ""
 "Error: Some unknown error happend.\n"
 "Please the the logs for more information."
@@ -234,12 +246,12 @@ msgstr "Load current year data"
 msgid "Load all data"
 msgstr "Load all data"
 
-#: src/components/NewHolidayButton.tsx:28
+#: src/components/NewHolidayButton.tsx:32
 msgid "Add new Holiday"
 msgstr "Add new Holiday"
 
 #: src/components/PublicHolidaysDialog.tsx:144
-#: src/components/SideMenu.tsx:102
+#: src/components/SideMenu.tsx:107
 msgid "Public Holidays"
 msgstr "Public Holidays"
 
@@ -362,7 +374,7 @@ msgid "The link must have a \"'%year%'\" placeholder."
 msgstr "The link must have a \"'%year%'\" placeholder."
 
 #: src/components/SchoolHolidaysDialog.tsx:212
-#: src/components/SideMenu.tsx:109
+#: src/components/SideMenu.tsx:113
 msgid "School Holidays"
 msgstr "School Holidays"
 
@@ -373,6 +385,10 @@ msgstr "Link"
 #: src/components/SchoolHolidaysDialogEntry.tsx:60
 msgid "School Holiday must have a name."
 msgstr "School Holiday must have a name."
+
+#: src/components/SchoolHolidaysDownloadButton.tsx:44
+msgid "Load School Holidays for year: {0}"
+msgstr "Load School Holidays for year: {0}"
 
 #: src/components/SettingsDialog.tsx:75
 msgid "An offset must be set."
@@ -387,7 +403,7 @@ msgid "Offset must be positiv."
 msgstr "Offset must be positiv."
 
 #: src/components/SettingsDialog.tsx:158
-#: src/components/SideMenu.tsx:155
+#: src/components/SideMenu.tsx:156
 msgid "Settings"
 msgstr "Settings"
 
@@ -419,42 +435,42 @@ msgstr ""
 "On year switch, scroll to beginning\n"
 "of the year, if not current year."
 
-#: src/components/SideMenu.tsx:90
+#: src/components/SideMenu.tsx:96
 msgid "Database"
 msgstr "Database"
 
-#: src/components/SideMenu.tsx:91
+#: src/components/SideMenu.tsx:97
 msgid "Select"
 msgstr "Select"
 
-#: src/components/SideMenu.tsx:92
-#: src/components/SideMenu.tsx:126
+#: src/components/SideMenu.tsx:98
+#: src/components/SideMenu.tsx:128
 msgid "Create"
 msgstr "Create"
 
-#: src/components/SideMenu.tsx:95
+#: src/components/SideMenu.tsx:101
 #: src/components/UsersDialog.tsx:138
 msgid "Users"
 msgstr "Users"
 
-#: src/components/SideMenu.tsx:97
-#: src/components/SideMenu.tsx:104
-#: src/components/SideMenu.tsx:111
-#: src/components/SideMenu.tsx:118
-#: src/components/SideMenu.tsx:125
+#: src/components/SideMenu.tsx:103
+#: src/components/SideMenu.tsx:109
+#: src/components/SideMenu.tsx:115
+#: src/components/SideMenu.tsx:121
+#: src/components/SideMenu.tsx:127
 msgid "Edit"
 msgstr "Edit"
 
-#: src/components/SideMenu.tsx:116
+#: src/components/SideMenu.tsx:119
 #: src/components/VacationTypesDialog.tsx:128
 msgid "Vacation Types"
 msgstr "Vacation Types"
 
-#: src/components/SideMenu.tsx:123
+#: src/components/SideMenu.tsx:125
 msgid "Vacation"
 msgstr "Vacation"
 
-#: src/components/SideMenu.tsx:162
+#: src/components/SideMenu.tsx:163
 msgid "About"
 msgstr "About"
 
@@ -539,6 +555,10 @@ msgstr "Error"
 #: src/state/action-creators/publicHolidaysDataActionCreators.ts:96
 msgid "Got {errorCount} errors while loading public holiday data."
 msgstr "Got {errorCount} errors while loading public holiday data."
+
+#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:79
+msgid "Successfully downloaded school holidays for year: {year}"
+msgstr "Successfully downloaded school holidays for year: {year}"
 
 #: src/state/action-creators/vacationStatsDataActionCreators.ts:35
 msgid ""

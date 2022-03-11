@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { t } from "@lingui/macro";
 
 export const getErrorCatalogueMsg = (errCode: string): string => {
@@ -14,8 +15,11 @@ export const getErrorCatalogueMsg = (errCode: string): string => {
     "database-load-error": t`Error: Failed to load entry in database.`,
     "database-not-set-error": t`Error: No database set.`,
     "database-update-error": t`Error: Failed to update entry in database.`,
+    "load-school-holidays-link-json-error": t`Error: Failed to load data from school holiday link into JSON schema.`,
     "no-year-to-show-set-error": t`Error: No "year to show" selected.`,
     "to-many-link-db-entries-error": t`Error: Got to many links from the database.`,
+    "no-school-holidays-link-set-error": t`Error: No school holidays link is set.`,
+    "request-on-school-holidays-link-error": t`Error: Failed to request data from school holiday link.`,
   };
 
   const defaultErrorMsg = t`Error: Some unknown error happend.
