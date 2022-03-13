@@ -553,12 +553,24 @@ msgstr "Keine Daten für Nutzer: {0}"
 msgid "Error"
 msgstr "Fehler"
 
-#: src/state/action-creators/publicHolidaysDataActionCreators.ts:38
-#: src/state/action-creators/publicHolidaysDataActionCreators.ts:96
-msgid "Got {errorCount} errors while loading public holiday data."
-msgstr "Wärend des Ladens der Feiertage traten {errorCount} Fehler auf."
+#: src/state/action-creators/publicHolidaysDataActionCreators.ts:40
+#: src/state/action-creators/publicHolidaysDataActionCreators.ts:100
+msgid "Got {0} errors while loading public holiday data."
+msgstr "Wärend des Ladens der Feiertage traten {0} Fehler auf."
 
-#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:79
+#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:76
+msgid "Got {errorCount} errors from downloaded school holiday data."
+msgstr "Wärend des Runterladens der Schulferien traten {errorCount} Fehler auf."
+
+#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:82
+msgid "{inDbCount} downloaded school holiday data sets are already in the database."
+msgstr "{inDbCount} runtergeladene Schulferien-Datensätze sind bereits in der Datenbank."
+
+#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:87
+msgid "Got {doubleCount} double data sets from downloaded school holiday data."
+msgstr "Die runtergeladenen Schulferien enthielten {doubleCount} doppelte Datensätze."
+
+#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:108
 msgid "Successfully downloaded school holidays for year: {year}"
 msgstr "Download von Schulferien für das Jahr {0} war erfolgreich."
 

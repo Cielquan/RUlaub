@@ -17,27 +17,27 @@ export const updateSchoolHolidaysLinkAction = (
 export const loadSchoolHolidaysLink =
   (snackbarHandles: ProviderContext) =>
   async (dispatch: Dispatch<SchoolHolidaysLinkAction>): Promise<void> => {
-    let data;
+    let cmdReturn: { data: string | null };
     try {
-      data = await invoke<string | null>("get_school_holidays_link");
+      cmdReturn = await invoke("get_school_holidays_link");
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
-    dispatch(updateSchoolHolidaysLinkAction(data));
+    dispatch(updateSchoolHolidaysLinkAction(cmdReturn.data));
   };
 
 export const updateSchoolHolidaysLink =
   (link: string | null, snackbarHandles: ProviderContext) =>
   async (dispatch: Dispatch<SchoolHolidaysLinkAction>): Promise<void> => {
-    let data;
+    let cmdReturn: { data: string | null };
     try {
-      data = await invoke<string | null>("update_school_holidays_link", { link });
+      cmdReturn = await invoke("update_school_holidays_link", { link });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
-    dispatch(updateSchoolHolidaysLinkAction(data));
+    dispatch(updateSchoolHolidaysLinkAction(cmdReturn.data));
   };

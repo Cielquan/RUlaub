@@ -19,9 +19,9 @@ export const loadVacationsDataAction = (payload: VacationsData): VacationsDataAc
 export const loadVacationsData =
   (snackbarHandles: ProviderContext, loadingDepth: LoadingDepth = "CurrentYear") =>
   async (dispatch: Dispatch<VacationsDataAction>): Promise<void> => {
-    let data;
+    let cmdReturn: { data: unknown };
     try {
-      data = await invoke("load_vacations", {
+      cmdReturn = await invoke("load_vacations", {
         filterCurrentYear: loadingDepth === "CurrentYear",
       });
     } catch (err) {
@@ -31,7 +31,7 @@ export const loadVacationsData =
 
     let validatedVacData: VacationsData;
     try {
-      validatedVacData = await validateVacationsData(data);
+      validatedVacData = await validateVacationsData(cmdReturn.data);
     } catch (err) {
       invoke("log_error", {
         target: "vacations",
@@ -63,9 +63,9 @@ export const updateVacationsData =
     loadingDepth: LoadingDepth = "CurrentYear"
   ) =>
   async (dispatch: Dispatch<VacationsDataAction>): Promise<void> => {
-    let data;
+    let cmdReturn: { data: unknown };
     try {
-      data = await invoke("update_vacations", {
+      cmdReturn = await invoke("update_vacations", {
         newEntries: newEntries ?? null,
         updatedEntries: updatedEntries ?? null,
         removedEntries: removedEntries ?? null,
@@ -78,7 +78,7 @@ export const updateVacationsData =
 
     let validatedVacData: VacationsData;
     try {
-      validatedVacData = await validateVacationsData(data);
+      validatedVacData = await validateVacationsData(cmdReturn.data);
     } catch (err) {
       invoke("log_error", {
         target: "vacations",

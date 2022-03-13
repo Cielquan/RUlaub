@@ -24,9 +24,9 @@ export const loadUsersData =
     dispatch: Dispatch<UsersDataAction | CalendarRowUserMapAction>,
     getState: typeof store.getState
   ): Promise<void> => {
-    let data;
+    let cmdReturn: { data: unknown };
     try {
-      data = await invoke("load_users");
+      cmdReturn = await invoke("load_users");
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
@@ -34,7 +34,7 @@ export const loadUsersData =
 
     let validatedData: UsersData;
     try {
-      validatedData = await validateUsersData(data);
+      validatedData = await validateUsersData(cmdReturn.data);
     } catch (err) {
       invoke("log_error", {
         target: "users",
@@ -71,9 +71,9 @@ export const updateUsersData =
     dispatch: Dispatch<UsersDataAction | CalendarRowUserMapAction>,
     getState: typeof store.getState
   ): Promise<void> => {
-    let data;
+    let cmdReturn: { data: unknown };
     try {
-      data = await invoke("update_users", {
+      cmdReturn = await invoke("update_users", {
         newEntries: newEntries ?? null,
         updatedEntries: updatedEntries ?? null,
         removedEntries: removedEntries ?? null,
@@ -85,7 +85,7 @@ export const updateUsersData =
 
     let valData: UsersData;
     try {
-      valData = await validateUsersData(data);
+      valData = await validateUsersData(cmdReturn.data);
     } catch (err) {
       invoke("log_error", {
         target: "users",

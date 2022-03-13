@@ -20,9 +20,9 @@ export const loadVacationTypesDataAction = (
 export const loadVacationTypesData =
   (snackbarHandles: ProviderContext) =>
   async (dispatch: Dispatch<VacationTypesDataAction>): Promise<void> => {
-    let data;
+    let cmdReturn: { data: unknown };
     try {
-      data = await invoke("load_vacation_types");
+      cmdReturn = await invoke("load_vacation_types");
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
@@ -30,7 +30,7 @@ export const loadVacationTypesData =
 
     let validatedData: VacationTypesData;
     try {
-      validatedData = await validateVacationTypesData(data);
+      validatedData = await validateVacationTypesData(cmdReturn.data);
     } catch (err) {
       invoke("log_error", {
         target: "vacation-types",
@@ -61,9 +61,9 @@ interface UpdatePayload {
 export const updateVacationTypesData =
   ({ newEntries, updatedEntries }: UpdatePayload, snackbarHandles: ProviderContext) =>
   async (dispatch: Dispatch<VacationTypesDataAction>): Promise<void> => {
-    let data;
+    let cmdReturn: { data: unknown };
     try {
-      data = await invoke("update_vacation_types", {
+      cmdReturn = await invoke("update_vacation_types", {
         newEntries: newEntries ?? null,
         updatedEntries: updatedEntries ?? null,
       });
@@ -74,7 +74,7 @@ export const updateVacationTypesData =
 
     let validatedData: VacationTypesData;
     try {
-      validatedData = await validateVacationTypesData(data);
+      validatedData = await validateVacationTypesData(cmdReturn.data);
     } catch (err) {
       invoke("log_error", {
         target: "vacation-types",

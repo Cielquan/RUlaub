@@ -22,10 +22,12 @@ export const loadPublicHolidaysDataAction = (
 export const loadPublicHolidaysData =
   (snackbarHandles: ProviderContext, loadingDepth: LoadingDepth = "CurrentYear") =>
   async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
-    let data: unknown;
-    let errorCount: number;
+    let cmdReturn: {
+      data: unknown;
+      additionalInfo: { errorCount: number };
+    };
     try {
-      [data, errorCount] = await invoke("load_public_holidays", {
+      cmdReturn = await invoke("load_public_holidays", {
         filterCurrentYear: loadingDepth === "CurrentYear",
       });
     } catch (err) {
@@ -33,15 +35,15 @@ export const loadPublicHolidaysData =
       return;
     }
 
-    if (errorCount > 0)
+    if (cmdReturn.additionalInfo.errorCount > 0)
       snackbarHandles.enqueueSnackbar(
-        t`Got ${errorCount} errors while loading public holiday data.`,
+        t`Got ${cmdReturn.additionalInfo.errorCount} errors while loading public holiday data.`,
         { variant: "warning" }
       );
 
     let validatedData: PublicHolidaysData;
     try {
-      validatedData = await validatePublicHolidaysData(data);
+      validatedData = await validatePublicHolidaysData(cmdReturn.data);
     } catch (err) {
       invoke("log_error", {
         target: "public-holidays",
@@ -77,10 +79,12 @@ export const updatePublicHolidaysData =
     loadingDepth: LoadingDepth = "CurrentYear"
   ) =>
   async (dispatch: Dispatch<PublicHolidaysDataAction>): Promise<void> => {
-    let data: unknown;
-    let errorCount: number;
+    let cmdReturn: {
+      data: unknown;
+      additionalInfo: { errorCount: number };
+    };
     try {
-      [data, errorCount] = await invoke("update_public_holidays", {
+      cmdReturn = await invoke("update_public_holidays", {
         newEntries: newEntries ?? null,
         updatedEntries: updatedEntries ?? null,
         removedEntries: removedEntries ?? null,
@@ -91,15 +95,15 @@ export const updatePublicHolidaysData =
       return;
     }
 
-    if (errorCount > 0)
+    if (cmdReturn.additionalInfo.errorCount > 0)
       snackbarHandles.enqueueSnackbar(
-        t`Got ${errorCount} errors while loading public holiday data.`,
+        t`Got ${cmdReturn.additionalInfo.errorCount} errors while loading public holiday data.`,
         { variant: "warning" }
       );
 
     let validatedData: PublicHolidaysData;
     try {
-      validatedData = await validatePublicHolidaysData(data);
+      validatedData = await validatePublicHolidaysData(cmdReturn.data);
     } catch (err) {
       invoke("log_error", {
         target: "public-holidays",

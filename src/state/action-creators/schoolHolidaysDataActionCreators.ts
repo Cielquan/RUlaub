@@ -22,9 +22,9 @@ export const loadSchoolHolidaysDataAction = (
 export const loadSchoolHolidaysData =
   (snackbarHandles: ProviderContext, loadingDepth: LoadingDepth = "CurrentYear") =>
   async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
-    let data;
+    let cmdReturn: { data: unknown };
     try {
-      data = await invoke("load_school_holidays", {
+      cmdReturn = await invoke("load_school_holidays", {
         filterCurrentYear: loadingDepth === "CurrentYear",
       });
     } catch (err) {
@@ -34,7 +34,7 @@ export const loadSchoolHolidaysData =
 
     let validatedData: SchoolHolidaysData;
     try {
-      validatedData = await validateSchoolHolidaysData(data);
+      validatedData = await validateSchoolHolidaysData(cmdReturn.data);
     } catch (err) {
       invoke("log_error", {
         target: "school-holidays",
@@ -53,17 +53,46 @@ export const loadSchoolHolidaysData =
 export const downloadSchoolHolidaysDataFromLink =
   (snackbarHandles: ProviderContext, year: number) =>
   async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
-    let data;
+    let cmdReturn: {
+      data: unknown;
+      additionalInfo: {
+        errorCount: number;
+        inDbCount: number;
+        doubleCount: number;
+      };
+    };
     try {
-      data = await invoke("download_school_holidays_from_link", { year });
+      cmdReturn = await invoke("download_school_holidays_from_link", { year });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
+    let showWarning = false;
+    let warningMsg = "";
+    const { errorCount, inDbCount, doubleCount } = cmdReturn.additionalInfo;
+
+    if (errorCount > 0) {
+      warningMsg += t`Got ${errorCount} errors from downloaded school holiday data.`;
+      showWarning = true;
+    }
+
+    if (inDbCount > 0) {
+      // eslint-disable-next-line max-len
+      warningMsg += t`${inDbCount} downloaded school holiday data sets are already in the database.`;
+      showWarning = true;
+    }
+
+    if (doubleCount > 0) {
+      warningMsg += t`Got ${doubleCount} double data sets from downloaded school holiday data.`;
+      showWarning = true;
+    }
+
+    if (showWarning) snackbarHandles.enqueueSnackbar(warningMsg, { variant: "warning" });
+
     let validatedData: SchoolHolidaysData;
     try {
-      validatedData = await validateSchoolHolidaysData(data);
+      validatedData = await validateSchoolHolidaysData(cmdReturn.data);
     } catch (err) {
       invoke("log_error", {
         target: "school-holidays",
@@ -106,9 +135,9 @@ export const updateSchoolHolidaysData =
     loadingDepth: LoadingDepth = "CurrentYear"
   ) =>
   async (dispatch: Dispatch<SchoolHolidaysDataAction>): Promise<void> => {
-    let data;
+    let cmdReturn: { data: unknown };
     try {
-      data = await invoke("update_school_holidays", {
+      cmdReturn = await invoke("update_school_holidays", {
         newEntries: newEntries ?? null,
         updatedEntries: updatedEntries ?? null,
         removedEntries: removedEntries ?? null,
@@ -121,7 +150,7 @@ export const updateSchoolHolidaysData =
 
     let validatedData: SchoolHolidaysData;
     try {
-      validatedData = await validateSchoolHolidaysData(data);
+      validatedData = await validateSchoolHolidaysData(cmdReturn.data);
     } catch (err) {
       invoke("log_error", {
         target: "school-holidays",
