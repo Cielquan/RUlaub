@@ -91,7 +91,7 @@ msgid ""
 "Please the the logs for more information."
 msgstr ""
 "Error: Ein unbekannter Fehler ist aufgetreten.\n"
-"In der Logs stehen weitere Informationen."
+"In den Logs stehen weitere Informationen."
 
 #: src/backendAPI/eventListeners/errors.tsx:12
 msgid ""
@@ -166,7 +166,7 @@ msgstr "Urlaub hinzufügen"
 
 #: src/components/AddVacationDialog.tsx:232
 msgid "Please select the user to add a vacation to."
-msgstr "Bitte einen Nutzer auswählen, um Urlaub einzutragen"
+msgstr "Bitte einen Nutzer auswählen, um Urlaub einzutragen."
 
 #: src/components/AddVacationDialog.tsx:235
 #: src/components/AddVacationDialog.tsx:240
@@ -504,7 +504,7 @@ msgstr "Arbeitstage"
 
 #: src/components/VacationTypesDialogEntry.tsx:80
 msgid "Vacation Type must have a name."
-msgstr "Urlaubsart muss eine Bezeichnung haben"
+msgstr "Urlaubsart muss eine Bezeichnung haben."
 
 #: src/components/VacationTypesDialogEntry.tsx:165
 msgid "Yes"
