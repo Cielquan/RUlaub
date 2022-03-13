@@ -39,6 +39,7 @@
     "format": "prettier --write --end-of-line=auto \"./**/*.{js,jsx,ts,tsx,html,css,json}\" --ignore-path .gitignore",
     "fmt": "yarn format",
     "extract": "lingui extract --clean",
+    "extract:unclean": "lingui extract",
     "compile": "lingui compile",
     "schemas": "json2ts -i 'src/backendAPI/schemas/*.json' -o src/backendAPI/types/",
     "schemas:win": "json2ts -i src\\backendAPI\\schemas\\**\\*.json -o src\\backendAPI\\types\\"
