@@ -20,32 +20,41 @@ export const loadVacationStatsDataAction = (
 export const loadVacationStatsData =
   (snackbarHandles: ProviderContext) =>
   async (dispatch: Dispatch<VacationStatsDataAction>): Promise<void> => {
-    let data: unknown;
-    let pubHoliErrorCount: number;
-    let vacErrorCount: number;
+    let cmdReturn: {
+      data: unknown;
+      additionalInfo: {
+        pubHolidayErrorCount: number;
+        vacationErrorCount: number;
+      };
+    };
     try {
-      [data, pubHoliErrorCount, vacErrorCount] = await invoke("load_vacation_stats");
+      cmdReturn = await invoke("load_vacation_stats");
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
     }
 
-    if (pubHoliErrorCount > 0)
-      snackbarHandles.enqueueSnackbar(
-        t`Got ${pubHoliErrorCount} errors while loading
-        public holiday data for vacation stats.`,
-        { variant: "warning" }
-      );
+    let showWarning = false;
+    let warningMsg = "";
+    const { pubHolidayErrorCount, vacationErrorCount } = cmdReturn.additionalInfo;
 
-    if (vacErrorCount > 0)
-      snackbarHandles.enqueueSnackbar(
-        t`Got ${vacErrorCount} errors while loading vacation data for vacation stats.`,
-        { variant: "warning" }
-      );
+    if (pubHolidayErrorCount > 0) {
+      // eslint-disable-next-line max-len
+      warningMsg += t`Got ${pubHolidayErrorCount} errors while loading public holiday data for vacation stats.`;
+      showWarning = true;
+    }
+
+    if (vacationErrorCount > 0) {
+      // eslint-disable-next-line max-len
+      warningMsg += t`Got ${vacationErrorCount} errors while loading vacation data for vacation stats.`;
+      showWarning = true;
+    }
+
+    if (showWarning) snackbarHandles.enqueueSnackbar(warningMsg, { variant: "warning" });
 
     let validatedData: VacationStatsData;
     try {
-      validatedData = await validateVacationStatsData(data);
+      validatedData = await validateVacationStatsData(cmdReturn.data);
     } catch (err) {
       invoke("log_error", {
         target: "vacation-stats",
