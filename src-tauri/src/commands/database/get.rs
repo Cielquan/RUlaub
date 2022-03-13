@@ -12,11 +12,17 @@ use crate::{commands, config, date_calc, db, state};
 pub async fn load_public_holidays(
     filter_current_year: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<(state_models::PublicHolidays, u32)> {
+) -> super::DatabaseCommandResult<state_models::PublicHolidays, super::ErrInfo> {
     let config_state_guard = config_state.0.lock();
     let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    _load_public_holidays(&config_state_guard, &conn, filter_current_year)
+    let (data, error_count) =
+        _load_public_holidays(&config_state_guard, &conn, filter_current_year)?;
+
+    Ok(super::DatabaseCmdOk {
+        data,
+        additional_info: Some(super::ErrInfo { error_count }),
+    })
 }
 
 pub fn _load_public_holidays(
@@ -69,11 +75,16 @@ pub fn _load_public_holidays(
 pub async fn load_school_holidays(
     filter_current_year: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<state_models::SchoolHolidays> {
+) -> super::DatabaseCommandResult<state_models::SchoolHolidays> {
     let config_state_guard = config_state.0.lock();
     let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    _load_school_holidays(&config_state_guard, &conn, filter_current_year)
+    let data = _load_school_holidays(&config_state_guard, &conn, filter_current_year)?;
+
+    Ok(super::DatabaseCmdOk {
+        data,
+        additional_info: None,
+    })
 }
 
 pub fn _load_school_holidays(
@@ -116,11 +127,16 @@ pub fn _load_school_holidays(
 #[tauri::command]
 pub async fn get_school_holidays_link(
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<Option<String>> {
+) -> super::DatabaseCommandResult<Option<String>> {
     let config_state_guard = config_state.0.lock();
     let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    _get_school_holidays_link(&conn)
+    let data = _get_school_holidays_link(&conn)?;
+
+    Ok(super::DatabaseCmdOk {
+        data,
+        additional_info: None,
+    })
 }
 
 pub fn _get_school_holidays_link(
@@ -157,11 +173,16 @@ pub fn _get_school_holidays_link(
 #[tauri::command]
 pub async fn load_users(
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<state_models::Users> {
+) -> super::DatabaseCommandResult<state_models::Users> {
     let config_state_guard = config_state.0.lock();
     let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    _load_users(&conn)
+    let data = _load_users(&conn)?;
+
+    Ok(super::DatabaseCmdOk {
+        data,
+        additional_info: None,
+    })
 }
 
 pub fn _load_users(conn: &SqliteConnection) -> commands::CommandResult<state_models::Users> {
@@ -186,11 +207,16 @@ pub fn _load_users(conn: &SqliteConnection) -> commands::CommandResult<state_mod
 pub async fn load_vacations(
     filter_current_year: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<state_models::Vacations> {
+) -> super::DatabaseCommandResult<state_models::Vacations> {
     let config_state_guard = config_state.0.lock();
     let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    _load_vacations(&config_state_guard, &conn, filter_current_year)
+    let data = _load_vacations(&config_state_guard, &conn, filter_current_year)?;
+
+    Ok(super::DatabaseCmdOk {
+        data,
+        additional_info: None,
+    })
 }
 
 pub fn _load_vacations(
@@ -228,6 +254,12 @@ pub fn _load_vacations(
     }
 }
 
+#[derive(Serialize)]
+pub struct VacationStatsErrorInfo {
+    pub pub_holiday_error_count: u32,
+    pub vacation_error_count: u32,
+}
+
 /// Calc VacationStats from database.
 ///
 /// The function queries the database 3 times in a row with different queries. Those queries are
@@ -238,7 +270,7 @@ pub fn _load_vacations(
 pub fn load_vacation_stats(
     filter_current_year: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<(state_models::VacationStatsMap, u32, u32)> {
+) -> super::DatabaseCommandResult<state_models::VacationStatsMap, VacationStatsErrorInfo> {
     let config_state_guard = config_state.0.lock();
 
     let display_year = match config_state_guard.settings.year_to_show.clone() {
@@ -339,7 +371,13 @@ pub fn load_vacation_stats(
         );
     }
 
-    Ok((vac_stats, pub_holiday_error_count, vacation_error_count))
+    Ok(super::DatabaseCmdOk {
+        data: vac_stats,
+        additional_info: Some(VacationStatsErrorInfo {
+            pub_holiday_error_count,
+            vacation_error_count,
+        }),
+    })
 }
 
 fn _load_user_workdays(
@@ -420,11 +458,16 @@ fn _load_vacations_with_types(
 #[tauri::command]
 pub async fn load_vacation_types(
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<state_models::VacationTypes> {
+) -> super::DatabaseCommandResult<state_models::VacationTypes> {
     let config_state_guard = config_state.0.lock();
     let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    _load_vacation_types(&conn)
+    let data = _load_vacation_types(&conn)?;
+
+    Ok(super::DatabaseCmdOk {
+        data,
+        additional_info: None,
+    })
 }
 
 pub fn _load_vacation_types(

@@ -12,7 +12,7 @@ pub async fn update_public_holidays(
     removed_entries: Option<Vec<i32>>,
     filter_current_year: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<(state_models::PublicHolidays, u32)> {
+) -> super::DatabaseCommandResult<state_models::PublicHolidays, super::ErrInfo> {
     use crate::db::schema::public_holidays::dsl::{id, public_holidays};
 
     let config_state_guard = config_state.0.lock();
@@ -93,9 +93,12 @@ pub async fn update_public_holidays(
             );
             panic!("Unexpected error slipped through; see loggs for more info");
         }
-        Ok(rv) => {
+        Ok((data, error_count)) => {
             debug!(target = "database", message = "Set public holidays in db");
-            Ok(rv)
+            Ok(super::DatabaseCmdOk {
+                data,
+                additional_info: Some(super::ErrInfo { error_count }),
+            })
         }
     }
 }
@@ -109,18 +112,23 @@ pub async fn update_school_holidays(
     removed_entries: Option<Vec<i32>>,
     filter_current_year: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<state_models::SchoolHolidays> {
+) -> super::DatabaseCommandResult<state_models::SchoolHolidays> {
     let config_state_guard = config_state.0.lock();
     let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
-    _update_school_holidays(
+    let data = _update_school_holidays(
         &config_state_guard,
         &conn,
         new_entries,
         updated_entries,
         removed_entries,
         filter_current_year,
-    )
+    )?;
+
+    Ok(super::DatabaseCmdOk {
+        data,
+        additional_info: None,
+    })
 }
 
 pub fn _update_school_holidays(
@@ -243,7 +251,7 @@ pub fn _update_school_holidays(
 pub async fn update_school_holidays_link(
     link: Option<String>,
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<Option<String>> {
+) -> super::DatabaseCommandResult<Option<String>> {
     use crate::db::schema::school_holidays_link::dsl::school_holidays_link;
 
     let config_state_guard = config_state.0.lock();
@@ -320,13 +328,17 @@ pub async fn update_school_holidays_link(
             );
             panic!("Unexpected error slipped through; see loggs for more info");
         }
-        Ok(rv) => {
+        Ok(data) => {
             debug!(
                 target = "database",
                 message = "Set school holiday link in db",
-                value = ?rv,
+                value = ?data,
             );
-            Ok(rv)
+
+            Ok(super::DatabaseCmdOk {
+                data,
+                additional_info: None,
+            })
         }
     }
 }
@@ -339,7 +351,7 @@ pub async fn update_users(
     updated_entries: Option<state_models::Users>,
     removed_entries: Option<Vec<i32>>,
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<state_models::Users> {
+) -> super::DatabaseCommandResult<state_models::Users> {
     use crate::db::schema::users::dsl::{id, users};
 
     let config_state_guard = config_state.0.lock();
@@ -420,9 +432,13 @@ pub async fn update_users(
             );
             panic!("Unexpected error slipped through; see loggs for more info");
         }
-        Ok(rv) => {
+        Ok(data) => {
             debug!(target = "database", message = "Set users in db");
-            Ok(rv)
+
+            Ok(super::DatabaseCmdOk {
+                data,
+                additional_info: None,
+            })
         }
     }
 }
@@ -436,7 +452,7 @@ pub async fn update_vacations(
     removed_entries: Option<Vec<i32>>,
     filter_current_year: Option<bool>,
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<state_models::Vacations> {
+) -> super::DatabaseCommandResult<state_models::Vacations> {
     use crate::db::schema::vacations::dsl::{id, vacations};
 
     let config_state_guard = config_state.0.lock();
@@ -538,9 +554,13 @@ pub async fn update_vacations(
             );
             panic!("Unexpected error slipped through; see loggs for more info");
         }
-        Ok(rv) => {
+        Ok(data) => {
             debug!(target = "database", message = "Set vacations in db");
-            Ok(rv)
+
+            Ok(super::DatabaseCmdOk {
+                data,
+                additional_info: None,
+            })
         }
     }
 }
@@ -552,7 +572,7 @@ pub async fn update_vacation_types(
     new_entries: Option<Vec<state_models::VacationType>>,
     updated_entries: Option<state_models::VacationTypes>,
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<state_models::VacationTypes> {
+) -> super::DatabaseCommandResult<state_models::VacationTypes> {
     use crate::db::schema::vacation_types::dsl::{id, vacation_types};
 
     let config_state_guard = config_state.0.lock();
@@ -618,9 +638,13 @@ pub async fn update_vacation_types(
             );
             panic!("Unexpected error slipped through; see loggs for more info");
         }
-        Ok(rv) => {
+        Ok(data) => {
             debug!(target = "database", message = "Set vacation types in db");
-            Ok(rv)
+
+            Ok(super::DatabaseCmdOk {
+                data,
+                additional_info: None,
+            })
         }
     }
 }

@@ -4,13 +4,20 @@ use crate::db::conversion::date_type::{iso_date_to_naive_date, naive_date_to_iso
 use crate::db::state_models;
 use crate::{commands, state};
 
+#[derive(Serialize)]
+pub struct DownloadedSchoolHolidaysErrorInfo {
+    error_count: u32,
+    in_db_count: u32,
+    double_count: u32,
+}
+
 /// Update [`crate::db::models::SchoolHoliday`] in database with external downloaded data.
 #[tracing::instrument(skip(config_state))]
 #[tauri::command]
 pub async fn download_school_holidays_from_link(
     year: u32,
     config_state: tauri::State<'_, state::ConfigState>,
-) -> commands::CommandResult<(state_models::SchoolHolidays, u32, u32, u32)> {
+) -> super::DatabaseCommandResult<state_models::SchoolHolidays, DownloadedSchoolHolidaysErrorInfo> {
     let config_state_guard = config_state.0.lock();
     let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;
 
@@ -57,9 +64,17 @@ pub async fn download_school_holidays_from_link(
             );
             panic!("Unexpected error slipped through; see loggs for more info");
         }
-        Ok(rv) => {
+        Ok((data, error_count, in_db_count, double_count)) => {
             debug!(target = "database", message = "Set school holidays in db");
-            Ok(rv)
+
+            Ok(super::DatabaseCmdOk {
+                data,
+                additional_info: Some(DownloadedSchoolHolidaysErrorInfo {
+                    error_count,
+                    in_db_count,
+                    double_count,
+                }),
+            })
         }
     }
 }
