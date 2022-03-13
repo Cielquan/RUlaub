@@ -240,6 +240,28 @@ msgstr "Helles Design aktivieren"
 msgid "Activate Dark Theme"
 msgstr "Dunkles Design aktivieren"
 
+#: src/components/DownloadSchoolHolidaysDialog.tsx:59
+msgid "Download school holidays?"
+msgstr "Schulferien downloaden?"
+
+#: src/components/DownloadSchoolHolidaysDialog.tsx:66
+msgid "No school holiday data found in the database. Do you want to download school holiday data from the set link?"
+msgstr "Keine Schulferien-Daten in der Datenbank gefunden. Möchtest du Schulferien von dem eingestellten Link downloaden?"
+
+#: src/components/DownloadSchoolHolidaysDialog.tsx:72
+msgid "Link: {schoolHolidaysLinkState}"
+msgstr "Link: {schoolHolidaysLinkState}"
+
+#: src/components/DownloadSchoolHolidaysDialog.tsx:90
+#: src/components/VacationTypesDialogEntry.tsx:165
+msgid "Yes"
+msgstr "Ja"
+
+#: src/components/DownloadSchoolHolidaysDialog.tsx:100
+#: src/components/VacationTypesDialogEntry.tsx:165
+msgid "No"
+msgstr "Nein"
+
 #: src/components/LoadingDepthSwitch.tsx:22
 msgid "Load current year data"
 msgstr "Daten für aktuelles Jahr laden"
@@ -505,14 +527,6 @@ msgstr "Arbeitstage"
 #: src/components/VacationTypesDialogEntry.tsx:80
 msgid "Vacation Type must have a name."
 msgstr "Urlaubsart muss eine Bezeichnung haben."
-
-#: src/components/VacationTypesDialogEntry.tsx:165
-msgid "Yes"
-msgstr "Ja"
-
-#: src/components/VacationTypesDialogEntry.tsx:165
-msgid "No"
-msgstr "Nein"
 
 #: src/components/VacationTypesDialogEntry.tsx:165
 #: src/components/VacationTypesDialogEntry.tsx:222

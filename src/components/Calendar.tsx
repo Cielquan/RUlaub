@@ -1,10 +1,11 @@
 import * as locales from "@mui/material/locale";
 import { Box } from "@mui/system";
 import React, { ReactElement, useCallback, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AutoSizer from "react-virtualized-auto-sizer";
+import { bindActionCreators } from "redux";
 
-import { State } from "../state";
+import { State, actionCreators } from "../state";
 import createTheme from "../theme";
 import { isLeapYear } from "../utils/dateUtils";
 import CalendarBody from "./CalendarBody";
@@ -31,6 +32,11 @@ const Calendar = (): ReactElement => {
     setScrollY(e.scrollTop);
   }, []);
 
+  const dispatch = useDispatch();
+  const { openDownloadSchoolHolidaysDialog } = bindActionCreators(actionCreators, dispatch);
+  const schoolHolidaysDataState = useSelector((state: State) => state.schoolHolidaysData);
+  const schoolHolidaysLinkState = useSelector((state: State) => state.schoolHolidaysLink);
+
   // FIXME:#i# Fix bug "Max update deptch exceeded"
   // useMountDelayOrUpdateEffect(
   //   () => {
@@ -49,6 +55,9 @@ const Calendar = (): ReactElement => {
   // );
 
   if (year === null) return <CalendarStartPage />;
+
+  if (schoolHolidaysDataState === {} && schoolHolidaysLinkState !== null)
+    openDownloadSchoolHolidaysDialog(year);
 
   const daysInYear = 365 + (isLeapYear(year) ? 1 : 0);
 
