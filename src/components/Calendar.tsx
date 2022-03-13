@@ -19,13 +19,9 @@ const today = new Date();
 const Calendar = (): ReactElement => {
   const configState = useSelector((state: State) => state.config);
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const themeState = configState!.settings.theme;
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const langState = configState!.settings.language;
+  const { theme: themeState, language: langState, yearToShow: year } = configState!.settings;
 
   const theme = createTheme(themeState, locales[langState.importName]);
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const year = configState!.settings.yearToShow;
 
   const [scrollX, setScrollX] = useState(0);
   const [scrollY, setScrollY] = useState(0);

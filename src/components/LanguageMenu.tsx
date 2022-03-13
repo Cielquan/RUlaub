@@ -19,9 +19,7 @@ const LanguageMenu = (): ReactElement => {
   const { setLanguage } = bindActionCreators(actionCreators, dispatch);
   const configState = useSelector((state: State) => state.config);
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const themeState = configState!.settings.theme;
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const langState = configState!.settings.language;
+  const { theme: themeState, language: langState } = configState!.settings;
 
   const { value: availableLanguages } = useAsync(
     async (): Promise<{ [key: string]: LanguageData }> => invoke("get_available_languages")
