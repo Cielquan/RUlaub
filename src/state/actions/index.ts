@@ -11,6 +11,7 @@ import {
   CalendarRowUserMapActionType,
   ConfigActionType,
   DBInitLoadActionType,
+  DownloadSchoolHolidaysDialogActionType,
   PublicHolidaysDataActionType,
   PublicHolidaysDataLoadingDepthActionType,
   PublicHolidaysDialogActionType,
@@ -53,6 +54,19 @@ export type DBInitLoadAction = {
   type: DBInitLoadActionType;
   payload: DBInitLoadState;
 };
+
+export type DownloadSchoolHolidaysDialogCloseAction = {
+  type: DownloadSchoolHolidaysDialogActionType.CLOSE;
+};
+
+export type DownloadSchoolHolidaysDialogOpenAction = {
+  type: DownloadSchoolHolidaysDialogActionType.OPEN;
+  payload: number;
+};
+
+export type DownloadSchoolHolidaysDialogAction =
+  | DownloadSchoolHolidaysDialogCloseAction
+  | DownloadSchoolHolidaysDialogOpenAction;
 
 export type PublicHolidaysDataAction = {
   type: PublicHolidaysDataActionType;

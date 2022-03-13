@@ -3,6 +3,7 @@ export * from "./addVacationDialogActionCreators";
 export * from "./calendarRowUserMapActionCreators";
 export * from "./configActionCreators";
 export * from "./dbInitLoadActionCreators";
+export * from "./downloadSchoolHolidaysDialogActionCreators";
 export * from "./publicHolidaysDataActionCreators";
 export * from "./publicHolidaysDataLoadingDepthActionCreators";
 export * from "./publicHolidaysDialogActionCreators";

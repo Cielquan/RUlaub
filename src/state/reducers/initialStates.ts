@@ -17,6 +17,25 @@ export enum DBInitLoadState {
   ERR,
 }
 
+export interface DownloadSchoolHolidaysDialogCloseState {
+  open: boolean;
+}
+
+export interface DownloadSchoolHolidaysDialogOpenState {
+  open: boolean;
+  year: number;
+}
+
+export type DownloadSchoolHolidaysDialogState =
+  | DownloadSchoolHolidaysDialogCloseState
+  | DownloadSchoolHolidaysDialogOpenState;
+
+export function downloadSchoolHolidaysDialogIsOpen(
+  state: DownloadSchoolHolidaysDialogState
+): state is DownloadSchoolHolidaysDialogOpenState {
+  return state.open;
+}
+
 export type LoadingDepth = "CurrentYear" | "Full";
 
 export const aboutPageInitState = false;
@@ -24,6 +43,9 @@ export const addVacationDialogInitState = false;
 export const calendarRowUserMapInitState: CalendarRowUserMap = {};
 export const configInitState = null;
 export const dbInitLoadInitState = DBInitLoadState.NOT_LOADED;
+export const downloadSchoolHolidaysDialogInitState: DownloadSchoolHolidaysDialogState = {
+  open: false,
+};
 export const publicHolidaysDataInitState: PublicHolidaysData = {};
 export const publicHolidaysDataLoadingDepthInitState: LoadingDepth = "CurrentYear";
 export const publicHolidaysDialogInitState = false;

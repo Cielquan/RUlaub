@@ -20,6 +20,11 @@ export enum DBInitLoadActionType {
   UPDATE = "update DBInitLoad to status",
 }
 
+export enum DownloadSchoolHolidaysDialogActionType {
+  OPEN = "open DownloadSchoolHolidaysDialog",
+  CLOSE = "close DownloadSchoolHolidaysDialog",
+}
+
 export enum PublicHolidaysDataActionType {
   ADD = "add PublicHolidays data",
   LOAD = "load PublicHolidays data",
