@@ -30,7 +30,7 @@ const SchoolHolidaysDownloadButton = (): ReactElement => {
   const dbInitLoadOk = dbInitLoadState === DBInitLoadState.OK;
 
   const disabled: boolean =
-    schoolHolidaysLinkState === null || yearToShow === null || !databaseUri || !dbInitLoadOk;
+    yearToShow === null || !databaseUri || !dbInitLoadOk || schoolHolidaysLinkState === null;
 
   const clickHandle = (): void => {
     if (yearToShow === null) return;
