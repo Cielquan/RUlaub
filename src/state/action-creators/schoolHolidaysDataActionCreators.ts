@@ -1,4 +1,4 @@
-import { t } from "@lingui/macro";
+import { plural, t } from "@lingui/macro";
 import { invoke } from "@tauri-apps/api/tauri";
 import { ProviderContext } from "notistack";
 import { Dispatch } from "redux";
@@ -73,18 +73,28 @@ export const downloadSchoolHolidaysDataFromLink =
     const { errorCount, inDbCount, doubleCount } = cmdReturn.additionalInfo;
 
     if (errorCount > 0) {
-      warningMsg += t`Got ${errorCount} errors from downloaded school holiday data.`;
+      warningMsg += plural(errorCount, {
+        one: "Got one error from downloaded school holiday data.",
+        other: "Got # errors from downloaded school holiday data.",
+      });
       showWarning = true;
     }
 
     if (inDbCount > 0) {
-      // eslint-disable-next-line max-len
-      warningMsg += t`${inDbCount} downloaded school holiday data sets are already in the database.`;
+      if (showWarning) warningMsg += "\n";
+      warningMsg += plural(inDbCount, {
+        one: "One downloaded school holiday data set is already in the database.",
+        other: "# downloaded school holiday data sets are already in the database.",
+      });
       showWarning = true;
     }
 
     if (doubleCount > 0) {
-      warningMsg += t`Got ${doubleCount} double data sets from downloaded school holiday data.`;
+      if (showWarning) warningMsg += "\n";
+      warningMsg += plural(doubleCount, {
+        one: "Got one double data set from downloaded school holiday data.",
+        other: "Got # double data sets from downloaded school holiday data.",
+      });
       showWarning = true;
     }
 

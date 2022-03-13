@@ -1,4 +1,4 @@
-import { t } from "@lingui/macro";
+import { plural } from "@lingui/macro";
 import { invoke } from "@tauri-apps/api/tauri";
 import { ProviderContext } from "notistack";
 import { Dispatch } from "redux";
@@ -37,7 +37,10 @@ export const loadPublicHolidaysData =
 
     if (cmdReturn.additionalInfo.errorCount > 0)
       snackbarHandles.enqueueSnackbar(
-        t`Got ${cmdReturn.additionalInfo.errorCount} errors while loading public holiday data.`,
+        plural(cmdReturn.additionalInfo.errorCount, {
+          one: "Got one error while loading public holiday data.",
+          other: "Got # errors while loading public holiday data.",
+        }),
         { variant: "warning" }
       );
 
@@ -97,7 +100,10 @@ export const updatePublicHolidaysData =
 
     if (cmdReturn.additionalInfo.errorCount > 0)
       snackbarHandles.enqueueSnackbar(
-        t`Got ${cmdReturn.additionalInfo.errorCount} errors while loading public holiday data.`,
+        plural(cmdReturn.additionalInfo.errorCount, {
+          one: "Got one error while loading public holiday data.",
+          other: "Got # errors while loading public holiday data.",
+        }),
         { variant: "warning" }
       );
 

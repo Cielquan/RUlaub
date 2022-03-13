@@ -1,4 +1,4 @@
-import { t } from "@lingui/macro";
+import { plural } from "@lingui/macro";
 import { invoke } from "@tauri-apps/api/tauri";
 import { ProviderContext } from "notistack";
 import { Dispatch } from "redux";
@@ -39,14 +39,19 @@ export const loadVacationStatsData =
     const { pubHolidayErrorCount, vacationErrorCount } = cmdReturn.additionalInfo;
 
     if (pubHolidayErrorCount > 0) {
-      // eslint-disable-next-line max-len
-      warningMsg += t`Got ${pubHolidayErrorCount} errors while loading public holiday data for vacation stats.`;
+      warningMsg += plural(pubHolidayErrorCount, {
+        one: "Got one error while loading public holiday data for vacation stats.",
+        other: "Got # errors while loading public holiday data for vacation stats.",
+      });
       showWarning = true;
     }
 
     if (vacationErrorCount > 0) {
-      // eslint-disable-next-line max-len
-      warningMsg += t`Got ${vacationErrorCount} errors while loading vacation data for vacation stats.`;
+      if (showWarning) warningMsg += "\n";
+      warningMsg += plural(vacationErrorCount, {
+        one: "Got one error while loading vacation data for vacation stats.",
+        other: "Got # errors while loading vacation data for vacation stats.",
+      });
       showWarning = true;
     }
 

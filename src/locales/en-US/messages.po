@@ -556,37 +556,62 @@ msgid "Error"
 msgstr "Error"
 
 #: src/state/action-creators/publicHolidaysDataActionCreators.ts:40
+#: src/state/action-creators/publicHolidaysDataActionCreators.ts:103
+msgid "{0, plural, one {Got one error while loading public holiday data.} other {Got # errors while loading public holiday data.}}"
+msgstr "{0, plural, one {Got one error while loading public holiday data.} other {Got # errors while loading public holiday data.}}"
+
+#: src/state/action-creators/publicHolidaysDataActionCreators.ts:40
 #: src/state/action-creators/publicHolidaysDataActionCreators.ts:100
-msgid "Got {0} errors while loading public holiday data."
-msgstr "Got {0} errors while loading public holiday data."
+#~ msgid "Got {0} errors while loading public holiday data."
+#~ msgstr "Got {0} errors while loading public holiday data."
 
 #: src/state/action-creators/schoolHolidaysDataActionCreators.ts:76
-msgid "Got {errorCount} errors from downloaded school holiday data."
-msgstr "Got {errorCount} errors from downloaded school holiday data."
+msgid "{errorCount, plural, one {Got one error from downloaded school holiday data.} other {Got # errors from downloaded school holiday data.}}"
+msgstr "{errorCount, plural, one {Got one error from downloaded school holiday data.} other {Got # errors from downloaded school holiday data.}}"
 
-#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:82
-msgid "{inDbCount} downloaded school holiday data sets are already in the database."
-msgstr "{inDbCount} downloaded school holiday data sets are already in the database."
+#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:85
+msgid "{inDbCount, plural, one {One downloaded school holiday data set is already in the database.} other {# downloaded school holiday data sets are already in the database.}}"
+msgstr "{inDbCount, plural, one {One downloaded school holiday data set is already in the database.} other {# downloaded school holiday data sets are already in the database.}}"
 
-#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:87
-msgid "Got {doubleCount} double data sets from downloaded school holiday data."
-msgstr "Got {doubleCount} double data sets from downloaded school holiday data."
+#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:86
+#~ msgid "{inDbCount} downloaded school holiday data sets are already in the database."
+#~ msgstr "{inDbCount} downloaded school holiday data sets are already in the database."
 
-#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:108
+#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:91
+#~ msgid "Got {doubleCount} double data sets from downloaded school holiday data."
+#~ msgstr "Got {doubleCount} double data sets from downloaded school holiday data."
+
+#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:93
+#~ msgid "{errorCount, plural, one {Got one double data set from downloaded school holiday data.} other {Got # double data sets from downloaded school holiday data.}}"
+#~ msgstr "{errorCount, plural, one {Got one double data set from downloaded school holiday data.} other {Got # double data sets from downloaded school holiday data.}}"
+
+#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:94
+msgid "{doubleCount, plural, one {Got one double data set from downloaded school holiday data.} other {Got # double data sets from downloaded school holiday data.}}"
+msgstr "{doubleCount, plural, one {Got one double data set from downloaded school holiday data.} other {Got # double data sets from downloaded school holiday data.}}"
+
+#: src/state/action-creators/schoolHolidaysDataActionCreators.ts:118
 msgid "Successfully downloaded school holidays for year: {year}"
 msgstr "Successfully downloaded school holidays for year: {year}"
 
 #: src/state/action-creators/vacationStatsDataActionCreators.ts:35
-msgid ""
-"Got {pubHoliErrorCount} errors while loading\n"
-"public holiday data for vacation stats."
-msgstr ""
-"Got {pubHoliErrorCount} errors while loading\n"
-"public holiday data for vacation stats."
+#~ msgid ""
+#~ "Got {pubHoliErrorCount} errors while loading\n"
+#~ "public holiday data for vacation stats."
+#~ msgstr ""
+#~ "Got {pubHoliErrorCount} errors while loading\n"
+#~ "public holiday data for vacation stats."
 
 #: src/state/action-creators/vacationStatsDataActionCreators.ts:42
-msgid "Got {vacErrorCount} errors while loading vacation data for vacation stats."
-msgstr "Got {vacErrorCount} errors while loading vacation data for vacation stats."
+msgid "{pubHolidayErrorCount, plural, one {Got one error while loading public holiday data for vacation stats.} other {Got # errors while loading public holiday data for vacation stats.}}"
+msgstr "{pubHolidayErrorCount, plural, one {Got one error while loading public holiday data for vacation stats.} other {Got # errors while loading public holiday data for vacation stats.}}"
+
+#: src/state/action-creators/vacationStatsDataActionCreators.ts:42
+#~ msgid "Got {vacErrorCount} errors while loading vacation data for vacation stats."
+#~ msgstr "Got {vacErrorCount} errors while loading vacation data for vacation stats."
+
+#: src/state/action-creators/vacationStatsDataActionCreators.ts:51
+msgid "{vacationErrorCount, plural, one {Got one error while loading vacation data for vacation stats.} other {Got # errors while loading vacation data for vacation stats.}}"
+msgstr "{vacationErrorCount, plural, one {Got one error while loading vacation data for vacation stats.} other {Got # errors while loading vacation data for vacation stats.}}"
 
 #: src/utils/dateUtils.ts:19
 msgid "January"
