@@ -1,5 +1,5 @@
 import { t } from "@lingui/macro";
-import { Add as AddIcon } from "@mui/icons-material";
+import { Download as DownloadIcon } from "@mui/icons-material";
 import { Fab, Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useSnackbar } from "notistack";
@@ -46,7 +46,7 @@ const SchoolHolidaysDownloadButton = (): ReactElement => {
       >
         <span>
           <Fab disabled={disabled} color="primary" onClick={clickHandle}>
-            <AddIcon />
+            <DownloadIcon />
           </Fab>
         </span>
       </Tooltip>
