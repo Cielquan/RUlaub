@@ -27,3 +27,16 @@ enum DieselResultErrorWrapper {
     #[error("Diesel-Error-Dummy")]
     DieselErrorDummy(#[from] diesel::result::Error),
 }
+
+pub type DatabaseCommandResult<T, I = ()> = CommandResult<DatabaseCmdOk<T, I>>;
+
+#[derive(Serialize)]
+pub struct DatabaseCmdOk<T, I = ()> {
+    data: T,
+    additional_info: Option<I>,
+}
+
+#[derive(Serialize)]
+pub struct ErrInfo {
+    error_count: u32,
+}
