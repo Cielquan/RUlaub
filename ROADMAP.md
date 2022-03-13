@@ -1,22 +1,6 @@
 # Roadmap
 
-- BE | Impl SchoolHoli link
-
-  - Check loaded holidays on year change
-    - If non -> Msgbox to ask if Holidays should be loaded
-      - Warn msg if no Holidays found
-      - Success msg on load
-  - Add button to manuelly load holidays
-    - Place btn besides link textbox
-    - Place btn on calender
-
-- BE | Impl autoload of SchoolHoli
-
-- Check for double/intersecting Vacation
-
-- ? split current state & new/update for DB stuff
-  so on DB update the state can be updated w/o corrupting new/update data
-  the current payload is like the update state .. is enough?
+- Fix autoscroll to today if current year
 
 - Add tauri command for DB creation
   add default `vacation_types`
@@ -45,15 +29,15 @@
   on query calc easter_sunday, if no day-month -> calc moving holiday date with offset
   `day` or `easter_sunday_offset` - if both: `day` takes precedence
 
+- ? split current state & new/update for DB stuff
+  so on DB update the state can be updated w/o corrupting new/update data
+  the current payload is like the update state .. is enough?
+
 - BE | Add file watcher for DB
 
 - Add Event to send data to FE for db-data update
   On change send event
   make snackbar with `Load` button to update state via commands
-
-- Add auto DL for SchoolHoli if link
-
-- Fix autoscroll to today if current year
 
 - BE | Add selfupdater
 
@@ -75,6 +59,8 @@
   Find good default colors for vacation
 
 - **1.0**
+
+- Check for double/intersecting Vacation
 
 - Tests
 
