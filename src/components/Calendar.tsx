@@ -1,6 +1,6 @@
 import * as locales from "@mui/material/locale";
 import { Box } from "@mui/system";
-import React, { ReactElement, useCallback, useState } from "react";
+import React, { ReactElement, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { bindActionCreators } from "redux";
@@ -19,8 +19,13 @@ const today = new Date();
 
 const Calendar = (): ReactElement => {
   const configState = useSelector((state: State) => state.config);
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const { theme: themeState, language: langState, yearToShow: year } = configState!.settings;
+  const {
+    theme: themeState,
+    language: langState,
+    yearChangeScrollBegin,
+    yearToShow: year,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  } = configState!.settings;
 
   const theme = createTheme(themeState, locales[langState.importName]);
 
@@ -37,19 +42,11 @@ const Calendar = (): ReactElement => {
   const schoolHolidaysDataState = useSelector((state: State) => state.schoolHolidaysData);
   const schoolHolidaysLinkState = useSelector((state: State) => state.schoolHolidaysLink);
 
-  // FIXME:#i# Fix bug "Max update deptch exceeded"
-  // useMountDelayOrUpdateEffect(
-  //   () => {
-  //     if (today.getFullYear() !== year && configState.settings.yearChangeScrollBegin) {
-  //       setScrollX(0);
-  //     } else {
-  //       const days = getDaysForDate(today);
-  //       setScrollX((days - 3) * STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL);
-  //     }
-  //   },
-  //   0,
-  //   [year]
-  // );
+  useEffect(() => {
+    if (yearChangeScrollBegin) {
+      setScrollX(0);
+    }
+  }, [year, yearChangeScrollBegin]);
 
   if (year === null) return <CalendarStartPage />;
 
