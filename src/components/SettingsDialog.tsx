@@ -199,8 +199,7 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
             }}
           >
             <FormControlLabel
-              label={t`On year switch, scroll to beginning
-              of the year, if not current year.`}
+              label={t`On year switch, scroll to beginning of the year.`}
               control={
                 <Checkbox
                   checked={scrollForm}
