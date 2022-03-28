@@ -3,6 +3,7 @@ import { useState } from "react";
 import Calendar from "./Calendar";
 import NewHolidayButton from "./NewHolidayButton";
 import SchoolHolidaysDownloadButton from "./SchoolHolidaysDownloadButton";
+import ScrollTodayButton from "./ScrollTodayButton";
 
 const CalendarWrapper = (): React.ReactElement => {
   const [scrollX, setScrollX] = useState(0);
@@ -18,6 +19,7 @@ const CalendarWrapper = (): React.ReactElement => {
       />
       <NewHolidayButton />
       <SchoolHolidaysDownloadButton />
+      <ScrollTodayButton setScrollX={setScrollX} />
     </>
   );
 };

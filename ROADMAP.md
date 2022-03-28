@@ -1,7 +1,5 @@
 # Roadmap
 
-- Add btn to scroll to today if current year
-
 - Add tauri command for DB creation
   add default `vacation_types`
   ask to add entries for `pub holidays` (or checkbox ?)
