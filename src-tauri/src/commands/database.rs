@@ -31,12 +31,14 @@ enum DieselResultErrorWrapper {
 pub type DatabaseCommandResult<T, I = ()> = CommandResult<DatabaseCmdOk<T, I>>;
 
 #[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct DatabaseCmdOk<T, I = ()> {
     data: T,
     additional_info: Option<I>,
 }
 
 #[derive(Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct ErrInfo {
     error_count: u32,
 }
