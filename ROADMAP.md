@@ -1,6 +1,6 @@
 # Roadmap
 
-- Fix autoscroll to today if current year
+- Add btn to scroll to today if current year
 
 - Add tauri command for DB creation
   add default `vacation_types`
