@@ -12,9 +12,8 @@ pub fn to_state_model(db_data: Vec<models::Vacation>) -> state_models::Vacations
     let mut map = HashMap::new();
 
     for entry in db_data.iter() {
-        if !map.contains_key(&entry.user_id) {
-            map.insert(entry.user_id, HashMap::new());
-        }
+        map.entry(entry.user_id).or_insert_with(HashMap::new);
+        // map.entry(entry.user_id).or_insert_with(|| HashMap::new());
 
         let vac_map = map.get_mut(&entry.user_id).unwrap();
         vac_map.insert(

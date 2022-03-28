@@ -53,6 +53,7 @@ impl fmt::Display for User {
 }
 
 impl User {
+    #[allow(clippy::too_many_arguments)]
     pub fn create_new_entry<'a>(
         name: &'a str,
         vacation_days: &'a i32,
@@ -78,6 +79,7 @@ impl User {
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     pub fn create_update_entry(
         id: i32,
         name: String,

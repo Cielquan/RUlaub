@@ -21,8 +21,7 @@ pub async fn update_public_holidays(
     match conn
         .exclusive_transaction::<(state_models::PublicHolidays, u32), super::DieselResultErrorWrapper, _>(
             || {
-                if new_entries.is_some() {
-                    let new_entries = new_entries.unwrap();
+                if let Some(new_entries) = new_entries {
                     let insertable = conversion::public_holiday::to_new_db_model(&new_entries);
                     if let Err(err) = diesel::insert_into(public_holidays)
                         .values(insertable.clone())
@@ -40,8 +39,7 @@ pub async fn update_public_holidays(
                     }
                 }
 
-                if updated_entries.is_some() {
-                    let updated_entries = updated_entries.unwrap();
+                if let Some(updated_entries) = updated_entries {
                     let insertables =
                         conversion::public_holiday::to_update_db_model(updated_entries);
                     for insertable in insertables {
@@ -62,8 +60,7 @@ pub async fn update_public_holidays(
                     }
                 }
 
-                if removed_entries.is_some() {
-                    let removed_entries = removed_entries.unwrap();
+                if let Some(removed_entries) = removed_entries {
                     for removed_entry in removed_entries {
                         if let Err(err) = diesel::delete(public_holidays.filter(id.eq(removed_entry))).execute(&conn) {
                             error!(
@@ -143,8 +140,7 @@ pub fn _update_school_holidays(
 
     match conn.exclusive_transaction::<state_models::SchoolHolidays, super::DieselResultErrorWrapper, _>(
         || {
-            if new_entries.is_some() {
-                let new_entries = new_entries.unwrap();
+            if let Some(new_entries) = new_entries {
                 let (insertable, errors) =
                     conversion::school_holiday::to_new_db_model(&new_entries);
                 if errors > 0 {
@@ -173,8 +169,7 @@ pub fn _update_school_holidays(
                 }
             }
 
-            if updated_entries.is_some() {
-                let updated_entries = updated_entries.unwrap();
+            if let Some(updated_entries) = updated_entries {
                 let (insertables, errors) =
                     conversion::school_holiday::to_update_db_model(updated_entries.clone());
                 if errors > 0 {
@@ -205,8 +200,7 @@ pub fn _update_school_holidays(
                 }
             }
 
-            if removed_entries.is_some() {
-                let removed_entries = removed_entries.unwrap();
+            if let Some(removed_entries) = removed_entries {
                 for removed_entry in removed_entries {
                     if let Err(err) =
                         diesel::delete(school_holidays.filter(id.eq(removed_entry))).execute(conn)
@@ -260,7 +254,7 @@ pub async fn update_school_holidays_link(
     match conn.exclusive_transaction::<Option<String>, super::DieselResultErrorWrapper, _>(|| {
         let current_entry = match cmd_db_get::_get_school_holidays_link(&conn) {
             Err(err) => {
-                return Err(super::DieselResultErrorWrapper::Msg(err.into()));
+                return Err(super::DieselResultErrorWrapper::Msg(err));
             }
             Ok(e) => e,
         };
@@ -286,7 +280,7 @@ pub async fn update_school_holidays_link(
                     "database-insert-error".into(),
                 ));
             }
-            return Ok(Some(link));
+            Ok(Some(link))
         } else if current_entry.is_some() && link.is_none() {
             if let Err(err) = diesel::delete(school_holidays_link).execute(&conn) {
                 error!(
@@ -298,7 +292,7 @@ pub async fn update_school_holidays_link(
                     "database-delete-error".into(),
                 ));
             }
-            return Ok(None);
+            Ok(None)
         } else {
             let link = link.unwrap();
             let insertable = models::SchoolHolidayLink::create_update_entry(link.clone());
@@ -316,7 +310,7 @@ pub async fn update_school_holidays_link(
                     "database-update-error".into(),
                 ));
             }
-            return Ok(Some(link));
+            Ok(Some(link))
         }
     }) {
         Err(super::DieselResultErrorWrapper::Msg(err)) => Err(err),
@@ -359,8 +353,7 @@ pub async fn update_users(
 
     match conn.exclusive_transaction::<state_models::Users, super::DieselResultErrorWrapper, _>(
         || {
-            if new_entries.is_some() {
-                let new_entries = new_entries.unwrap();
+            if let Some(new_entries) = new_entries {
                 let insertable = conversion::user::to_new_db_model(&new_entries);
                 if let Err(err) = diesel::insert_into(users)
                     .values(insertable.clone())
@@ -378,8 +371,7 @@ pub async fn update_users(
                 }
             }
 
-            if updated_entries.is_some() {
-                let updated_entries = updated_entries.unwrap();
+            if let Some(updated_entries) = updated_entries {
                 let insertables = conversion::user::to_update_db_model(updated_entries);
                 for insertable in insertables {
                     if let Err(err) = diesel::update(users.filter(id.eq(insertable.id)))
@@ -399,8 +391,7 @@ pub async fn update_users(
                 }
             }
 
-            if removed_entries.is_some() {
-                let removed_entries = removed_entries.unwrap();
+            if let Some(removed_entries) = removed_entries {
                 for removed_entry in removed_entries {
                     if let Err(err) =
                         diesel::delete(users.filter(id.eq(removed_entry))).execute(&conn)
@@ -460,8 +451,7 @@ pub async fn update_vacations(
 
     match conn.exclusive_transaction::<state_models::Vacations, super::DieselResultErrorWrapper, _>(
         || {
-            if new_entries.is_some() {
-                let new_entries = new_entries.unwrap();
+            if let Some(new_entries) = new_entries {
                 let (insertable, errors) = conversion::vacation::to_new_db_model(&new_entries);
                 if errors > 0 {
                     error!(
@@ -489,8 +479,7 @@ pub async fn update_vacations(
                 }
             }
 
-            if updated_entries.is_some() {
-                let updated_entries = updated_entries.unwrap();
+            if let Some(updated_entries) = updated_entries {
                 let (insertables, errors) =
                     conversion::vacation::to_update_db_model(updated_entries.clone());
                 if errors > 0 {
@@ -521,8 +510,7 @@ pub async fn update_vacations(
                 }
             }
 
-            if removed_entries.is_some() {
-                let removed_entries = removed_entries.unwrap();
+            if let Some(removed_entries) = removed_entries {
                 for removed_entry in removed_entries {
                     if let Err(err) =
                         diesel::delete(vacations.filter(id.eq(removed_entry))).execute(&conn)
@@ -581,8 +569,7 @@ pub async fn update_vacation_types(
     match conn
         .exclusive_transaction::<state_models::VacationTypes, super::DieselResultErrorWrapper, _>(
             || {
-                if new_entries.is_some() {
-                    let new_entries = new_entries.unwrap();
+                if let Some(new_entries) = new_entries {
                     let insertable = conversion::vacation_type::to_new_db_model(&new_entries);
                     if let Err(err) = diesel::insert_into(vacation_types)
                         .values(insertable.clone())
@@ -600,8 +587,7 @@ pub async fn update_vacation_types(
                     }
                 }
 
-                if updated_entries.is_some() {
-                    let updated_entries = updated_entries.unwrap();
+                if let Some(updated_entries) = updated_entries {
                     let insertables =
                         conversion::vacation_type::to_update_db_model(updated_entries);
                     for insertable in insertables {

@@ -37,6 +37,7 @@ impl fmt::Display for Vacation {
 }
 
 impl Vacation {
+    #[allow(clippy::too_many_arguments)]
     pub fn create_new_entry<'a>(
         user_id: &'a i32,
         vacation_type_id: &'a i32,
@@ -59,6 +60,7 @@ impl Vacation {
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     pub fn create_update_entry(
         id: i32,
         vacation_type_id: i32,

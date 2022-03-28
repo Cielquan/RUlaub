@@ -121,7 +121,7 @@ fn download_school_holidays(link: &str) -> commands::CommandResult<Vec<SchoolHol
                 message = "Error while loading data from school holiday link into struct",
                 err = ?err,
             );
-            return Err("load-school-holidays-link-json-error".into());
+            Err("load-school-holidays-link-json-error".into())
         }
     }
 }
@@ -140,7 +140,7 @@ fn make_school_holidays_insertable(
     let mut in_db_count: u32 = 0;
     let mut double_count: u32 = 0;
 
-    let current_data_list: Vec<state_models::SchoolHoliday> = current_data.into_values().collect();
+    let mut current_data_list = current_data.into_values();
 
     for entry in downloaded_data.iter() {
         let start_date = match iso_date_to_naive_date(entry.start.clone()) {
@@ -184,7 +184,7 @@ fn make_school_holidays_insertable(
             },
         };
 
-        if current_data_list.contains(&new_entry) {
+        if current_data_list.any(|e| e == new_entry) {
             warn!(
                 target = "download-database-data",
                 message = "School holiday data entry already in database; skipping",

@@ -53,6 +53,7 @@ impl SchoolHoliday {
         }
     }
 
+    #[allow(clippy::too_many_arguments)]
     pub fn create_update_entry(
         id: i32,
         name: String,

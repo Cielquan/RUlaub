@@ -100,7 +100,6 @@ fn main() {
 
             trace!(target = "tauri_setup", message = "Spawn task for app init");
             let app_handle = app.handle();
-            let main_window_ = main_window.clone();
             tauri::async_runtime::spawn(async move {
                 debug!(target = "tauri_setup", message = "Start app init");
 
@@ -134,7 +133,7 @@ fn main() {
                 );
                 splashscreen_window.close().unwrap();
                 debug!(target = "tauri_setup", message = "Show main window");
-                main_window_.show().unwrap();
+                main_window.show().unwrap();
 
                 trace!(
                     target = "tauri_setup",
@@ -148,7 +147,7 @@ fn main() {
                             target = "emit_event",
                             message = "Emit event 'config-file-init-write-error'"
                         );
-                        main_window_
+                        main_window
                             .emit("config-file-init-write-error", ())
                             .unwrap();
                     }
@@ -157,18 +156,14 @@ fn main() {
                             target = "emit_event",
                             message = "Emit event 'config-file-init-read-error'"
                         );
-                        main_window_
-                            .emit("config-file-init-read-error", ())
-                            .unwrap();
+                        main_window.emit("config-file-init-read-error", ()).unwrap();
                     }
                     config::setup::ConfigSetupErr::NoFileErr => {
                         trace!(
                             target = "emit_event",
                             message = "Emit event 'config-file-init-none-error'"
                         );
-                        main_window_
-                            .emit("config-file-init-none-error", ())
-                            .unwrap();
+                        main_window.emit("config-file-init-none-error", ()).unwrap();
                     }
                 };
 
@@ -183,14 +178,14 @@ fn main() {
                             target = "emit_event",
                             message = "Emit event 'db-init-no-file-error'"
                         );
-                        main_window_.emit("db-init-no-file-error", ()).unwrap();
+                        main_window.emit("db-init-no-file-error", ()).unwrap();
                     }
                     state::DBSetup::DBError => {
                         trace!(
                             target = "emit_event",
                             message = "Emit event 'db-init-connection-error'"
                         );
-                        main_window_.emit("db-init-connection-error", ()).unwrap();
+                        main_window.emit("db-init-connection-error", ()).unwrap();
                     }
                     _ => {}
                 };

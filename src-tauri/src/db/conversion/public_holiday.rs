@@ -85,7 +85,7 @@ fn try_add_date_based_holiday(
             ),
         );
     } else {
-        *error_count = *error_count + 1;
+        *error_count += 1;
         error!(
             target = "database-data",
             message = "Failed to calculate the ordinal for a date based PublicHoliday",
@@ -115,7 +115,7 @@ fn try_add_offset_based_holiday(
             ),
         );
     } else {
-        *error_count = *error_count + 1;
+        *error_count += 1;
         error!(
             target = "database-data",
             message = "Failed to calculate the ordinal for a offset based PublicHoliday",
@@ -151,7 +151,7 @@ pub fn to_state_model(
                 &mut map,
             )
         } else {
-            error_count = error_count + 1;
+            error_count += 1;
             error!(
                 target = "database-data",
                 message = "Invalid PublicHoliday db entry; failed to convert to state data",
@@ -184,25 +184,17 @@ pub fn to_new_db_model(
     for entry_variant in new_entries {
         match entry_variant {
             state_models::PublicHolidayVariant::DateBasedHoliday(entry) => {
-                let year = match &entry.year {
-                    None => None,
-                    Some(y) => Some(y),
-                };
                 db_models.push(models::PublicHoliday::create_new_entry(
                     &entry.name,
-                    year,
+                    entry.year.as_ref(),
                     Some(&entry.yearless_date),
                     None,
                 ))
             }
             state_models::PublicHolidayVariant::EasterBasedHoliday(entry) => {
-                let year = match &entry.year {
-                    None => None,
-                    Some(y) => Some(y),
-                };
                 db_models.push(models::PublicHoliday::create_new_entry(
                     &entry.name,
-                    year,
+                    entry.year.as_ref(),
                     None,
                     Some(&entry.easter_sunday_offset),
                 ))

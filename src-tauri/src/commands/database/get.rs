@@ -38,7 +38,7 @@ pub fn _load_public_holidays(
         filter_current_year = ?filter_current_year,
     );
 
-    let display_year = match config.settings.year_to_show.clone() {
+    let display_year = match config.settings.year_to_show {
         None => {
             error!(target = "database", message = "No year to show set");
             return Err("no-year-to-show-set-error".into());
@@ -96,7 +96,7 @@ pub fn _load_school_holidays(
 
     let mut query = school_holidays.into_boxed();
     if let Some(true) = filter_current_year {
-        let display_year = match config.settings.year_to_show.clone() {
+        let display_year = match config.settings.year_to_show {
             None => {
                 error!(target = "database", message = "No year to show set");
                 return Err("no-year-to-show-set-error".into());
@@ -228,7 +228,7 @@ pub fn _load_vacations(
 
     let mut query = vacations.into_boxed();
     if let Some(true) = filter_current_year {
-        let display_year = match config.settings.year_to_show.clone() {
+        let display_year = match config.settings.year_to_show {
             None => {
                 error!(target = "database", message = "No year to show set");
                 return Err("no-year-to-show-set-error".into());
@@ -273,7 +273,7 @@ pub fn load_vacation_stats(
 ) -> super::DatabaseCommandResult<state_models::VacationStatsMap, VacationStatsErrorInfo> {
     let config_state_guard = config_state.0.lock();
 
-    let display_year = match config_state_guard.settings.year_to_show.clone() {
+    let display_year = match config_state_guard.settings.year_to_show {
         None => {
             error!(target = "database", message = "No year to show set");
             return Err("no-year-to-show-set-error".into());
@@ -331,13 +331,13 @@ pub fn load_vacation_stats(
                 let start_date = if vac.start_date >= first_day {
                     vac.start_date
                 } else {
-                    first_day.clone()
+                    first_day
                 };
 
                 let end_date = if vac.end_date <= last_day {
                     vac.end_date
                 } else {
-                    last_day.clone()
+                    last_day
                 };
 
                 match date_calc::sum_weekdays_between(

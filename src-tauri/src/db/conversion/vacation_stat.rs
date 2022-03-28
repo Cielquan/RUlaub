@@ -24,7 +24,7 @@ pub fn group_vacations(vacation_list: Vec<query_only_models::VacationWithType>) 
     let mut user_vac_map: VacationMap = HashMap::new();
 
     for vac in vacation_list {
-        let user_entry = user_vac_map.entry(vac.user_id).or_insert(HashMap::new());
+        let user_entry = user_vac_map.entry(vac.user_id).or_insert_with(HashMap::new);
         let vac_list = user_entry.entry(vac.vacation_type_id).or_insert(Vec::new());
 
         vac_list.push(VacationData {
@@ -38,7 +38,7 @@ pub fn group_vacations(vacation_list: Vec<query_only_models::VacationWithType>) 
 }
 
 pub fn map_user_workdays_list(
-    user_workdays_list: &Vec<query_only_models::UserWorkdays>,
+    user_workdays_list: &[query_only_models::UserWorkdays],
 ) -> HashMap<i32, Vec<Weekday>> {
     trace!(
         target = "database-data",

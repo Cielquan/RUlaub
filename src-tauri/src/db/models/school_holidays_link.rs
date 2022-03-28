@@ -16,7 +16,7 @@ impl fmt::Display for SchoolHolidayLink {
 }
 
 impl SchoolHolidayLink {
-    pub fn create_new_entry<'a>(link: &'a str) -> NewSchoolHolidayLink<'a> {
+    pub fn create_new_entry(link: &'_ str) -> NewSchoolHolidayLink<'_> {
         NewSchoolHolidayLink { link }
     }
 

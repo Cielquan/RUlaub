@@ -70,7 +70,7 @@ pub fn sum_weekdays_between(
             continue;
         }
         let weekday_map_entry = weekday_map.get_mut(&date.weekday()).unwrap();
-        *weekday_map_entry = *weekday_map_entry + 1u32;
+        *weekday_map_entry += 1u32;
     }
 
     Some(weekday_map)
@@ -84,9 +84,9 @@ pub fn sum_workdays(weekday_sum_map: &WeekdaySumMap, workdays: &Vec<Weekday>) ->
         workdays = ?workdays,
     );
     let mut sum = 0;
-    weekday_sum_map.into_iter().for_each(|(day, count)| {
-        if workdays.contains(&day) {
-            sum = sum + count
+    weekday_sum_map.iter().for_each(|(day, count)| {
+        if workdays.contains(day) {
+            sum += count
         }
     });
     sum
