@@ -6,13 +6,11 @@ import React, { ReactElement } from "react";
 
 import AboutPage from "./components/AboutPage";
 import AddVacationDialog from "./components/AddVacationDialog";
-import Calendar from "./components/Calendar";
+import CalendarWrapper from "./components/CalendarWrapper";
 import DownloadSchoolHolidaysDialog from "./components/DownloadSchoolHolidaysDialog";
 import Navbar from "./components/Navbar";
-import NewHolidayButton from "./components/NewHolidayButton";
 import PublicHolidaysDialog from "./components/PublicHolidaysDialog";
 import SchoolHolidaysDialog from "./components/SchoolHolidaysDialog";
-import SchoolHolidaysDownloadButton from "./components/SchoolHolidaysDownloadButton";
 import SettingsDialog from "./components/SettingsDialog";
 import SideMenu from "./components/SideMenu";
 import UsersDialog from "./components/UsersDialog";
@@ -56,9 +54,7 @@ const App = (): ReactElement => {
         <Navbar />
         <SideMenu />
         <StyledMain data-testid="rulaub-main">
-          <Calendar />
-          <NewHolidayButton />
-          <SchoolHolidaysDownloadButton />
+          <CalendarWrapper />
         </StyledMain>
       </Box>
       <AboutPage />
