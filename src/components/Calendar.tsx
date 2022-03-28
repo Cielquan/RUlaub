@@ -1,6 +1,6 @@
 import * as locales from "@mui/material/locale";
 import { Box } from "@mui/system";
-import React, { ReactElement, useCallback, useEffect, useState } from "react";
+import React, { ReactElement, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AutoSizer from "react-virtualized-auto-sizer";
 import { bindActionCreators } from "redux";
@@ -17,7 +17,14 @@ import CalendarTableHead from "./CalendarTableHead";
 
 const today = new Date();
 
-const Calendar = (): ReactElement => {
+interface Props {
+  scrollX: number;
+  setScrollX: React.Dispatch<React.SetStateAction<number>>;
+  scrollY: number;
+  setScrollY: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const Calendar = ({ scrollX, setScrollX, scrollY, setScrollY }: Props): ReactElement => {
   const configState = useSelector((state: State) => state.config);
   const {
     theme: themeState,
@@ -29,13 +36,13 @@ const Calendar = (): ReactElement => {
 
   const theme = createTheme(themeState, locales[langState.importName]);
 
-  const [scrollX, setScrollX] = useState(0);
-  const [scrollY, setScrollY] = useState(0);
-
-  const handleGridScroll = useCallback((e) => {
-    setScrollX(e.scrollLeft);
-    setScrollY(e.scrollTop);
-  }, []);
+  const handleGridScroll = useCallback(
+    (e) => {
+      setScrollX(e.scrollLeft);
+      setScrollY(e.scrollTop);
+    },
+    [setScrollX, setScrollY]
+  );
 
   const dispatch = useDispatch();
   const { openDownloadSchoolHolidaysDialog } = bindActionCreators(actionCreators, dispatch);
@@ -46,7 +53,7 @@ const Calendar = (): ReactElement => {
     if (yearChangeScrollBegin) {
       setScrollX(0);
     }
-  }, [year, yearChangeScrollBegin]);
+  }, [setScrollX, year, yearChangeScrollBegin]);
 
   if (year === null) return <CalendarStartPage />;
 
