@@ -4,7 +4,7 @@ import Calendar from "./Calendar";
 import NewHolidayButton from "./NewHolidayButton";
 import SchoolHolidaysDownloadButton from "./SchoolHolidaysDownloadButton";
 
-const App = (): React.ReactElement => {
+const CalendarWrapper = (): React.ReactElement => {
   const [scrollX, setScrollX] = useState(0);
   const [scrollY, setScrollY] = useState(0);
 
@@ -22,4 +22,4 @@ const App = (): React.ReactElement => {
   );
 };
 
-export default App;
+export default CalendarWrapper;
