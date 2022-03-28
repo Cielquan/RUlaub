@@ -59,14 +59,14 @@ const AboutPage = ({ onClick }: Props): ReactElement => {
         <InfoIcon />
       </DialogTitle>
       <DialogContent>
-        <DialogContentText sx={{ whiteSpace: "pre-wrap" }}>
-          <Typography gutterBottom component="span">
+        <DialogContentText sx={{ whiteSpace: "pre-wrap" }} component="span">
+          <Typography gutterBottom>
             <Trans>
               RUlaub is licensed under either &apos;Apache License 2.0&apos; or &apos;MIT
               License&apos; at your option.
             </Trans>
           </Typography>
-          <Typography component="span">
+          <Typography>
             <Trans>
               For the Source Code, Documentation and copies of the License files please see the
               github repository at: {ghLink}.

@@ -61,7 +61,7 @@ const DownloadSchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
         <DownloadIcon />
       </DialogTitle>
       <DialogContent>
-        <DialogContentText sx={{ whiteSpace: "pre-wrap" }}>
+        <DialogContentText sx={{ whiteSpace: "pre-wrap" }} component="span">
           <Typography gutterBottom>
             <Trans>
               No school holiday data found in the database. Do you want to download school holiday
