@@ -60,6 +60,8 @@
 
 - **1.0**
 
+- Check option for auto-scroll to today
+
 - Check for double/intersecting Vacation
 
 - Tests
