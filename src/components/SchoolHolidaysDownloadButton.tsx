@@ -1,7 +1,6 @@
 import { t } from "@lingui/macro";
 import { Download as DownloadIcon } from "@mui/icons-material";
 import { Fab, Tooltip } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import { useSnackbar } from "notistack";
 import React, { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,14 +8,13 @@ import { bindActionCreators } from "redux";
 
 import { State, actionCreators } from "../state";
 import { DBInitLoadState } from "../state/reducers/initialStates";
+import { PositionWrapperType } from "./CalendarWrapper";
 
-const StyledSchoolHolidaysDownloadButton = styled("div")(({ theme }) => ({
-  position: "absolute",
-  bottom: theme.spacing(2),
-  right: theme.spacing(13),
-}));
+interface Props {
+  PositionWrapper: PositionWrapperType;
+}
 
-const SchoolHolidaysDownloadButton = (): ReactElement => {
+const SchoolHolidaysDownloadButton = ({ PositionWrapper }: Props): ReactElement => {
   const dispatch = useDispatch();
   const { downloadSchoolHolidaysDataFromLink } = bindActionCreators(actionCreators, dispatch);
   const configState = useSelector((state: State) => state.config);
@@ -38,7 +36,7 @@ const SchoolHolidaysDownloadButton = (): ReactElement => {
   };
 
   return (
-    <StyledSchoolHolidaysDownloadButton>
+    <PositionWrapper>
       <Tooltip
         arrow
         title={t`Load School Holidays for year: ${yearToShow ?? "None"}`}
@@ -50,7 +48,7 @@ const SchoolHolidaysDownloadButton = (): ReactElement => {
           </Fab>
         </span>
       </Tooltip>
-    </StyledSchoolHolidaysDownloadButton>
+    </PositionWrapper>
   );
 };
 
