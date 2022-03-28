@@ -17,7 +17,6 @@ impl Config {
                 language: config::LanguageData::new(config_file.settings.language),
                 log_level: config_file.settings.log_level,
                 theme: config_file.settings.theme,
-                today_autoscroll_left_offset: config_file.settings.today_autoscroll_left_offset,
                 year_change_scroll_begin: config_file.settings.year_change_scroll_begin,
                 year_to_show: config_file.settings.year_to_show,
             },
@@ -40,7 +39,6 @@ pub struct Settings {
     pub language: config::LanguageData,
     pub log_level: logging::log_level::LogLevel,
     pub theme: config::Theme,
-    pub today_autoscroll_left_offset: i32,
     pub year_change_scroll_begin: bool,
     pub year_to_show: Option<i32>,
 }
@@ -61,7 +59,6 @@ impl ConfigFile {
                 language: config::Language::from_languagedata(config.settings.language),
                 log_level: config.settings.log_level,
                 theme: config.settings.theme,
-                today_autoscroll_left_offset: config.settings.today_autoscroll_left_offset,
                 year_change_scroll_begin: config.settings.year_change_scroll_begin,
                 year_to_show: config.settings.year_to_show,
             },
@@ -76,7 +73,6 @@ pub struct SettingsConfigFile {
     pub language: config::Language,
     pub log_level: logging::log_level::LogLevel,
     pub theme: config::Theme,
-    pub today_autoscroll_left_offset: i32,
     pub year_change_scroll_begin: bool,
     pub year_to_show: Option<i32>,
 }

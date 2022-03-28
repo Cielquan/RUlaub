@@ -44,10 +44,7 @@ const Calendar = (): ReactElement => {
   //       setScrollX(0);
   //     } else {
   //       const days = getDaysForDate(today);
-  //       setScrollX(
-  //         (days - (configState.settings.todayAutoscrollLeftOffset + 1)) *
-  //           STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL
-  //       );
+  //       setScrollX((days - 3) * STYLE_CONST.CALENDAR_COLUMN_WIDTH_FULL);
   //     }
   //   },
   //   0,

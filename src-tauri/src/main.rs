@@ -214,7 +214,6 @@ fn main() {
             commands::config::get::get_config_state,
             //
             commands::config::set::set_db_uri,
-            commands::config::set::set_today_autoscroll_left_offset,
             commands::config::set::set_user_name,
             commands::config::set::set_year_change_scroll_begin,
             commands::config::set::set_year_to_show,

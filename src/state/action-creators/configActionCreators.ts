@@ -122,34 +122,6 @@ export const setTheme =
     dispatch(updateConfigAction(conf));
   };
 
-export const setTodayAutoscrollLeftOffset =
-  (offset: number, snackbarHandles: ProviderContext) =>
-  async (dispatch: Dispatch<ConfigAction>): Promise<void> => {
-    let data;
-    try {
-      data = await invoke<ConfigFile>("set_today_autoscroll_left_offset", {
-        offset,
-      });
-    } catch (err) {
-      enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
-      return;
-    }
-
-    let conf;
-    try {
-      conf = await validateConfig(data);
-    } catch (err) {
-      invoke("log_error", {
-        target: "config",
-        message: "Config data validation failed",
-        location: "state/action-creators/configActionCreators.ts-setTodayAutoscrollLeftOffset",
-        errObjectString: JSON.stringify(err),
-      });
-      return;
-    }
-    dispatch(updateConfigAction(conf));
-  };
-
 export const setUserName =
   (name: string, snackbarHandles: ProviderContext) =>
   async (dispatch: Dispatch<ConfigAction>): Promise<void> => {

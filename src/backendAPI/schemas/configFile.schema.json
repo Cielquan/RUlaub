@@ -18,7 +18,6 @@
         "language": { "$ref": "#/$defs/LanguageData" },
         "logLevel": { "$ref": "#/$defs/LogLevel" },
         "theme": { "$ref": "#/$defs/SupportedThemes" },
-        "todayAutoscrollLeftOffset": { "type": "number" },
         "yearChangeScrollBegin": { "type": "boolean" },
         "yearToShow": {
           "type": ["null", "number"],
@@ -30,7 +29,6 @@
         "language",
         "logLevel",
         "theme",
-        "todayAutoscrollLeftOffset",
         "yearChangeScrollBegin",
         "yearToShow"
       ],

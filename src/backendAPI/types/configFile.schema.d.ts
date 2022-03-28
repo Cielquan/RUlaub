@@ -22,7 +22,6 @@ export interface ConfigFileSchema {
     language: LanguageData;
     logLevel: LogLevel;
     theme: SupportedThemes;
-    todayAutoscrollLeftOffset: number;
     yearChangeScrollBegin: boolean;
     yearToShow: null | number;
   };

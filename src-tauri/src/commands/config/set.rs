@@ -180,30 +180,6 @@ pub async fn set_theme(
 
 #[tracing::instrument(skip(state, config_setup_err_state))]
 #[tauri::command]
-pub async fn set_today_autoscroll_left_offset(
-    offset: i32,
-    state: tauri::State<'_, state::ConfigState>,
-    config_setup_err_state: tauri::State<'_, state::ConfigSetupErrState>,
-) -> commands::CommandResult<config::Config> {
-    let mut state_guard = state.0.lock();
-
-    if state_guard.settings.today_autoscroll_left_offset != offset {
-        trace!(
-            target = "command",
-            message = "Update config state settings.today_autoscroll_left_offset",
-            old = ?state_guard.settings.today_autoscroll_left_offset,
-            new = ?offset,
-        );
-        state_guard.settings.today_autoscroll_left_offset = offset;
-
-        save_config_to_file(&state_guard, config_setup_err_state)?
-    }
-
-    Ok(state_guard.clone())
-}
-
-#[tracing::instrument(skip(state, config_setup_err_state))]
-#[tauri::command]
 pub async fn set_user_name(
     name: String,
     state: tauri::State<'_, state::ConfigState>,

@@ -45,13 +45,8 @@ interface Props {
 
 const SettingsDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const {
-    closeSettingsDialog,
-    setLogLevel,
-    setTodayAutoscrollLeftOffset,
-    setUserName,
-    setYearChangeScrollBegin,
-  } = bindActionCreators(actionCreators, dispatch);
+  const { closeSettingsDialog, setLogLevel, setUserName, setYearChangeScrollBegin } =
+    bindActionCreators(actionCreators, dispatch);
   const settingsDialogState = useSelector((state: State) => state.settingsDialog);
   const configState = useSelector((state: State) => state.config);
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -62,38 +57,8 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
   const [showAdvanced, setShowAdvanced] = useState(false);
   const [level, setLevel] = useState(settings.logLevel);
   const [levelForm, setLevelForm] = useState(level);
-  const [offset, setOffset] = useState(settings.todayAutoscrollLeftOffset.toString());
-  const [offsetForm, setOffsetForm] = useState(offset);
   const [scroll, setScroll] = useState(settings.yearChangeScrollBegin);
   const [scrollForm, setScrollForm] = useState(scroll);
-
-  const [submittedOnce, setSubmittedOnce] = useState(false);
-
-  type OffsetFormError = typeof OffsetFormError[keyof typeof OffsetFormError];
-  const OffsetFormError = {
-    NONE: "",
-    EMPTY: t`An offset must be set.`,
-    NAN: t`Offset must be a number.`,
-    NEGATIV: t`Offset must be positiv.`,
-  } as const;
-  const [offsetFormError, setOffsetFormError] = useState<OffsetFormError>(OffsetFormError.NONE);
-
-  const validateOffset = (value: string): boolean => {
-    if (value === "") {
-      setOffsetFormError(OffsetFormError.EMPTY);
-      return false;
-    }
-    if (Number.isNaN(Number(value))) {
-      setOffsetFormError(OffsetFormError.NAN);
-      return false;
-    }
-    if (Number(value) < 0) {
-      setOffsetFormError(OffsetFormError.NEGATIV);
-      return false;
-    }
-    setOffsetFormError(OffsetFormError.NONE);
-    return true;
-  };
 
   useEffect(() => {
     setName(configState?.user?.name ?? "");
@@ -101,12 +66,8 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
     setLevel(settings.logLevel);
     setLevelForm(settings.logLevel);
     setShowAdvanced(false);
-    setOffset(settings.todayAutoscrollLeftOffset.toString());
-    setOffsetForm(settings.todayAutoscrollLeftOffset.toString());
-    setOffsetFormError(OffsetFormError.NONE);
     setScroll(settings.yearChangeScrollBegin);
     setScrollForm(settings.yearChangeScrollBegin);
-    setSubmittedOnce(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [settingsDialogState]);
 
@@ -125,11 +86,6 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
   }));
 
   const saveChanges = (): boolean => {
-    if (offset !== offsetForm) {
-      if (offsetFormError || !validateOffset(offsetForm)) return false;
-      setOffset(offsetForm);
-      setTodayAutoscrollLeftOffset(Number(offsetForm), snackbarHandles);
-    }
     if (level !== levelForm) {
       setLevel(levelForm);
       setLogLevel(levelForm, snackbarHandles);
@@ -228,23 +184,6 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
               />
             </Box>
           </FormControl>
-          <TextField
-            margin="dense"
-            id="offset"
-            label={t`Left side offset on auto scroll to today.`}
-            type="text"
-            inputProps={{ inputMode: "numeric", pattern: "[0-9]+" }}
-            fullWidth
-            variant="outlined"
-            value={offsetForm}
-            error={offsetFormError !== OffsetFormError.NONE}
-            helperText={offsetFormError}
-            onChange={(event) => {
-              if (submittedOnce) validateOffset(event.target.value);
-              setOffsetForm(event.target.value);
-            }}
-            sx={{ marginY: 1 }}
-          />
           <FormControl
             component="fieldset"
             fullWidth
@@ -277,7 +216,6 @@ const SettingsDialog = ({ onClick }: Props): ReactElement => {
           data-testid={`${id}-btn-save`}
           onClick={() => {
             if (typeof onClick === "function") onClick();
-            setSubmittedOnce(true);
             if (!saveChanges()) return;
             closeSettingsDialog();
           }}

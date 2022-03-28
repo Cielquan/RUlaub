@@ -17,7 +17,6 @@ pub const DEFAULT_CONFIG_TOML_STR: &str = r#"
 settings.language = "de-DE"
 settings.log_level = "INFO"
 settings.theme = "dark"
-settings.today_autoscroll_left_offset = 2
 settings.year_change_scroll_begin = true
 "#;
 
