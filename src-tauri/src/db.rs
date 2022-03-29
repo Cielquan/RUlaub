@@ -1,5 +1,6 @@
 mod connection;
 pub mod conversion;
+pub mod defaults;
 pub mod migration;
 pub mod models;
 pub mod query_only_models;

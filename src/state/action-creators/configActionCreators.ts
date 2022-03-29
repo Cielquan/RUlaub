@@ -210,7 +210,7 @@ export const createNewDB =
 
     let data;
     try {
-      data = await invoke<ConfigFile>("create_db", { path });
+      data = await invoke<ConfigFile>("create_db", { path, addDefaults: false });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;

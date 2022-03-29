@@ -92,10 +92,11 @@ pub async fn set_db_uri(
 #[tauri::command]
 pub async fn create_db(
     path: String,
+    add_defaults: bool,
     state: tauri::State<'_, state::ConfigState>,
     config_setup_err_state: tauri::State<'_, state::ConfigSetupErrState>,
 ) -> commands::CommandResult<config::Config> {
-    if db::migrate_db_schema(&path, true).is_err() {
+    if db::migrate_db_schema(&path, true, add_defaults).is_err() {
         return Err("database-creation-error".into());
     }
 

@@ -1,7 +1,7 @@
 use crate::db;
 
 /// Migrate the database to the latest state
-pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<bool> {
+pub fn migrate_db_schema(db_url: &str, create: bool, add_defaults: bool) -> anyhow::Result<bool> {
     debug!(
         target = "database-migration",
         message = "Start database migration routine"
@@ -28,8 +28,23 @@ pub fn migrate_db_schema(db_url: &str, create: bool) -> anyhow::Result<bool> {
                     target = "database-migration",
                     message = "Ran pending migrations"
                 );
-                new
             }
+            if add_defaults {
+                if let Err(err) = db::defaults::add_default_values_to_db(&conn) {
+                    error!(
+                        target = "database-migration",
+                        message = "Failed to add default values to the database",
+                        error = ?err
+                    );
+                    return Err(err.into());
+                } else {
+                    info!(
+                        target = "database-migration",
+                        message = "Added default values to the database"
+                    );
+                }
+            }
+            new
         }
     };
     debug!(
