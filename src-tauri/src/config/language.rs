@@ -13,12 +13,14 @@ lazy_static! {
                 import_name: "deDE".to_string(),
                 locale: Language::DE.to_string(),
                 name: "Deutsch".to_string(),
+                flag: "🇩🇪".to_string(),
             }),
             ("en-US", LanguageData {
                 date_mask: "__/__/____".to_string(),
                 import_name: "enUS".to_string(),
                 locale: Language::EN.to_string(),
                 name: "English".to_string(),
+                flag: "🇺🇸".to_string(),
             }),
         ]
     );
@@ -31,6 +33,7 @@ pub struct LanguageData {
     pub import_name: String,
     pub locale: String,
     pub name: String,
+    pub flag: String,
 }
 
 impl LanguageData {

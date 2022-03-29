@@ -24,7 +24,7 @@ const LanguageMenuButton = forwardRef(
 
     return (
       <MenuItem ref={ref} selected={active} onClick={active ? closeHandle : changeHandle}>
-        {language.name}
+        {`${language.flag} ${language.name}`}
       </MenuItem>
     );
   }

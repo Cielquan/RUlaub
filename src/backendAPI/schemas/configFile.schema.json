@@ -60,9 +60,10 @@
         "dateMask": { "type": "string" },
         "importName": { "$ref": "#/$defs/SupportedLanguagesShort" },
         "locale": { "$ref": "#/$defs/SupportedLanguages" },
-        "name": { "type": "string" }
+        "name": { "type": "string" },
+        "flag": { "type": "string" }
       },
-      "required": ["dateMask", "importName", "locale", "name"],
+      "required": ["dateMask", "importName", "locale", "name", "flag"],
       "additionalProperties": false
     }
   }

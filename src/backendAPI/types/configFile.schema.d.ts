@@ -31,4 +31,5 @@ export interface LanguageData {
   importName: SupportedLanguagesShort;
   locale: SupportedLanguages;
   name: string;
+  flag: string;
 }
