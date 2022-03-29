@@ -4,6 +4,7 @@ import aboutPageReducer from "./aboutPageReducer";
 import addVacationDialogReducer from "./addVacationDialogReducer";
 import calendarRowUserMapReducer from "./calendarRowUserMapReducer";
 import configReducer from "./configReducer";
+import createDBDialogReducer from "./createDBDialogReducer";
 import dbInitLoadReducer from "./dbInitLoadReducer";
 import downloadSchoolHolidaysDialogReducer from "./downloadSchoolHolidaysDialogReducer";
 import {
@@ -11,6 +12,7 @@ import {
   addVacationDialogInitState,
   calendarRowUserMapInitState,
   configInitState,
+  createDBDialogInitState,
   dbInitLoadInitState,
   downloadSchoolHolidaysDialogInitState,
   publicHolidaysDataInitState,
@@ -54,6 +56,7 @@ const rootReducer = combineReducers({
   addVacationDialog: addVacationDialogReducer,
   calendarRowUserMap: calendarRowUserMapReducer,
   config: configReducer,
+  createDBDialog: createDBDialogReducer,
   dbInitLoad: dbInitLoadReducer,
   downloadSchoolHolidaysDialog: downloadSchoolHolidaysDialogReducer,
   publicHolidaysData: publicHolidaysDataReducer,
@@ -82,6 +85,7 @@ export const initialState: State = {
   addVacationDialog: addVacationDialogInitState,
   calendarRowUserMap: calendarRowUserMapInitState,
   config: configInitState,
+  createDBDialog: createDBDialogInitState,
   dbInitLoad: dbInitLoadInitState,
   downloadSchoolHolidaysDialog: downloadSchoolHolidaysDialogInitState,
   publicHolidaysData: publicHolidaysDataInitState,

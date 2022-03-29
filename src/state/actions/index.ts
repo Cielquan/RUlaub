@@ -10,6 +10,7 @@ import {
   AddVacationDialogActionType,
   CalendarRowUserMapActionType,
   ConfigActionType,
+  CreateDBDialogActionType,
   DBInitLoadActionType,
   DownloadSchoolHolidaysDialogActionType,
   PublicHolidaysDataActionType,
@@ -48,6 +49,10 @@ export type CalendarRowUserMapAction = {
 export type ConfigAction = {
   type: ConfigActionType;
   payload: ConfigFile;
+};
+
+export type CreateDBDialogAction = {
+  type: CreateDBDialogActionType;
 };
 
 export type DBInitLoadAction = {

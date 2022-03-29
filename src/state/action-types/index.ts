@@ -16,6 +16,11 @@ export enum ConfigActionType {
   UPDATE = "update Config",
 }
 
+export enum CreateDBDialogActionType {
+  OPEN = "open CreateDBDialog dialog",
+  CLOSE = "close CreateDBDialog dialog",
+}
+
 export enum DBInitLoadActionType {
   UPDATE = "update DBInitLoad to status",
 }

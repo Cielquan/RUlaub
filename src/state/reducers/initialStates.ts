@@ -42,6 +42,7 @@ export const aboutPageInitState = false;
 export const addVacationDialogInitState = false;
 export const calendarRowUserMapInitState: CalendarRowUserMap = {};
 export const configInitState = null;
+export const createDBDialogInitState = false;
 export const dbInitLoadInitState = DBInitLoadState.NOT_LOADED;
 export const downloadSchoolHolidaysDialogInitState: DownloadSchoolHolidaysDialogState = {
   open: false,
