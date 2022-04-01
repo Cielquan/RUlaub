@@ -7,6 +7,7 @@ import React, { ReactElement } from "react";
 import AboutPage from "./components/AboutPage";
 import AddVacationDialog from "./components/AddVacationDialog";
 import CalendarWrapper from "./components/CalendarWrapper";
+import CreateDBDialog from "./components/CreateDBDialog";
 import DownloadSchoolHolidaysDialog from "./components/DownloadSchoolHolidaysDialog";
 import Navbar from "./components/Navbar";
 import PublicHolidaysDialog from "./components/PublicHolidaysDialog";
@@ -59,6 +60,7 @@ const App = (): ReactElement => {
       </Box>
       <AboutPage />
       <AddVacationDialog />
+      <CreateDBDialog />
       <DownloadSchoolHolidaysDialog />
       <PublicHolidaysDialog />
       <SchoolHolidaysDialog />

@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api";
-import { open, save } from "@tauri-apps/api/dialog";
+import { open } from "@tauri-apps/api/dialog";
 import { ProviderContext } from "notistack";
 import { dirname } from "path";
 import { batch } from "react-redux";
@@ -200,17 +200,12 @@ export const setYearToShow =
     dispatch(updateConfigAction(conf));
   };
 
-const FILTERS = [{ name: "Database", extensions: ["db"] }];
-
 export const createNewDB =
-  (snackbarHandles: ProviderContext) =>
+  (path: string, addDefaults: boolean, snackbarHandles: ProviderContext) =>
   async (dispatch: Dispatch): Promise<void> => {
-    const path = await save({ filters: FILTERS });
-    if (path === null) return;
-
     let data;
     try {
-      data = await invoke<ConfigFile>("create_db", { path, addDefaults: false });
+      data = await invoke<ConfigFile>("create_db", { path, addDefaults });
     } catch (err) {
       enqueuePersistendErrSnackbar(getErrorCatalogueMsg(err as string), snackbarHandles);
       return;
@@ -244,7 +239,7 @@ export const selectDB =
 
     const path = (await open({
       defaultPath: dbUri ? dirname(dbUri) : undefined,
-      filters: FILTERS,
+      filters: [{ name: "Database", extensions: ["db"] }],
       multiple: false,
       directory: false,
     })) as string;

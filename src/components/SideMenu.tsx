@@ -43,8 +43,8 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
   const {
     closeSideMenu,
-    createNewDB,
     openAboutPage,
+    openCreateDBDialog,
     openPublicHolidaysDialog,
     openSchoolHolidaysDialog,
     openSettingsDialog,
@@ -95,7 +95,7 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
     {
       mainButton: [t`Database`, <StorageIcon />],
       rightButton: [<FolderIcon />, () => selectDB(snackbarHandles), t`Select`],
-      leftButton: [<AddIcon />, () => createNewDB(snackbarHandles), t`Create`],
+      leftButton: [<AddIcon />, openCreateDBDialog, t`Create`],
     },
     {
       mainButton: [t`Users`, <GroupIcon />],

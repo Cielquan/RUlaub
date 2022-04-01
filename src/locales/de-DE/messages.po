@@ -232,6 +232,28 @@ msgstr "Kein Jahr zum Anzeigen ausgewählt. Bitte unten auswählen:"
 msgid "Change displayed year."
 msgstr "Angezeigtes Jahr ändern."
 
+#: src/components/CreateDBDialog.tsx:93
+msgid "Create new Database"
+msgstr "Neue Datenbank erstellen"
+
+#: src/components/CreateDBDialog.tsx:98
+msgid "Database file path"
+msgstr "Datenbank Dateipfad"
+
+#: src/components/CreateDBDialog.tsx:133
+msgid "Add default values for Germany NRW to database."
+msgstr "Default Werte für Deutschland NRW in Datenbank einpflegen"
+
+#: src/components/CreateDBDialog.tsx:151
+#: src/components/SideMenu.tsx:98
+#: src/components/SideMenu.tsx:128
+msgid "Create"
+msgstr "Erstellen"
+
+#: src/components/CreateDBDialog.tsx:160
+msgid "Abort"
+msgstr "Abbrechen"
+
 #: src/components/DarkThemeSwitch.tsx:25
 msgid "Activate Light Theme"
 msgstr "Helles Design aktivieren"
@@ -270,7 +292,7 @@ msgstr "Daten für aktuelles Jahr laden"
 msgid "Load all data"
 msgstr "Alle Daten laden"
 
-#: src/components/NewHolidayButton.tsx:32
+#: src/components/NewHolidayButton.tsx:30
 msgid "Add new Holiday"
 msgstr "Neuen Urlaub hinzufügen"
 
@@ -410,9 +432,13 @@ msgstr "Link"
 msgid "School Holiday must have a name."
 msgstr "Ferien muss eine Bezeichnung haben."
 
-#: src/components/SchoolHolidaysDownloadButton.tsx:44
+#: src/components/SchoolHolidaysDownloadButton.tsx:42
 msgid "Load School Holidays for year: {0}"
 msgstr "Download Schulferien für das Jahr: {0}"
+
+#: src/components/ScrollTodayButton.tsx:33
+msgid "Scroll to today"
+msgstr "Nach Heute scrollen"
 
 #: src/components/SettingsDialog.tsx:114
 #: src/components/SideMenu.tsx:156
@@ -446,11 +472,6 @@ msgstr "Datenbank"
 #: src/components/SideMenu.tsx:97
 msgid "Select"
 msgstr "Auswählen"
-
-#: src/components/SideMenu.tsx:98
-#: src/components/SideMenu.tsx:128
-msgid "Create"
-msgstr "Erstellen"
 
 #: src/components/SideMenu.tsx:101
 #: src/components/UsersDialog.tsx:138
