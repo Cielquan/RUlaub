@@ -2,7 +2,7 @@ use diesel::prelude::*;
 
 use crate::db;
 
-const DEFAULT_LINK: &str = "link";
+const DEFAULT_LINK: &str = "https://raw.githubusercontent.com/Cielquan/holidAPI/main/api/state/NW/year/%year%/holidays.json";
 
 pub fn add_default_school_holiday_link(conn: &diesel::SqliteConnection) -> diesel::QueryResult<()> {
     use db::schema::school_holidays_link::dsl::school_holidays_link;
