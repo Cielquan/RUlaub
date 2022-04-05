@@ -282,7 +282,7 @@ const VacationTypesDialogEntry = ({
   );
 
   const onClickSave = (): void => {
-    if (nameFormError !== NameFormError.NONE || !validateForm()) return;
+    if (!validateForm()) return;
     setName(nameForm);
     setCharge(chargeForm);
     setColorDark(colorDarkForm);

@@ -411,16 +411,7 @@ const PublicHolidaysDialogEntry = ({
   );
 
   const onClickSave = (): void => {
-    if (
-      nameFormError !== NameFormError.NONE ||
-      yearFormError !== YearFormError.NONE ||
-      (dateTypeForm === DateType.YEARLESSDATE &&
-        yearlessDateFormError !== YearlessDateFormError.NONE) ||
-      (dateTypeForm === DateType.OFFSET &&
-        easterSundayOffsetFormError !== EasterSundayOffsetFormError.NONE) ||
-      !validateForm()
-    )
-      return;
+    if (!validateForm()) return;
     setName(nameForm);
     setYear(Number(yearForm));
     if (dateTypeForm === DateType.YEARLESSDATE) {

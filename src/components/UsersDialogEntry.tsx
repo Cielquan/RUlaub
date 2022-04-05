@@ -309,13 +309,7 @@ const UsersDialogEntry = ({
   );
 
   const onClickSave = (): void => {
-    if (
-      nameFormError !== NameFormError.NONE ||
-      vacDaysFormError !== VacDaysFormError.NONE ||
-      workdaysFormError !== WorkdaysFormError.NONE ||
-      !validateForm()
-    )
-      return;
+    if (!validateForm()) return;
     setName(nameForm);
     setVacDays(Number(vacDaysForm));
     setWorkdays(workdaysForm);

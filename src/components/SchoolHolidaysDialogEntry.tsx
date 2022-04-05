@@ -269,13 +269,7 @@ const SchoolHolidaysDialogEntry = ({
   );
 
   const onClickSave = (): void => {
-    if (
-      nameFormError !== NameFormError.NONE ||
-      startDateFormError !== StartDateFormError.NONE ||
-      endDateFormError !== EndDateFormError.NONE ||
-      !validateForm()
-    )
-      return;
+    if (!validateForm()) return;
     setName(nameForm);
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     setStartDate(startDateForm!.toISOString().slice(0, 10));

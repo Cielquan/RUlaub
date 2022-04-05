@@ -285,13 +285,7 @@ const VacationsDialogEntry = ({
   );
 
   const onClickSave = (): void => {
-    if (
-      typeIDFormError !== TypeIDFormError.NONE ||
-      startDateFormError !== StartDateFormError.NONE ||
-      endDateFormError !== EndDateFormError.NONE ||
-      !validateForm()
-    )
-      return;
+    if (!validateForm()) return;
     setTypeID(Number(typeIDForm));
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     setStartDate(startDateForm!.toISOString().slice(0, 10));
