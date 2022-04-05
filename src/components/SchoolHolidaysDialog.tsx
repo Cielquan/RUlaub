@@ -23,6 +23,7 @@ import { bindActionCreators } from "redux";
 
 import { NewSchoolHolidayData, SchoolHolidayDataPayload } from "../backendAPI/types/helperTypes";
 import { SchoolHolidayData } from "../backendAPI/types/schoolHolidaysData.schema";
+import { useCounter } from "../hooks";
 import { State, actionCreators } from "../state";
 import { getDaysForDate } from "../utils/dateUtils";
 import LoadingDepthSwitch from "./LoadingDepthSwitch";
@@ -86,6 +87,11 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
     return true;
   };
 
+  const {
+    counter: inProgessCounter,
+    increaseCounter: addEntryInProgress,
+    decreaseCounter: removeEntryInProgress,
+  } = useCounter();
   const [tmpID, setTmpID] = useState(-1);
   const getTmpID = (): string => {
     setTmpID(tmpID - 1);
@@ -132,6 +138,7 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
       },
     };
     setNewSchoolHolidays(rv);
+    addEntryInProgress();
   };
   const updateNewSchoolHoliday = ([id, schoolHolidayData]: SchoolHolidayDataPayload): void => {
     const rv = { ...newSchoolHolidays };
@@ -194,9 +201,10 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
   const id = "schoolHolidays-dialog";
 
   const saveDisabled =
-    Object.keys(updatedSchoolHolidays).length === 0 &&
-    Object.keys(newSchoolHolidays).length === 0 &&
-    link === linkForm;
+    inProgessCounter > 0 ||
+    (Object.keys(updatedSchoolHolidays).length === 0 &&
+      Object.keys(newSchoolHolidays).length === 0 &&
+      link === linkForm);
 
   return (
     <Dialog
@@ -248,6 +256,8 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
                 schoolHoliday={schoolHolidaysDataState[schoolHolidayId]}
                 addSchoolHolidayToQueue={addUpdatedSchoolHoliday}
                 removeSchoolHolidayFromQueue={removeUpdatedSchoolHoliday}
+                addEntryInProgress={addEntryInProgress}
+                removeEntryInProgress={removeEntryInProgress}
               />
             ))}
           {Object.keys(newSchoolHolidays)
@@ -259,6 +269,8 @@ const SchoolHolidaysDialog = ({ onClick }: Props): ReactElement => {
                 schoolHoliday={newSchoolHolidays[schoolHolidayId]}
                 addSchoolHolidayToQueue={updateNewSchoolHoliday}
                 removeSchoolHolidayFromQueue={removeNewSchoolHoliday}
+                addEntryInProgress={addEntryInProgress}
+                removeEntryInProgress={removeEntryInProgress}
               />
             ))}
           <ListItem sx={{ display: "flex", justifyContent: "center", padding: 0 }}>

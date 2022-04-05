@@ -21,6 +21,7 @@ import { bindActionCreators } from "redux";
 
 import { NewPublicHolidayData, PublicHolidayDataPayload } from "../backendAPI/types/helperTypes";
 import { PublicHolidayData } from "../backendAPI/types/publicHolidaysData.schema";
+import { useCounter } from "../hooks";
 import { State, actionCreators } from "../state";
 import LoadingDepthSwitch from "./LoadingDepthSwitch";
 import PublicHolidaysDialogEntry from "./PublicHolidaysDialogEntry";
@@ -44,6 +45,11 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
   const publicHolidaysDialogState = useSelector((state: State) => state.publicHolidaysDialog);
   const publicHolidaysDataState = useSelector((state: State) => state.publicHolidaysData);
 
+  const {
+    counter: inProgessCounter,
+    increaseCounter: addEntryInProgress,
+    decreaseCounter: removeEntryInProgress,
+  } = useCounter();
   const [tmpID, setTmpID] = useState(-1);
   const getTmpID = (): string => {
     setTmpID(tmpID - 1);
@@ -80,6 +86,7 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
       name: "",
     };
     setNewPublicHolidays(rv);
+    addEntryInProgress();
   };
   const updateNewPublicHoliday = ([id, publicHolidayData]: PublicHolidayDataPayload): void => {
     const rv = { ...newPublicHolidays };
@@ -128,7 +135,9 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
   const id = "publicHolidays-dialog";
 
   const saveDisabled =
-    Object.keys(updatedPublicHolidays).length === 0 && Object.keys(newPublicHolidays).length === 0;
+    inProgessCounter > 0 ||
+    (Object.keys(updatedPublicHolidays).length === 0 &&
+      Object.keys(newPublicHolidays).length === 0);
 
   return (
     <Dialog
@@ -163,6 +172,8 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
                 publicHoliday={publicHolidaysDataState[publicHolidayId]}
                 addPublicHolidayToQueue={addUpdatedPublicHoliday}
                 removePublicHolidayFromQueue={removeUpdatedPublicHoliday}
+                addEntryInProgress={addEntryInProgress}
+                removeEntryInProgress={removeEntryInProgress}
               />
             ))}
           {Object.keys(newPublicHolidays)
@@ -174,6 +185,8 @@ const PublicHolidaysDialog = ({ onClick }: Props): ReactElement => {
                 publicHoliday={newPublicHolidays[publicHolidayId]}
                 addPublicHolidayToQueue={updateNewPublicHoliday}
                 removePublicHolidayFromQueue={removeNewPublicHoliday}
+                addEntryInProgress={addEntryInProgress}
+                removeEntryInProgress={removeEntryInProgress}
               />
             ))}
           <ListItem sx={{ display: "flex", justifyContent: "center", padding: 0 }}>

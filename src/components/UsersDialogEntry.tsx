@@ -33,6 +33,8 @@ interface Props {
   user: UserData | NewUserData;
   addUserToQueue(e: UserDataPayload | [string, undefined] | NewUserDataPayload): void;
   removeUserFromQueue(e: string): void;
+  addEntryInProgress(): void;
+  removeEntryInProgress(): void;
 }
 
 const UsersDialogEntry = ({
@@ -40,6 +42,8 @@ const UsersDialogEntry = ({
   user,
   addUserToQueue,
   removeUserFromQueue,
+  addEntryInProgress,
+  removeEntryInProgress,
 }: Props): ReactElement => {
   const usersDialogState = useSelector((state: State) => state.usersDialog);
 
@@ -327,6 +331,7 @@ const UsersDialogEntry = ({
         availableVacationDays: Number(vacDaysForm),
       },
     ]);
+    removeEntryInProgress();
   };
   const onClickEdit = (): void => {
     setNameForm(name);
@@ -334,6 +339,7 @@ const UsersDialogEntry = ({
     setWorkdaysForm(workdays);
     resetErrorStates();
     setEditable(true);
+    addEntryInProgress();
   };
   const onClickCancel = (): void => {
     if (newEntry && !savedOnce) {
@@ -345,6 +351,7 @@ const UsersDialogEntry = ({
       resetErrorStates();
       setEditable(false);
     }
+    removeEntryInProgress();
   };
   const onClickDelete = (): void => {
     setToBeRemoved(true);

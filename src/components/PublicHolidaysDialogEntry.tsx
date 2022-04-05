@@ -39,6 +39,8 @@ interface Props {
     e: PublicHolidayDataPayload | [string, undefined] | NewPublicHolidayDataPayload
   ): void;
   removePublicHolidayFromQueue(e: string): void;
+  addEntryInProgress(): void;
+  removeEntryInProgress(): void;
 }
 
 const PublicHolidaysDialogEntry = ({
@@ -46,6 +48,8 @@ const PublicHolidaysDialogEntry = ({
   publicHoliday,
   addPublicHolidayToQueue,
   removePublicHolidayFromQueue,
+  addEntryInProgress,
+  removeEntryInProgress,
 }: Props): ReactElement => {
   const publicHolidaysDialogState = useSelector((state: State) => state.publicHolidaysDialog);
 
@@ -438,6 +442,7 @@ const PublicHolidaysDialogEntry = ({
           dateTypeForm === DateType.OFFSET ? Number(easterSundayOffsetForm) : undefined,
       },
     ]);
+    removeEntryInProgress();
   };
   const onClickEdit = (): void => {
     setNameForm(name);
@@ -446,6 +451,7 @@ const PublicHolidaysDialogEntry = ({
     setEasterSundayOffsetForm((easterSundayOffset ?? "").toString());
     resetErrorStates();
     setEditable(true);
+    addEntryInProgress();
   };
   const onClickCancel = (): void => {
     if (newEntry && !savedOnce) {
@@ -458,6 +464,7 @@ const PublicHolidaysDialogEntry = ({
       resetErrorStates();
       setEditable(false);
     }
+    removeEntryInProgress();
   };
   const onClickDelete = (): void => {
     setToBeRemoved(true);

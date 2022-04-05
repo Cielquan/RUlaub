@@ -21,6 +21,7 @@ import { bindActionCreators } from "redux";
 
 import { NewUserData, UserDataPayload } from "../backendAPI/types/helperTypes";
 import { UserData } from "../backendAPI/types/usersData.schema";
+import { useCounter } from "../hooks";
 import { State, actionCreators } from "../state";
 import UsersDialogEntry from "./UsersDialogEntry";
 
@@ -42,6 +43,11 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
   const usersDialogState = useSelector((state: State) => state.usersDialog);
   const usersDataState = useSelector((state: State) => state.usersData);
 
+  const {
+    counter: inProgessCounter,
+    increaseCounter: addEntryInProgress,
+    decreaseCounter: removeEntryInProgress,
+  } = useCounter();
   const [tmpID, setTmpID] = useState(-1);
   const getTmpID = (): string => {
     setTmpID(tmpID - 1);
@@ -84,6 +90,7 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
       availableVacationDays: 0,
     };
     setNewUsers(rv);
+    addEntryInProgress();
   };
   const updateNewUser = ([id, userData]: UserDataPayload): void => {
     const rv = { ...newUsers };
@@ -122,7 +129,9 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
 
   const id = "users-dialog";
 
-  const saveDisabled = Object.keys(updatedUsers).length === 0 && Object.keys(newUsers).length === 0;
+  const saveDisabled =
+    inProgessCounter > 0 ||
+    (Object.keys(updatedUsers).length === 0 && Object.keys(newUsers).length === 0);
 
   return (
     <Dialog
@@ -149,6 +158,8 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
                 user={usersDataState[userId]}
                 addUserToQueue={addUpdatedUser}
                 removeUserFromQueue={removeUpdatedUser}
+                addEntryInProgress={addEntryInProgress}
+                removeEntryInProgress={removeEntryInProgress}
               />
             ))}
           {Object.keys(newUsers)
@@ -160,6 +171,8 @@ const UsersDialog = ({ onClick }: Props): ReactElement => {
                 user={newUsers[userId]}
                 addUserToQueue={updateNewUser}
                 removeUserFromQueue={removeNewUser}
+                addEntryInProgress={addEntryInProgress}
+                removeEntryInProgress={removeEntryInProgress}
               />
             ))}
           <ListItem sx={{ display: "flex", justifyContent: "center", padding: 0 }}>

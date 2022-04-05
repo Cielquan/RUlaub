@@ -21,6 +21,7 @@ import { bindActionCreators } from "redux";
 
 import { NewVacationTypeData, VacationTypeDataPayload } from "../backendAPI/types/helperTypes";
 import { VacationTypeData } from "../backendAPI/types/vacationTypesData.schema";
+import { useCounter } from "../hooks";
 import { State, actionCreators } from "../state";
 import VacationTypesDialogEntry from "./VacationTypesDialogEntry";
 
@@ -45,6 +46,11 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
   const vacationTypesDialogState = useSelector((state: State) => state.vacationTypesDialog);
   const vacationTypesDataState = useSelector((state: State) => state.vacationTypesData);
 
+  const {
+    counter: inProgessCounter,
+    increaseCounter: addEntryInProgress,
+    decreaseCounter: removeEntryInProgress,
+  } = useCounter();
   const [tmpID, setTmpID] = useState(-1);
   const getTmpID = (): string => {
     setTmpID(tmpID - 1);
@@ -76,6 +82,7 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
       active: true,
     };
     setNewVacationTypes(rv);
+    addEntryInProgress();
   };
   const updateNewVacationType = ([id, vacationTypeData]: VacationTypeDataPayload): void => {
     const rv = { ...newVacationTypes };
@@ -112,7 +119,8 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
   const id = "vacationTypes-dialog";
 
   const saveDisabled =
-    Object.keys(updatedVacationTypes).length === 0 && Object.keys(newVacationTypes).length === 0;
+    inProgessCounter > 0 ||
+    (Object.keys(updatedVacationTypes).length === 0 && Object.keys(newVacationTypes).length === 0);
 
   return (
     <Dialog
@@ -139,6 +147,8 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
                 vacationType={vacationTypesDataState[vacationTypeId]}
                 addVacationTypeToQueue={addUpdatedVacationType}
                 removeVacationTypeFromQueue={() => undefined}
+                addEntryInProgress={addEntryInProgress}
+                removeEntryInProgress={removeEntryInProgress}
               />
             ))}
           {Object.keys(newVacationTypes)
@@ -150,6 +160,8 @@ const VacationTypesDialog = ({ onClick }: Props): ReactElement => {
                 vacationType={newVacationTypes[vacationTypeId]}
                 addVacationTypeToQueue={updateNewVacationType}
                 removeVacationTypeFromQueue={removeNewVacationType}
+                addEntryInProgress={addEntryInProgress}
+                removeEntryInProgress={removeEntryInProgress}
               />
             ))}
           <ListItem sx={{ display: "flex", justifyContent: "center", padding: 0 }}>

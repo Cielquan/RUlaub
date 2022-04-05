@@ -37,6 +37,8 @@ interface Props {
   vacation: VacationData | NewVacationData;
   addVacationToQueue(e: VacationDataPayload | [string, undefined] | NewVacationDataPayload): void;
   removeVacationFromQueue(e: string): void;
+  addEntryInProgress(): void;
+  removeEntryInProgress(): void;
 }
 
 const VacationsDialogEntry = ({
@@ -44,6 +46,8 @@ const VacationsDialogEntry = ({
   vacation,
   addVacationToQueue,
   removeVacationFromQueue,
+  addEntryInProgress,
+  removeEntryInProgress,
 }: Props): ReactElement => {
   const vacationsDialogState = useSelector((state: State) => state.vacationsDialog);
   const vacationTypesDataState = useSelector((state: State) => state.vacationTypesData);
@@ -320,6 +324,7 @@ const VacationsDialogEntry = ({
         },
       },
     ]);
+    removeEntryInProgress();
   };
   const onClickEdit = (): void => {
     setTypeIDForm(typeID.toString());
@@ -327,6 +332,7 @@ const VacationsDialogEntry = ({
     setEndDateForm(new Date(endDate));
     resetErrorStates();
     setEditable(true);
+    addEntryInProgress();
   };
   const onClickCancel = (): void => {
     if (newEntry && !savedOnce) {
@@ -338,6 +344,7 @@ const VacationsDialogEntry = ({
       resetErrorStates();
       setEditable(false);
     }
+    removeEntryInProgress();
   };
   const onClickDelete = (): void => {
     setToBeRemoved(true);

@@ -46,6 +46,8 @@ interface Props {
     e: VacationTypeDataPayload | [string, undefined] | NewVacationTypeDataPayload
   ): void;
   removeVacationTypeFromQueue(e: string): void;
+  addEntryInProgress(): void;
+  removeEntryInProgress(): void;
 }
 
 const VacationTypesDialogEntry = ({
@@ -53,6 +55,8 @@ const VacationTypesDialogEntry = ({
   vacationType,
   addVacationTypeToQueue,
   removeVacationTypeFromQueue,
+  addEntryInProgress,
+  removeEntryInProgress,
 }: Props): ReactElement => {
   const vacationTypesDialogState = useSelector((state: State) => state.vacationTypesDialog);
 
@@ -296,6 +300,7 @@ const VacationTypesDialogEntry = ({
         colorLight: colorLightForm,
       },
     ]);
+    removeEntryInProgress();
   };
   const onClickEdit = (): void => {
     setNameForm(name);
@@ -304,6 +309,7 @@ const VacationTypesDialogEntry = ({
     setColorLightForm(colorLight);
     resetErrorStates();
     setEditable(true);
+    addEntryInProgress();
   };
   const onClickCancel = (): void => {
     if (newEntry && !savedOnce) {
@@ -316,6 +322,7 @@ const VacationTypesDialogEntry = ({
       resetErrorStates();
       setEditable(false);
     }
+    removeEntryInProgress();
   };
   // Delete only for new entries, thus not saved in DB yet
   const onClickDelete = (): void => {

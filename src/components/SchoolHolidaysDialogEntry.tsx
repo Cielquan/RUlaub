@@ -29,6 +29,8 @@ interface Props {
     e: SchoolHolidayDataPayload | [string, undefined] | NewSchoolHolidayDataPayload
   ): void;
   removeSchoolHolidayFromQueue(e: string): void;
+  addEntryInProgress(): void;
+  removeEntryInProgress(): void;
 }
 
 const SchoolHolidaysDialogEntry = ({
@@ -36,6 +38,8 @@ const SchoolHolidaysDialogEntry = ({
   schoolHoliday,
   addSchoolHolidayToQueue,
   removeSchoolHolidayFromQueue,
+  addEntryInProgress,
+  removeEntryInProgress,
 }: Props): ReactElement => {
   const schoolHolidaysDialogState = useSelector((state: State) => state.schoolHolidaysDialog);
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -303,6 +307,7 @@ const SchoolHolidaysDialogEntry = ({
         },
       },
     ]);
+    removeEntryInProgress();
   };
   const onClickEdit = (): void => {
     setNameForm(name);
@@ -310,6 +315,7 @@ const SchoolHolidaysDialogEntry = ({
     setEndDateForm(new Date(endDate));
     resetErrorStates();
     setEditable(true);
+    addEntryInProgress();
   };
   const onClickCancel = (): void => {
     if (newEntry && !savedOnce) {
@@ -321,6 +327,7 @@ const SchoolHolidaysDialogEntry = ({
       resetErrorStates();
       setEditable(false);
     }
+    removeEntryInProgress();
   };
   const onClickDelete = (): void => {
     setToBeRemoved(true);

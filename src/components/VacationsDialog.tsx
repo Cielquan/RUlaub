@@ -28,6 +28,7 @@ import { bindActionCreators } from "redux";
 
 import { NewVacationData, VacationDataPayload } from "../backendAPI/types/helperTypes";
 import { VacationData } from "../backendAPI/types/vacationsData.schema";
+import { useCounter } from "../hooks";
 import { State, actionCreators } from "../state";
 import { getDaysForDate } from "../utils/dateUtils";
 import { getUserIdByName } from "../utils/userUtils";
@@ -59,6 +60,11 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
 
   const [currentUserID, setCurrentUserID] = useState("");
 
+  const {
+    counter: inProgessCounter,
+    increaseCounter: addEntryInProgress,
+    decreaseCounter: removeEntryInProgress,
+  } = useCounter();
   const [tmpID, setTmpID] = useState(-1);
   const getTmpID = (): string => {
     setTmpID(tmpID - 1);
@@ -103,6 +109,7 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
       },
     };
     setNewVacations(rv);
+    addEntryInProgress();
   };
   const updateNewVacation = ([id, vacationData]: VacationDataPayload): void => {
     const rv = { ...newVacations };
@@ -157,7 +164,8 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
   const id = "vacations-dialog";
 
   const saveDisabled =
-    Object.keys(updatedVacations).length === 0 && Object.keys(newVacations).length === 0;
+    inProgessCounter > 0 ||
+    (Object.keys(updatedVacations).length === 0 && Object.keys(newVacations).length === 0);
 
   const currentUserVacationData = vacationsDataState[currentUserID];
 
@@ -226,6 +234,8 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
                     vacation={vacationsDataState[currentUserID][vacationId]}
                     addVacationToQueue={addUpdatedVacation}
                     removeVacationFromQueue={removeUpdatedVacation}
+                    addEntryInProgress={addEntryInProgress}
+                    removeEntryInProgress={removeEntryInProgress}
                   />
                 ))}
               {Object.keys(newVacations)
@@ -237,6 +247,8 @@ const VacationsDialog = ({ onClick }: Props): ReactElement => {
                     vacation={newVacations[vacationId]}
                     addVacationToQueue={updateNewVacation}
                     removeVacationFromQueue={removeNewVacation}
+                    addEntryInProgress={addEntryInProgress}
+                    removeEntryInProgress={removeEntryInProgress}
                   />
                 ))}
               <ListItem sx={{ display: "flex", justifyContent: "center", padding: 0 }}>
