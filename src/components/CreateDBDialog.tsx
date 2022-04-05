@@ -41,6 +41,15 @@ const CreateDBDialog = ({ onClick }: Props): ReactElement => {
   const dispatch = useDispatch();
   const { closeCreateDBDialog, createNewDB } = bindActionCreators(actionCreators, dispatch);
   const createDBDialogState = useSelector((state: State) => state.createDBDialog);
+  const publicHolidaysDataLoadingDepthState = useSelector(
+    (state: State) => state.publicHolidaysDataLoadingDepth
+  );
+  const schoolHolidaysDataLoadingDepthState = useSelector(
+    (state: State) => state.schoolHolidaysDataLoadingDepth
+  );
+  const vacationsDataLoadingDepthState = useSelector(
+    (state: State) => state.vacationsDataLoadingDepth
+  );
 
   const [path, setPath] = useState<string>();
   const [pathError, setPathError] = useState(false);
@@ -68,8 +77,15 @@ const CreateDBDialog = ({ onClick }: Props): ReactElement => {
   const createDB = (): void => {
     if (pathError || !validatePath(path)) return;
     closeCreateDBDialog();
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    createNewDB(path!, addDefaults, snackbarHandles);
+    createNewDB(
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      path!,
+      addDefaults,
+      snackbarHandles,
+      publicHolidaysDataLoadingDepthState,
+      schoolHolidaysDataLoadingDepthState,
+      vacationsDataLoadingDepthState
+    );
   };
 
   useEffect(() => {

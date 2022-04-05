@@ -17,6 +17,7 @@ import { validateConfig } from "../../backendAPI/validation";
 import { enqueuePersistendErrSnackbar } from "../../utils/snackbarUtils";
 import { ConfigActionType } from "../action-types";
 import { ConfigAction } from "../actions";
+import { LoadingDepth } from "../reducers/initialStates";
 
 export const updateConfigAction = (payload: ConfigFile): ConfigAction => ({
   type: ConfigActionType.UPDATE,
@@ -201,7 +202,14 @@ export const setYearToShow =
   };
 
 export const createNewDB =
-  (path: string, addDefaults: boolean, snackbarHandles: ProviderContext) =>
+  (
+    path: string,
+    addDefaults: boolean,
+    snackbarHandles: ProviderContext,
+    publicHolidaysLoadingDepth: LoadingDepth,
+    schoolHolidaysLoadingDepth: LoadingDepth,
+    vacationsLoadingDepth: LoadingDepth
+  ) =>
   async (dispatch: Dispatch): Promise<void> => {
     let data;
     try {
@@ -224,16 +232,37 @@ export const createNewDB =
       return;
     }
 
-    const setDBInitLoadStateOK = bindActionCreators(actionCreators.setDBInitLoadStateOK, dispatch);
+    const {
+      setDBInitLoadStateOK,
+      loadPublicHolidaysData,
+      loadSchoolHolidaysData,
+      loadSchoolHolidaysLink,
+      loadUsersData,
+      loadVacationStatsData,
+      loadVacationTypesData,
+      loadVacationsData,
+    } = bindActionCreators(actionCreators, dispatch);
 
     batch(() => {
       dispatch(updateConfigAction(conf));
       setDBInitLoadStateOK();
+      loadPublicHolidaysData(snackbarHandles, publicHolidaysLoadingDepth);
+      loadSchoolHolidaysData(snackbarHandles, schoolHolidaysLoadingDepth);
+      loadSchoolHolidaysLink(snackbarHandles);
+      loadUsersData(snackbarHandles);
+      loadVacationStatsData(snackbarHandles);
+      loadVacationTypesData(snackbarHandles);
+      loadVacationsData(snackbarHandles, vacationsLoadingDepth);
     });
   };
 
 export const selectDB =
-  (snackbarHandles: ProviderContext) =>
+  (
+    snackbarHandles: ProviderContext,
+    publicHolidaysLoadingDepth: LoadingDepth,
+    schoolHolidaysLoadingDepth: LoadingDepth,
+    vacationsLoadingDepth: LoadingDepth
+  ) =>
   async (dispatch: Dispatch): Promise<void> => {
     const dbUri = (await invoke<ConfigFile>("get_config_state")).settings.databaseUri;
 
@@ -266,10 +295,26 @@ export const selectDB =
       return;
     }
 
-    const setDBInitLoadStateOK = bindActionCreators(actionCreators.setDBInitLoadStateOK, dispatch);
+    const {
+      setDBInitLoadStateOK,
+      loadPublicHolidaysData,
+      loadSchoolHolidaysData,
+      loadSchoolHolidaysLink,
+      loadUsersData,
+      loadVacationStatsData,
+      loadVacationTypesData,
+      loadVacationsData,
+    } = bindActionCreators(actionCreators, dispatch);
 
     batch(() => {
       dispatch(updateConfigAction(conf));
       setDBInitLoadStateOK();
+      loadPublicHolidaysData(snackbarHandles, publicHolidaysLoadingDepth);
+      loadSchoolHolidaysData(snackbarHandles, schoolHolidaysLoadingDepth);
+      loadSchoolHolidaysLink(snackbarHandles);
+      loadUsersData(snackbarHandles);
+      loadVacationStatsData(snackbarHandles);
+      loadVacationTypesData(snackbarHandles);
+      loadVacationsData(snackbarHandles, vacationsLoadingDepth);
     });
   };

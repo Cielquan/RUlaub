@@ -56,6 +56,15 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
   const sideMenuState = useSelector((state: State) => state.sideMenu);
   const configState = useSelector((state: State) => state.config);
   const dbInitLoadState = useSelector((state: State) => state.dbInitLoad);
+  const publicHolidaysDataLoadingDepthState = useSelector(
+    (state: State) => state.publicHolidaysDataLoadingDepth
+  );
+  const schoolHolidaysDataLoadingDepthState = useSelector(
+    (state: State) => state.schoolHolidaysDataLoadingDepth
+  );
+  const vacationsDataLoadingDepthState = useSelector(
+    (state: State) => state.vacationsDataLoadingDepth
+  );
 
   const wrapOnClick =
     (fn: () => void): (() => void) =>
@@ -94,7 +103,17 @@ const SideMenu = ({ onClick }: Props): ReactElement => {
   const doubleButtonItemList: DoubleButtonItemList = [
     {
       mainButton: [t`Database`, <StorageIcon />],
-      rightButton: [<FolderIcon />, () => selectDB(snackbarHandles), t`Select`],
+      rightButton: [
+        <FolderIcon />,
+        () =>
+          selectDB(
+            snackbarHandles,
+            publicHolidaysDataLoadingDepthState,
+            schoolHolidaysDataLoadingDepthState,
+            vacationsDataLoadingDepthState
+          ),
+        t`Select`,
+      ],
       leftButton: [<AddIcon />, openCreateDBDialog, t`Create`],
     },
     {
