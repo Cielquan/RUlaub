@@ -17,6 +17,7 @@ import {
   ListItem,
   ListItemText,
   TextField,
+  useTheme,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
@@ -171,6 +172,8 @@ const UsersDialogEntry = ({
   } else {
     entryStyle = EntryStyle.DEFAULT;
   }
+  const theme = useTheme();
+  const styles = getStyles(entryStyle, theme);
 
   const ContentComponentView = (
     <>
@@ -184,7 +187,7 @@ const UsersDialogEntry = ({
             paddingX: 1,
             color: "text.disabled",
             border: "1px solid",
-            borderColor: getStyles(entryStyle).borderColor,
+            borderColor: styles.borderColor,
             borderTopLeftRadius: 8,
             borderBottomRightRadius: 8,
           }}

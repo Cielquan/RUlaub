@@ -18,6 +18,7 @@ import {
   ListItemText,
   Popover,
   TextField,
+  useTheme,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Box } from "@mui/system";
@@ -132,6 +133,8 @@ const VacationTypesDialogEntry = ({
   } else {
     entryStyle = EntryStyle.DEFAULT;
   }
+  const theme = useTheme();
+  const styles = getStyles(entryStyle, theme);
 
   const ContentComponentView = (
     <>
@@ -145,7 +148,7 @@ const VacationTypesDialogEntry = ({
             paddingX: 1,
             color: "text.disabled",
             border: "1px solid",
-            borderColor: getStyles(entryStyle).borderColor,
+            borderColor: styles.borderColor,
             borderTopLeftRadius: 8,
             borderBottomRightRadius: 8,
           }}

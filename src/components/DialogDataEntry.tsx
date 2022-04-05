@@ -1,5 +1,5 @@
-import { IconButton, ListItem, ListItemSecondaryAction, Tooltip } from "@mui/material";
-import { Box } from "@mui/system";
+import { IconButton, ListItem, ListItemSecondaryAction, Tooltip, useTheme } from "@mui/material";
+import { Box, Theme } from "@mui/system";
 import React, { ReactElement } from "react";
 
 export enum EntryStyle {
@@ -14,7 +14,7 @@ interface Styles {
   background: { backgroundColor?: string; opacity?: number };
   contentStyle: { color?: string };
 }
-export const getStyles = (entryStyle: EntryStyle | undefined): Styles => {
+export const getStyles = (entryStyle: EntryStyle | undefined, theme: Theme): Styles => {
   const entryStyles = {
     borderColor: "primary.main",
     background: {},
@@ -31,13 +31,13 @@ export const getStyles = (entryStyle: EntryStyle | undefined): Styles => {
       break;
     case EntryStyle.NEW:
       entryStyles.borderColor = "success.dark";
-      entryStyles.background = { backgroundColor: "success.light", opacity: 0.7 };
-      entryStyles.contentStyle = { color: "success.contrastText" };
+      entryStyles.background = { backgroundColor: `${theme.palette.success.light}30` };
+      entryStyles.contentStyle = { color: "text.primary" };
       break;
     case EntryStyle.REMOVED:
       entryStyles.borderColor = "error.dark";
-      entryStyles.background = { backgroundColor: "error.light", opacity: 0.5 };
-      entryStyles.contentStyle = { color: "error.contrastText" };
+      entryStyles.background = { backgroundColor: `${theme.palette.error.light}30` };
+      entryStyles.contentStyle = { color: "text.primary" };
       break;
     default:
       break;
@@ -68,7 +68,8 @@ const DialogDataEntry = ({
   rightButtonIcon,
   entryStyle,
 }: Props): ReactElement => {
-  const entryStyles = getStyles(entryStyle);
+  const theme = useTheme();
+  const entryStyles = getStyles(entryStyle, theme);
 
   return (
     <ListItem
