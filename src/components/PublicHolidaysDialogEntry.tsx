@@ -89,8 +89,8 @@ const PublicHolidaysDialogEntry = ({
   const YearlessDateFormError = {
     NONE: "",
     EMPTY: t`A date must be entered.`,
-    FORMAT: t`Invalid Format. Please use format: Day-Month e.g. 31-01`,
-    INVALID: t`Invalid Date. Please enter date in format: Day-Month e.g. 31-01`,
+    FORMAT: t`Invalid Format. Please use format: Month-Day e.g. 01-31`,
+    INVALID: t`Invalid Date. Please enter date in format: Month-Day e.g. 01-31`,
   } as const;
   const [yearlessDateFormError, setYearlessDateFormError] = useState<YearlessDateFormError>(
     YearlessDateFormError.NONE
@@ -150,8 +150,9 @@ const PublicHolidaysDialogEntry = ({
       setYearlessDateFormError(YearlessDateFormError.FORMAT);
       return false;
     }
-    const testYear = yearForm && !yearFormError ? Number(yearForm) : 2000;
-    const testDate = `${testYear}-${value.slice(3)}-${value.slice(0, 2)}`;
+    // NOTE: test against non leap-year
+    const testYear = yearForm && !yearFormError ? Number(yearForm) : 2001;
+    const testDate = `${testYear}-${value}`;
     if (
       Number.isNaN(Date.parse(testDate)) ||
       new Date(testDate).toISOString().slice(0, 10) !== testDate
@@ -245,16 +246,16 @@ const PublicHolidaysDialogEntry = ({
         }}
       >
         <ListItem key={`${id}-view-name`} sx={{ gridArea: "name" }}>
-          <ListItemText primary={name} secondary={t`Name`} />
+          <ListItemText primary={nameForm} secondary={t`Name`} />
         </ListItem>
         <ListItem key={`${id}-view-date`} sx={{ gridArea: "date" }}>
           <ListItemText
-            primary={yearlessDate || easterSundayOffset}
-            secondary={yearlessDate ? t`Day-Month` : t`Easter Sunday Offset`}
+            primary={yearlessDateForm || easterSundayOffsetForm}
+            secondary={yearlessDateForm ? t`Month-Day` : t`Easter Sunday Offset`}
           />
         </ListItem>
         <ListItem key={`${id}-view-year`} sx={{ gridArea: "year" }}>
-          <ListItemText primary={year || t`Every`} secondary={t`Year`} />
+          <ListItemText primary={yearForm || t`Every`} secondary={t`Year`} />
         </ListItem>
       </List>
     </>
@@ -341,7 +342,7 @@ const PublicHolidaysDialogEntry = ({
                 <FormControlLabel
                   value={DateType.YEARLESSDATE}
                   control={<Radio />}
-                  label={t`Day-Month`}
+                  label={t`Month-Day`}
                 />
                 <FormControlLabel
                   value={DateType.OFFSET}
@@ -354,7 +355,7 @@ const PublicHolidaysDialogEntry = ({
               <TextField
                 margin="dense"
                 id="yearless-date"
-                label={t`Day-Month`}
+                label={t`Month-Day`}
                 type="text"
                 variant="outlined"
                 value={yearlessDateForm}

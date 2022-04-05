@@ -324,12 +324,12 @@ msgid "A date must be entered."
 msgstr "Ein Datum muss eingegeben werden."
 
 #: src/components/PublicHolidaysDialogEntry.tsx:92
-msgid "Invalid Format. Please use format: Day-Month e.g. 31-01"
-msgstr "Ungültiges Format. Bitte benutze das Format: Tag-Monat z.B. 31-01"
+msgid "Invalid Format. Please use format: Month-Day e.g. 01-31"
+msgstr "Ungültiges Format. Bitte benutze das Format: Monat-Tag z.B. 01-31"
 
 #: src/components/PublicHolidaysDialogEntry.tsx:93
-msgid "Invalid Date. Please enter date in format: Day-Month e.g. 31-01"
-msgstr "Ungültiges Datum. Bitte Datum eingeben im Format: Tag-Monat z.B. 31-01"
+msgid "Invalid Date. Please enter date in format: Month-Day e.g. 01-31"
+msgstr "Ungültiges Datum. Bitte Datum eingeben im Format: Monat-Tag z.B. 01-31"
 
 #: src/components/PublicHolidaysDialogEntry.tsx:103
 msgid "An offset must be entered."
@@ -350,8 +350,8 @@ msgstr "Name"
 #: src/components/PublicHolidaysDialogEntry.tsx:253
 #: src/components/PublicHolidaysDialogEntry.tsx:344
 #: src/components/PublicHolidaysDialogEntry.tsx:357
-msgid "Day-Month"
-msgstr "Tag-Monat"
+msgid "Month-Day"
+msgstr "Monat-Tag"
 
 #: src/components/PublicHolidaysDialogEntry.tsx:253
 #: src/components/PublicHolidaysDialogEntry.tsx:349
