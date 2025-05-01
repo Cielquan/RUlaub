@@ -1,8 +1,0 @@
-{
-  "printWidth": 100,
-  "endOfLine": "auto",
-  "importOrder": ["<THIRD_PARTY_MODULES>", "^[@a-zA-Z]", "^[./]"],
-  "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true,
-  "importOrderGroupNamespaceSpecifiers": true
-}
