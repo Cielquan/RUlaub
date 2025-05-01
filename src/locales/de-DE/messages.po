@@ -132,31 +132,31 @@ msgid "Close"
 msgstr "Schließen"
 
 #: src/components/AddVacationDialog.tsx:83
-#: src/components/VacationsDialogEntry.tsx:69
+#: src/components/VacationsDialogEntry.tsx:73
 msgid "Vacation must have a type."
 msgstr "Urlaub muss einen Typ haben."
 
 #: src/components/AddVacationDialog.tsx:90
-#: src/components/SchoolHolidaysDialogEntry.tsx:67
-#: src/components/VacationsDialogEntry.tsx:76
+#: src/components/SchoolHolidaysDialogEntry.tsx:71
+#: src/components/VacationsDialogEntry.tsx:80
 msgid "A start date must be selected."
 msgstr "Ein Startdatum muss aufgewählt werden."
 
 #: src/components/AddVacationDialog.tsx:91
-#: src/components/SchoolHolidaysDialogEntry.tsx:68
-#: src/components/VacationsDialogEntry.tsx:77
+#: src/components/SchoolHolidaysDialogEntry.tsx:72
+#: src/components/VacationsDialogEntry.tsx:81
 msgid "Start date cannot be bigger than end date."
 msgstr "Startdatum kann nicht größer als das Enddatum sein."
 
 #: src/components/AddVacationDialog.tsx:100
-#: src/components/SchoolHolidaysDialogEntry.tsx:77
-#: src/components/VacationsDialogEntry.tsx:86
+#: src/components/SchoolHolidaysDialogEntry.tsx:81
+#: src/components/VacationsDialogEntry.tsx:90
 msgid "An end date must be selected."
 msgstr "Ein Enddatum muss aufgewählt werden."
 
 #: src/components/AddVacationDialog.tsx:101
-#: src/components/SchoolHolidaysDialogEntry.tsx:78
-#: src/components/VacationsDialogEntry.tsx:87
+#: src/components/SchoolHolidaysDialogEntry.tsx:82
+#: src/components/VacationsDialogEntry.tsx:91
 msgid "End date cannot be smaller than start date."
 msgstr "Enddatum kann nicht kleiner als das Startdatum sein."
 
@@ -170,53 +170,53 @@ msgstr "Bitte einen Nutzer auswählen, um Urlaub einzutragen."
 
 #: src/components/AddVacationDialog.tsx:235
 #: src/components/AddVacationDialog.tsx:240
-#: src/components/VacationsDialog.tsx:182
-#: src/components/VacationsDialog.tsx:187
+#: src/components/VacationsDialog.tsx:190
+#: src/components/VacationsDialog.tsx:195
 msgid "User"
 msgstr "Benutzer"
 
 #: src/components/AddVacationDialog.tsx:268
 #: src/components/AddVacationDialog.tsx:273
-#: src/components/VacationsDialogEntry.tsx:197
-#: src/components/VacationsDialogEntry.tsx:221
-#: src/components/VacationsDialogEntry.tsx:226
+#: src/components/VacationsDialogEntry.tsx:201
+#: src/components/VacationsDialogEntry.tsx:225
+#: src/components/VacationsDialogEntry.tsx:230
 msgid "Type"
 msgstr "Typ"
 
 #: src/components/AddVacationDialog.tsx:289
-#: src/components/SchoolHolidaysDialogEntry.tsx:189
-#: src/components/SchoolHolidaysDialogEntry.tsx:226
-#: src/components/VacationsDialogEntry.tsx:201
-#: src/components/VacationsDialogEntry.tsx:242
+#: src/components/SchoolHolidaysDialogEntry.tsx:193
+#: src/components/SchoolHolidaysDialogEntry.tsx:230
+#: src/components/VacationsDialogEntry.tsx:205
+#: src/components/VacationsDialogEntry.tsx:246
 msgid "Start Date"
 msgstr "Startdatum"
 
 #: src/components/AddVacationDialog.tsx:309
-#: src/components/SchoolHolidaysDialogEntry.tsx:192
-#: src/components/SchoolHolidaysDialogEntry.tsx:246
-#: src/components/VacationsDialogEntry.tsx:204
-#: src/components/VacationsDialogEntry.tsx:262
+#: src/components/SchoolHolidaysDialogEntry.tsx:196
+#: src/components/SchoolHolidaysDialogEntry.tsx:250
+#: src/components/VacationsDialogEntry.tsx:208
+#: src/components/VacationsDialogEntry.tsx:266
 msgid "End Date"
 msgstr "Enddatum"
 
 #: src/components/AddVacationDialog.tsx:332
 #: src/components/AddVacationDialog.tsx:342
-#: src/components/PublicHolidaysDialog.tsx:200
-#: src/components/SchoolHolidaysDialog.tsx:286
+#: src/components/PublicHolidaysDialog.tsx:213
+#: src/components/SchoolHolidaysDialog.tsx:298
 #: src/components/SettingsDialog.tsx:223
-#: src/components/UsersDialog.tsx:186
-#: src/components/VacationTypesDialog.tsx:176
-#: src/components/VacationsDialog.tsx:265
+#: src/components/UsersDialog.tsx:199
+#: src/components/VacationTypesDialog.tsx:188
+#: src/components/VacationsDialog.tsx:277
 msgid "Save"
 msgstr "Speichern"
 
 #: src/components/AddVacationDialog.tsx:353
-#: src/components/PublicHolidaysDialog.tsx:211
-#: src/components/SchoolHolidaysDialog.tsx:297
+#: src/components/PublicHolidaysDialog.tsx:224
+#: src/components/SchoolHolidaysDialog.tsx:309
 #: src/components/SettingsDialog.tsx:233
-#: src/components/UsersDialog.tsx:197
-#: src/components/VacationTypesDialog.tsx:187
-#: src/components/VacationsDialog.tsx:276
+#: src/components/UsersDialog.tsx:210
+#: src/components/VacationTypesDialog.tsx:199
+#: src/components/VacationsDialog.tsx:288
 msgid "Discard"
 msgstr "Verwerfen"
 
@@ -232,25 +232,25 @@ msgstr "Kein Jahr zum Anzeigen ausgewählt. Bitte unten auswählen:"
 msgid "Change displayed year."
 msgstr "Angezeigtes Jahr ändern."
 
-#: src/components/CreateDBDialog.tsx:93
+#: src/components/CreateDBDialog.tsx:109
 msgid "Create new Database"
 msgstr "Neue Datenbank erstellen"
 
-#: src/components/CreateDBDialog.tsx:98
+#: src/components/CreateDBDialog.tsx:114
 msgid "Database file path"
 msgstr "Datenbank Dateipfad"
 
-#: src/components/CreateDBDialog.tsx:133
+#: src/components/CreateDBDialog.tsx:149
 msgid "Add default values for Germany NRW to database."
 msgstr "Default Werte für Deutschland NRW in Datenbank einpflegen"
 
-#: src/components/CreateDBDialog.tsx:151
-#: src/components/SideMenu.tsx:98
-#: src/components/SideMenu.tsx:128
+#: src/components/CreateDBDialog.tsx:167
+#: src/components/SideMenu.tsx:117
+#: src/components/SideMenu.tsx:147
 msgid "Create"
 msgstr "Erstellen"
 
-#: src/components/CreateDBDialog.tsx:160
+#: src/components/CreateDBDialog.tsx:176
 msgid "Abort"
 msgstr "Abbrechen"
 
@@ -275,12 +275,12 @@ msgid "Link: {schoolHolidaysLinkState}"
 msgstr "Link: {schoolHolidaysLinkState}"
 
 #: src/components/DownloadSchoolHolidaysDialog.tsx:89
-#: src/components/VacationTypesDialogEntry.tsx:165
+#: src/components/VacationTypesDialogEntry.tsx:209
 msgid "Yes"
 msgstr "Ja"
 
 #: src/components/DownloadSchoolHolidaysDialog.tsx:98
-#: src/components/VacationTypesDialogEntry.tsx:165
+#: src/components/VacationTypesDialogEntry.tsx:209
 msgid "No"
 msgstr "Nein"
 
@@ -296,139 +296,139 @@ msgstr "Alle Daten laden"
 msgid "Add new Holiday"
 msgstr "Neuen Urlaub hinzufügen"
 
-#: src/components/PublicHolidaysDialog.tsx:144
-#: src/components/SideMenu.tsx:107
+#: src/components/PublicHolidaysDialog.tsx:153
+#: src/components/SideMenu.tsx:126
 msgid "Public Holidays"
 msgstr "Feiertage"
 
-#: src/components/PublicHolidaysDialog.tsx:187
-#: src/components/SchoolHolidaysDialog.tsx:272
-#: src/components/UsersDialog.tsx:173
-#: src/components/VacationTypesDialog.tsx:163
-#: src/components/VacationsDialog.tsx:252
+#: src/components/PublicHolidaysDialog.tsx:200
+#: src/components/SchoolHolidaysDialog.tsx:284
+#: src/components/UsersDialog.tsx:186
+#: src/components/VacationTypesDialog.tsx:175
+#: src/components/VacationsDialog.tsx:264
 msgid "Save changes to database"
 msgstr "Änderungen in Datenbank speichern"
 
-#: src/components/PublicHolidaysDialogEntry.tsx:77
+#: src/components/PublicHolidaysDialogEntry.tsx:81
 msgid "Public Holiday must have a name."
 msgstr "Feiertag muss eine Bezeichnung haben."
 
-#: src/components/PublicHolidaysDialogEntry.tsx:84
-#: src/components/PublicHolidaysDialogEntry.tsx:104
-#: src/components/UsersDialogEntry.tsx:76
+#: src/components/PublicHolidaysDialogEntry.tsx:88
+#: src/components/PublicHolidaysDialogEntry.tsx:108
+#: src/components/UsersDialogEntry.tsx:80
 msgid "Only positive whole numbers are permitted."
 msgstr "Nur positive ganze Zahlen sind zulässig."
 
-#: src/components/PublicHolidaysDialogEntry.tsx:91
+#: src/components/PublicHolidaysDialogEntry.tsx:95
 msgid "A date must be entered."
 msgstr "Ein Datum muss eingegeben werden."
 
-#: src/components/PublicHolidaysDialogEntry.tsx:92
+#: src/components/PublicHolidaysDialogEntry.tsx:96
 msgid "Invalid Format. Please use format: Month-Day e.g. 01-31"
 msgstr "Ungültiges Format. Bitte benutze das Format: Monat-Tag z.B. 01-31"
 
-#: src/components/PublicHolidaysDialogEntry.tsx:93
+#: src/components/PublicHolidaysDialogEntry.tsx:97
 msgid "Invalid Date. Please enter date in format: Month-Day e.g. 01-31"
 msgstr "Ungültiges Datum. Bitte Datum eingeben im Format: Monat-Tag z.B. 01-31"
 
-#: src/components/PublicHolidaysDialogEntry.tsx:103
+#: src/components/PublicHolidaysDialogEntry.tsx:107
 msgid "An offset must be entered."
 msgstr "Ein Offset muss eingegeben werden."
 
-#: src/components/PublicHolidaysDialogEntry.tsx:248
-#: src/components/PublicHolidaysDialogEntry.tsx:277
-#: src/components/SchoolHolidaysDialogEntry.tsx:186
-#: src/components/SchoolHolidaysDialogEntry.tsx:212
+#: src/components/PublicHolidaysDialogEntry.tsx:253
+#: src/components/PublicHolidaysDialogEntry.tsx:282
+#: src/components/SchoolHolidaysDialogEntry.tsx:190
+#: src/components/SchoolHolidaysDialogEntry.tsx:216
 #: src/components/SettingsDialog.tsx:122
-#: src/components/UsersDialogEntry.tsx:200
-#: src/components/UsersDialogEntry.tsx:233
-#: src/components/VacationTypesDialogEntry.tsx:162
-#: src/components/VacationTypesDialogEntry.tsx:194
+#: src/components/UsersDialogEntry.tsx:204
+#: src/components/UsersDialogEntry.tsx:237
+#: src/components/VacationTypesDialogEntry.tsx:206
+#: src/components/VacationTypesDialogEntry.tsx:238
 msgid "Name"
 msgstr "Name"
 
-#: src/components/PublicHolidaysDialogEntry.tsx:253
-#: src/components/PublicHolidaysDialogEntry.tsx:344
-#: src/components/PublicHolidaysDialogEntry.tsx:357
+#: src/components/PublicHolidaysDialogEntry.tsx:258
+#: src/components/PublicHolidaysDialogEntry.tsx:349
+#: src/components/PublicHolidaysDialogEntry.tsx:362
 msgid "Month-Day"
 msgstr "Monat-Tag"
 
-#: src/components/PublicHolidaysDialogEntry.tsx:253
-#: src/components/PublicHolidaysDialogEntry.tsx:349
-#: src/components/PublicHolidaysDialogEntry.tsx:372
+#: src/components/PublicHolidaysDialogEntry.tsx:258
+#: src/components/PublicHolidaysDialogEntry.tsx:354
+#: src/components/PublicHolidaysDialogEntry.tsx:377
 msgid "Easter Sunday Offset"
 msgstr "Ostersonntag Offset"
 
-#: src/components/PublicHolidaysDialogEntry.tsx:257
+#: src/components/PublicHolidaysDialogEntry.tsx:262
 msgid "Every"
 msgstr "Jedes"
 
-#: src/components/PublicHolidaysDialogEntry.tsx:257
-#: src/components/PublicHolidaysDialogEntry.tsx:392
+#: src/components/PublicHolidaysDialogEntry.tsx:262
+#: src/components/PublicHolidaysDialogEntry.tsx:397
 msgid "Year"
 msgstr "Jahr"
 
-#: src/components/PublicHolidaysDialogEntry.tsx:318
+#: src/components/PublicHolidaysDialogEntry.tsx:323
 msgid "Date"
 msgstr "Datum"
 
-#: src/components/PublicHolidaysDialogEntry.tsx:479
-#: src/components/SchoolHolidaysDialogEntry.tsx:343
-#: src/components/UsersDialogEntry.tsx:367
-#: src/components/VacationTypesDialogEntry.tsx:351
-#: src/components/VacationsDialogEntry.tsx:360
+#: src/components/PublicHolidaysDialogEntry.tsx:487
+#: src/components/SchoolHolidaysDialogEntry.tsx:350
+#: src/components/UsersDialogEntry.tsx:374
+#: src/components/VacationTypesDialogEntry.tsx:428
+#: src/components/VacationsDialogEntry.tsx:367
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: src/components/PublicHolidaysDialogEntry.tsx:483
-#: src/components/SchoolHolidaysDialogEntry.tsx:347
-#: src/components/UsersDialogEntry.tsx:371
-#: src/components/VacationsDialogEntry.tsx:364
+#: src/components/PublicHolidaysDialogEntry.tsx:491
+#: src/components/SchoolHolidaysDialogEntry.tsx:354
+#: src/components/UsersDialogEntry.tsx:378
+#: src/components/VacationsDialogEntry.tsx:371
 msgid "Cancel deletion of entry"
 msgstr "Löschung des Eintrags abbrechen"
 
-#: src/components/PublicHolidaysDialogEntry.tsx:487
-#: src/components/SchoolHolidaysDialogEntry.tsx:351
-#: src/components/UsersDialogEntry.tsx:375
-#: src/components/VacationTypesDialogEntry.tsx:359
-#: src/components/VacationsDialogEntry.tsx:368
+#: src/components/PublicHolidaysDialogEntry.tsx:495
+#: src/components/SchoolHolidaysDialogEntry.tsx:358
+#: src/components/UsersDialogEntry.tsx:382
+#: src/components/VacationTypesDialogEntry.tsx:436
+#: src/components/VacationsDialogEntry.tsx:375
 msgid "Delete entry"
 msgstr "Eintrag löschen"
 
-#: src/components/PublicHolidaysDialogEntry.tsx:495
-#: src/components/SchoolHolidaysDialogEntry.tsx:359
-#: src/components/UsersDialogEntry.tsx:383
-#: src/components/VacationTypesDialogEntry.tsx:367
-#: src/components/VacationsDialogEntry.tsx:376
+#: src/components/PublicHolidaysDialogEntry.tsx:503
+#: src/components/SchoolHolidaysDialogEntry.tsx:366
+#: src/components/UsersDialogEntry.tsx:390
+#: src/components/VacationTypesDialogEntry.tsx:444
+#: src/components/VacationsDialogEntry.tsx:383
 msgid "Save entry"
 msgstr "Eintrag speichern"
 
-#: src/components/PublicHolidaysDialogEntry.tsx:495
-#: src/components/SchoolHolidaysDialogEntry.tsx:359
-#: src/components/UsersDialogEntry.tsx:383
-#: src/components/VacationTypesDialogEntry.tsx:367
-#: src/components/VacationsDialogEntry.tsx:376
+#: src/components/PublicHolidaysDialogEntry.tsx:503
+#: src/components/SchoolHolidaysDialogEntry.tsx:366
+#: src/components/UsersDialogEntry.tsx:390
+#: src/components/VacationTypesDialogEntry.tsx:444
+#: src/components/VacationsDialogEntry.tsx:383
 msgid "Edit entry"
 msgstr "Eintrag ändern"
 
-#: src/components/SchoolHolidaysDialog.tsx:65
+#: src/components/SchoolHolidaysDialog.tsx:66
 msgid "The link must start with \"https://\"."
 msgstr "Der Link muss mit \"https://\" starten."
 
-#: src/components/SchoolHolidaysDialog.tsx:66
+#: src/components/SchoolHolidaysDialog.tsx:67
 msgid "The link must have a \"'%year%'\" placeholder."
 msgstr "Der Link muss einen \"'%year%'\" Platzhalter beinhalten."
 
-#: src/components/SchoolHolidaysDialog.tsx:212
-#: src/components/SideMenu.tsx:113
+#: src/components/SchoolHolidaysDialog.tsx:220
+#: src/components/SideMenu.tsx:132
 msgid "School Holidays"
 msgstr "Ferien"
 
-#: src/components/SchoolHolidaysDialog.tsx:219
+#: src/components/SchoolHolidaysDialog.tsx:227
 msgid "Link"
 msgstr "Link"
 
-#: src/components/SchoolHolidaysDialogEntry.tsx:60
+#: src/components/SchoolHolidaysDialogEntry.tsx:64
 msgid "School Holiday must have a name."
 msgstr "Ferien muss eine Bezeichnung haben."
 
@@ -441,7 +441,7 @@ msgid "Scroll to today"
 msgstr "Nach Heute scrollen"
 
 #: src/components/SettingsDialog.tsx:114
-#: src/components/SideMenu.tsx:156
+#: src/components/SideMenu.tsx:175
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -465,37 +465,37 @@ msgstr "Logging Level"
 msgid "On year switch, scroll to beginning of the year."
 msgstr "Scoll zum Jahrsstart beim Jahreswechsel."
 
-#: src/components/SideMenu.tsx:96
+#: src/components/SideMenu.tsx:105
 msgid "Database"
 msgstr "Datenbank"
 
-#: src/components/SideMenu.tsx:97
+#: src/components/SideMenu.tsx:115
 msgid "Select"
 msgstr "Auswählen"
 
-#: src/components/SideMenu.tsx:101
-#: src/components/UsersDialog.tsx:138
+#: src/components/SideMenu.tsx:120
+#: src/components/UsersDialog.tsx:147
 msgid "Users"
 msgstr "Benutzer"
 
-#: src/components/SideMenu.tsx:103
-#: src/components/SideMenu.tsx:109
-#: src/components/SideMenu.tsx:115
-#: src/components/SideMenu.tsx:121
-#: src/components/SideMenu.tsx:127
+#: src/components/SideMenu.tsx:122
+#: src/components/SideMenu.tsx:128
+#: src/components/SideMenu.tsx:134
+#: src/components/SideMenu.tsx:140
+#: src/components/SideMenu.tsx:146
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: src/components/SideMenu.tsx:119
-#: src/components/VacationTypesDialog.tsx:128
+#: src/components/SideMenu.tsx:138
+#: src/components/VacationTypesDialog.tsx:136
 msgid "Vacation Types"
 msgstr "Urlaubsarten"
 
-#: src/components/SideMenu.tsx:125
+#: src/components/SideMenu.tsx:144
 msgid "Vacation"
 msgstr "Urlaub"
 
-#: src/components/SideMenu.tsx:163
+#: src/components/SideMenu.tsx:182
 msgid "About"
 msgstr "Über"
 
@@ -503,68 +503,76 @@ msgstr "Über"
 msgid "<Set Username>"
 msgstr "<Nutzername festlegen>"
 
-#: src/components/UsersDialogEntry.tsx:68
+#: src/components/UsersDialogEntry.tsx:72
 msgid "User must have a name."
 msgstr "Nutzer muss einen Namen haben."
 
-#: src/components/UsersDialogEntry.tsx:75
+#: src/components/UsersDialogEntry.tsx:79
 msgid "User must a number of Vacation days."
 msgstr "Nutzer muss eine Anzahl an Urlaubstagen haben."
 
-#: src/components/UsersDialogEntry.tsx:83
+#: src/components/UsersDialogEntry.tsx:87
 msgid "At least one workday must be selected."
 msgstr "Mindestens ein Arbeitstag muss ausgewählt werden."
 
-#: src/components/UsersDialogEntry.tsx:203
-#: src/components/UsersDialogEntry.tsx:249
+#: src/components/UsersDialogEntry.tsx:207
+#: src/components/UsersDialogEntry.tsx:253
 msgid "Vacation Days"
 msgstr "Urlaubstage"
 
-#: src/components/UsersDialogEntry.tsx:211
-#: src/components/UsersDialogEntry.tsx:280
+#: src/components/UsersDialogEntry.tsx:215
+#: src/components/UsersDialogEntry.tsx:284
 msgid "Workdays"
 msgstr "Arbeitstage"
 
-#: src/components/VacationTypesDialogEntry.tsx:80
+#: src/components/VacationTypesDialogEntry.tsx:84
 msgid "Vacation Type must have a name."
 msgstr "Urlaubsart muss eine Bezeichnung haben."
 
-#: src/components/VacationTypesDialogEntry.tsx:165
-#: src/components/VacationTypesDialogEntry.tsx:222
+#: src/components/VacationTypesDialogEntry.tsx:91
+msgid "Vacation Type must have a dark color."
+msgstr "Urlaubsart muss eine dunkle Farbe haben"
+
+#: src/components/VacationTypesDialogEntry.tsx:100
+msgid "Vacation Type must have a light color."
+msgstr "Urlaubsart muss eine helle Farbe haben"
+
+#: src/components/VacationTypesDialogEntry.tsx:209
+#: src/components/VacationTypesDialogEntry.tsx:266
 msgid "Charge to annual leave"
 msgstr "Anrechnung auf den Jahresurlaub"
 
-#: src/components/VacationTypesDialogEntry.tsx:169
-#: src/components/VacationTypesDialogEntry.tsx:240
+#: src/components/VacationTypesDialogEntry.tsx:213
+#: src/components/VacationTypesDialogEntry.tsx:284
 msgid "Color (Dark theme)"
 msgstr "Farbe (Dunkles Design)"
 
-#: src/components/VacationTypesDialogEntry.tsx:173
-#: src/components/VacationTypesDialogEntry.tsx:252
+#: src/components/VacationTypesDialogEntry.tsx:217
+#: src/components/VacationTypesDialogEntry.tsx:296
 msgid "Color (Light theme)"
 msgstr "Farbe (Helles Design)"
 
-#: src/components/VacationTypesDialogEntry.tsx:355
+#: src/components/VacationTypesDialogEntry.tsx:432
 msgid "Activate"
 msgstr "Aktivieren"
 
-#: src/components/VacationTypesDialogEntry.tsx:359
+#: src/components/VacationTypesDialogEntry.tsx:436
 msgid "Deactivate"
 msgstr "Deaktivieren"
 
-#: src/components/VacationsDialog.tsx:175
+#: src/components/VacationsDialog.tsx:183
 msgid "Vacations"
 msgstr "Urlaube"
 
-#: src/components/VacationsDialog.tsx:179
+#: src/components/VacationsDialog.tsx:187
 msgid "Please select a user to show their vacations."
 msgstr "Bitte Benutzer wählen, um Urlaube anzuzeigen."
 
-#: src/components/VacationsDialog.tsx:205
+#: src/components/VacationsDialog.tsx:213
 msgid "No data for user: {0}"
 msgstr "Keine Daten für Nutzer: {0}"
 
-#: src/components/VacationsDialogEntry.tsx:196
+#: src/components/VacationsDialogEntry.tsx:200
 msgid "Error"
 msgstr "Fehler"
 

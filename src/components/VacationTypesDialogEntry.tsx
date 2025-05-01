@@ -86,9 +86,29 @@ const VacationTypesDialogEntry = ({
   } as const;
   const [nameFormError, setNameFormError] = useState<NameFormError>(NameFormError.NONE);
 
+  type DarkColorFormError = typeof DarkColorFormError[keyof typeof DarkColorFormError];
+  const DarkColorFormError = {
+    NONE: "",
+    EMPTY: t`Vacation Type must have a dark color.`,
+  } as const;
+  const [darkColorFormError, setDarkColorFormError] = useState<DarkColorFormError>(
+    DarkColorFormError.NONE
+  );
+
+  type LightColorFormError = typeof LightColorFormError[keyof typeof LightColorFormError];
+  const LightColorFormError = {
+    NONE: "",
+    EMPTY: t`Vacation Type must have a light color.`,
+  } as const;
+  const [lightColorFormError, setLightColorFormError] = useState<LightColorFormError>(
+    LightColorFormError.NONE
+  );
+
   const resetErrorStates = useCallback((): void => {
     setNameFormError(NameFormError.NONE);
-  }, [NameFormError.NONE]);
+    setDarkColorFormError(DarkColorFormError.NONE);
+    setLightColorFormError(LightColorFormError.NONE);
+  }, [DarkColorFormError.NONE, LightColorFormError.NONE, NameFormError.NONE]);
 
   const validateName = (value: string): boolean => {
     if (value === "") {
@@ -99,9 +119,29 @@ const VacationTypesDialogEntry = ({
     return true;
   };
 
+  const validateDarkColor = (value: string): boolean => {
+    if (value === "") {
+      setDarkColorFormError(DarkColorFormError.EMPTY);
+      return false;
+    }
+    setDarkColorFormError(DarkColorFormError.NONE);
+    return true;
+  };
+
+  const validateLightColor = (value: string): boolean => {
+    if (value === "") {
+      setLightColorFormError(LightColorFormError.EMPTY);
+      return false;
+    }
+    setLightColorFormError(LightColorFormError.NONE);
+    return true;
+  };
+
   const validateForm = (): boolean => {
     let error = false;
     error = !validateName(nameForm) || error;
+    error = !validateDarkColor(colorDarkForm) || error;
+    error = !validateLightColor(colorLightForm) || error;
     return !error;
   };
 
@@ -243,6 +283,8 @@ const VacationTypesDialogEntry = ({
             onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
               setAnchorElDark(event.currentTarget)
             }
+            // TODO: fix border color for buttons ... grey normal and on hover white like textbox
+            sx={{ borderColor: darkColorFormError ? "error.main" : styles.contentStyle.color }}
           >
             {t`Color (Dark theme)`}
             <CircleIcon fontSize="large" sx={{ color: colorDarkForm }} />
@@ -255,6 +297,8 @@ const VacationTypesDialogEntry = ({
             onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
               setAnchorElLight(event.currentTarget)
             }
+            // TODO: fix border color for buttons ... grey normal and on hover white like textbox
+            sx={{ borderColor: lightColorFormError ? "error.main" : styles.contentStyle.color }}
           >
             {t`Color (Light theme)`}
             <CircleIcon fontSize="large" sx={{ color: colorLightForm }} />
@@ -268,8 +312,20 @@ const VacationTypesDialogEntry = ({
         onClose={() => setAnchorElDark(null)}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
-        <HexColorPicker color={colorDarkForm} onChange={setColorDarkForm} />
-        <StyledHexColorInput color={colorDarkForm} onChange={setColorDarkForm} />
+        <HexColorPicker
+          color={colorDarkForm}
+          onChange={(newColor: string) => {
+            validateDarkColor(newColor);
+            setColorDarkForm(newColor);
+          }}
+        />
+        <StyledHexColorInput
+          color={colorDarkForm}
+          onChange={(newColor: string) => {
+            validateDarkColor(newColor);
+            setColorDarkForm(newColor);
+          }}
+        />
       </Popover>
       <Popover
         id={`${id}-edit-charge-light-color-picker`}
@@ -278,8 +334,20 @@ const VacationTypesDialogEntry = ({
         onClose={() => setAnchorElLight(null)}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
-        <HexColorPicker color={colorLightForm} onChange={setColorLightForm} />
-        <StyledHexColorInput color={colorLightForm} onChange={setColorLightForm} />
+        <HexColorPicker
+          color={colorLightForm}
+          onChange={(newColor: string) => {
+            validateLightColor(newColor);
+            setColorLightForm(newColor);
+          }}
+        />
+        <StyledHexColorInput
+          color={colorLightForm}
+          onChange={(newColor: string) => {
+            validateLightColor(newColor);
+            setColorLightForm(newColor);
+          }}
+        />
       </Popover>
     </>
   );

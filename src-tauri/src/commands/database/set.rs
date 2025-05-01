@@ -14,6 +14,7 @@ pub async fn update_public_holidays(
     config_state: tauri::State<'_, state::ConfigState>,
 ) -> super::DatabaseCommandResult<state_models::PublicHolidays, super::ErrInfo> {
     use crate::db::schema::public_holidays::dsl::{id, public_holidays};
+    println!("{:?}", new_entries);
 
     let config_state_guard = config_state.0.lock();
     let conn = super::get_db_conn(&config_state_guard.settings.database_uri)?;

@@ -1,5 +1,14 @@
 # Roadmap
 
+
+
+- fix display of pub holidays
+
+- add default vac types
+
+- fix color and name (empty allowed) check in vac types / school holidays
+  Reason: Master Save btn safes entries and only small Save btn validates
+
 - Add tauri command for DB creation
   add default `vacation_types`
   ask to add entries for `pub holidays` (or checkbox ?)
